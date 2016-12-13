@@ -1,0 +1,1382 @@
+[
+    {
+        "id": -1,
+        "name": "NA",
+        "license_type": "permissive",
+        "hints": [
+            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ]
+    },
+    {
+        "id": 0,
+        "name": "uncategorized",
+        "license_type": "permissive",
+        "hints": [
+            "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+        ]
+    },
+    {
+        "id": 1,
+        "name": "adcirc",
+        "license_type": "proprietary",
+        "hints": [
+            "adcirc"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "amber",
+        "license_type": "permissive",
+        "hints": [
+            "amber",
+            "MMPBSA",
+            "pmemd",
+            "ptraj",
+            "sander"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "berkeleygw",
+        "license_type": "permissive",
+        "hints": [
+            "absorption",
+            "bgw",
+            "epsilon.real.x",
+            "kernel.cplx.x",
+            "kernel.real.x",
+            "kgrid.x",
+            "plotxct.real.x",
+            "sigma.cplx.x",
+            "sigma.real.x"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "cactus",
+        "license_type": "permissive",
+        "hints": [
+            "cactus"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "casino",
+        "license_type": "proprietary",
+        "hints": [
+            "casino"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "ccsm",
+        "license_type": "permissive",
+        "hints": [
+            "ccsm"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "cesm",
+        "license_type": "permissive",
+        "hints": [
+            "cesm"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "charmm",
+        "license_type": "permissive",
+        "hints": [
+            "charmm"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "cp2k",
+        "license_type": "permissive",
+        "hints": [
+            "cp2k"
+        ]
+    },
+    {
+        "id": 10,
+        "name": "cpmd",
+        "license_type": "proprietary",
+        "hints": [
+            "cpmd"
+        ]
+    },
+    {
+        "id": 11,
+        "name": "desmond",
+        "license_type": "proprietary",
+        "hints": [
+            "desmond"
+        ]
+    },
+    {
+        "id": 12,
+        "name": "enzo",
+        "license_type": "permissive",
+        "hints": [
+            "enzo",
+            "ring.exe"
+        ]
+    },
+    {
+        "id": 13,
+        "name": "gadget",
+        "license_type": "permissive",
+        "hints": [
+            "gadget"
+        ]
+    },
+    {
+        "id": 14,
+        "name": "gamess",
+        "license_type": "permissive",
+        "hints": [
+            "gamess",
+            "rungms"
+        ]
+    },
+    {
+        "id": 15,
+        "name": "gpaw",
+        "license_type": "permissive",
+        "hints": [
+            "gpaw"
+        ]
+    },
+    {
+        "id": 16,
+        "name": "gromacs",
+        "license_type": "permissive",
+        "hints": [
+            "gromacs",
+            "mdrun",
+            "gmx",
+            "g_dos",
+            "grompp_mpi"
+        ]
+    },
+    {
+        "id": 17,
+        "name": "homme",
+        "license_type": "permissive",
+        "hints": [
+            "homme",
+            "preqx"
+        ]
+    },
+    {
+        "id": 18,
+        "name": "lammps",
+        "license_type": "permissive",
+        "hints": [
+            "lammps",
+            "lmp"
+        ]
+    },
+    {
+        "id": 19,
+        "name": "lattice boltzmann",
+        "license_type": "permissive",
+        "hints": [
+            "lbm"
+        ]
+    },
+    {
+        "id": 20,
+        "name": "mcnpx",
+        "license_type": "proprietary",
+        "hints": [
+            "mcnpx"
+        ]
+    },
+    {
+        "id": 21,
+        "name": "milc",
+        "url": "http://physics.indiana.edu/~sg/milc.html",
+        "license_type": "permissive",
+        "hints": [
+            "milc",
+            "su3_hmc_sf_pcac",
+            "su3_rhmc_hisq_stampede_m775_q175_dbl_130401",
+            "su3_hyp_debug"
+        ]
+    },
+    {
+        "id": 22,
+        "name": "mpiblast",
+        "license_type": "permissive",
+        "hints": [
+            "mpiblast"
+        ]
+    },
+    {
+        "id": 23,
+        "name": "namd",
+        "license_type": "permissive",
+        "hints": [
+            "namd"
+        ]
+    },
+    {
+        "id": 24,
+        "name": "nwchem",
+        "license_type": "permissive",
+        "hints": [
+            "nwchem"
+        ]
+    },
+    {
+        "id": 25,
+        "name": "openfoam",
+        "url": "http://www.openfoam.com/",
+        "license_type": "permissive",
+        "hints": [
+            "foam",
+            "cfdemSolverIB",
+            "cfdemSolverPiso",
+            "ABLPisoSolver",
+            "ABLSolver",
+            "decomposePar",
+            "flamelet",
+            "reconstructPar"
+        ]
+    },
+    {
+        "id": 26,
+        "name": "opensees",
+        "license_type": "permissive",
+        "hints": [
+            "opensees"
+        ]
+    },
+    {
+        "id": 27,
+        "name": "paratec",
+        "license_type": "permissive",
+        "hints": [
+            "paratec"
+        ]
+    },
+    {
+        "id": 28,
+        "name": "q-espresso",
+        "license_type": "permissive",
+        "hints": [
+            "bands.x",
+            "cp.x",
+            "dynmat.x",
+            "epsilon.cplx.x",
+            "espresso",
+            "matdyn.x",
+            "plotband.x",
+            "dos.x",
+            "neb.x",
+            "ph.x",
+            "pp.x",
+            "projwfc.x",
+            "pw.x",
+            "pw2wannier90.x",
+            "pwcond.x",
+            "q2r.x"
+        ]
+    },
+    {
+        "id": 29,
+        "name": "siesta",
+        "license_type": "proprietary",
+        "hints": [
+            "siesta",
+            "tbtrans"
+        ]
+    },
+    {
+        "id": 30,
+        "name": "specfem3d",
+        "license_type": "permissive",
+        "hints": [
+            "specfem3d",
+            "xmeshfem3D"
+        ]
+    },
+    {
+        "id": 31,
+        "name": "superlu",
+        "license_type": "permissive",
+        "hints": [
+            "superlu"
+        ]
+    },
+    {
+        "id": 32,
+        "name": "vasp",
+        "license_type": "proprietary",
+        "hints": [
+            "vasp",
+            "vp"
+        ]
+    },
+    {
+        "id": 33,
+        "name": "wrf",
+        "license_type": "permissive",
+        "hints": [
+            "arwpost",
+            "geogrid",
+            "ideal.exe",
+            "ideal_mpi.exe",
+            "metgrid",
+            "real.exe",
+            "ripdp",
+            "ungrib.exe",
+            "wrf"
+        ]
+    },
+    {
+        "id": 34,
+        "name": "pegasus",
+        "license_type": "proprietary",
+        "hints": [
+            "pegasus"
+        ]
+    },
+    {
+        "id": 35,
+        "name": "rosetta",
+        "license_type": "permissive",
+        "hints": [
+            "minimize.default.linuxgccrelease"
+        ]
+    },
+    {
+        "id": 36,
+        "name": "cybershake",
+        "license_type": "unknown",
+        "hints": [
+            "extract_sgt"
+        ]
+    },
+    {
+        "id": 37,
+        "name": "hpcc",
+        "license_type": "permissive",
+        "hints": [
+            "hpcc"
+        ]
+    },
+    {
+        "id": 38,
+        "name": "aesop",
+        "license_type": "unknown",
+        "hints": [
+            "aesop"
+        ]
+    },
+    {
+        "id": 39,
+        "name": "qcff",
+        "license_type": "unknown",
+        "hints": [
+            "qcff"
+        ]
+    },
+    {
+        "id": 40,
+        "name": "linpack",
+        "license_type": "permissive",
+        "hints": [
+            "xhpl_mvapich2_version5",
+            "xhpl_intel64_dynamic",
+            "xhpl_hybrid",
+            "xhpl"
+        ]
+    },
+    {
+        "id": 41,
+        "name": "ior",
+        "license_type": "permissive",
+        "hints": [
+            "ior"
+        ]
+    },
+    {
+        "id": 42,
+        "name": "imb",
+        "license_type": "permissive",
+        "hints": [
+            "imb"
+        ]
+    },
+    {
+        "id": 43,
+        "name": "mpi-tile-io",
+        "license_type": "permissive",
+        "hints": [
+            "mpi-cube-io",
+            "mpi-tile-io"
+        ]
+    },
+    {
+        "id": 44,
+        "name": "charm++",
+        "license_type": "permissive",
+        "hints": [
+            "charmrun"
+        ]
+    },
+    {
+        "id": 45,
+        "name": "wien2k",
+        "license_type": "permissive",
+        "hints": [
+            "lapw0",
+            "lapw1",
+            "lapw2"
+        ]
+    },
+    {
+        "id": 46,
+        "name": "pstgf",
+        "license_type": "unknown",
+        "hints": [
+            "pstgf"
+        ]
+    },
+    {
+        "id": 47,
+        "name": "stgf",
+        "license_type": "unknown",
+        "hints": [
+            "stgf"
+        ]
+    },
+    {
+        "id": 48,
+        "name": "stgfz",
+        "license_type": "unknown",
+        "hints": [
+            "stgfz"
+        ]
+    },
+    {
+        "id": 49,
+        "name": "parsec",
+        "license_type": "permissive",
+        "hints": [
+            "parsec"
+        ]
+    },
+    {
+        "id": 50,
+        "name": "enkf",
+        "license_type": "permissive",
+        "hints": [
+            "enkf"
+        ]
+    },
+    {
+        "id": 51,
+        "name": "dsmc",
+        "license_type": "permissive",
+        "hints": [
+            "dsmc"
+        ]
+    },
+    {
+        "id": 52,
+        "name": "p-flapw",
+        "license_type": "permissive",
+        "hints": [
+            "pflapw"
+        ]
+    },
+    {
+        "id": 53,
+        "name": "hisq",
+        "license_type": "unknown",
+        "hints": [
+            "hisq"
+        ]
+    },
+    {
+        "id": 54,
+        "name": "petsc",
+        "license_type": "permissive",
+        "hints": [
+            "petsc"
+        ]
+    },
+    {
+        "id": 55,
+        "name": "h2mol",
+        "license_type": "permissive",
+        "hints": [
+            "h2mol"
+        ]
+    },
+    {
+        "id": 56,
+        "name": "numactl",
+        "license_type": "permissive",
+        "hints": [
+            "numactl"
+        ]
+    },
+    {
+        "id": 57,
+        "name": "matmult",
+        "license_type": "permissive",
+        "hints": [
+            "matmult"
+        ]
+    },
+    {
+        "id": 58,
+        "name": "mitgcm",
+        "license_type": "proprietary",
+        "hints": [
+            "mitgcm"
+        ]
+    },
+    {
+        "id": 59,
+        "name": "dl_poly",
+        "license_type": "permissive",
+        "hints": [
+            "dlpoly"
+        ]
+    },
+    {
+        "id": 60,
+        "name": "vmd",
+        "license_type": "permissive",
+        "hints": [
+            "vmd"
+        ]
+    },
+    {
+        "id": 61,
+        "name": "gaussian",
+        "license_type": "proprietary",
+        "hints": [
+            "g09",
+            "l906.exe",
+            "l703.exe",
+            "l401.exe",
+            "l502.exe",
+            "l9999.exe",
+            "l904.exe",
+            "l804.exe",
+            "l801.exe",
+            "l701.exe",
+            "l601.exe",
+            "l508.exe",
+            "l1101.exe",
+            "l1002.exe"
+        ]
+    },
+    {
+        "id": 62,
+        "name": "qmcchem",
+        "license_type": "permissive",
+        "hints": [
+            "qmc"
+        ]
+    },
+    {
+        "id": 63,
+        "name": "olympus",
+        "license_type": "unknown",
+        "hints": [
+            "olympus"
+        ]
+    },
+    {
+        "id": 64,
+        "name": "visit",
+        "url": "http://www.visitusers.org",
+        "license_type": "permissive",
+        "hints": [
+            "engine_par",
+            "engine_ser"
+        ]
+    },
+    {
+        "id": 65,
+        "name": "meep",
+        "license_type": "permissive",
+        "hints": [
+            "meep"
+        ]
+    },
+    {
+        "id": 66,
+        "name": "sweep3d",
+        "license_type": "permissive",
+        "hints": [
+            "sweep3d"
+        ]
+    },
+    {
+        "id": 67,
+        "name": "wannier90",
+        "license_type": "permissive",
+        "hints": [
+            "wannier90"
+        ]
+    },
+    {
+        "id": 68,
+        "name": "abinit",
+        "license_type": "permissive",
+        "hints": [
+            "abinit"
+        ]
+    },
+    {
+        "id": 69,
+        "name": "qwalk",
+        "license_type": "permissive",
+        "hints": [
+            "qwalk"
+        ]
+    },
+    {
+        "id": 70,
+        "name": "octopus",
+        "license_type": "permissive",
+        "hints": [
+            "octopus"
+        ]
+    },
+    {
+        "id": 71,
+        "name": "fdtd",
+        "license_type": "proprietary",
+        "hints": [
+            "fdtd"
+        ]
+    },
+    {
+        "id": 72,
+        "name": "gipaw",
+        "license_type": "permissive",
+        "hints": [
+            "gipaw.x"
+        ]
+    },
+    {
+        "id": 73,
+        "name": "acesiii",
+        "license_type": "permissive",
+        "hints": [
+            "xaces3"
+        ]
+    },
+    {
+        "id": 74,
+        "name": "q-chem",
+        "license_type": "proprietary",
+        "hints": [
+            "qcprog.exe"
+        ]
+    },
+    {
+        "id": 75,
+        "name": "castep",
+        "license_type": "proprietary",
+        "hints": [
+            "castep.mpi"
+        ]
+    },
+    {
+        "id": 76,
+        "name": "rmhd",
+        "license_type": "permissive",
+        "hints": [
+            "rmhd"
+        ]
+    },
+    {
+        "id": 77,
+        "name": "aerosoft gasp",
+        "license_type": "proprietary",
+        "hints": [
+            "gasp"
+        ]
+    },
+    {
+        "id": 78,
+        "name": "chroma",
+        "license_type": "unknown",
+        "hints": [
+            "chroma"
+        ]
+    },
+    {
+        "id": 79,
+        "name": "a.out",
+        "license_type": "permissive",
+        "hints": [
+            "a.out"
+        ]
+    },
+    {
+        "id": 80,
+        "name": "stellarbox",
+        "license_type": "permissive",
+        "hints": [
+            "sbox",
+            "stellarbox"
+        ]
+    },
+    {
+        "id": 81,
+        "name": "rocflo",
+        "license_type": "unknown",
+        "hints": [
+            "rocflocm"
+        ]
+    },
+    {
+        "id": 82,
+        "name": "bsr hbd3",
+        "license_type": "unknown",
+        "hints": [
+            "bsr_hdb3"
+        ]
+    },
+    {
+        "id": 83,
+        "name": "mlrho",
+        "license_type": "permissive",
+        "hints": [
+            "mlrho"
+        ]
+    },
+    {
+        "id": 84,
+        "name": "harm3d",
+        "license_type": "permissive",
+        "hints": [
+            "harm3d"
+        ]
+    },
+    {
+        "id": 85,
+        "name": "bsr",
+        "license_type": "unknown",
+        "hints": [
+            "bsr"
+        ]
+    },
+    {
+        "id": 86,
+        "name": "nek5000",
+        "license_type": "permissive",
+        "hints": [
+            "nek5000"
+        ]
+    },
+    {
+        "id": 87,
+        "name": "cfdem",
+        "license_type": "permissive",
+        "hints": [
+            "cfdem"
+        ]
+    },
+    {
+        "id": 88,
+        "name": "spec",
+        "license_type": "permissive",
+        "hints": [
+            "spec"
+        ]
+    },
+    {
+        "id": 89,
+        "name": "cdp",
+        "license_type": "unknown",
+        "hints": [
+            "cdp"
+        ]
+    },
+    {
+        "id": 90,
+        "name": "swan",
+        "license_type": "permissive",
+        "hints": [
+            "padcswan"
+        ]
+    },
+    {
+        "id": 91,
+        "name": "mpsolve",
+        "license_type": "permissive",
+        "hints": [
+            "mpsolve"
+        ]
+    },
+    {
+        "id": 92,
+        "name": "openggcm",
+        "license_type": "permissive",
+        "hints": [
+            "openggcm"
+        ]
+    },
+    {
+        "id": 93,
+        "name": "fdl3di",
+        "license_type": "permissive",
+        "hints": [
+            "fdl3di"
+        ]
+    },
+    {
+        "id": 94,
+        "name": "tmdmpi",
+        "license_type": "unknown",
+        "hints": [
+            "tmdmpi"
+        ]
+    },
+    {
+        "id": 95,
+        "name": "gh3d2m",
+        "license_type": "permissive",
+        "hints": [
+            "gh3d2m"
+        ]
+    },
+    {
+        "id": 96,
+        "name": "mc3dp",
+        "license_type": "unknown",
+        "hints": [
+            "mc3dp"
+        ]
+    },
+    {
+        "id": 97,
+        "name": "fd3d",
+        "license_type": "permissive",
+        "hints": [
+            "fd3d"
+        ]
+    },
+    {
+        "id": 98,
+        "name": "3dsg",
+        "license_type": "unknown",
+        "hints": [
+            "3dsg"
+        ]
+    },
+    {
+        "id": 99,
+        "name": "cmaq_cctm",
+        "license_type": "permissive",
+        "hints": [
+            "cctm"
+        ]
+    },
+    {
+        "id": 100,
+        "name": "zeus-mp",
+        "license_type": "permissive",
+        "hints": [
+            "zeusmp"
+        ]
+    },
+    {
+        "id": 101,
+        "name": "zasp",
+        "license_type": "unknown",
+        "hints": [
+            "zasp"
+        ]
+    },
+    {
+        "id": 102,
+        "name": "ifortddwntl.om",
+        "license_type": "unknown",
+        "hints": [
+            "ifortddwntl.om"
+        ]
+    },
+    {
+        "id": 103,
+        "name": "uts_ws",
+        "license_type": "unknown",
+        "hints": [
+            "uts_ws"
+        ]
+    },
+    {
+        "id": 104,
+        "name": "transfer",
+        "license_type": "unknown",
+        "hints": [
+            "transfer"
+        ]
+    },
+    {
+        "id": 105,
+        "name": "mangll_dgae_snell",
+        "license_type": "unknown",
+        "hints": [
+            "mangll_dgae_snell"
+        ]
+    },
+    {
+        "id": 106,
+        "name": "md1_mpi",
+        "license_type": "unknown",
+        "hints": [
+            "md1_mpi"
+        ]
+    },
+    {
+        "id": 107,
+        "name": "flash4",
+        "license_type": "permissive",
+        "hints": [
+            "flash4"
+        ]
+    },
+    {
+        "id": 108,
+        "name": "mhd3d",
+        "license_type": "permissive",
+        "hints": [
+            "mhd3d"
+        ]
+    },
+    {
+        "id": 109,
+        "name": "lesmpi_rankine.a",
+        "license_type": "unknown",
+        "hints": [
+            "lesmpi_rankine.a"
+        ]
+    },
+    {
+        "id": 110,
+        "name": "graph500",
+        "license_type": "permissive",
+        "hints": [
+            "graph500_mpi_replicated_csc_seqval",
+            "graph500_mpi_replicated_seqval",
+            "graph500_mpi"
+        ]
+    },
+    {
+        "id": 111,
+        "name": "nrlmol",
+        "license_type": "unknown",
+        "hints": [
+            "nrlmol.exe",
+            "nrlmol.mpi"
+        ]
+    },
+    {
+        "id": 112,
+        "name": "PROPRIETARY",
+        "license_type": "permissive",
+        "hints": []
+    },
+    {
+        "id": 113,
+        "name": "adf",
+        "license_type": "proprietary",
+        "hints": [
+            "adf.exe"
+        ]
+    },
+    {
+        "id": 114,
+        "name": "maker",
+        "license_type": "permissive",
+        "hints": [
+            "maker"
+        ]
+    },
+    {
+        "id": 115,
+        "name": "python",
+        "license_type": "permissive",
+        "hints": [
+            "python",
+            "python-mpi",
+            "python2.7"
+        ]
+    },
+    {
+        "id": 116,
+        "name": "nemo",
+        "license_type": "permissive",
+        "hints": [
+            "nemo"
+        ]
+    },
+    {
+        "id": 117,
+        "name": "lsms",
+        "license_type": "permissive",
+        "hints": [
+            "lsms"
+        ]
+    },
+    {
+        "id": 118,
+        "name": "aims",
+        "license_type": "proprietary",
+        "hints": [
+            "aims."
+        ]
+    },
+    {
+        "id": 119,
+        "name": "cnvnator",
+        "license_type": "permissive",
+        "hints": [
+            "cnvnator"
+        ]
+    },
+    {
+        "id": 120,
+        "name": "matlab",
+        "license_type": "permissive",
+        "hints": [
+            "matlab"
+        ]
+    },
+    {
+        "id": 121,
+        "name": "arps",
+        "license_type": "permissive",
+        "hints": [
+            "arps_mpi",
+            "arpsenkf_mpi"
+        ]
+    },
+    {
+        "id": 122,
+        "name": "chargemol",
+        "license_type": "permissive",
+        "hints": [
+            "chargemol"
+        ]
+    },
+    {
+        "id": 123,
+        "name": "rsqsim",
+        "license_type": "permissive",
+        "hints": [
+            "runRSQSim"
+        ]
+    },
+    {
+        "id": 124,
+        "name": "gizmo",
+        "url": "http://www.tapir.caltech.edu/~phopkins/Site/GIZMO.html",
+        "license_type": "permissive",
+        "hints": [
+            "GIZMO"
+        ]
+    },
+    {
+        "id": 125,
+        "name": "uspex",
+        "url": "http://uspex.stonybrook.edu/uspex.html",
+        "license_type": "permissive",
+        "hints": [
+            "mpi-run-1cpus-uspex.o",
+            "mpi-run-1cpus-uspex-once.o"
+        ]
+    },
+    {
+        "id": 126,
+        "name": "hoomd",
+        "license_type": "permissive",
+        "hints": [
+            "hoomd"
+        ]
+    },
+    {
+        "id": 127,
+        "name": "dumses",
+        "license_type": "permissive",
+        "hints": [
+            "dumses"
+        ]
+    },
+    {
+        "id": 128,
+        "name": "titan2d",
+        "url": "https://vhub.org/resources/titan2d",
+        "license_type": "permissive",
+        "hints": [
+            "titan"
+        ]
+    },
+    {
+        "id": 129,
+        "name": "astrogk",
+        "url": "http://newton.physics.uiowa.edu/~ghowes/astrogk/",
+        "license_type": "permissive",
+        "hints": [
+            "agk"
+        ]
+    },
+    {
+        "id": 130,
+        "name": "snoopy",
+        "url": "http://ipag.osug.fr/~lesurg/snoopy_doc/html/index.html",
+        "license_type": "permissive",
+        "hints": [
+            "snoopy"
+        ]
+
+    },
+    {
+        "id": 131,
+        "name": "r",
+        "url": "https://www.r-project.org/",
+        "license_type": "permissive",
+        "hints": [
+            "Rscript",
+            "RMPISNOW"
+        ]
+    },
+    {
+        "id": 132,
+        "name": "unknown (ran under a debugger)",
+        "license_type": "permissive",
+        "hints": [
+            "valgrind",
+            "perfexpert",
+            "ddt-debugger",
+            "hpcrun"
+        ]
+    },
+    {
+        "id": 133,
+        "name": "ncbi-blast",
+        "url": "http://blast.ncbi.nlm.nih.gov/Blast.cgi",
+        "license_type": "permissive",
+        "hints": [
+            "blastx"
+        ]
+    },
+    {
+        "id": 134,
+        "name": "gnu-octave",
+        "url": "https://www.gnu.org/software/octave/",
+        "license_type": "permissive",
+        "hints": [
+            "octave"
+        ]
+    },
+    {
+        "id": 135,
+        "name": "garli",
+        "url": "http://wiki.hpc.ufl.edu/doc/Garli",
+        "license_type": "permissive",
+        "hints": [
+            "Garli"
+        ]
+    },
+    {
+        "id": 136,
+        "name": "orca",
+        "url": "https://orcaforum.cec.mpg.de/",
+        "license_type": "permissive",
+        "hints": [
+            "orca_cpscf",
+            "orca_scf",
+            "orca_mp2",
+            "orca"
+        ]
+    },
+    {
+        "id": 137,
+        "name": "paraview",
+        "url": "http://www.paraview.org/",
+        "license_type": "permissive",
+        "hints": [
+            "pvbatch",
+            "pvserver"
+        ]
+    },
+    {
+        "id": 138,
+        "name": "dirac",
+        "url": "http://diracprogram.org/doku.php",
+        "license_type": "permissive",
+        "hints": [
+            "dirac.x"
+        ]
+    },
+    {
+        "id": 139,
+        "name": "gatk",
+        "url": "https://www.broadinstitute.org/gatk/",
+        "license_type": "permissive",
+        "hints": [
+            "GenomeAnalysisTK.jar"
+        ]
+    },
+    {
+        "id": 140,
+        "name": "varscan",
+        "url": "http://varscan.sourceforge.net/",
+        "license_type": "permissive",
+        "hints": [
+            "VarScan.jar",
+            "VarScan.v%.jar"
+        ]
+    },
+    {
+        "id": 141,
+        "name": "picard",
+        "url": "http://broadinstitute.github.io/picard/",
+        "license_type": "permissive",
+        "hints": [
+            "picard.jar"
+        ]
+    },
+    {
+        "id": 142,
+        "name": "setsm",
+        "url": "http://www.pgc.umn.edu/elevation/stereo/",
+        "license_type": "permissive",
+        "hints": [
+            "setsm"
+        ]
+    },
+    {
+        "id": 143,
+        "name": "gdal",
+        "url": "http://www.gdal.org/",
+        "license_type": "permissive",
+        "hints": [
+            "gdal"
+        ]
+    },
+    {
+        "id": 144,
+        "name": "citcoms",
+        "url": "https://geodynamics.org/cig/software/citcoms/",
+        "license_type": "permissive",
+        "hints": [
+            "mpipycitcoms"
+        ]
+    },
+    {
+        "id": 145,
+        "name": "adda",
+        "url": "https://www.openhub.net/p/adda",
+        "license_type": "permissive",
+        "hints": [
+            "adda_mpi"
+        ]
+    },
+    {
+        "id": 146,
+        "name": "meld",
+        "url": "https://github.com/laufercenter/meld",
+        "license_type": "permissive",
+        "hints": [
+            "launch_remd"
+        ]
+    },
+    {
+        "id": 147,
+        "name": "osiris",
+        "url": "http://www.ncbi.nlm.nih.gov/projects/SNP/osiris",
+        "license_type": "permissive",
+        "hints": [
+            "osiris-"
+        ]
+    },
+    {
+        "id": 148,
+        "name": "chimera",
+        "url": "https://www.cgl.ucsf.edu/chimera",
+        "license_type": "permissive",
+        "hints": [
+            "CHIMERA3D"
+        ]
+    },
+    {
+        "id": 149,
+        "name": "rockstar-galaxies",
+        "url": "https://bitbucket.org/pbehroozi/rockstar-galaxies",
+        "license_type": "permissive",
+        "hints": [
+            "rockstar-galaxies"
+        ]
+    },
+    {
+        "id": 150,
+        "name": "swift",
+        "url": "http://swift-lang.org/",
+        "license_type": "permissive",
+        "hints": [
+            "cscript"
+        ]
+    },
+    {
+        "id": 151,
+        "name": "castro",
+        "url": "http://boxlib-codes.github.io/Castro/",
+        "license_type": "permissive",
+        "hints": [
+            "Castro3d"
+        ]
+    },
+    {
+        "id": 152,
+        "name": "mdtest",
+        "url": "https://sourceforge.net/projects/mdtest/",
+        "license_type": "permissive",
+        "hints": [
+            "mdtest"
+        ]
+    },
+    {
+        "id": 153,
+        "name": "waveqlab3d",
+        "url": "https://www.scec.org/publication/7004",
+        "license_type": "permissive",
+        "hints": [
+            "waveqlab3d"
+        ]
+    },
+    {
+        "id": 154,
+        "name": "msflukss",
+        "url": "",
+        "license_type": "permissive",
+        "hints": [
+            "MHDAM3d.Linux"
+        ]
+    },
+    {
+        "id": 155,
+        "name": "awp-odc-os",
+        "url": "https://github.com/HPGeoC/awp-odc-os",
+        "license_type": "permissive",
+        "hints": [
+            "pmcl3d"
+        ]
+    }
+]

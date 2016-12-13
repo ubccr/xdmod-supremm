@@ -1,0 +1,692 @@
+{
+   "block" : {
+      "sdb" : {
+         "read" : {
+            "cnt" : 8,
+            "avg" : 0
+         },
+         "write" : {
+            "med" : 3.5,
+            "skw" : -0.144337567297406,
+            "cov" : 0.462910049886276,
+            "max" : 6,
+            "krt" : -1.16666666666667,
+            "cnt" : 8,
+            "min" : 1,
+            "std" : 1.8516401995451,
+            "avg" : 4
+         },
+         "read_bytes" : {
+            "avg" : 0,
+            "cnt" : 8
+         },
+         "write_bytes" : {
+            "min" : 8,
+            "avg" : 51.75,
+            "std" : 39.4923138995787,
+            "cnt" : 8,
+            "skw" : 0.286593520017929,
+            "cov" : 0.763136500474951,
+            "max" : 101,
+            "krt" : -1.6684071141845,
+            "med" : 37
+         }
+      },
+      "sda" : {
+         "write" : {
+            "krt" : -0.674826114648014,
+            "skw" : 0.810575425122295,
+            "max" : 992,
+            "cov" : 0.0560416913208311,
+            "med" : 885.5,
+            "avg" : 900.25,
+            "std" : 50.4515326115782,
+            "min" : 848,
+            "cnt" : 8
+         },
+         "read" : {
+            "std" : 0.707106781186548,
+            "avg" : 0.25,
+            "min" : 0,
+            "cnt" : 8,
+            "krt" : 3.14285714285714,
+            "skw" : 2.26778683805536,
+            "cov" : 2.82842712474619,
+            "max" : 2,
+            "med" : 0
+         },
+         "write_bytes" : {
+            "skw" : -2.00066683692181,
+            "cov" : 0.0716318930052632,
+            "max" : 59877,
+            "krt" : 2.58711440536883,
+            "med" : 57213.5,
+            "min" : 46564,
+            "avg" : 56262.75,
+            "std" : 4030.20728818187,
+            "cnt" : 8
+         },
+         "read_bytes" : {
+            "cnt" : 8,
+            "min" : 0,
+            "avg" : 0.25,
+            "std" : 0.707106781186548,
+            "med" : 0,
+            "skw" : 2.26778683805536,
+            "cov" : 2.82842712474619,
+            "max" : 2,
+            "krt" : 3.14285714285714
+         }
+      }
+   },
+   "infiniband" : {
+      "mlx4_0:1" : {
+         "switch-out-bytes" : {
+            "cov" : 0.0498877137522487,
+            "max" : 4574960564,
+            "skw" : 0.375489173048115,
+            "krt" : -0.99059479848686,
+            "med" : 4201218660,
+            "min" : 3963833012,
+            "avg" : 4219518386.5,
+            "std" : 210502125.438062,
+            "cnt" : 8
+         },
+         "switch-in-bytes" : {
+            "std" : 210467377.528189,
+            "avg" : 4219518386.5,
+            "min" : 3959362700,
+            "cnt" : 8,
+            "krt" : -0.445913237640436,
+            "skw" : 0.555347025265272,
+            "max" : 4611365912,
+            "cov" : 0.0498794787105471,
+            "med" : 4222270326
+         },
+         "switch-in-packets" : {
+            "cnt" : 8,
+            "avg" : 3702901.75,
+            "std" : 185711.508589263,
+            "min" : 3456397,
+            "med" : 3712284,
+            "krt" : -0.987413113019478,
+            "cov" : 0.0501529668156232,
+            "max" : 4003540,
+            "skw" : 0.093642216996028
+         },
+         "switch-out-packets" : {
+            "cnt" : 8,
+            "min" : 3467338,
+            "std" : 186398.410243642,
+            "avg" : 3702901.75,
+            "med" : 3701141,
+            "skw" : 0.0872745108045027,
+            "cov" : 0.0503384704289392,
+            "max" : 3981860,
+            "krt" : -1.29088252316658
+         }
+      }
+   },
+   "errors" : {
+      "archive" : [
+         "cpn-d16-32 gpu Instance domain identifier not defined in the PCP archive log",
+         "cpn-d15-03 gpu Instance domain identifier not defined in the PCP archive log",
+         "cpn-d16-34 gpu Instance domain identifier not defined in the PCP archive log",
+         "cpn-d07-30-01 gpu Instance domain identifier not defined in the PCP archive log",
+         "cpn-d16-31 gpu Instance domain identifier not defined in the PCP archive log",
+         "cpn-d15-06 gpu Instance domain identifier not defined in the PCP archive log",
+         "cpn-d16-33 gpu Instance domain identifier not defined in the PCP archive log",
+         "cpn-d14-08 gpu Instance domain identifier not defined in the PCP archive log"
+      ]
+   },
+   "uncperf" : {
+      "membw" : {
+         "skw" : -1.66076622584641,
+         "cov" : 0.0513982499581426,
+         "max" : 81441239488,
+         "krt" : 1.92713682146818,
+         "med" : 77835779424,
+         "min" : 67901706880,
+         "avg" : 77063755368,
+         "std" : 3960942161.11761,
+         "cnt" : 8
+      }
+   },
+   "_id" : "4655275-1445928790",
+   "processed" : {
+      "v01n09:3306-modw_supremm" : {
+         "errors" : null,
+         "version" : 138,
+         "ts" : 1446288077842,
+         "warnings" : null
+      }
+   },
+   "gpfs" : {
+      "gpfs0" : {
+         "write_bytes" : {
+            "cnt" : 8,
+            "min" : 0,
+            "std" : 8905885.45825108,
+            "avg" : 3148706,
+            "med" : 0,
+            "skw" : 2.26778683805536,
+            "max" : 25189648,
+            "cov" : 2.82842712474619,
+            "krt" : 3.14285714285714
+         },
+         "read_bytes" : {
+            "cnt" : 8,
+            "avg" : 20525406.75,
+            "std" : 24904474.660794,
+            "min" : 10779944,
+            "med" : 11498792,
+            "krt" : 3.11871187723603,
+            "skw" : 2.25828796910991,
+            "cov" : 1.21334865438386,
+            "max" : 82095838
+         },
+         "writes" : {
+            "krt" : 3.14285714285714,
+            "skw" : 2.26778683805536,
+            "cov" : 2.82842712474619,
+            "max" : 386,
+            "med" : 0,
+            "avg" : 48.25,
+            "std" : 136.471608769004,
+            "min" : 0,
+            "cnt" : 8
+         },
+         "reads" : {
+            "cnt" : 8,
+            "std" : 124.525886580146,
+            "avg" : 1240.875,
+            "min" : 1194,
+            "med" : 1197,
+            "krt" : 3.13833408495676,
+            "skw" : 2.26600431471948,
+            "cov" : 0.100353288268477,
+            "max" : 1549
+         }
+      }
+   },
+   "network" : {
+      "enp11s0f1" : {
+         "in-bytes" : {
+            "cnt" : 7,
+            "avg" : 0
+         },
+         "out-packets" : {
+            "avg" : 0,
+            "cnt" : 7
+         },
+         "in-packets" : {
+            "avg" : 0,
+            "cnt" : 7
+         },
+         "out-bytes" : {
+            "avg" : 0,
+            "cnt" : 7
+         }
+      },
+      "ib1" : {
+         "out-packets" : {
+            "avg" : 0,
+            "cnt" : 1
+         },
+         "in-packets" : {
+            "cnt" : 1,
+            "avg" : 0
+         },
+         "out-bytes" : {
+            "cnt" : 1,
+            "avg" : 0
+         },
+         "in-bytes" : {
+            "avg" : 0,
+            "cnt" : 1
+         }
+      },
+      "em2" : {
+         "in-packets" : {
+            "cnt" : 1,
+            "avg" : 0
+         },
+         "out-bytes" : {
+            "cnt" : 1,
+            "avg" : 0
+         },
+         "out-packets" : {
+            "avg" : 0,
+            "cnt" : 1
+         },
+         "in-bytes" : {
+            "cnt" : 1,
+            "avg" : 0
+         }
+      },
+      "lo" : {
+         "out-packets" : {
+            "med" : 140,
+            "krt" : 3.1428148855923,
+            "cov" : 1.63744969899668,
+            "max" : 1685,
+            "skw" : 2.26777009248561,
+            "cnt" : 8,
+            "avg" : 333.5,
+            "std" : 546.089474615391,
+            "min" : 140
+         },
+         "in-packets" : {
+            "std" : 546.089474615391,
+            "avg" : 333.5,
+            "min" : 140,
+            "cnt" : 8,
+            "krt" : 3.1428148855923,
+            "skw" : 2.26777009248561,
+            "max" : 1685,
+            "cov" : 1.63744969899668,
+            "med" : 140
+         },
+         "out-bytes" : {
+            "krt" : 3.1428292756818,
+            "skw" : 2.26777579188029,
+            "cov" : 1.98425529669407,
+            "max" : 224342,
+            "med" : 11280,
+            "avg" : 37954.75,
+            "std" : 75311.9137221994,
+            "min" : 11280,
+            "cnt" : 8
+         },
+         "in-bytes" : {
+            "std" : 75311.9137221994,
+            "avg" : 37954.75,
+            "min" : 11280,
+            "cnt" : 8,
+            "krt" : 3.1428292756818,
+            "cov" : 1.98425529669407,
+            "max" : 224342,
+            "skw" : 2.26777579188029,
+            "med" : 11280
+         }
+      },
+      "em1" : {
+         "out-bytes" : {
+            "avg" : 24294374,
+            "cnt" : 1
+         },
+         "in-packets" : {
+            "avg" : 11674,
+            "cnt" : 1
+         },
+         "out-packets" : {
+            "avg" : 9822,
+            "cnt" : 1
+         },
+         "in-bytes" : {
+            "avg" : 37675901,
+            "cnt" : 1
+         }
+      },
+      "enp11s0f0" : {
+         "in-bytes" : {
+            "std" : 2384706.90618407,
+            "avg" : 17491753,
+            "min" : 16102519,
+            "cnt" : 7,
+            "krt" : 1.64599526947607,
+            "max" : 22747287,
+            "cov" : 0.1363332140686,
+            "skw" : 1.82326002500229,
+            "med" : 16452642
+         },
+         "in-packets" : {
+            "min" : 3794,
+            "avg" : 4405.85714285714,
+            "std" : 518.405706170829,
+            "cnt" : 7,
+            "cov" : 0.117662849557271,
+            "max" : 5140,
+            "skw" : 0.0824619486581915,
+            "krt" : -1.46294923223158,
+            "med" : 4512
+         },
+         "out-bytes" : {
+            "avg" : 467836.142857143,
+            "std" : 142816.172597771,
+            "min" : 340779,
+            "cnt" : 7,
+            "krt" : -1.19009597659159,
+            "max" : 671897,
+            "cov" : 0.305269643609772,
+            "skw" : 0.757478764326082,
+            "med" : 423708
+         },
+         "out-packets" : {
+            "krt" : -1.71696499592205,
+            "skw" : -0.222513387775614,
+            "cov" : 0.139526317251336,
+            "max" : 3573,
+            "med" : 3302,
+            "std" : 430.837335341088,
+            "avg" : 3087.85714285714,
+            "min" : 2553,
+            "cnt" : 7
+         }
+      },
+      "enp0s29f1u2" : {
+         "out-packets" : {
+            "avg" : 0,
+            "cnt" : 7
+         },
+         "out-bytes" : {
+            "cnt" : 7,
+            "avg" : 0
+         },
+         "in-packets" : {
+            "krt" : 2.16666666666668,
+            "cov" : 0.0208326874886976,
+            "max" : 38,
+            "skw" : 2.04124145231932,
+            "med" : 36,
+            "std" : 0.755928946018454,
+            "avg" : 36.2857142857143,
+            "min" : 36,
+            "cnt" : 7
+         },
+         "in-bytes" : {
+            "avg" : 2358.57142857143,
+            "std" : 49.1353814911995,
+            "min" : 2340,
+            "cnt" : 7,
+            "krt" : 2.16666666666669,
+            "cov" : 0.0208326874886976,
+            "max" : 2470,
+            "skw" : 2.04124145231932,
+            "med" : 2340
+         }
+      },
+      "ib0" : {
+         "in-bytes" : {
+            "avg" : 0,
+            "cnt" : 8
+         },
+         "in-packets" : {
+            "cnt" : 8,
+            "avg" : 0
+         },
+         "out-bytes" : {
+            "avg" : 0,
+            "cnt" : 8
+         },
+         "out-packets" : {
+            "avg" : 0,
+            "cnt" : 8
+         }
+      }
+   },
+   "acct" : {
+      "partition" : "general-compute",
+      "gid" : 104531,
+      "jobname" : "xdmod.app.md.namd.job",
+      "reqcpus" : 64,
+      "hostcores" : [
+         [
+            "cpn-d15-03",
+            [
+               "error"
+            ]
+         ],
+         [
+            "cpn-d14-08",
+            [
+               "error"
+            ]
+         ],
+         [
+            "cpn-d16-34",
+            [
+               "error"
+            ]
+         ],
+         [
+            "cpn-d16-33",
+            [
+               "error"
+            ]
+         ],
+         [
+            "cpn-d16-32",
+            [
+               "error"
+            ]
+         ],
+         [
+            "cpn-d16-31",
+            [
+               "error"
+            ]
+         ],
+         [
+            "cpn-d15-06",
+            [
+               "error"
+            ]
+         ],
+         [
+            "cpn-d07-30-01",
+            [
+               0,
+               1,
+               2,
+               3,
+               4,
+               5,
+               6,
+               7
+            ]
+         ]
+      ],
+      "account" : "",
+      "group" : "xdtas",
+      "nodes" : 8,
+      "user" : "xdtas",
+      "ncpus" : 64,
+      "host_list" : [
+         "cpn-d07-30-01",
+         "cpn-d14-08",
+         "cpn-d15-03",
+         "cpn-d15-06",
+         "cpn-d16-31",
+         "cpn-d16-32",
+         "cpn-d16-33",
+         "cpn-d16-34"
+      ],
+      "submit" : 1445928665,
+      "resource_id" : 13,
+      "timelimit" : 780,
+      "end_time" : 1445928790,
+      "exit_code" : "0:0",
+      "id" : "4655275",
+      "eligible" : 1445928665,
+      "start_time" : 1445928699,
+      "uid" : 257439,
+      "local_job_id" : 4655275,
+      "reqmem" : "2800Mc",
+      "exit_status" : "COMPLETED"
+   },
+   "memory" : {
+      "used_minus_cache" : {
+         "cnt" : 8,
+         "min" : 334526,
+         "std" : 7818.44900128627,
+         "avg" : 346676.25,
+         "med" : 346265.5,
+         "skw" : -0.170502860145953,
+         "max" : 356606,
+         "cov" : 0.0225525948238054,
+         "krt" : -1.27287341225232
+      },
+      "used" : {
+         "med" : 577860.5,
+         "krt" : -1.4315540311883,
+         "cov" : 0.0537978956038514,
+         "max" : 616573,
+         "skw" : -0.118339246302746,
+         "cnt" : 8,
+         "avg" : 576946.25,
+         "std" : 31038.4941265335,
+         "min" : 535352
+      }
+   },
+   "cpuperf" : {
+      "flops" : {
+         "med" : 48322080177,
+         "krt" : 41.1176804369315,
+         "skw" : 6.01082688118046,
+         "cov" : 0.0862206960617973,
+         "max" : 79638054711,
+         "cnt" : 64,
+         "avg" : 49060941967.9375,
+         "std" : 4230068565.92301,
+         "min" : 44210774954
+      },
+      "cpiref" : {
+         "med" : 0.613762093268345,
+         "krt" : 35.2629458872111,
+         "skw" : -5.29797802467591,
+         "cov" : 0.0173862619014359,
+         "max" : 0.628795774826917,
+         "cnt" : 64,
+         "std" : 0.0106645842885895,
+         "avg" : 0.613391443718489,
+         "min" : 0.539051736715967
+      },
+      "cpldref" : {
+         "med" : 2.10203170830043,
+         "krt" : 8.7353767983525,
+         "max" : 2.26053882325486,
+         "cov" : 0.0146970166048099,
+         "skw" : 1.655372809267,
+         "cnt" : 64,
+         "std" : 0.0309707068583483,
+         "avg" : 2.10727848318635,
+         "min" : 2.01589031939142
+      }
+   },
+   "cpu" : {
+      "nodecpus" : {
+         "idle" : {
+            "cnt" : 64,
+            "avg" : 0.208836290734023,
+            "std" : 0.0104465227604358,
+            "min" : 0.184219214262133,
+            "med" : 0.211595684255152,
+            "krt" : -0.634831714063054,
+            "skw" : -0.644663674595599,
+            "cov" : 0.050022545045778,
+            "max" : 0.225451343020696
+         },
+         "irq" : {
+            "avg" : 0,
+            "cnt" : 64
+         },
+         "softirq" : {
+            "cnt" : 64,
+            "avg" : 7.56870720433612e-05,
+            "std" : 9.17455230859483e-05,
+            "min" : 0,
+            "med" : 0,
+            "krt" : -0.593404152322351,
+            "skw" : 0.801015496138582,
+            "cov" : 1.21216900864374,
+            "max" : 0.000330287349994495
+         },
+         "iowait" : {
+            "med" : 0.000825488141141621,
+            "cov" : 1.54153184141422,
+            "max" : 0.0245540629817221,
+            "skw" : 1.42698643041503,
+            "krt" : 0.40795068591678,
+            "cnt" : 64,
+            "min" : 0,
+            "std" : 0.00788135407213982,
+            "avg" : 0.00511267679356487
+         },
+         "nice" : {
+            "cnt" : 64,
+            "avg" : 0
+         },
+         "all" : {
+            "cnt" : 64
+         },
+         "system" : {
+            "std" : 0.00164028051222691,
+            "avg" : 0.00848832109194208,
+            "min" : 0.00396301188903567,
+            "cnt" : 64,
+            "krt" : 1.03372293104015,
+            "cov" : 0.193239687148972,
+            "max" : 0.013647369579573,
+            "skw" : 0.37623423888104,
+            "med" : 0.00841911257170185
+         },
+         "user" : {
+            "med" : 0.7746820411374,
+            "skw" : 0.984767082940522,
+            "cov" : 0.00948172081259236,
+            "max" : 0.799009356081453,
+            "krt" : 0.501477709650767,
+            "cnt" : 64,
+            "min" : 0.765463350209113,
+            "avg" : 0.777487024308427,
+            "std" : 0.00737191489990572
+         }
+      },
+      "jobcpus" : {
+         "error" : 5
+      }
+   },
+   "gpu" : {
+      "error" : "no data"
+   },
+   "procDump" : {
+      "constrained" : [
+         "/util/academic/namd/NAMD_2.9_Source-IBVERBS/charmrun +p64 ++nodelist nodelist /util/academic/namd/NAMD_2.9_Source-IBVERBS/namd2 ./input.namd",
+         "ssh cpn-d07-30-01 -l xdtas /bin/sh -f",
+         "ssh cpn-d16-33 -l xdtas /bin/sh -f",
+         "ssh cpn-d15-06 -l xdtas /bin/sh -f",
+         "ssh cpn-d16-32 -l xdtas /bin/sh -f",
+         "ssh cpn-d14-08 -l xdtas /bin/sh -f",
+         "ssh cpn-d16-34 -l xdtas /bin/sh -f",
+         "ssh cpn-d16-31 -l xdtas /bin/sh -f",
+         "/bin/bash /var/spool/slurmd/job4655275/slurm_script",
+         "ssh cpn-d15-03 -l xdtas /bin/sh -f"
+      ],
+      "unconstrained" : [
+         "/bin/sh -f",
+         "ssh cpn-d07-30-01 -l xdtas /bin/sh -f",
+         "ssh cpn-d16-33 -l xdtas /bin/sh -f",
+         "ssh cpn-d16-32 -l xdtas /bin/sh -f",
+         "ssh cpn-d15-06 -l xdtas /bin/sh -f",
+         "sshd: xdtas@notty",
+         "ssh cpn-d14-08 -l xdtas /bin/sh -f",
+         "ssh cpn-d16-34 -l xdtas /bin/sh -f",
+         "(ssh)",
+         "ssh cpn-d16-31 -l xdtas /bin/sh -f",
+         "sleep 1",
+         "ssh cpn-d15-03 -l xdtas /bin/sh -f",
+         "/util/academic/namd/NAMD_2.9_Source-IBVERBS/namd2 ./input.namd"
+      ]
+   },
+   "catastrophe" : {
+      "value" : 1.98658862635412
+   },
+   "summarization" : {
+      "complete" : true,
+      "mergetime" : 4.97944092750549,
+      "srcdir" : "/dev/shm/supremm_test/ub-hpc/4655275",
+      "version" : "1.0.4",
+      "elapsed" : 0.375080108642578
+   }
+}

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="850px" height="420px" viewBox="107 40 875 417" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="211" y="71">
+    <tspan x="211" y="71"></tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="333.958" y1="116.5" x2="490" y2="116.5"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="333.958" y1="40.5" x2="490" y2="40.5"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="411.979" y="74.5">
+      <tspan x="411.979" y="74.5">PCP archive files</tspan>
+      <tspan x="411.979" y="90.5"> on filesystem</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="334.5" y1="277" x2="550.389" y2="277"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="334.5" y1="201" x2="550.389" y2="201"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="442.444" y="235">
+      <tspan x="442.444" y="235">accounting data in </tspan>
+      <tspan x="442.444" y="251">Open XDMoD datawarehouse</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="109.425" y="213" width="165.15" height="54"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="109.425" y="213" width="165.15" height="54"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="192" y="235.9">
+      <tspan x="192" y="235.9">SLURM resource</tspan>
+      <tspan x="192" y="251.9">manager</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="109" y="52" width="163" height="54"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="109" y="52" width="163" height="54"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="190.5" y="74.9">
+      <tspan x="190.5" y="74.9">PCP running</tspan>
+      <tspan x="190.5" y="90.9">on compute nodes</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="272" y1="79" x2="324.223" y2="78.5786"/>
+    <polygon style="fill: #000000" points="331.722,78.518 321.763,83.5986 324.223,78.5786 321.682,73.5989 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="331.722,78.518 321.763,83.5986 324.223,78.5786 321.682,73.5989 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="274.575" y1="240" x2="324.765" y2="239.162"/>
+    <polygon style="fill: #000000" points="332.264,239.037 322.349,244.203 324.765,239.162 322.182,234.205 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="332.264,239.037 322.349,244.203 324.765,239.162 322.182,234.205 "/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="714.468" cy="120.061" rx="80.9275" ry="43.4543"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="714.468" cy="120.061" rx="80.9275" ry="43.4543"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="714.468" y="107.961">
+      <tspan x="714.468" y="107.961">SUPReMM</tspan>
+      <tspan x="714.468" y="123.961">summarization</tspan>
+      <tspan x="714.468" y="139.961">scripts</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="777" y1="308" x2="961" y2="308"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="777" y1="232" x2="961" y2="232"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="869" y="266">
+      <tspan x="869" y="266">Job summary documents</tspan>
+      <tspan x="869" y="282">in mongoDb instance</tspan>
+    </text>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="674.057" cy="419.652" rx="64.1915" ry="35.7197"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="674.057" cy="419.652" rx="64.1915" ry="35.7197"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="674.057" y="415.552">
+      <tspan x="674.057" y="415.552">SUPReMM </tspan>
+      <tspan x="674.057" y="431.552">ETL process </tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="961,270 982,270 982,433.322 743.098,433.322 "/>
+    <polygon style="fill: #000000" points="735.598,433.322 745.598,428.322 743.098,433.322 745.598,438.322 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="735.598,433.322 745.598,428.322 743.098,433.322 745.598,438.322 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="333" y1="457" x2="548.889" y2="457"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="333" y1="381" x2="548.889" y2="381"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="440.944" y="415">
+      <tspan x="440.944" y="415">SUPReMM data in </tspan>
+      <tspan x="440.944" y="431">Open XDMoD datawarehouse</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="609.865" y1="419.652" x2="558.624" y2="419.104"/>
+    <polygon style="fill: #000000" points="551.125,419.024 561.178,414.131 558.624,419.104 561.071,424.131 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="551.125,419.024 561.178,414.131 558.624,419.104 561.071,424.131 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="550.389,220 595.054,220 595.054,136.649 629.982,136.649 "/>
+    <polygon style="fill: #000000" points="637.482,136.649 627.482,141.649 629.982,136.649 627.482,131.649 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="637.482,136.649 627.482,141.649 629.982,136.649 627.482,131.649 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="490,78.5 564.859,78.5 564.859,103.472 629.982,103.472 "/>
+    <polygon style="fill: #000000" points="637.482,103.472 627.482,108.472 629.982,103.472 627.482,98.472 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="637.482,103.472 627.482,108.472 629.982,103.472 627.482,98.472 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="795.856,120.061 816.856,120.061 816.856,195.03 756,195.03 756,270 767.264,270 "/>
+    <polygon style="fill: #000000" points="774.764,270 764.764,275 767.264,270 764.764,265 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="774.764,270 764.764,275 767.264,270 764.764,265 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="550.389,258 674.057,258 674.057,374.197 "/>
+    <polygon style="fill: #000000" points="674.057,381.697 669.057,371.697 674.057,374.197 679.057,371.697 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="674.057,381.697 669.057,371.697 674.057,374.197 679.057,371.697 "/>
+  </g>
+</svg>

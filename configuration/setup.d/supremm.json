@@ -1,0 +1,9 @@
+{
+    "+menu": [
+        {
+            "position": 200,
+            "label": "SUPReMM",
+            "handler": "SupremmSetup"
+        }
+    ]
+}

@@ -1,0 +1,226 @@
+body
+{
+    font-family: Arial, Verdana, sans-serif;
+}
+table, td, th
+{
+    border-collapse:collapse;
+    border:1px solid black;
+    padding-left: 1ex;
+    padding-right: 1ex;
+}
+
+thead
+{
+    background-color: lightgray;
+    color: rgb(0, 136, 204);
+}
+
+td.outlier
+{
+    background-color: red;
+}
+
+td.zeroer
+{
+    background-color: yellow;
+}
+
+#resourceform select
+{
+    width: 11em;
+}
+
+#navpane li
+{
+    float: left;
+    display: inline;
+    margin-right: 1em;
+    padding: 0.5ex;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+#navpane ul
+{
+    margin-top: 0px; 
+    padding-left: 0px;
+}
+
+#navpane a
+{
+    text-decoration: none;
+}
+#spacer
+{
+    clear: both;
+}
+
+.sqldatastore {
+    background-color: #95ed64;
+    border-bottom-color: #346789;
+    border-bottom-left-radius: 5.76667px;
+    border-bottom-right-radius: 5.76667px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: #346789;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #346789;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #346789;
+    border-top-left-radius: 5.76667px;
+    border-top-right-radius: 5.76667px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    box-shadow: #AAA 2px 2px 19px 0px;
+    color: #000;
+    opacity: 0.8;
+    padding-bottom: 5.76667px;
+    padding-left: 5.76667px;
+    padding-right: 5.76667px;
+    padding-top: 5.76667px;
+    transition-delay: 0s;
+    transition-duration: 0.15s;
+    transition-propertybox-shadowtransition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+    height: 5em;
+    width: 15em;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    position: absolute;
+}
+
+.mongodatastore
+{
+    background-color: #deb0c4;
+    border-bottom-color: #346789;
+    border-bottom-left-radius: 5.76667px;
+    border-bottom-right-radius: 5.76667px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: #346789;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #346789;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #346789;
+    border-top-left-radius: 5.76667px;
+    border-top-right-radius: 5.76667px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    box-shadow: #AAA 2px 2px 19px 0px;
+    color: #000;
+    height: 5em;
+    width: 15em;
+    opacity: 0.8;
+    padding-bottom: 5.76667px;
+    padding-left: 5.76667px;
+    padding-right: 5.76667px;
+    padding-top: 5.76667px;
+    transition-delay: 0s;
+    transition-duration: 0.15s;
+    transition-propertybox-shadowtransition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    position: absolute;
+}
+
+.filedatastore {
+    background-color: #b0c4de;
+    border-bottom-color: #346789;
+    border-bottom-left-radius: 5.76667px;
+    border-bottom-right-radius: 5.76667px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: #346789;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #346789;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #346789;
+    border-top-left-radius: 5.76667px;
+    border-top-right-radius: 5.76667px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    box-shadow: #AAA 2px 2px 19px 0px;
+    color: #000;
+    height: 80px;
+    opacity: 0.8;
+    padding-bottom: 5.76667px;
+    padding-left: 5.76667px;
+    padding-right: 5.76667px;
+    padding-top: 5.76667px;
+    transition-delay: 0s;
+    transition-duration: 0.15s;
+    transition-propertybox-shadowtransition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+    width: 80px;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    position: absolute;
+}
+
+.statsbox {
+    font-size: 80%;
+}
+
+#remote_machine { top: 3em; left:  7em; }
+#local_mirror   { top: 3em; left: 24em; }
+#accountfact    { top:13em; left: 37em; height: 8em; }
+#mongo          { top:26em; left: 30em; height: 8em; }
+#jobfact        { top:23em; left: 54em; height: 7em; }
+#aggregates     { top:33em; left: 54em; }
+
+#flowchart {
+    border: thin solid black;
+    position: relative;
+    height: 40em;
+    width: 75em;
+}
+
+#flowchart ul {
+    padding-left: 0px;
+}
+
+#flowchart li {
+     list-style-type: none;
+}
+
+.intpart {
+    text-align: right;
+    width: 2em;
+    float: left;
+}
+
+.fractionpart {
+    text-align: left;
+    float: left;
+}
+
+#key {
+    position: absolute;
+    top: 36em;
+    left: 1em;
+}
+
+
+.filekey {
+    border: thin solid black;
+    background-color: #b0c4de;
+}
+.sqlkey {
+    border: thin solid black;
+    background-color: #95ed64;
+}
+.mongokey {
+    border: thin solid black;
+    background-color: #deb0c4;
+}

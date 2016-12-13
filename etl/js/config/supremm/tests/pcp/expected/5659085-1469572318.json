@@ -1,0 +1,347 @@
+{
+    "local_job_id": {
+        "value": "5659085",
+        "error": 0
+    },
+    "name": {
+        "value": "tacc_stats",
+        "error": 0
+    },
+    "resource_name": {
+        "value": "pcp",
+        "error": 0
+    },
+    "resource_id": {
+        "value": 1,
+        "error": 0
+    },
+    "organization_id": {
+        "value": 1,
+        "error": 0
+    },
+    "account": {
+        "value": "",
+        "error": 0
+    },
+    "username": {
+        "value": "xdtas",
+        "error": 0
+    },
+    "cwd": {
+        "value": "NA",
+        "error": 2
+    },
+    "executable": {
+        "value": "python",
+        "error": 0
+    },
+    "exit_status": {
+        "value": "TIMEOUT",
+        "error": 0
+    },
+    "datasource": {
+        "value": "pcp",
+        "error": 0
+    },
+    "granted_pe": {
+        "value": 32,
+        "error": 0
+    },
+    "queue": {
+        "value": "general-compute",
+        "error": 0
+    },
+    "requested_nodes": {
+        "value": 4,
+        "error": 0
+    },
+    "hosts": {
+        "value": [
+            "cpn-k07-02-01",
+            "cpn-k08-19-02",
+            "cpn-k08-27-01",
+            "cpn-k08-28-02"
+        ],
+        "error": 0
+    },
+    "nodes": {
+        "value": 4,
+        "error": 0
+    },
+    "shared": {
+        "value": 0,
+        "error": 0
+    },
+    "cores": {
+        "value": 32,
+        "error": 0
+    },
+    "cores_avail": {
+        "value": 48,
+        "error": 0
+    },
+    "submit_time_ts": {
+        "value": 1469568655,
+        "error": 0
+    },
+    "eligible_time_ts": {
+        "value": 1469568655,
+        "error": 0
+    },
+    "start_time_ts": {
+        "value": 1469568690,
+        "error": 0
+    },
+    "end_time_ts": {
+        "value": 1469572318,
+        "error": 0
+    },
+    "wall_time": {
+        "value": 3628,
+        "error": 0
+    },
+    "requested_wall_time": {
+        "value": 3600,
+        "error": 0
+    },
+    "wait_time": {
+        "value": 35,
+        "error": 0
+    },
+    "cpu_time": {
+        "value": 116096,
+        "error": 0
+    },
+    "node_time": {
+        "value": 14512,
+        "error": 0
+    },
+    "cpu_idle": {
+        "value": 0.0829621885481068,
+        "error": 0
+    },
+    "cpu_system": {
+        "value": 0.0106998173279966,
+        "error": 0
+    },
+    "cpu_user": {
+        "value": 0.861465148633713,
+        "error": 0
+    },
+    "error": {
+        "value": null,
+        "error": 2
+    },
+    "flops": {
+        "value": 358222803.333333,
+        "error": 0
+    },
+    "flops_cov": {
+        "value": 0.710981709702888,
+        "error": 0
+    },
+    "cpiref": {
+        "value": 1.04360786856839,
+        "error": 0
+    },
+    "cpiref_cov": {
+        "value": 0.32506254894708,
+        "error": 0
+    },
+    "catastrophe": {
+        "value": 0.825990639067278,
+        "error": 0
+    },
+    "cpldref": {
+        "value": 3.74701236275798,
+        "error": 0
+    },
+    "cpldref_cov": {
+        "value": 0.408163817521946,
+        "error": 0
+    },
+    "mem_transferred": {
+        "value": 536617611296,
+        "error": 0
+    },
+    "mem_transferred_cov": {
+        "value": 0.0771689307798841,
+        "error": 0
+    },
+    "cpu_user_imbalance": {
+        "value": 9.93946243402951,
+        "error": 0
+    },
+    "cpu_user_cv": {
+        "value": 0.0171202675713068,
+        "error": 0
+    },
+    "memory_used": {
+        "value": 375827403.0107525,
+        "error": 0
+    },
+    "memory_used_cov": {
+        "value": 0.0895184272231062,
+        "error": 0
+    },
+    "max_memory": {
+        "value": 0.610707484654018,
+        "error": 0
+    },
+    "mem_used_including_os_caches": {
+        "value": 3494303329.0322533,
+        "error": 0
+    },
+    "mem_used_including_os_caches_cov": {
+        "value": 0.14588582698819,
+        "error": 0
+    },
+    "ib_rx_bytes": {
+        "value": null,
+        "error": 8
+    },
+    "block_sda_wr_ios": {
+        "value": 5031.5,
+        "error": 0
+    },
+    "block_sda_wr_bytes": {
+        "value": 47561.25,
+        "error": 0
+    },
+    "block_sda_wr_bytes_cov": {
+        "value": 0.083462672050298,
+        "error": 0
+    },
+    "block_sda_rd_ios": {
+        "value": 98.25,
+        "error": 0
+    },
+    "block_sda_rd_bytes": {
+        "value": 3260,
+        "error": 0
+    },
+    "block_sda_rd_bytes_cov": {
+        "value": 0.380128561029237,
+        "error": 0
+    },
+    "netdrv_gpfs_rx": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_rx_cov": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_rx_msgs": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_tx": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_tx_cov": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_tx_msgs": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_isilon_rx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_rx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_rx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_tx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_tx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_tx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_rx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_rx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_rx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_tx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_tx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_tx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "net_eth0_rx": {
+        "value": 12710607006.5,
+        "error": 0
+    },
+    "net_eth0_rx_cov": {
+        "value": 0.0220660675818812,
+        "error": 0
+    },
+    "net_eth0_rx_packets": {
+        "value": 2742964,
+        "error": 0
+    },
+    "net_eth0_tx": {
+        "value": 1810358792.75,
+        "error": 0
+    },
+    "net_eth0_tx_cov": {
+        "value": 0.676127347182923,
+        "error": 0
+    },
+    "net_eth0_tx_packets": {
+        "value": 2346399.75,
+        "error": 0
+    },
+    "net_ib0_rx": {
+        "value": 0,
+        "error": 0
+    },
+    "net_ib0_rx_packets": {
+        "value": 0,
+        "error": 0
+    },
+    "net_ib0_tx": {
+        "value": 0,
+        "error": 0
+    },
+    "net_ib0_tx_packets": {
+        "value": 0,
+        "error": 0
+    },
+    "gpu0_nv_mem_used": {
+        "value": null,
+        "error": "no data"
+    },
+    "gpu0_nv_utilization": {
+        "value": null,
+        "error": "no data"
+    }
+}

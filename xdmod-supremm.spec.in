@@ -1,0 +1,112 @@
+Name:          xdmod-supremm
+Version:       __VERSION__
+Release:       __RELEASE__%{?dist}
+Summary:       SUPReMM module for Open XDMoD
+URL:           http://supremm.xdmod.org/supremm-overview.html
+Vendor:        Center for Computational Research, University at Buffalo
+Packager:      Jeffrey T. Palmer <jtpalmer@buffalo.edu>
+Group:         Applications/Internet
+License:       LGPLv3+
+Source:        %{name}-%{version}.tar.gz
+BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+BuildArch:     noarch
+BuildRequires: php-cli
+Requires:      xdmod >= 6.0.0
+Requires:      nodejs npm
+Requires:      php-pecl-mongo
+
+%description
+Open XDMoD SUPReMM package.
+
+%prep
+%setup -q -n %{name}-%{version}
+
+%install
+rm -rf $RPM_BUILD_ROOT
+DESTDIR=$RPM_BUILD_ROOT ./install \
+    --quiet \
+    --bindir=%{_bindir} \
+    --libdir=%{_libdir}/xdmod \
+    --sysconfdir=%{_sysconfdir}/xdmod \
+    --datadir=%{_datadir}/xdmod \
+    --docdir=%{_docdir}/%{name}-%{version} \
+    --crondconfdir=%{_sysconfdir}/cron.d
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root,-)
+%{_bindir}/aggregate_supremm.sh
+%{_libdir}/xdmod/
+%{_datadir}/xdmod/
+%{_docdir}/%{name}-%{version}/
+
+%config(noreplace) %{_datadir}/xdmod/etl/js/config/supremm/etl.profile.js
+%config(noreplace) %{_sysconfdir}/xdmod/*.d/supremm.ini
+%config(noreplace) %{_sysconfdir}/xdmod/*.d/supremm*.json
+%config(noreplace) %{_sysconfdir}/xdmod/rawstatisticsconfig.json
+%config(noreplace) %{_sysconfdir}/xdmod/supremmconfig.json
+%config(noreplace) %{_sysconfdir}/xdmod/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json
+
+%changelog
+* Wed Sep 21 2016 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.0.0-1.0
+- Features
+    - General
+        - Added ability to redact specific job-level values for some users.
+    - Job Viewer
+        - Added sort options to search history panel.
+        - Organized advanced search filters into categories.
+        - Modified timeseries charts to use the timezone of a job's resource
+          instead of the timezone used by the web browser.
+        - Modified analytics pane to always be present and explain why missing
+          data is missing.
+        - Modified byte units to use IEC prefixes instead of SI ones.
+        - Allowed some metrics to be displayed in multiple tabs.
+        - Added tooltips to advanced search filters.
+        - Added tooltips to detailed metrics.
+        - Added help sections to tabs that didn't have any previously.
+        - Added a help button to the at-a-glance analytics.
+        - Added a loading message to charts that are loading.
+- Bug Fixes
+    - Job Viewer
+        - Fixed a number of cases where editing a search did not work as
+          expected.
+        - Fixed case where timeseries chart drilldowns stopped working after
+          leaving the Job Viewer and returning.
+        - Fixed case where a top-level timeseries chart was exported instead of
+          the current, drilled-down chart.
+        - Fixed case where timeseries chart drilldowns performed on a chart were
+          not reflected in the navigation tree.
+        - Fixed case where selecting a low-level timeseries chart in the
+          navigation tree opened a top-level chart instead.
+        - Fixed basic search resource list loading immediately on page load.
+* Tue May 24 2016 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 5.6.0-1.0
+- New Features
+    - Configuration
+        - Switched to URL-based method for specifying Mongo databases.
+            - This adds support for Mongo databases that require authentication.
+        - Improved setup process to be more user-friendly.
+            - The interactive setup script now generates the required
+              configuration files.
+        - Improved configuration file structure.
+    - Data Processing
+        - Added ability to transfer ingested/aggregated data between databases.
+            - This allows SUPReMM data to be reprocessed in a secondary database
+              before deploying a new version of the SUPReMM ingestor in the main
+              XDMoD instance.
+        - Improved logging for ingestion and aggregation scripts.
+    - Job Viewer
+        - Added ability to edit searches.
+        - Improved layout of search window.
+        - Added ability to export timeseries plots as images or CSV data.
+- Bug Fixes
+    - Job Viewer
+        - Added error dialog box for if Quick Job Lookup's resource list fails
+          to load instead of silently failing.
+        - Fixed existing searches breaking after performing a re-ingest of
+          SUPReMM data.
+        - Fixed charts sometimes not resizing properly.
+        - Fixed memory leak in search history right-click menu.
+* Fri Dec 18 2015 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 5.5.0-0.6.beta1
+- Initial public release

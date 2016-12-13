@@ -1,0 +1,17 @@
+[features]
+singlejobviewer = "on"
+
+[supremm-general]
+
+; The version number is updated during the upgrade process.
+version = "[:supremm-general_version:]"
+
+; The path of the ETL schema file relative to [share]/etl/js/config/supremm.
+schema_file = "[:supremm-general_schema_file:]"
+
+[jobsummarydb]
+
+db_engine = "[:jobsummarydb_db_engine:]"
+uri = "[:jobsummarydb_uri:]"
+db = "[:jobsummarydb_db:]"
+
