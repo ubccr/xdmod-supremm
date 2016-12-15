@@ -121,7 +121,7 @@ class GroupByNSFDirectorate extends \DataWarehouse\Query\SUPREMM\GroupBy
         // construct the join between the main data_table and this group by table
         $query->addTable($this->fos_table);
 
-        $fostable_id_field = new \DataWarehouse\Query\Model\TableField($this->fos_table,'id');
+        $fostable_id_field = new \DataWarehouse\Query\Model\TableField($this->fos_table,'directorate_id');
         $datatable_fos_id_field = new \DataWarehouse\Query\Model\TableField($data_table, 'fos_id');
 
         // construct the join between the main data_table and this group by table
