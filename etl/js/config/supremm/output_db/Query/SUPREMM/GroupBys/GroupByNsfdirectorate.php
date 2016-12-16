@@ -62,10 +62,6 @@ class GroupByNSFDirectorate extends \DataWarehouse\Query\SUPREMM\GroupBy
    {
       return 'y';
    }
-   public function getDefaultShowErrorBars()
-   {
-       return 'n';
-   }
    public function getDefaultShowGuideLines()
    {
        return 'n';
