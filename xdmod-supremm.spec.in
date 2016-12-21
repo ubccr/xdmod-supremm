@@ -11,7 +11,7 @@ Source:        %{name}-%{version}.tar.gz
 BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch:     noarch
 BuildRequires: php-cli
-Requires:      xdmod >= 6.0.0
+Requires:      xdmod >= 6.5.0
 Requires:      nodejs npm
 Requires:      php-pecl-mongo
 
@@ -50,6 +50,40 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json
 
 %changelog
+* Thu Dec 22 2016 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.5.0-1.0
+- Features
+    - General
+        - Added peak memory usage metric.
+        - Improved application identification data.
+        - Added aggregation data removal to the data reset script.
+        - Added ability to track metrics for a "projects" filesystem.
+    - Job Viewer
+        - Added a count column to the detailed metrics pane to show how many
+          data points were used to calculate the metrics.
+    - Node ETL
+        - Added support for uppercase auto-generated labels.
+- Bug Fixes
+    - Job Viewer
+        - Fixed "Show Raw Data" button in Metric Explorer not filtering results
+          correctly when using some combinations of drilldowns and filters.
+        - Fixed single-point datasets not appearing in exported charts.
+        - Fixed Search History tree sorting nodes that should not be sorted.
+        - Fixed "Show Raw Data" window in Metric Explorer staying active after
+          the chart underneath it changes (for example, when a new chart is
+          imported from Usage).
+        - Improved handling of raw data specified in kilobytes and megabytes
+          in Detailed Metrics pane.
+        - Fixed handling of Search History entries that have numeric names.
+    - Node ETL
+        - Fixed ingestion process hanging indefinitely if it failed to
+          connect to the Mongo database at certain points.
+        - Fixed SQL statement queue sometimes batching more statements
+          together in one MySQL driver call than the driver can handle.
+- Refactors and Miscellaneous
+    - Moved to custom option parser that supports long options and
+      multi-character short options.
+        - This replaces minimist and removes it as a dependency.
+
 * Wed Sep 21 2016 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.0.0-1.0
 - Features
     - General
