@@ -1,3 +1,4 @@
+USE modw_aggregates;
 
 ALTER TABLE `supremmfact_by_day` ADD COLUMN `max_mem_bucketid` int(11) NOT NULL COMMENT 'DIMENSION: Maximum ratio of memory used to total memory available for the compute node with the highest peak memory usage' AFTER `jobtime_id`;
 UPDATE `supremmfact_by_day` SET `max_mem_bucketid` = 0 WHERE 1;
