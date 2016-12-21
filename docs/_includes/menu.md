@@ -54,4 +54,4 @@ Using
 Developing
 ----------
 
-- [Job Summarization Source Code](https://github.com/ubccr/supremm)
+- [Developer Guide](supremm-developer.html)
