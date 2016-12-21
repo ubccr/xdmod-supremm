@@ -8,7 +8,7 @@ The job-level data is typically processed daily, with the various scripts run as
 1. The job summarization software runs. This software generates job-level summaries by combining the accounting data (retrieved from Open XDMoD) with the node-level performance data (collected on the compute nodes).
 1. The job-level summaries are ingested into Open XMDoD and the data aggregated.
 
-The `xdmod-shredder` and `xdmod-ingestor` commands are part of the core Open XDMoD software and are documented in the [Shredder](shredder.html) and [Ingestor](ingestor.html) guides.
+The `xdmod-shredder` and `xdmod-ingestor` commands are part of the core Open XDMoD software and are documented in the [Shredder](http://open.xdmod.org/shredder.html) and [Ingestor](http://open.xdmod.org/ingestor.html) guides.
 
 The job summarization script is part of the SUPReMM job summarization package and is described in the [configuration](supremm-processing-configuration.html) page.
 
