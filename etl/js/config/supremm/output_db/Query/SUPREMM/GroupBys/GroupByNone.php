@@ -44,11 +44,6 @@ class GroupByNone extends \DataWarehouse\Query\SUPREMM\GroupBy
 		return 'stack';
 	}
 
-	public function getDefaultShowTrendLine()
-	{
-		return 'y';
-	}
-
 	public function applyTo(\DataWarehouse\Query\Query &$query, \DataWarehouse\Query\Model\Table $data_table, $multi_group = false)
 	{
 		$query->addField(new \DataWarehouse\Query\Model\FormulaField('-9999', $this->getIdColumnName($multi_group)));
