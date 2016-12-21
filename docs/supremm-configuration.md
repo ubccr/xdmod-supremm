@@ -2,9 +2,10 @@
 title: SUPReMM module configuration guide
 ---
 
-Ensure that [Open XDMoD](index.html) is installed and configured correctly and the [shredder](shredder.html) and
-[ingestor](ingestor.html) scripts have been run successfully before installing and configuring
-the SUPReMM module.
+Ensure that [Open XDMoD](http://open.xdmod.org) is installed and configured
+correctly and the [shredder](http://open.xdmod.org/shredder.html) and
+[ingestor](http://open.xdmod.org/ingestor.html) scripts have been run successfully
+before installing and configuring the SUPReMM module.
 
 Run Configuration Script
 ------------------------
@@ -65,7 +66,7 @@ Defines all of the resources that have SUPReMM data that will be ingested and
 displayed in XDMoD. Each object in the array represents the configuration for a
 single resource. All resources listed in this file must also have entries in
 the `resources.json` and `resource_specs.json` main configuration files
-(described in the [main configuration guide](configuration.html)).
+(described in the [main configuration guide](http://open.xdmod.org/configuration.html)).
 
     {
         "resources": [

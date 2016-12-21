@@ -13,7 +13,7 @@ different data collection packages. This document describes the steps necessary
 to setup the SUPReMM system using the open-source Performance Co-Pilot (PCP)
 software as the primary data source. For more information about other data
 sources please contact the development team via the mailing list or email
-(contact details on the [main overview page](index.html))
+(contact details on the [main overview page](http://open.xdmod.org))
 
 The SUPReMM architecture does not depend on a specific HPC resource manager, but
 there are resource manager-specific configuration steps and resource
