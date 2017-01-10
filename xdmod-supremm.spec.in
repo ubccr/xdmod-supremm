@@ -51,6 +51,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Tue Jan 10 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.5.0-1.0
+- Important Notes
+    - This update adds a dependency to npm. If you are updating from a previous
+      version installed via RPM, you will need to reinstall npm dependencies
+      afterward. From the `etl/js` directory inside the XDMoD share directory
+      (RPM default: `/usr/share/xdmod`), run `npm install`.
 - Features
     - General
         - Added peak memory usage metric.

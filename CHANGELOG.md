@@ -4,6 +4,17 @@ Open XDMoD SUPReMM Change Log
 2017-01-10 v6.5.0
 -----------------
 
+**Important Note**: This update adds a dependency to npm. If you are updating
+an existing installation via RPM, you will need to reinstall npm
+dependencies afterward. To do this, run the commands below.
+
+```bash
+# Assuming XDMoD's share directory is RPM default "/usr/share/xdmod"
+
+cd /usr/share/xdmod/etl/js
+npm install
+```
+
 - Features
     - General
         - Added peak memory usage metric.
