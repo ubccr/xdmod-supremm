@@ -50,7 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json
 
 %changelog
-* Thu Dec 22 2016 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.5.0-1.0
+* Tue Jan 10 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.5.0-1.0
 - Important Notes
     - This update adds a dependency to npm. If you are updating from a previous
       version installed via RPM, you will need to reinstall npm dependencies

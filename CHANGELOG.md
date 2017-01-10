@@ -1,7 +1,7 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-2016-12-22 v6.5.0
+2017-01-10 v6.5.0
 -----------------
 
 **Important Note**: This update adds a dependency to npm. If you are updating
