@@ -108,7 +108,7 @@ if [ "$TEST_SUITE" = "syntax" ]; then
     done
 elif [ "$TEST_SUITE" = "style" ]; then
     for file in "${php_files_changed[@]}"; do
-        phpcs "$file"
+        phpcs "$file" || phpcs -n "$file" > /dev/null 2>&1
         if [ $? != 0 ]; then
             build_exit_value=2
         fi
