@@ -39,19 +39,17 @@ class SupremmResourcesSetup extends SubMenuSetupItem
     {
         $this->quit = false;
 
-        if($this->populateResources() === false) {
+        if ($this->populateResources() === false) {
             return;
         }
 
         $items = array();
-        foreach($this->getResources() as $resource){
-
+        foreach ($this->getResources() as $resource) {
             $items[] = new MenuItem(
                 $resource['resource_id'],
                 'Edit resource ' . $resource['resource'],
                 new SupremmEditResourceSetup($this->console, $resource, array($this, 'updateResource'))
             );
-
         }
         $items[] = new MenuItem('s', 'Save (and return to main menu)', new SubMenuSaveSetup($this->console, $this));
         $items[] = new MenuItem('q', 'Quit without saving', new SubMenuQuitSetup($this->console, $this));
@@ -70,9 +68,9 @@ class SupremmResourcesSetup extends SubMenuSetupItem
     private function populateResources()
     {
         $path = $this->getJsonConfigFilePath('supremm_resources');
-        if( file_exists($path) ) {
+        if (file_exists($path)) {
             $jsonresources = $this->loadJsonFile($path);
-            if(isset($jsonresources) && isset($jsonresources['resources'])) {
+            if (isset($jsonresources) && isset($jsonresources['resources'])) {
                 $this->addResources($jsonresources['resources']);
             }
             // else Ignore corrupt json file since it will be overwritten anyway.
@@ -82,8 +80,7 @@ class SupremmResourcesSetup extends SubMenuSetupItem
             $db = \CCR\DB::factory('datawarehouse');
             $existingresources = $db->query('SELECT id AS resource_id, code AS resource FROM resourcefact');
             $this->addResources($existingresources);
-        }
-        catch(\Exception $exp) {
+        } catch (\Exception $exp) {
             $this->console->displayMessage(<<<"EOF"
 Error retrieving resource information from the datawarehouse. Make sure that
 Open XDMoD has been configured and shredding and ingest steps have
@@ -128,22 +125,22 @@ EOF
     {
         $priority = array_keys($this->defaultSettings(0));
 
-        if(in_array($left, $priority)) {
-            if(in_array($right, $priority)) {
+        if (in_array($left, $priority)) {
+            if (in_array($right, $priority)) {
                 $lIndex = array_search($left, $priority);
                 $rIndex = array_search($right, $priority);
 
-                if($lIndex < $rIndex) {
+                if ($lIndex < $rIndex) {
                     return -1;
                 }
-                if( $lIndex > $rIndex) {
+                if ($lIndex > $rIndex) {
                     return 1;
                 }
                 return 0;
             }
             return -1;
         }
-        if(in_array($right, $priority)) {
+        if (in_array($right, $priority)) {
             return 1;
         }
         return strncasecmp($left, $right);
@@ -157,10 +154,8 @@ EOF
      */
     private function addResources(array $resourceList)
     {
-        foreach($resourceList as $resource)
-        {
-            if(!isset($resource['resource_id']) )
-            {
+        foreach ($resourceList as $resource) {
+            if (!isset($resource['resource_id'])) {
                 // ignore corrupt record
                 continue;
             }
@@ -170,8 +165,7 @@ EOF
             // Ensure resource_id is an int type and not a string
             $resource['resource_id'] = $id;
 
-            if(!isset($this->resources[$id]))
-            {
+            if (!isset($this->resources[$id])) {
                 $this->resources[$id] = $this->defaultSettings($id);
             }
             $this->resources[$id] = array_merge($this->resources[$id], $resource);
