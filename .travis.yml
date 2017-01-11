@@ -14,10 +14,6 @@ env:
         - TEST_SUITE=style
         - TEST_SUITE=build CACHE_NAME=build
 
-matrix:
-    allow_failures:
-        - env: TEST_SUITE=style
-
 # Add dependency directories to the Travis cache
 cache:
     directories:
