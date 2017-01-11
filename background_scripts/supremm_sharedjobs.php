@@ -19,7 +19,8 @@ function usage_and_exit()
 {
     global $argv;
 
-    fwrite(STDERR,
+    fwrite(
+        STDERR,
         <<<"EOMSG"
 Usage: {$argv[0]}
     -h, --help
@@ -35,18 +36,16 @@ Usage: {$argv[0]}
         enable debug messages to the console
 
 EOMSG
-);
+    );
 
-  exit(1);
+    exit(1);
 
 }
 
 $args = getopt(implode('', array_keys($options)), $options);
 
-foreach ($args as $arg => $value) 
-{
-    switch ($arg) 
-    {
+foreach ($args as $arg => $value) {
+    switch ($arg) {
         case 'h':
         case 'help':
             usage_and_exit();
@@ -78,8 +77,7 @@ $logger->notice(array(
     'process_start_time' => date('Y-m-d H:i:s'),
 ));
 
-try
-{
+try {
     $end = time();
     $start = $end - (60*60*24 * 3);
 
@@ -125,29 +123,25 @@ try
     $jbu = $db->handle()->prepare($jobfactupdate);
 
     $hosts = $db->query($hostquery);
-    foreach($hosts as $host) 
-    {
+    foreach ($hosts as $host) {
         $activejobs = array();
         $sharedjobs = array();
 
-        $jbq->execute( array("hostid" => $host['id'], "start" => $start, "end" => $end) );
-        while($row = $jbq->fetch(PDO::FETCH_ASSOC))
-        {
-            if($row['jobstate'] == "s") {
+        $jbq->execute(array("hostid" => $host['id'], "start" => $start, "end" => $end));
+        while ($row = $jbq->fetch(PDO::FETCH_ASSOC)) {
+            if ($row['jobstate'] == "s") {
                 $activejobs[ "{$row['jobid']}" ] = $row['state_transition_timestamp'];
-            } else if($row['jobstate'] == "e") {
-
-                if(count($activejobs) > 1) {
-
+            } elseif ($row['jobstate'] == "e") {
+                if (count($activejobs) > 1) {
                     $npeers = 0;
-                    foreach($activejobs as $currentjob => $state_transition_timestamp) {
-                        if($currentjob != $row['jobid'] && $state_transition_timestamp != $row['state_transition_timestamp']) {
+                    foreach ($activejobs as $currentjob => $state_transition_timestamp) {
+                        if ($currentjob != $row['jobid'] && $state_transition_timestamp != $row['state_transition_timestamp']) {
                             $npeers += 1;
-                            $hiq->execute( array($row['jobid'], $currentjob, $currentjob, $row['jobid']) );
+                            $hiq->execute(array($row['jobid'], $currentjob, $currentjob, $row['jobid']));
                             $sharedjobs[ $currentjob ] = 1;
                         }
                     }
-                    if( $npeers > 0 ) {
+                    if ($npeers > 0) {
                         $sharedjobs[ $row['jobid'] ] = 1;
                     }
                 }
@@ -155,8 +149,8 @@ try
             }
         }
         
-        foreach($sharedjobs as $key => $ignore) {
-            $jbu->execute( array( $key ) );
+        foreach ($sharedjobs as $key => $ignore) {
+            $jbu->execute(array( $key ));
         }
         $logger->debug("Processed " . count($sharedjobs) . " jobs for host " . $host['name']);
     }
@@ -165,15 +159,10 @@ try
         'message'          => 'process shared jobs end',
         'process_end_time' => date('Y-m-d H:i:s'),
     ));
-
-}
-catch (\Exception $e) {
-
+} catch (\Exception $e) {
     $msg = 'Caught exception while executing: ' . $e->getMessage();
     $logger->err(array(
         'message'    => $msg,
         'stacktrace' => $e->getTraceAsString()
     ));
 }
-
-

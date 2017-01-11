@@ -58,6 +58,7 @@ if [ "$TEST_SUITE" = "build" ]; then
     fi
 
     xdmod_branch="$TRAVIS_BRANCH"
+    xdmod_branch="xdmod6.6"
     echo "Cloning Open XDMoD branch '$xdmod_branch'"
     git clone --depth=1 --branch="$xdmod_branch" https://github.com/ubccr/xdmod.git ../xdmod
 
@@ -108,7 +109,7 @@ if [ "$TEST_SUITE" = "syntax" ]; then
     done
 elif [ "$TEST_SUITE" = "style" ]; then
     for file in "${php_files_changed[@]}"; do
-        phpcs "$file"
+        phpcs "$file" || phpcs -n "$file" > /dev/null 2>&1
         if [ $? != 0 ]; then
             build_exit_value=2
         fi

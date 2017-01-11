@@ -7,11 +7,10 @@ namespace DataWarehouse\Query\SUPREMM;
 *
 */
 class Statistic extends \DataWarehouse\Query\Statistic
-{	
-	public function getWeightStatName()
-	{
-		return 'running_job_count';
-	}
+{
+   
+    public function getWeightStatName()
+    {
+        return 'running_job_count';
+    }
 }
-
-?>

@@ -48,7 +48,6 @@ EOT
         );
 
         try {
-
             // The SUPReMM databases reuse configuration sections from
             // the primary portal_settings.ini file.  Currently, the
             // modw_etl database uses the credentials from the "logger"
@@ -138,7 +137,7 @@ EOT
     private function mongoSetup()
     {
         $settings = $this->loadIniConfig('portal_settings', 'supremm');
-        $needSave = False;
+        $needSave = false;
 
         $section = 'jobsummarydb';
         $defaults = array(
@@ -151,25 +150,25 @@ EOT
             'database name' => 'db'
         );
 
-        foreach($defaults as $key => $value) {
-            if(!isset($settings[$section.'_'.$key])) {
+        foreach ($defaults as $key => $value) {
+            if (!isset($settings[$section.'_'.$key])) {
                 $settings[$section.'_'.$key] = $value;
-                $needSave = True;
+                $needSave = true;
             }
         }
 
         $this->console->displayBlankLine();
         $this->console->displayMessage('Settings for the job summary document database');
 
-        foreach($prompts as $message => $key) {
+        foreach ($prompts as $message => $key) {
             $response = $this->console->prompt($message, $settings[$section.'_'.$key]);
-            if($response != $settings[$section.'_'.$key]) {
+            if ($response != $settings[$section.'_'.$key]) {
                 $settings[$section.'_'.$key] = $response;
-                $needSave = True;
+                $needSave = true;
             }
         }
 
-        if($needSave) {
+        if ($needSave) {
             $this->saveIniConfig($settings, 'portal_settings', 'supremm');
         } else {
             $this->console->displayBlankLine();

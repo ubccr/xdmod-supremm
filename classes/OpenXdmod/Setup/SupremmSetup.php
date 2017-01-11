@@ -5,7 +5,6 @@
 
 namespace OpenXdmod\Setup;
 
-
 /**
  * Resources setup.
  */
