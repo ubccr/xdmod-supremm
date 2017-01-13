@@ -5,7 +5,7 @@
  *
  * The unified schema document for supremm data. Helps map
  * a dataset from multiple sources where the sources are not the same
- * nor are the records expected to abide by a schema. 
+ * nor are the records expected to abide by a schema.
  *
  * @requirements:
  *	node.js
@@ -14,15 +14,15 @@
 
 
 function getIf(condition, _then, _else) {
-	return "case when " + condition +  
-				  " then " + _then + 
-				" else " + _else + 
+	return "case when " + condition +
+				  " then " + _then +
+				" else " + _else +
 			 " end";
 }
 
 function getDistributionSQLCaseStatement(stat, _max, s1, e1, s2, e2) {
 	return "case when (" + s1 + " between " + s2 + " and " + e2 + " and "
-				+ e1 + " between " + s2 + " and " + e2 + " ) "  
+				+ e1 + " between " + s2 + " and " + e2 + " ) "
 				+ " then " + stat + " "
 			+ " when (" + s1 + " < " + s2 + " and "
 				+ e1 + " between " + s2 + " and " + e2 + " ) "
@@ -37,11 +37,11 @@ function getDistributionSQLCaseStatement(stat, _max, s1, e1, s2, e2) {
 			+ " end";
 }
 
-var wallduration_case_statement =  getDistributionSQLCaseStatement('wall_time', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts");
+var wallduration_case_statement = getDistributionSQLCaseStatement('wall_time', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts");
 
 function getSumMetric(stat)
 {
-    return "sum(" + getDistributionSQLCaseStatement( '(' + stat + ')', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + ")";
+    return "sum(" + getDistributionSQLCaseStatement( '(' + stat + ')', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + ")";
 }
 
 function getWeightMetric(stat, per)
@@ -55,7 +55,7 @@ module.exports = {
 		//list of tables to be created/modified by the etl process. fields and derived
 		//fields indicate belonging to a table via the table tag (ie: table: "job")
 		//other tables are not managed by etl. For example, the name field below
-		//is inserted into modw_supremm.job_name which needs to pre exist in the 
+		//is inserted into modw_supremm.job_name which needs to pre exist in the
 		//output of the etl profile
 		job: {
 			schema: "modw_supremm",
@@ -150,13 +150,13 @@ module.exports = {
 		},
 		onEndDoc: function(values) {
 			this.end_ts = Date.now();
-			if(values.start_time_ts !== undefined && values.start_time_ts !== null) {
-				if(this.min_ts === null) {
+			if (values.start_time_ts !== undefined && values.start_time_ts !== null) {
+				if (this.min_ts === null) {
 					this.min_ts = values.start_time_ts;
 				} else {
 					this.min_ts = Math.min(this.min_ts, values.start_time_ts);
 				}
-				if(this.max_ts === null) {
+				if (this.max_ts === null) {
 					this.max_ts = values.start_time_ts;
 				} else {
 					this.max_ts = Math.max(this.max_ts, values.start_time_ts);
@@ -165,21 +165,21 @@ module.exports = {
 		},
 		onEndProcess: function(processingDetails) {
 			this.end_ts = Date.now();
-			//the format of the etlLog object is as follows: 
+			//the format of the etlLog object is as follows:
 			var etlLog = {
 				etlProfileName: processingDetails.etlProfileName,
 				etlProfileVersion: processingDetails.etlProfileVersion,
 				dataset: processingDetails.dataset,
-				start_ts: this.start_ts/1000,
-				end_ts: this.end_ts/1000,
+				start_ts: this.start_ts / 1000,
+				end_ts: this.end_ts / 1000,
 				min_index: this.min_ts,
 				max_index: this.max_ts,
 				processed: processingDetails.processed,
 				good: processingDetails.good,
 				details: JSON.stringify(processingDetails)
 			};
-			
-			return etlLog;//the data processor inserts this. 
+
+			return etlLog;//the data processor inserts this.
 		}
 	},
 	fields: {
@@ -204,7 +204,7 @@ module.exports = {
 			comments: "The name of the job as reported by the job scheduler.",
 			per: "job",
 			table: "job",
-			dim_insert: function(attributes) { 
+			dim_insert: function(attributes) {
 				return {
 					query: "INSERT IGNORE INTO modw_supremm.job_name (name, name_md5) VALUES (:name, MD5(:name))",
 					values: {name: attributes.name.value}
@@ -305,7 +305,7 @@ module.exports = {
 			def: "NA",
 			comments: "The current working directory where the executable was launched",
 			per: "job",
-			dim_insert: function(attributes) { 
+			dim_insert: function(attributes) {
 				return {
 					query: "INSERT IGNORE INTO modw_supremm.cwd (resource_id, cwd, cwd_md5) VALUES (:resource_id, :cwd, MD5(:cwd))",
 					values: {resource_id: attributes.resource_id.value, cwd: attributes.cwd.value}
@@ -323,9 +323,9 @@ module.exports = {
 			per: "job",
 			dim_insert: function(attributes) {
 				return {
-					query:  "INSERT IGNORE INTO modw_supremm.executable (`resource_id`, `exec`, `binary`, `exec_md5`, `application_id`) " +
+					query: "INSERT IGNORE INTO modw_supremm.executable (`resource_id`, `exec`, `binary`, `exec_md5`, `application_id`) " +
 						"VALUES (:resource_id, :exec, substring_index(:exec,'/',-1), MD5(:exec), (SELECT if (:exec = 'NA', -1, " +
- 						"COALESCE((SELECT id FROM modw_supremm.application_hint WHERE substring_index(:exec,'/',-1) LIKE hint ORDER BY id LIMIT 1)," + 
+ 						"COALESCE((SELECT id FROM modw_supremm.application_hint WHERE substring_index(:exec,'/',-1) LIKE hint ORDER BY id LIMIT 1)," +
  						"COALESCE((SELECT id FROM modw_supremm.application_hint WHERE substring_index(:exec,'/',-1) LIKE concat('%', hint, '%') ORDER BY id LIMIT 1),0)))))",
 					values: {resource_id: attributes.resource_id.value, exec: attributes.executable.value}
 				};
@@ -340,7 +340,7 @@ module.exports = {
 			def: "NA",
 			comments: "The overall job exit status reported by the job scheduler.",
 			per: "job",
-			dim_insert: function (attributes) { 
+			dim_insert: function (attributes) {
 				return {
 					query: "insert ignore into modw_supremm.exit_status (name) values (:name)",
 					values: {name: attributes.exit_status.value}
@@ -356,7 +356,7 @@ module.exports = {
 			comments: "number of granted processing elements (i.e. wayness)",
 			per: "job",
 			table: "job",
-			dim_insert: function (attributes) { 
+			dim_insert: function (attributes) {
 				return {
 					query: "insert ignore into modw_supremm.granted_pe (id, name) values (:id, :name)",
 					values: {id: attributes.granted_pe.value, name: attributes.granted_pe.value}
@@ -408,7 +408,7 @@ module.exports = {
 			per: "job",
 			dim_insert: function(attributes) {
 				var ret = [];
-				for(var i = 0 ; i < attributes.hosts.value.length ; i++) {
+				for (var i = 0; i < attributes.hosts.value.length; i++) {
 					ret.push({
 						query: "insert ignore into modw_supremm.host (resource_id, name) values (:resource_id, :name)",
 						values: {resource_id: attributes.resource_id.value, name: attributes.hosts.value[i]}
@@ -479,8 +479,8 @@ module.exports = {
 				},
 				{
 					name: 'processorbucket_id',
-					type: 'int32', 
-					dimension: false, //don't need to group by this since we are grouping by cores. 
+					type: 'int32',
+					dimension: false, //don't need to group by this since we are grouping by cores.
 					table: 'supremmfact',
 					sql: '(select id from processor_buckets pb where cores between pb.min_processors and pb.max_processors)',
 					comments: 'Processor bucket or job size buckets are prechosen in the modw.processor_buckets table.'
@@ -515,7 +515,7 @@ module.exports = {
 				table: 'supremmfact',
 				type: 'int32',
 				dimension: false,
-				sql: 'sum('+getIf('submit_time_ts between :period_start_ts and :period_end_ts',1,0)+')',
+				sql: 'sum(' + getIf('submit_time_ts between :period_start_ts and :period_end_ts', 1, 0) + ')',
 				comments: 'The number of jobs that started during this period.',
 				stats: [{
 					sql: 'coalesce(sum(jf.submitted_job_count),0)',
@@ -555,7 +555,7 @@ module.exports = {
 				table: 'supremmfact',
 				type: 'int32',
 				dimension: false,
-				sql: 'sum('+getIf('start_time_ts between :period_start_ts and :period_end_ts',1,0)+')',
+				sql: 'sum(' + getIf('start_time_ts between :period_start_ts and :period_end_ts', 1, 0) + ')',
 				comments: 'The number of jobs that started during this period.',
 				stats: [{
 					sql: 'coalesce(sum(jf.started_job_count),0)',
@@ -583,8 +583,8 @@ module.exports = {
 				type: 'int32',
 				table: 'supremmfact',
 				dimension: false,
-				sql: 'sum('+getIf('end_time_ts between :period_start_ts and :period_end_ts',1,0)+')',
-				comments: 'The number of jobs that ended during this period.' ,
+				sql: 'sum(' + getIf('end_time_ts between :period_start_ts and :period_end_ts', 1, 0) + ')',
+				comments: 'The number of jobs that ended during this period.',
 				stats: [{
 					sql: 'coalesce(sum(jf.job_count),0)',
 					label: 'Number of Jobs Ended',
@@ -610,7 +610,7 @@ module.exports = {
 				name: 'jobtime_id',
 				table: 'supremmfact',
 				alias: 'jobwalltime',
-				type: 'int32', 
+				type: 'int32',
 				roles: { disable: [ "pub" ] },
 				dimension: true,
 				sql: '(select id from job_times jt where wall_time >= jt.min_duration and wall_time <= jt.max_duration)',
@@ -655,7 +655,7 @@ module.exports = {
 				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'coalesce(sum(' + getDistributionSQLCaseStatement('requested_wall_time', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + '),0)',
+				sql: 'coalesce(sum(' + getDistributionSQLCaseStatement('requested_wall_time', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + '),0)',
 				comments: 'The requested wall time of the jobs that were running during this period. This will only count the walltime of the jobs that fell during the period.',
 				stats: [{
 					sql: 'coalesce(sum(jf.requested_wall_time/3600.0),0)',
@@ -698,14 +698,14 @@ module.exports = {
 					label: 'Wait Hours: Total',
 					unit: 'Hour',
 					description: 'The total time, in hours, jobs waited before execution on their designated resource.<br/>'
-								+'<i>Wait Time: </i>Wait time is defined as the linear time between submission of a job by a user until it begins to execute.'
+								+ '<i>Wait Time: </i>Wait time is defined as the linear time between submission of a job by a user until it begins to execute.'
 				}, {
 					name: 'wait_time_per_job',
 					sql: 'coalesce(sum(jf.wait_time/3600.0)/sum(jf.started_job_count),0)',
 					label: 'Wait Hours: Per Job',
 					unit: 'Hour',
 					description: 'The average time, in hours, a job waits before execution on the designated resource.<br/>'
-								+'<i>Wait Time: </i>Wait time is defined as the linear time between submission of a job by a user until it begins to execute.',
+								+ '<i>Wait Time: </i>Wait time is defined as the linear time between submission of a job by a user until it begins to execute.',
 					decimals: 2
 				}]
 			}
@@ -723,12 +723,12 @@ module.exports = {
 			table: "job",
 			agg: [ {
 				name: 'cpu_time',
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
 				sql: getSumMetric('cpu_time'),
 				comments: 'The amount of the cpu_time of the jobs pertaining to this period. If a job took more than one period, its cpu_time is distributed linearly across the periods it spans.'
-				
+
 			}
 			]
 		},
@@ -744,12 +744,12 @@ module.exports = {
 			table: "job",
 			agg: [ {
 				name: 'node_time',
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'coalesce(sum(' + getDistributionSQLCaseStatement('node_time', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + '), 0)',
+				sql: 'coalesce(sum(' + getDistributionSQLCaseStatement('node_time', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + '), 0)',
 				comments: 'The amount of the node_time of the jobs pertaining to this period. If a job took more than one period, its node_time is distributed linearly across the periods it spans.'
-				
+
 			}
 			]
 		},
@@ -769,7 +769,7 @@ module.exports = {
 			table: "job",
 			agg: [ {
 				name: 'cpu_time_idle',
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
 				sql: getSumMetric('cpu_time*cpu_idle'),
@@ -788,7 +788,7 @@ module.exports = {
 					unit: 'CPU %',
 					description: 'The average CPU idle % weighted by core hours, over all jobs that were executing.'
                 }]
-				
+
 			}
 			]
 		},
@@ -808,7 +808,7 @@ module.exports = {
 			table: "job",
 			agg: [ {
 				name: 'cpu_time_system',
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
 				sql: getSumMetric('cpu_time*cpu_system'),
@@ -827,7 +827,7 @@ module.exports = {
 					unit: 'CPU %',
 					description: 'The average CPU system % weighted by core hours, over all jobs that were executing.'
                 }]
-				
+
 			}
 			]
 		},
@@ -847,7 +847,7 @@ module.exports = {
 			table: "job",
 			agg: [ {
 				name: 'cpu_time_user',
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
 				sql: getSumMetric('cpu_time*cpu_user'),
@@ -866,7 +866,7 @@ module.exports = {
 					unit: 'CPU %',
 					description: 'The average CPU user % weighted by core hours, over all jobs that were executing.'
                 }]
-			},{
+			}, {
                 name: 'cpu_user_bucketid',
                 type: 'int32',
                 alias: 'cpuuser',
@@ -877,7 +877,7 @@ module.exports = {
                 sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * cpu_user, -1.0) > cb.min AND coalesce(100.0 * cpu_user, -1.0) <= cb.max)',
                 label: "CPU User Value",
                 dimension_table: "percentages_buckets"
-            },{
+            }, {
                     name: 'cpu_usage_weight',
                     table: 'supremmfact',
 				    type: 'double',
@@ -896,7 +896,7 @@ module.exports = {
 			per: "job",
 			table: "job"
 		},
-	
+
 		flops: {
             unit: "ops",
 			type: "double",
@@ -913,7 +913,7 @@ module.exports = {
 			table: "job",
             agg: [ {
                 name: 'flop',
-                table: 'supremmfact', 
+                table: 'supremmfact',
                 type: 'double',
                 dimension: false,
                 sql: getSumMetric('flops'),
@@ -926,7 +926,7 @@ module.exports = {
                     unit: 'ops/s',
                     description: 'The average number of floating point operations per second per core over all jobs that ran in the selected time period.'
                 } ]
-            },{
+            }, {
                 name: 'flop_weight',
                 table: 'supremmfact',
                 type: 'double',
@@ -1069,7 +1069,7 @@ module.exports = {
                         unit: 'CPLD',
                         description: 'The average ratio of clock ticks to L1D cache loads per core weighted by core-hour. The CPLD is calculated using the reference processor clock.'
                     }]
-                },{
+                }, {
                     name: 'cpldref_weight',
                     type: 'double',
                     dimension: false,
@@ -1121,7 +1121,7 @@ module.exports = {
                         unit: 'bytes/s',
                         description: 'The average main-memory transfer rate per core weighted by core-hour.'
                     }]
-                },{
+                }, {
                     name: 'mem_transferred_weight',
                     type: 'double',
                     dimension: false,
@@ -1172,7 +1172,7 @@ module.exports = {
                         requirenotnull: 'jf.cpu_user_cv_weighted_core_seconds',
                         label: 'Avg: CPU User CV: weighted by core-hour',
                         unit: 'CV',
-                        description: 'The average CPU user coefficient of variation weighted by core-hour. The coefficient of variation is defined as the ratio of the standard deviation to the mean' 
+                        description: 'The average CPU user coefficient of variation weighted by core-hour. The coefficient of variation is defined as the ratio of the standard deviation to the mean'
                     }]
                 },
                 {
@@ -1239,7 +1239,7 @@ module.exports = {
 			table: "job",
 			agg: [{
 				name: 'mem_used_weighted_by_duration',
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
 				sql: 'sum(memory_used * cores * ' + wallduration_case_statement + ')',
@@ -1252,7 +1252,7 @@ module.exports = {
 					unit: 'bytes',
 					description: 'The average memory used per core for all selected jobs that ran in the selected time period'
 				}]
-			    },{
+			    }, {
                     name: 'mem_usage_weight',
                     table: 'supremmfact',
 				    type: 'double',
@@ -1318,7 +1318,7 @@ module.exports = {
 			table: "job",
 			agg: [{
 				name: 'mem_used_including_os_caches_weighted_by_duration',
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
 				sql: 'sum(mem_used_including_os_caches * cores * ' + wallduration_case_statement + ')',
@@ -1361,10 +1361,10 @@ module.exports = {
 			typical_usage: "",
 			table: "job",
 			agg: [{
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'sum(' + getDistributionSQLCaseStatement('(ib_rx_bytes * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + ')',
+				sql: 'sum(' + getDistributionSQLCaseStatement('(ib_rx_bytes * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + ')',
 				comments: 'The total bytes per second written by block devices in this period.',
 				stats: [{
 					name: "avg_ib_rx_bytes",
@@ -1374,14 +1374,14 @@ module.exports = {
 					unit: 'bytes/s',
 					description: 'Average number of bytes received per second per node over the data interconnect. This value only includes the inter-node data transfers and does not count any other data over the interconnect (for example parallel filesystem data).'
 				}]
-				},{
+				}, {
                     name: 'ib_rx_bytes_weight',
                     table: 'supremmfact',
                     type: 'double',
                     dimension: false,
                     sql: 'sum( case when ( ib_rx_bytes IS NOT NULL) then 1.0 else 0.0 end * nodecount_id * ' + wallduration_case_statement + ')',
                     comments: 'The node weight for jobs with ib_rx_bytes counts that ran during this period'
-                },{
+                }, {
                     name: 'ibrxbyterate_bucket_id',
                     type: 'int32',
 					roles: { disable: [ "pub" ] },
@@ -1394,7 +1394,7 @@ module.exports = {
                 }
 			]
 		},
-	
+
 		"block_(sd[a-z])_wr_ios": {
 			unit: "ops",
 			type: "double",
@@ -1410,7 +1410,7 @@ module.exports = {
 			typical_usage: "",
 			table: "job",
 			agg: [{
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
 				sql: getSumMetric(':field_name * nodecount_id'),
@@ -1423,7 +1423,7 @@ module.exports = {
 					unit: 'ops/s',
 					description: 'Average number of write operations per second per node for the local hard disk device :label_1.'
 				}]
-				},{
+				}, {
                     name: ':field_name_weight',
                     table: 'supremmfact',
                     type: 'double',
@@ -1448,10 +1448,10 @@ module.exports = {
 			typical_usage: "",
 			table: "job",
 			agg: [{
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + ')',
+				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + ')',
 				comments: 'The total bytes per second written by block devices in this period.',
 				stats: [{
 					name: "avg_:field_name",
@@ -1461,7 +1461,7 @@ module.exports = {
 					unit: 'bytes/s',
 					description: 'Average number of bytes written per second per node to the local hard disk device :label_1.'
 				}]
-				},{
+				}, {
                     name: ':field_name_weight',
                     table: 'supremmfact',
                     type: 'double',
@@ -1499,10 +1499,10 @@ module.exports = {
 			typical_usage: "",
 			table: "job",
 			agg: [{
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + ')',
+				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + ')',
 				comments: 'The total number of read io operations per second by block devices in this period.',
 				stats: [{
 					name: "avg_:field_name",
@@ -1512,7 +1512,7 @@ module.exports = {
 					unit: 'ops/s',
 					description: 'Average number of read operations per second per node for the local hard disk device :label_1.'
 				}]
-				},{
+				}, {
                     name: ':field_name_weight',
                     table: 'supremmfact',
                     type: 'double',
@@ -1537,10 +1537,10 @@ module.exports = {
 			typical_usage: "",
 			table: "job",
 			agg: [{
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + ')',
+				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + ')',
 				comments: 'The total bytes per second read by block devices in this period.',
 				stats: [{
 					name: "avg_:field_name",
@@ -1550,7 +1550,7 @@ module.exports = {
 					unit: 'bytes/s',
 					description: 'Average number of bytes read per second per node from the local hard disk device :label_1.'
 				}]
-				},{
+				}, {
                     name: ':field_name_weight',
                     table: 'supremmfact',
                     type: 'double',
@@ -1560,7 +1560,7 @@ module.exports = {
                 }
 			]
 		},
-	
+
 		"block_(sd[a-z])_rd_bytes_cov": {
             unit: "ratio",
             name: "Block device \":label_1\" data read cov",
@@ -1588,7 +1588,7 @@ module.exports = {
 			typical_usage: "",
 			table: "job"
 		},
-	
+
 		"netdir_(work|scratch|home)_write": {
 			unit: "bytes",
 			type: "double",
@@ -1604,10 +1604,10 @@ module.exports = {
 			typical_usage: "",
 			table: "job",
 			agg: [{
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + ')',
+				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + ')',
 				comments: 'The total bytes rwritten to network dir i in this period.',
 				stats: [{
 					name: "avg_:field_name",
@@ -1617,7 +1617,7 @@ module.exports = {
 					unit: 'bytes/s',
 					description: 'Average number of bytes written per second per node for the filesystem mounted on mount point /:label_1'
 				}]
-			},{
+			}, {
                     name: ':field_name_weight',
                     table: 'supremmfact',
                     type: 'double',
@@ -1626,8 +1626,8 @@ module.exports = {
                     comments: 'The node weight for jobs with :field_name counts that ran during this period'
                 }
 			]
-		},	
-	
+		},
+
 		"netdir_(work|scratch|home)_write_cov": {
             unit: "ratio",
             type: "double",
@@ -1655,10 +1655,10 @@ module.exports = {
 			typical_usage: "",
 			table: "job",
 			agg: [{
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + ')',
+				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + ')',
 				comments: 'The total bytes received by network drive i in this period.',
 				stats: [{
 					name: "avg_:field_name",
@@ -1668,7 +1668,7 @@ module.exports = {
 					unit: 'bytes/s',
 					description: 'Average number of bytes received per second per node from the :label_1 filesystem.'
 				}]
-			},{
+			}, {
                     name: ':field_name_weight',
                     table: 'supremmfact',
                     type: 'double',
@@ -1732,10 +1732,10 @@ module.exports = {
 			typical_usage: "",
 			table: "job",
 			agg: [{
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + ')',
+				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + ')',
 				comments: 'The total number of bytes transmitted by network drive i in this period.',
 				stats: [{
 					name: "avg_:field_name",
@@ -1745,7 +1745,7 @@ module.exports = {
 					unit: 'bytes/s',
 					description: 'Average number of bytes transmitted per second per node to the :label_1 filesystem.'
 				}]
-			},{
+			}, {
                     name: ':field_name_weight',
                     table: 'supremmfact',
                     type: 'double',
@@ -1781,8 +1781,8 @@ module.exports = {
 			typical_usage: "",
 			table: "job"
 		},
-	
-		
+
+
 		"net_([a-z]+[0-9]+)_rx": {
 			unit: "bytes",
 			type: "double",
@@ -1797,10 +1797,10 @@ module.exports = {
 			typical_usage: "",
 			table: "job",
             agg: [{
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + ')',
+				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + ')',
 				comments: 'The total number of bytes received by network via network interface i in this period.',
 				stats: [{
 					name: "avg_:field_name",
@@ -1810,7 +1810,7 @@ module.exports = {
 					unit: 'bytes/s',
 					description: 'Average number of bytes received per second per node for network device :label_1'
 				}]
-			},{
+			}, {
                     name: ':field_name_weight',
                     table: 'supremmfact',
                     type: 'double',
@@ -1858,10 +1858,10 @@ module.exports = {
 			typical_usage: "",
 			table: "job",
 			agg: [{
-				table: 'supremmfact', 
+				table: 'supremmfact',
 				type: 'double',
 				dimension: false,
-				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts",":period_end_ts") + ')',
+				sql: 'sum(' + getDistributionSQLCaseStatement('(:field_name * nodecount_id)', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts") + ')',
 				comments: 'The total number of bytes transmitted by by network via network interface i in this period.',
 				stats: [{
 					name: "avg_:field_name",
@@ -1871,7 +1871,7 @@ module.exports = {
 					unit: 'bytes/s',
 					description: 'Average number of bytes transmitted per second per node for network device :label_1.'
 				}]
-			},{
+			}, {
                     name: ':field_name_weight',
                     table: 'supremmfact',
                     type: 'double',
@@ -1905,7 +1905,7 @@ module.exports = {
 			typical_usage: "",
 			table: "job"
 		},
-		
+
 		"gpu([0-9]+)_nv_mem_used": {
 			unit: "bytes",
 			type: "double",
@@ -1920,7 +1920,7 @@ module.exports = {
 			typical_usage: "",
 			table: "job"
 		},
-	
+
 		"gpu([0-9]+)_nv_utilization": {
 			unit: "%",
 			type: "double",
@@ -1981,25 +1981,25 @@ module.exports = {
 		},
 		nodecount: {
 			//mapping: {nodecount_id: "coalesce(:nodes,0)"},
-			value: function(attributes) { 
-				if(attributes.nodes.value !== undefined && attributes.nodes.value !== null) { 
+			value: function(attributes) {
+				if (attributes.nodes.value !== undefined && attributes.nodes.value !== null) {
 					return attributes.nodes.value;
-				} else { 
-					return 0; 
-				} 
-			} 
-			
+				} else {
+					return 0;
+				}
+			}
+
 		},
 		queue: {
 			//mapping: {nodecount_id: "coalesce(:nodes,0)"},
-			value: function(attributes) { 
-				if(attributes.queue.value !== undefined && attributes.queue.value !== null) { 
+			value: function(attributes) {
+				if (attributes.queue.value !== undefined && attributes.queue.value !== null) {
 					return attributes.queue.value;
-				} else { 
-					return 'NA'; 
-				} 
-			} 
-			
+				} else {
+					return 'NA';
+				}
+			}
+
 		}
 	},
 	derivedFields: {
@@ -2011,7 +2011,7 @@ module.exports = {
 			per: "job",
 			table: "job",
 			queries: ["jobfact"]
-		}, 
+		},
 		account_id: {
 			type: "int32",
 			nullable: false,
@@ -2244,5 +2244,5 @@ module.exports = {
 	groupByNoneRoleConfig: {
 		disable: [ "pub" ]
 	}
-    
-}
+
+};

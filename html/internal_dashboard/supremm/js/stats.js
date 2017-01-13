@@ -2,46 +2,46 @@
             jsPlumb.ready(function() {
 
                 var common = {
-                      endpoints:["Blank", "Blank" ],
+                      endpoints: ["Blank", "Blank" ],
                       overlays: [ [ "PlainArrow", { location: 1.0 } ] ],
-                      paintStyle: { strokeStyle:"#216477", lineWidth:5 }
+                      paintStyle: { strokeStyle: "#216477", lineWidth: 5 }
                     };
 
                 jsPlumb.setContainer($("#flowchart"));
 
                 jsPlumb.connect({
-                      source:$("#remote_machine"),
+                      source: $("#remote_machine"),
                       target: $("#local_mirror"),
                       connector: "Straight",
                       anchor: "AutoDefault"
                   }, common);
 
                 jsPlumb.connect({
-                      source:$("#local_mirror"),
+                      source: $("#local_mirror"),
                       target: $("#accountfact"),
-                      anchors:[ "BottomCenter", "TopCenter" ]
+                      anchors: [ "BottomCenter", "TopCenter" ]
                   }, common);
 
                 jsPlumb.connect({
-                      source:$("#local_mirror"),
+                      source: $("#local_mirror"),
                       target: $("#mongo"),
-                      anchors:[ "BottomCenter", "TopCenter" ]
+                      anchors: [ "BottomCenter", "TopCenter" ]
                   }, common);
 
                 jsPlumb.connect({
-                      source:$("#accountfact"),
+                      source: $("#accountfact"),
                       target: $("#mongo"),
-                      anchors:[ "BottomCenter", "TopCenter" ]
+                      anchors: [ "BottomCenter", "TopCenter" ]
                   }, common);
 
                 jsPlumb.connect({
-                      source:$("#mongo"),
+                      source: $("#mongo"),
                       target: $("#jobfact"),
                       anchor: "AutoDefault"
                   }, common);
 
                 jsPlumb.connect({
-                      source:$("#jobfact"),
+                      source: $("#jobfact"),
                       target: $("#aggregates"),
                       connector: "Straight",
                       anchor: "AutoDefault"
@@ -62,8 +62,8 @@
 
                 var print_list = function(data, selector) {
                     var h = "<ul>";
-                    for( var k in data ) {
-                        if( data.hasOwnProperty(k) ) {
+                    for ( var k in data ) {
+                        if ( data.hasOwnProperty(k) ) {
                             h = h + "<li>" + k + ": " + data[k] + "</li>";
                         }
                     }
@@ -93,7 +93,7 @@
                 $.getJSON("/rest/supremm/explorer/resources", {token: token}, function(data) {
                     var select = document.getElementById("resourceselect");
 
-                    for (var i = 0; i < data.data.length ; i++) {
+                    for (var i = 0; i < data.data.length; i++) {
                         var element = data.data[i];
                         var tmp = document.createElement("option");
                         tmp.text = element.name;

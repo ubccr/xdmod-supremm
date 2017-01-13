@@ -46,22 +46,22 @@ var markAsProcessedMongoUpdate = function(collection, _id, config, endFn, dbkey)
 var getMongoSettings = function(config, datasetConfig) {
 
     var section = "jobsummarydb";
-    if(datasetConfig.db) {
+    if (datasetConfig.db) {
         section = datasetConfig.db;
     }
 
     var dbsettings = config.xdmodConfig[section];
 
-    if(!dbsettings) {
+    if (!dbsettings) {
         throw new Error("MongoDB configuration section \"" + section + "\" missing from XDMoD portal_settings.");
     }
 
     // Backwards compatibility with host/port specification
-    if(!dbsettings.uri && dbsettings.host && dbsettings.port && dbsettings.db) {
+    if (!dbsettings.uri && dbsettings.host && dbsettings.port && dbsettings.db) {
         dbsettings.uri = "mongodb://" + dbsettings.host + ":" + dbsettings.port + "/" + dbsettings.db;
     }
 
-    if(!(dbsettings.uri && dbsettings.db_engine)) {
+    if (!(dbsettings.uri && dbsettings.db_engine)) {
         throw new Error("Missing MongoDB configuration settings in section \"" + section + "\" of the XDMoD portal_settings.");
     }
 

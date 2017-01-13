@@ -1,6 +1,7 @@
 <?php
 
 namespace Supremm;
+
 use \Exception;
 use \CCR\DB;
 
@@ -11,9 +12,9 @@ function formatDataSize($d)
 {
     if ($d > 1024 * 1024 * 1024) {
         return sprintf("%.2f GB", $d / (1024 * 1024 * 1024));
-    } else if ($d > 1024 * 1024) {
+    } elseif ($d > 1024 * 1024) {
         return sprintf("%.2f MB", $d / (1024 * 1024));
-    } else if ($d > 1024) {
+    } elseif ($d > 1024) {
         return sprintf("%.2f kB", $d / 1024);
     } else {
         return sprintf("%.2f B", $d);
@@ -23,7 +24,7 @@ function formatDataSize($d)
 
 class Explorer extends \aRestAction
 {
-    protected $logger = NULL;
+    protected $logger = null;
 
 
     // --------------------------------------------------------------------------------
@@ -37,7 +38,6 @@ class Explorer extends \aRestAction
         $method = $target . ucfirst($this->_operation);
 
         if (!method_exists($this, $method)) {
-
             if ($this->_operation == 'Help') {
                 // The help method for this action does not exist, so attempt to generate a response
                 // using that action's Documentation() method
@@ -49,15 +49,12 @@ class Explorer extends \aRestAction
                 }
 
                 return $this->$documentationMethod()->getRESTResponse();
-
             } else {
                 throw new Exception("Unknown action '$target' in category '" . strtolower(__CLASS__) . "'");
             }
-
         }  // if ( ! method_exists($this, $method) )
 
         return $this->$method($arguments);
-
     } // __call()
 
     // --------------------------------------------------------------------------------
@@ -74,7 +71,6 @@ class Explorer extends \aRestAction
         $logConf = array('mode' => 0644);
         $logfile = LOG_DIR . "/" . \xd_utilities\getConfiguration('datawarehouse', 'rest_logfile');
         $this->logger = \Log::factory('file', $logfile, 'Supremm', $logConf, $maxLogLevel);
-
     }  // __construct
 
     // --------------------------------------------------------------------------------
@@ -199,33 +195,67 @@ class Explorer extends \aRestAction
         } elseif ($diff > 0) {
             $day_diff = floor($diff / 86400);
             if ($day_diff == 0) {
-                if ($diff < 60) return 'just now';
-                if ($diff < 120) return '1 minute ago';
-                if ($diff < 3600) return floor($diff / 60) . ' minutes ago';
-                if ($diff < 7200) return '1 hour ago';
-                if ($diff < 86400) return floor($diff / 3600) . ' hours ago';
+                if ($diff < 60) {
+                    return 'just now';
+                }
+                if ($diff < 120) {
+                    return '1 minute ago';
+                }
+                if ($diff < 3600) {
+                    return floor($diff / 60) . ' minutes ago';
+                }
+                if ($diff < 7200) {
+                    return '1 hour ago';
+                }
+                if ($diff < 86400) {
+                    return floor($diff / 3600) . ' hours ago';
+                }
             }
             if ($day_diff == 1) {
                 return floor($diff / 3600) . ' hours ago';
             }
-            if ($day_diff < 7) return $day_diff . ' days ago';
-            if ($day_diff < 31) return ceil($day_diff / 7) . ' weeks ago';
-            if ($day_diff < 60) return 'last month';
+            if ($day_diff < 7) {
+                return $day_diff . ' days ago';
+            }
+            if ($day_diff < 31) {
+                return ceil($day_diff / 7) . ' weeks ago';
+            }
+            if ($day_diff < 60) {
+                return 'last month';
+            }
             return date('F Y', $ts);
         } else {
             $diff = abs($diff);
             $day_diff = floor($diff / 86400);
             if ($day_diff == 0) {
-                if ($diff < 120) return 'in a minute';
-                if ($diff < 3600) return 'in ' . floor($diff / 60) . ' minutes';
-                if ($diff < 7200) return 'in an hour';
-                if ($diff < 86400) return 'in ' . floor($diff / 3600) . ' hours';
+                if ($diff < 120) {
+                    return 'in a minute';
+                }
+                if ($diff < 3600) {
+                    return 'in ' . floor($diff / 60) . ' minutes';
+                }
+                if ($diff < 7200) {
+                    return 'in an hour';
+                }
+                if ($diff < 86400) {
+                    return 'in ' . floor($diff / 3600) . ' hours';
+                }
             }
-            if ($day_diff == 1) return 'Tomorrow';
-            if ($day_diff < 4) return date('l', $ts);
-            if ($day_diff < 7 + (7 - date('w'))) return 'next week';
-            if (ceil($day_diff / 7) < 4) return 'in ' . ceil($day_diff / 7) . ' weeks';
-            if (date('n', $ts) == date('n') + 1) return 'next month';
+            if ($day_diff == 1) {
+                return 'Tomorrow';
+            }
+            if ($day_diff < 4) {
+                return date('l', $ts);
+            }
+            if ($day_diff < 7 + (7 - date('w'))) {
+                return 'next week';
+            }
+            if (ceil($day_diff / 7) < 4) {
+                return 'in ' . ceil($day_diff / 7) . ' weeks';
+            }
+            if (date('n', $ts) == date('n') + 1) {
+                return 'next month';
+            }
             return date('F Y', $ts);
         }
     }
@@ -235,12 +265,10 @@ class Explorer extends \aRestAction
         $doc = new \RestDocumentation();
         $doc->setDescription("Retrieve statistics for a database in the SUPReMM data processing workflow.");
         $doc->setAuthenticationRequirement(false);
-        $doc->addArgument("resource_id", "A valid resource id.", TRUE);
-        $doc->addArgument("db_id", "A valid database identifier.", TRUE);
+        $doc->addArgument("resource_id", "A valid resource id.", true);
+        $doc->addArgument("db_id", "A valid database identifier.", true);
         $doc->addReturnElement("data", "An array with the record statistics.");
         $doc->addReturnElement("resource_id", "The resource_id that was requested.");
         return $doc;
     }
 }  // class Explorer
-
-?>
