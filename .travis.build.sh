@@ -107,17 +107,31 @@ if [ "$TEST_SUITE" = "syntax" ]; then
         fi
     done
 elif [ "$TEST_SUITE" = "style" ]; then
+    npm install https://github.com/jpwhite4/lint-diff/tarball/master
+
     for file in "${php_files_changed[@]}"; do
-        phpcs "$file"
+        phpcs "$file" --report=json > "$file.lint.new.json"
         if [ $? != 0 ]; then
-            build_exit_value=2
+            git show "$commit_range_start:$file" | phpcs --stdin-path="$file" --report=json > "$file.lint.orig.json"
+            ./node_modules/.bin/lint-diff "$file.lint.orig.json" "$file.lint.new.json"
+            if [ $? != 0 ]; then
+                build_exit_value=2
+            fi
+            rm "$file.lint.orig.json"
         fi
+        rm "$file.lint.new.json"
     done
     for file in "${js_files_changed[@]}"; do
-        eslint "$file"
+        eslint "$file" -f json > "$file.lint.new.json"
         if [ $? != 0 ]; then
-            build_exit_value=2
+            git show "$commit_range_start:$file" | eslint --stdin --stdin-filename "$file" -f json > "$file.lint.orig.json"
+            ./node_modules/.bin/lint-diff "$file.lint.orig.json" "$file.lint.new.json"
+            if [ $? != 0 ]; then
+                build_exit_value=2
+            fi
+            rm "$file.lint.orig.json"
         fi
+        rm "$file.lint.new.json"
     done
 elif [ "$TEST_SUITE" = "build" ]; then
     # If PHP 5.3.3 is installed, SSL/TLS isn't available to PHP.
