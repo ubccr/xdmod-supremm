@@ -12,6 +12,17 @@ page](http://open.xdmod.org/upgrade.html).
 6.0.0 to 6.5.0 Upgrade Notes
 ----------------------------
 
+**Important Note**: This update adds a dependency to npm. If you are updating
+an existing installation via RPM, you will need to reinstall npm
+dependencies afterward. To do this, run the commands below.
+
+```bash
+# Assuming XDMoD's share directory is RPM default "/usr/share/xdmod"
+
+cd /usr/share/xdmod/etl/js
+npm install
+```
+
 - This upgrade includes database schema changes.
     - Modifies `modw_supremm` schema.
     - Modifies `modw_aggregates` schema.
