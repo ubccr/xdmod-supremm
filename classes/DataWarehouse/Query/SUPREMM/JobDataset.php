@@ -99,7 +99,6 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                 }
             }
         } elseif ($stat == "analytics") {
-
             $joberrors = new Table(new Schema('modw_supremm'), 'job_errors', 'je');
             $this->addTable($joberrors);
 
@@ -172,7 +171,6 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                 the compute node that had the highest memory usage.',
                 'dtype' => 'analysis'
             );
-
         } elseif ($stat == "jobscript") {
             $batchscriptTable = new Table(new Schema("modw_supremm"), "batchscripts", "bs");
             $this->addTable($batchscriptTable);
@@ -193,7 +191,6 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             $this->addTable($rf);
             $this->addWhereCondition(new WhereCondition(new TableField($dataTable, 'resource_id'), '=', new TableField($rf, 'id')));
             $this->addField(new TableField($rf, 'timezone'));
-
         } elseif ($stat == "peers") {
             $jp = new Table(new Schema("modw_supremm"), "job_peers", "jp");
             $this->joinTo($jp, "_id", "other_job_id", "jobid", "job_id");
@@ -262,9 +259,10 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
         $errorTableIdx += 1;
 
-        $this->addLeftJoin($errordesc,
+        $this->addLeftJoin(
+            $errordesc,
             new WhereCondition(
-                new Field( '((' .$errorTable->getAlias() . '.' . $fieldName . ' >> ' . $errordesc->getAlias() . '.id - 1) & 1)'),
+                new Field('((' .$errorTable->getAlias() . '.' . $fieldName . ' >> ' . $errordesc->getAlias() . '.id - 1) & 1)'),
                 '>',
                 '0'
             )

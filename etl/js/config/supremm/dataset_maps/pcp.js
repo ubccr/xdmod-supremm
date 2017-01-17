@@ -298,12 +298,12 @@ module.exports = function(config) {
                     if (result) {
                         if (result[1]) {
                             return {
-                                value: (24 * 3600 * result[1]) + (3600 * result[2]) + (60 * result[3]) + (1 * result[4]),
+                                value: 24 * 3600 * result[1] + 3600 * result[2] + 60 * result[3] + Number(result[4]),
                                 error: 0
                             };
                         } else {
                             return {
-                                value: (3600 * result[2]) + (60 * result[3]) + (1 * result[4]),
+                                value: 3600 * result[2] + 60 * result[3] + Number(result[4]),
                                 error: 0
                             };
                         }

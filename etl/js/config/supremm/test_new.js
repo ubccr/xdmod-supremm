@@ -13,7 +13,7 @@ var version = 139;
 
 var configRoot = String(__dirname), //the folder where schema, dataset_maps, and tests directories reside.
     fs = require("fs"),
-    util = require("util");
+    util = require("util")
 
 var datasetRoot = configRoot + "/dataset_maps";
 
