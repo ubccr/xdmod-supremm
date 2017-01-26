@@ -23,6 +23,22 @@
                     "installer-name": "jsPlumb"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ubccr/xdmod-test-artifacts",
+                "version": "master",
+                "dist": {
+                    "url": "https://github.com/ubccr/xdmod-test-artifacts/archive/master.zip",
+                    "type": "zip",
+                    "reference": "master"
+                },  
+                "autoload": {
+                    "classmap": ["."]
+                }
+            }   
+        
         }
     ],
     "extra": {
@@ -38,6 +54,7 @@
         }
     },
     "require-dev": {
+        "ubccr/xdmod-test-artifacts": "dev-master",
         "squizlabs/php_codesniffer": "2.*"
     }
 }
