@@ -35,7 +35,7 @@ if [ "$TEST_SUITE" = "syntax" ] || [ "$TEST_SUITE" = "style" ]; then
     files_changed=()
     while IFS= read -r -d $'\0' file; do
         files_changed+=("$file")
-    done < <(git diff --name-only --diff-filter=d -z "$TRAVIS_COMMIT_RANGE")
+    done < <(git diff --name-only --diff-filter=da -z "$TRAVIS_COMMIT_RANGE")
 
     # Separate the changed files by language.
     php_files_changed=()
@@ -47,10 +47,21 @@ if [ "$TEST_SUITE" = "syntax" ] || [ "$TEST_SUITE" = "style" ]; then
             js_files_changed+=("$file")
         fi
     done
+
+    # Get any added files by language
+    php_files_added=()
+    js_files_added=()
+    while IFS= read -r -d $'\0' file; do
+        if [[ "$file" == *.php ]]; then
+            php_files_added+=("$file")
+        elif [[ "$file" == *.js ]]; then
+            js_files_added+=("$file")
+        fi
+    done < <(git diff --name-only --diff-filter=A -z "$TRAVIS_COMMIT_RANGE")
 fi
 
 # Build tests require the corresponding version of Open XDMoD.
-if [ "$TEST_SUITE" = "build" ]; then
+if [ "$TEST_SUITE" = "build" ] || [ "$TEST_SUITE" = "unit" ]; then
     # If present, move Travis cache dirs out of the way.
     xdmod_cache_exists="false"; [ -e ../xdmod ] && xdmod_cache_exists="true"
     if "$xdmod_cache_exists"; then
@@ -73,6 +84,16 @@ if [ "$TEST_SUITE" = "build" ]; then
         echo "Using newer version of PHP for installing dependencies"
         phpenv global 5.3
         php --version
+
+        # Update Composer since the attempt made by the Travis setup script
+        # using PHP 5.3.3 would have failed.
+        #
+        # First, we update to the latest developer version since the version
+        # of Composer pre-installed on Travis systems (1.0.0) doesn't support
+        # selecting an update channel. Then, we use this version to rollback to
+        # the latest stable version.
+        composer self-update
+        composer self-update --stable
     fi
 
     # Install Composer dependencies.
@@ -121,6 +142,12 @@ elif [ "$TEST_SUITE" = "style" ]; then
         fi
         rm "$file.lint.new.json"
     done
+    for file in "${php_files_added[@]}"; do
+        phpcs "$file"
+        if [ $? != 0 ]; then
+            build_exit_value=2
+        fi
+    done
     for file in "${js_files_changed[@]}"; do
         eslint "$file" -f json > "$file.lint.new.json"
         if [ $? != 0 ]; then
@@ -133,6 +160,17 @@ elif [ "$TEST_SUITE" = "style" ]; then
         fi
         rm "$file.lint.new.json"
     done
+    for file in "${js_files_added[@]}"; do
+        eslint "$file"
+        if [ $? != 0 ]; then
+            build_exit_value=2
+        fi
+    done
+elif [ "$TEST_SUITE" = "unit" ]; then
+    tests/runtests.sh
+    if [ $? != 0 ]; then
+        build_exit_value=2
+    fi
 elif [ "$TEST_SUITE" = "build" ]; then
     # If PHP 5.3.3 is installed, SSL/TLS isn't available to PHP.
     # Use a newer version of PHP for installing Composer dependencies.

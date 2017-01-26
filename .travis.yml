@@ -12,6 +12,7 @@ env:
     matrix:
         - TEST_SUITE=syntax
         - TEST_SUITE=style
+        - TEST_SUITE=unit
         - TEST_SUITE=build CACHE_NAME=build
 
 # Add dependency directories to the Travis cache
