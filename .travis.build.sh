@@ -35,7 +35,7 @@ if [ "$TEST_SUITE" = "syntax" ] || [ "$TEST_SUITE" = "style" ]; then
     files_changed=()
     while IFS= read -r -d $'\0' file; do
         files_changed+=("$file")
-    done < <(git diff --name-only --diff-filter=d -z "$TRAVIS_COMMIT_RANGE")
+    done < <(git diff --name-only --diff-filter=da -z "$TRAVIS_COMMIT_RANGE")
 
     # Separate the changed files by language.
     php_files_changed=()
@@ -47,6 +47,17 @@ if [ "$TEST_SUITE" = "syntax" ] || [ "$TEST_SUITE" = "style" ]; then
             js_files_changed+=("$file")
         fi
     done
+
+    # Get any added files by language
+    php_files_added=()
+    js_files_added=()
+    while IFS= read -r -d $'\0' file; do
+        if [[ "$file" == *.php ]]; then
+            php_files_added+=("$file")
+        elif [[ "$file" == *.js ]]; then
+            js_files_added+=("$file")
+        fi
+    done < <(git diff --name-only --diff-filter=A -z "$TRAVIS_COMMIT_RANGE")
 fi
 
 # Build tests require the corresponding version of Open XDMoD.
@@ -121,6 +132,12 @@ elif [ "$TEST_SUITE" = "style" ]; then
         fi
         rm "$file.lint.new.json"
     done
+    for file in "${php_files_added[@]}"; do
+        phpcs "$file"
+        if [ $? != 0 ]; then
+            build_exit_value=2
+        fi
+    done
     for file in "${js_files_changed[@]}"; do
         eslint "$file" -f json > "$file.lint.new.json"
         if [ $? != 0 ]; then
@@ -132,6 +149,12 @@ elif [ "$TEST_SUITE" = "style" ]; then
             rm "$file.lint.orig.json"
         fi
         rm "$file.lint.new.json"
+    done
+    for file in "${js_files_added[@]}"; do
+        eslint "$file"
+        if [ $? != 0 ]; then
+            build_exit_value=2
+        fi
     done
 elif [ "$TEST_SUITE" = "build" ]; then
     # If PHP 5.3.3 is installed, SSL/TLS isn't available to PHP.
