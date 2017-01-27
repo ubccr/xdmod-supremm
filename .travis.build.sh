@@ -61,7 +61,7 @@ if [ "$TEST_SUITE" = "syntax" ] || [ "$TEST_SUITE" = "style" ]; then
 fi
 
 # Build tests require the corresponding version of Open XDMoD.
-if [ "$TEST_SUITE" = "build" ]; then
+if [ "$TEST_SUITE" = "build" ] || [ "$TEST_SUITE" = "unit" ]; then
     # If present, move Travis cache dirs out of the way.
     xdmod_cache_exists="false"; [ -e ../xdmod ] && xdmod_cache_exists="true"
     if "$xdmod_cache_exists"; then
@@ -77,26 +77,9 @@ if [ "$TEST_SUITE" = "build" ]; then
         mv ../xdmod-cache/etl/js/node_modules ../xdmod/etl/js/node_modules
     fi
 
-    # If PHP 5.3.3 is installed, SSL/TLS isn't available to PHP.
-    # Use a newer version of PHP for installing Composer dependencies.
-    using_php_533="false"; [[ "$(php --version)" == PHP\ 5.3.3\ * ]] && using_php_533="true"
-    if "$using_php_533"; then
-        echo "Using newer version of PHP for installing dependencies"
-        phpenv global 5.3
-        php --version
-    fi
-
-    # Install Composer dependencies.
-    pushd ../xdmod >/dev/null
-    composer install
-    popd >/dev/null
-
-    # If using PHP 5.3.3 for testing purposes, stop using the newer PHP version.
-    if "$using_php_533"; then
-        echo "Reverting back to PHP 5.3.3 for testing"
-        phpenv global 5.3.3
-        php --version
-    fi
+    pushd ../xdmod
+    . .travis.install.sh
+    popd
 
     # Create a symlink from Open XDMoD to this module.
     ln -s "$(pwd)" "../xdmod/open_xdmod/modules/$module_dir"
@@ -156,6 +139,11 @@ elif [ "$TEST_SUITE" = "style" ]; then
             build_exit_value=2
         fi
     done
+elif [ "$TEST_SUITE" = "unit" ]; then
+    tests/runtests.sh
+    if [ $? != 0 ]; then
+        build_exit_value=2
+    fi
 elif [ "$TEST_SUITE" = "build" ]; then
     # If PHP 5.3.3 is installed, SSL/TLS isn't available to PHP.
     # Use a newer version of PHP for installing Composer dependencies.
