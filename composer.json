@@ -55,6 +55,6 @@
     },
     "require-dev": {
         "ubccr/xdmod-test-artifacts": "dev-master",
-        "squizlabs/php_codesniffer": "2.*"
+        "squizlabs/php_codesniffer": "2.8.0"
     }
 }
