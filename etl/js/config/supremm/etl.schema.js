@@ -14,27 +14,30 @@
 
 
 function getIf(condition, _then, _else) {
-    return "case when " + condition +
-                  " then " + _then +
-                " else " + _else +
-             " end";
+    return "CASE WHEN " + condition +
+        " then " + _then +
+        " else " + _else +
+         " end";
 }
 
 function getDistributionSQLCaseStatement(stat, _max, s1, e1, s2, e2) {
     return "case when (" + s1 + " between " + s2 + " and " + e2 + " and "
-                + e1 + " between " + s2 + " and " + e2 + " ) "
-                + " then " + stat + " "
-            + " when (" + s1 + " < " + s2 + " and "
-                + e1 + " between " + s2 + " and " + e2 + " ) "
-                + " then " + stat + " * (" + e1 + " - " + s2 + " ) / ( " + e1 + " - " + s1 + ") "
-            + " when (" + s1 + " between " + s2 + " and " + e2 + " and "
-                + e1 + " > " + e2 + " ) "
-                + " then " + stat + " * (" + e2 + " - " + s1 + ") / (" + e1 + " - " + s1 + ") "
-            + " when (" + s1 + " < " + s2 + " and "
-                + e1 + " > " + e2 + " ) "
-                + " then	" + stat + " *( " + _max + " ) / (" + e1 + " - " + s1 + ") "
-            + " else " + stat + " "
-            + " end";
+        + e1 + " between " + s2 + " and " + e2 + " ) "
+        + " then " + stat + " "
+        + " when (" + s1 + " < " + s2 + " and "
+        + e1 + " between " + s2 + " and " + e2 + " ) "
+        + " then " + stat + " * (" + e1 + " - " + s2 + " + 1 ) / ( " +
+e1 + " - " + s1 + " + 1) "
+        + " when (" + s1 + " between " + s2 + " and " + e2 + " and "
+        + e1 + " > " + e2 + " ) "
+        + " then " + stat + " * (" + e2 + " - " + s1 + " + 1 ) / (" +
+e1 + " - " + s1 + " + 1) "
+        + " when (" + s1 + " < " + s2 + " and "
+        + e1 + " > " + e2 + " ) "
+        + " then    " + stat + " *( " + _max + " ) / (" + e1 + " - " +
+s1 + " + 1) "
+        + " else " + stat + " "
+        + " end";
 }
 
 var wallduration_case_statement = getDistributionSQLCaseStatement('wall_time', ':seconds', 'start_time_ts', 'end_time_ts', ":period_start_ts", ":period_end_ts");
