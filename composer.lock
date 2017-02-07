@@ -214,11 +214,29 @@
                 "standards"
             ],
             "time": "2016-04-03 22:58:34"
+        },
+        {
+            "name": "ubccr/xdmod-test-artifacts",
+            "version": "master",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ubccr/xdmod-test-artifacts/archive/master.zip",
+                "reference": "master",
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "."
+                ]
+            }
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "ubccr/xdmod-test-artifacts": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

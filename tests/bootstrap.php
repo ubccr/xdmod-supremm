@@ -28,7 +28,6 @@ spl_autoload_register(
             . str_replace('\\', '/', $className)
             . '.php';
 
-        error_log("Checking ".$classPath);
         if (is_readable($classPath)) {
             return require_once $classPath;
         } else {
