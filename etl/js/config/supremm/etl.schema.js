@@ -26,16 +26,13 @@ function getDistributionSQLCaseStatement(stat, _max, s1, e1, s2, e2) {
         + " then " + stat + " "
         + " when (" + s1 + " < " + s2 + " and "
         + e1 + " between " + s2 + " and " + e2 + " ) "
-        + " then " + stat + " * (" + e1 + " - " + s2 + " + 1 ) / ( " +
-e1 + " - " + s1 + " + 1) "
+        + " then " + stat + " * (" + e1 + " - " + s2 + " + 1 ) / ( " + e1 + " - " + s1 + " + 1) "
         + " when (" + s1 + " between " + s2 + " and " + e2 + " and "
         + e1 + " > " + e2 + " ) "
-        + " then " + stat + " * (" + e2 + " - " + s1 + " + 1 ) / (" +
-e1 + " - " + s1 + " + 1) "
+        + " then " + stat + " * (" + e2 + " - " + s1 + " + 1 ) / (" + e1 + " - " + s1 + " + 1) "
         + " when (" + s1 + " < " + s2 + " and "
         + e1 + " > " + e2 + " ) "
-        + " then    " + stat + " *( " + _max + " ) / (" + e1 + " - " +
-s1 + " + 1) "
+        + " then    " + stat + " *( " + _max + " ) / (" + e1 + " - " + s1 + " + 1) "
         + " else " + stat + " "
         + " end";
 }
