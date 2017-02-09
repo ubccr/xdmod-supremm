@@ -1,6 +1,6 @@
 "use strict";
 
-var logger = { warning: function(s) { console.log(s) } };
+var logger = { warning: function(s) { console.log(s); } };
 
 
 module.exports = function(configfile) {
@@ -12,16 +12,17 @@ module.exports = function(configfile) {
 
     var appconfobj = {};
     var maxid = 0;
-    for(var i = 0; i < appconf.length; i++) {
-        if( appconfobj[ appconf[i].name ] ) {
+    var i;
+    for (i = 0; i < appconf.length; i++) {
+        if (appconfobj[ appconf[i].name ]) {
             logger.warning("Duplicate application definitions for " + appconf[i].name + " only the final definition will be used.");
         }
         appconfobj[ appconf[i].name ] = appconf[i];
         maxid = Math.max(maxid, appconf[i].id);
     }
 
-    if( appconfobj['PROPRIETARY'] ) {
-        var proprietary_id = appconfobj['PROPRIETARY'].id;
+    if ( appconfobj.PROPRIETARY ) {
+        var proprietary_id = appconfobj.PROPRIETARY.id;
     } else {
         logger.warning("Adding an application definition for PROPRIETARY");
         maxid += 1;
@@ -38,15 +39,16 @@ module.exports = function(configfile) {
             var approws = [];
             var hintrows = [];
 
-            for(var i = 0; i < appconf.length; i++) {
+            var i;
+            for (i = 0; i < appconf.length; i++) {
                 approws.push("(" + appconf[i].id + "," + mysql.escape(appconf[i].name) + "," + mysql.escape(appconf[i].license_type) + ")");
-                var appid = (appconf[i].license_type == "permissive") ? appconf[i].id : proprietary_id;
-                for(var j=0; j < appconf[i].hints.length; j++) {
+                var appid = appconf[i].license_type == "permissive" ? appconf[i].id : proprietary_id;
+                for (var j = 0; j < appconf[i].hints.length; j++) {
                     hintrows.push("(" + appid + "," + mysql.escape(appconf[i].hints[j]) + "," + appconf[i].id + ")");
                 }
             }
 
-            var apptablesql =  [
+            var apptablesql = [
                 "LOCK TABLES " + applicationhint_table + " WRITE, " + application_table + " WRITE",
                 "DELETE IGNORE FROM " + applicationhint_table,
                 "DELETE IGNORE FROM " + application_table,
@@ -57,11 +59,11 @@ module.exports = function(configfile) {
             ];
             return apptablesql.join(";\n");
         }
-    }
+    };
 };
 
 /* Used for testing */
-if( require.main === module ) {
+if (require.main === module ) {
     console.log(module.exports("./application.json").getsql());
 }
 
