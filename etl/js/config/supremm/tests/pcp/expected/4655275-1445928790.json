@@ -35,6 +35,10 @@
         "value": "/util/academic/namd/NAMD_2.9_Source-IBVERBS/charmrun",
         "error": 0
     },
+    "application": {
+        "value": "charm++",
+        "error": 0
+    },
     "exit_status": {
         "value": "COMPLETED",
         "error": 0
