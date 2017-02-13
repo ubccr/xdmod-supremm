@@ -1,5 +1,7 @@
 module.exports = function(config) {
 
+    var appident = require('../app_ident.js')(config.applicationDefn);
+
     return {
         id: config.resource_id,
         name: config.resource,
@@ -177,6 +179,23 @@ module.exports = function(config) {
                         value: p,
                         error: 0
                     };
+                }
+            },
+            "application": {
+                formula: function(job) {
+                    var exec = this.attributes.executable.formula.call(this, job);
+                    if (exec.error) {
+                        return exec;
+                    }
+
+                    var app_id = appident(exec.value);
+
+                    if (app_id) {
+                        return {value: app_id.name, error: 0};
+                    }
+                    else {
+                        return {value: "uncategorized", error: 0};
+                    }
                 }
             },
             "exit_status": {

@@ -82,11 +82,6 @@ module.exports = {
                 var appload = require('./applicationtables.js');
                 return appload(__dirname + '/application.json').getsql();
             }
-        },
-        application_hint: {
-            schema: "modw_supremm",
-            definition: "static",
-            import_stmt: null
         }
     },
     postprocess: [
@@ -324,12 +319,20 @@ module.exports = {
             dim_insert: function(attributes) {
                 return {
                     query: "INSERT IGNORE INTO modw_supremm.executable (`resource_id`, `exec`, `binary`, `exec_md5`, `application_id`) " +
-                        "VALUES (:resource_id, :exec, substring_index(:exec,'/',-1), MD5(:exec), (SELECT if (:exec = 'NA', -1, " +
-                         "COALESCE((SELECT id FROM modw_supremm.application_hint WHERE substring_index(:exec,'/',-1) LIKE hint ORDER BY id LIMIT 1)," +
-                         "COALESCE((SELECT id FROM modw_supremm.application_hint WHERE substring_index(:exec,'/',-1) LIKE concat('%', hint, '%') ORDER BY id LIMIT 1),0)))))",
-                    values: {resource_id: attributes.resource_id.value, exec: attributes.executable.value}
+                           "VALUES (:resource_id, :exec, substring_index(:exec,'/',-1), MD5(:exec), COALESCE((SELECT id FROM modw_supremm.application WHERE `name` = :appname), -1) )",
+                    values: {resource_id: attributes.resource_id.value, exec: attributes.executable.value, appname: attributes.application.value}
                 };
             }
+        },
+        application: {
+            unit: null,
+            type: "string",
+            dtype: "accounting",
+            group: "Executable",
+            nullable: false,
+            def: "NA",
+            comments: "The name of the application that ran",
+            per: "job",
         },
         exit_status: {
             unit: null,
@@ -1964,6 +1967,11 @@ module.exports = {
             table: "modw_supremm.datasource",
             where: "description = :datasource"
         },
+        application: {
+            mapping: {application_id: "id"},
+            table: "modw_supremm.application",
+            where: "name = :application"
+        },
         cwd: {
             mapping: {cwd_id: "id"},
             table: "modw_supremm.cwd",
@@ -2176,7 +2184,7 @@ module.exports = {
             comments: "The application that the job ran. This value is autodetected based on the job executable path. A value of uncategorized indicates that the executable path was not recognized as a community application. A value of PROPRIETARY is shown for any application that has a non-open licence agreement that may restrict publishing of performance data. NA means not available.",
             per: "job",
             table: "job",
-            queries: ["executable"],
+            queries: ["application"],
             agg: {
                 table: 'supremmfact',
                 roles: { disable: [ "pub" ] },
