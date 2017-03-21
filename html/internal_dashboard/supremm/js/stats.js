@@ -1,4 +1,5 @@
 
+            Ext.ns('XDMoD');
             jsPlumb.ready(function() {
 
                 var common = {
@@ -62,22 +63,23 @@
 
                 var print_list = function(data, selector) {
                     var h = "<ul>";
-                    for( var k in data ) {
-                        if( data.hasOwnProperty(k) ) {
-                            h = h + "<li>" + k + ": " + data[k] + "</li>";
+                    var d = data.data;
+                    for (var k in d) {
+                        if (d.hasOwnProperty(k)) {
+                            h = h + '<li>' + k + ': ' + d[k] + '</li>';
                         }
                     }
                     h = h + "</ul>";
                     $(selector).html(h);
                 };
 
-                $.getJSON( "/rest/supremm/explorer/dbstats", { token: token, resource_id: resource_id, db_id: "accountdb" },
+                $.getJSON(XDMoD.REST.url + '/supremm_dataflow/dbstats', { token: XDMoD.REST.token, resource_id: resource_id, db_id: 'accountdb' },
                         function(data) { print_list(data.data, "#accountfact_content"); });
-                $.getJSON( "/rest/supremm/explorer/dbstats", { token: token, resource_id: resource_id, db_id: "summarydb" },
+                $.getJSON(XDMoD.REST.url + '/supremm_dataflow/dbstats', { token: XDMoD.REST.token, resource_id: resource_id, db_id: 'summarydb' },
                         function(data) { print_list(data.data, "#mongo_content"); });
-                $.getJSON( "/rest/supremm/explorer/dbstats", { token: token, resource_id: resource_id, db_id: "jobfact" },
+                $.getJSON(XDMoD.REST.url + '/supremm_dataflow/dbstats', { token: XDMoD.REST.token, resource_id: resource_id, db_id: 'jobfact' },
                         function(data) { print_list(data.data, "#jobfact_content"); });
-                $.getJSON( "/rest/supremm/explorer/dbstats", { token: token, resource_id: resource_id, db_id: "aggregates" },
+                $.getJSON(XDMoD.REST.url + '/supremm_dataflow/dbstats', { token: XDMoD.REST.token, resource_id: resource_id, db_id: 'aggregates' },
                         function(data) { print_list(data.data, "#aggregates_content"); });
 
                 $("#pagetitle").text("Data flow information for " + resource_map[resource_id] );
@@ -90,7 +92,7 @@
                     loadstats( $("#resourceselect").val() );
                 });
 
-                $.getJSON("/rest/supremm/explorer/resources", {token: token}, function(data) {
+                $.getJSON(XDMoD.REST.url + '/supremm_dataflow/resources', { token: XDMoD.REST.token }, function (data) {
                     var select = document.getElementById("resourceselect");
 
                     for (var i = 0; i < data.data.length ; i++) {
