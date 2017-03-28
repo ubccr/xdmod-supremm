@@ -4,7 +4,7 @@ namespace DataWarehouse\Query\SUPREMM;
 
 class JobTimeseriesTest extends \PHPUnit_Framework_TestCase
 {
-    const TEST_ARTIFACT_PATH = "../vendor/ubccr/xdmod-test-artifacts/xdmod-supremm/summaries/";
+    const TEST_ARTIFACT_PATH = "../../vendor/ubccr/xdmod-test-artifacts/xdmod-supremm/summaries/";
 
     /**
      * @dataProvider validDataProvider
