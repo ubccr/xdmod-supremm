@@ -24,7 +24,7 @@ spl_autoload_register(
     function ($className) use ($dir) {
         $classPath
             = $dir
-            . '/../classes/'
+            . '/../../classes/'
             . str_replace('\\', '/', $className)
             . '.php';
 
@@ -37,4 +37,4 @@ spl_autoload_register(
 );
 
 // Autoloader for XDMoD classes.
-require_once __DIR__ . '/../../xdmod/configuration/linker.php';
+require_once __DIR__ . '/../../../xdmod/configuration/linker.php';
