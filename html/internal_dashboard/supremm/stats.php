@@ -1,7 +1,7 @@
 <?php
 require_once 'user_check.php';
 ?>
-    
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -9,9 +9,15 @@ require_once 'user_check.php';
         <title>Job timeseries demo</title>
         <script type="text/javascript" src="/gui/lib/jquery/jquery-1.12.4.min.js"></script>
         <script type="text/javascript" src="/gui/lib/jsPlumb/jquery.jsPlumb-1.6.3-min.js"></script>
-        <script>
-<?php echo "var token='" . $_SESSION['session_token'] . "';" ; ?>
+
+        <!-- Ext and Jquery adapter -->
+        <script type="text/javascript" src="/gui/lib/extjs/adapter/jquery/ext-jquery-adapter.js"></script>
+        <script type="text/javascript" src="/gui/lib/extjs/ext-all-debug.js"></script>
+
+        <script type="text/javascript">
+            <?php \xd_rest\printJavascriptVariables(); ?>
         </script>
+
         <script type="text/javascript" src="js/stats.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" />
     </head>
@@ -45,7 +51,7 @@ require_once 'user_check.php';
                 <div id="jobfact_content" class="statsbox"></div>
             </div>
             <div id="aggregates" class="sqldatastore">
-                Aggregate job data 
+                Aggregate job data
                 <div id="aggregates_content" class="statsbox"></div>
             </div>
         </div>
