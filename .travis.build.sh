@@ -62,20 +62,9 @@ fi
 
 # Build tests require the corresponding version of Open XDMoD.
 if [ "$TEST_SUITE" = "build" ] || [ "$TEST_SUITE" = "unit" ]; then
-    # If present, move Travis cache dirs out of the way.
-    xdmod_cache_exists="false"; [ -e ../xdmod ] && xdmod_cache_exists="true"
-    if "$xdmod_cache_exists"; then
-        mv ../xdmod ../xdmod-cache
-    fi
-
     xdmod_branch="$TRAVIS_BRANCH"
     echo "Cloning Open XDMoD branch '$xdmod_branch'"
     git clone --depth=1 --branch="$xdmod_branch" https://github.com/ubccr/xdmod.git ../xdmod
-
-    # If present, move Travis cache dirs back in.
-    if "$xdmod_cache_exists"; then
-        mv ../xdmod-cache/etl/js/node_modules ../xdmod/etl/js/node_modules
-    fi
 
     pushd ../xdmod
     . .travis.install.sh
