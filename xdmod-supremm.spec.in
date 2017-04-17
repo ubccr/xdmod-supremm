@@ -11,7 +11,7 @@ Source:        %{name}-%{version}.tar.gz
 BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch:     noarch
 BuildRequires: php-cli
-Requires:      xdmod >= 6.5.0
+Requires:      xdmod >= 6.7.0
 Requires:      nodejs npm
 Requires:      php-pecl-mongo
 
