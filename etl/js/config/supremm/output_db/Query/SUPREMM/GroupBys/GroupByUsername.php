@@ -154,7 +154,7 @@ class GroupByUsername extends \DataWarehouse\Query\SUPREMM\GroupBy
 			}
 		}
 		
-		return parent::getPossibleValues($hint,$limit,$offset,$parameters,$possible_values_query);
+		return parent::getPossibleValues($hint, $limit, $offset, $parameters, $possible_values_query, $base_query, $filter);
 	}
 
     public function getCategory()
