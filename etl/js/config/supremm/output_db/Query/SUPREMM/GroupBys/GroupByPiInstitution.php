@@ -135,7 +135,7 @@ class GroupByPiInstitution extends \DataWarehouse\Query\SUPREMM\GroupBy
 							'select short_name as field_label from modw.organization  where id in (_filter_) order by order_id');
 	}
 	
-	public function getPossibleValues($hint = NULL, $limit = NULL, $offset = NULL, array $parameters = array())
+	public function getPossibleValues($hint = null, $limit = null, $offset = null, array $parameters = array(), $base_query = null, $filter = null)
 	{
 		if($this->_possible_values_query == NULL)
 		{
