@@ -25,20 +25,8 @@
             }
         },
         {
-            "type": "package",
-            "package": {
-                "name": "ubccr/xdmod-test-artifacts",
-                "version": "master",
-                "dist": {
-                    "url": "https://github.com/ubccr/xdmod-test-artifacts/archive/master.zip",
-                    "type": "zip",
-                    "reference": "master"
-                },  
-                "autoload": {
-                    "classmap": ["."]
-                }
-            }   
-        
+            "type": "vcs",
+            "url": "https://github.com/ubccr/xdmod-test-artifacts.git"
         }
     ],
     "extra": {
@@ -54,7 +42,7 @@
         }
     },
     "require-dev": {
-        "ubccr/xdmod-test-artifacts": "dev-master",
+        "ubccr/xdmod-test-artifacts": "@dev",
         "squizlabs/php_codesniffer": "2.8.0"
     }
 }
