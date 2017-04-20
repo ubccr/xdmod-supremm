@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e60949b340a2e6637420b54fea3906e4",
+    "content-hash": "d44a6743efe4cb009de232fbe31567d2",
     "packages": [
         {
             "name": "composer/installers",
@@ -216,19 +216,25 @@
         },
         {
             "name": "ubccr/xdmod-test-artifacts",
-            "version": "master",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ubccr/xdmod-test-artifacts.git",
+                "reference": "fe17a3f7b09febaec33a8e0ccbfe38fb8605d039"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/ubccr/xdmod-test-artifacts/archive/master.zip",
-                "reference": "master",
-                "shasum": null
+                "url": "https://api.github.com/repos/ubccr/xdmod-test-artifacts/zipball/fe17a3f7b09febaec33a8e0ccbfe38fb8605d039",
+                "reference": "fe17a3f7b09febaec33a8e0ccbfe38fb8605d039",
+                "shasum": ""
             },
             "type": "library",
-            "autoload": {
-                "classmap": [
-                    "."
-                ]
-            }
+            "description": "Test artifacts for XDMoD and XDMoD submodules",
+            "support": {
+                "source": "https://github.com/ubccr/xdmod-test-artifacts/tree/master",
+                "issues": "https://github.com/ubccr/xdmod-test-artifacts/issues"
+            },
+            "time": "2017-04-19T19:08:38+00:00"
         }
     ],
     "aliases": [],

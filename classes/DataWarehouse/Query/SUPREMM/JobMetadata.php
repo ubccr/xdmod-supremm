@@ -99,6 +99,9 @@ class JobMetadata
             if (is_array($value) && array_key_exists('*', $value)) {
                 if (isset($merged[$key]) && is_array($merged[$key])) {
                     foreach ($merged[$key] as $mkey => $mvalue) {
+                        if ($mkey === "error") {
+                            break;
+                        }
                         $merged[$key][$mkey] = $this->arrayMergeRecursiveWildcard($mvalue, $value['*']);
                     }
                 }
