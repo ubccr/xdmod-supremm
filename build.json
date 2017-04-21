@@ -4,14 +4,11 @@
     "release": "1.0",
     "files": {
         "include_paths": [
-            "/etl"
         ],
         "include_patterns": [
         ],
         "exclude_paths": [
-            "docs",
-            "/etl/assets",
-            "/etl/js/node_modules"
+            "docs"
         ],
         "exclude_patterns": [
             "#/\\.#"
