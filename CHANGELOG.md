@@ -1,17 +1,20 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-2017-04-?? v6.6.0
+2017-05-11 v6.6.0
 -----------------
 
 - Features
     - Improved application classification code
-      ([\#27](https://github.com/ubccr/xdmod-supremm/pull/27))
+      ([\#27](https://github.com/ubccr/xdmod-supremm/pull/27),
+       [\#39](https://github.com/ubccr/xdmod-supremm/pull/39))
 - Bug Fixes
     - Fixed Job Viewer load error with version 4 timeseries documents
       ([\#24](https://github.com/ubccr/xdmod-supremm/pull/24))
     - Fixed aggregators excluding data on certain time boundaries
       ([\#25](https://github.com/ubccr/xdmod-supremm/pull/25))
+    - Fixed handling of certain errors in job summaries
+      ([\#38](https://github.com/ubccr/xdmod-supremm/pull/38))
 - Miscellaneous
     - Cleaned up old and/or unused code
       ([\#28](https://github.com/ubccr/xdmod-supremm/pull/28))
