@@ -16,6 +16,24 @@ General Upgrade Notes
 Software Compatibility
 ----------------------
 
+### Open XDMoD 6.6.0
+
+<table>
+<thead>
+<tr>
+<th>Package</th> <th>Recommended Version</th> <th>Compatible Version(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Job Summarization </td><td align="right"> 1.0.2               </td><td align="right"> 1.0.x </td>
+</tr>
+<tr>
+<td> PCP               </td><td align="right"> 3.11.7              </td><td align="right"> 3.11.x </td>
+</tr>
+</tbody>
+</table>
+
 ### Open XDMoD 6.5.0
 
 <table>
