@@ -95,6 +95,11 @@ class JobTimeseries
         if( !isset( $this->_doc[$metric] ) ) {
             return null;
         }
+
+        if (isset($this->_doc[$metric]['error'])) {
+            return null;
+        }
+
         $ret = array( "series" => array() );
 
         if( $nodeidx === null )

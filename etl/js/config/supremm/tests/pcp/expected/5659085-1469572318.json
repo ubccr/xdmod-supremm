@@ -35,6 +35,10 @@
         "value": "python",
         "error": 0
     },
+    "application": {
+        "value": "python",
+        "error": 0
+    },
     "exit_status": {
         "value": "TIMEOUT",
         "error": 0

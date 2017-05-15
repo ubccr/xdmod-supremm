@@ -106,6 +106,8 @@ module.exports = {
 
             db = getMongoSettings(config, datasetConfig[i]);
 
+            datasetConfig[i].applicationDefn = configRoot + "/application.json";
+
             this.datasets.push({
                 name: datasetConfig[i].resource,
                 enabled: datasetConfig[i].enabled === undefined ? true : datasetConfig[i].enabled,

@@ -3,17 +3,12 @@
         "id": -1,
         "name": "NA",
         "license_type": "permissive",
-        "hints": [
-            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        ]
+        "science_area": "NA"
     },
     {
         "id": 0,
         "name": "uncategorized",
-        "license_type": "permissive",
-        "hints": [
-            "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
-        ]
+        "license_type": "permissive"
     },
     {
         "id": 1,
@@ -27,6 +22,8 @@
         "id": 2,
         "name": "amber",
         "license_type": "permissive",
+        "url": "http://ambermd.org/",
+        "science_area": "Molecular Dynamics",
         "hints": [
             "amber",
             "MMPBSA",
@@ -55,6 +52,11 @@
         "id": 4,
         "name": "cactus",
         "license_type": "permissive",
+        "url": "http://cactuscode.org/",
+        "science_area": "General Relativity",
+        "pathmatch": [
+            "BATCH\\/exec$"
+        ],
         "hints": [
             "cactus"
         ]
@@ -79,6 +81,8 @@
         "id": 7,
         "name": "cesm",
         "license_type": "permissive",
+        "url": "http://www.cesm.ucar.edu/",
+        "science_area": "Climate and Weather",
         "hints": [
             "cesm"
         ]
@@ -95,6 +99,8 @@
         "id": 9,
         "name": "cp2k",
         "license_type": "permissive",
+        "url": "https://www.cp2k.org/",
+        "science_area": "Material Science",
         "hints": [
             "cp2k"
         ]
@@ -103,6 +109,7 @@
         "id": 10,
         "name": "cpmd",
         "license_type": "proprietary",
+        "science_area": "Material Science",
         "hints": [
             "cpmd"
         ]
@@ -119,6 +126,8 @@
         "id": 12,
         "name": "enzo",
         "license_type": "permissive",
+        "url": "http://enzo-project.org/",
+        "science_area": "Cosmology",
         "hints": [
             "enzo",
             "ring.exe"
@@ -128,6 +137,7 @@
         "id": 13,
         "name": "gadget",
         "license_type": "permissive",
+        "science_area": "Cosmology",
         "hints": [
             "gadget"
         ]
@@ -136,6 +146,7 @@
         "id": 14,
         "name": "gamess",
         "license_type": "permissive",
+        "science_area": "Computational Chemistry",
         "hints": [
             "gamess",
             "rungms"
@@ -153,6 +164,15 @@
         "id": 16,
         "name": "gromacs",
         "license_type": "permissive",
+        "url": "http://www.gromacs.org/",
+        "science_area": "Molecular Dynamics",
+        "execmatch": [
+            "^g_anadock",
+            "^g_cluster",
+            "^g_pme_error",
+            "^g_rama",
+            "^trjconv"
+        ],
         "hints": [
             "gromacs",
             "mdrun",
@@ -165,6 +185,8 @@
         "id": 17,
         "name": "homme",
         "license_type": "permissive",
+        "url": "https://www.homme.ucar.edu/",
+        "science_area": "Climate and Weather",
         "hints": [
             "homme",
             "preqx"
@@ -174,6 +196,8 @@
         "id": 18,
         "name": "lammps",
         "license_type": "permissive",
+        "url": "http://lammps.sandia.gov/",
+        "science_area": "Molecular Dynamics",
         "hints": [
             "lammps",
             "lmp"
@@ -198,8 +222,14 @@
     {
         "id": 21,
         "name": "milc",
-        "url": "http://physics.indiana.edu/~sg/milc.html",
         "license_type": "permissive",
+        "url": "http://physics.indiana.edu/~sg/milc.html",
+        "science_area": "Quantum Chromo Dynamics",
+        "execmatch": [
+            "^ks_spectrum",
+            "^su3_rmd",
+            "^su3_rhmc"
+        ],
         "hints": [
             "milc",
             "su3_hmc_sf_pcac",
@@ -219,6 +249,8 @@
         "id": 23,
         "name": "namd",
         "license_type": "permissive",
+        "url": "http://www.ks.uiuc.edu/Research/namd/",
+        "science_area": "Molecular Dynamics",
         "hints": [
             "namd"
         ]
@@ -227,6 +259,8 @@
         "id": 24,
         "name": "nwchem",
         "license_type": "permissive",
+        "url": "http://www.nwchem-sw.org/index.php/Main_Page",
+        "science_area": "Computational Chemistry",
         "hints": [
             "nwchem"
         ]
@@ -234,8 +268,9 @@
     {
         "id": 25,
         "name": "openfoam",
-        "url": "http://www.openfoam.com/",
         "license_type": "permissive",
+        "url": "http://www.openfoam.com/",
+        "science_area": "Computational Fluid Dynamics",
         "hints": [
             "foam",
             "cfdemSolverIB",
@@ -251,6 +286,8 @@
         "id": 26,
         "name": "opensees",
         "license_type": "permissive",
+        "url": "http://opensees.berkeley.edu/",
+        "science_area": "Earthquakes/Seismology",
         "hints": [
             "opensees"
         ]
@@ -259,6 +296,8 @@
         "id": 27,
         "name": "paratec",
         "license_type": "permissive",
+        "url": "http://www.nersc.gov/users/software/applications/materials-science/paratec/",
+        "science_area": "Material Science",
         "hints": [
             "paratec"
         ]
@@ -267,6 +306,8 @@
         "id": 28,
         "name": "q-espresso",
         "license_type": "permissive",
+        "url": "http://www.quantum-espresso.org/",
+        "science_area": "Material Science",
         "hints": [
             "bands.x",
             "cp.x",
@@ -289,7 +330,9 @@
     {
         "id": 29,
         "name": "siesta",
-        "license_type": "proprietary",
+        "license_type": "permissive",
+        "url": "http://departments.icmab.es/leem/siesta/",
+        "science_area": "Material Science",
         "hints": [
             "siesta",
             "tbtrans"
@@ -299,6 +342,8 @@
         "id": 30,
         "name": "specfem3d",
         "license_type": "permissive",
+        "url": "https://github.com/geodynamics/specfem3d",
+        "science_area": "Earthquakes/Seismology",
         "hints": [
             "specfem3d",
             "xmeshfem3D"
@@ -316,6 +361,7 @@
         "id": 32,
         "name": "vasp",
         "license_type": "proprietary",
+        "science_area": "Material Science",
         "hints": [
             "vasp",
             "vp"
@@ -325,6 +371,7 @@
         "id": 33,
         "name": "wrf",
         "license_type": "permissive",
+        "science_area": "Climate and Weather",
         "hints": [
             "arwpost",
             "geogrid",
@@ -349,6 +396,12 @@
         "id": 35,
         "name": "rosetta",
         "license_type": "permissive",
+        "url": "https://www.rosettacommons.org",
+        "science_area": "Molecular Dynamics",
+        "execmatch": [
+            "^pepspec",
+            "^fixbb"
+        ],
         "hints": [
             "minimize.default.linuxgccrelease"
         ]
@@ -365,6 +418,8 @@
         "id": 37,
         "name": "hpcc",
         "license_type": "permissive",
+        "url": "http://icl.cs.utk.edu/hpcc/",
+        "science_area": "Benchmarking",
         "hints": [
             "hpcc"
         ]
@@ -389,6 +444,8 @@
         "id": 40,
         "name": "linpack",
         "license_type": "permissive",
+        "url": "http://www.netlib.org/linpack/",
+        "science_area": "Benchmarking",
         "hints": [
             "xhpl_mvapich2_version5",
             "xhpl_intel64_dynamic",
@@ -400,6 +457,8 @@
         "id": 41,
         "name": "ior",
         "license_type": "permissive",
+        "url": "https://github.com/LLNL/ior",
+        "science_area": "Benchmarking",
         "hints": [
             "ior"
         ]
@@ -547,6 +606,8 @@
         "id": 59,
         "name": "dl_poly",
         "license_type": "permissive",
+        "url": "http://www.ccp5.ac.uk/DL_POLY_CLASSIC/",
+        "science_area": "Molecular Dynamics",
         "hints": [
             "dlpoly"
         ]
@@ -555,6 +616,7 @@
         "id": 60,
         "name": "vmd",
         "license_type": "permissive",
+        "science_area": "Visualization",
         "hints": [
             "vmd"
         ]
@@ -563,27 +625,33 @@
         "id": 61,
         "name": "gaussian",
         "license_type": "proprietary",
-        "hints": [
-            "g09",
-            "l906.exe",
-            "l703.exe",
-            "l401.exe",
-            "l502.exe",
-            "l9999.exe",
-            "l904.exe",
-            "l804.exe",
-            "l801.exe",
-            "l701.exe",
-            "l601.exe",
-            "l508.exe",
-            "l1101.exe",
-            "l1002.exe"
+        "url": "http://www.gaussian.com/",
+        "science_area": "Computational Chemistry",
+        "execmatch": [
+            "^g09",
+            "^l101.exe",
+            "^l906.exe",
+            "^l703.exe",
+            "^l401.exe",
+            "^l301.exe",
+            "^l302.exe",
+            "^l502.exe",
+            "^l9999.exe",
+            "^l904.exe",
+            "^l804.exe",
+            "^l801.exe",
+            "^l701.exe",
+            "^l601.exe",
+            "^l508.exe",
+            "^l1101.exe",
+            "^l1002.exe"
         ]
     },
     {
         "id": 62,
         "name": "qmcchem",
         "license_type": "permissive",
+        "science_area": "Material Science",
         "hints": [
             "qmc"
         ]
@@ -599,8 +667,12 @@
     {
         "id": 64,
         "name": "visit",
-        "url": "http://www.visitusers.org",
         "license_type": "permissive",
+        "url": "http://www.visitusers.org",
+        "science_area": "Visualization",
+        "execmatch": [
+            "^visit$"
+        ],
         "hints": [
             "engine_par",
             "engine_ser"
@@ -642,6 +714,8 @@
         "id": 69,
         "name": "qwalk",
         "license_type": "permissive",
+        "url": "http://qwalk.github.io/mainline/",
+        "science_area": "Material Science",
         "hints": [
             "qwalk"
         ]
@@ -658,6 +732,7 @@
         "id": 71,
         "name": "fdtd",
         "license_type": "proprietary",
+        "science_area": "Atmostpheric Science",
         "hints": [
             "fdtd"
         ]
@@ -682,6 +757,7 @@
         "id": 74,
         "name": "q-chem",
         "license_type": "proprietary",
+        "science_area": "Material Science",
         "hints": [
             "qcprog.exe"
         ]
@@ -713,17 +789,24 @@
     {
         "id": 78,
         "name": "chroma",
-        "license_type": "unknown",
+        "license_type": "permissive",
+        "url": "http://jeffersonlab.github.io/chroma/",
+        "science_area": "Quantum Chromo Dynamics",
         "hints": [
             "chroma"
+        ],
+        "execmatch": [
+            "^chroma\\.parscalar",
+            "^harom[\\._]parscalar",
+            "^hmc_parscalar"
         ]
     },
     {
         "id": 79,
         "name": "a.out",
         "license_type": "permissive",
-        "hints": [
-            "a.out"
+        "execmatch": [
+            "^a.out$"
         ]
     },
     {
@@ -763,6 +846,8 @@
         "id": 84,
         "name": "harm3d",
         "license_type": "permissive",
+        "url": "http://dx.doi.org/10.1088/0004-637X/692/1/411",
+        "science_area": "General Relativity",
         "hints": [
             "harm3d"
         ]
@@ -779,6 +864,7 @@
         "id": 86,
         "name": "nek5000",
         "license_type": "permissive",
+        "science_area": "Computational Fluid Dynamics",
         "hints": [
             "nek5000"
         ]
@@ -795,8 +881,15 @@
         "id": 88,
         "name": "spec",
         "license_type": "permissive",
-        "hints": [
-            "spec"
+        "url": "https://www.black-holes.org/SpEC.html",
+        "science_area": "General Relativity",
+        "execmatch": [
+            "^spec$",
+            "^ApplyObservers$",
+            "^EvolveHyperbolicSystem$",
+            "^TrajectoryToSpatialCoordMapFiles$",
+            "^DomainInfo$",
+            "^SurfaceToSpatialCoordMapFiles$"
         ]
     },
     {
@@ -891,6 +984,8 @@
         "id": 100,
         "name": "zeus-mp",
         "license_type": "permissive",
+        "url": "http://www.netpurgatory.com/zeusmp.html",
+        "science_area": "Magnetohydrodynamics",
         "hints": [
             "zeusmp"
         ]
@@ -955,6 +1050,7 @@
         "id": 108,
         "name": "mhd3d",
         "license_type": "permissive",
+        "science_area": "Magnetohydrodynamics",
         "hints": [
             "mhd3d"
         ]
@@ -1022,6 +1118,8 @@
         "id": 116,
         "name": "nemo",
         "license_type": "permissive",
+        "url": "https://engineering.purdue.edu/gekcogrp/software-projects/nemo5/",
+        "science_area": "Material Science",
         "hints": [
             "nemo"
         ]
@@ -1086,8 +1184,8 @@
     {
         "id": 124,
         "name": "gizmo",
-        "url": "http://www.tapir.caltech.edu/~phopkins/Site/GIZMO.html",
         "license_type": "permissive",
+        "url": "http://www.tapir.caltech.edu/~phopkins/Site/GIZMO.html",
         "hints": [
             "GIZMO"
         ]
@@ -1095,8 +1193,8 @@
     {
         "id": 125,
         "name": "uspex",
-        "url": "http://uspex.stonybrook.edu/uspex.html",
         "license_type": "permissive",
+        "url": "http://uspex.stonybrook.edu/uspex.html",
         "hints": [
             "mpi-run-1cpus-uspex.o",
             "mpi-run-1cpus-uspex-once.o"
@@ -1121,8 +1219,8 @@
     {
         "id": 128,
         "name": "titan2d",
-        "url": "https://vhub.org/resources/titan2d",
         "license_type": "permissive",
+        "url": "https://vhub.org/resources/titan2d",
         "hints": [
             "titan"
         ]
@@ -1130,8 +1228,8 @@
     {
         "id": 129,
         "name": "astrogk",
-        "url": "http://newton.physics.uiowa.edu/~ghowes/astrogk/",
         "license_type": "permissive",
+        "url": "http://newton.physics.uiowa.edu/~ghowes/astrogk/",
         "hints": [
             "agk"
         ]
@@ -1139,18 +1237,21 @@
     {
         "id": 130,
         "name": "snoopy",
-        "url": "http://ipag.osug.fr/~lesurg/snoopy_doc/html/index.html",
         "license_type": "permissive",
+        "url": "http://ipag.osug.fr/~lesurg/snoopy_doc/html/index.html",
         "hints": [
             "snoopy"
         ]
-
     },
     {
         "id": 131,
         "name": "r",
-        "url": "https://www.r-project.org/",
         "license_type": "permissive",
+        "url": "https://www.r-project.org/",
+        "science_area": "Statistical Analysis",
+        "execmatch": [
+            "^R$"
+        ],
         "hints": [
             "Rscript",
             "RMPISNOW"
@@ -1164,14 +1265,15 @@
             "valgrind",
             "perfexpert",
             "ddt-debugger",
+            "gdb",
             "hpcrun"
         ]
     },
     {
         "id": 133,
         "name": "ncbi-blast",
-        "url": "http://blast.ncbi.nlm.nih.gov/Blast.cgi",
         "license_type": "permissive",
+        "url": "http://blast.ncbi.nlm.nih.gov/Blast.cgi",
         "hints": [
             "blastx"
         ]
@@ -1179,8 +1281,8 @@
     {
         "id": 134,
         "name": "gnu-octave",
-        "url": "https://www.gnu.org/software/octave/",
         "license_type": "permissive",
+        "url": "https://www.gnu.org/software/octave/",
         "hints": [
             "octave"
         ]
@@ -1188,8 +1290,8 @@
     {
         "id": 135,
         "name": "garli",
-        "url": "http://wiki.hpc.ufl.edu/doc/Garli",
         "license_type": "permissive",
+        "url": "http://wiki.hpc.ufl.edu/doc/Garli",
         "hints": [
             "Garli"
         ]
@@ -1197,8 +1299,8 @@
     {
         "id": 136,
         "name": "orca",
-        "url": "https://orcaforum.cec.mpg.de/",
         "license_type": "permissive",
+        "url": "https://orcaforum.cec.mpg.de/",
         "hints": [
             "orca_cpscf",
             "orca_scf",
@@ -1209,8 +1311,9 @@
     {
         "id": 137,
         "name": "paraview",
-        "url": "http://www.paraview.org/",
         "license_type": "permissive",
+        "url": "http://www.paraview.org/",
+        "science_area": "Visualization",
         "hints": [
             "pvbatch",
             "pvserver"
@@ -1219,8 +1322,8 @@
     {
         "id": 138,
         "name": "dirac",
-        "url": "http://diracprogram.org/doku.php",
         "license_type": "permissive",
+        "url": "http://diracprogram.org/doku.php",
         "hints": [
             "dirac.x"
         ]
@@ -1228,8 +1331,8 @@
     {
         "id": 139,
         "name": "gatk",
-        "url": "https://www.broadinstitute.org/gatk/",
         "license_type": "permissive",
+        "url": "https://www.broadinstitute.org/gatk/",
         "hints": [
             "GenomeAnalysisTK.jar"
         ]
@@ -1237,18 +1340,20 @@
     {
         "id": 140,
         "name": "varscan",
-        "url": "http://varscan.sourceforge.net/",
         "license_type": "permissive",
+        "url": "http://varscan.sourceforge.net/",
+        "execmatch": [
+            "^VarScan.*\\.jar$"
+        ],
         "hints": [
-            "VarScan.jar",
-            "VarScan.v%.jar"
+            "VarScan.jar"
         ]
     },
     {
         "id": 141,
         "name": "picard",
-        "url": "http://broadinstitute.github.io/picard/",
         "license_type": "permissive",
+        "url": "http://broadinstitute.github.io/picard/",
         "hints": [
             "picard.jar"
         ]
@@ -1256,8 +1361,9 @@
     {
         "id": 142,
         "name": "setsm",
-        "url": "http://www.pgc.umn.edu/elevation/stereo/",
         "license_type": "permissive",
+        "url": "http://www.pgc.umn.edu/elevation/stereo/",
+        "science_area": "Earth Science",
         "hints": [
             "setsm"
         ]
@@ -1265,8 +1371,8 @@
     {
         "id": 143,
         "name": "gdal",
-        "url": "http://www.gdal.org/",
         "license_type": "permissive",
+        "url": "http://www.gdal.org/",
         "hints": [
             "gdal"
         ]
@@ -1274,17 +1380,21 @@
     {
         "id": 144,
         "name": "citcoms",
-        "url": "https://geodynamics.org/cig/software/citcoms/",
         "license_type": "permissive",
-        "hints": [
-            "mpipycitcoms"
+        "url": "https://geodynamics.org/cig/software/citcoms/",
+        "science_area": "Earthquakes/Seismology",
+        "execmatch": [
+            "^mpipycitcoms",
+            "^pycitcoms",
+            "^citcoms"
         ]
     },
     {
         "id": 145,
         "name": "adda",
-        "url": "https://www.openhub.net/p/adda",
         "license_type": "permissive",
+        "url": "https://www.openhub.net/p/adda",
+        "science_area": "Physics",
         "hints": [
             "adda_mpi"
         ]
@@ -1292,8 +1402,9 @@
     {
         "id": 146,
         "name": "meld",
-        "url": "https://github.com/laufercenter/meld",
         "license_type": "permissive",
+        "url": "https://github.com/laufercenter/meld",
+        "science_area": "Molecular Dynamics",
         "hints": [
             "launch_remd"
         ]
@@ -1301,8 +1412,9 @@
     {
         "id": 147,
         "name": "osiris",
-        "url": "http://www.ncbi.nlm.nih.gov/projects/SNP/osiris",
         "license_type": "permissive",
+        "url": "http://epp.ist.utl.pt/wp/osiris/",
+        "science_area": "Physics",
         "hints": [
             "osiris-"
         ]
@@ -1310,8 +1422,9 @@
     {
         "id": 148,
         "name": "chimera",
-        "url": "https://www.cgl.ucsf.edu/chimera",
         "license_type": "permissive",
+        "url": "https://www.cgl.ucsf.edu/chimera",
+        "science_area": "Visualization",
         "hints": [
             "CHIMERA3D"
         ]
@@ -1319,8 +1432,9 @@
     {
         "id": 149,
         "name": "rockstar-galaxies",
-        "url": "https://bitbucket.org/pbehroozi/rockstar-galaxies",
         "license_type": "permissive",
+        "url": "https://bitbucket.org/pbehroozi/rockstar-galaxies",
+        "science_area": "Cosmology",
         "hints": [
             "rockstar-galaxies"
         ]
@@ -1328,8 +1442,8 @@
     {
         "id": 150,
         "name": "swift",
-        "url": "http://swift-lang.org/",
         "license_type": "permissive",
+        "url": "http://swift-lang.org/",
         "hints": [
             "cscript"
         ]
@@ -1337,17 +1451,18 @@
     {
         "id": 151,
         "name": "castro",
-        "url": "http://boxlib-codes.github.io/Castro/",
         "license_type": "permissive",
-        "hints": [
-            "Castro3d"
+        "url": "http://boxlib-codes.github.io/Castro/",
+        "science_area": "Stellar Atmospheres and Supernovae",
+        "execmatch": [
+            "^Castro[23]d"
         ]
     },
     {
         "id": 152,
         "name": "mdtest",
-        "url": "https://sourceforge.net/projects/mdtest/",
         "license_type": "permissive",
+        "url": "https://sourceforge.net/projects/mdtest/",
         "hints": [
             "mdtest"
         ]
@@ -1355,8 +1470,8 @@
     {
         "id": 153,
         "name": "waveqlab3d",
-        "url": "https://www.scec.org/publication/7004",
         "license_type": "permissive",
+        "url": "https://www.scec.org/publication/7004",
         "hints": [
             "waveqlab3d"
         ]
@@ -1364,19 +1479,414 @@
     {
         "id": 154,
         "name": "msflukss",
-        "url": "",
         "license_type": "permissive",
+        "url": "http://dl.acm.org/citation.cfm?id=2616499",
+        "science_area": "Magnetohydrodynamics",
         "hints": [
             "MHDAM3d.Linux"
         ]
     },
     {
         "id": 155,
-        "name": "awp-odc-os",
-        "url": "https://github.com/HPGeoC/awp-odc-os",
+        "name": "awp-odc",
         "license_type": "permissive",
+        "url": "https://github.com/HPGeoC/awp-odc-os",
+        "science_area": "Earthquakes/Seismology",
         "hints": [
             "pmcl3d"
         ]
+    },
+    {
+        "id": 156,
+        "name": "fluent",
+        "license_type": "proprietary",
+        "url": "http://www.ansys.com/",
+        "science_area": "Computational Fluid Dynamics",
+        "execmatch": [
+            "^fluent"
+        ]
+    },
+    {
+        "id": 157,
+        "name": "ls-dyna",
+        "license_type": "permissive",
+        "url": "http://www.oasys-software.com/dyna/en/software/ls-dyna.shtml",
+        "execmatch": [
+            "^mppdyna",
+            "^ls-dyna"
+        ]
+    },
+    {
+        "id": 158,
+        "name": "psdns",
+        "license_type": "permissive",
+        "url": "http://www.cs.odu.edu/~mln/ltrs-pdfs/conf-hpc-95-p1.pdf",
+        "science_area": "Turbulence",
+        "execmatch": [
+            "^DNS2d_",
+            "^PSDNS_"
+        ]
+    },
+    {
+        "id": 159,
+        "name": "openatom",
+        "license_type": "permissive",
+        "url": "http://charm.cs.illinois.edu/OpenAtom/",
+        "science_area": "Molecular Dynamics",
+        "execmatch": [
+            "^OpenAtom"
+        ]
+    },
+    {
+        "id": 160,
+        "name": "changa",
+        "license_type": "permissive",
+        "url": "http://www-hpcc.astro.washington.edu/tools/changa.html",
+        "science_area": "Cosmology",
+        "execmatch": [
+            "^ChaNGa"
+        ]
+    },
+    {
+        "id": 161,
+        "name": "maestro",
+        "license_type": "permissive",
+        "url": "http://boxlib-codes.github.io/MAESTRO/",
+        "science_area": "Stellar Atmospheres and Supernovae",
+        "execmatch": [
+            "^maestro",
+            "main\\.Linux\\.Cray.*\\.exe"
+        ]
+    },
+    {
+        "id": 162,
+        "name": "caffe",
+        "license_type": "permissive",
+        "url": "http://caffe.berkeleyvision.org/",
+        "science_area": "Machine Learning",
+        "hints": [
+            "caffenet"
+        ]
+    },
+    {
+        "id": 163,
+        "name": "hpcg",
+        "license_type": "permissive",
+        "url": "https://software.sandia.gov/hpcg/html/index.html",
+        "science_area": "Benchmarking",
+        "execmatch": [
+            "^xhpcg"
+        ]
+    },
+    {
+        "id": 164,
+        "name": "feap",
+        "license_type": "permissive",
+        "url": "http://www.ce.berkeley.edu/~sanjay/FEAP/feap.html",
+        "science_area": "Finite Element Analysis",
+        "execmatch": [
+            "^feap"
+        ]
+    },
+    {
+        "id": 165,
+        "name": "system applications",
+        "license_type": "permissive",
+        "science_area": "None",
+        "execmatch": [
+            "^sh$",
+            "^bash$",
+            "^csh$",
+            "^touch$",
+            "^cat$",
+            "^zcat$",
+            "^cp$",
+            "^chmod$",
+            "^df$",
+            "^find$",
+            "^locate$",
+            "^hostname$",
+            "^vmstat$",
+            "^pwd$",
+            "^ls$",
+            "^sleep$",
+            "^true$",
+            "^which$",
+            "^uname$",
+            "^top$",
+            "^ulimit$",
+            "^uptime$",
+            "^mount$",
+            "^date$",
+            "^dd$",
+            "^dmesg$",
+            "^tar$"
+        ]
+    },
+    {
+        "id": 166,
+        "name": "star-ccm+",
+        "license_type": "proprietary",
+        "url": "http://www.ce.berkeley.edu/~sanjay/FEAP/feap.html",
+        "science_area": "Computational Fluid Dynamics",
+        "execmatch": [
+            "^star-ccm"
+        ]
+    },
+    {
+        "id": 167,
+        "name": "neo-rxchf",
+        "license_type": "permissive",
+        "science_area": "Quantum Chemistry",
+        "pathmatch": [
+            "\\/NEO-RXCHF\\/"
+        ]
+    },
+    {
+        "id": 168,
+        "name": "episimdemics",
+        "license_type": "permissive",
+        "url": "http://charm.cs.uiuc.edu/research/episim",
+        "science_area": "Social Networks",
+        "execmatch": [
+            "^EpiSimdemics"
+        ]
+    },
+    {
+        "name": "alya",
+        "license_type": "permissive",
+        "url": "http://www.bsc.es/es/computer-applications/alya-system",
+        "science_area": "Computational Fluid Dynamics",
+        "execmatch": [
+            "^alya"
+        ]
+    },
+    {
+        "name": "distuf",
+        "license_type": "permissive",
+        "science_area": "Turbulence",
+        "execmatch": [
+            "^distuf"
+        ]
+    },
+    {
+        "name": "eve",
+        "license_type": "permissive",
+        "url": "https://tavazoielab.c2b2.columbia.edu/EVE/",
+        "science_area": "Cellular Evolution",
+        "execmatch": [
+            "^eve$"
+        ]
+    },
+    {
+        "name": "moose",
+        "license_type": "permissive",
+        "url": "http://mooseframework.org/",
+        "science_area": "Computational Mechanics",
+        "execmatch": [
+            "^moose_",
+            "^darcy_thermo_mech"
+        ]
+    },
+    {
+        "name": "X11 applications",
+        "license_type": "permissive",
+        "science_area": "None",
+        "execmatch": [
+            "^x11$",
+            "^Xorg$",
+            "^vncserver$",
+            "^xterm$",
+            "^xclock$"
+        ]
+    },
+    {
+        "name": "specfem2d",
+        "license_type": "permissive",
+        "url": "https://github.com/geodynamics/specfem2d",
+        "science_area": "Earthquakes/Seismology",
+        "hints": [
+            "specfem2d",
+            "xmeshfem3D"
+        ]
+    },
+    {
+        "name": "hadoop",
+        "license_type": "permissive",
+        "url": "https://github.com/glennklockwood/myhadoop/",
+        "science_area": "Map Reduce",
+        "execmatch": [
+            "^start-mapred.sh$",
+            "^start_my_hadoop$"
+        ],
+        "pathmatch": [
+            "\\/hadoop",
+            "\\/myhadoop"
+        ]
+    },
+    {
+        "name": "supremm",
+        "license_type": "permissive",
+        "url": "http://xdmod.sourceforge.net/",
+        "science_area": "System Monitoring",
+        "execmatch": [
+            "^summarize_mpi.py$",
+            "^summarize_jobs.py$",
+            "^ldms2pcp.py$"
+        ]
+    },
+    {
+        "name": "vpic",
+        "license_type": "permissive",
+        "url": "https://github.com/losalamos/vpic",
+        "science_area": "Plasmas/Magnetosphere",
+        "execmatch": [
+            "^vpic",
+            "^waves.cxx.op$",
+            "^dipole.cxx.op$"
+        ]
+    },
+    {
+        "name": "rmgdft",
+        "license_type": "permissive",
+        "url": "https://sourceforge.net/p/rmgdft/wiki/Home/",
+        "science_area": "Material Science",
+        "execmatch": [
+            "^rmg"
+        ]
+    },
+    {
+        "name": "ramses",
+        "license_type": "permissive",
+        "url": "http://dx.doi.org/10.1051/0004-6361:20011817",
+        "science_area": "Cosmology",
+        "execmatch": [
+            "^euler_cpu",
+            "^euler_gpu",
+            "^euler_zslab"
+        ]
+    },
+    {
+        "name": "lsqr",
+        "license_type": "permissive",
+        "url": "http://www.cs.ucf.edu/~lwang/LSQR.html",
+        "science_area": "Earthquakes/Seismology",
+        "execmatch": [
+            "^plsqr_"
+        ]
+    },
+    {
+        "name": "cg-md",
+        "license_type": "permissive",
+        "url": "http://pubs.acs.org/doi/abs/10.1021/ct400727q",
+        "science_area": "Molecular Dynamics",
+        "execmatch": [
+            "^cg$"
+        ]
+    },
+    {
+        "name": "ppm",
+        "license_type": "permissive",
+        "url": "https://www.xsede.org/documents/271087/586927/Woodward.pdf",
+        "science_area": "Turbulence",
+        "execmatch": [
+            "^workerbee"
+        ]
+    },
+    {
+        "name": "wsmp",
+        "license_type": "permissive",
+        "url": "http://researcher.watson.ibm.com/researcher/view_group.php?id=1426",
+        "execmatch": [
+            "^wsmp_"
+        ]
+    },
+    {
+        "name": "lsu3shell",
+        "license_type": "permissive",
+        "url": "https://arxiv.org/abs/1602.02965",
+        "execmatch": [
+            "^lsu3shell"
+        ]
+    },
+    {
+        "name": "sord",
+        "license_type": "permissive",
+        "url": "http://gely.github.io/coseis/docs/SORD.html",
+        "science_area": "Earthquakes/Seismology",
+        "execmatch": [
+            "^sord"
+        ]
+    },
+    {
+        "name": "grips",
+        "license_type": "permissive",
+        "url": "https://bluewaters.ncsa.illinois.edu/documents/10157/c321b78f-5176-495c-b34b-a229dbbf96a4",
+        "execmatch": [
+            "^grips_bluew"
+        ]
+    },
+    {
+        "name": "plascomcm",
+        "license_type": "permissive",
+        "url": "https://bitbucket.org/xpacc/plascomcm",
+        "science_area": "Physics",
+        "execmatch": [
+            "^plascomcm"
+        ]
+    },
+    {
+        "name": "mconv",
+        "license_type": "permissive",
+        "url": "https://bluewaterssymposium2015.sched.org/event/38Pr/astro-robert-f-stein-ab-initial-models-of-solar-activity",
+        "science_area": "Magnetohydrodynamics",
+        "execmatch": [
+            "^mconv_"
+        ]
+    },
+    {
+        "name": "INTERACTIVE",
+        "license_type": "permissive",
+        "execmatch": [
+            "^ccmlaunch$"
+        ]
+    },
+    {
+        "name": "cgmd",
+        "license_type": "permissive",
+        "url": "https://vothgroup.uchicago.edu/research/multiscale-theory-and-simulations-biomolecular-systems",
+        "science_area": "Molecular Dynamics",
+        "execmatch": [
+            "^exeCGBW$",
+            "^exeCG2BW$"
+        ]
+    },
+    {
+        "name": "3dh",
+        "license_type": "permissive",
+        "url": "http://www.ncsa.illinois.edu/news/stories/ESSsolar/",
+        "science_area": "Plasmas/Magnetosphere",
+        "execmatch": [
+            "^3dh$",
+            "^3dh[[_+][0-9a-z]+"
+        ]
+    },
+    {
+        "name": "hmc",
+        "license_type": "permissive",
+        "science_area": "Quantum Chromo Dynamics",
+        "execmatch": [
+            "^hmc"
+        ]
+    },
+    {
+        "name": "SYSTEM TESTING",
+        "license_type": "permissive",
+        "science_area": "None",
+        "execmatch": [
+            "^ptest_",
+            "^prog_mpi$",
+            "^netgauge$"
+        ]  
     }
 ]

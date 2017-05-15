@@ -12,17 +12,13 @@ env:
     matrix:
         - TEST_SUITE=syntax
         - TEST_SUITE=style
+        - TEST_SUITE=unit
         - TEST_SUITE=build CACHE_NAME=build
-
-matrix:
-    allow_failures:
-        - env: TEST_SUITE=style
 
 # Add dependency directories to the Travis cache
 cache:
     directories:
-        - node_modules
-        - ../xdmod/etl/js/node_modules
+        - $HOME/.npm
         - $HOME/.composer/cache
         - /tmp/pear/cache
 

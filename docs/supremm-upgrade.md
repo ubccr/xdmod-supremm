@@ -9,6 +9,12 @@ The SUPReMM Open XDMoD module should be upgraded at the same time as the main XD
 software. The upgrade procedure is documented on the [XDMoD upgrade
 page](http://open.xdmod.org/upgrade.html).
 
+6.5.0 to 6.6.0 Upgrade Notes
+----------------------------
+
+- This upgrade includes database schema changes.
+    - Modifies `modw_supremm` schema.
+
 6.0.0 to 6.5.0 Upgrade Notes
 ----------------------------
 

@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "53e1ccca27f6e86921ab195f4499358d",
-    "content-hash": "6171e306c42a23d6c6ebb1bfab50e103",
+    "content-hash": "d44a6743efe4cb009de232fbe31567d2",
     "packages": [
         {
             "name": "composer/installers",
@@ -112,7 +111,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2016-08-13 20:53:52"
+            "time": "2016-08-13T20:53:52+00:00"
         },
         {
             "name": "sporritt/jsplumb-jquery-min-file",
@@ -139,16 +138,16 @@
     "packages-dev": [
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.6.0",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "1bcdf03b068a530ac1962ce671dead356eeba43b"
+                "reference": "86dd55a522238211f9f3631e3361703578941d9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/1bcdf03b068a530ac1962ce671dead356eeba43b",
-                "reference": "1bcdf03b068a530ac1962ce671dead356eeba43b",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/86dd55a522238211f9f3631e3361703578941d9a",
+                "reference": "86dd55a522238211f9f3631e3361703578941d9a",
                 "shasum": ""
             },
             "require": {
@@ -213,12 +212,36 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-04-03 22:58:34"
+            "time": "2017-02-02T03:30:00+00:00"
+        },
+        {
+            "name": "ubccr/xdmod-test-artifacts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ubccr/xdmod-test-artifacts.git",
+                "reference": "fe17a3f7b09febaec33a8e0ccbfe38fb8605d039"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ubccr/xdmod-test-artifacts/zipball/fe17a3f7b09febaec33a8e0ccbfe38fb8605d039",
+                "reference": "fe17a3f7b09febaec33a8e0ccbfe38fb8605d039",
+                "shasum": ""
+            },
+            "type": "library",
+            "description": "Test artifacts for XDMoD and XDMoD submodules",
+            "support": {
+                "source": "https://github.com/ubccr/xdmod-test-artifacts/tree/master",
+                "issues": "https://github.com/ubccr/xdmod-test-artifacts/issues"
+            },
+            "time": "2017-04-19T19:08:38+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "ubccr/xdmod-test-artifacts": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
