@@ -7,8 +7,8 @@ Vendor:        Center for Computational Research, University at Buffalo
 Packager:      Jeffrey T. Palmer <jtpalmer@buffalo.edu>
 Group:         Applications/Internet
 License:       LGPLv3+
-Source:        %{name}-%{version}.tar.gz
-BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+Source:        %{name}-%{version}__PRERELEASE__.tar.gz
+BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}__PRERELEASE__-%{release}-XXXXXX)
 BuildArch:     noarch
 BuildRequires: php-cli
 Requires:      xdmod >= 7.0.0
@@ -19,7 +19,7 @@ Requires:      php-pecl-mongo
 Open XDMoD SUPReMM package.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{version}__PRERELEASE__
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -29,7 +29,7 @@ DESTDIR=$RPM_BUILD_ROOT ./install \
     --libdir=%{_libdir}/xdmod \
     --sysconfdir=%{_sysconfdir}/xdmod \
     --datadir=%{_datadir}/xdmod \
-    --docdir=%{_docdir}/%{name}-%{version} \
+    --docdir=%{_docdir}/%{name}-%{version}__PRERELEASE__ \
     --crondconfdir=%{_sysconfdir}/cron.d
 
 %clean
@@ -40,7 +40,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/aggregate_supremm.sh
 %{_libdir}/xdmod/
 %{_datadir}/xdmod/
-%{_docdir}/%{name}-%{version}/
+%{_docdir}/%{name}-%{version}__PRERELEASE__/
 
 %config(noreplace) %{_datadir}/xdmod/etl/js/config/supremm/etl.profile.js
 %config(noreplace) %{_sysconfdir}/xdmod/*.d/supremm.ini
@@ -50,6 +50,18 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json
 
 %changelog
+* Thu May 11 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.6.0-1.0
+- Features
+    - Improved application classification code
+- Bug Fixes
+    - Fixed Job Viewer load error with version 4 timeseries documents
+    - Fixed aggregators excluding data on certain time boundaries
+    - Fixed handling of certain errors in job summaries
+- Miscellaneous
+    - Cleaned up old and/or unused code
+    - Improved logging
+    - Improved quality assurance
+
 * Tue Jan 10 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.5.0-1.0
 - Important Notes
     - This update adds a dependency to npm. If you are updating from a previous

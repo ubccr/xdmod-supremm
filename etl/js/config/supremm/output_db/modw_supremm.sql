@@ -244,6 +244,8 @@ CREATE TABLE `application` (
   `id` int(11) NOT NULL,
   `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `license_type` enum('unknown','proprietary','permissive') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unknown',
+  `application_fosid` int(11) NOT NULL DEFAULT '-1',
+  `url` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`),
   UNIQUE KEY `appname` (`name`)
@@ -251,17 +253,16 @@ CREATE TABLE `application` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `application_hint`
+-- Table structure for table `application_fos`
 --
 
-DROP TABLE IF EXISTS `application_hint`;
+DROP TABLE IF EXISTS `application_fos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `application_hint` (
-  `id` int(11) NOT NULL,
-  `hint` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `realid` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`hint`)
+CREATE TABLE `application_fos` (
+      `id` int(11) NOT NULL,
+      `description` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+      PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
