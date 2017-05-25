@@ -16,14 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `modw_supremm`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `modw_supremm` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-
-USE `modw_supremm`;
-
---
 -- Table structure for table `catastrophe_buckets`
 --
 
