@@ -184,6 +184,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
         } elseif ($stat == "internal") {
             $this->addField(new TableField($dataTable, "resource_id"));
             $this->addField(new TableField($dataTable, "local_job_id"));
+            $this->addField(new TableField($dataTable, "start_time_ts"));
             $this->addField(new TableField($dataTable, "end_time_ts"));
             $this->addField(new TableField($dataTable, "cpu_user"));
             $this->addField(new TableField($dataTable, "catastrophe"));
@@ -193,6 +194,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             $this->addTable($rf);
             $this->addWhereCondition(new WhereCondition(new TableField($dataTable, 'resource_id'), '=', new TableField($rf, 'id')));
             $this->addField(new TableField($rf, 'timezone'));
+            $this->addField(new TableField($rf, 'code', 'resource'));
 
         } elseif ($stat == "peers") {
             $jp = new Table(new Schema("modw_supremm"), "job_peers", "jp");
@@ -202,6 +204,8 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             $this->addTable($jf);
             $this->addWhereCondition(new WhereCondition(new TableField($jp, "other_job_id"), '=', new TableField($jf, "_id")));
             $this->addField(new TableField($jf, "local_job_id"));
+            $this->addField(new TableField($jf, "start_time_ts"));
+            $this->addField(new TableField($jf, "end_time_ts"));
 
             $rt = new Table(new Schema("modw"), "resourcefact", "rf");
             $this->addTable($rt);
@@ -212,6 +216,14 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             $this->addTable($pt);
             $this->addWhereCondition(new WhereCondition(new TableField($jf, "person_id"), '=', new TableField($pt, "id")));
             $this->addField(new TableField($pt, "long_name", "name"));
+
+            $this->addOrder(
+                new \DataWarehouse\Query\Model\OrderBy(
+                    new TableField($jf, 'start_time_ts'),
+                    'asc',
+                    'start_time_ts'
+                )
+            );
         } else {
             // TODO This code is very similar to the code in ./classes/DataWarehouse/Query/SUPREMM/RawData.php ~ line 58
             // make this more common
