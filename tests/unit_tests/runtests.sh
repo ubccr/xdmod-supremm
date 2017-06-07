@@ -6,5 +6,8 @@ if { ! which phpunit >/dev/null 2>&1; } then
 fi
 
 cd $(dirname $0)
+
+../artifacts/update-artifacts.sh
+
 phpunit .
 exit $?
