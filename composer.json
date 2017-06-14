@@ -23,10 +23,6 @@
                     "installer-name": "jsPlumb"
                 }
             }
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/ubccr/xdmod-test-artifacts.git"
         }
     ],
     "extra": {
@@ -42,7 +38,6 @@
         }
     },
     "require-dev": {
-        "ubccr/xdmod-test-artifacts": "@dev",
         "squizlabs/php_codesniffer": "2.8.0"
     }
 }
