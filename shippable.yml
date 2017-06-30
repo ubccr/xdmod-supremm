@@ -1,0 +1,23 @@
+language: none
+env:
+    - XDMOD_TEST_MODE=fresh_install
+    - XDMOD_TEST_MODE=upgrade
+build:
+    cache: true
+    cache_dir_list:
+        - /root/.composer
+    pre_ci_boot:
+        image_name: tas-tools-ext-01.ccr.xdmod.org/centos7-xdmod-supremm6.6.0
+        image_tag: version3
+        pull: true
+        options: "--user root -e HOME=/root"
+    ci:
+        - git clone --depth=1 --branch=$BRANCH https://github.com/ubccr/xdmod.git ../xdmod
+        - ln -s $SHIPPABLE_BUILD_DIR ../xdmod/open_xdmod/modules/supremm
+        - composer install -d ../xdmod --no-progress
+        - cd ../xdmod && ~/bin/buildrpm xdmod supremm && cd $SHIPPABLE_BUILD_DIR
+        - ./tests/integration_tests/scripts/bootstrap.sh
+        - composer install -d ../xdmod --no-progress
+        - cp ~/assets/secrets ../xdmod/open_xdmod/modules/xdmod/integration_tests/.secrets
+        - ./tests/integration_tests/runtests.sh --log-junit `pwd`/shippable/testresults/results.xml
+

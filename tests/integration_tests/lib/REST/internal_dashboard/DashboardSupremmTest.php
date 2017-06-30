@@ -185,16 +185,6 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
         return $item;
     }
 
-    public function testInvalidUserPOSupremmResourceEntries()
-    {
-        // with wrong user authenticated: expect to receive a 403
-        $user = 'po';
-        $this->xdmodhelper->authenticate($user);
-
-        $result = $this->invalidSupremmResourceEntries(null);
-        $this->assertEquals(403, $result[1]['http_code']);
-    }
-
     public function testInvalidUserCDSupremmResourceEntries()
     {
         // with wrong user authenticated: expect to receive a 403
@@ -218,13 +208,6 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
 
         // should return at least one element
         $this->assertGreaterThanOrEqual(1, sizeof($data));
-    }
-
-    public function testInvalidUserPOSupremmDbstatsEntries()
-    {
-        $user = 'po';
-        $db = 'summarydb';
-        $this->invalidSupremmUserDbstatsEntries($db, $user);
     }
 
     public function testInvalidUserCDSupremmDbstatsEntries()
@@ -270,6 +253,8 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
 
     // fetch accountdb stats
     public function testFetchDbstatsAccount($db = 'accountdb') {
+
+        $this->markTestIncomplete('This enpoint only works on the XSEDE version of XDMoD.');
 
         $item = $this->validateSupremmDbstatsEntries($db);
 

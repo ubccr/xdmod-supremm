@@ -20,7 +20,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
 
     public function testResourceEndPoint()
     {
-        $this->xdmodhelper->authenticate("po");
+        $this->xdmodhelper->authenticate("cd");
 
         $queryparams = array(
             'realm' => 'SUPREMM'
@@ -50,7 +50,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
 
     private function validateSingleJobSearch($searchparams)
     {
-        $this->xdmodhelper->authenticate("po");
+        $this->xdmodhelper->authenticate("cd");
         $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
@@ -68,7 +68,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidJobSearch() {
 
-        $this->xdmodhelper->authenticate("po");
+        $this->xdmodhelper->authenticate("cd");
         $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', array() );
 
         $this->assertArrayHasKey('success', $result[0]);
@@ -83,7 +83,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             "params" => "this is not json data"
         );
 
-        $this->xdmodhelper->authenticate("po");
+        $this->xdmodhelper->authenticate("cd");
         $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
@@ -98,7 +98,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             "params" => json_encode(array("resource_id" => "2801"))
         );
 
-        $this->xdmodhelper->authenticate("po");
+        $this->xdmodhelper->authenticate("cd");
         $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
@@ -119,7 +119,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             "start" => 0
         );
 
-        $this->xdmodhelper->authenticate("po");
+        $this->xdmodhelper->authenticate("cd");
         $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
         $this->assertEquals($result[0]['success'], false);
         $this->assertEquals($result[1]['http_code'], 400);
