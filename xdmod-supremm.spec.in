@@ -48,6 +48,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/rawstatisticsconfig.json
 %config(noreplace) %{_sysconfdir}/xdmod/supremmconfig.json
 %config(noreplace) %{_sysconfdir}/xdmod/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json
+%config(noreplace) %{_sysconfdir}/modules.d/supremm.json
 
 %changelog
 * Thu May 11 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.6.0-1.0
