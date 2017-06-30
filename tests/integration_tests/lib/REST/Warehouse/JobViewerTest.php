@@ -18,6 +18,71 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Note that this test intentionally hardcodes the available dimensions so
+     * that we can confirm that the dimensions are all present and correct for
+     * fresh installs and for upgrades. Needless to say, the expected results
+     * must be updated when the SUPReMM schema changes.
+     */
+    public function testDimensions()
+    {
+        $this->xdmodhelper->authenticate("cd");
+        $queryparams = array(
+            'realm' => 'SUPREMM'
+        );
+        $response = $this->xdmodhelper->get($this->endpoint . 'dimensions', $queryparams);
+
+        $this->assertEquals(200, $response[1]['http_code']);
+
+        $resdata = $response[0];
+
+        $this->assertArrayHasKey('success', $resdata);
+        $this->assertEquals(true, $resdata['success']);
+
+        $dimids = array();
+        foreach ($resdata['results'] as $dimension) {
+            $dimids[] = $dimension['id'];
+        }
+
+        $expectedDimensions = <<<EOF
+[
+    "application",
+    "catastrophe_bucket_id",
+    "cpi",
+    "cpucv",
+    "cpuuser",
+    "datasource",
+    "nsfdirectorate",
+    "parentscience",
+    "exit_status",
+    "netdrv_gpfs_rx_bucket_id",
+    "grant_type",
+    "granted_pe",
+    "ibrxbyterate_bucket_id",
+    "netdrv_isilon_rx_bucket_id",
+    "jobsize",
+    "jobwalltime",
+    "nodecount",
+    "netdrv_panasas_rx_bucket_id",
+    "max_mem",
+    "pi",
+    "fieldofscience",
+    "pi_institution",
+    "queue",
+    "resource",
+    "provider",
+    "shared",
+    "username",
+    "person",
+    "institution"
+]
+EOF;
+        $this->assertEquals(json_decode($expectedDimensions, true), $dimids);
+
+        $this->xdmodhelper->logout();
+    }
+
+
     public function testResourceEndPoint()
     {
         $this->xdmodhelper->authenticate("cd");
@@ -42,10 +107,18 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             $this->assertArrayHasKey('short_name', $resource);
             $this->assertArrayHasKey('long_name', $resource);
         }
+
+        $this->xdmodhelper->logout();
     }
 
     public function testResourceNoAuth()
     {
+        $queryparams = array(
+            'realm' => 'SUPREMM'
+        );
+        $response = $this->xdmodhelper->get($this->endpoint . 'dimensions/resource', $queryparams);
+
+        $this->assertEquals(401, $response[1]['http_code']);
     }
 
     private function validateSingleJobSearch($searchparams)
@@ -63,7 +136,43 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('dtype', $jobdata);
         $this->assertArrayHasKey($jobdata['dtype'], $jobdata);
 
+        $this->xdmodhelper->logout();
+
         return $jobdata;
+    }
+
+    public function testBasicJobSearch() {
+        $queryparams = array(
+            'realm' => 'SUPREMM',
+            'params' => json_encode(
+                array(
+                    'resource_id' => 5,
+                    'local_job_id' => 6117153
+                )
+            )
+        );
+        $this->validateSingleJobSearch($queryparams);
+    }
+
+    public function testBasicJobSearchNoAuth() {
+        $searchparams = array(
+            'realm' => 'SUPREMM',
+            'params' => json_encode(
+                array(
+                    'resource_id' => 5,
+                    'local_job_id' => 6117153
+                )
+            )
+        );
+
+        foreach (array('usr', 'pi') as $unpriv) {
+            $this->xdmodhelper->authenticate($unpriv);
+            $response = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
+            $this->assertEquals(403, $response[1]['http_code']);
+            $this->assertArrayHasKey('success', $response[0]);
+            $this->assertEquals(false, $response[0]['success']);
+            $this->xdmodhelper->logout();
+        }
     }
 
     public function testInvalidJobSearch() {
@@ -74,6 +183,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('success', $result[0]);
         $this->assertEquals($result[0]['success'], false);
         $this->assertEquals($result[1]['http_code'], 400);
+
+        $this->xdmodhelper->logout();
     }
 
     public function testInvalidJobSearchJson() {
@@ -89,6 +200,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('success', $result[0]);
         $this->assertEquals($result[0]['success'], false);
         $this->assertEquals($result[1]['http_code'], 400);
+
+        $this->xdmodhelper->logout();
     }
 
     public function testInvalidJobSearchMissingParams() {
@@ -104,6 +217,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('success', $result[0]);
         $this->assertEquals($result[0]['success'], false);
         $this->assertEquals($result[1]['http_code'], 400);
+
+        $this->xdmodhelper->logout();
     }
 
     public function testAdvancedSearchInvalid() {
@@ -123,5 +238,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
         $this->assertEquals($result[0]['success'], false);
         $this->assertEquals($result[1]['http_code'], 400);
+
+        $this->xdmodhelper->logout();
     }
 }
