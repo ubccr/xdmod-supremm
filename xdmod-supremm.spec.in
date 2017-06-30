@@ -41,6 +41,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/xdmod/
 %{_datadir}/xdmod/
 %{_docdir}/%{name}-%{version}__PRERELEASE__/
+%{_sysconfdir}/modules.d/supremm.json
 
 %config(noreplace) %{_datadir}/xdmod/etl/js/config/supremm/etl.profile.js
 %config(noreplace) %{_sysconfdir}/xdmod/*.d/supremm.ini
@@ -48,7 +49,6 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/rawstatisticsconfig.json
 %config(noreplace) %{_sysconfdir}/xdmod/supremmconfig.json
 %config(noreplace) %{_sysconfdir}/xdmod/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json
-%config(noreplace) %{_sysconfdir}/modules.d/supremm.json
 
 %changelog
 * Thu May 11 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.6.0-1.0
