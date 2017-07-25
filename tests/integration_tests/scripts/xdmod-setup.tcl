@@ -75,7 +75,6 @@ for {set i 1} {$i < 6} {incr i} {
        selectMenuOption $i
        answerQuestion {Enabled \(yes, no\)} {yes}
        answerQuestion {Dataset mapping} {pcp}
-       answerQuestion {MongoDB collection name} "resource_$i"
        provideInput {GPFS mount point (leave empty if no GPFS)} {gpfs0}
 }
 selectMenuOption s

@@ -43,26 +43,31 @@ var markAsProcessedMongoUpdate = function(collection, _id, config, endFn, dbkey)
     });
 };
 
-var getMongoSettings = function(config, datasetConfig) {
-
-    var section = "jobsummarydb";
-    if(datasetConfig.db) {
+var getMongoSettings = function (config, datasetConfig) {
+    var section = 'jobsummarydb';
+    if (datasetConfig.db) {
         section = datasetConfig.db;
     }
 
-    var dbsettings = config.xdmodConfig[section];
-
-    if(!dbsettings) {
-        throw new Error("MongoDB configuration section \"" + section + "\" missing from XDMoD portal_settings.");
+    if (!config.xdmodConfig[section]) {
+        throw new Error('MongoDB configuration section "' + section + '" missing from XDMoD portal_settings.');
     }
+
+    var dbsettings = util._extend({}, config.xdmodConfig[section]);
 
     // Backwards compatibility with host/port specification
-    if(!dbsettings.uri && dbsettings.host && dbsettings.port && dbsettings.db) {
-        dbsettings.uri = "mongodb://" + dbsettings.host + ":" + dbsettings.port + "/" + dbsettings.db;
+    if (!dbsettings.uri && dbsettings.host && dbsettings.port && dbsettings.db) {
+        dbsettings.uri = 'mongodb://' + dbsettings.host + ':' + dbsettings.port + '/' + dbsettings.db;
     }
 
-    if(!(dbsettings.uri && dbsettings.db_engine)) {
-        throw new Error("Missing MongoDB configuration settings in section \"" + section + "\" of the XDMoD portal_settings.");
+    if (!(dbsettings.uri && dbsettings.db_engine)) {
+        throw new Error('Missing MongoDB configuration settings in section "' + section + '" of the XDMoD portal_settings.');
+    }
+
+    if (datasetConfig.collection) {
+        dbsettings.collection = datasetConfig.collection;
+    } else {
+        dbsettings.collection = 'resource_' + dbsettings.resource_id;
     }
 
     return dbsettings;
@@ -114,9 +119,7 @@ module.exports = {
                 mapping: this.getDatasetMap(datasetConfig[i].datasetmap, datasetConfig[i]),
                 input: {
                     dbEngine: db.db_engine.toLowerCase(),
-                    config: util._extend({
-                        collection: datasetConfig[i].collection
-                    }, db),
+                    config: db,
                     sortQuery: {},
                     getQuery: function() {
                         return getJobsToProcessMongoQuery(this.databasekey);

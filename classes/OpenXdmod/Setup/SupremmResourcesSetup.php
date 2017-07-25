@@ -110,7 +110,6 @@ EOF
             'resource' => '',
             'enabled' => false,
             'datasetmap' => 'pcp',
-            'collection' => "resource_$id",
             'hardware' => array(
                 'gpfs' => ''
             )
