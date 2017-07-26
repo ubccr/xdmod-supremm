@@ -67,7 +67,7 @@ var getMongoSettings = function (config, datasetConfig) {
     if (datasetConfig.collection) {
         dbsettings.collection = datasetConfig.collection;
     } else {
-        dbsettings.collection = 'resource_' + dbsettings.resource_id;
+        dbsettings.collection = 'resource_' + datasetConfig.resource_id;
     }
 
     return dbsettings;
