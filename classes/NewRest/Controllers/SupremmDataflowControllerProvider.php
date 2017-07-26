@@ -40,7 +40,8 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
     } // function setupRoutes
 
     /**
-     * Retrieve list of all available Supremm resources.
+     * Retrieve list of all configured SUPReMM realm resources. A resource will be
+     * included in the list even if it has no data present.
      *
      * @param Request $request
      * @param Application $app
@@ -56,9 +57,12 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
 
         $user = $this->authorize($request, array(ROLE_ID_MANAGER));
 
+        $s = new \DataWarehouse\Query\SUPREMM\SupremmDbInterface();
+        $resources = $s->getResources();
+
         $pdo = DB::factory('database');
-        $query = "SELECT r.code as name, jj.resource_id as id FROM modw.resourcefact r, (SELECT DISTINCT j.resource_id as resource_id FROM modw_supremm.job j) jj WHERE jj.resource_id = r.id";
-        $data = $pdo->query($query);
+        $query = "SELECT r.code as name, r.id as id FROM modw.resourcefact r WHERE r.id IN (" . implode(',', array_fill(0, count($resources), '?')) . ')';
+        $data = $pdo->query($query, $resources);
 
         $payload['data'] = $data;
         $payload['success'] = true;
@@ -188,12 +192,98 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
                 return $result;
                 break;
 
+            case 'nodearchives':
+                return $this->queryArchiveMetadata($resourceid);
+                break;
+
+            case 'accountfact':
+                return $this->queryJobFact($resourceid);
+                break;
+
             default:
                 throw new NotFoundHttpException("There was no result found for the given database ($dbid)");
                 break;
         }
         return null;
     } // function queryDbstats
+
+    /**
+     * query archive metadata tables and return statistics about them.
+     * @param resourceid the resource id to return data for.
+     * @return array
+     */
+    private function queryArchiveMetadata($resourceid)
+    {
+        $pdo = DB::factory('database');
+
+        try {
+            $query = 'SELECT COUNT(*) AS node_archives, COUNT(DISTINCT host_id) AS nodes FROM modw_supremm.archives_nodelevel nl, `modw`.`hosts` h WHERE nl.host_id = h.id AND h.resource_id = :id';
+            $nodedata = $pdo->query($query, array("id" => $resourceid));
+            $query = 'SELECT COUNT(*) AS job_archives, COUNT(DISTINCT local_job_id_raw) AS jobs FROM modw_supremm.archives_joblevel jl, `modw`.`hosts` h WHERE jl.host_id = h.id AND h.resource_id = :id';
+            $jobdata = $pdo->query($query, array("id" => $resourceid));
+
+            $data = array(
+                'schema version' => 2,
+                'node level archives' => $nodedata[0]['node_archives'],
+                'node count' => $nodedata[0]['nodes'],
+                'job level archives' => $jobdata[0]['job_archives'],
+                'distinct jobs' => $jobdata[0]['jobs']
+            );
+        }
+        catch (\PDOException $exc) {
+            try {
+                $query = 'SELECT COUNT(*) AS node_archives, COUNT(DISTINCT hostid) AS nodes FROM modw_supremm.archive a, `modw`.`hosts` h WHERE a.hostid = h.id AND h.resource_id = :id AND a.jobid IS NULL';
+                $nodedata = $pdo->query($query, array("id" => $resourceid));
+                $query = 'SELECT COUNT(*) AS job_archives, COUNT(DISTINCT jobid) AS jobs FROM modw_supremm.archive a, `modw`.`hosts` h WHERE a.hostid = h.id AND h.resource_id = :id AND a.jobid IS NOT NULL';
+                $jobdata = $pdo->query($query, array("id" => $resourceid));
+
+                $data = array(
+                    'schema version' => 1,
+                    'node level archives' => $nodedata[0]['node_archives'],
+                    'node count' => $nodedata[0]['nodes'],
+                    'job level archives' => $jobdata[0]['job_archives'],
+                    'distinct jobs' => $jobdata[0]['jobs']
+                );
+            }
+            catch (\PDOException $exc) {
+                $data = array('error' => $exc->getCode());
+            }
+        }
+
+        return array(
+            "resource_id" => $resourceid,
+            "data" => $data
+        );
+    }
+
+    /**
+     * query modw jobfact table and return statistics on jobs for a given resource
+     * @param resourceid the resource id to return data for.
+     * @return array
+     */
+    private function queryJobFact($resourceid)
+    {
+        $pdo = DB::factory('database');
+        $query = 'SELECT count(*) as count, min(end_time_ts) as earliest, max(end_time_ts) as recent FROM `modw`.`jobfact` WHERE resource_id = :id';
+
+        try {
+            $res = $pdo->query($query, array('id' => $resourceid));
+            $data = array(
+                'total jobs' => $res[0]['count'],
+                'earliest job' => $this->time2str($res[0]['earliest']),
+                'earliest job time' => gmdate('c', $res[0]['earliest']),
+                'most recent job' => $this->time2str($res[0]['recent']),
+                'recent job time' => gmdate('c', $res[0]['recent']),
+            );
+        } catch (\PDOException $exc) {
+            $data = array('error' => $exc->getCode());
+        }
+
+        return array(
+            "resource_id" => $resourceid,
+            "data" => $data
+        );
+    }
 
     /**
      * Format and label timestamp appropriately for report output (minutes, hours, weeks, or months).
