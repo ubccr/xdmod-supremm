@@ -22,6 +22,10 @@ class SupremmDbInterface {
             }
             $sresource['database'] = \xd_utilities\getConfigurationSection($dbsection);
 
+            if (!isset($sresource['collection']) ) {
+                $sresource['collection'] = 'resource_' . $sresource['resource_id'];
+            }
+
             $this->resource_rmap[$sresource['resource_id']] = $sresource;
         }
 

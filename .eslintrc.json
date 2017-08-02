@@ -10,6 +10,14 @@
       "error",
       "all"
     ],
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": [
+          "_extend"
+        ]
+      }
+    ],
     "brace-style": [
       "error",
       "1tbs",

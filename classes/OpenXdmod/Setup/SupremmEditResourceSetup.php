@@ -44,7 +44,6 @@ class SupremmEditResourceSetup extends SetupItem
         if($this->resourceConf['enabled']) {
 
             $this->resourceConf['datasetmap'] = $this->console->prompt('Dataset mapping', $this->resourceConf['datasetmap']);
-            $this->resourceConf['collection'] = $this->console->prompt('MongoDB collection name', $this->resourceConf['collection']);
 
             $this->resourceConf['hardware']['gpfs'] = $this->console->prompt('GPFS mount point (leave empty if no GPFS)', $this->resourceConf['hardware']['gpfs']);
         }

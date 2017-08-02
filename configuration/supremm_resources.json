@@ -3,7 +3,6 @@
         {
             "resource": "pcp",
             "resource_id": 1,
-            "collection": "resource_1",
             "datasetmap": "pcp",
             "hardware": {
                 "gpfs": "gpfs0"
