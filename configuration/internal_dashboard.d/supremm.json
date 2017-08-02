@@ -1,4 +1,13 @@
 {
+    "+menu": [
+        {
+            "class": "XDMoD.Dashboard.FramePanel",
+            "config": {
+                "title": "SUPReMM Dataflow",
+                "url": "/internal_dashboard/supremm/stats.php"
+            }
+        }
+    ],
     "+logs": [
         {
             "ident": "SUPREMM",

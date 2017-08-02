@@ -31,6 +31,13 @@ class SupremmDbInterface {
 
     }
 
+    /** get the list of configured resources
+     * @return array list of resource ids of the configured resources
+     */
+    public function getResources() {
+        return array_keys($this->resource_rmap);
+    }
+
     public function getResourceConfig($resource_id) {
 
         if( ! array_key_exists($resource_id, $this->resource_rmap) ) {

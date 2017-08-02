@@ -56,26 +56,17 @@ td.zeroer
     clear: both;
 }
 
-.sqldatastore {
-    background-color: #95ed64;
-    border-bottom-color: #346789;
-    border-bottom-left-radius: 5.76667px;
-    border-bottom-right-radius: 5.76667px;
+.datastore
+{
+    border-bottom-color: black;
     border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-left-color: #346789;
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-right-color: #346789;
-    border-right-style: solid;
-    border-right-width: 1px;
-    border-top-color: #346789;
-    border-top-left-radius: 5.76667px;
-    border-top-right-radius: 5.76667px;
+    border-bottom-width: 2px;
+    border-top-color: black;
     border-top-style: solid;
-    border-top-width: 1px;
+    border-top-width: 2px;
     box-shadow: #AAA 2px 2px 19px 0px;
     color: #000;
+    height: 8em;
     opacity: 0.8;
     padding-bottom: 5.76667px;
     padding-left: 5.76667px;
@@ -84,100 +75,61 @@ td.zeroer
     transition-delay: 0s;
     transition-duration: 0.15s;
     transition-propertybox-shadowtransition-timing-function: cubic-bezier(0.42, 0, 1, 1);
-    height: 5em;
     width: 15em;
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
     position: absolute;
+}
+
+.datasource
+{
+    border: thin solid black;
+    box-shadow: #AAA 2px 2px 19px 0px;
+    width: 150px;
+    height: 4em;
+    display: table;
+    position: absolute;
+}
+
+.process
+{
+    border: thin solid black;
+    border-radius: 50%;
+    width: 12em;
+    height: 6em;
+    box-shadow: #AAA 2px 2px 19px 0px;
+    display: table;
+    position: absolute;
+}
+
+.sqldatastore {
+    background-color: #95ed64;
 }
 
 .mongodatastore
 {
     background-color: #deb0c4;
-    border-bottom-color: #346789;
-    border-bottom-left-radius: 5.76667px;
-    border-bottom-right-radius: 5.76667px;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-left-color: #346789;
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-right-color: #346789;
-    border-right-style: solid;
-    border-right-width: 1px;
-    border-top-color: #346789;
-    border-top-left-radius: 5.76667px;
-    border-top-right-radius: 5.76667px;
-    border-top-style: solid;
-    border-top-width: 1px;
-    box-shadow: #AAA 2px 2px 19px 0px;
-    color: #000;
-    height: 5em;
-    width: 15em;
-    opacity: 0.8;
-    padding-bottom: 5.76667px;
-    padding-left: 5.76667px;
-    padding-right: 5.76667px;
-    padding-top: 5.76667px;
-    transition-delay: 0s;
-    transition-duration: 0.15s;
-    transition-propertybox-shadowtransition-timing-function: cubic-bezier(0.42, 0, 1, 1);
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    position: absolute;
 }
 
 .filedatastore {
     background-color: #b0c4de;
-    border-bottom-color: #346789;
-    border-bottom-left-radius: 5.76667px;
-    border-bottom-right-radius: 5.76667px;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-left-color: #346789;
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-right-color: #346789;
-    border-right-style: solid;
-    border-right-width: 1px;
-    border-top-color: #346789;
-    border-top-left-radius: 5.76667px;
-    border-top-right-radius: 5.76667px;
-    border-top-style: solid;
-    border-top-width: 1px;
-    box-shadow: #AAA 2px 2px 19px 0px;
-    color: #000;
-    height: 80px;
-    opacity: 0.8;
-    padding-bottom: 5.76667px;
-    padding-left: 5.76667px;
-    padding-right: 5.76667px;
-    padding-top: 5.76667px;
-    transition-delay: 0s;
-    transition-duration: 0.15s;
-    transition-propertybox-shadowtransition-timing-function: cubic-bezier(0.42, 0, 1, 1);
-    width: 80px;
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    position: absolute;
 }
 
 .statsbox {
     font-size: 80%;
 }
 
-#remote_machine { top: 3em; left:  7em; }
-#local_mirror   { top: 3em; left: 24em; }
-#accountfact    { top:13em; left: 37em; height: 8em; }
-#mongo          { top:26em; left: 30em; height: 8em; }
-#jobfact        { top:23em; left: 54em; height: 7em; }
-#aggregates     { top:33em; left: 54em; }
+#pcpdatasource  { top: 2em; left: 2em; }
+#resdatasource  { top: 9em; left: 2em; }
+#local_mirror   { top: 2em; left: 24em; }
+#summarization_scripts { top: 4.5em; left: 56.9em; }
+#mongo          { top: 15em; left: 55em; height: 8em; }
+#accountfact    { top: 15em; left: 23em; height: 8em; width: 17em; }
+#etl_process    { top: 29em; left: 47em; }
+#jobfact        { top: 28em; left: 24em; height: 7em; }
+#aggregates     { top: 28em; left: 4em; height: 7em; }
 
 #flowchart {
     border: thin solid black;
@@ -207,11 +159,15 @@ td.zeroer
 
 #key {
     position: absolute;
-    top: 36em;
-    left: 1em;
+    bottom: 0;
+    right: 1ex;
 }
 
-
+span.centered {
+  text-align: center;
+	vertical-align: middle;
+  display: table-cell;
+}
 .filekey {
     border: thin solid black;
     background-color: #b0c4de;
