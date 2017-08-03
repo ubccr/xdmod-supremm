@@ -22,6 +22,16 @@ Prebuilt packages of the SUPReMM module are available as
 See [the installation instructions on the SUPReMM website](http://supremm.xdmod.org/supremm-install-overview.html)
 for additional information.
 
+## Support
+
+Please email ccr-xdmod-help@buffalo.edu for support. Please
+include the following in your email:
+
+  - Open XDMoD version number and install type (RPM or tarball)
+  - Operating system and version where Open XDMoD is installed
+  - Description of the problem you are experiencing
+  - Steps to reproduce the problem
+
 ## Contributing
 
 Feedback is always welcome, and contributions are greatly appreciated!
