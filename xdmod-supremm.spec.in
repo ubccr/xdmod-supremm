@@ -41,10 +41,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/xdmod/
 %{_datadir}/xdmod/
 %{_docdir}/%{name}-%{version}__PRERELEASE__/
+%{_sysconfdir}/xdmod/modules.d/supremm.json
 
 %config(noreplace) %{_datadir}/xdmod/etl/js/config/supremm/etl.profile.js
 %config(noreplace) %{_sysconfdir}/xdmod/*.d/supremm.ini
-%config(noreplace) %{_sysconfdir}/xdmod/*.d/supremm*.json
+%config(noreplace) %{_sysconfdir}/xdmod/datawarehouse.d/supremm*.json
+%config(noreplace) %{_sysconfdir}/xdmod/internal_dashboard.d/supremm*.json
+%config(noreplace) %{_sysconfdir}/xdmod/roles.d/supremm*.json
+%config(noreplace) %{_sysconfdir}/xdmod/setup.d/supremm*.json
+%config(noreplace) %{_sysconfdir}/xdmod/rest.d/supremm*.json
 %config(noreplace) %{_sysconfdir}/xdmod/rawstatisticsconfig.json
 %config(noreplace) %{_sysconfdir}/xdmod/supremmconfig.json
 %config(noreplace) %{_sysconfdir}/xdmod/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json
