@@ -55,6 +55,19 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json
 
 %changelog
+* ??? ??? ?? 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 7.0.0-1.0
+- Features
+    - Added support for viewing job peers in Job Viewer
+    - Improved Mongo configuration process
+    - Enabled dataflow diagram for Open XDMoD administrators
+- Miscellaneous
+    - Updated for compatibility with Open XDMoD 7.0.0
+    - Moved Node.js ETL framework to Open XDMoD repository
+    - Performed work in anticipation of federated instances
+    - Improved development workflow
+    - Improved quality assurance
+    - Improved documentation
+
 * Thu May 11 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.6.0-1.0
 - Features
     - Improved application classification code
