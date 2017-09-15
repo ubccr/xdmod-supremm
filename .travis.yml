@@ -4,8 +4,9 @@ sudo: false
 # Specify the build matrix
 language: php
 php:
-    - '5.3.3'
     - '5.4'
+    - '7.0'
+    - '7.1.6'
 env:
     global:
         - NODE_VERSION=6
@@ -17,7 +18,9 @@ env:
         - TEST_SUITE=build CACHE_NAME=build
 matrix:
     exclude:
-        - php: '5.4'
+        - php: '7.0'
+          env: TEST_SUITE=style
+        - php: '7.1.6'
           env: TEST_SUITE=style
 
 # Add dependency directories to the Travis cache
