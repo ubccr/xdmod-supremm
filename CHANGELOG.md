@@ -1,7 +1,7 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-## 2017-0?-?? v7.0.0
+## 2017-09-21 v7.0.0
 
 - Features
     - Added support for viewing job peers in Job Viewer ([\#52](https://github.com/ubccr/xdmod-supremm/pull/52))
