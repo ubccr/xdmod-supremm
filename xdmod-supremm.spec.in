@@ -60,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
     - Added support for viewing job peers in Job Viewer
     - Improved Mongo configuration process
     - Enabled dataflow diagram for Open XDMoD administrators
+- Bug Fixes
+    - Fixed issue that allowed incompatible versions of XDMoD and this module
+      to be installed when installing via RPM
 - Miscellaneous
     - Updated for compatibility with Open XDMoD 7.0.0
     - Moved Node.js ETL framework to Open XDMoD repository
