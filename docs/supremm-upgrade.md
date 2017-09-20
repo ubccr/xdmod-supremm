@@ -9,6 +9,17 @@ The SUPReMM Open XDMoD module should be upgraded at the same time as the main XD
 software. The upgrade procedure is documented on the [XDMoD upgrade
 page](http://open.xdmod.org/upgrade.html).
 
+6.6.0 to 7.0.0 Upgrade Notes
+----------------------------
+
+- This upgrade includes config file format changes.
+    - New versions of `supremm_resources.json` no longer require a `collection`
+      to be specified for each resource.  The appropriate MongoDB collection
+      will be determined using the `resource_id`.  Existing
+      `supremm_resources.json` files that specify a `collection` will continue
+      to work as in previous versions.  No changes are necessary for
+      configurations that are compatible with previous versions.
+
 6.5.0 to 6.6.0 Upgrade Notes
 ----------------------------
 
