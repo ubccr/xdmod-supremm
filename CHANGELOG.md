@@ -7,13 +7,15 @@ Open XDMoD SUPReMM Change Log
     - Added support for viewing job peers in Job Viewer ([\#52](https://github.com/ubccr/xdmod-supremm/pull/52))
     - Improved Mongo configuration process ([\#59](https://github.com/ubccr/xdmod-supremm/pull/59))
     - Enabled dataflow diagram for Open XDMoD administrators ([\#60](https://github.com/ubccr/xdmod-supremm/pull/60))
+- Bug Fixes
+    - Fixed issue that allowed incompatible versions of XDMoD and this module to be installed when installing via RPM ([\#67](https://github.com/ubccr/xdmod-supremm/pull/67))
 - Miscellaneous
     - Updated for compatibility with Open XDMoD 7.0.0 ([\#51](https://github.com/ubccr/xdmod-supremm/pull/51))
     - Moved Node.js ETL framework to Open XDMoD repository ([\#40](https://github.com/ubccr/xdmod-supremm/pull/40))
     - Performed work in anticipation of federated instances ([\#48](https://github.com/ubccr/xdmod-supremm/pull/48))
     - Improved development workflow ([\#41](https://github.com/ubccr/xdmod-supremm/pull/41))
     - Improved quality assurance ([\#42](https://github.com/ubccr/xdmod-supremm/pull/42), [\#49](https://github.com/ubccr/xdmod-supremm/pull/49), [\#50](https://github.com/ubccr/xdmod-supremm/pull/50), [\#55](https://github.com/ubccr/xdmod-supremm/pull/55), [\#56](https://github.com/ubccr/xdmod-supremm/pull/56), [\#58](https://github.com/ubccr/xdmod-supremm/pull/58))
-    - Improved documentation ([\#61](https://github.com/ubccr/xdmod-supremm/pull/61))
+    - Improved documentation ([\#61](https://github.com/ubccr/xdmod-supremm/pull/61), [\#67](https://github.com/ubccr/xdmod-supremm/pull/67), [\#68](https://github.com/ubccr/xdmod-supremm/pull/68))
 
 2017-05-11 v6.6.0
 -----------------
