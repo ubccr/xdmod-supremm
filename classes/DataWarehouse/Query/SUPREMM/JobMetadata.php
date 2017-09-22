@@ -294,6 +294,7 @@ class JobMetadata
         $timeseries =  $jt->get($tsid, $nodeid, $cpuid);
 
         $timeseries['schema']['timezone'] = $job['timezone'];
+        $timeseries['schema']['source'] = $job['resource'] . ' ' . $job['local_job_id'];
 
         return $timeseries;
     }
