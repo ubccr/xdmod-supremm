@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
+PATH="$(pwd)/vendor/bin:$(pwd)/node_modules/.bin:$(pwd)/../xdmod/vendor/bin:$PATH"
 export PATH
-PATH="$(pwd)/vendor/bin:$(pwd)/node_modules/.bin:$PATH"
 
 source ~/.nvm/nvm.sh
 nvm use "$NODE_VERSION"

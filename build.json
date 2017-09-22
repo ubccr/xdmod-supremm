@@ -73,7 +73,8 @@
             "configuration/internal_dashboard.d/supremm.json": "internal_dashboard.d/supremm.json",
             "configuration/rawstatisticsconfig.json": "",
             "configuration/supremmconfig.json": "",
-            "configuration/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json": "aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json"
+            "configuration/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json": "aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json",
+            "configuration/modules.d/supremm.json": "modules.d/supremm.json"
         }
     }
 }
