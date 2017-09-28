@@ -310,3 +310,6 @@ configuration/aggregation_meta/
 
 # External dependencies
 /html/gui/lib/*
+
+# External QA assets
+/.qa/
