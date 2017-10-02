@@ -7,8 +7,8 @@ build:
     cache_dir_list:
         - /root/.composer
     pre_ci_boot:
-        image_name: tas-tools-ext-01.ccr.xdmod.org/centos7-xdmod-supremm6.6.0
-        image_tag: version3
+        image_name: tas-tools-ext-01.ccr.xdmod.org/centos7-xdmod-supremm7.0.0
+        image_tag: version1
         pull: true
         options: "--user root -e HOME=/root"
     ci:
