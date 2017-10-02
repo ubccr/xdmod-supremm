@@ -1,6 +1,6 @@
 {
     "name": "xdmod-supremm",
-    "version": "7.0.0",
+    "version": "7.1.0",
     "description": "The SUPReMM module for Open XDMoD.",
     "dependencies": {},
     "devDependencies": {
