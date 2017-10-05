@@ -4,18 +4,12 @@ namespace IntegrationTests\REST\Warehouse;
 
 class JobViewerTest extends \PHPUnit_Framework_TestCase
 {
+    const ENDPOINT = 'rest/v0.1/warehouse/';
+
     public function setUp()
     {
         $xdmodConfig = array( "decodetextasjson" => true );
         $this->xdmodhelper = new \TestHarness\XdmodTestHelper($xdmodConfig);
-
-        $this->endpoint = 'rest/v0.1/warehouse/';
-
-        $this->exportTypes = array(
-            array('image/png', 'image/png', 'image/png'),
-            array('image/svg', 'image/svg+xml', 'text/plain'),
-            array('text/csv',  'text/csv', 'text/plain'),
-        );
     }
 
     /**
@@ -30,7 +24,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $queryparams = array(
             'realm' => 'SUPREMM'
         );
-        $response = $this->xdmodhelper->get($this->endpoint . 'dimensions', $queryparams);
+        $response = $this->xdmodhelper->get(self::ENDPOINT . 'dimensions', $queryparams);
 
         $this->assertEquals(200, $response[1]['http_code']);
 
@@ -91,7 +85,7 @@ EOF;
             'realm' => 'SUPREMM'
         );
 
-        $response = $this->xdmodhelper->get($this->endpoint . 'dimensions/resource', $queryparams);
+        $response = $this->xdmodhelper->get(self::ENDPOINT . 'dimensions/resource', $queryparams);
 
         $this->assertEquals(200, $response[1]['http_code']);
 
@@ -116,15 +110,17 @@ EOF;
         $queryparams = array(
             'realm' => 'SUPREMM'
         );
-        $response = $this->xdmodhelper->get($this->endpoint . 'dimensions/resource', $queryparams);
+        $response = $this->xdmodhelper->get(self::ENDPOINT . 'dimensions/resource', $queryparams);
 
         $this->assertEquals(401, $response[1]['http_code']);
     }
 
-    private function validateSingleJobSearch($searchparams)
+    private function validateSingleJobSearch($searchparams, $doAuth = true)
     {
-        $this->xdmodhelper->authenticate("cd");
-        $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
+        if ($doAuth) {
+            $this->xdmodhelper->authenticate("cd");
+        }
+        $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
         $this->assertEquals($result[0]['success'], true);
@@ -136,7 +132,9 @@ EOF;
         $this->assertArrayHasKey('dtype', $jobdata);
         $this->assertArrayHasKey($jobdata['dtype'], $jobdata);
 
-        $this->xdmodhelper->logout();
+        if ($doAuth) {
+            $this->xdmodhelper->logout();
+        }
 
         return $jobdata;
     }
@@ -167,7 +165,7 @@ EOF;
 
         foreach (array('usr', 'pi') as $unpriv) {
             $this->xdmodhelper->authenticate($unpriv);
-            $response = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
+            $response = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
             $this->assertEquals(403, $response[1]['http_code']);
             $this->assertArrayHasKey('success', $response[0]);
             $this->assertEquals(false, $response[0]['success']);
@@ -178,7 +176,7 @@ EOF;
     public function testInvalidJobSearch() {
 
         $this->xdmodhelper->authenticate("cd");
-        $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', array() );
+        $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', array() );
 
         $this->assertArrayHasKey('success', $result[0]);
         $this->assertEquals($result[0]['success'], false);
@@ -195,7 +193,7 @@ EOF;
         );
 
         $this->xdmodhelper->authenticate("cd");
-        $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
+        $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
         $this->assertEquals($result[0]['success'], false);
@@ -212,7 +210,7 @@ EOF;
         );
 
         $this->xdmodhelper->authenticate("cd");
-        $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
+        $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
         $this->assertEquals($result[0]['success'], false);
@@ -235,10 +233,104 @@ EOF;
         );
 
         $this->xdmodhelper->authenticate("cd");
-        $result = $this->xdmodhelper->get($this->endpoint . 'search/jobs', $searchparams);
+        $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
         $this->assertEquals($result[0]['success'], false);
         $this->assertEquals($result[1]['http_code'], 400);
 
         $this->xdmodhelper->logout();
+    }
+
+    public function testJobMetadata() {
+        $queryparams = array(
+            'realm' => 'SUPREMM',
+            'params' => json_encode(
+                array(
+                    'resource_id' => 5,
+                    'local_job_id' => 6112282
+                )
+            )
+        );
+        $this->xdmodhelper->authenticate('cd');
+        $jobparams = $this->validateSingleJobSearch($queryparams, false);
+        $searchparams = array(
+            'realm' => 'SUPREMM',
+            'recordid' => '-1', // this parameter is not acutally used for anything but needs to be present :-(
+            $jobparams['dtype'] => $jobparams[$jobparams['dtype']]
+        );
+
+        $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/history', $searchparams);
+
+        $types = array();
+
+        foreach($result[0]['results'] as $datum) {
+            $this->assertArrayHasKey('dtype', $datum);
+            $this->assertArrayHasKey($datum['dtype'], $datum);
+            $this->assertArrayHasKey('text', $datum);
+            $types[] = $datum['text'];
+        }
+        
+        $expectedTypes = array(
+            'Accounting data',
+            'Executable information',
+            'Summary metrics',
+            'Detailed metrics',
+            'Job analytics',
+            'Timeseries'
+        );
+
+        $this->assertEquals($expectedTypes, $types);
+    }
+
+    /**
+     * @dataProvider jobTimeseriesProvider
+     */
+    public function testJobTimeseries($xdmodhelper, $params, $expectedContentType, $expectedFinfo) {
+        $response = $xdmodhelper->get(self::ENDPOINT . 'search/jobs/timeseries', $params);
+
+        $this->assertEquals(200, $response[1]['http_code']);
+        $this->assertEquals($expectedContentType, $response[1]['content_type']);
+
+        if ($expectedFinfo !== null) {
+            // Check the mime type of the file is correct.
+            $finfo = finfo_open(FILEINFO_MIME);
+            $this->assertEquals($expectedFinfo, finfo_buffer($finfo, $response[0]));
+        }
+    }
+
+    public function jobTimeseriesProvider() {
+        $xdmodhelper = new \TestHarness\XdmodTestHelper();
+        $xdmodhelper->authenticate('cd');
+
+        $queryparams = array(
+            'realm' => 'SUPREMM',
+            'params' => json_encode(
+                array(
+                    'resource_id' => 5,
+                    'local_job_id' => 6112282
+                )
+            )
+        );
+        $result = $xdmodhelper->get(self::ENDPOINT . 'search/jobs', $queryparams);
+        $jobparams = $result[0]['results'][0];
+
+        $searchparams = array(
+            'realm' => 'SUPREMM',
+            $jobparams['dtype'] => $jobparams[$jobparams['dtype']],
+            'infoid' => 6,
+            'tsid' =>  'cpuuser'
+        );
+
+        $ret = array();
+        $ret[] = array($xdmodhelper, $searchparams, 'application/json', null);
+        $searchparams['format'] = 'pdf';
+        $ret[] = array($xdmodhelper, $searchparams, 'application/pdf', 'application/pdf; charset=binary');
+        $searchparams['format'] = 'csv';
+        $ret[] = array($xdmodhelper, $searchparams, 'text/csv', 'text/plain; charset=us-ascii');
+        $searchparams['format'] = 'png';
+        $ret[] = array($xdmodhelper, $searchparams, 'image/png', 'image/png; charset=binary');
+        $searchparams['format'] = 'svg';
+        $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'text/plain; charset=us-ascii');
+
+        return $ret;
     }
 }
