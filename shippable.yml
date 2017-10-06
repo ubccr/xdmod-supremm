@@ -20,4 +20,6 @@ build:
         - composer install -d ../xdmod --no-progress
         - cp ~/assets/secrets ../xdmod/open_xdmod/modules/xdmod/integration_tests/.secrets
         - ./tests/integration_tests/runtests.sh --log-junit `pwd`/shippable/testresults/results.xml
+        - cp ~/assets/secrets.json ../xdmod/open_xdmod/modules/xdmod/automated_tests/.secrets.json
+        - ../xdmod/open_xdmod/modules/xdmod/automated_tests/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
 
