@@ -1,7 +1,4 @@
 var logIn = require('../../../../../xdmod/open_xdmod/modules/xdmod/automated_tests/test/specs/xdmod/loginPage.page.js');
-var loginName = testHelpers.auth.roles.centerdirector.username;
-var loginPassword = testHelpers.auth.roles.centerdirector.password;
-var displayName = testHelpers.auth.roles.centerdirector.display;
 
 var fs = require('fs');
 var jV = require('./jobViewer.page.js');
@@ -10,7 +7,7 @@ var xdmod = require('../../../../../xdmod/open_xdmod/modules/xdmod/automated_tes
 
 
 describe('Job Viewer', function jobViewer() {
-    logIn.login('Open XDMoD', '/', loginName, loginPassword, displayName);
+    logIn.login('centerdirector');
     var selectors = jV.selectors;
     var meselectors = testHelpers.metricExplorer;
 
