@@ -18,9 +18,9 @@ describe('Job Viewer', function jobViewer() {
         });
 
         it('Has Instructions', function jvConfirmInstructions() {
-            var instructions = '<div class="x-grid-empty"><b style="font-size: 150%">No job is selected for viewing</b><br><br>Please refer to the instructions below:<br><br><img src="gui/images/job_viewer_instructions.png"><br><br><div style="background-image: url(\'gui/images/user_manual.png\'); background-repeat: no-repeat; height: 36px; padding-left: 40px; padding-top: 10px">For more information, please refer to the <a href="javascript:void(0)" onclick="CCR.xdmod.ui.userManualNav(\'job+viewer\')">User Manual</a></div></div>';
-
-            expect(browser.getHTML(selectors.container + ' .x-grid-empty')).to.equal(instructions);
+            var instructions = 'No job is selected for viewing\n\nPlease refer to the instructions below:\n\n\n\nFor more information, please refer to the User Manual';
+            browser.waitForExist(selectors.container + '  .x-grid-empty img[src="gui/images/job_viewer_instructions.png"]');
+            expect(browser.getText(selectors.container + ' .x-grid-empty')).to.equal(instructions);
         });
     });
 
