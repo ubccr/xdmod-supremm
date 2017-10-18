@@ -201,7 +201,7 @@ module.exports = function(config) {
             "exit_status": {
                 formula: function(job) {
                     var exit = this.ref(job, "acct.exit_status");
-                    if (exit.error == 0) {
+                    if (exit.error === 0 && exit.value) {
                         exit.value = exit.value.split(" ")[0];
                     }
                     return exit;

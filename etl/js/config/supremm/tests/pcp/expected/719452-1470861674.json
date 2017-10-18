@@ -1,0 +1,350 @@
+{
+    "local_job_id": {
+        "value": "719452",
+        "error": 0
+    },
+    "name": {
+        "value": "namd2-gpu",
+        "error": 0
+    },
+    "resource_name": {
+        "value": "pcp",
+        "error": 0
+    },
+    "resource_id": {
+        "value": 1,
+        "error": 0
+    },
+    "organization_id": {
+        "value": 1,
+        "error": 0
+    },
+    "account": {
+        "value": "",
+        "error": 0
+    },
+    "username": {
+        "value": "rbunting",
+        "error": 0
+    },
+    "cwd": {
+        "value": "NA",
+        "error": 2
+    },
+    "executable": {
+        "value": "NA",
+        "error": 8
+    },
+    "application": {
+        "value": "NA",
+        "error": 8
+    },
+    "exit_status": {
+        "value": "NA",
+        "error": 0
+    },
+    "datasource": {
+        "value": "pcp",
+        "error": 0
+    },
+    "granted_pe": {
+        "value": 90,
+        "error": 0
+    },
+    "queue": {
+        "value": "regular",
+        "error": 0
+    },
+    "requested_nodes": {
+        "value": 6,
+        "error": 0
+    },
+    "hosts": {
+        "value": [
+            "node1223",
+            "node1255",
+            "node5489"
+        ],
+        "error": 0
+    },
+    "nodes": {
+        "value": 6,
+        "error": 0
+    },
+    "shared": {
+        "value": 0,
+        "error": 0
+    },
+    "cores": {
+        "value": 90,
+        "error": 0
+    },
+    "cores_avail": {
+        "value": 0,
+        "error": 1
+    },
+    "submit_time_ts": {
+        "value": 1470858653,
+        "error": 0
+    },
+    "eligible_time_ts": {
+        "value": null,
+        "error": 0
+    },
+    "start_time_ts": {
+        "value": 1470858850,
+        "error": 0
+    },
+    "end_time_ts": {
+        "value": 1470861674,
+        "error": 0
+    },
+    "wall_time": {
+        "value": 2824,
+        "error": 0
+    },
+    "requested_wall_time": {
+        "value": null,
+        "error": 2
+    },
+    "wait_time": {
+        "value": 197,
+        "error": 0
+    },
+    "cpu_time": {
+        "value": 254160,
+        "error": 0
+    },
+    "node_time": {
+        "value": 16944,
+        "error": 0
+    },
+    "cpu_idle": {
+        "value": 0.008101617202996687,
+        "error": 0
+    },
+    "cpu_system": {
+        "value": 0,
+        "error": 0
+    },
+    "cpu_user": {
+        "value": 0.8319764010148706,
+        "error": 0
+    },
+    "error": {
+        "value": null,
+        "error": 2
+    },
+    "flops": {
+        "value": null,
+        "error": 8
+    },
+    "flops_cov": {
+        "value": null,
+        "error": 8
+    },
+    "cpiref": {
+        "value": null,
+        "error": 8
+    },
+    "cpiref_cov": {
+        "value": null,
+        "error": 8
+    },
+    "catastrophe": {
+        "value": null,
+        "error": 8
+    },
+    "cpldref": {
+        "value": null,
+        "error": 8
+    },
+    "cpldref_cov": {
+        "value": null,
+        "error": 8
+    },
+    "mem_transferred": {
+        "value": null,
+        "error": 8
+    },
+    "mem_transferred_cov": {
+        "value": null,
+        "error": 8
+    },
+    "cpu_user_imbalance": {
+        "value": 5.766895066575095,
+        "error": 0
+    },
+    "cpu_user_cv": {
+        "value": 0.03157700927775841,
+        "error": 0
+    },
+    "memory_used": {
+        "value": null,
+        "error": 8
+    },
+    "memory_used_cov": {
+        "value": null,
+        "error": 8
+    },
+    "max_memory": {
+        "value": null,
+        "error": 8
+    },
+    "mem_used_including_os_caches": {
+        "value": null,
+        "error": 8
+    },
+    "mem_used_including_os_caches_cov": {
+        "value": null,
+        "error": 8
+    },
+    "ib_rx_bytes": {
+        "value": null,
+        "error": 8
+    },
+    "block_sda_wr_ios": {
+        "value": null,
+        "error": 8
+    },
+    "block_sda_wr_bytes": {
+        "value": null,
+        "error": 8
+    },
+    "block_sda_wr_bytes_cov": {
+        "value": null,
+        "error": 8
+    },
+    "block_sda_rd_ios": {
+        "value": null,
+        "error": 8
+    },
+    "block_sda_rd_bytes": {
+        "value": null,
+        "error": 8
+    },
+    "block_sda_rd_bytes_cov": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_rx": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_rx_cov": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_rx_msgs": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_tx": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_tx_cov": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_gpfs_tx_msgs": {
+        "value": null,
+        "error": 8
+    },
+    "netdrv_isilon_rx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_rx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_rx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_tx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_tx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_tx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_rx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_rx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_rx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_tx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_tx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_tx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "net_eth0_rx": {
+        "value": null,
+        "error": 8
+    },
+    "net_eth0_rx_cov": {
+        "value": null,
+        "error": 8
+    },
+    "net_eth0_rx_packets": {
+        "value": null,
+        "error": 8
+    },
+    "net_eth0_tx": {
+        "value": null,
+        "error": 8
+    },
+    "net_eth0_tx_cov": {
+        "value": null,
+        "error": 8
+    },
+    "net_eth0_tx_packets": {
+        "value": null,
+        "error": 8
+    },
+    "net_ib0_rx": {
+        "value": null,
+        "error": 8
+    },
+    "net_ib0_rx_packets": {
+        "value": null,
+        "error": 8
+    },
+    "net_ib0_tx": {
+        "value": null,
+        "error": 8
+    },
+    "net_ib0_tx_packets": {
+        "value": null,
+        "error": 8
+    },
+    "gpu0_nv_mem_used": {
+        "value": null,
+        "error": 8
+    },
+    "gpu0_nv_utilization": {
+        "value": null,
+        "error": 8
+    }
+}
