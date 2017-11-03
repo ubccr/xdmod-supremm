@@ -66,6 +66,7 @@ These templates are available:
 ------------------------------
 #### /usr/share/supremm/templates/pmlogger/control
 * Moved to: /etc/pcp/pmlogger
+    * Remove any existing files under: /etc/pcp/pmlogger/control.d
 * **THIS CHANGE MUST BE MADE**
     * Edit the file to specify that the logs be written to shared space, accessable by the Supremm processing machine
     * "PCP_LOG_DIR/pmlogger/LOCALHOSTNAME"
