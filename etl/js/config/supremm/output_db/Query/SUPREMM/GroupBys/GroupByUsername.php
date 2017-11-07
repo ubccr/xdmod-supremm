@@ -122,7 +122,7 @@ class GroupByUsername extends \DataWarehouse\Query\SUPREMM\GroupBy
 							"select distinct username as field_label from modw.systemaccount  where username in (_filter_) order by username");
 	}
 	
-	public function getPossibleValues($hint = NULL, $limit = NULL, $offset = NULL, array $parameters = array())
+	public function getPossibleValues($hint = null, $limit = null, $offset = null, array $parameters = array(), $base_query = null, $filter = null)
 	{
 		if($this->_possible_values_query == NULL)
 		{
@@ -154,7 +154,7 @@ class GroupByUsername extends \DataWarehouse\Query\SUPREMM\GroupBy
 			}
 		}
 		
-		return parent::getPossibleValues($hint,$limit,$offset,$parameters,$possible_values_query);
+		return parent::getPossibleValues($hint, $limit, $offset, $parameters, $possible_values_query, $base_query, $filter);
 	}
 
     public function getCategory()
