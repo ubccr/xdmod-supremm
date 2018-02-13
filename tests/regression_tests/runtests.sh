@@ -36,9 +36,17 @@ fi
 
 export REG_TEST_BASE="/../../../tests/artifacts/xdmod-test-artifacts/xdmod-supremm/regression/current/"
 
-REG_TEST_USER_ROLE=usr $phpunit $REGUSER ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ &
-REG_TEST_USER_ROLE=pi $phpunit $PI ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ &
-REG_TEST_USER_ROLE=cd $phpunit $CD ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ &
-REG_TEST_USER_ROLE=cs $phpunit $CS ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ &
-$phpunit $PUB ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ &
-wait
+REG_TEST_USER_ROLE=usr $phpunit $REGUSER ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & usrpid=$!
+REG_TEST_USER_ROLE=pi $phpunit $PI ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & pipid=$!
+REG_TEST_USER_ROLE=cd $phpunit $CD ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & cdpid=$!
+REG_TEST_USER_ROLE=cs $phpunit $CS ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & cspid=$!
+$phpunit $PUB ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & pubpid=$!
+
+for pid in $usrpid $pipid $cdpid $cspid $pubpid;
+do
+    wait "$pid"
+    if [ "$?" -ne "0" ];
+    then
+        exit 1
+    fi
+done
