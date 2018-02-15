@@ -42,11 +42,13 @@ REG_TEST_USER_ROLE=cd $phpunit $CD ../../../xdmod/open_xdmod/modules/xdmod/regre
 REG_TEST_USER_ROLE=cs $phpunit $CS ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & cspid=$!
 $phpunit $PUB ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & pubpid=$!
 
+EXIT_STATUS=0
 for pid in $usrpid $pipid $cdpid $cspid $pubpid;
 do
     wait "$pid"
     if [ "$?" -ne "0" ];
     then
-        exit 1
+        EXIT_STATUS=1
     fi
 done
+exit $EXIT_STATUS
