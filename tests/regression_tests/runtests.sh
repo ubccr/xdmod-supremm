@@ -24,7 +24,7 @@ then
     echo "ERROR missing .secrets.json file." >&2
     echo >&2
     cat README.md >&2
-    false
+    exit 126
 fi
 
 phpunit="$(readlink -f ../../../xdmod/vendor/bin/phpunit)"
@@ -36,17 +36,28 @@ fi
 
 export REG_TEST_BASE="/../../../tests/artifacts/xdmod-test-artifacts/xdmod-supremm/regression/current/"
 
-REG_TEST_USER_ROLE=usr $phpunit $REGUSER ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & usrpid=$!
-REG_TEST_USER_ROLE=pi $phpunit $PI ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & pipid=$!
-REG_TEST_USER_ROLE=cd $phpunit $CD ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & cdpid=$!
-REG_TEST_USER_ROLE=cs $phpunit $CS ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & cspid=$!
-$phpunit $PUB ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & pubpid=$!
+if [ "$REG_TEST_ALL" == "1" ]; then
+    set +e
+    REG_TEST_USER_ROLE=usr $phpunit $REGUSER ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/
+    REG_TEST_USER_ROLE=pi $phpunit $PI ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/
+    REG_TEST_USER_ROLE=cd $phpunit $CD ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/
+    REG_TEST_USER_ROLE=cs $phpunit $CS ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/
+    $phpunit $PUB ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/
+else
+    REG_TEST_USER_ROLE=usr $phpunit $REGUSER ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & usrpid=$!
+    REG_TEST_USER_ROLE=pi $phpunit $PI ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & pipid=$!
+    REG_TEST_USER_ROLE=cd $phpunit $CD ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & cdpid=$!
+    REG_TEST_USER_ROLE=cs $phpunit $CS ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & cspid=$!
+    $phpunit $PUB ../../../xdmod/open_xdmod/modules/xdmod/regression_tests/ & pubpid=$!
 
-for pid in $usrpid $pipid $cdpid $cspid $pubpid;
-do
-    wait "$pid"
-    if [ "$?" -ne "0" ];
-    then
-        exit 1
-    fi
-done
+    EXIT_STATUS=0
+    for pid in $usrpid $pipid $cdpid $cspid $pubpid;
+    do
+        wait "$pid"
+        if [ "$?" -ne "0" ];
+        then
+            EXIT_STATUS=1
+        fi
+    done
+    exit $EXIT_STATUS
+fi
