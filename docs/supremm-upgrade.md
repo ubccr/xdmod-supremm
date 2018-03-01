@@ -9,6 +9,17 @@ The SUPReMM Open XDMoD module should be upgraded at the same time as the main XD
 software. The upgrade procedure is documented on the [XDMoD upgrade
 page](http://open.xdmod.org/upgrade.html).
 
+7.0.0 to 7.5.0 Upgrade Notes
+----------------------------
+
+For RPM based installs, the file permissions of the XDMoD configuration
+files is changed to only permit access for the `xdmod` user account.
+
+If you have configured the summarization scripts to read the database access credentials directly
+from the XDMoD configuration files then you must run the scripts with a user account that
+has appropriate has access permissions for these files.  For an RPM based install, the `xdmod` user
+account has the correct permission.
+
 6.6.0 to 7.0.0 Upgrade Notes
 ----------------------------
 
