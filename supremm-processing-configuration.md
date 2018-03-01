@@ -1,3 +1,3 @@
 ---
-redirect_to: /7.0/supremm-processing-configuration.html
+redirect_to: /7.5/supremm-processing-configuration.html
 ---

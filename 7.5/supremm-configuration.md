@@ -51,8 +51,7 @@ By default all the resources are disabled. You must select the "Edit
 resource" option for each resource that you wish to configure to appear in the
 SUPReMM realm and follow the prompt to enable the resource and set the correct
 options. The "Dataset mapping" should be set to pcp if processing job summaries
-generated from PCP data. The MongoDB collection name should be set to the name
-of the mongoDB collection that contains the job summaries for the resource.
+generated from PCP data. 
 
 SUPReMM configuration files
 ---------------------------
@@ -75,7 +74,6 @@ the `resources.json` and `resource_specs.json` main configuration files
                 "resource_id": 1,
                 "enabled": true,
                 "datasetmap": "pcp",
-                "collection": "resource_1",
                 "hardware": {
                     "gpfs": ""
                 }
@@ -99,9 +97,6 @@ where `%resource%` should be replaced with the `resource` parameter from the
 The `datasetmap` option allows the ingestion of SUPReMM data from different
 data sources. Currently PCP is the only supported data source.
 
-The collection name should be set to the name of the mongoDB collection that
-contains the job summaries for the resource.
-
 The `hardware` property is used by the dataset mapping code to process PCP
 metrics that have device-specific names. The only configurable mapping
 in this release is the name of the GPFS mount point. If the resource has
@@ -123,6 +118,22 @@ The uri syntax is described in the [mongo documentation][]. **You must specify
 the database name in the connection URI.** If the database is not specifed then
 the mongo driver defaults to the 'test' database, which will not contain the
 job summary data.
+
+Advanced Configuration Options
+---------------------------
+
+The resource configuration file `supremm_resources.json` has optional advanced
+configuration settings for each resource.
+
+The `$.resources[*].collection` option overrides the collection name in the
+MongoDB. This option can be used to set a non default collection name.
+
+The `$.resources[*].db` option specifies the name of the section in the
+portal_settings file that contains the database configuration settings. This
+setting can be used to support an XDMoD instance ingesting data from multiple
+MongoDB databases.
+
+
 
 [mongo documentation]:        https://docs.mongodb.org/manual/reference/connection-string/
 [shredder]:                   shredder.md
