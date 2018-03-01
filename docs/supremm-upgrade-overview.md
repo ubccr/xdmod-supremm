@@ -21,6 +21,24 @@ compatible with the identical version of the main  Open XDMoD (`xdmod`)
 software. You must not upgrade the `xdmod` software without upgrading all
 installed modules at the same time.
 
+### Open XDMoD 7.5.0
+
+<table>
+<thead>
+<tr>
+<th>Package</th> <th>Recommended Version</th> <th>Compatible Version(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Job Summarization </td><td align="right"> 1.0.3               </td><td align="right"> 1.0.x </td>
+</tr>
+<tr>
+<td> PCP               </td><td align="right"> 3.11.10              </td><td align="right"> 3.11.x </td>
+</tr>
+</tbody>
+</table>
+
 ### Open XDMoD 7.0.0
 
 <table>
