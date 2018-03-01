@@ -128,7 +128,10 @@ then ensure the `config.json` has the following settings:
     }
 
 Where xdmodroot should be set to the location of the xdmod configuration
-directory, typically `/etc/xdmod` for RPM based installs.
+directory, typically `/etc/xdmod` for RPM based installs. Note that the user
+account that runs the summarization scripts will need to have read permission
+on the xdmod configuration files. For an RPM based install, the `xdmod` user
+account has the correct permission.
 
 ### Option (2) Direct DB credentials ###
 
