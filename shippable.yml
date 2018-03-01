@@ -7,8 +7,8 @@ build:
     cache_dir_list:
         - /root/.composer
     pre_ci_boot:
-        image_name: tas-tools-ext-01.ccr.xdmod.org/centos7-xdmod-supremm7.0.0
-        image_tag: version1
+        image_name: tas-tools-ext-01.ccr.xdmod.org/xdmod-centos7
+        image_tag: open7.5-supremm7.5-v2
         pull: true
         options: "--user root -e HOME=/root"
     ci:
@@ -18,7 +18,6 @@ build:
         - cd ../xdmod && ~/bin/buildrpm xdmod supremm && cd $SHIPPABLE_BUILD_DIR
         - ./tests/integration_tests/scripts/bootstrap.sh
         - composer install -d ../xdmod --no-progress
-        - cp ~/assets/secrets ../xdmod/open_xdmod/modules/xdmod/integration_tests/.secrets.json
+        - cp ~/assets/secrets.json ../xdmod/open_xdmod/modules/xdmod/integration_tests/.secrets.json
         - ./tests/integration_tests/runtests.sh --log-junit `pwd`/shippable/testresults/results.xml
         - ../xdmod/open_xdmod/modules/xdmod/automated_tests/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
-
