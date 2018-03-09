@@ -8,7 +8,7 @@ build:
         - /root/.composer
     pre_ci_boot:
         image_name: tas-tools-ext-01.ccr.xdmod.org/xdmod-centos7
-        image_tag: open7.5-supremm7.5-v2
+        image_tag: open7.5-supremm7.5-v3
         pull: true
         options: "--user root -e HOME=/root"
     ci:
