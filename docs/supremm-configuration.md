@@ -7,14 +7,20 @@ correctly and the [shredder](http://open.xdmod.org/shredder.html) and
 [ingestor](http://open.xdmod.org/ingestor.html) scripts have been run successfully
 before installing and configuring the SUPReMM module.
 
-Run Configuration Script
-------------------------
+Then run the following two commands:
 
     # xdmod-setup
+    # acl-config
 
-There should be a new section titled "SUPReMM" in the list.  Select that
-option to show the SUPReMM module configuration menu. The options in the menu
-are listed below:
+The `xdmod-setup` script usage is described below. The `acl-config` script
+is documented in the [XDMoD command reference][commands].
+
+The `xdmod-setup` script
+------------------------
+
+`xdmod-setup` is an interactive setup script for XDMoD. After installing the xdmod-supremm module, there will be an
+additional option titled  "SUPReMM" in the main menu.  Select that option to show the SUPReMM
+module configuration menu. The options in the menu are listed below:
 
 ### Setup database
 
@@ -136,6 +142,7 @@ MongoDB databases.
 
 
 [mongo documentation]:        https://docs.mongodb.org/manual/reference/connection-string/
+[commands]:                   http://open.xdmod.org/commands.html
 [shredder]:                   shredder.md
 [ingestor]:                   ingestor.md
 [notices]:                    supremm-notices.md
