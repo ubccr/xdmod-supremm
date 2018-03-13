@@ -90,6 +90,9 @@ EOT
 
         $this->nodeNpmSetup();
         $this->mongoSetup();
+
+        $aclConfig = new AclConfig($this->console);
+        $aclConfig->handle();
     }
 
     /**
