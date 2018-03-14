@@ -12,8 +12,11 @@ page](http://open.xdmod.org/upgrade.html).
 7.5.0 to 7.5.1 Upgrade Notes
 ----------------------------
 
-This upgrade only includes bug fixes.  The module may be upgraded directly from
-7.0.0 to 7.5.1.
+This upgrade includes a single bug fix that runs `acl-config` during the
+database setup.  If you have 7.5.0 successfully installed and ran `acl-config`
+manually then upgrading to 7.5.1 is not necessary.  If you are upgrading to Open
+XDMoD 7.0.0 to 7.5.0 then this module may be upgraded directly from 7.0.0 to
+7.5.1.
 
 7.0.0 to 7.5.0 Upgrade Notes
 ----------------------------
