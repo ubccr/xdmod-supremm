@@ -1,6 +1,11 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
+## 2018-03-14 v7.5.1
+
+- Bug Fixes
+    - Added acl-config call to the database setup
+
 ## 2018-03-01 v7.5.0
 
 - Features
