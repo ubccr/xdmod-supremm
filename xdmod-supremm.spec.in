@@ -55,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json
 
 %changelog
+* Wed Mar 14 2018 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 7.5.1-1.0
+- Bug Fixes
+    - Added acl-config call to the database setup
 * Thu Mar 01 2018 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 7.5.0-1.0
 - Features
     - Added PDF export support to the Job Viewer

@@ -69,6 +69,9 @@ provideInput {Install Node.js packages using npm*} {y}
 provideInput {MongoDB uri*} {mongodb://localhost:27017/supremm}
 provideInput {database name*} {supremm}
 enterToContinue
+set timeout 200
+provideInput {Do you want to see the output*} {no}
+set timeout 10
 
 selectMenuOption r
 for {set i 1} {$i < 6} {incr i} {
