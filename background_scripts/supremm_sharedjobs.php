@@ -154,7 +154,8 @@ try
                             $record = "${row['jobid']} $currentjob\n$currentjob ${row['jobid']}\n";
                             $written = fwrite($jobpeersfile, $record);
                             if ($written !== strlen($record)) {
-                                throw new \Exception('Error writing job peer information to temporary file ' . $jobpeersfile);
+                                fclose($jobpeersfile);
+                                throw new \Exception('Error writing job peer information to temporary file ' . $jobpeersfname);
                             }
                             $jobpeercount++;
                             $sharedjobs[ $currentjob ] = 1;
@@ -181,7 +182,14 @@ try
 
         $jobpeerload = 'LOAD DATA LOCAL INFILE \'' . $jobpeersfname . '\' IGNORE INTO TABLE `modw_supremm`.`job_peers` FIELDS TERMINATED BY \' \' (job_id, other_job_id)';
         $databaseHelper = MySQLHelper::factory($db);
-        $databaseHelper->executeStatement($jobpeerload);
+        $output = $databaseHelper->executeStatement($jobpeerload);
+
+        if (count($output) > 0) {
+            $this->logger->warning($jobpeerload);
+            foreach($output as $line) {
+                $this->logger->warning($line);
+            }
+        }
     } else {
         $logger->info('Skipping batch update - no job peers found');
     }
