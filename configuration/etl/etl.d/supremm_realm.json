@@ -1,0 +1,83 @@
+{
+    "supremm-realm-aggregation": [
+        {
+            "name": "supremm-aggregation-days",
+            "namespace": "ETL\\Aggregator",
+            "options_class": "AggregatorOptions",
+            "class": "SimpleAggregator",
+            "description": "Aggregate SUPReMM realm data by day",
+            "definition_file": "supremm/supremmfact_by_day.json",
+            "truncate_destination": false,
+            "table_prefix": "supremmfact_by_",
+            "aggregation_units": ["day"],
+            "endpoints": {
+                "source": {
+                    "type": "mysql",
+                    "name": "SUPReMM DB",
+                    "config": "datawarehouse",
+                    "schema": "modw_supremm"
+                },
+                "destination": {
+                    "type": "mysql",
+                    "name": "modw_aggregates",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates",
+                    "create_schema_if_not_exists": true
+                }
+            }
+        },
+        {
+            "name": "supremm-aggregation",
+            "namespace": "ETL\\Aggregator",
+            "options_class": "AggregatorOptions",
+            "class": "SimpleAggregator",
+            "description": "Aggregate SUPReMM realm data by month, quarter and year",
+            "definition_file": "supremm/supremmfact_by.json",
+            "truncate_destination": false,
+            "table_prefix": "supremmfact_by_",
+            "aggregation_units": ["month", "quarter", "year"],
+            "endpoints": {
+                "source": {
+                    "type": "mysql",
+                    "name": "SUPReMM DB",
+                    "config": "datawarehouse",
+                    "schema": "modw_supremm"
+                },
+                "destination": {
+                    "type": "mysql",
+                    "name": "modw_aggregates",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates",
+                    "create_schema_if_not_exists": true
+                }
+            }
+        }
+    ],
+    "supremm-realm-joblist": [
+        {
+            "name": "supremm-aggregation-joblist",
+            "namespace": "ETL\\Ingestor",
+            "class": "ExplodeTransformIngestor",
+            "options_class": "IngestorOptions",
+            "definition_file": "supremm/supremmfact_by_day_joblist.json",
+            "description": "Populate the job list table, which contains the back references from the aggregates table to the fact table",
+            "explode_column": {
+                "job_id_list": "job_id"
+            },
+            "endpoints": {
+                "source": {
+                    "type": "mysql",
+                    "name": "modw_aggregates",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates"
+                },
+                "destination": {
+                    "type": "mysql",
+                    "name": "modw_aggregates",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates"
+                }
+            }
+        }
+    ]
+}

@@ -31,8 +31,10 @@
             "mv configuration/rawstatisticsconfig.json open_xdmod/modules/supremm/configuration/rawstatisticsconfig.json",
             "mv configuration/roles.d/supremm.json open_xdmod/modules/supremm/configuration/roles.d/supremm.json",
             "mv configuration/supremmconfig.json open_xdmod/modules/supremm/configuration/supremmconfig.json",
-            "mkdir -p open_xdmod/modules/supremm/configuration/aggregation_meta",
-            "mv configuration/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json open_xdmod/modules/supremm/configuration/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json",
+            "mkdir -p open_xdmod/modules/supremm/configuration/etl/etl_tables.d",
+            "mkdir -p open_xdmod/modules/supremm/configuration/etl/etl_action_defs.d",
+            "mv configuration/etl/etl_tables.d/supremm open_xdmod/modules/supremm/configuration/etl/etl_tables.d",
+            "mv configuration/etl/etl_action_defs.d/supremm open_xdmod/modules/supremm/configuration/etl/etl_action_defs.d",
             "mv configuration/portal_settings.d/supremm.ini open_xdmod/modules/supremm/configuration/portal_settings.d/supremm.ini",
             "mv configuration/supremm_resources.json open_xdmod/modules/supremm/configuration/supremm_resources.json",
             "cp -R etl/js/config/supremm/* open_xdmod/modules/supremm/etl/js/config/supremm/",
@@ -73,7 +75,7 @@
             "configuration/internal_dashboard.d/supremm.json": "internal_dashboard.d/supremm.json",
             "configuration/rawstatisticsconfig.json": "",
             "configuration/supremmconfig.json": "",
-            "configuration/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json": "aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json",
+            "configuration/etl": "",
             "configuration/modules.d/supremm.json": "modules.d/supremm.json"
         }
     }
