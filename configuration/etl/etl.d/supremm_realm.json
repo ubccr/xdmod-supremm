@@ -1,41 +1,10 @@
 {
-    "supremm-realm-aggregation": [
-        {
-            "name": "supremm-aggregation-days",
+    "defaults": {
+        "global": {
             "namespace": "ETL\\Aggregator",
             "options_class": "AggregatorOptions",
             "class": "SimpleAggregator",
-            "description": "Aggregate SUPReMM realm data by day",
-            "definition_file": "supremm/supremmfact_by_day.json",
             "truncate_destination": false,
-            "table_prefix": "supremmfact_by_",
-            "aggregation_units": ["day"],
-            "endpoints": {
-                "source": {
-                    "type": "mysql",
-                    "name": "SUPReMM DB",
-                    "config": "datawarehouse",
-                    "schema": "modw_supremm"
-                },
-                "destination": {
-                    "type": "mysql",
-                    "name": "modw_aggregates",
-                    "config": "datawarehouse",
-                    "schema": "modw_aggregates",
-                    "create_schema_if_not_exists": true
-                }
-            }
-        },
-        {
-            "name": "supremm-aggregation",
-            "namespace": "ETL\\Aggregator",
-            "options_class": "AggregatorOptions",
-            "class": "SimpleAggregator",
-            "description": "Aggregate SUPReMM realm data by month, quarter and year",
-            "definition_file": "supremm/supremmfact_by.json",
-            "truncate_destination": false,
-            "table_prefix": "supremmfact_by_",
-            "aggregation_units": ["month", "quarter", "year"],
             "endpoints": {
                 "source": {
                     "type": "mysql",
@@ -52,6 +21,33 @@
                 }
             }
         }
+    },
+    "supremm-realm-aggregation": [
+        {
+            "name": "supremm-aggregation-table-create",
+            "description": "Setup tables",
+            "class": "ManageTables",
+            "namespace": "ETL\\Maintenance",
+            "options_class": "MaintenanceOptions",
+            "definition_file_list": [
+                 "supremm/supremmfact_by_day_joblist.json"
+            ]
+        },
+        {
+            "name": "supremm-aggregation-days",
+            "description": "Aggregate SUPReMM realm data by day",
+            "class": "JobListAggregator",
+            "definition_file": "supremm/supremmfact_by_day.json",
+            "table_prefix": "supremmfact_by_",
+            "aggregation_units": ["day"]
+        },
+        {
+            "name": "supremm-aggregation",
+            "description": "Aggregate SUPReMM realm data by month, quarter and year",
+            "definition_file": "supremm/supremmfact_by.json",
+            "table_prefix": "supremmfact_by_",
+            "aggregation_units": ["month", "quarter", "year"]
+        }
     ],
     "supremm-realm-joblist": [
         {
@@ -66,12 +62,6 @@
             },
             "endpoints": {
                 "source": {
-                    "type": "mysql",
-                    "name": "modw_aggregates",
-                    "config": "datawarehouse",
-                    "schema": "modw_aggregates"
-                },
-                "destination": {
                     "type": "mysql",
                     "name": "modw_aggregates",
                     "config": "datawarehouse",
