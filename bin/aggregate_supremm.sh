@@ -3,6 +3,7 @@
 LOCKFILE=/var/tmp/supremm_ingest.lock
 XDMOD_SHARE_PATH=__XDMOD_SHARE_PATH__
 XDMOD_LIB_PATH=__XDMOD_LIB_PATH__
+XDMOD_BIN_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 reportfail()
 {
@@ -28,4 +29,5 @@ fi
     
     php ${XDMOD_LIB_PATH}/aggregate_supremm.php $FLAGS
 
+    ${XDMOD_BIN_PATH}/xdmod-build-filter-lists --realm SUPREMM $FLAGS
 ) 9>${LOCKFILE}
