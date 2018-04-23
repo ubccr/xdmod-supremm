@@ -1250,6 +1250,7 @@
         "url": "https://www.r-project.org/",
         "science_area": "Statistical Analysis",
         "execmatch": [
+            "^R\\.bin$",
             "^R$"
         ],
         "hints": [

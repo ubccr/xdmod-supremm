@@ -85,24 +85,26 @@ module.exports = {
         }
     },
     postprocess: [
-        "UPDATE " +
-        "   modw_supremm.job j, " +
-        "   modw.jobfact jf " +
-        "SET " +
-        "   j.account_id = jf.account_id, " +
-        "   j.fos_id = jf.fos_id, " +
-        "   j.person_id = jf.person_id, " +
-        "   j.person_organization_id = jf.person_organization_id, " +
-        "   j.principalinvestigator_person_id = jf.principalinvestigator_person_id, " +
-        "   j.piperson_organization_id = jf.piperson_organization_id, " +
-        "   j.systemaccount_id = jf.systemaccount_id, " +
-        "   j.tg_job_id = jf.job_id " +
-        "WHERE " +
-        "   j.resource_id = jf.resource_id " +
-        "   AND j.local_job_id = jf.local_job_id_raw " +
-        "   AND j.end_time_ts = jf.end_time_ts " +
-        "   AND j.tg_job_id != jf.job_id " +
-        "   AND j.tg_job_id = -1" ],
+        'UPDATE ' +
+        '   modw_supremm.job j, ' +
+        '   modw.job_tasks jt, ' +
+        '   modw.job_records jr ' +
+        'SET ' +
+        '   j.account_id = jr.account_id, ' +
+        '   j.fos_id = jr.fos_id, ' +
+        '   j.person_id = jt.person_id, ' +
+        '   j.person_organization_id = jt.person_organization_id, ' +
+        '   j.principalinvestigator_person_id = jr.principalinvestigator_person_id, ' +
+        '   j.piperson_organization_id = jr.piperson_organization_id, ' +
+        '   j.systemaccount_id = jt.systemaccount_id, ' +
+        '   j.tg_job_id = jt.job_id ' +
+        'WHERE ' +
+        '   j.resource_id = jt.resource_id ' +
+        '   AND j.local_job_id = jt.local_job_id_raw ' +
+        '   AND j.end_time_ts = jt.end_time_ts ' +
+        '   AND j.tg_job_id != jt.job_id ' +
+        '   AND jr.job_record_id = jt.job_record_id ' +
+        '   AND j.tg_job_id = -1'],
 
     aggregationTables: {
         supremmfact: {
@@ -1941,10 +1943,14 @@ module.exports = {
     },
     derivedFieldQueries: {
         jobfact: {
-            mapping: {tg_job_id: "job_id"},
-            table: "modw.jobfact",
-            //bind these using the same query format function just replace with attributes.:resource_id.value
-            where: "resource_id = :resource_id and local_job_id_raw = :local_job_id",
+            mapping: {
+                tg_job_id: 'job_id',
+                person_id: { alias: 'jt' },
+                person_organization_id: { alias: 'jt' }
+            },
+            table: 'modw.job_tasks jt, modw.job_records jr',
+            // bind these using the same query format function just replace with attributes.:resource_id.value
+            where: 'jt.resource_id = :resource_id and jt.local_job_id_raw = :local_job_id and jt.job_record_id = jr.job_record_id',
             cacheable: false
         },
         account: {

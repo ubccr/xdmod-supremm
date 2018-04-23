@@ -197,7 +197,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
                 break;
 
             case 'accountfact':
-                return $this->queryJobFact($resourceid);
+                return $this->queryJobTasks($resourceid);
                 break;
 
             default:
@@ -257,14 +257,14 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
     }
 
     /**
-     * query modw jobfact table and return statistics on jobs for a given resource
+     * query modw job_tasks table and return statistics on jobs for a given resource
      * @param resourceid the resource id to return data for.
      * @return array
      */
-    private function queryJobFact($resourceid)
+    private function queryJobTasks($resourceid)
     {
         $pdo = DB::factory('database');
-        $query = 'SELECT count(*) as count, min(end_time_ts) as earliest, max(end_time_ts) as recent FROM `modw`.`jobfact` WHERE resource_id = :id';
+        $query = 'SELECT count(*) as count, min(end_time_ts) as earliest, max(end_time_ts) as recent FROM `modw`.`job_tasks` WHERE resource_id = :id';
 
         try {
             $res = $pdo->query($query, array('id' => $resourceid));

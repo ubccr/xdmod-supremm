@@ -11,7 +11,7 @@ Source:        %{name}-%{version}__PRERELEASE__.tar.gz
 BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}__PRERELEASE__-%{release}-XXXXXX)
 BuildArch:     noarch
 BuildRequires: php-cli
-Requires:      xdmod >= 7.5.0, xdmod < 7.6.0
+Requires:      xdmod >= 8.0.0, xdmod < 8.1.0
 Requires:      nodejs npm
 Requires:      php-pecl-mongo
 
@@ -40,11 +40,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/aggregate_supremm.sh
 %{_libdir}/xdmod/
 %{_datadir}/xdmod/
+%{_sysconfdir}/xdmod/etl/
 %{_docdir}/%{name}-%{version}__PRERELEASE__/
 %{_sysconfdir}/xdmod/modules.d/supremm.json
 
 %config(noreplace) %{_datadir}/xdmod/etl/js/config/supremm/etl.profile.js
-%config(noreplace) %{_sysconfdir}/xdmod/*.d/supremm.ini
+%config(noreplace) %attr(0440,apache,xdmod) %{_sysconfdir}/xdmod/*.d/supremm.ini
 %config(noreplace) %{_sysconfdir}/xdmod/datawarehouse.d/supremm*.json
 %config(noreplace) %{_sysconfdir}/xdmod/internal_dashboard.d/supremm*.json
 %config(noreplace) %{_sysconfdir}/xdmod/roles.d/supremm*.json
@@ -52,9 +53,20 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/rest.d/supremm*.json
 %config(noreplace) %{_sysconfdir}/xdmod/rawstatisticsconfig.json
 %config(noreplace) %{_sysconfdir}/xdmod/supremmconfig.json
-%config(noreplace) %{_sysconfdir}/xdmod/aggregation_meta/modw_aggregates.supremmfact_aggregation_meta.json
 
 %changelog
+* Wed Mar 14 2018 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 7.5.1-1.0
+- Bug Fixes
+    - Added acl-config call to the database setup
+* Thu Mar 01 2018 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 7.5.0-1.0
+- Features
+    - Added PDF export support to the Job Viewer
+- Bug Fixes
+    - Fix erroneous error message seen when running the ingest process for resources
+      where the exit status is not reported by the resource manager
+- Miscellaneous
+    - Added tests
+    - Additions to the application categorization database
 * Thu Sep 21 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 7.0.0-1.0
 - Features
     - Added support for viewing job peers in Job Viewer
