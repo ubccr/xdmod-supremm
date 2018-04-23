@@ -3,6 +3,7 @@ require_once __DIR__ . '/../configuration/linker.php';
 
 use CCR\DB;
 use CCR\Log;
+use CCR\DB\MySQLHelper;
 
 $conf = array(
     'emailSubject' => gethostname() . ': XDMOD: Data Warehouse: SUPReMM ETL Log',
@@ -117,12 +118,19 @@ try
                 AND j.end_time_ts BETWEEN :start AND :end
             ORDER BY 3 ASC, 2 DESC";
 
-    $hostinsert = "INSERT LOW_PRIORITY IGNORE INTO modw_supremm.job_peers (job_id, other_job_id) VALUES (?,?), (?,?)";
     $jobfactupdate = "UPDATE IGNORE modw_supremm.job SET shared = 1 WHERE shared = 0 AND _id = ?";
 
     $jbq = $db->handle()->prepare($jobsforhost);
-    $hiq = $db->handle()->prepare($hostinsert);
     $jbu = $db->handle()->prepare($jobfactupdate);
+
+
+    $jobpeersfname = tempnam(sys_get_temp_dir(), 'supremm_sharedjobs_');
+    $jobpeersfile = fopen($jobpeersfname, 'wb');
+
+    if ($jobpeersfile === false) {
+        throw new \Exception('Error creating temporary file ' . $jobpeersfname);
+    }
+    $jobpeercount = 0;
 
     $hosts = $db->query($hostquery);
     foreach($hosts as $host) 
@@ -143,7 +151,13 @@ try
                     foreach($activejobs as $currentjob => $state_transition_timestamp) {
                         if($currentjob != $row['jobid'] && $state_transition_timestamp != $row['state_transition_timestamp']) {
                             $npeers += 1;
-                            $hiq->execute( array($row['jobid'], $currentjob, $currentjob, $row['jobid']) );
+                            $record = "${row['jobid']} $currentjob\n$currentjob ${row['jobid']}\n";
+                            $written = fwrite($jobpeersfile, $record);
+                            if ($written !== strlen($record)) {
+                                fclose($jobpeersfile);
+                                throw new \Exception('Error writing job peer information to temporary file ' . $jobpeersfname);
+                            }
+                            $jobpeercount++;
                             $sharedjobs[ $currentjob ] = 1;
                         }
                     }
@@ -160,6 +174,27 @@ try
         }
         $logger->debug("Processed " . count($sharedjobs) . " jobs for host " . $host['name']);
     }
+
+    fclose($jobpeersfile);
+
+    if ($jobpeercount > 0) {
+        $logger->info('Batch update ' . $jobpeercount . ' job peers');
+
+        $jobpeerload = 'LOAD DATA LOCAL INFILE \'' . $jobpeersfname . '\' IGNORE INTO TABLE `modw_supremm`.`job_peers` FIELDS TERMINATED BY \' \' (job_id, other_job_id)';
+        $databaseHelper = MySQLHelper::factory($db);
+        $output = $databaseHelper->executeStatement($jobpeerload);
+
+        if (count($output) > 0) {
+            $this->logger->warning($jobpeerload);
+            foreach($output as $line) {
+                $this->logger->warning($line);
+            }
+        }
+    } else {
+        $logger->info('Skipping batch update - no job peers found');
+    }
+
+    unlink($jobpeersfname);
 
     $logger->notice(array(
         'message'          => 'process shared jobs end',
