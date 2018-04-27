@@ -12,14 +12,11 @@ ALTER TABLE `modw_supremm`.`job`
 
 USE `modw_etl`;
 
+SET @updatetime = (SELECT UNIX_TIMESTAMP(NOW()));
+
 INSERT INTO `log`
     (etlProfileName, start_ts, end_ts, min_index, max_index, details)
-VALUES (
-    "modw_supremm.job",
-    UNIX_TIMESTAMP(now()),
-    UNIX_TIMESTAMP(now()),
-    0,
-    (SELECT UNIX_TIMESTAMP(MAX(last_modified)) FROM `modw_supremm`.`job`),
-    "{reason: \"7.5.0 - 8.0.0 migration\"}"
-);
+VALUES 
+    ("modw_supremm.job", @updatetime, @updatetime, 0, @updatetime, "{reason: \"7.5.0 - 8.0.0 migration\"}"),
+    ("modw_aggregates.supremmfact_by_day", @updatetime, @updatetime, 0, @updatetime, "{reason: \"7.5.0 - 8.0.0 migration\"}");
 
