@@ -96,26 +96,28 @@ try
                 h.resource_id = rf.id
                 AND rf.shared_jobs = 1";
 
+    $db->handle()->exec('DROP TABLE IF EXISTS `modw_supremm`.`job_tmp`');
+    $createtmp = $db->handle()->prepare('CREATE TABLE `modw_supremm`.`job_tmp` (KEY (resource_id, local_job_id)) SELECT _id, resource_id, local_job_id, start_time_ts, end_time_ts FROM `modw_supremm`.`job` WHERE end_time_ts BETWEEN :start AND :end');
+    $createtmp->execute(array('start' => $start, 'end' => $end));
+
     $jobsforhost = "SELECT 
                 j._id as jobid, 'e' as jobstate, j.end_time_ts as state_transition_timestamp
             FROM
-                modw_supremm.job j,
+                modw_supremm.job_tmp j,
                 modw_supremm.jobhost jh
             WHERE
                 jh.local_job_id = j.local_job_id
                 AND jh.resource_id = j.resource_id
                 AND jh.host_id = :hostid
-                AND j.end_time_ts BETWEEN :start AND :end
             UNION SELECT 
                 j._id as jobid, 's' as jobstate, j.start_time_ts as state_transition_timestamp
             FROM
-                modw_supremm.job j,
+                modw_supremm.job_tmp j,
                 modw_supremm.jobhost jh
             WHERE
                 jh.local_job_id = j.local_job_id
                 AND jh.resource_id = j.resource_id
                 AND jh.host_id = :hostid
-                AND j.end_time_ts BETWEEN :start AND :end
             ORDER BY 3 ASC, 2 DESC";
 
     $jobfactupdate = "UPDATE IGNORE modw_supremm.job SET shared = 1 WHERE shared = 0 AND _id = ?";
@@ -138,7 +140,7 @@ try
         $activejobs = array();
         $sharedjobs = array();
 
-        $jbq->execute( array("hostid" => $host['id'], "start" => $start, "end" => $end) );
+        $jbq->execute(array("hostid" => $host['id']));
         while($row = $jbq->fetch(PDO::FETCH_ASSOC))
         {
             if($row['jobstate'] == "s") {
@@ -195,6 +197,7 @@ try
     }
 
     unlink($jobpeersfname);
+    $db->handle()->exec('DROP TABLE IF EXISTS `modw_supremm`.`job_tmp`');
 
     $logger->notice(array(
         'message'          => 'process shared jobs end',
