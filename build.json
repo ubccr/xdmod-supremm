@@ -16,32 +16,13 @@
     },
     "commands": {
         "pre_build": [
-            "mkdir -p configuration/portal_settings.d",
-            "cp open_xdmod/modules/supremm/configuration/portal_settings.d/supremm.ini configuration/portal_settings.d/",
-            "cp open_xdmod/modules/supremm/configuration/supremm_resources.json configuration/supremm_resources.json",
-            "mkdir -p etl/js/config",
-            "cp -r -t etl/js/config  open_xdmod/modules/supremm/etl/js/config/supremm",
-            "mkdir -p classes/DataWarehouse/Query",
-            "cp -r -t classes/DataWarehouse/Query open_xdmod/modules/supremm/classes/DataWarehouse/Query/SUPREMM",
-            "node etl/js/etl.cli.js -i",
-            "node etl/js/etl.cli.js -a",
+            "rsync -a open_xdmod/modules/supremm/configuration/portal_settings.d open_xdmod/modules/supremm/configuration/supremm_resources.json configuration/",
+            "rsync -a open_xdmod/modules/supremm/etl/js/config etl/js",
+            "XDMOD_BUILD_ROOT=open_xdmod/modules/supremm node etl/js/etl.cli.js -i",
+            "XDMOD_BUILD_ROOT=open_xdmod/modules/supremm node etl/js/etl.cli.js -a",
             "mv etl/js/config/supremm/output_db/modw_supremm.sql open_xdmod/modules/supremm/db/schema/modw_supremm.sql",
             "node etl/js/etl.cli.js -o >>open_xdmod/modules/supremm/db/schema/modw_supremm.sql",
-            "mkdir -p open_xdmod/modules/supremm/configuration/datawarehouse.d",
-            "mv configuration/datawarehouse.d/supremm.json open_xdmod/modules/supremm/configuration/datawarehouse.d/supremm.json",
-            "mv configuration/rawstatisticsconfig.json open_xdmod/modules/supremm/configuration/rawstatisticsconfig.json",
-            "mv configuration/roles.d/supremm.json open_xdmod/modules/supremm/configuration/roles.d/supremm.json",
-            "mv configuration/supremmconfig.json open_xdmod/modules/supremm/configuration/supremmconfig.json",
-            "rm -fr open_xdmod/modules/supremm/configuration/etl/etl_tables.d && mkdir -p open_xdmod/modules/supremm/configuration/etl/etl_tables.d",
-            "rm -fr open_xdmod/modules/supremm/configuration/etl/etl_action_defs.d && mkdir -p open_xdmod/modules/supremm/configuration/etl/etl_action_defs.d",
-            "mv configuration/etl/etl_tables.d/supremm open_xdmod/modules/supremm/configuration/etl/etl_tables.d",
-            "mv configuration/etl/etl_action_defs.d/supremm open_xdmod/modules/supremm/configuration/etl/etl_action_defs.d",
-            "mv configuration/portal_settings.d/supremm.ini open_xdmod/modules/supremm/configuration/portal_settings.d/supremm.ini",
-            "mv configuration/supremm_resources.json open_xdmod/modules/supremm/configuration/supremm_resources.json",
-            "cp -R etl/js/config/supremm/* open_xdmod/modules/supremm/etl/js/config/supremm/",
-            "rm -r etl/js/config/supremm/",
-            "cp -R classes/DataWarehouse/Query/SUPREMM/* open_xdmod/modules/supremm/classes/DataWarehouse/Query/SUPREMM/",
-            "rm -r classes/DataWarehouse/Query/SUPREMM/"
+            "rm -r etl/js/config configuration/portal_settings.d/supremm.ini configuration/supremm_resources.json"
         ]
     },
     "file_maps": {

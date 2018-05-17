@@ -1,0 +1,28 @@
+{
+    "table_definition": [
+        {
+            "$ref": "${table_definition_dir}/supremm/job_scripts.json#/table_definition"
+        }
+    ],
+    "source_query": {
+        "records": {
+            "tg_job_id": "jf.job_id",
+            "resource_id": "jf.resource_id",
+            "start_date": "DATE(FROM_UNIXTIME(jf.start_time_ts))",
+            "script": "sb.script"
+        },
+        "joins": [
+            {
+                "name": "batchscripts",
+                "schema": "${DESTINATION_SCHEMA}",
+                "alias": "sb"
+            },
+            {
+                "name": "job_tasks",
+                "schema": "${SOURCE_SCHEMA}",
+                "alias": "jf",
+                "on": "jf.resource_id = sb.resource_id AND COALESCE(jf.local_job_id_raw, jf.local_jobid) = sb.local_job_id"
+            }
+        ]
+    }
+}

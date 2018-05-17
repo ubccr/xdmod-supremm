@@ -6,6 +6,7 @@
 namespace OpenXdmod\Setup;
 
 use CCR\DB\MySQLHelper;
+use CCR\Log;
 
 /**
  * SUPReMM setup.
@@ -18,6 +19,13 @@ class SupremmDbSetup extends DatabaseSetupItem
      */
     public function handle()
     {
+        $conf = array(
+            'console' => true,
+            'consoleLogLevel' => Log::WARNING
+        );
+
+        $logger = Log::factory('xdmod-setup', $conf);
+
         $settings = $this->loadIniConfig('portal_settings');
 
         $this->console->displaySectionHeader('SUPReMM Setup');
@@ -74,6 +82,22 @@ EOT
                     array($database)
                 );
             }
+
+            //  ETLv2 database bootstrap
+            //
+            $scriptOptions = array(
+                'process-sections' => array(
+                    'supremm.bootstrap'
+                )
+            );
+
+            $etlConfig = new \ETL\Configuration\EtlConfiguration(CONFIG_DIR . '/etl/etl.json', null, $logger, array());
+            $etlConfig->initialize();
+            \ETL\Utilities::setEtlConfig($etlConfig);
+            $overseerOptions = new \ETL\EtlOverseerOptions($scriptOptions, $logger);
+            $overseer = new \ETL\EtlOverseer($overseerOptions, $logger);
+            $overseer->execute($etlConfig);
+
         } catch (Exception $e) {
             $this->console->displayBlankLine();
             $this->console->displayMessage('Failed to create databases:');
