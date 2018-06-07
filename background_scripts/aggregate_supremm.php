@@ -92,7 +92,7 @@ try
     $last_modified = $journal->getLastModified();
 
     $scriptOptions = array(
-        'process-sections' => array('supremm-realm-aggregation'),
+        'process-sections' => array('supremm.supremm-realm-aggregation'),
         'verbosity' => $conf['consoleLogLevel'],
         'option-overrides' => array(
             'batch_aggregation_min_num_periods' => 10
@@ -120,7 +120,7 @@ try
     $last_modified = $jobListJournal->getLastModified();
 
     $scriptOptions = array(
-        'actions' => array('supremm-aggregation-joblist'),
+        'actions' => array('supremm.supremm-realm-joblist.supremm-aggregation-joblist'),
         'verbosity' => $conf['consoleLogLevel']
     );
 
