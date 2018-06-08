@@ -68,17 +68,22 @@ class JobViewer {
                 tabByName: function (name) {
                     return '//div[@id="info_display"]//span[contains(@class,"x-tab-strip-text") and contains(text(),"' + name + '")]';
                 },
-                tabById: function (jobid, infoid) {
+                tabById: function (jobid, infoid, extra) {
                     var infomap = {
                         0: 'kv',
                         2: 'nested',
                         4: 'kv',
                         5: 'metrics'
                     };
-                    return '#job_tabs-' + jobid + '__infoid_' + infoid + '_' + jobid + '_' + infomap[infoid];
+                    var restrictions = '';
+                    if (extra) {
+                        restrictions = extra;
+                    }
+
+                    return '//li[contains(@id,"__infoid_' + infoid + '_' + jobid + '_' + infomap[infoid] + '")' + restrictions + ']';
                 },
                 tabById_active: function (jobid, infoid) {
-                    return '//li[@id="' + module.exports.selectors.info.tabById(jobid, infoid).substring(1) + '" and contains(@class, "x-tab-strip-active")]';
+                    return module.exports.selectors.info.tabById(jobid, infoid, ' and contains(@class, "x-tab-strip-active")');
                 },
                 chart: {
                     titleByContainer: function (container) {
