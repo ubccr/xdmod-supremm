@@ -425,8 +425,39 @@ module.exports = function(config) {
                     return this.getcov.call(this, job, "cpuperf.cpiref");
                 }
             },
-            "catastrophe": {
-                ref: "catastrophe.value"
+            catastrophe: {
+                formula: function (job) {
+                    var result = {
+                        value: null,
+                        error: this.metricErrors.codes.metricMissingNotAvailOnThisHost.value
+                    };
+
+                    if (job.catastrophe) {
+                        if (job.catastrophe.error) {
+                            switch (job.catastrophe.error) {
+                                case 1:
+                                    result.error = this.metricErrors.codes.metricDisabledByUser.value;
+                                    break;
+                                case 2:
+                                    result.error = this.metricErrors.codes.metricInsufficientData.value;
+                                    break;
+                                case 6:
+                                    result.error = this.metricErrors.codes.metricCounterRollover.value;
+                                    break;
+                                default:
+                                    result.error = this.metricErrors.codes.metricMissingUnknownReason.value;
+                                    break;
+                            }
+                        } else if (Number.isNaN(job.catastrophe.value)) {
+                            result.error = this.metricErrors.codes.metricSummarizationError.value;
+                        } else {
+                            result.value = job.catastrophe.value;
+                            result.error = 0;
+                        }
+                    }
+
+                    return result;
+                }
             },
             "cpldref": {
                 ref: "cpuperf.cpldref.avg"
