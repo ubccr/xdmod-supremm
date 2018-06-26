@@ -92,18 +92,27 @@ try
     $last_modified = $journal->getLastModified();
 
     $scriptOptions = array(
-        'process-sections' => array('supremm-realm-aggregation'),
+        'process-sections' => array('supremm.supremm-realm-aggregation'),
         'verbosity' => $conf['consoleLogLevel'],
         'option-overrides' => array(
             'batch_aggregation_min_num_periods' => 10
-        )
+        ),
+        'default-module-name' => 'xdmod'
     );
 
     if ($last_modified !== null) {
         $scriptOptions['last-modified-start-date'] = $last_modified;
     }
 
-    $etlConfig = new \ETL\Configuration\EtlConfiguration(CONFIG_DIR . '/etl/etl.json', null, $logger, array('option_overrides' => $scriptOptions['option-overrides']));
+    $etlConfig = new \ETL\Configuration\EtlConfiguration(
+        CONFIG_DIR . '/etl/etl.json',
+        null,
+        $logger,
+        array(
+            'option_overrides' => $scriptOptions['option-overrides'],
+            'default_module_name' => $scriptOptions['default-module-name']
+        )
+    );
     $etlConfig->initialize();
     $overseerOptions = new \ETL\EtlOverseerOptions($scriptOptions, $logger);
     $overseer = new \ETL\EtlOverseer($overseerOptions, $logger);
@@ -120,15 +129,21 @@ try
     $last_modified = $jobListJournal->getLastModified();
 
     $scriptOptions = array(
-        'actions' => array('supremm-aggregation-joblist'),
-        'verbosity' => $conf['consoleLogLevel']
+        'actions' => array('supremm.supremm-realm-joblist.supremm-aggregation-joblist'),
+        'verbosity' => $conf['consoleLogLevel'],
+        'default-module-name' => 'xdmod'
     );
 
     if ($last_modified !== null) {
         $scriptOptions['last-modified-start-date'] = $last_modified;
     }
 
-    $etlConfig = new \ETL\Configuration\EtlConfiguration(CONFIG_DIR . '/etl/etl.json', null, $logger);
+    $etlConfig = new \ETL\Configuration\EtlConfiguration(
+        CONFIG_DIR . '/etl/etl.json',
+        null,
+        $logger,
+        array('default_module_name' => $scriptOptions['default-module-name'])
+    );
     $etlConfig->initialize();
     $overseerOptions = new \ETL\EtlOverseerOptions($scriptOptions, $logger);
     $overseer = new \ETL\EtlOverseer($overseerOptions, $logger);

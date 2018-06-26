@@ -115,7 +115,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                 $sfield = $sdata['key'];
                 // TODO work out a better way to have metrics have multiple
                 // meta-types (ie cpu user is an analytic as well as a metric).
-                if ($sdata['dtype'] == "analysis" || $sfield == "cpu_user") {
+                if ($sfield == "cpu_user") {
                     $this->addFieldWithError(new TableField($dataTable, $sfield), $sfield, $joberrors);
                     $this->documentation[$sfield] = $sdata;
                 }
