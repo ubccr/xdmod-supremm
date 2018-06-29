@@ -6,11 +6,13 @@ build:
     cache: true
     cache_dir_list:
         - /root/.composer
+    pre_ci:
+        - docker build -t pseudo_repo/xdmod-open-751:latest .
     pre_ci_boot:
-        image_name: tas-tools-ext-01.ccr.xdmod.org/xdmod-centos7
-        image_tag: open7.5-supremm7.5-v3
-        pull: true
-        options: "--user root -e HOME=/root"
+        image_name: pseudo_repo/xdmod-open-751
+        image_tag: latest
+        pull: false
+        options: "--user root -e HOME=/root --shm-size 2g"
     ci:
         - yum install -y php-mbstring
         - git clone --depth=1 --branch=$BRANCH https://github.com/ubccr/xdmod.git ../xdmod
