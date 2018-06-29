@@ -1,6 +1,6 @@
 <?php
 
-namespace NewRest\Controllers;
+namespace Rest\Controllers;
 
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
