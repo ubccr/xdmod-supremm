@@ -6,13 +6,14 @@ build:
     cache: true
     cache_dir_list:
         - /root/.composer
+    pre_ci:
+        - docker build -t pseudo_repo/xdmod-open-supremm:latest .
     pre_ci_boot:
-        image_name: tas-tools-ext-01.ccr.xdmod.org/xdmod-centos7
-        image_tag: open7.5-supremm7.5-v3
-        pull: true
-        options: "--user root -e HOME=/root"
+        image_name: pseudo_repo/xdmod-open-supremm
+        image_tag: latest
+        pull: false
+        options: "--user root -e HOME=/root --shm-size 2g"
     ci:
-        - yum install -y php-mbstring
         - git clone --depth=1 --branch=$BRANCH https://github.com/ubccr/xdmod.git ../xdmod
         - ln -s $SHIPPABLE_BUILD_DIR ../xdmod/open_xdmod/modules/supremm
         - composer install -d ../xdmod --no-progress
@@ -22,3 +23,5 @@ build:
         - cp ~/assets/secrets.json ../xdmod/open_xdmod/modules/xdmod/integration_tests/.secrets.json
         - ./tests/integration_tests/runtests.sh --log-junit `pwd`/shippable/testresults/results.xml
         - ../xdmod/open_xdmod/modules/xdmod/automated_tests/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
+    on_failure:
+        - cat /var/log/xdmod/*
