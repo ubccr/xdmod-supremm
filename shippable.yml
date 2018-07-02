@@ -7,9 +7,9 @@ build:
     cache_dir_list:
         - /root/.composer
     pre_ci:
-        - docker build -t pseudo_repo/xdmod-open-751:latest .
+        - docker build -t pseudo_repo/xdmod-open-supremm:latest .
     pre_ci_boot:
-        image_name: pseudo_repo/xdmod-open-751
+        image_name: pseudo_repo/xdmod-open-supremm
         image_tag: latest
         pull: false
         options: "--user root -e HOME=/root --shm-size 2g"
