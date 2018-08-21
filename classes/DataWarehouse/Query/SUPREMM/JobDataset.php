@@ -174,10 +174,9 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             );
 
         } elseif ($stat == "jobscript") {
-            $batchscriptTable = new Table(new Schema("modw_supremm"), "batchscripts", "bs");
+            $batchscriptTable = new Table(new Schema("modw_supremm"), "job_scripts", "js");
             $this->addTable($batchscriptTable);
-            $this->addWhereCondition(new WhereCondition(new TableField($dataTable, "resource_id"), '=', new TableField($batchscriptTable, "resource_id")));
-            $this->addWhereCondition(new WhereCondition(new TableField($dataTable, "local_job_id"), '=', new TableField($batchscriptTable, "local_job_id")));
+            $this->addWhereCondition(new WhereCondition(new TableField($dataTable, "tg_job_id"), '=', new TableField($batchscriptTable, "tg_job_id")));
             $this->addField(new TableField($batchscriptTable, "script"));
 
             $this->documentation['script'] = array("units" => null, "documentation" => "The batch script that was submitted to the job scheduler.", "name" => "script");
