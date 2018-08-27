@@ -57,7 +57,7 @@ Configuration Templates
 
 The SUPReMM summarization package includes template files that can be used to configure PCP collection on the compute nodes.  The package itself does not need to be installed on the compute nodes, however you may wish to install it on a test node in order to obtain the PCP configuration file templates.
 
-Package installation instructions are documented on the [SUPReMM summarization package](supremm-processing-install.html) page.
+Package installation instructions are documented on the in the SUPReMM summarization package [RPM](supremm-processing-install-rpm.md) or [Source](supremm-processing-install-source.md) pages.
 
 Alternatively, the templates may be extracted directly from the source tarball.
 
