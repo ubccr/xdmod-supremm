@@ -2,7 +2,7 @@
 title: License Notices
 ---
 
-The SUPReMM module for Open XDMoD makes use of several other open source
+The Job Performance (SUPReMM) module for Open XDMoD makes use of several other open source
 software libraries.
 
 ## Open Source Licenses

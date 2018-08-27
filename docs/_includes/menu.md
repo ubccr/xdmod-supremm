@@ -15,6 +15,7 @@ Download
 Installing
 ----------
 
+- [Overview](supremm-softwarecompat.html)
 - [Install guide](supremm-install-overview.html)
 - [Upgrade guide](supremm-upgrade-overview.html)
 
@@ -32,23 +33,21 @@ Installing
 
 - [Software Requirements](supremm-software-requirements.html)
 - [Installation Guide](supremm-install.html)
-   - [RPM Installation Guide](supremm-install-rpm.html)
-   - [Source Installation Guide](supremm-install-source.html)
 - [Configuration Guide](supremm-configuration.html)
-- [Database Guide](supremm-databases.html)
 - [Upgrade Guide](supremm-upgrade.html)
+- [Database Guide](supremm-databases.html)
 
 ### 4. Job Summarization ###
 
 - [Software Requirements](supremm-processing-software-requirements.html)
 - [Installation Guide](supremm-processing-install.html)
-   - [RPM Installation Guide](supremm-processing-install-rpm.html)
-   - [Source Installation Guide](supremm-processing-install-source.html)
 - [Configuration Guide](supremm-processing-configuration.html)
+- [Upgrade Guide](supremm-processing-upgrade.html)
 
 Using
 -----
 
+- [Initial Run](supremm-bootstrap.html)
 - [Ingestion](supremm-ingestor.html)
 
 Developing
