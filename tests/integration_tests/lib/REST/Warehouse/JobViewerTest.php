@@ -12,6 +12,39 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $this->xdmodhelper = new \TestHarness\XdmodTestHelper($xdmodConfig);
     }
 
+    private static function getDimensions() {
+        return array(
+            "application",
+            "catastrophe_bucket_id",
+            "cpi",
+            "cpucv",
+            "cpuuser",
+            "datasource",
+            "nsfdirectorate",
+            "parentscience",
+            "exit_status",
+            "netdrv_gpfs_rx_bucket_id",
+            "granted_pe",
+            "ibrxbyterate_bucket_id",
+            "netdrv_isilon_rx_bucket_id",
+            "jobsize",
+            "jobwalltime",
+            "nodecount",
+            "netdrv_panasas_rx_bucket_id",
+            "max_mem",
+            "pi",
+            "fieldofscience",
+            "pi_institution",
+            "queue",
+            "resource",
+            "provider",
+            "shared",
+            "username",
+            "person",
+            "institution"
+        );
+    }
+
     /**
      * Note that this test intentionally hardcodes the available dimensions so
      * that we can confirm that the dimensions are all present and correct for
@@ -38,44 +71,43 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             $dimids[] = $dimension['id'];
         }
 
-        $expectedDimensions = <<<EOF
-[
-    "application",
-    "catastrophe_bucket_id",
-    "cpi",
-    "cpucv",
-    "cpuuser",
-    "datasource",
-    "nsfdirectorate",
-    "parentscience",
-    "exit_status",
-    "netdrv_gpfs_rx_bucket_id",
-    "grant_type",
-    "granted_pe",
-    "ibrxbyterate_bucket_id",
-    "netdrv_isilon_rx_bucket_id",
-    "jobsize",
-    "jobwalltime",
-    "nodecount",
-    "netdrv_panasas_rx_bucket_id",
-    "max_mem",
-    "pi",
-    "fieldofscience",
-    "pi_institution",
-    "queue",
-    "resource",
-    "provider",
-    "shared",
-    "username",
-    "person",
-    "institution"
-]
-EOF;
-        $this->assertEquals(json_decode($expectedDimensions, true), $dimids);
+        $this->assertEquals(self::getDimensions(), $dimids);
 
         $this->xdmodhelper->logout();
     }
 
+    public function dimensionsProvider()
+    {
+        $xdmodhelper = new \TestHarness\XdmodTestHelper(array('decodetextasjson' => true));
+        $xdmodhelper->authenticate("cd");
+
+        $testCases = array();
+        foreach (self::getDimensions() as $dimension) {
+            $testCases[] = array($xdmodhelper, $dimension);
+        }
+        return $testCases;
+    }
+
+    /**
+     * Check that all dimensions have at least one dimension value.
+     *
+     * @dataProvider dimensionsProvider
+     */
+    public function testDimensionValues($xdmodhelper, $dimension)
+    {
+        $queryparams = array(
+            'realm' => 'SUPREMM'
+        );
+        $response = $xdmodhelper->get(self::ENDPOINT . 'dimensions/' . $dimension, $queryparams);
+
+        $this->assertEquals(200, $response[1]['http_code']);
+
+        $resdata = $response[0];
+
+        $this->assertArrayHasKey('success', $resdata);
+        $this->assertEquals(true, $resdata['success']);
+        $this->assertEquals(true, count($resdata['results']) > 0);
+    }
 
     public function testResourceEndPoint()
     {
