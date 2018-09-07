@@ -24,4 +24,5 @@ if [ "$XDMOD_TEST_MODE" = "upgrade" ];
 then
     mongod -f /etc/mongod.conf
     $XDMOD_BOOTSTRAP
+    aggregate_supremm.sh
 fi
