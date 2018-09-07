@@ -2034,13 +2034,7 @@ module.exports = {
             comments: "The name of the account or project (also known as a charge number).",
             per: "job",
             table: "job",
-            queries: ["jobfact", "account"],
-            agg: {
-                table: 'supremmfact',
-                alias: 'grant_type',
-                roles: { disable: [ "pub" ] },
-                dimension: true
-            }
+            queries: ['jobfact', 'account']
         },
         fos_id: {
             type: "int32",
