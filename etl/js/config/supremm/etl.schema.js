@@ -1926,19 +1926,58 @@ module.exports = {
             table: "job"
         },
 
-        "gpu([0-9]+)_nv_utilization": {
-            unit: "%",
-            type: "double",
-            group: "Accelerator Statistics",
+        'gpu([0-9]+)_nv_utilization': {
+            unit: '%',
+            type: 'double',
+            name: 'GPU device "gpu:label_1" utilization',
+            group: 'Accelerator Statistics',
             nullable: true,
             def: null,
-            comments: "average % utilization of the gpu",
-            per: "node",
-            raw_per: "gpu",
-            algorithm: "",
-            algorithm_description: "",
-            typical_usage: "",
-            table: "job"
+            comments: 'average % utilization of the gpu',
+            per: 'node',
+            raw_per: 'gpu',
+            algorithm: '',
+            algorithm_description: '',
+            typical_usage: '',
+            table: 'job',
+            agg: [{
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: getSumMetric(':field_name*node_time'),
+                comments: 'The amount of gpu time of the jobs pertaining to this period.',
+                stats: [{
+                    sql: 'sum(jf.:field_name/3600.0)',
+                    label: 'GPU:label_1 Hours: Total',
+                    requirenotnull: 'jf.:field_name',
+                    unit: 'GPU Hour',
+                    description: 'The total GPU hours for all jobs that were executing during the time period.'
+                }, {
+                    name: 'avg_percent_:field_name',
+                    sql: 'sum(100.0 * jf.:field_name / jf.node_time * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    label: 'Avg GPU:label_1 usage: weighted by node-hour',
+                    requirenotnull: 'jf.:field_name',
+                    unit: 'GPU %',
+                    description: 'The average GPU:label_1 usage % weighted by node hours, over all jobs that were executing.'
+                }]
+            }, {
+                name: ':field_name_bucketid',
+                type: 'int32',
+                roles: { disable: ['pub'] },
+                dimension: true,
+                category: 'Metrics',
+                table: 'supremmfact',
+                sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * :field_name, -1.0) > cb.min AND coalesce(100.0 * :field_name, -1.0) <= cb.max)',
+                label: 'GPU:label_1 Usage Value',
+                dimension_table: 'percentages_buckets'
+            }, {
+                name: ':field_name_weight',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: getWeightMetric(':field_name', 'nodes'),
+                comments: 'The node weight for jobs with cpu user values that ran during the period'
+            }]
         }
     },
     derivedFieldQueries: {
