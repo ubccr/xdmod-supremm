@@ -106,16 +106,22 @@ Job batch scripts are displayed in the "Job Script" tab in the "Job Viewer" in
 XDMoD. This tab is only displayed if the job script is available and the absence
 of the jobs scripts does not impact the rest of the interface.
 
-The `ingest_jobscripts.py` script parses the filesystem and 
+The `ingest_jobscripts.py` script parses the filesystem, reads each job script file
+and loads the contentss into the XDMoD datawarehouse.
 If you have the batch scripts for each HPC job available, they are ingested as
 follows
 
     $ ingest_jobscripts.py -a -d
 
 The `ingest_jobscripts.py` has similar commandline configuration as the `indexarchives.py`. The path
+is parsed to obtain the start time of the job and only the last 3 days worth of
+jobs are ingested by default.
+
+
 ### 5. Run the XDMoD ingest and aggregation script
 
-The 
+Once there are job summary data in MongoDB it is ingested and aggregated into
+XDMoD as follows:
 
     $ aggregate_supremm.sh -d
 
