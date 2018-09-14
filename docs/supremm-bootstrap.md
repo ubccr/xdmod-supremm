@@ -204,6 +204,22 @@ by directly querying the XDMoD datawarehouse and MongoDB.
 
     /usr/lib64/xdmod/xdmod-supremm-jobinfo -r RESOURCE -j JOBID
 
-An example output of this script is shown below:
+An example output of this script for a job that has all data present and correct is shown below:
 
+    $ ./xdmod-supremm-jobinfo -r resourcename -j 8038957
+    Job 8038957 (end time 2018-01-01 16:40:50)
+    Host list (1 hosts):
+        "compute-15-33"
+    Archive list:
+        Host "compute-d15-33"
+          "/data/pcp-logs/compute-d15-33/2018/01/01/20180101.00.10"
+          "/data/pcp-logs/compute-d15-33/2018/01/01/job-8038957-begin-20180101.03.46.33"
+          "/data/pcp-logs/compute-d15-33/2018/01/01/job-8038957-end-20180101.16.40.50"
+    
+        
+    Data from modw_supremm:
+        13 8038957 1514842850
+    Summary in mongo: _id, summarization, procDump, process_memory, infiniband, cpuperf, gpfs, cpu, network, cores, nfs, uncperf, memory, load1, acct, catastrophe, block, nodememory, processed
+    Summary in mongo: _id, lnet, memused, cpuuser, ib_lnet, version, nfs, simdins, process_mem_usage, hosts, membw, memused_minus_diskcache, block
+    
 
