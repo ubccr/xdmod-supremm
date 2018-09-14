@@ -2,18 +2,24 @@
 title: SUPReMM module configuration guide
 ---
 
+## Prerequisites
+
 Ensure that [Open XDMoD](http://open.xdmod.org) is installed and configured
 correctly and the [shredder](http://open.xdmod.org/shredder.html) and
-[ingestor](http://open.xdmod.org/ingestor.html) scripts have been run successfully
-before installing and configuring the SUPReMM module.
+[ingestor](http://open.xdmod.org/ingestor.html) scripts have been run
+successfully before configuring the SUPReMM module.  **Do not begin the
+configuration steps until the accounting data is loaded into XDMoD**.
 
-Then run the following two commands:
+## Configuration
+
+The Job Performance (SUPReMM) XDMoD module adds an additional main menu item
+to the XDMoD interactive setup software. Run the script as follows:
 
     # xdmod-setup
-    # acl-config
 
-The `xdmod-setup` script usage is described below. The `acl-config` script
-is documented in the [XDMoD command reference][commands].
+and select the 'SUPReMM' option in the main menu. The `xdmod-setup` script usage is described below. 
+
+The next step after configuring in the XDMoD module is to install and configure the [job summarization software](supremm-processing-install.md).
 
 The `xdmod-setup` script
 ------------------------
@@ -45,11 +51,22 @@ contains the job summary data. I.e. the mongodb instance. Enter the uri
 in the standard mongodb connection string format (see the [mongo documentation][] for
 the syntax).  **You must specify the database name in the connection URI.** If
 the database is not specifed then the mongo driver defaults to the 'test'
-database, which will not contain the job summary data.
+database, which will not contain the job summary data. The default database name is 'supremm'
+so, for example, if you have installed the mongodb on the same server as XDMoD then you would use
+the following uri:
+
+    mongodb://localhost:27017/supremm
+
+The script also runs the `acl-config` command that is used to update the access controls in
+XDMoD.  If you prefer to run this command manually use the following command
+
+    # acl-config
+
+The `acl-config` command is documented in the [XDMoD command reference][commands].
 
 ### Configure resources
 
-The setup script automatically detects the resources that exist in the XDMoD datawarehouse and lists them.
+The setup script automatically detects the existing resources in the XDMoD datawarehouse and lists them.
 If no "Edit resource" options show in the list then quit the setup and complete the steps listed in the
 [shredder][] and [ingestor][] guides before re-running the setup script.
 

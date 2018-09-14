@@ -2,26 +2,22 @@
 title: Software Requirements
 ---
 
-The SUPReMM Open XDMoD module requires all of the software for Open XDMoD and
+The Job Performance (SUPReMM) XDMoD module requires all of the software for XDMoD and
 the following additional packages:
 
-- [PHP][] 5.3+
-    - [MongoClient][]
-- [nodejs][] 0.10+
+- [PHP MongoClient][]
+- [nodejs][] 6.14.4+
 
-[php]:             http://php.net/
 [nodejs]:          https://nodejs.org
-[MongoClient]:     http://php.net/manual/en/class.mongoclient.php
+[PHP MongoClient]:     http://php.net/manual/en/class.mongoclient.php
 
 Linux Distribution Packages
 ---------------------------
 
-The Open XDMoD SUPReMM module can be run on most recent Linux distributions, but has
-been tested on CentOS 6 and Centos 7.
+The Job Performance (SUPReMM) XDMoD module has been tested on Centos 7, but
+will likely run on most recent Linux distributions.
 
-The SUPReMM module requirements can be met using packages from the EPEL repository.
-
-### CentOS 6 / Centos 7
+### Centos 7
 
 **NOTE**: The package list below includes packages included with
 [EPEL](http://fedoraproject.org/wiki/EPEL).  This repository can be

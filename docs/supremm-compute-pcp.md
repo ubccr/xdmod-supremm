@@ -55,11 +55,10 @@ For a full install with all monitors being used at CCR:
 Configuration Templates
 -----------------------
 
-The SUPReMM summarization package includes template files that can be used to configure PCP collection on the compute nodes.  The package itself does not need to be installed on the compute nodes, however you may wish to install it on a test node in order to obtain the PCP configuration file templates.
-
-Package installation instructions are documented on the in the SUPReMM summarization package [RPM](supremm-processing-install-rpm.md) or [Source](supremm-processing-install-source.md) pages.
-
-Alternatively, the templates may be extracted directly from the source tarball.
+The [Job Summarization software](supremm-processing-install.md) includes template files that can be used to
+configure PCP collection on the compute nodes.  The package itself should not
+be installed on the compute nodes, however you may wish to install it
+on a test node in order to obtain the PCP configuration file templates.
 
 These templates are available:
 ------------------------------
@@ -67,7 +66,7 @@ These templates are available:
 * Moved to: /etc/pcp/pmlogger
     * Remove any existing files under: /etc/pcp/pmlogger/control.d
 * **THIS CHANGE MUST BE MADE**
-    * Edit the file to specify that the logs be written to shared space, accessable by the Supremm processing machine
+    * Edit the file to specify the path to the shared filesystem. The log files must be accessible by the node that has the Job Summarization software installed
     * "PCP_LOG_DIR/pmlogger/LOCALHOSTNAME/$(date +%Y)/$(date +%m)/$(date +%d)"
         * Changed to something like: "/<GLOBAL_SHARED_SPACE>/supremm/pmlogger/LOCALHOSTNAME/$(date +%Y)/$(date +%m)/$(date +%d)"
         * Where "LOCALHOSTNAME" is that exact literal string
