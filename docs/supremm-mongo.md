@@ -1,22 +1,7 @@
----
-title: Install MongoDB
----
+A MongoDB server must be installed and enabled. We recommend that the software 
+is installed on a dedicated server, however it may be installed on the same
+server as the XDMoD instance.
 
-A MongoDB server should be installed and enabled. This may be installed on a dedicated host
-or on the same host as the SUPReMM summarization software or Open XDMoD software.
+Please refer to the official [MongoDB installation manual](https://docs.mongodb.org/manual/installation/) for instructions on how to install MongoDB.
 
-A quick start guide to installing MongoDB on Centos is listed below. Please refer to the official [MongoDB installation manual](https://docs.mongodb.org/manual/installation/) for full instructions on how to install on other Linux distributions.
-
-Please see the [MongoDB documentation](https://docs.mongodb.org/manual) for instructions on how to set up access controls for the database instance.
-
-### Centos 6
-
-    # yum install mongodb-server mongodb
-    # chkconfig mongod on
-    # service mongod start
-
-### Centos 7
-
-    # yum install mongodb-server mongodb
-    # systemctl enable mongod
-    # systemctl start mongod
+The MongoDB node.js driver used in the Job Performance (SUPREMM) XDMoD module is compatible with MongoDB 2.6, 3.0, 3.2 and 3.4. The software has been tested against MongoDB version 3.4 

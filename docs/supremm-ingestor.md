@@ -10,7 +10,16 @@ The job-level data is typically processed daily, with the various scripts run as
 
 The `xdmod-shredder` and `xdmod-ingestor` commands are part of the core Open XDMoD software and are documented in the [Shredder](http://open.xdmod.org/shredder.html) and [Ingestor](http://open.xdmod.org/ingestor.html) guides.
 
-The job summarization script is part of the SUPReMM job summarization package and is described in the [configuration](supremm-processing-configuration.html) page.
+Deploy SUPReMM in Production
+--------------------------------
+
+Enable the following script to run everyday via a cron job.  It should be executed
+after the Open XDMoD daily update process is expected to finish.
+
+    $ /usr/bin/supremm_update
+
+This script calls indexarchives.py and summarize_jobs.py in turn while providing a
+locking mechanisms so that processes do not conflict with each other.
 
 The job-level summaries are ingested into Open XDMoD with the following command:
 
