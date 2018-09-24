@@ -16,6 +16,12 @@ class SupremmDbInterface {
 
         foreach($resources as $sresource) {
 
+            if (isset($sresource['enabled'])) {
+                if ($sresource['enabled'] === false) {
+                    continue;
+                }
+            }
+
             $dbsection = 'jobsummarydb';
             if(isset($sresource['db'])) {
                 $dbsection = $sresource['db'];

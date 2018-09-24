@@ -286,4 +286,22 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('last_day', $item);
         $this->assertArrayHasKey('last_day_tm', $item);
     }
+
+    public function testResourceEnableDisable() {
+
+        $this->xdmodhelper->authenticate($this->validateAsUser);
+
+        $result = $this->xdmodhelper->get($this->endpoint . 'resources', null);
+        $this->assertEquals(5, sizeof($result[0]['data']));
+
+        shell_exec('mv /etc/xdmod/supremm_resources.json /etc/xdmod/supremm_resources.json.bak && jq \'.resources |= map(if .resource == "frearson" then .enabled |= false else . end)\' /etc/xdmod/supremm_resources.json.bak > /etc/xdmod/supremm_resources.json');
+
+        $result = $this->xdmodhelper->get($this->endpoint . 'resources', null);
+        $this->assertEquals(4, sizeof($result[0]['data']));
+
+        shell_exec('mv /etc/xdmod/supremm_resources.json.bak /etc/xdmod/supremm_resources.json');
+
+        $result = $this->xdmodhelper->get($this->endpoint . 'resources', null);
+        $this->assertEquals(5, sizeof($result[0]['data']));
+    }
 }

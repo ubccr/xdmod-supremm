@@ -23,7 +23,7 @@ fi
 
     cd ${XDMOD_SHARE_PATH}/etl/js
     
-    node etl.cluster.js $FLAGS
+    node --max-old-space-size=4096 etl.cluster.js $FLAGS
     
     php ${XDMOD_LIB_PATH}/supremm_sharedjobs.php $FLAGS
     
