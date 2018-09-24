@@ -85,7 +85,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                 $sfield = $sdata['key'];
                 if ($sdata['dtype'] == "statistic") {
                     // HACK
-                    if ($sdata['units'] == 'cpuratio') {
+                    if ($sdata['units'] == 'cpuratio' || $sdata['units'] == '%') {
                         $this->addField(new FormulaField("100.0 * jf.$sfield", $sfield));
                         $this->documentation[$sfield] = $sdata;
                         $this->documentation[$sfield]['units'] = "%";
