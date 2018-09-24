@@ -1,0 +1,252 @@
+#!/usr/bin/env php
+<?php
+/* Helper script that retrieves information about jobs in the database
+ *
+ * Version 0.0.2
+ */
+require_once __DIR__ . '/../configuration/linker.php';
+
+use CCR\DB;
+
+function printarchiveinfo($dwDb, $job)
+{
+    $archivequery = "
+SELECT 
+    tt.hostname, tt.filename
+FROM (
+SELECT 
+    h.hostname, ap.filename, na.start_time_ts
+FROM
+    modw_supremm.`archive_paths` ap,
+    modw_supremm.`archives_nodelevel` na,
+    modw.`hosts` h,
+    modw.`jobhosts` jh,
+    modw.`job_tasks` j
+WHERE
+    j.job_id = jh.job_id
+        AND jh.job_id = ?
+        AND jh.host_id = h.id
+        AND na.host_id = h.id
+        AND ((j.start_time_ts BETWEEN na.start_time_ts AND na.end_time_ts)
+        OR (j.end_time_ts BETWEEN na.start_time_ts AND na.end_time_ts)
+        OR (j.start_time_ts < na.start_time_ts
+        AND j.end_time_ts > na.end_time_ts))
+        AND ap.id = na.archive_id 
+UNION 
+SELECT 
+    h.hostname, ap.filename, ja.start_time_ts
+FROM
+    modw_supremm.`archive_paths` ap,
+    modw_supremm.`archives_joblevel` ja,
+    modw.`hosts` h,
+    modw.`jobhosts` jh,
+    modw.`job_tasks` j
+WHERE
+    j.job_id = jh.job_id
+        AND jh.job_id = ?
+        AND jh.host_id = h.id
+        AND ja.host_id = h.id
+        AND ja.local_job_id_raw = j.local_job_id_raw
+        AND ja.archive_id = ap.id
+) tt ORDER BY 1 ASC, tt.start_time_ts ASC";
+
+    $result = $dwDb->query($archivequery, array($job['job_id'], $job['job_id']));
+
+    if (count($result) == 0) {
+        print "There are no archives available for this job";
+        return;
+    }
+
+    print "Archive list:\n";
+
+    $lasthost = '';
+    foreach ($result as $row) {
+        if ($lasthost != $row['hostname']) {
+            print "    Host \"${row['hostname']}\"\n";
+            $lasthost = $row['hostname'];
+        }
+        print "      \"${row['filename']}\"\n";
+    }
+}
+
+function printjobdata($resource, $localjobid)
+{
+    $dwDb = DB::factory('datawarehouse');
+
+    $query = "
+SELECT 
+    job_id, FROM_UNIXTIME(start_time_ts) AS start, FROM_UNIXTIME(end_time_ts) AS end, jf.resource_id, jf.local_job_id_raw, jf.end_time_ts
+FROM 
+    job_tasks jf, resourcefact r
+WHERE
+    r.code = ? AND jf.resource_id = r.id AND jf.local_job_id_raw = ?";
+
+    $result = $dwDb->query($query, array($resource, $localjobid));
+
+    if (count($result) == 0) {
+        print "Job $localjobid on $resource does not exist in the database.\n";
+        return;
+    }
+
+    foreach ($result as $job) {
+
+        $query = "
+SELECT
+    h.hostname
+FROM
+    jobhosts jh, hosts h
+WHERE 
+    jh.job_id = ? AND jh.host_id = h.id";
+
+        $hosts = $dwDb->query($query, array($job['job_id']));
+
+        if (count($hosts) == 0 ) {
+            print "Job $localjobid (end time ${job['end']}) exists in the database, but has no host information.\n";
+        } else {
+            print "Job $localjobid (end time ${job['end']})\n";
+            print 'Host list (' . count($hosts) . " hosts):\n";
+            foreach ($hosts as $row) {
+                print "    \"${row['hostname']}\"\n";
+            }
+            printarchiveinfo($dwDb, $job);
+        }
+        print "\n\n";
+
+        $sjquery = "
+SELECT
+    jf.resource_id, jf.local_job_id, jf.end_time_ts, jf._id as job_id
+FROM
+    modw_supremm.job jf
+WHERE
+    jf.resource_id = ? AND jf.local_job_id = ? AND jf.end_time_ts = ?";
+
+        $result = $dwDb->query($sjquery, array($job['resource_id'], $job['local_job_id_raw'], $job['end_time_ts']));
+        if (count($result) === 0) {
+            print "No records for this job in the modw_supremm database\n";
+        } else {
+            print "Data from modw_supremm:\n";
+            foreach($result as $row) {
+                print "    " . $row['resource_id'] . " ". $row['local_job_id'] . " " . $row['end_time_ts'] . "\n";
+            }
+        }
+
+        $supremmDbInterface = new \DataWarehouse\Query\SUPREMM\SupremmDbInterface();
+        $resconf = $supremmDbInterface->getResourceConfig($job['resource_id']);
+        $collection = $resconf['handle']->selectCollection($resconf['collection']);
+        $query = array( "_id" => new \MongoRegex("/^${job['local_job_id_raw']}-.*${job['end_time_ts']}/") );
+        $doc = $collection->findOne($query);
+        if ( $doc === null) {
+            print "No document found for this job in mongo\n";
+        } else {
+            print "Summary in mongo: " . implode(", ", array_keys($doc)) . "\n";
+        }
+
+        $collection = $resconf['handle']->selectCollection('timeseries-'.$resconf['collection']);
+        $query = array( "_id" => new \MongoRegex("/^${job['local_job_id_raw']}-.*${job['end_time_ts']}/") );
+        $doc = $collection->findOne($query);
+        if ( $doc === null) {
+            print "No timeseries document found for this job in mongo\n";
+        } else {
+            print "Summary in mongo: " . implode(", ", array_keys($doc)) . "\n";
+        }
+    }
+}
+
+function printhelp()
+{
+    print <<< EOF
+Usage: php jobinfo.php [OPTION]...
+Print information about a job or jobs in the database.
+
+Mandatory arguments to long options are mandatory for short options too.
+  -r, --resource=RESOURCE    select jobs for resource RESOURCE.
+  -j, --jobid=JOBID          select jobs with job id JOBID.
+  -h, --help                 print this help text.
+
+EOF;
+}
+
+function printhint()
+{
+    $errmsg = <<< EOF
+ERROR You must specify a resource and job id on the command line.  For example,
+the following commandline will search for job 1234 on resource TEST:
+
+    php jobinfo.php -r TEST -j 1234
+
+You can also use the -h or --help options to display help text.
+
+EOF;
+    fwrite(STDERR, $errmsg);
+}
+
+function main()
+{
+    global $argv, $logger;
+
+    $opts = array(
+        array('h', 'help'),
+        array('j:', 'jobid:'),
+        array('r:', 'resource:'),
+    );
+
+    $shortOptions = implode('', array_map(function ($opt) {
+            return $opt[0];
+    }, $opts));
+    $longOptions = array_map(function ($opt) {
+        return $opt[1];
+    }, $opts);
+
+    $args = getopt($shortOptions, $longOptions);
+
+    if ($args === false) {
+        fwrite(STDERR, "ERROR Failed to parse arguments\n");
+        exit(1);
+    }
+
+    $resource = null;
+    $jobid = null;
+
+    foreach ($args as $key => $value) {
+        if (is_array($value)) {
+            fwrite(STDERR, "ERROR Multiple values not allowed for '$key'\n");
+            exit(1);
+        }
+
+        switch ($key) {
+            case 'h':
+            case 'help':
+                printHelp();
+                exit(0);
+                break;
+            case 'r':
+            case 'resource':
+                $resource = $value;
+                break;
+            case 'j':
+            case 'jobid':
+                $jobid = $value;
+                break;
+            default:
+                fwrite(STDERR, "ERROR Unexpected option '$key'\n");
+                exit(1);
+                break;
+        }
+    }
+
+    if ($resource === null && $jobid === null) {
+        printhint();
+    } else {
+        printjobdata($resource, $jobid);
+    }
+}
+
+
+try {
+    main();
+} catch (Exception $e) {
+    do {
+        fwrite(STDERR, 'message: ' . $e->getMessage() . ' stack: ' . $e->getTraceAsString());
+    } while ($e = $e->getPrevious());
+    exit(1);
+}
