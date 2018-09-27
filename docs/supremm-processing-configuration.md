@@ -89,27 +89,6 @@ available, then the `script_dir` field should be set to an empty string.
 }
 ```
 
-MongoDB settings
-----------------
-
-The `outputdatabase`.`uri` should be set to the uri of the MongoDB server that
-will be used to store the job level summary documents.  The uri syntax is
-described in the [MongoDB documentation][]. You must specify the database name in
-the connection uri string in addition to specifying it in the `dbname` field
-
-```json
-{
-    ...
-    "outputdatabase": {
-        "type": "mongodb",
-        "uri": "mongodb://localhost:27017/supremm",
-        "dbname": "supremm"
-    },
-}
-```
-
-[MongoDB documentation]:        https://docs.mongodb.org/manual/reference/connection-string/
-
 Database authentication settings
 --------------------------------
 
@@ -171,6 +150,40 @@ the XDMoD database server.
     },
 }
 ```
+
+MongoDB settings
+----------------
+
+If you used _Option (1) XDMoD path specification_ in the datawarehouse configuration then
+use the following configuration settings:
+
+```json
+{
+    ...
+    "outputdatabase": {
+        "include": "xdmod://jobsummarydb"
+    }
+}
+```
+
+Otherwise the MongoDB settings can be specified directly as follows:
+The `outputdatabase`.`uri` should be set to the uri of the MongoDB server that
+will be used to store the job level summary documents.  The uri syntax is
+described in the [MongoDB documentation][]. You must specify the database name in
+the connection uri string in addition to specifying it in the `dbname` field
+
+```json
+{
+    ...
+    "outputdatabase": {
+        "type": "mongodb",
+        "uri": "mongodb://localhost:27017/supremm",
+        "dbname": "supremm"
+    },
+}
+```
+
+[MongoDB documentation]:        https://docs.mongodb.org/manual/reference/connection-string/
 
 
 Setup the Database
