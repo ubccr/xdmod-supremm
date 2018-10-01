@@ -122,6 +122,23 @@ XDMoD as follows:
 
     $ aggregate_supremm.sh -d
 
+This script runs three separate commands. First the job summary data is ingested
+from MongoDB to the XDMoD datawarehouse. Then a script parses the job accounting
+data and records which jobs shared compute nodes. Then the data are aggregated
+to be displayed in the XDMoD UI.
+
+The ingestion and aggregation software automatically processes all job summaries
+that have not previously been processed. The shared jobs calculation by default
+processes jobs that ran over the previous three days. If there are jobs
+that shared compute nodes that are older than this three day window then
+run the shared jobs script with the `-a` flag to process all jobs in the database:
+
+    $ /usr/lib64/xdmod/supremm_sharedjobs.php -a -d
+    $ aggregate_supremm.sh -d
+
+It is not necessary to run the `supremm_sharedjobs.php` with the `-a` flag every
+time, only on initial ingest if there are older jobs.
+
 ### 6. Check Open XDMoD Portal
 
 After the XDMoD ingest and aggregation script has completed successfully
