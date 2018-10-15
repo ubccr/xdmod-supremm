@@ -13,6 +13,7 @@ $options = array(
     'h'  => 'help',
     'q'  => 'quiet',
     'v'  => 'verbose',
+    'a'  => 'all',
     'd'  => 'debug'
 );
 
@@ -35,12 +36,17 @@ Usage: {$argv[0]}
     -d, --debug
         enable debug messages to the console
 
+    -a, --all
+        process all jobs in the datawarehouse
 EOMSG
 );
 
   exit(1);
 
 }
+
+$end = time();
+$start = $end - (60*60*24 * 3);
 
 $args = getopt(implode('', array_keys($options)), $options);
 
@@ -59,6 +65,10 @@ foreach ($args as $arg => $value)
         case 'v':
         case 'verbose':
             $conf['consoleLogLevel'] = CCR\Log::INFO;
+            break;
+        case 'a':
+        case 'all':
+            $start = 0;
             break;
         case 'd':
         case 'debug':
@@ -81,9 +91,6 @@ $logger->notice(array(
 
 try
 {
-    $end = time();
-    $start = $end - (60*60*24 * 3);
-
     $db = DB::factory('datawarehouse');
 
     $hostquery = "SELECT 

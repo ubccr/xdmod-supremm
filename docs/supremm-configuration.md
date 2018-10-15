@@ -8,6 +8,13 @@ correctly and the [shredder](http://open.xdmod.org/shredder.html) and
 successfully before configuring the SUPReMM module.  **Do not begin the
 configuration steps until the accounting data is loaded into XDMoD**.
 
+Double check that that the `timezone` and `shared_jobs` configuration settings
+in the `resources.json` configuration file are correct for the resources that have performance data. These settings are
+documented in the [main configuration guide](https://open.xdmod.org/{% if page.version %}{{page.version}}/{% endif %}configuration.html#resourcesjson)
+The `timezone` setting determines the timezone of time data displayed in the XDMoD Job Viewer tab. The
+`shared_jobs` setting determines whether the accounting data will be processed to check
+for jobs that share compute nodes.
+
 ## Configuration
 
 The Job Performance (SUPReMM) XDMoD module adds an additional main menu item
