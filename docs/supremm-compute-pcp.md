@@ -77,7 +77,7 @@ Configure Global Process Capture
 
 By default, PCP does not allow the capture of process information for all users. XDMoD
 can display process information only if the pcp user is permitted to log this
-information from each compute host. See the releavant documentation in `man pmdaproc`.
+information from each compute host. See the relevant documentation in `man pmdaproc`.
 To enable this, you must add the `-A` flag to the `pmdaproc` line 
 in `/etc/pcp/pmcd/pmcd.conf` like so:
 
@@ -90,8 +90,8 @@ The daily housekeeping processes that run from cron for PCP
 will attempt to do some cleanup that is not necessary when ingesting
 the PCP archives into XDMoD. You should add the `-M` flag to pmlogger_daily
 line in the `/etc/cron.d/pcp-pmlogger` file.  This will disable the process
-that runs daily to combine mutliple arives into one file.  XDMoD can
-handle these files with no problem, and this process uses unnecesarry resources.
+that runs daily to combine multiple archives into one file.  XDMoD can
+handle these files with no problem, and this process uses unnecessary resources.
 You may also wish to adjust the retention period for old archives
 with the `-k` parameter. See `man pmlogger_daily` for more information. The
 following line will disable the daily rollup and keep archives forever.
