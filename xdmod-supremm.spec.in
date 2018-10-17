@@ -51,6 +51,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/roles.d/supremm*.json
 %config(noreplace) %{_sysconfdir}/xdmod/setup.d/supremm*.json
 %config(noreplace) %{_sysconfdir}/xdmod/rest.d/supremm*.json
+%config(noreplace) %{_sysconfdir}/xdmod/rawstatistics.d/supremm.json
 %config(noreplace) %{_sysconfdir}/xdmod/rawstatisticsconfig.json
 %config(noreplace) %{_sysconfdir}/xdmod/supremmconfig.json
 
