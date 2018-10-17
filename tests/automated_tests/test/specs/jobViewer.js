@@ -169,8 +169,7 @@ describe('Job Viewer', function jobViewer() {
                 }); // Perform 'Edit Search' Action
 
                 it('Validate that the search parameters have been set correctly.', function validateParametersSet() {
-                    expect(browser.getValue(selectors.search.basic.resource)).to.equal(resource);
-                    expect(browser.getValue(selectors.search.basic.jobId)).to.equal(String(jobId));
+                    jV.validateSearchParameters(resource, jobId, false);
                 }); // Validate that the search parameters have been set correctly.
 
                 it('Change the Job Number', function changeJobNumber() {
