@@ -32,7 +32,7 @@ var markAsProcessedMongoUpdate = function(collection, _id, config, endFn, dbkey)
         version: version
     };
     util._extend(setter["processed." + dbkey], config);
-    collection.update({
+    collection.updateOne({
         _id: _id
     }, {
         $set: setter
