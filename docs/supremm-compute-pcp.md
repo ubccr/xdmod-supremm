@@ -49,6 +49,13 @@ This script is designed for and tested with the [Slurm][] resource manager.
 This script will run data collection at job end. This script should be merged into your existing epilogue script.
 This script is designed for and tested with the [Slurm][] resource manager.
 
+#### /usr/share/supremm/hotproc/hotproc.conf
+* Moved to /var/lib/pcp/pmdas/proc
+
+This configuration file sets the parameters for process logging into the pcp
+archives. It prevents the logging of system processes, unless they consume
+significant resources.  This will reduce disk usage by the pcp archives.
+
 Enable logging modules (PMDAs)
 -----------------------------
 * By default, in order to be lightweight, PCP does not enable all logging modules (PMDAs)
@@ -64,7 +71,42 @@ to enable the PMDA on next restart.
     $ touch /var/lib/pcp/pmdas/perfevent/.NeedInstall
     $ touch /var/lib/pcp/pmdas/mic/.NeedInstall
     $ touch /var/lib/pcp/pmdas/libvirt/.NeedInstall
+    
+Configure Global Process Capture
+--------------------------------
 
+By default, PCP does not allow the capture of process information for all users. XDMoD
+can display process information only if the pcp user is permitted to log this
+information from each compute host. See the relevant documentation in `man pmdaproc`.
+To enable this, you must add the `-A` flag to the `pmdaproc` line 
+in `/etc/pcp/pmcd/pmcd.conf` like so:
+
+    proc	3	pipe	binary 		/var/lib/pcp/pmdas/proc/pmdaproc  -A
+    
+Disable daily archive rollup
+--------------------------------
+
+The daily housekeeping processes that run from cron for PCP
+will attempt to do some cleanup that is not necessary when ingesting
+the PCP archives into XDMoD. You should add the `-M` flag to pmlogger_daily
+line in the `/etc/cron.d/pcp-pmlogger` file.  This will disable the process
+that runs daily to combine multiple archives into one file.  XDMoD can
+handle these files with no problem, and this process uses unnecessary resources.
+You may also wish to adjust the retention period for old archives
+with the `-k` parameter. See `man pmlogger_daily` for more information. The
+following line will disable the daily rollup and keep archives forever.
+
+    10     0  *  *  *  pcp  /usr/libexec/pcp/bin/pmlogger_daily -M -k forever
+
+Adjust the retention policy to suit your needs of reprocessing old data.
+
+Restart PMCD
+--------------------------------
+
+After making configuration changes to the PMDAs, you will need to restart the pmcd
+service.  On a systemd enabled system, this can be done with:
+
+    $ systemctl restart pmcd
 
 [Job Summarization software]: supremm-processing-install.md
 [Slurm]: https://www.schedmd.com/
