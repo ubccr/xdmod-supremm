@@ -10,6 +10,11 @@ The job-level data is typically processed daily, with the various scripts run as
 
 The `xdmod-shredder` and `xdmod-ingestor` commands are part of the core Open XDMoD software and are documented in the [Shredder](http://open.xdmod.org/shredder.html) and [Ingestor](http://open.xdmod.org/ingestor.html) guides.
 
+## Prerequisites
+
+Before setting up the batch processing workflow, we highly recommend manually running the various scripts in debug mode following
+the instructions on the [Inital Ingest Setup](supremm-bootstrap.md) page.
+
 Deploy SUPReMM in Production
 --------------------------------
 
@@ -23,7 +28,7 @@ locking mechanisms so that processes do not conflict with each other.
 
 The job-level summaries are ingested into Open XDMoD with the following command:
 
-    aggregate_supremm.sh
+    $ aggregate_supremm.sh
 
 Cron Configuration
 ------------------
