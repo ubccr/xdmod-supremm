@@ -15,6 +15,8 @@ through all the intermediate versions or perform a clean installation.
 Check the [software compatibilty tables](supremm-install-overview.md#software-compatibility)
 for the recommended versions of the various components.
 
+**NOTE:** that the Job Summarization software must be upgraded to 1.1.0 to be compatible with XDMoD 8.0.0.
+
 General Upgrade Notes
 ---------------------
 
