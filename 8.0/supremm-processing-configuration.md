@@ -1,11 +1,15 @@
----
-title: Job Summarization Configuration Guide
----
+
+This guide explains how to configure the Job Summarization software.
+
+## Prerequisites
+
+The Job Performance (SUPReMM) XDMoD module must be [installed](supremm-install.md) and [configured](supremm-configuration.md)
+before configuring the Job Summarization software. 
 
 Setup Script
 ------------
 
-The SUPReMM software includes a setup script to help you configure your
+The Job Summarization software includes a setup script to help you configure your
 installation. The script will prompt for information needed to configure the
 software and update the configuration files and databases. If you have
 modified your configuration files manually, be sure to make backups before
@@ -37,7 +41,7 @@ database user account that has CREATE privileges on the XDMoD modw_supremm datab
 
 ### Initialize MongoDB Database
 
-This section will add the required data to the MongoDB database.
+This section will add required data to the MongoDB database.
 
 The default connection settings are read from the configuration file (but can
 be overridden).
@@ -69,39 +73,21 @@ script, then the `script_dir` field should be set to the path to the directory
 that contains the job batch scripts. If the job batch scripts are not
 available, then the `script_dir` field should be set to an empty string.
 
-    {
-        ...
-        "resources": {
-            "my_cluster_name": {
-                "enabled": true,
-                "resource_id": 1,
-                "batch_system": "XDMoD",
-                "hostname_mode": "hostname",
-                "pcp_log_dir": "/data/pcp-logs/my_cluster_name",
-                "script_dir": "/data/jobscripts/my_cluster_name"
-            }
+```json
+{
+    ...
+    "resources": {
+        "my_cluster_name": {
+            "enabled": true,
+            "resource_id": 1,
+            "batch_system": "XDMoD",
+            "hostname_mode": "hostname",
+            "pcp_log_dir": "/data/pcp-logs/my_cluster_name",
+            "script_dir": "/data/jobscripts/my_cluster_name"
         }
     }
-
-MongoDB settings
-----------------
-
-The `outputdatabase`.`uri` should be set to the uri of the MongoDB server that
-will be used to store the job level summary documents.  The uri syntax is
-described in the [MongoDB documentation][]. You must specify the database name in
-the connection uri string in addition to specifying it in the `dbname` field
-
-    {
-        ...
-        "outputdatabase": {
-            "type": "mongodb",
-            "uri": "mongodb://localhost:27017/supremm",
-            "dbname": "supremm"
-        },
-        ...
-    }
-
-[MongoDB documentation]:        https://docs.mongodb.org/manual/reference/connection-string/
+}
+```
 
 Database authentication settings
 --------------------------------
@@ -118,17 +104,21 @@ If the summarization software is installed on the same machine as Open XDMoD the
 If the summarization software is installed on the same machine as Open XDMoD
 then ensure the `config.json` has the following settings:
 
-    {
-        ...
-        "xdmodroot": "/etc/xdmod",
-        "datawarehouse": {
-            "include": "xdmod://datawarehouse"
-        },
-        ...
-    }
+```json
+{
+    ...
+    "xdmodroot": "/etc/xdmod",
+    "datawarehouse": {
+        "include": "xdmod://datawarehouse"
+    },
+}
+```
 
 Where xdmodroot should be set to the location of the xdmod configuration
-directory, typically `/etc/xdmod` for RPM based installs.
+directory, typically `/etc/xdmod` for RPM based installs. Note that the user
+account that runs the summarization scripts will need to have read permission
+on the xdmod configuration files. For an RPM based install, the `xdmod` user
+account has the correct permission.
 
 ### Option (2) Direct DB credentials ###
 
@@ -140,23 +130,60 @@ Create a file called `.supremm.my.cnf` in the home directory of the user that
 will run the job summarization software. This file must include the username
 and password to the Open XDMoD datawarehouse mysql server:
 
-    [client]
-    user=[USERNAME]
-    password=[PASSWORD]
+```ini
+[client]
+user=[USERNAME]
+password=[PASSWORD]
+```
 
 ensure the "datawarehouse" section of the `config.json` file has settings like
 the following, where *XDMOD\_DATABASE\_FILL\_ME\_IN* should be set to the hostname of
 the XDMoD database server.
 
-    {
-        ...
-        "datawarehouse": {
-            "db_engine": "MySQLDB",
-            "host": "XDMOD_DATABASE_FILL_ME_IN",
-            "defaultsfile": "~/.supremm.my.cnf"
-        },
-        ...
+```json
+{
+    ...
+    "datawarehouse": {
+        "db_engine": "MySQLDB",
+        "host": "XDMOD_DATABASE_FILL_ME_IN",
+        "defaultsfile": "~/.supremm.my.cnf"
+    },
+}
+```
+
+MongoDB settings
+----------------
+
+If you used _Option (1) XDMoD path specification_ in the datawarehouse configuration then
+use the following configuration settings:
+
+```json
+{
+    ...
+    "outputdatabase": {
+        "include": "xdmod://jobsummarydb"
     }
+}
+```
+
+Otherwise the MongoDB settings can be specified directly as follows:
+The `outputdatabase`.`uri` should be set to the uri of the MongoDB server that
+will be used to store the job level summary documents.  The uri syntax is
+described in the [MongoDB documentation][]. You must specify the database name in
+the connection uri string in addition to specifying it in the `dbname` field
+
+```json
+{
+    ...
+    "outputdatabase": {
+        "type": "mongodb",
+        "uri": "mongodb://localhost:27017/supremm",
+        "dbname": "supremm"
+    },
+}
+```
+
+[MongoDB documentation]:        https://docs.mongodb.org/manual/reference/connection-string/
 
 
 Setup the Database
@@ -178,48 +205,3 @@ Setup MongoDB
     $ mongo [MONGO CONNECTION URI] /usr/share/supremm/setup/mongo_setup.js
 
 where [MONGO CONNECTION URI] is the uri of the MongoDB database.
-
-Run the indexer script:
------------------------
-
-The archive indexer script scans the PCP archive directory that is specified
-in the configuration file, parses the PCP archive and stores the archive metadata in
-the database. This index is then used by the job summarization script to quickly
-obtain the list of archives for each job.
-
-The archive indexer script by default uses archive file name to only process
-archives that were created in the last N days.  The first time the archive
-indexer is run, specify the "-a" flag to get it to processes all archives.  It
-is also recommended to specify the debug output flag -d so that you can see
-that it is processing the files:
-
-    $ /usr/bin/indexarchives.py -a -d
-
-Run the summarization script:
------------------------------
-
-    $ /usr/bin/summarize_jobs.py -d
-
-You should see log messages indicating that the jobs are being processed. You
-can hit CTRL-C to stop the process.  The jobs that have been summarized by the
-script will be marked as processed in the database and the summaries should end
-up in MongoDB. Check to see that the summaries are in MongoDB by, for example, using
-the MongoDB command line client to query the database:
-
-    $ mongo [MONGO CONNECTION URI]
-    > var cols = db.getCollectionNames();
-    > for(var i=0; i < cols.length; i++) {
-          print(cols[i], db[cols[i]].count())
-      }
-
-
-Deploy SUPReMM in Production
---------------------------------
-
-Enable the following script to run everyday via a cron job.  It should be executed
-after the Open XDMoD daily update process is expected to finish.
-
-    $ /usr/bin/supremm_update
-
-This script calls indexarchives.py and summarize_jobs.py in turn while providing a
-locking mechanisms so that processes do not conflict with each other.
