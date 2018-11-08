@@ -201,6 +201,9 @@
         "hints": [
             "lammps",
             "lmp"
+        ],
+        "execmatch": [
+            "^lmp_mpi$"
         ]
     },
     {
@@ -280,6 +283,10 @@
             "decomposePar",
             "flamelet",
             "reconstructPar"
+        ],
+        "pathmatch": [
+            "\\/OpenFOAM\\/",
+            "\\/OpenFOAM-[0-9]\\.[0-9]\\.[0-9x]\\/"
         ]
     },
     {
@@ -409,9 +416,13 @@
     {
         "id": 36,
         "name": "cybershake",
-        "license_type": "unknown",
+        "license_type": "permissive",
+        "url": "https://scec.usc.edu/scecpedia/CyberShake_Code_Base",
         "hints": [
             "extract_sgt"
+        ],
+        "pathmatch": [
+            "\\/CyberShake\\/"
         ]
     },
     {
@@ -581,10 +592,7 @@
     {
         "id": 56,
         "name": "numactl",
-        "license_type": "permissive",
-        "hints": [
-            "numactl"
-        ]
+        "license_type": "permissive"
     },
     {
         "id": 57,
@@ -597,7 +605,9 @@
     {
         "id": 58,
         "name": "mitgcm",
-        "license_type": "proprietary",
+        "license_type": "permissive",
+        "url": "http://mitgcm.org/",
+        "science_area": "Atmostpheric Science",
         "hints": [
             "mitgcm"
         ]
@@ -629,22 +639,17 @@
         "science_area": "Computational Chemistry",
         "execmatch": [
             "^g09",
-            "^l101.exe",
-            "^l906.exe",
-            "^l703.exe",
-            "^l401.exe",
-            "^l301.exe",
-            "^l302.exe",
-            "^l502.exe",
+            "^g16$",
+            "^l[0-9]{3}.exe$",
             "^l9999.exe",
-            "^l904.exe",
-            "^l804.exe",
-            "^l801.exe",
-            "^l701.exe",
-            "^l601.exe",
-            "^l508.exe",
             "^l1101.exe",
+            "^l1102.exe",
+            "^l1110.exe",
+            "^l1112.exe",
             "^l1002.exe"
+        ],
+        "pathmatch": [
+            "^\\/opt\\/packages\\/gaussian\\/"
         ]
     },
     {
@@ -760,6 +765,10 @@
         "science_area": "Material Science",
         "hints": [
             "qcprog.exe"
+        ],
+        "execmatch": [
+            "^mpirun_qchem$",
+            "^qchem$"
         ]
     },
     {
@@ -1107,6 +1116,7 @@
     {
         "id": 115,
         "name": "python",
+        "priority": -1,
         "license_type": "permissive",
         "hints": [
             "python",
@@ -1151,7 +1161,7 @@
     {
         "id": 120,
         "name": "matlab",
-        "license_type": "permissive",
+        "license_type": "proprietary",
         "hints": [
             "matlab"
         ]
@@ -1160,9 +1170,11 @@
         "id": 121,
         "name": "arps",
         "license_type": "permissive",
-        "hints": [
-            "arps_mpi",
-            "arpsenkf_mpi"
+        "execmatch": [
+            "^arps"
+        ],
+        "pathmatch": [
+            "\\/arps[0-9]\\.[0-9]\\.[0-9]"
         ]
     },
     {
@@ -1261,6 +1273,7 @@
     {
         "id": 132,
         "name": "unknown (ran under a debugger)",
+        "priority": -1,
         "license_type": "permissive",
         "hints": [
             "valgrind",
@@ -1275,8 +1288,33 @@
         "name": "ncbi-blast",
         "license_type": "permissive",
         "url": "http://blast.ncbi.nlm.nih.gov/Blast.cgi",
-        "hints": [
-            "blastx"
+        "execmatch": [
+            "^blastn$",
+            "^blast$",
+            "^blast_formatter$",
+            "^blastdb_aliastool$",
+            "^blastdbcheck$",
+            "^blastdbcmd$",
+            "^blastpgp$",
+            "^blastall$",
+            "^blastn$",
+            "^blastp$",
+            "^blastx$",
+            "^convert2blastmask$",
+            "^deltablast$",
+            "^dustmasker$",
+            "^legacy_blast.pl$",
+            "^makeblastdb$",
+            "^makembindex$",
+            "^makeprofiledb$",
+            "^psiblast$",
+            "^rpsblast$",
+            "^rpstblastn$",
+            "^segmasker$",
+            "^tblastn$",
+            "^tblastx$",
+            "^update_blastdb\\.pl$",
+            "^windowmasker$"
         ]
     },
     {
@@ -1505,6 +1543,9 @@
         "science_area": "Computational Fluid Dynamics",
         "execmatch": [
             "^fluent"
+        ],
+        "pathmatch": [
+            "^\\/opt\\/packages\\/ansys\\/"
         ]
     },
     {
@@ -1593,6 +1634,7 @@
         "id": 165,
         "name": "system applications",
         "license_type": "permissive",
+        "priority": -10,
         "science_area": "None",
         "execmatch": [
             "^sh$",
@@ -1604,6 +1646,7 @@
             "^cp$",
             "^chmod$",
             "^df$",
+            "^mv$",
             "^find$",
             "^locate$",
             "^hostname$",
@@ -1692,6 +1735,7 @@
     {
         "name": "X11 applications",
         "license_type": "permissive",
+        "priority": -1,
         "science_area": "None",
         "execmatch": [
             "^x11$",
@@ -1728,7 +1772,7 @@
     {
         "name": "supremm",
         "license_type": "permissive",
-        "url": "http://xdmod.sourceforge.net/",
+        "url": "http://supremm.xdmod.org/",
         "science_area": "System Monitoring",
         "execmatch": [
             "^summarize_mpi.py$",
@@ -1888,6 +1932,322 @@
             "^ptest_",
             "^prog_mpi$",
             "^netgauge$"
-        ]  
+        ]
+    },
+    {
+        "name": "athena",
+        "license_type": "permissive",
+        "science_area": "Magnetohydrodynamics",
+        "url": "https://arxiv.org/abs/0804.0402",
+        "execmatch": [
+            "^athena$"
+        ]
+    },
+    {
+        "name": "raxml",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "https://academic.oup.com/bioinformatics/article/30/9/1312/238053",
+        "execmatch": [
+            "^raxmlHPC"
+        ]
+    },
+    {
+        "name": "beast",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://beast.community/",
+        "execmatch": [
+            "^beast$",
+            "^beastwrapper_1",
+            "^beastonlywrappe",
+            "^treeannotator$"
+        ]
+    },
+    {
+        "name": "beast2",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://www.beast2.org/",
+        "execmatch": [
+            "^beast2"
+        ]
+    },
+    {
+        "name": "neuron",
+        "license_type": "permissive",
+        "science_area": "Biophysics",
+        "url": "https://neuron.yale.edu/neuron/",
+        "execmatch": [
+            "^nrniv$"
+        ]
+    },
+    {
+        "name": "molpro",
+        "license_type": "proprietary",
+        "science_area": "Molecular Dynamics",
+        "url": "https://www.molpro.net",
+        "execmatch": [
+            "^molpro.exe$"
+        ]
+    },
+    {
+        "name": "mrbayes",
+        "license_type": "permissive",
+        "science_area": "Phylogenetics",
+        "url": "http://mrbayes.sourceforge.net/index.php",
+        "execmatch": [
+            "^mb$",
+            "^mbmpiwrapper_3"
+        ]
+    },
+    {
+        "name": "mupfes",
+        "license_type": "permissive",
+        "science_area": "Physics",
+        "url": "https://sites.google.com/site/memt63/tools/MUPFES",
+        "execmatch": [
+            "^mupfes$"
+        ]
+    },
+    {
+        "name": "migrate-n",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "https://popgen.sc.fsu.edu/Migrate/Migrate-n.html",
+        "execmatch": [
+            "^migrate-n-mpi$",
+            "^migrate-mpi_[1-9]+"
+        ]
+    },
+    {
+        "name": "viriato",
+        "license_type": "permissive",
+        "science_area": "Magnetohydrodynamics",
+        "url": "https://doi.org/10.1016/j.cpc.2016.05.004",
+        "execmatch": [
+            "^viriato"
+        ]
+    },
+    {
+        "name": "tophat",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "https://ccb.jhu.edu/software/tophat/index.shtml",
+        "pathmatch": [
+            "^\\/opt\\/packages\\/tophat"
+        ]
+    },
+    {
+        "name": "satsuma2",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "https://github.com/bioinfologics/satsuma2",
+        "pathmatch": [
+            "\\/satsuma2\\/",
+            "\\/satsuma-2.0\\/"
+        ]
+    },
+    {
+        "name": "canu",
+        "license_type": "permissive",
+        "science_area": "Molecular Sequencing",
+        "url": "https://canu.readthedocs.io/en/stable/",
+        "pathmatch": [
+            "\\/opt\\/packages\\/canu\\/"
+        ]
+    },
+    {
+        "name": "trinity",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://trinityrnaseq.sourceforge.net/",
+        "pathmatch": [
+            "\\/opt\\/packages\\/trinity\\/"
+        ]
+    },
+    {
+        "name": "samtools",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://samtools.sourceforge.net",
+        "execmatch": [
+            "^samtools$"
+        ],
+        "pathmatch": [
+            "^\\/opt\\/packages\\/samtools\\/"
+        ]
+    },
+    {
+        "name": "hisat2",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "https://ccb.jhu.edu/software/hisat2/index.shtml",
+        "pathmatch": [
+            "^\\/opt\\/packages\\/hisat2\\/"
+        ]
+    },
+    {
+        "name": "abaqus",
+        "license_type": "proprietary",
+        "science_area": "Finite Element Analysis",
+        "url": "https://www.3ds.com/products-services/simulia/products/abaqus/",
+        "pathmatch": [
+            "^\\/opt\\/packages\\/abaqus\\/"
+        ]
+    },
+    {
+        "name": "lastz",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://www.bx.psu.edu/miller_lab/dist/README.lastz-1.02.00/README.lastz-1.02.00a.html#intro",
+        "execmatch": [
+            "^lastz$"
+        ]
+    },
+    {
+        "name": "salmon",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "https://combine-lab.github.io/salmon/",
+        "execmatch": [
+            "^salmon$"
+        ]
+    },
+    {
+        "name": "unknown (htcondor)",
+        "license_type": "permissive",
+        "science_area": "N/A",
+        "priority": -1,
+        "url": "https://research.cs.wisc.edu/htcondor/",
+        "execmatch": [
+            "^condor_master$",
+            "^condor_procd$",
+            "^condor_startd$"
+        ]
+    },
+    {
+        "name": "hh-suite",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "https://github.com/soedinglab/hh-suite",
+        "execmatch": [
+            "^hhsearch$",
+            "^hhfilter$",
+            "^hhblits$",
+            "^hhmake$",
+            "^hhalign$",
+            "^hhconsensus$"
+        ]
+    },
+    {
+        "name": "partitionfinder2",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://www.robertlanfear.com/partitionfinder/",
+        "execmatch": [
+            "^partitionfinder$"
+        ]
+    },
+    {
+        "name": "cnfpred",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://raptorx.uchicago.edu/",
+        "execmatch": [
+            "^CNFalign$",
+            "^CNFsearch$",
+            "^CNFsearch_mpi$",
+            "^CNFalign_[a-z]+$"
+        ]
+    },
+    {
+        "name": "fasttree",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://meta.microbesonline.org/fasttree/",
+        "execmatch": [
+            "^FastTreeMP$",
+            "^fasttree_[1-9]+"
+        ]
+    },
+    {
+        "name": "mafft",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "https://mafft.cbrc.jp/alignment/software/",
+        "execmatch": [
+            "^mafft$"
+        ]
+    },
+    {
+        "name": "paup",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://paup.phylosolutions.com/",
+        "execmatch": [
+            "^paup4a[0-9]{3}_cento$"
+        ]
+    },
+    {
+        "name": "iqtree",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://www.iqtree.org/doc/Home#why-iq-tree",
+        "execmatch": [
+            "^iqtree$",
+            "^iqtree_[0-9]+"
+        ]
+    },
+    {
+        "name": "phyml",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://www.atgc-montpellier.fr/phyml/binaries.php",
+        "execmatch": [
+            "^phyml.linux$",
+            "^PhyML_3.0_linux$"
+        ]
+    },
+    {
+        "name": "bwa",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://bio-bwa.sourceforge.net/",
+        "execmatch": [
+            "^bwa$"
+        ]
+    },
+    {
+        "name": "prospect",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "http://compbio.ornl.gov/structure/prospect/index.html",
+        "execmatch": [
+            "^threading\\.LINUX$",
+            "^prospect\\.LINUX$"
+        ]
+
+    },
+    {
+        "name": "oxdna",
+        "license_type": "permissive",
+        "science_area": "Bioinformatics",
+        "url": "https://dna.physics.ox.ac.uk/index.php/Main_Page",
+        "execmatch": [
+            "^oxDNA[2]?$"
+        ]
+    },
+    {
+        "name": "gransim",
+        "license_type": "permissive",
+        "science_area": "Biology",
+        "url": "http://malthus.micro.med.umich.edu/lab/",
+        "execmatch": [
+            "^gr$",
+            "^gr-co$",
+            "^gr-co-[0-9]{4}$",
+            "^gr-[0-9]{4}-[23]d-co$"
+        ]
     }
 ]

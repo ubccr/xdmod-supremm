@@ -1,6 +1,36 @@
-module.exports = function(config) {
+var app_ident = require('../app_ident.js');
 
-    var appident = require('../app_ident.js')(config.applicationDefn);
+module.exports = function(config) {
+    var appident = app_ident(config.applicationDefn);
+
+    var getProcInfo = function (job) {
+        var app = null;
+
+        if (job.procDump && job.procDump.constrained) {
+            app = appident(job.procDump.constrained);
+
+            if (!app) {
+                app = appident(job.procDump.unconstrained);
+            }
+
+            if (!app) {
+                if (job.procDump.constrained.length > 0) {
+                    return {
+                        executable: job.procDump.constrained[0],
+                        name: 'uncategorized'
+                    };
+                }
+                if (job.procDump.unconstrained.length > 0) {
+                    return {
+                        executable: job.procDump.unconstrained[0],
+                        name: 'uncategorized'
+                    };
+                }
+            }
+        }
+
+        return app;
+    };
 
     return {
         id: config.resource_id,
@@ -120,82 +150,34 @@ module.exports = function(config) {
             "cwd": {
                 error: 2
             },
-            "executable": {
-                formula: function(job) {
-                    if (job.procDump === undefined) {
+            executable: {
+                formula: function (job) {
+                    var app = getProcInfo(job);
+                    if (app) {
                         return {
-                            value: null,
-                            error: this.metricErrors.codes.metricMissingUnknownReason.value
-                        };
-                    }
-                    var getcommand = function(cmdline) {
-                        var cmdend = cmdline.indexOf(" ");
-                        if (cmdend === -1) {
-                            cmdend = cmdline.length;
-                        }
-                        var cmdbegin = cmdline.lastIndexOf("/", cmdend) + 1;
-
-                        return cmdline.substring(cmdbegin, cmdend);
-                    };
-                    var commandparsers = {
-                        "java": function(cmdline) {
-                            // Crude command parser, does not take into account escape characters
-                            var tokens = cmdline.split(" ");
-                            for (var i = 0; i < tokens.length - 1; i++) {
-                                if (tokens[i] === "-jar") {
-                                    return tokens[i + 1];
-                                }
-                            }
-                            return tokens[0];
-                        }
-                    };
-                    var getproc = function(procarray) {
-                        var blacklist = ["sh", "csh", "bash", "srun", "mpiexec", "mpirun.mpich", "ssh", "slurmstepd:", "mpiexec.hydra", "mpirun", "pmi_proxy", "cp"];
-                        var len = procarray.length;
-                        var i;
-                        for (i = 0; i < len; i += 1) {
-                            var cmd = getcommand(procarray[i]);
-                            if (blacklist.indexOf(cmd) === -1) {
-                                if (commandparsers[cmd]) {
-                                    return commandparsers[cmd](procarray[i]);
-                                }
-                                return procarray[i].split(" ")[0];
-                            }
-                        }
-                        return null;
-                    };
-
-                    var p = getproc(job.procDump.constrained);
-                    if (p === null) {
-                        p = getproc(job.procDump.unconstrained);
-                    }
-                    if (p === null) {
-                        return {
-                            value: null,
-                            error: this.metricErrors.codes.metricMissingUnknownReason.value
+                            value: app.executable,
+                            error: 0
                         };
                     }
                     return {
-                        value: p,
-                        error: 0
+                        value: null,
+                        error: this.metricErrors.codes.metricMissingUnknownReason.value
                     };
                 }
             },
-            "application": {
-                formula: function(job) {
-                    var exec = this.attributes.executable.formula.call(this, job);
-                    if (exec.error) {
-                        return exec;
+            application: {
+                formula: function (job) {
+                    var app = getProcInfo(job);
+                    if (app) {
+                        return {
+                            value: app.name,
+                            error: 0
+                        };
                     }
-
-                    var app_id = appident(exec.value);
-
-                    if (app_id) {
-                        return {value: app_id.name, error: 0};
-                    }
-                    else {
-                        return {value: "uncategorized", error: 0};
-                    }
+                    return {
+                        value: null,
+                        error: this.metricErrors.codes.metricMissingUnknownReason.value
+                    };
                 }
             },
             "exit_status": {

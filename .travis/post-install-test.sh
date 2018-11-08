@@ -14,5 +14,12 @@ node share/etl/js/etl.cli.js -t
 if [ $? != 0 ]; then
     post_install_exit_value=2
 fi
+for file in share/etl/js/config/supremm/unit_test/*.js;
+do
+    node $file
+    if [ $? != 0 ]; then
+        post_install_exit_value=2
+    fi
+done
 
 exit $post_install_exit_value
