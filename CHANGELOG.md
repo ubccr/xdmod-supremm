@@ -1,6 +1,20 @@
 Open XDMoD SUPReMM Change Log
 =============================
-## 2018-??-?? v8.0.0
+## 2018-11-08 v8.0.0
+- Features
+    - Improved performance of aggregation process by switching to the ETLv2 framework.
+    - Improved performance of shared jobs analysis script.
+
+- Bug Fixes
+    - Changed the database table that stores job scripts so that it can support job arrays and fixed
+      missing unique key that resulted in redundant data storage.
+    - Only show enabled resources in the Internal Dashboard dataflow diagram.
+
+- Miscellaneous
+    - Updated documentation and added troubleshooting information.
+    - Added a `xdmod-supremm-jobinfo` script that prints information about individual
+      jobs. This is intended to be used for troubleshooting purposes.
+
 
 ## 2018-03-14 v7.5.1
 
