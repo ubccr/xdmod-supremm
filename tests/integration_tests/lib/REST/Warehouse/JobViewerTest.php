@@ -24,6 +24,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             "parentscience",
             "exit_status",
             "netdrv_gpfs_rx_bucket_id",
+            "gpu0_nv_utilization_bucketid",
             "granted_pe",
             "ibrxbyterate_bucket_id",
             "netdrv_isilon_rx_bucket_id",
