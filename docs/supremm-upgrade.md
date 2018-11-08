@@ -5,70 +5,30 @@ title: SUPReMM Open XDMoD module Upgrade Guide
 General Upgrade Notes
 ---------------------
 
-The SUPReMM Open XDMoD module should be upgraded at the same time as the main XDMoD
+The Job Performance (SUPReMM) XDMoD module should be upgraded at the same time as the main XDMoD
 software. The upgrade procedure is documented on the [XDMoD upgrade
-page](http://open.xdmod.org/upgrade.html).
+page](https://open.xdmod.org/upgrade.html).
+
+**NOTE:** the recommended MySQL/MariaDB database settings have changed and must be updated. See 
+the [XDMoD Software Requirements](https://open.xdmod.org/8.0/software-requirements.html#mysql) for 
+details.
 
 7.5.1 to 8.0.0 Upgrade Notes
 ----------------------------
-
-7.5.0 to 7.5.1 Upgrade Notes
-----------------------------
-
-This upgrade includes a single bug fix that runs `acl-config` during the
-database setup.  If you have 7.5.0 successfully installed and ran `acl-config`
-manually then upgrading to 7.5.1 is not necessary.  If you are upgrading to Open
-XDMoD 7.0.0 to 7.5.0 then this module may be upgraded directly from 7.0.0 to
-7.5.1.
-
-7.0.0 to 7.5.0 Upgrade Notes
-----------------------------
-
-For RPM based installs, the file permissions of the XDMoD configuration
-files is changed to only permit access for the `xdmod` user account.
-
-If you have configured the summarization scripts to read the database access credentials directly
-from the XDMoD configuration files then you must run the scripts with a user account that
-has appropriate has access permissions for these files.  For an RPM based install, the `xdmod` user
-account has the correct permission.
-
-6.6.0 to 7.0.0 Upgrade Notes
-----------------------------
-
-- This upgrade includes config file format changes.
-    - New versions of `supremm_resources.json` no longer require a `collection`
-      to be specified for each resource.  The appropriate MongoDB collection
-      will be determined using the `resource_id`.  Existing
-      `supremm_resources.json` files that specify a `collection` will continue
-      to work as in previous versions.  No changes are necessary for
-      configurations that are compatible with previous versions.
-
-6.5.0 to 6.6.0 Upgrade Notes
-----------------------------
-
-- This upgrade includes database schema changes.
-    - Modifies `modw_supremm` schema.
-
-6.0.0 to 6.5.0 Upgrade Notes
-----------------------------
-
-**Important Note**: This update adds a dependency to npm. If you are updating
-an existing installation via RPM, you will need to reinstall npm
-dependencies afterward. To do this, run the commands below.
-
-```bash
-# Assuming XDMoD's share directory is RPM default "/usr/share/xdmod"
-
-cd /usr/share/xdmod/etl/js
-npm install
-```
 
 - This upgrade includes database schema changes.
     - Modifies `modw_supremm` schema.
     - Modifies `modw_aggregates` schema.
 
-5.6.0 to 6.0.0 Upgrade Notes
-----------------------------
+The `modw_supremm.batchscripts` table is deprecated and is replaced by the `modw_supremm.job_scripts` table.
+The contents of the `batchscripts` table are migrated to the `job_scripts` table by
+the `xdmod-upgrade` script. The `batchscripts` table is not deleted automatically, but can be safely
+dropped from the database after a successful upgrade.
 
-- This upgrade includes config file format changes.
-    - Adds an additional option to `portal_settings.d/supremm.ini` to specify the schema definition file for the SUPReMM realm.
+The `modw_supremm.jobstatus` table was used to track the aggregation status of each row
+in the `modw_supremm.job` table. The `jobstatus` table is not longer used and is removed 
+by the upgrade. The `modw_supremm.job` table now has an extra column that stores the modification
+time for each row.
+
+The modifications to the `modw_aggregates` schema are made by the aggregation software. These run
+automatically the first time `aggregate_supremm.sh` runs after the upgrade.
