@@ -275,7 +275,7 @@ class JobViewer {
         browser.waitAndClick(this.selectors.history.search.contextMenu.buttons.editSearch);
         browser.waitForVisible(this.selectors.search.window, 30000);
     }
-    validateSearchParameters(resource, nextJobId) {
+    validateSearchParameters(resource, nextJobId, saveSearch = true) {
         browser.waitForVisible(this.selectors.search.window, 30000);
         browser.waitUntil(function () {
             var loaded = browser.execute("return Ext.getCmp('jobviewer_search_history_panel').loaded;");
@@ -284,12 +284,22 @@ class JobViewer {
             }
             return undefined;
         }, 30000);
+        // Wait until the input field has been updated
+        for (let i = 0; i < 100; i++) {
+            if (browser.getValue(this.selectors.search.basic.resource) === resource) {
+                break;
+            }
+            browser.pause(2);
+        }
         expect(browser.getValue(this.selectors.search.basic.resource)).to.equal(resource);
         expect(browser.getValue(this.selectors.search.basic.jobId)).to.equal(nextJobId + '');
-        browser.click('#job-viewer-search-lookup button');
-        browser.waitForExist('#job-viewer-search-panel div.ext-el-mask', 30000, true);
-        browser.click('#job-viewer-search-save-results button');
-        browser.waitForVisible(this.selectors.search.window, 30000, true);
+
+        if (saveSearch) {
+            browser.click('#job-viewer-search-lookup button');
+            browser.waitForExist('#job-viewer-search-panel div.ext-el-mask', 30000, true);
+            browser.click('#job-viewer-search-save-results button');
+            browser.waitForVisible(this.selectors.search.window, 30000, true);
+        }
     }
 
     changeSortOrder(saveSearchName, jobIdent) {

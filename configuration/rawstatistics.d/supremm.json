@@ -1,0 +1,9 @@
+{
+    "+realms": {
+        "SUPREMM": {
+            "name": "SUPREMM",
+            "primary_key": "_id",
+            "ident_key": "local_job_id"
+        }
+    }
+}
