@@ -1,1 +1,1 @@
-FROM tas-tools-ext-01.ccr.xdmod.org/xdmod-centos7:open7.5.1-supremm7.5.1-v2
+FROM tas-tools-ext-01.ccr.xdmod.org/xdmod-centos7:open8.0.0-supremm8.0.0-v1
