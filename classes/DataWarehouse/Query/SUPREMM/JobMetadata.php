@@ -2,6 +2,8 @@
 
 namespace DataWarehouse\Query\SUPREMM;
 
+use \XDUser;
+
 function comparenodeid($a, $b)
 {
     if ($a['nodeid'] == $b['nodeid']) {
@@ -18,7 +20,7 @@ function comparecpuid($a, $b)
     return $a['cpuid'] < $b['cpuid'] ? -1 : 1;
 }
 
-class JobMetadata
+class JobMetadata implements \DataWarehouse\Query\iJobMetadata
 {
     private $supremmDbInterface = null;
 
@@ -28,7 +30,7 @@ class JobMetadata
         $this->supremmDbInterface = new \DataWarehouse\Query\SUPREMM\SupremmDbInterface();
     }
 
-    public function getJobMetadata($user, $jobid)
+    public function getJobMetadata(XDUser $user, $jobid)
     {
 
         // TODO This implementation performs multiple queries to generate the list of
@@ -42,7 +44,7 @@ class JobMetadata
         $available_data = array( \DataWarehouse\Query\RawQueryTypes::ACCOUNTING => true );
 
         $scriptquery = new \DataWarehouse\Query\SUPREMM\JobDataset(
-            array(new \DataWarehouse\Query\Model\Parameter("_id", "=", $jobid)),
+            array('primary_key' => $jobid),
             "jobscript"
         );
 
@@ -114,7 +116,7 @@ class JobMetadata
         return $merged;
     }
 
-    public function getJobSummary($user, $jobid)
+    public function getJobSummary(XDUser $user, $jobid)
     {
         $job = $this->lookupJob($user, $jobid);
         if ($job == null) {
@@ -131,7 +133,7 @@ class JobMetadata
         }
     }
 
-    private function redactLariat($user, $lariatdata)
+    private function redactLariat(XDUser $user, $lariatdata)
     {
         if ($user->getUserType() == DEMO_USER_TYPE) {
             $username = $lariatdata['user'];
@@ -146,7 +148,7 @@ class JobMetadata
         }
     }
 
-    public function getJobExecutableInfo($user, $jobid)
+    public function getJobExecutableInfo(XDUser $user, $jobid)
     {
         $job = $this->lookupJob($user, $jobid);
         if ($job == null) {
@@ -161,7 +163,7 @@ class JobMetadata
         return array();
     }
 
-    public function getJobTimeseriesMetaData($user, $jobid)
+    public function getJobTimeseriesMetaData(XDUser $user, $jobid)
     {
 
         // TODO The next three functions just parse the data from the db in order to work
@@ -200,7 +202,7 @@ class JobMetadata
         return $result;
     }
 
-    public function getJobTimeseriesMetricMeta($user, $jobid, $metric)
+    public function getJobTimeseriesMetricMeta(XDUser $user, $jobid, $metric)
     {
 
         $job = $this->lookupJob($user, $jobid);
@@ -240,7 +242,7 @@ class JobMetadata
         return $result;
     }
 
-    public function getJobTimeseriesMetricNodeMeta($user, $jobid, $metric, $nodeid)
+    public function getJobTimeseriesMetricNodeMeta(XDUser $user, $jobid, $metric, $nodeid)
     {
 
         $job = $this->lookupJob($user, $jobid);
@@ -274,7 +276,7 @@ class JobMetadata
         return $result;
     }
 
-    public function getJobTimeseriesData($user, $jobid, $tsid, $nodeid, $cpuid)
+    public function getJobTimeseriesData(XDUser $user, $jobid, $tsid, $nodeid, $cpuid)
     {
 
         $job = $this->lookupJob($user, $jobid);
@@ -306,9 +308,7 @@ class JobMetadata
      */
     private function lookupJob($user, $jobid)
     {
-        $params = array(new \DataWarehouse\Query\Model\Parameter("_id", "=", $jobid));
-
-        $query = new \DataWarehouse\Query\SUPREMM\JobDataset($params, "internal");
+        $query = new \DataWarehouse\Query\SUPREMM\JobDataset(array('primary_key' => $jobid), "internal");
         $query->setMultipleRoleParameters($user->getAllRoles(), $user);
         $stmt = $query->getRawStatement();
 

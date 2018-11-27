@@ -50,7 +50,7 @@
         "etc": {
             "configuration/portal_settings.d/supremm.ini": "portal_settings.d/supremm.ini",
             "configuration/datawarehouse.d/supremm.json": "datawarehouse.d/supremm.json",
-            "configuration/rawstatistics.d/supremm.json": "rawstatistics.d/supremm.json",
+            "configuration/rawstatistics.d/10_supremm.json": "rawstatistics.d/10_supremm.json",
             "configuration/rest.d/supremm_dataflow.json": "rest.d/supremm_dataflow.json",
             "configuration/roles.d/supremm.json": "roles.d/supremm.json",
             "configuration/roles.d/supremm:job-viewer.json": "roles.d/supremm:job-viewer.json",
