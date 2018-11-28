@@ -640,13 +640,7 @@
         "execmatch": [
             "^g09",
             "^g16$",
-            "^l[0-9]{3}.exe$",
-            "^l9999.exe",
-            "^l1101.exe",
-            "^l1102.exe",
-            "^l1110.exe",
-            "^l1112.exe",
-            "^l1002.exe"
+            "^l[0-9]{3,4}.exe$"
         ],
         "pathmatch": [
             "^\\/opt\\/packages\\/gaussian\\/"
@@ -1289,17 +1283,13 @@
         "license_type": "permissive",
         "url": "http://blast.ncbi.nlm.nih.gov/Blast.cgi",
         "execmatch": [
-            "^blastn$",
-            "^blast$",
             "^blast_formatter$",
             "^blastdb_aliastool$",
             "^blastdbcheck$",
             "^blastdbcmd$",
             "^blastpgp$",
             "^blastall$",
-            "^blastn$",
-            "^blastp$",
-            "^blastx$",
+            "^t?blast[npx]?$",
             "^convert2blastmask$",
             "^deltablast$",
             "^dustmasker$",
@@ -1311,8 +1301,6 @@
             "^rpsblast$",
             "^rpstblastn$",
             "^segmasker$",
-            "^tblastn$",
-            "^tblastx$",
             "^update_blastdb\\.pl$",
             "^windowmasker$"
         ]
