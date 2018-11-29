@@ -23,7 +23,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
         $stat = "all"
     ) {
     
-        parent::__construct('SUPREMM', 'modw_supremm', 'job', $parameters);
+        parent::__construct('SUPREMM', 'modw_supremm', 'job', array());
 
         $this->loadRawStatsConfig();
 
@@ -48,6 +48,13 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
 
         $dataTable = $this->getDataTable();
+
+        if (isset($parameters['primary_key'])) {
+            $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, '_id'), "=", $parameters['primary_key']));
+        } else {
+            $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, 'resource_id'), '=', $parameters['resource_id']));
+            $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, 'local_job_id'), '=', $parameters['job_identifier']));
+        }
 
         if ($stat == "accounting") {
             $i = 0;
