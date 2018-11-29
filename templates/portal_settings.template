@@ -1,6 +1,3 @@
-[features]
-singlejobviewer = "on"
-
 [supremm-general]
 
 ; The version number is updated during the upgrade process.
