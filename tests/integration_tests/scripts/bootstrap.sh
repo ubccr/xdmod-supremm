@@ -12,7 +12,7 @@ set -o pipefail
 
 if [ "$XDMOD_TEST_MODE" = "fresh_install" ];
 then
-    rm -rf /var/lib/mongodb/*
+    rm -rf /var/lib/mongo/*
     mongod -f /etc/mongod.conf
     ~/bin/importmongo.sh
     $XDMOD_BOOTSTRAP
