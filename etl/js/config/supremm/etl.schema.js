@@ -64,12 +64,7 @@ module.exports = {
             extras: [
                 "KEY localjobid (resource_id,local_job_id)",
                   "KEY aggregation_index (end_time_ts,start_time_ts)"
-            ],
-            triggers: {
-                after_insert: "INSERT INTO jobstatus (job_id, aggregated_day, aggregated_month, aggregated_quarter, aggregated_year) VALUES (NEW._id, 0,0, 0, 0) ON DUPLICATE KEY UPDATE  aggregated_day = 0, aggregated_month = 0, aggregated_quarter = 0, aggregated_year = 0;",
-                after_update: "INSERT INTO jobstatus (job_id, aggregated_day, aggregated_month, aggregated_quarter, aggregated_year) VALUES (NEW._id, 0,0, 0, 0) ON DUPLICATE KEY UPDATE  aggregated_day = 0, aggregated_month = 0, aggregated_quarter = 0, aggregated_year = 0;",
-                before_del: "DELETE FROM  jobstatus WHERE job_id = OLD._id;"
-            }
+            ]
         }
     },
     dimension_tables: {
