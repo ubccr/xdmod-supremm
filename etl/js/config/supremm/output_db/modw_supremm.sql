@@ -374,27 +374,6 @@ CREATE TABLE `jobhost` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `jobstatus`
---
-
-DROP TABLE IF EXISTS `jobstatus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jobstatus` (
-  `job_id` int(11) NOT NULL,
-  `aggregated_day` bit(1) NOT NULL DEFAULT b'0',
-  `aggregated_month` bit(1) NOT NULL DEFAULT b'0',
-  `aggregated_quarter` bit(1) NOT NULL DEFAULT b'0',
-  `aggregated_year` bit(1) NOT NULL DEFAULT b'0',
-  PRIMARY KEY (`job_id`),
-  KEY `days` (`aggregated_day`),
-  KEY `months` (`aggregated_month`),
-  KEY `quarters` (`aggregated_quarter`),
-  KEY `years` (`aggregated_year`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `job_name`
 --
 

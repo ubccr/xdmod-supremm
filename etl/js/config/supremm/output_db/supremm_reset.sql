@@ -12,7 +12,6 @@ DROP TABLE IF EXISTS modw_supremm.`job_errors`;
 TRUNCATE modw_supremm.`jobhost`;
 TRUNCATE modw_supremm.`job_name`;
 TRUNCATE modw_supremm.`job_peers`;
-TRUNCATE modw_supremm.`jobstatus`;
 
 DROP TABLE IF EXISTS modw_supremm.`pkgt`;
 DROP TABLE IF EXISTS modw_supremm.`sizet`;
