@@ -59,6 +59,16 @@
             ]
         },
         {
+            "name": "supremm-ingest-postprocess",
+            "description": "Postprocessing of fact table data before aggregation is run",
+            "namespace": "ETL\\Maintenance",
+            "options_class": "MaintenanceOptions",
+            "class": "ExecuteSql",
+            "sql_file_list": [
+                "supremm/postprocess.sql"
+            ]
+        },
+        {
             "name": "supremm-aggregation-days",
             "description": "Aggregate SUPReMM realm data by day",
             "class": "JobListAggregator",
