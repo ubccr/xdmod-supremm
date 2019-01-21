@@ -1,10 +1,10 @@
 {
     "local_job_id": {
-        "value": "4655275",
+        "value": "4843309",
         "error": 0
     },
     "name": {
-        "value": "xdmod.app.md.namd.job",
+        "value": "test job 2",
         "error": 0
     },
     "resource_name": {
@@ -20,11 +20,11 @@
         "error": 0
     },
     "account": {
-        "value": "",
+        "value": "asfdnn",
         "error": 0
     },
     "username": {
-        "value": "xdtas",
+        "value": "shfaksj",
         "error": 0
     },
     "cwd": {
@@ -32,11 +32,11 @@
         "error": 2
     },
     "executable": {
-        "value": "/util/academic/namd/NAMD_2.9_Source-IBVERBS/charmrun",
+        "value": "/util/common/python/anaconda-5.0.1/bin/python",
         "error": 0
     },
     "application": {
-        "value": "charm++",
+        "value": "python",
         "error": 0
     },
     "exit_status": {
@@ -48,32 +48,26 @@
         "error": 0
     },
     "granted_pe": {
-        "value": 64,
+        "value": 32,
         "error": 0
     },
     "queue": {
-        "value": "general-compute",
+        "value": "qwjekll",
         "error": 0
     },
     "requested_nodes": {
-        "value": 8,
+        "value": 2,
         "error": 0
     },
     "hosts": {
         "value": [
-            "cpn-d07-30-01",
-            "cpn-d14-08",
-            "cpn-d15-03",
-            "cpn-d15-06",
-            "cpn-d16-31",
-            "cpn-d16-32",
-            "cpn-d16-33",
-            "cpn-d16-34"
+            "compute-node-01",
+            "compute-node-02"
         ],
         "error": 0
     },
     "nodes": {
-        "value": 8,
+        "value": 2,
         "error": 0
     },
     "shared": {
@@ -81,59 +75,59 @@
         "error": 0
     },
     "cores": {
-        "value": 64,
+        "value": 32,
         "error": 0
     },
     "cores_avail": {
-        "value": 64,
+        "value": 32,
         "error": 0
     },
     "submit_time_ts": {
-        "value": 1445928665,
+        "value": 1546451953,
         "error": 0
     },
     "eligible_time_ts": {
-        "value": 1445928665,
+        "value": 1546451953,
         "error": 0
     },
     "start_time_ts": {
-        "value": 1445928699,
+        "value": 1546451954,
         "error": 0
     },
     "end_time_ts": {
-        "value": 1445928790,
+        "value": 1546457856,
         "error": 0
     },
     "wall_time": {
-        "value": 91,
+        "value": 5902,
         "error": 0
     },
     "requested_wall_time": {
-        "value": 780,
+        "value": 259200,
         "error": 0
     },
     "wait_time": {
-        "value": 34,
+        "value": 1,
         "error": 0
     },
     "cpu_time": {
-        "value": 5824,
+        "value": 188864,
         "error": 0
     },
     "node_time": {
-        "value": 728,
+        "value": 11804,
         "error": 0
     },
     "cpu_idle": {
-        "value": 0.208836290734023,
+        "value": 0.0162509576674297,
         "error": 0
     },
     "cpu_system": {
-        "value": 0.00848832109194208,
+        "value": 0.606332951366836,
         "error": 0
     },
     "cpu_user": {
-        "value": 0.777487024308427,
+        "value": 0.376575167977805,
         "error": 0
     },
     "error": {
@@ -141,131 +135,131 @@
         "error": 2
     },
     "flops": {
-        "value": 49060941967.9375,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "flops_cov": {
-        "value": 0.0862206960617973,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "cpiref": {
-        "value": 0.613391443718489,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "cpiref_cov": {
-        "value": 0.0173862619014359,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "catastrophe": {
-        "value": 1.98658862635412,
-        "error": 0
+        "value": null,
+        "error": 16384
     },
     "cpldref": {
-        "value": 2.10727848318635,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "cpldref_cov": {
-        "value": 0.0146970166048099,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "mem_transferred": {
-        "value": 77063755368,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "mem_transferred_cov": {
-        "value": 0.0513982499581426,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "cpu_user_imbalance": {
-        "value": 4.198449694864418,
+        "value": 69.39658265860898,
         "error": 0
     },
     "cpu_user_cv": {
-        "value": 0.00948172081259236,
+        "value": 0.36046222348215,
         "error": 0
     },
     "node_cpu_idle": {
-        "value": 0.208836290734023,
+        "value": 0.0162509576674297,
         "error": 0
     },
     "energy": {
-        "value": null,
-        "error": 8
+        "value": 954623.519772768,
+        "error": 0
     },
     "max_power": {
-        "value": null,
-        "error": 8
+        "value": 165,
+        "error": 0
     },
     "memory_used": {
-        "value": 354996480,
+        "value": 307590780.14070374,
         "error": 0
     },
     "memory_used_cov": {
-        "value": 0.0225525948238054,
+        "value": 0.169926013252866,
         "error": 0
     },
     "max_memory": {
-        "value": null,
-        "error": 8
+        "value": 0.0924613444010417,
+        "error": 0
     },
     "mem_used_including_os_caches": {
-        "value": 590792960,
+        "value": 444056640.9648241,
         "error": 0
     },
     "mem_used_including_os_caches_cov": {
-        "value": 0.0537978956038514,
+        "value": 0.0554264295501713,
         "error": 0
     },
     "ib_rx_bytes": {
-        "value": 4219518386.5,
+        "value": 115200,
         "error": 0
     },
     "block_sda_wr_ios": {
-        "value": 900.25,
+        "value": 8107,
         "error": 0
     },
     "block_sda_wr_bytes": {
-        "value": 56262.75,
+        "value": 81686,
         "error": 0
     },
     "block_sda_wr_bytes_cov": {
-        "value": 0.0716318930052632,
+        "value": 0.0168799821672474,
         "error": 0
     },
     "block_sda_rd_ios": {
-        "value": 0.25,
+        "value": 6.5,
         "error": 0
     },
     "block_sda_rd_bytes": {
-        "value": 0.25,
+        "value": 174,
         "error": 0
     },
     "block_sda_rd_bytes_cov": {
-        "value": 2.82842712474619,
+        "value": 1.38170290576682,
         "error": 0
     },
     "netdrv_gpfs_rx": {
-        "value": 20525406.75,
+        "value": 548810984.5,
         "error": 0
     },
     "netdrv_gpfs_rx_cov": {
-        "value": 1.21334865438386,
+        "value": 1.41421356237309,
         "error": 0
     },
     "netdrv_gpfs_rx_msgs": {
-        "value": 1240.875,
+        "value": 8839.5,
         "error": 0
     },
     "netdrv_gpfs_tx": {
-        "value": 3148706,
+        "value": 247993095,
         "error": 0
     },
     "netdrv_gpfs_tx_cov": {
-        "value": 2.82842712474619,
+        "value": 1.37636417328634,
         "error": 0
     },
     "netdrv_gpfs_tx_msgs": {
-        "value": 48.25,
+        "value": 5197,
         "error": 0
     },
     "netdrv_isilon_rx": {
@@ -317,59 +311,59 @@
         "error": 2
     },
     "net_eth0_rx": {
-        "value": 37675901,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "net_eth0_rx_cov": {
-        "value": 0,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "net_eth0_rx_packets": {
-        "value": 11674,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "net_eth0_tx": {
-        "value": 24294374,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "net_eth0_tx_cov": {
-        "value": 0,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "net_eth0_tx_packets": {
-        "value": 9822,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "net_ib0_rx": {
         "value": 0,
         "error": 0
     },
     "net_ib0_rx_packets": {
-        "value": 0,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "net_ib0_tx": {
         "value": 0,
         "error": 0
     },
     "net_ib0_tx_packets": {
-        "value": 0,
-        "error": 0
+        "value": null,
+        "error": 8
     },
     "gpu_energy": {
-        "value": null,
-        "error": 2
+        "value": 657403.674388661,
+        "error": 0
     },
     "gpu_max_power": {
-        "value": null,
-        "error": 2
+        "value": 177.293,
+        "error": 0
     },
     "gpu0_nv_mem_used": {
         "value": null,
-        "error": "no data"
+        "error": 8
     },
     "gpu0_nv_utilization": {
         "value": null,
-        "error": "no data"
+        "error": 8
     }
 }

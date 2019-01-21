@@ -1092,6 +1092,42 @@ module.exports = {
             table: "job",
         },
 
+        node_cpu_idle: {
+            unit: 'ratio',
+            type: 'double',
+            name: 'Node CPU idle',
+            nullable: true,
+            group: 'CPU Statistics',
+            def: null,
+            comments: 'The average CPU idle for all of the CPU cores on the nodes that were assigned to the job. For jobs that were assigned all cores on the nodes this value will be identical to the CPU Idle value.',
+            per: 'node',
+            table: 'job'
+        },
+
+        energy: {
+            unit: 'joules',
+            type: 'double',
+            name: 'Energy',
+            nullable: true,
+            group: 'Energy Usage Statistics',
+            def: null,
+            comments: 'An estimate of the amount of energy consumed by the compute nodes on which the job ran. This value does not include the energy used by any external cooling equipment. Nor does it include the energy usage of other components such as filesystem servers and network switches',
+            per: 'node',
+            table: 'job'
+        },
+
+        max_power: {
+            unit: 'watts',
+            type: 'double',
+            name: 'Max Power',
+            nullable: true,
+            group: 'Energy Usage Statistics',
+            def: null,
+            comments: 'An estimate of the maximum power consumption of the compute node with largest maximum power consumption during the job.',
+            per: 'node',
+            table: 'job'
+        },
+
         mem_transferred: {
             unit: "bytes",
             type: "double",
@@ -1904,6 +1940,30 @@ module.exports = {
             algorithm_description: "",
             typical_usage: "",
             table: "job"
+        },
+
+        gpu_energy: {
+            unit: 'joules',
+            type: 'double',
+            name: 'GPU Energy',
+            nullable: true,
+            group: 'Energy Usage Statistics',
+            def: null,
+            comments: 'An estimate of the amount of energy consumed by the GPU devices that were assigned to the job. This value does not include the energy used by the compute nodes or any other components external to the GPU cards.',
+            per: 'node',
+            table: 'job'
+        },
+
+        gpu_max_power: {
+            unit: 'watts',
+            type: 'double',
+            name: 'GPU Max Power',
+            nullable: true,
+            group: 'Energy Usage Statistics',
+            def: null,
+            comments: 'An estimate of the maximum power consumption of the GPU card with the largest maximum power consumption during the job.',
+            per: 'gpu',
+            table: 'job'
         },
 
         "gpu([0-9]+)_nv_mem_used": {
