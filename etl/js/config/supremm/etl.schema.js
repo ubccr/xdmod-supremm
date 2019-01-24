@@ -1909,6 +1909,7 @@ module.exports = {
         "gpu([0-9]+)_nv_mem_used": {
             unit: "bytes",
             type: "double",
+            name: 'GPU device "gpu:label_1" average memory usage',
             nullable: true,
             group: "Accelerator Statistics",
             def: null,
