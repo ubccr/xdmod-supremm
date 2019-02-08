@@ -20,29 +20,29 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             "cpucv",
             "cpuuser",
             "datasource",
-            "nsfdirectorate",
-            "parentscience",
             "exit_status",
-            "netdrv_gpfs_rx_bucket_id",
+            "fieldofscience",
             "gpu0_nv_utilization_bucketid",
             "granted_pe",
             "ibrxbyterate_bucket_id",
-            "netdrv_isilon_rx_bucket_id",
+            "institution",
             "jobsize",
             "jobwalltime",
-            "nodecount",
-            "netdrv_panasas_rx_bucket_id",
             "max_mem",
+            "netdrv_gpfs_rx_bucket_id",
+            "netdrv_isilon_rx_bucket_id",
+            "netdrv_panasas_rx_bucket_id",
+            "nodecount",
+            "nsfdirectorate",
+            "parentscience",
+            "person",
             "pi",
-            "fieldofscience",
             "pi_institution",
+            "provider",
             "queue",
             "resource",
-            "provider",
             "shared",
-            "username",
-            "person",
-            "institution"
+            "username"
         );
     }
 
@@ -71,6 +71,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         foreach ($resdata['results'] as $dimension) {
             $dimids[] = $dimension['id'];
         }
+        sort($dimids);
 
         $this->assertEquals(self::getDimensions(), $dimids);
 
