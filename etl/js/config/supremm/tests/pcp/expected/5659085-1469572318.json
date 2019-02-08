@@ -180,6 +180,18 @@
         "value": 0.0171202675713068,
         "error": 0
     },
+    "node_cpu_idle": {
+        "value": 0.384319295395006,
+        "error": 0
+    },
+    "energy": {
+        "value": null,
+        "error": 8
+    },
+    "max_power": {
+        "value": null,
+        "error": 8
+    },
     "memory_used": {
         "value": 375827403.0107525,
         "error": 0
@@ -339,6 +351,14 @@
     "net_ib0_tx_packets": {
         "value": 0,
         "error": 0
+    },
+    "gpu_energy": {
+        "value": null,
+        "error": 2
+    },
+    "gpu_max_power": {
+        "value": null,
+        "error": 2
     },
     "gpu0_nv_mem_used": {
         "value": null,

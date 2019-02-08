@@ -488,6 +488,17 @@ module.exports = function(config) {
                     return this.getcov.call(this, job, ["cpu.jobcpus.user", "cpu.nodecpus.user"]);
                 }
             },
+            node_cpu_idle: {
+                ref: 'cpu.nodecpus.idle.avg'
+            },
+            energy: {
+                ref: 'ipmi.energy.avg'
+            },
+            max_power: {
+                formula: function (job) {
+                    return this.getmax(job, 'ipmi.power.max');
+                }
+            },
             "memory_used": {
                 formula: function(job) {
                     var mem = this.ref(job, "memory.used_minus_cache.avg");
@@ -649,6 +660,61 @@ module.exports = function(config) {
             },
             "net_ib0_tx_packets": {
                 ref: "network.ib0.out-packets.avg"
+            },
+            gpu_energy: {
+                formula: function (job) {
+                    if (!job.gpupower) {
+                        return { value: null, error: this.metricErrors.codes.metricMissingNotAvailOnThisHost.value };
+                    }
+
+                    var energy = 0.0;
+                    var device_count = 0;
+
+                    for (let gpu in job.gpupower) {
+                        if (job.gpupower.hasOwnProperty(gpu)) {
+                            if (job.gpupower[gpu].energy && job.gpupower[gpu].energy.avg) {
+                                energy += job.gpupower[gpu].energy.avg;
+                                device_count += 1;
+                            }
+                        }
+                    }
+
+                    if (device_count === 0) {
+                        return { value: null, error: this.metricErrors.codes.missingCollectionFailed.value };
+                    }
+
+                    return { value: energy, error: 0 };
+                }
+            },
+            gpu_max_power: {
+                formula: function (job) {
+                    if (!job.gpupower) {
+                        return { value: null, error: this.metricErrors.codes.metricMissingNotAvailOnThisHost.value };
+                    }
+
+                    var max_power = 0.0;
+                    var device_count = 0;
+
+                    for (let gpu in job.gpupower) {
+                        if (job.gpupower.hasOwnProperty(gpu)) {
+                            if (job.gpupower[gpu].power && job.gpupower[gpu].power.max) {
+                                if (job.gpupower[gpu].power.max.max) {
+                                    max_power = Math.max(max_power, job.gpupower[gpu].power.max.max);
+                                    device_count += 1;
+                                } else if (job.gpupower[gpu].power.max.avg) {
+                                    max_power = Math.max(max_power, job.gpupower[gpu].power.max.avg);
+                                    device_count += 1;
+                                }
+                            }
+                        }
+                    }
+
+                    if (device_count === 0) {
+                        return { value: null, error: this.metricErrors.codes.missingCollectionFailed.value };
+                    }
+
+                    return { value: max_power, error: 0 };
+                }
             },
             "gpu0_nv_mem_used": {
                 ref: "gpu.gpu0.memused.avg"

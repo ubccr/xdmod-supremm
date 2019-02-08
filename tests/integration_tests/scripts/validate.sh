@@ -30,4 +30,12 @@ then
     exitcode=1
 fi
 
+# Check that the energy metric columns are present and correct
+hascolumn=$(echo "show columns from modw_supremm.job LIKE 'energy'"  | mysql -N modw_supremm)
+if [ -z "$hascolumn" ];
+then
+    echo "Misssing energy column from job table"
+    exitcode=1
+fi
+
 exit $exitcode
