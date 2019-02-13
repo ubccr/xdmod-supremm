@@ -414,9 +414,14 @@ module.exports = {
                         values: {resource_id: attributes.resource_id.value, name: attributes.hosts.value[i]}
                     });
                     ret.push({
-                        query: "insert ignore into modw_supremm.jobhost (local_job_id, resource_id, host_id) "
-                             + "values (:local_job_id, :resource_id, (select id from modw_supremm.host where resource_id = :resource_id and name = :name ))",
-                        values: {local_job_id: attributes.local_job_id.value, resource_id: attributes.resource_id.value, name: attributes.hosts.value[i]},
+                        query: 'insert ignore into modw_supremm.jobhost (local_job_id, resource_id, end_time_ts, host_id) '
+                             + 'values (:local_job_id, :resource_id, :end_time_ts, (select id from modw_supremm.host where resource_id = :resource_id and name = :name ))',
+                        values: {
+                            local_job_id: attributes.local_job_id.value,
+                            resource_id: attributes.resource_id.value,
+                            end_time_ts: attributes.end_time_ts.value,
+                            name: attributes.hosts.value[i]
+                        },
                         cacheable: false
                     });
                 }
