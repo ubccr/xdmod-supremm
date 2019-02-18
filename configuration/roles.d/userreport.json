@@ -1,0 +1,24 @@
+{
+    "+roles": {
+        "+default": {
+            "+query_descripters": [
+                {
+                    "realm": "UserReport",
+                    "group_by": "none"
+                },
+                {
+                    "realm": "UserReport",
+                    "group_by": "person"
+                },
+                {
+                    "realm": "UserReport",
+                    "group_by": "pi"
+                },
+                {
+                    "realm": "UserReport",
+                    "group_by": "category"
+                }
+            ]
+        }
+    }
+}

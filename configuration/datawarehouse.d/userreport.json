@@ -1,0 +1,41 @@
+{
+    "+realms": {
+        "UserReport": {
+            "schema": "N/A",
+            "table": "N/A",
+            "datasource": "SUPREMM",
+            "group_bys": [
+                {
+                    "name": "none",
+                    "class": "GroupByNone"
+                },
+                {
+                    "name": "person",
+                    "class": "GroupByPerson"
+                },
+                {
+                    "name": "pi",
+                    "class": "GroupByPi"
+                },
+                {
+                    "name": "category",
+                    "class": "GroupByCategory"
+                },
+                {
+                    "name": "day",
+                    "class": "GroupByDay"
+                }
+            ],
+            "statistics": [
+                {
+                    "name": "job_count",
+                    "class": "job_count_Statistic"
+                },
+                {
+                    "name": "core_time",
+                    "class": "core_time_Statistic"
+                }
+            ]
+        }
+    }
+}

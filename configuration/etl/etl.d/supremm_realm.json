@@ -41,11 +41,59 @@
             "namespace": "ETL\\Maintenance",
             "options_class": "MaintenanceOptions",
             "definition_file_list": [
+                "supremm/job_category.json",
+                "supremm/userreport_by_day_joblist.json",
                 "supremm/job.json",
                 "supremm/job_errors.json",
                 "supremm/jobhost.json",
                 "supremm/job_scripts.json"
             ]
+        },
+        {
+            "name": "dimension-job-category-load",
+            "description": "Load data into job_category dimension table",
+            "class": "StructuredFileIngestor",
+            "namespace": "ETL\\Ingestor",
+            "options_class": "IngestorOptions",
+            "definition_file": "supremm/job_category.json",
+            "endpoints": {
+                "source": {
+                    "type": "jsonfile",
+                    "name": "job categories",
+                    "path": "supremm/job_category.json"
+                }
+            }
+        }
+    ],
+    "userreport-aggregation": [
+        {
+            "name": "userreport-aggregation-days",
+            "description": "Aggregate SUPReMM realm data by day",
+            "class": "JobListAggregator",
+            "definition_file": "supremm/userreport_by_day.json",
+            "table_prefix": "userreport_by_",
+            "aggregation_units": ["day"]
+        }
+    ],
+    "userreport-joblist": [
+        {
+            "name": "userreport-aggregation-joblist",
+            "namespace": "ETL\\Ingestor",
+            "class": "ExplodeTransformIngestor",
+            "options_class": "IngestorOptions",
+            "definition_file": "supremm/userreport_by_day_joblist.json",
+            "description": "Populate the job list table, which contains the back references from the aggregates table to the fact table",
+            "explode_column": {
+                "job_id_list": "job_id"
+            },
+            "endpoints": {
+                "source": {
+                    "type": "mysql",
+                    "name": "modw_aggregates",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates"
+                }
+            }
         }
     ],
     "supremm-realm-aggregation": [

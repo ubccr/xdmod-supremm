@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../configuration/linker.php';
+
 use CCR\DB;
+use ETL\Utilities;
 
 $conf = array(
     'emailSubject' => gethostname() . ': XDMOD: Data Warehouse: SUPReMM ETL Log',
@@ -19,7 +21,8 @@ function usage_and_exit()
 {
     global $argv;
 
-    fwrite(STDERR,
+    fwrite(
+        STDERR,
         <<<"EOMSG"
 Usage: {$argv[0]}
     -h, --help
@@ -43,16 +46,15 @@ Usage: {$argv[0]}
 EOMSG
 );
 
-  exit(1);
-
+    exit(1);
 }
 
 
 $args = getopt(implode('', array_keys($options)), $options);
 
-foreach ($args as $arg => $value) 
+foreach ($args as $arg => $value)
 {
-    switch ($arg) 
+    switch ($arg)
     {
         case 'h':
         case 'help':
@@ -85,14 +87,18 @@ $logger->notice(array(
     'process_start_time' => $process_start_time
 ));
 
-try
+function run_aggregation($sourceTable, $pipeline)
 {
-    $journal = new \DB\EtlJournalHelper('modw_supremm', 'job');
+    global $conf, $logger;
+
+    $process_start_time = date('Y-m-d H:i:s');
+
+    $journal = new \DB\EtlJournalHelper($sourceTable[0], $sourceTable[1]);
 
     $last_modified = $journal->getLastModified();
 
     $scriptOptions = array(
-        'process-sections' => array('supremm.supremm-realm-aggregation'),
+        'process-sections' => $pipeline,
         'verbosity' => $conf['consoleLogLevel'],
         'option-overrides' => array(
             'batch_aggregation_min_num_periods' => 10
@@ -113,46 +119,28 @@ try
             'default_module_name' => $scriptOptions['default-module-name']
         )
     );
+    Utilities::setEtlConfig($etlConfig);
     $overseerOptions = new \ETL\EtlOverseerOptions($scriptOptions, $logger);
     $overseer = new \ETL\EtlOverseer($overseerOptions, $logger);
     $overseer->execute($etlConfig);
-
 
     $process_end_time = date('Y-m-d H:i:s');
 
     $journal->markAsDone($process_start_time, $process_end_time, array());
+}
 
-    $process_start_time = date('Y-m-d H:i:s');
-
-    $jobListJournal = new \DB\EtlJournalHelper('modw_aggregates', 'supremmfact_by_day');
-    $last_modified = $jobListJournal->getLastModified();
-
-    $scriptOptions = array(
-        'actions' => array('supremm.supremm-realm-joblist.supremm-aggregation-joblist'),
-        'verbosity' => $conf['consoleLogLevel'],
-        'default-module-name' => 'xdmod'
+try
+{
+    run_aggregation(
+        array('modw_supremm', 'job'),
+        array('supremm.supremm-realm-aggregation', 'supremm.userreport-aggregation')
     );
-
-    if ($last_modified !== null) {
-        $scriptOptions['last-modified-start-date'] = $last_modified;
-    }
-
-    $etlConfig = \ETL\Configuration\EtlConfiguration::factory(
-        CONFIG_DIR . '/etl/etl.json',
-        null,
-        $logger,
-        array('default_module_name' => $scriptOptions['default-module-name'])
-    );
-    $overseerOptions = new \ETL\EtlOverseerOptions($scriptOptions, $logger);
-    $overseer = new \ETL\EtlOverseer($overseerOptions, $logger);
-    $overseer->execute($etlConfig);
-
-    $process_end_time = date('Y-m-d H:i:s');
-    $jobListJournal->markAsDone($process_start_time, $process_end_time, array());
+    run_aggregation(array('modw_aggregates', 'supremmfact_by_day'), array('supremm.supremm-realm-joblist'));
+    run_aggregation(array('modw_aggregates', 'userreport_by_day'), array('supremm.userreport-joblist'));
 
     $logger->notice(array(
         'message'          => 'aggregate_supremm end',
-        'process_end_time' => $process_end_time
+        'process_end_time' => date('Y-m-d H:i:s')
     ));
 
 }

@@ -1,0 +1,5 @@
+{
+    "table_definition": [{
+        "$ref": "${table_definition_dir}/supremm/job_category.json#/table_definition"
+    }]
+}

@@ -1,0 +1,82 @@
+{
+    "table_definition": {
+        "$ref": "${table_definition_dir}/supremm/userreport_by_day.json#/table_definition"
+    },
+    "aggregation_period_query": {
+        "overseer_restrictions": {
+            "last_modified_start_date": "last_modified >= ${VALUE}",
+            "last_modified_end_date": "last_modified <= ${VALUE}",
+            "include_only_resource_codes": "resource_id IN ${VALUE}",
+            "exclude_resource_codes": "resource_id NOT IN ${VALUE}"
+        },
+        "conversions": {
+            "start_day_id": "YEAR(FROM_UNIXTIME(start_time_ts)) * 100000 + DAYOFYEAR(FROM_UNIXTIME(start_time_ts))",
+            "end_day_id": "YEAR(FROM_UNIXTIME(end_time_ts)) * 100000 + DAYOFYEAR(FROM_UNIXTIME(end_time_ts))"
+        }
+    },
+    "destination_query": {
+        "overseer_restrictions": {
+            "include_only_resource_codes": "record_resource_id IN ${VALUE}",
+            "exclude_resource_codes": "record_resource_id NOT IN ${VALUE}"
+        }
+    },
+    "source_query": {
+        "overseer_restrictions": {
+            "include_only_resource_codes": "record.resource_id IN ${VALUE}",
+            "exclude_resource_codes": "record.resource_id NOT IN ${VALUE}"
+        },
+        "query_hint": "SQL_NO_CACHE",
+        "records": {
+            "${AGGREGATION_UNIT}_id": "${:PERIOD_ID}",
+            "year": "${:YEAR_VALUE}",
+            "${AGGREGATION_UNIT}": "${:PERIOD_VALUE}",
+            "application_id": "application_id",
+            "fos_id": "fos_id",
+            "job_category_id": "${job_classifier}",
+            "organization_id": "organization_id",
+            "person_id": "person_id",
+            "person_organization_id": "person_organization_id",
+            "piperson_organization_id": "piperson_organization_id",
+            "principalinvestigator_person_id": "principalinvestigator_person_id",
+            "queue_id": "queue_id",
+            "resource_id": "resource_id",
+            "systemaccount_id": "systemaccount_id",
+            "cpu_time": "sum(case when (start_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} and end_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} )  then (cpu_time)  when (start_time_ts < ${:PERIOD_START_TS} and end_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} )  then (cpu_time) * (end_time_ts - ${:PERIOD_START_TS} + 1 ) / ( end_time_ts - start_time_ts + 1)  when (start_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} and end_time_ts > ${:PERIOD_END_TS} )  then (cpu_time) * (${:PERIOD_END_TS} - start_time_ts + 1 ) / (end_time_ts - start_time_ts + 1)  when (start_time_ts < ${:PERIOD_START_TS} and end_time_ts > ${:PERIOD_END_TS} )  then    (cpu_time) *( ${:PERIOD_SECONDS} ) / (end_time_ts - start_time_ts + 1)  else (cpu_time)  end)",
+            "job_count": "sum(CASE WHEN end_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} then 1 else 0 end)",
+            "node_time": "coalesce(sum(case when (start_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} and end_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} )  then node_time  when (start_time_ts < ${:PERIOD_START_TS} and end_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} )  then node_time * (end_time_ts - ${:PERIOD_START_TS} + 1 ) / ( end_time_ts - start_time_ts + 1)  when (start_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} and end_time_ts > ${:PERIOD_END_TS} )  then node_time * (${:PERIOD_END_TS} - start_time_ts + 1 ) / (end_time_ts - start_time_ts + 1)  when (start_time_ts < ${:PERIOD_START_TS} and end_time_ts > ${:PERIOD_END_TS} )  then    node_time *( ${:PERIOD_SECONDS} ) / (end_time_ts - start_time_ts + 1)  else node_time  end), 0)",
+            "running_job_count": "sum(1)",
+            "started_job_count": "sum(CASE WHEN start_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} then 1 else 0 end)",
+            "submitted_job_count": "sum(CASE WHEN submit_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} then 1 else 0 end)",
+            "wall_time": "coalesce(sum(case when (start_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} and end_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} )  then wall_time  when (start_time_ts < ${:PERIOD_START_TS} and end_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} )  then wall_time * (end_time_ts - ${:PERIOD_START_TS} + 1 ) / ( end_time_ts - start_time_ts + 1)  when (start_time_ts between ${:PERIOD_START_TS} and ${:PERIOD_END_TS} and end_time_ts > ${:PERIOD_END_TS} )  then wall_time * (${:PERIOD_END_TS} - start_time_ts + 1 ) / (end_time_ts - start_time_ts + 1)  when (start_time_ts < ${:PERIOD_START_TS} and end_time_ts > ${:PERIOD_END_TS} )  then    wall_time *( ${:PERIOD_SECONDS} ) / (end_time_ts - start_time_ts + 1)  else wall_time  end),0)",
+            "job_id_list": "GROUP_CONCAT(jf._id)"
+        },
+        "groupby": [
+            "application_id",
+            "fos_id",
+            "organization_id",
+            "person_id",
+            "person_organization_id",
+            "piperson_organization_id",
+            "principalinvestigator_person_id",
+            "queue_id",
+            "resource_id",
+            "systemaccount_id"
+        ],
+        "joins": [
+            {
+                "name": "job",
+                "schema": "${SOURCE_SCHEMA}",
+                "alias": "jf"
+            }
+        ],
+        "macros": [
+            {
+                "name": "job_classifier",
+                "file": "supremm/job_categorization.sql"
+            }
+        ],
+        "where": [
+            "YEAR(FROM_UNIXTIME(jf.start_time_ts)) * 100000 + DAYOFYEAR(FROM_UNIXTIME(jf.start_time_ts)) <= ${:PERIOD_END_DAY_ID} AND YEAR(FROM_UNIXTIME(jf.end_time_ts)) * 100000 + DAYOFYEAR(FROM_UNIXTIME(jf.end_time_ts)) >= ${:PERIOD_START_DAY_ID}"
+        ]
+    }
+}

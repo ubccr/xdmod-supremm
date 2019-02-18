@@ -1,0 +1,60 @@
+{
+    "module": "supremm",
+    "defaults": {
+        "global": {
+            "endpoints": {
+                "destination": {
+                    "type": "mysql",
+                    "name": "SUPReMM DB",
+                    "config": "datawarehouse",
+                    "schema": "modw_supremm"
+                }
+            }
+        }
+    },
+    "migration-8_1_2-8_5_0": [
+        {
+            "name": "table-maintenance",
+            "description": "Setup tables",
+            "class": "ManageTables",
+            "namespace": "ETL\\Maintenance",
+            "options_class": "MaintenanceOptions",
+            "definition_file_list": [
+                "supremm/job_category.json"
+            ]
+        },
+        {
+            "name": "agg-table-maintenance",
+            "description": "Setup tables",
+            "class": "ManageTables",
+            "namespace": "ETL\\Maintenance",
+            "options_class": "MaintenanceOptions",
+            "definition_file_list": [
+                "supremm/userreport_by_day_joblist.json"
+            ],
+            "endpoints": {
+                "destination": {
+                    "type": "mysql",
+                    "name": "SUPReMM DB",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates"
+                }
+            }
+        },
+        {
+            "name": "dimension-job-category-load",
+            "description": "Load data into job_category dimension table",
+            "class": "StructuredFileIngestor",
+            "namespace": "ETL\\Ingestor",
+            "options_class": "IngestorOptions",
+            "definition_file": "supremm/job_category.json",
+            "endpoints": {
+                "source": {
+                    "type": "jsonfile",
+                    "name": "job categories",
+                    "path": "supremm/job_category.json"
+                }
+            }
+        }
+    ]
+}
