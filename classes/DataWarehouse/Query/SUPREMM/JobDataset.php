@@ -1,6 +1,7 @@
 <?php
 namespace DataWarehouse\Query\SUPREMM;
 
+use Configuration\XdmodConfiguration;
 use \DataWarehouse\Query\Model\Table;
 use \DataWarehouse\Query\Model\TableField;
 use \DataWarehouse\Query\Model\Field;
@@ -303,8 +304,13 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
     private function loadRawStatsConfig()
     {
         if ($this->sconf == null) {
-            $config = \Xdmod\Config::factory();
-            $this->sconf = $config['rawstatisticsconfig'];
+            $configFile = new XdmodConfiguration(
+                'rawstatisticsconfig.json',
+                CONFIG_DIR
+            );
+            $configFile->initialize();
+
+            $this->sconf = json_decode($configFile->toJson(), true);
         }
     }
 

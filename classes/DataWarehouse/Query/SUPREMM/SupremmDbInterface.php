@@ -2,17 +2,31 @@
 
 namespace DataWarehouse\Query\SUPREMM;
 
+use Configuration\XdmodConfiguration;
+
 class SupremmDbInterface {
     private $etl_version = null;
     private $resource_rmap = null;
 
     public function __construct() {
-        $config = \Xdmod\Config::factory();
+        $supremmConfigFile = new XdmodConfiguration(
+            'supremmconfig',
+            CONFIG_DIR
+        );
+        $supremmConfigFile->initialize();
 
-        $sconf = $config['supremmconfig'];
+        $sconf = json_decode($supremmConfigFile->toJson(), true);
         $this->etl_version = $sconf['etlversion'];
 
-        $resources = $config['supremm_resources']['resources'];
+        $supremmResourcesConfigFile = new XdmodConfiguration(
+            'supremm_resources.json',
+            CONFIG_DIR
+
+        );
+        $supremmResourcesConfigFile->initialize();
+
+        $supremmResourcesConfig = json_decode($supremmResourcesConfigFile->toJson(), true);
+        $resources = $supremmResourcesConfig['resources'];
 
         foreach($resources as $sresource) {
 
