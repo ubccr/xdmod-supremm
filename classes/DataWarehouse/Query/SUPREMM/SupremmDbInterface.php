@@ -10,7 +10,7 @@ class SupremmDbInterface {
 
     public function __construct() {
         $supremmConfigFile = new XdmodConfiguration(
-            'supremmconfig',
+            'supremmconfig.json',
             CONFIG_DIR
         );
         $supremmConfigFile->initialize();
