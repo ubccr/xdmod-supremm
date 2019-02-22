@@ -15,7 +15,7 @@ class SupremmDbInterface {
         );
         $supremmConfigFile->initialize();
 
-        $sconf = json_decode($supremmConfigFile->toJson(), true);
+        $sconf = $supremmConfigFile->toAssocArray();
         $this->etl_version = $sconf['etlversion'];
 
         $supremmResourcesConfigFile = new XdmodConfiguration(
@@ -25,7 +25,7 @@ class SupremmDbInterface {
         );
         $supremmResourcesConfigFile->initialize();
 
-        $supremmResourcesConfig = json_decode($supremmResourcesConfigFile->toJson(), true);
+        $supremmResourcesConfig = $supremmResourcesConfigFile->toAssocArray();
         $resources = $supremmResourcesConfig['resources'];
 
         foreach($resources as $sresource) {

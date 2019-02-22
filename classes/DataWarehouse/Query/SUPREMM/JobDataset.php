@@ -310,7 +310,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             );
             $configFile->initialize();
 
-            $this->sconf = json_decode($configFile->toJson(), true);
+            $this->sconf = $configFile->toAssocArray();
         }
     }
 
