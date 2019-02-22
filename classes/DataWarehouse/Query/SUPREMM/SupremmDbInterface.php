@@ -21,7 +21,6 @@ class SupremmDbInterface {
         $supremmResourcesConfigFile = new XdmodConfiguration(
             'supremm_resources.json',
             CONFIG_DIR
-
         );
         $supremmResourcesConfigFile->initialize();
 
