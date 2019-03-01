@@ -9,23 +9,13 @@ class SupremmDbInterface {
     private $resource_rmap = null;
 
     public function __construct() {
-        $supremmConfigFile = new XdmodConfiguration(
-            'supremmconfig.json',
-            CONFIG_DIR
-        );
-        $supremmConfigFile->initialize();
-
-        $sconf = $supremmConfigFile->toAssocArray();
+        $sconf = XdmodConfiguration::assocArrayFactory('supremmconfig.json', CONFIG_DIR);
         $this->etl_version = $sconf['etlversion'];
 
-        $supremmResourcesConfigFile = new XdmodConfiguration(
+        $resources = XdmodConfiguration::assocArrayFactory(
             'supremm_resources.json',
             CONFIG_DIR
-        );
-        $supremmResourcesConfigFile->initialize();
-
-        $supremmResourcesConfig = $supremmResourcesConfigFile->toAssocArray();
-        $resources = $supremmResourcesConfig['resources'];
+        )['resources'];
 
         foreach($resources as $sresource) {
 
