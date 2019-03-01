@@ -1,7 +1,8 @@
 {
-    "+realms": {
-        "SUPREMM": {
-            "name": "SUPREMM"
+    "+realms": [
+        {
+            "name": "SUPREMM",
+            "display": "SUPREMM"
         }
-    }
+    ]
 }
