@@ -65,7 +65,6 @@ selectMenuOption 8
 selectMenuOption d
 answerQuestion {DB Admin Username:} root
 providePassword {DB Admin Password:} {}
-provideInput {Install Node.js packages using npm*} {y}
 provideInput {MongoDB uri*} {mongodb://localhost:27017/supremm}
 provideInput {database name*} {supremm}
 enterToContinue
