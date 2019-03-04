@@ -2,6 +2,8 @@
 The Job Performance data workflow is run as a series of batch processing
 scripts executed periodically via cron.
 
+<INSERT>
+
 Before setting up the batch processing workflow, we highly recommend manually
 running the various scripts in debug mode.
 
