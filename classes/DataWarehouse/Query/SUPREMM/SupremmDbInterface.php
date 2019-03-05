@@ -13,13 +13,10 @@ class SupremmDbInterface {
         $this->etl_version = $sconf['etlversion'];
 
         $resourcesConf = XdmodConfiguration::assocArrayFactory(
-            supremm_resources.json',
-            CONFIG_DIR
-        );
-        $resources = $resoruceConf['resources'];
             'supremm_resources.json',
             CONFIG_DIR
-        )['resources'];
+        );
+        $resources = $resourcesConf['resources'];
 
         foreach($resources as $sresource) {
 
