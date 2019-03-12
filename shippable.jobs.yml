@@ -1,9 +1,0 @@
-jobs:
-  - name: xdmod-supremm_runCI
-    type: runCI
-    steps:
-      - IN: nightly-trigger
-    on_success:
-      - script: echo 'xdmod-supremm daily build success'
-    on_failure:
-      - script: echo 'xdmod-supremm daily build failure'
