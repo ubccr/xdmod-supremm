@@ -26,3 +26,17 @@ build:
         - ../xdmod/open_xdmod/modules/xdmod/automated_tests/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
     on_failure:
         - cat /var/log/xdmod/*
+jobs:
+    - name: nightly
+      type: runCI
+      steps:
+        - IN: nightly-trigger
+      on_success:
+        - script: echo 'xdmod-supremm daily build success'
+      on_failure:
+        - script: echo 'xdmod-supremm daily build failure'
+resources:
+  - name: nightly-trigger
+    type: time
+    seed:
+    interval: "0 22 * * *"
