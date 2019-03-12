@@ -27,7 +27,7 @@ build:
     on_failure:
         - cat /var/log/xdmod/*
 jobs:
-    - name: nightly
+    - name: xdmod-supremm_runCI
       type: runCI
       steps:
         - IN: nightly-trigger
