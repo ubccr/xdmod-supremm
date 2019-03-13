@@ -32,17 +32,18 @@ jobs:
       steps:
         - IN: nightly-trigger
       on_success:
-        - script: echo 'xdmod-supremm daily build success'
+        - NOTIFY: email-team
       on_failure:
         - NOTIFY: email-team
 resources:
   - name: nightly-trigger
     type: time
     versionTemplate:
-      interval: "10 2 * * *" # UTC
+      interval: "0 3 * * *" # UTC
   - name: email-team
     type: notification
     versionTemplate:
       method: email
       recipients:
+         - "jpwhite4@buffalo.edu"
          - "ccr-xdmod-cron@buffalo.edu"
