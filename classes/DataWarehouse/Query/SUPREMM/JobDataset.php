@@ -304,13 +304,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
     private function loadRawStatsConfig()
     {
         if ($this->sconf == null) {
-            $configFile = new XdmodConfiguration(
-                'rawstatisticsconfig.json',
-                CONFIG_DIR
-            );
-            $configFile->initialize();
-
-            $this->sconf = $configFile->toAssocArray();
+            $this->sconf = XdmodConfiguration::assocArrayFactory('rawstatisticsconfig.json', CONFIG_DIR);
         }
     }
 
