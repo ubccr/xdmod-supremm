@@ -39,4 +39,4 @@ resources:
   - name: nightly-trigger
     type: time
     seed:
-    interval: "0 22 * * *"
+      interval: "0 22 * * *"
