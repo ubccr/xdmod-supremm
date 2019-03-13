@@ -1,0 +1,230 @@
+{
+    "table_definition": {
+        "name": "jobefficiency_by",
+        "table_prefix": "jobefficiency_by_",
+        "engine": "MyISAM",
+        "comment": "jobefficiency aggregated by ${AGGREGATION_UNIT}.",
+        "columns": [
+            {
+                "name": "id",
+                "type": "int(11)",
+                "nullable": false,
+                "extra": "auto_increment"
+            },
+            {
+                "name": "${AGGREGATION_UNIT}_id",
+                "type": "int(10) unsigned",
+                "nullable": false,
+                "comment": "DIMENSION: The id related to modw.${AGGREGATION_UNIT}s."
+            },
+            {
+                "name": "year",
+                "type": "smallint(5) unsigned",
+                "nullable": false,
+                "comment": "DIMENSION: The year of the ${AGGREGATION_UNIT}"
+            },
+            {
+                "name": "${AGGREGATION_UNIT}",
+                "type": "smallint(5) unsigned",
+                "nullable": false,
+                "comment": "DIMENSION: The ${AGGREGATION_UNIT} of the year."
+            },
+            {
+                "name": "application_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The application that the job ran. This value is autodetected based on the job executable path. A value of uncategorized indicates that the executable path was not recognized as a community application. A value of PROPRIETARY is shown for any application that has a non-open licence agreement that may restrict publishing of performance data. NA means not available."
+            },
+            {
+                "name": "fos_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: config://hierarchy.json:bottom_level_info"
+            },
+            {
+                "name": "job_category_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The categorized job type."
+            },
+            {
+                "name": "organization_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The organization that owns the resource on which the job ran."
+            },
+            {
+                "name": "person_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The name of the job owner."
+            },
+            {
+                "name": "person_organization_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The name of the organization of the job owner."
+            },
+            {
+                "name": "piperson_organization_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The organization of the job owner's PI."
+            },
+            {
+                "name": "principalinvestigator_person_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The PI of the job owner."
+            },
+            {
+                "name": "queue_id",
+                "type": "varchar(50)",
+                "nullable": false,
+                "comment": "DIMENSION: The name of the queue to which the job was submitted."
+            },
+            {
+                "name": "resource_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The resource that ran the job."
+            },
+            {
+                "name": "systemaccount_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The username on the resource of the user that ran the job. May be a UID or string username depending on the resource."
+            },
+            {
+                "name": "cpu_time",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The amount of the cpu_time of the jobs pertaining to this period. If a job took more than one period, its cpu_time is distributed linearly across the periods it spans."
+            },
+            {
+                "name": "job_count",
+                "type": "int(11)",
+                "nullable": true,
+                "comment": "FACT: The number of jobs that ended during this period."
+            },
+            {
+                "name": "node_time",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The amount of the node_time of the jobs pertaining to this period. If a job took more than one period, its node_time is distributed linearly across the periods it spans."
+            },
+            {
+                "name": "running_job_count",
+                "type": "int(11)",
+                "nullable": true,
+                "comment": "FACT: The number of jobs that were running during this period."
+            },
+            {
+                "name": "started_job_count",
+                "type": "int(11)",
+                "nullable": true,
+                "comment": "FACT: The number of jobs that started during this period."
+            },
+            {
+                "name": "submitted_job_count",
+                "type": "int(11)",
+                "nullable": true,
+                "comment": "FACT: The number of jobs that started during this period."
+            },
+            {
+                "name": "wall_time",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The wall_time of the jobs that were running during this period. This will only count the walltime of the jobs that fell during the period."
+            }
+        ],
+        "indexes": [
+            {
+                "name": "PRIMARY",
+                "columns": [
+                    "id"
+                ],
+                "type": "BTREE",
+                "is_unique": true
+            },
+            {
+                "name": "index_jobefficiency_by_${AGGREGATION_UNIT}_${AGGREGATION_UNIT}_id",
+                "columns": [
+                    "${AGGREGATION_UNIT}_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_by_${AGGREGATION_UNIT}_${AGGREGATION_UNIT}",
+                "columns": [
+                    "${AGGREGATION_UNIT}"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_application_id",
+                "columns": [
+                    "application_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_fos_id",
+                "columns": [
+                    "fos_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_job_category_id",
+                "columns": [
+                    "job_category_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_organization_id",
+                "columns": [
+                    "organization_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_person_id",
+                "columns": [
+                    "person_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_person_organization_id",
+                "columns": [
+                    "person_organization_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_piperson_organization_id",
+                "columns": [
+                    "piperson_organization_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_principalinvestigator_person_id",
+                "columns": [
+                    "principalinvestigator_person_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_queue_id",
+                "columns": [
+                    "queue_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_resource_id",
+                "columns": [
+                    "resource_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_systemaccount_id",
+                "columns": [
+                    "systemaccount_id"
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "+roles": {
+        "+default": {
+            "+query_descripters": [
+                {
+                    "realm": "JobEfficiency",
+                    "group_by": "none"
+                },
+                {
+                    "realm": "JobEfficiency",
+                    "group_by": "person"
+                },
+                {
+                    "realm": "JobEfficiency",
+                    "group_by": "pi"
+                },
+                {
+                    "realm": "JobEfficiency",
+                    "group_by": "category"
+                }
+            ]
+        }
+    }
+}
