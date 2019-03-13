@@ -274,23 +274,53 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $this->xdmodhelper->logout();
     }
 
-    public function testJobMetadata() {
+    public function getJobPrimaryIdentifier($resource_id, $local_job_id) {
         $queryparams = array(
             'realm' => 'SUPREMM',
             'params' => json_encode(
                 array(
-                    'resource_id' => 5,
-                    'local_job_id' => 6112282
+                    'resource_id' => $resource_id,
+                    'local_job_id' => $local_job_id
                 )
             )
         );
         $this->xdmodhelper->authenticate('cd');
         $jobparams = $this->validateSingleJobSearch($queryparams, false);
-        $searchparams = array(
+        $this->xdmodhelper->logout();
+        return array(
             'realm' => 'SUPREMM',
             'recordid' => '-1', // this parameter is not acutally used for anything but needs to be present :-(
             $jobparams['dtype'] => $jobparams[$jobparams['dtype']]
         );
+    }
+
+    public function testJobDatasetAccessControls() {
+
+        $searchparams = $this->getJobPrimaryIdentifier(5, 6117006);
+
+        $this->xdmodhelper->authenticate('usr');
+
+        $response = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs/accounting', $searchparams);
+
+        $this->assertEquals(403, $response[1]['http_code']);
+
+        $this->xdmodhelper->logout();
+
+        $this->xdmodhelper->authenticate('cd');
+
+        $response = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs/accounting', $searchparams);
+
+        $this->assertEquals(200, $response[1]['http_code']);
+        $this->assertEquals(true, $response[0]['success']);
+        $this->assertNotEmpty($response[0]['success']);
+
+    }
+
+    public function testJobMetadata() {
+
+        $searchparams = $this->getJobPrimaryIdentifier(5, 6112282);
+
+        $this->xdmodhelper->authenticate('cd');
 
         $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/history', $searchparams);
 
