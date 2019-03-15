@@ -18,6 +18,10 @@
                     "class": "GroupByPi"
                 },
                 {
+                    "name": "institution",
+                    "class": "GroupByInstitution"
+                },
+                {
                     "name": "category",
                     "class": "GroupByCategory"
                 },

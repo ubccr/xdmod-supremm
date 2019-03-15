@@ -16,6 +16,10 @@
                 },
                 {
                     "realm": "JobEfficiency",
+                    "group_by": "institution"
+                },
+                {
+                    "realm": "JobEfficiency",
                     "group_by": "category"
                 }
             ]
