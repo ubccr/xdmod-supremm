@@ -20,7 +20,18 @@
             "namespace": "ETL\\Maintenance",
             "options_class": "MaintenanceOptions",
             "definition_file_list": [
+                "supremm/jobhost.json",
                 "supremm/job.json"
+            ]
+        },
+        {
+            "name": "migrate-data",
+            "description": "Migrate data to new schema",
+            "namespace": "ETL\\Maintenance",
+            "options_class": "MaintenanceOptions",
+            "class": "ExecuteSql",
+            "sql_file_list": [
+                "supremm/migration-8_0_0-8_1_0.sql"
             ]
         }
     ]

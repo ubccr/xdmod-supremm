@@ -104,7 +104,7 @@ try
                 AND rf.shared_jobs = 1";
 
     $db->handle()->exec('DROP TABLE IF EXISTS `modw_supremm`.`job_tmp`');
-    $createtmp = $db->handle()->prepare('CREATE TABLE `modw_supremm`.`job_tmp` (KEY (resource_id, local_job_id)) SELECT _id, resource_id, local_job_id, start_time_ts, end_time_ts FROM `modw_supremm`.`job` WHERE end_time_ts BETWEEN :start AND :end');
+    $createtmp = $db->handle()->prepare('CREATE TABLE `modw_supremm`.`job_tmp` (KEY (resource_id, local_job_id, end_time_ts)) SELECT _id, resource_id, local_job_id, start_time_ts, end_time_ts FROM `modw_supremm`.`job` WHERE end_time_ts BETWEEN :start AND :end');
     $createtmp->execute(array('start' => $start, 'end' => $end));
 
     $jobsforhost = "SELECT 
@@ -115,6 +115,7 @@ try
             WHERE
                 jh.local_job_id = j.local_job_id
                 AND jh.resource_id = j.resource_id
+                AND jh.end_time_ts = j.end_time_ts
                 AND jh.host_id = :hostid
             UNION SELECT 
                 j._id as jobid, 's' as jobstate, j.start_time_ts as state_transition_timestamp
@@ -124,6 +125,7 @@ try
             WHERE
                 jh.local_job_id = j.local_job_id
                 AND jh.resource_id = j.resource_id
+                AND jh.end_time_ts = j.end_time_ts
                 AND jh.host_id = :hostid
             ORDER BY 3 ASC, 2 DESC";
 

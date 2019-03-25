@@ -24,5 +24,6 @@ if [ "$XDMOD_TEST_MODE" = "upgrade" ];
 then
     mongod -f /etc/mongod.conf
     $XDMOD_BOOTSTRAP
+    cd /usr/share/xdmod/etl/js && npm install && cd -
     aggregate_supremm.sh
 fi

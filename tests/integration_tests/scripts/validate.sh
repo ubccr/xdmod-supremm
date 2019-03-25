@@ -38,4 +38,12 @@ then
     exitcode=1
 fi
 
+# Check that the jobhosts table has end_time_ts column with non-zero timestamps
+jobcount=$(echo 'SELECT COUNT(*) FROM modw_supremm.job j, modw_supremm.jobhost jh WHERE j.resource_id = jh.resource_id AND j.local_job_id = jh.local_job_id AND j.end_time_ts = jh.end_time_ts' | mysql -N modw_supremm)
+if [ $jobcount -eq 0 ];
+then
+    echo "Job Hosts table incorrect data"
+    exitcode=1
+fi
+
 exit $exitcode
