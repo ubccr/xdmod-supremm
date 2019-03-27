@@ -213,8 +213,8 @@
         "error": 0
     },
     "ib_rx_bytes": {
-        "value": null,
-        "error": 8
+        "value": 369576,
+        "error": 0
     },
     "block_sda_wr_ios": {
         "value": 5031.5,

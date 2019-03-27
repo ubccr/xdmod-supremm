@@ -545,7 +545,30 @@ module.exports = function(config) {
                 }
             },
             "ib_rx_bytes": {
-                ref: "infiniband.mlx4_0:1.switch-out-bytes.avg"
+                formula: function (job) {
+                    var ret_val = {
+                        value: null,
+                        error: this.metricErrors.codes.metricMissingUnknownReason.value
+                    };
+                    if (job.infiniband) {
+                        if (job.infiniband.error) {
+                            ret_val.error = job.infiniband.error;
+                            return ret_val;
+                        }
+
+                        for (let device in job.infiniband) {
+                            if (job.infiniband.hasOwnProperty(device)) {
+                                if (job.infiniband[device]['switch-out-bytes'] && job.infiniband[device]['switch-out-bytes'].avg) {
+                                    ret_val.value = job.infiniband[device]['switch-out-bytes'].avg;
+                                    ret_val.error = 0;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    return ret_val;
+                }
             },
             "block_sda_wr_ios": {
                 ref: "block.sda.write.avg"
