@@ -202,9 +202,26 @@ function shared_jobs($resource_id, $start, $end)
             $jbu->execute(array($key));
         }
         $logger->debug("Processed " . count($sharedjobs) . " jobs for host " . $host['name']);
+
+        if ($jobpeercount > 250000) {
+            fclose($jobpeersfile);
+            batch_update($jobpeersfname, $jobpeercount);
+            $jobpeersfile = fopen($jobpeersfname, 'wb');
+            $jobpeercount = 0;
+        }
     }
 
     fclose($jobpeersfile);
+    batch_update($jobpeersfname, $jobpeercount);
+
+    unlink($jobpeersfname);
+    $db->handle()->exec('DROP TABLE IF EXISTS `modw_supremm`.`job_tmp`');
+}
+
+function batch_update($jobpeersfname, $jobpeercount)
+{
+    global $logger;
+    global $db;
 
     if ($jobpeercount > 0) {
         $logger->info('Batch update ' . $jobpeercount . ' job peers');
@@ -222,9 +239,6 @@ function shared_jobs($resource_id, $start, $end)
     } else {
         $logger->info('Skipping batch update - no job peers found');
     }
-
-    unlink($jobpeersfname);
-    $db->handle()->exec('DROP TABLE IF EXISTS `modw_supremm`.`job_tmp`');
 }
 
 /**
