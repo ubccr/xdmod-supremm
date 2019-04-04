@@ -36,7 +36,7 @@ identical to the version of the base XDMoD install. The versions of the
 summarization software and PCP software for a given XDMoD version are listed
 below.
 
-### Open XDMoD 8.0.0
+### Open XDMoD 8.1.0
 
 <table>
 <thead>
@@ -46,7 +46,7 @@ below.
 </thead>
 <tbody>
 <tr>
-<td> Job Summarization </td><td align="right"> 1.1.0               </td><td align="right"> 1.1.x </td>
+<td> Job Summarization </td><td align="right"> 1.1.1               </td><td align="right"> 1.1.x </td>
 </tr>
 <tr>
 <td> PCP               </td><td align="right"> 3.12.2              </td><td align="right"> 3.11.x - 3.12.x </td>
@@ -57,6 +57,10 @@ below.
 
 The SUPReMM software has been tested with MongoDB version 3.4.15. We expect
 that the software is compatible with any supported release version of MongoDB.
+
+The summarization software should be compatible with the 4.x releases of PCP.
+However the XDMoD team have not tested this configuration and will not be able
+to provide support for it.
 
 System Requirements
 ---------------------
