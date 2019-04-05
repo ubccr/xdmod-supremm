@@ -49,7 +49,7 @@ records from the MySQL database tables.
 Then the job data should be re-ingested:
 
     $ cd /usr/share/xdmod/etl/js
-    $ node etl.cluster.js --dataset=[RESOURCE]
+    $ node --max-old-space-size=4096 etl.cluster.js --dataset=[RESOURCE]
 
 Then the shared jobs script should be run to reprocess all jobs for the resource:
 
