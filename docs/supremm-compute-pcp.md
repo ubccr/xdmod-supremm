@@ -6,8 +6,34 @@ data are collected:
 * Periodically during the job (recommended 30 seconds)
 * At the end of every job
 
-The archive data for each node are stored on a shared filesystem for
+The archive data for each node should be stored on a shared filesystem for
 subsequent processing by the job summarization software.
+
+It is recommended to store the archives in a directory structure
+that includes the hostname and the date in different subdirectories. The recommended
+directory path is:
+
+    [YYYY]/[MM]/[HOSTNAME]/[YYYY-MM-DD]
+
+Where YYYY is the 4 digit year, MM 2 digit month, DD is the 2 digit day of the month
+and HOSTNAME is the hostname of the compute node. The two main reasons for storing
+the data in this way are (1) to minimize the number of files per directory and
+(2) to reduce the I/O of the summarization software's indexing script. The
+indexing script is designed to run daily and scans the filesystem for new PCP
+archives. The script is able to exclude old directories from processing based
+on the timestamp. This reduces the amount of I/O since only candidate
+directories are scanned.
+
+In previous versions of the summarization software the recommended path
+was:
+
+   [HOSTNAME]/[YYYY]/[MM]/[DD]
+
+this directory structure is still supported by the indexing script and may
+still be used. The reason for changing the recommendation is that the new directory
+structure limits the total number of files under a given directory. This
+helps reduce the runtime of backup software. If the filesystem I/O performance with
+ the existing directory stucture is not an issue then do not change to the new one.
 
 ## Prerequisites
 
@@ -21,17 +47,22 @@ configure PCP collection on the compute nodes.  The package itself should not
 be installed on the compute nodes, however you may wish to install it
 on a test node in order to obtain the PCP configuration file templates.
 Alternatively, the scripts may be extracted directly from the source tarball.
+The template files should be edited before use.
 
 These templates are available:
 ------------------------------
 #### /usr/share/supremm/templates/pmlogger/control
-* Moved to: /etc/pcp/pmlogger
-    * Remove any existing files under: /etc/pcp/pmlogger/control.d
-* **THIS CHANGE MUST BE MADE**
-    * Edit the file to specify the path to the shared filesystem. The log files must be accessible by the node that has the Job Summarization software installed
-    * "PCP_LOG_DIR/pmlogger/LOCALHOSTNAME/$(date +%Y)/$(date +%m)/$(date +%d)"
-        * Changed to something like: "/<GLOBAL_SHARED_SPACE>/supremm/pmlogger/LOCALHOSTNAME/$(date +%Y)/$(date +%m)/$(date +%d)"
-        * Where "LOCALHOSTNAME" is that exact literal string
+
+This template file **must** be edited to specify the path to the directory
+where the PCP archives are to be saved.
+
+The path `PCP_LOG_DIR/pmlogger` should be changed to the path  where the PCP archives are to be saved.
+
+The edited template should be saved in the `/etc/pcp/pmlogger` directory and  any existing files under
+`/etc/pcp/pmlogger/control.d` should be removed.
+
+Note that the string `LOCALHOSTNAME` in the file is expanded by the pcp logger software to the hostname
+of the compute node running the logger.
 
 #### /usr/share/supremm/templates/pmlogger/pmlogger-supremm.config
 * Moved to /etc/pcp/pmlogger
@@ -40,12 +71,16 @@ These templates are available:
 
 #### /usr/share/supremm/slurm/slurm-prolog
 
+This is a template perl script that **must** be edited. The string `/<GLOBAL_SHARED_SPACE>/supremm/pmlogger` must be
+changed to match the directory where the PCP archives are to be saved.
 This script will run data collection at job start time and three additional samples
 at ten second intervals. This script should be merged into your existing prologue script.
 This script is designed for and tested with the [Slurm][] resource manager.
 
 #### /usr/share/supremm/slurm/slurm-epilog
 
+This is a template perl script that **must** be edited. The string `/<GLOBAL_SHARED_SPACE>/supremm/pmlogger` must be
+changed to match the directory where the PCP archives are to be saved.
 This script will run data collection at job end. This script should be merged into your existing epilogue script.
 This script is designed for and tested with the [Slurm][] resource manager.
 
