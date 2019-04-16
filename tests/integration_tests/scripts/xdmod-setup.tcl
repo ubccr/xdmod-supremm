@@ -65,8 +65,9 @@ selectMenuOption 8
 selectMenuOption d
 answerQuestion {DB Admin Username:} root
 providePassword {DB Admin Password:} {}
-provideInput {MongoDB uri*} {mongodb://localhost:27017/supremm}
+provideInput {MongoDB uri*} {mongodb://xdmod:uvVA6bIC9DMts30ZiLRaH@localhost:27017/supremm?authSource=auth}
 provideInput {database name*} {supremm}
+confirmFileWrite yes
 enterToContinue
 set timeout 200
 provideInput {Do you want to see the output*} {no}
