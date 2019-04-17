@@ -1,7 +1,22 @@
 var app_ident = require('../app_ident.js');
+var map_helpers = require('../map_helpers.js');
 
 module.exports = function(config) {
     var appident = app_ident(config.applicationDefn);
+
+    var getHardwareConfig = function (setting, default_val) {
+        var val = config.hardware;
+        var props = setting.split('.');
+        for (let i = 0; i < props.length; i++) {
+            if (typeof val !== 'undefined' && val.hasOwnProperty(props[i])) {
+                val = val[props[i]];
+            } else {
+                val = default_val;
+                break;
+            }
+        }
+        return val;
+    };
 
     var getProcInfo = function (job) {
         var app = null;
@@ -570,50 +585,23 @@ module.exports = function(config) {
                     return ret_val;
                 }
             },
-            "block_sda_wr_ios": {
-                ref: "block.sda.write.avg"
-            },
-            "block_sda_wr_bytes": {
-                ref: "block.sda.write_bytes.avg"
-            },
-            "block_sda_wr_bytes_cov": {
-                formula: function(job) {
-                    return this.getcov.call(this, job, "block.sda.write_bytes");
-                }
-            },
-            "block_sda_rd_ios": {
-                ref: "block.sda.read.avg"
-            },
-            "block_sda_rd_bytes": {
-                ref: "block.sda.read_bytes.avg"
-            },
-            "block_sda_rd_bytes_cov": {
-                formula: function(job) {
-                    return this.getcov.call(this, job, "block.sda.read_bytes");
-                }
-            },
-            "netdrv_gpfs_rx": {
-                ref: "gpfs." + config.hardware.gpfs + ".read_bytes.avg"
-            },
-            "netdrv_gpfs_rx_cov": {
-                formula: function(job) {
-                    return this.getcov.call(this, job, "gpfs." + this.gpfs + ".read_bytes");
-                }
-            },
-            "netdrv_gpfs_rx_msgs": {
-                ref: "gpfs." + config.hardware.gpfs + ".reads.avg"
-            },
-            "netdrv_gpfs_tx": {
-                ref: "gpfs." + config.hardware.gpfs + ".write_bytes.avg"
-            },
-            "netdrv_gpfs_tx_cov": {
-                formula: function(job) {
-                    return this.getcov.call(this, job, "gpfs." + this.gpfs + ".write_bytes");
-                }
-            },
-            "netdrv_gpfs_tx_msgs": {
-                ref: "gpfs." + config.hardware.gpfs + ".writes.avg"
-            },
+
+            block_sda_wr_ios: map_helpers.device('block', getHardwareConfig('block', 'sda'), 'write'),
+            block_sda_wr_bytes: map_helpers.device('block', getHardwareConfig('block', 'sda'), 'write_bytes'),
+            block_sda_wr_bytes_cov: map_helpers.device_cov('block', getHardwareConfig('block', 'sda'), 'write_bytes'),
+
+            block_sda_rd_ios: map_helpers.device('block', getHardwareConfig('block', 'sda'), 'read'),
+            block_sda_rd_bytes: map_helpers.device('block', getHardwareConfig('block', 'sda'), 'read_bytes'),
+            block_sda_rd_bytes_cov: map_helpers.device_cov('block', getHardwareConfig('block', 'sda'), 'read_bytes'),
+
+            netdrv_gpfs_rx: map_helpers.device('gpfs', config.hardware.gpfs, 'read_bytes'),
+            netdrv_gpfs_rx_cov: map_helpers.device_cov('gpfs', config.hardware.gpfs, 'read_bytes'),
+            netdrv_gpfs_rx_msgs: map_helpers.device('gpfs', config.hardware.gpfs, 'reads'),
+
+            netdrv_gpfs_tx: map_helpers.device('gpfs', config.hardware.gpfs, 'write_bytes'),
+            netdrv_gpfs_tx_cov: map_helpers.device_cov('gpfs', config.hardware.gpfs, 'write_bytes'),
+            netdrv_gpfs_tx_msgs: map_helpers.device('gpfs', config.hardware.gpfs, 'writes'),
+
             "netdrv_isilon_rx": {
                 error: 2
             },
@@ -650,28 +638,40 @@ module.exports = function(config) {
             "netdrv_panasas_tx_msgs": {
                 error: 2
             },
-            "net_eth0_rx": {
-                ref: "network.em1.in-bytes.avg"
-            },
-            "net_eth0_rx_cov": {
-                formula: function(job) {
-                    return this.getcov.call(this, job, "network.em1.in-bytes");
-                }
-            },
-            "net_eth0_rx_packets": {
-                ref: "network.em1.in-packets.avg"
-            },
-            "net_eth0_tx": {
-                ref: "network.em1.out-bytes.avg"
-            },
-            "net_eth0_tx_cov": {
-                formula: function(job) {
-                    return this.getcov.call(this, job, "network.em1.out-bytes");
-                }
-            },
-            "net_eth0_tx_packets": {
-                ref: "network.em1.out-packets.avg"
-            },
+
+            netdir_home_read: map_helpers.sum(
+                ['nfs', getHardwareConfig('mounts.home', '/home')],
+                ['read-normal', 'read-server', 'read-direct']
+            ),
+            netdir_home_write: map_helpers.sum(
+                ['nfs', getHardwareConfig('mounts.home', '/home')],
+                ['write-normal', 'write-server', 'write-direct']
+            ),
+            netdir_projects_read: map_helpers.sum(
+                ['nfs', getHardwareConfig('mounts.projects', '/projects')],
+                ['read-normal', 'read-server', 'read-direct']
+            ),
+            netdir_projects_write: map_helpers.sum(
+                ['nfs', getHardwareConfig('mounts.projects', '/projects')],
+                ['write-normal', 'write-server', 'write-direct']
+            ),
+            netdir_util_read: map_helpers.sum(
+                ['nfs', getHardwareConfig('mounts.util', '/util')],
+                ['read-normal', 'read-server', 'read-direct']
+            ),
+            netdir_util_write: map_helpers.sum(
+                ['nfs', getHardwareConfig('mounts.util', '/util')],
+                ['write-normal', 'write-server', 'write-direct']
+            ),
+
+            net_eth0_rx: map_helpers.device('network', getHardwareConfig('network', 'em1'), 'in-bytes', ['lo', 'ib0', 'ib1']),
+            net_eth0_rx_cov: map_helpers.device_cov('network', getHardwareConfig('network', 'em1'), 'in-bytes', ['lo', 'ib0', 'ib1']),
+            net_eth0_rx_packets: map_helpers.device('network', getHardwareConfig('network', 'em1'), 'in-packets', ['lo', 'ib0', 'ib1']),
+
+            net_eth0_tx: map_helpers.device('network', getHardwareConfig('network', 'em1'), 'out-bytes', ['lo', 'ib0', 'ib1']),
+            net_eth0_tx_cov: map_helpers.device_cov('network', getHardwareConfig('network', 'em1'), 'out-bytes', ['lo', 'ib0', 'ib1']),
+            net_eth0_tx_packets: map_helpers.device('network', getHardwareConfig('network', 'em1'), 'out-packets', ['lo', 'ib0', 'ib1']),
+
             "net_ib0_rx": {
                 ref: "network.ib0.in-bytes.avg"
             },

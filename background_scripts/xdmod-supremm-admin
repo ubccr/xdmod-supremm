@@ -121,7 +121,10 @@ function main()
 
     switch ($config['action']) {
         case 'truncate':
-            truncateAction($config);
+            truncateAction($config, true);
+            break;
+        case 'reset':
+            truncateAction($config, false);
             break;
         default:
             $logger->crit('No action specified');
@@ -132,10 +135,12 @@ function main()
     exit;
 }
 
+
 /**
- * Truncate all the job tables.
+ * Reset the job status in mongo and optionally delete the contents
+ * of the SQL tables.
  */
-function truncateAction($config)
+function truncateAction($config, $deleteSqlData)
 {
     global $logger;
 
@@ -144,7 +149,9 @@ function truncateAction($config)
         exit(1);
     }
 
-    if (!$config['force'] && !confirm('Truncate all job data for resource ' . $config['resource'] . '?')) {
+    $verb = $deleteSqlData ? 'Truncate' : 'Reset';
+
+    if (!$config['force'] && !confirm($verb . ' all job data for resource ' . $config['resource'] . '?')) {
         return;
     }
 
@@ -180,22 +187,23 @@ function truncateAction($config)
         }
     }
 
-    $logger->notice('Removing job data from sql database for resource_id ' . $resource_id);
+    if ($deleteSqlData) {
+        $logger->notice('Removing job data from sql database for resource_id ' . $resource_id);
 
-    $tables = array(
-        'executable',
-        'cwd',
-        'host',
-        'jobhost',
-        'job_errors'
-    );
+        $tables = array(
+            'executable',
+            'cwd',
+            'host',
+            'jobhost',
+            'job_errors'
+        );
 
-    foreach ($tables as $table) {
-        $rows = $db->execute('DELETE FROM `modw_supremm`.`' . $table . '` WHERE resource_id = :resource_id', array('resource_id' => $resource_id));
-        $logger->notice('Deleted ' . $rows . ' rows from ' . $table);
-    }
+        foreach ($tables as $table) {
+            $rows = $db->execute('DELETE FROM `modw_supremm`.`' . $table . '` WHERE resource_id = :resource_id', array('resource_id' => $resource_id));
+            $logger->notice('Deleted ' . $rows . ' rows from ' . $table);
+        }
 
-    $multiDel = <<<EOF
+        $multiDel = <<<EOF
 DELETE FROM `modw_supremm` . `job_name` , `modw_supremm` . `job_peers`
 USING `modw_supremm`.`job`
         LEFT JOIN `modw_supremm`.`job_name` ON `modw_supremm`.`job`.jobname_id = `modw_supremm`.`job_name`.id
@@ -203,8 +211,9 @@ USING `modw_supremm`.`job`
 WHERE
     `modw_supremm`.`job`.resource_id = :resource_id
 EOF;
-    $rows = $db->execute($multiDel, array('resource_id' => $resource_id));
-    $logger->notice('Deleted ' . $rows . ' rows from job_name and job_peers tables.');
+        $rows = $db->execute($multiDel, array('resource_id' => $resource_id));
+        $logger->notice('Deleted ' . $rows . ' rows from job_name and job_peers tables.');
+    }
 }
 
 /**
@@ -272,6 +281,20 @@ The truncate action removes the data for a given resource
         xdmod-admin --action=truncate --resource='hpc'
 
     This will remove all job data from the supremm realm for the resource 'hpc'.
+
+    reset --resource=RESOURCE
+
+The reset action resets the ingest status in MongoDB for the jobs for a given
+resource. This will cause all job data for the resource to be reingested next
+time the aggregate_supremm script is run.
+
+    Examples:
+
+        xdmod-admin --action=reset --resource='hpc'
+
+    Reset the ingest status for all jobs for the 'hpc' resource in MongoDB that
+    have already been ingested.
+
 
 EOF;
 }

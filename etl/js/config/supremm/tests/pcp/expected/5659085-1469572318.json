@@ -241,28 +241,28 @@
         "error": 0
     },
     "netdrv_gpfs_rx": {
-        "value": null,
-        "error": 8
+        "value": 65970265.75,
+        "error": 0
     },
     "netdrv_gpfs_rx_cov": {
-        "value": null,
-        "error": 8
+        "value": 2,
+        "error": 0
     },
     "netdrv_gpfs_rx_msgs": {
-        "value": null,
-        "error": 8
+        "value": 16,
+        "error": 0
     },
     "netdrv_gpfs_tx": {
-        "value": null,
-        "error": 8
+        "value": 605004083,
+        "error": 0
     },
     "netdrv_gpfs_tx_cov": {
-        "value": null,
-        "error": 8
+        "value": 2,
+        "error": 0
     },
     "netdrv_gpfs_tx_msgs": {
-        "value": null,
-        "error": 8
+        "value": 46237.75,
+        "error": 0
     },
     "netdrv_isilon_rx": {
         "value": null,
@@ -311,6 +311,30 @@
     "netdrv_panasas_tx_msgs": {
         "value": null,
         "error": 2
+    },
+    "netdir_home_read": {
+        "value": 38581089,
+        "error": 0
+    },
+    "netdir_home_write": {
+        "value": 7328141,
+        "error": 0
+    },
+    "netdir_projects_read": {
+        "value": 961832142989.75,
+        "error": 0
+    },
+    "netdir_projects_write": {
+        "value": 5625256.25,
+        "error": 0
+    },
+    "netdir_util_read": {
+        "value": 135683604.75,
+        "error": 0
+    },
+    "netdir_util_write": {
+        "value": 0,
+        "error": 0
     },
     "net_eth0_rx": {
         "value": 12710607006.5,

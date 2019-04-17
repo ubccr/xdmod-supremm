@@ -217,11 +217,11 @@
     },
     "block_sda_wr_ios": {
         "value": null,
-        "error": 8
+        "error": 2
     },
     "block_sda_wr_bytes": {
         "value": null,
-        "error": 8
+        "error": 2
     },
     "block_sda_wr_bytes_cov": {
         "value": null,
@@ -229,11 +229,11 @@
     },
     "block_sda_rd_ios": {
         "value": null,
-        "error": 8
+        "error": 2
     },
     "block_sda_rd_bytes": {
         "value": null,
-        "error": 8
+        "error": 2
     },
     "block_sda_rd_bytes_cov": {
         "value": null,
@@ -241,7 +241,7 @@
     },
     "netdrv_gpfs_rx": {
         "value": null,
-        "error": 8
+        "error": 2
     },
     "netdrv_gpfs_rx_cov": {
         "value": null,
@@ -249,11 +249,11 @@
     },
     "netdrv_gpfs_rx_msgs": {
         "value": null,
-        "error": 8
+        "error": 2
     },
     "netdrv_gpfs_tx": {
         "value": null,
-        "error": 8
+        "error": 2
     },
     "netdrv_gpfs_tx_cov": {
         "value": null,
@@ -261,7 +261,7 @@
     },
     "netdrv_gpfs_tx_msgs": {
         "value": null,
-        "error": 8
+        "error": 2
     },
     "netdrv_isilon_rx": {
         "value": null,
@@ -308,6 +308,30 @@
         "error": 2
     },
     "netdrv_panasas_tx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_home_read": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_home_write": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_projects_read": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_projects_write": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_util_read": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_util_write": {
         "value": null,
         "error": 2
     },

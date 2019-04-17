@@ -1661,7 +1661,7 @@ module.exports = {
             table: "job",
         },
 
-        "netdir_(work|scratch|home)_read": {
+        'netdir_(projects|util|work|scratch|home)_read': {
             unit: "bytes",
             type: "double",
             name: "Mount point \":label_1\" data read",
@@ -1678,7 +1678,7 @@ module.exports = {
             table: "job"
         },
 
-        "netdir_(work|scratch|home)_write": {
+        'netdir_(projects|util|work|scratch|home)_write': {
             unit: "bytes",
             type: "double",
             name: "Mount point \":label_1\" data written",
@@ -1718,7 +1718,7 @@ module.exports = {
             ]
         },
 
-        "netdir_(work|scratch|home)_write_cov": {
+        'netdir_(projects|util|work|scratch|home)_write_cov': {
             unit: "ratio",
             type: "double",
             name: "Mount point \":label_1\" data written cov",
