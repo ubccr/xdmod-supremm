@@ -1,7 +1,7 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-## 2019-04-XX v8.1.0
+## 2019-04-23 v8.1.0
 - Features
     - Add support for GPU metrics. If available, the GPU usage and GPU memory
       usage for job are shown in the Job Viewer. It is now possible to group
@@ -33,7 +33,7 @@ Open XDMoD SUPReMM Change Log
     - The dynamically generated MySQL tables are now managed via the ETLv2
       framework.
     - Updates to the continuous integration (CI) scripts to add more tests.
-    - Update mongodb driver version 
+    - Update mongodb driver version
 
 ## 2018-11-08 v8.0.0
 - Features
