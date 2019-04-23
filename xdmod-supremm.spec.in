@@ -58,7 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Tue Apr 23 2019 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 8.1.0-1.0
 - Updated for compatibility with Open XDMoD 8.1.0.
-* Thu Nov 8 2018XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 8.0.0-1.0
+* Thu Nov 8 2018 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 8.0.0-1.0
 - Updated for compatibility with Open XDMoD 8.0.0.
 * Wed Mar 14 2018 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 7.5.1-1.0
 - Updated for compatibility with Open XDMoD 7.5.1.
