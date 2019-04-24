@@ -1,6 +1,7 @@
 ---
 redirect_from:
-    - "/8.0/"
+    - "/8.1/"
+    - ""
 ---
 
 This documentation is intended to be used by system administrators to install and configure

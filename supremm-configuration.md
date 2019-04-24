@@ -1,3 +1,3 @@
 ---
-redirect_to: /8.0/supremm-configuration.html
+redirect_to: /8.1/supremm-configuration.html
 ---
