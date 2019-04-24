@@ -18,6 +18,9 @@ repository. This repository can be added with this command for CentOS:
 
     # yum install epel-release
 
+It also requires the PCP rpms provided by the [PCP project](https://pcp.io). The yum repository setup information
+is available on the [pcp packages page](https://bintray.com/pcp/).
+
 An RPM package for Centos 7 is [available for download](https://github.com/ubccr/supremm/releases/latest)
 
     # yum install supremm-{{ page.summ_sw_version }}-1.x86_64.rpm
