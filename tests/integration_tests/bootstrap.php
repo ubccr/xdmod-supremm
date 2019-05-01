@@ -7,7 +7,7 @@ spl_autoload_register(
     function ($className) use ($dir) {
         $classPath
             = $dir
-            . '/../../../xdmod/open_xdmod/modules/xdmod/integration_tests/lib/'
+            . '/../../../xdmod/tests/integration/lib/'
             . str_replace('\\', '/', $className)
             . '.php';
 
