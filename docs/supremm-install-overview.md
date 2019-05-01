@@ -46,7 +46,7 @@ below.
 </thead>
 <tbody>
 <tr>
-<td> Job Summarization </td><td align="right"> 1.1.1               </td><td align="right"> 1.1.x </td>
+<td> Job Summarization </td><td align="right"> {{ page.summ_sw_version }} </td><td align="right"> 1.1.x </td>
 </tr>
 <tr>
 <td> PCP               </td><td align="right"> 3.12.2              </td><td align="right"> 3.11.x - 3.12.x </td>
