@@ -37,21 +37,21 @@ toc:
         url: /8.0/supremm-processing-configuration.html
   - title: Use
     subfolderitems:
-       - page: PCP Data collection
-         url: /8.0/supremm-pcp-use.html
-       - page: Inital Ingest Setup
-         url: /8.0/supremm-bootstrap.html
-       - page: Automate dataflow
-         url: /8.0/supremm-ingestor.html
+      - page: PCP Data collection
+        url: /8.0/supremm-pcp-use.html
+      - page: Inital Ingest Setup
+        url: /8.0/supremm-bootstrap.html
+      - page: Automate dataflow
+        url: /8.0/supremm-ingestor.html
   - title: Upgrade
     subfolderitems:
-       - page: Overview
-         url: /8.0/supremm-upgrade-overview.html
-       - page: Job Performance module
-         url: /8.0/supremm-upgrade.html
-       - page: Job Summarization
-         url: /8.0/supremm-processing-upgrade.html
+      - page: Overview
+        url: /8.0/supremm-upgrade-overview.html
+      - page: Job Performance module
+        url: /8.0/supremm-upgrade.html
+      - page: Job Summarization
+        url: /8.0/supremm-processing-upgrade.html
   - title: Developing
     subfolderitems:
-       - page: Developer Guide
-         url: /8.0/supremm-developer.html
+      - page: Developer Guide
+        url: /8.0/supremm-developer.html

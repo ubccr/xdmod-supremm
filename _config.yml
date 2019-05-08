@@ -28,32 +28,32 @@ github_url: https://github.com/ubccr/xdmod-supremm
 xdmod_module_name: Job Performance (SUPReMM)
 latest_version: "8.1"
 version_list:
-    - "8.1"
-    - "8.0"
+  - "8.1"
+  - "8.0"
 
 defaults:
-    -
-        scope:
-            path: "8.1"
-            type: "pages"
-        values:
-            layout: "page"
-            version: "8.1"
-            sw_version: "8.1.0"
-            summ_sw_version: "1.2.0"
-            style: "effervescence"
-            tocversion: "v8_1toc"
-    -
-        scope:
-            path: "8.0"
-            type: "pages"
-        values:
-            layout: "page"
-            version: "8.0"
-            sw_version: "8.0.0"
-            summ_sw_version: "1.1.0"
-            style: "effervescence"
-            tocversion: "v8_0toc"
+  -
+    scope:
+      path: "8.1"
+      type: "pages"
+    values:
+      layout: "page"
+      version: "8.1"
+      sw_version: "8.1.0"
+      summ_sw_version: "1.2.0"
+      style: "effervescence"
+      tocversion: "v8_1toc"
+  -
+    scope:
+      path: "8.0"
+      type: "pages"
+    values:
+      layout: "page"
+      version: "8.0"
+      sw_version: "8.0.0"
+      summ_sw_version: "1.1.0"
+      style: "effervescence"
+      tocversion: "v8_0toc"
 
 # Build settings
 markdown: kramdown
