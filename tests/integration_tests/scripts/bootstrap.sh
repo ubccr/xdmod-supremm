@@ -4,7 +4,7 @@
 # do configure & start the core.
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-XDMOD_BOOTSTRAP=$BASEDIR/../../../../xdmod/open_xdmod/modules/xdmod/integration_tests/scripts/bootstrap.sh
+XDMOD_BOOTSTRAP=$BASEDIR/../../../../xdmod/tests/ci/bootstrap.sh
 REF_DIR=/root/assets/referencedata
 
 set -e
@@ -24,6 +24,5 @@ if [ "$XDMOD_TEST_MODE" = "upgrade" ];
 then
     mongod -f /etc/mongod.conf
     $XDMOD_BOOTSTRAP
-    cd /usr/share/xdmod/etl/js && npm install && cd -
     aggregate_supremm.sh
 fi
