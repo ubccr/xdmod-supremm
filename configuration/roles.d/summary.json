@@ -1,0 +1,24 @@
+{
+    "roles": {
+        "cd": {
+            "summary_portlets": [{
+                "name": "User Job Efficiency Portlet",
+                "type": "UserJobEfficiencyPortlet"
+            },
+            {
+                "name": "Job Efficiency Portlet",
+                "type": "JobEfficiencyPortlet"
+            }]
+        },
+        "usr": {
+            "summary_portlets": [{
+                "name": "User Job Efficiency Portlet",
+                "type": "UserJobEfficiencyPortlet"
+            },
+            {
+                "name": "Job Efficiency Portlet",
+                "type": "JobEfficiencyPortlet"
+            }]
+        }
+    }
+}

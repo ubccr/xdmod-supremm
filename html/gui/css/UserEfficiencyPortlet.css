@@ -1,0 +1,37 @@
+.user-efficiency-portlet .x-panel-body {
+    background-color: white;
+}
+.user-efficiency-data-row {
+    font-size: 18px;
+}
+.float-left{
+    float: left;
+}
+.user-efficiency-details {
+    width: 270px;
+    text-align: center;
+}
+.user-efficiency-detail:first-child {
+    padding-bottom: 19px;
+    border-bottom: 1px solid lightgray;
+    margin: 15px auto 0px;
+    width: 150px;
+}
+.user-efficiency-detail:nth-child(2){
+    padding-top: 25px;
+}
+.user-efficiency-detail h2 {
+    margin-bottom: 5px;
+}
+.user-efficiency-data-row:first-child{
+    border-bottom: 2px solid lightgray;
+    padding-bottom: 4px;
+    height: 180px;
+}
+.user-efficiency-data-row:nth-child(2){
+    padding-top: 4px;
+}
+.user-efficiency-data-row .highcharts-container .highcharts-button,
+.user-efficiency-data-row .highcharts-container > svg text:nth-of-type(2){
+    display: none;
+}

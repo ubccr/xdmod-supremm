@@ -53,6 +53,7 @@
             "configuration/rawstatistics.d/10_supremm.json": "rawstatistics.d/10_supremm.json",
             "configuration/rest.d/supremm_dataflow.json": "rest.d/supremm_dataflow.json",
             "configuration/roles.d": "",
+            "configuration/assets.d": "assets.d",
             "configuration/setup.d/supremm.json": "setup.d/supremm.json",
             "configuration/internal_dashboard.d/supremm.json": "internal_dashboard.d/supremm.json",
             "configuration/rawstatisticsconfig.json": "",

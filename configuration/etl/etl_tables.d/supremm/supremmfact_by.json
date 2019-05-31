@@ -1,0 +1,726 @@
+{
+    "table_definition": {
+        "name": "supremmfact_by",
+        "table_prefix": "supremmfact_by_",
+        "engine": "MyISAM",
+        "comment": "supremmfact aggregated by ${AGGREGATION_UNIT}.",
+        "columns": [
+            {
+                "name": "${AGGREGATION_UNIT}_id",
+                "type": "int(10) unsigned",
+                "nullable": false,
+                "comment": "DIMENSION: The id related to modw.${AGGREGATION_UNIT}s."
+            },
+            {
+                "name": "year",
+                "type": "smallint(5) unsigned",
+                "nullable": false,
+                "comment": "DIMENSION: The year of the ${AGGREGATION_UNIT}"
+            },
+            {
+                "name": "${AGGREGATION_UNIT}",
+                "type": "smallint(5) unsigned",
+                "nullable": false,
+                "comment": "DIMENSION: The ${AGGREGATION_UNIT} of the year."
+            },
+            {
+                "name": "application_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The application that the job ran. This value is autodetected based on the job executable path. A value of uncategorized indicates that the executable path was not recognized as a community application. A value of PROPRIETARY is shown for any application that has a non-open licence agreement that may restrict publishing of performance data. NA means not available."
+            },
+            {
+                "name": "block_sda_rd_bytes",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total bytes per second read by block devices in this period."
+            },
+            {
+                "name": "block_sda_rd_bytes_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "block_sda_rd_ios",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total number of read io operations per second by block devices in this period."
+            },
+            {
+                "name": "block_sda_rd_ios_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "block_sda_wr_bytes",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total bytes per second written by block devices in this period."
+            },
+            {
+                "name": "block_sda_wr_bytes_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "block_sda_wr_ios",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total number of write io operations by block devices in this period."
+            },
+            {
+                "name": "block_sda_wr_ios_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "catastrophe_bucket_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: indicator L1D cache load drop off (smaller is worse)"
+            },
+            {
+                "name": "cores",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: Number of processor cores each of the jobs used."
+            },
+            {
+                "name": "cpibucket_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The number of cpu clock ticks per instruction on average per core."
+            },
+            {
+                "name": "cpiref_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The weight for jobs with cpi counts that ran during the period"
+            },
+            {
+                "name": "cpiref_weighted_by_coreseconds",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: Total cpiref core seconds."
+            },
+            {
+                "name": "cpldref_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The weight for jobs with cpld counts that ran during the period"
+            },
+            {
+                "name": "cpldref_weighted_by_coreseconds",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: Total cpldref core seconds."
+            },
+            {
+                "name": "cpu_time",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The amount of the cpu_time of the jobs pertaining to this period. If a job took more than one period, its cpu_time is distributed linearly across the periods it spans."
+            },
+            {
+                "name": "cpu_time_idle",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The amount of the idle cpu_time of the jobs pertaining to this period."
+            },
+            {
+                "name": "cpu_time_system",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The amount of the system cpu_time of the jobs pertaining to this period."
+            },
+            {
+                "name": "cpu_time_user",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The amount of the user cpu_time of the jobs pertaining to this period."
+            },
+            {
+                "name": "cpu_usage_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The core weight for jobs with cpu user values that ran during the period"
+            },
+            {
+                "name": "cpu_user_bucketid",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The ratio of user cpu time to total cpu time for the cores that the job was assigned."
+            },
+            {
+                "name": "cpu_user_cv_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: Coefficient of variation for the CPU user for all cores that were assigned to the job."
+            },
+            {
+                "name": "cpu_user_cv_weighted_core_seconds",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: cpu user CV * core seconds."
+            },
+            {
+                "name": "cpu_user_imbalance_weighted_core_seconds",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: Total cpu user imbalance core seconds."
+            },
+            {
+                "name": "datasource_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The software used to collect the performance data."
+            },
+            {
+                "name": "exit_status_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The exit status of the job reported by the job scheduler. The meaning of this field depends on the job scheduler."
+            },
+            {
+                "name": "flop",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total floating point operations per core in this period."
+            },
+            {
+                "name": "flop_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The core weight for jobs with flops counts that ran during the period"
+            },
+            {
+                "name": "fos_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: config://hierarchy.json:bottom_level_info"
+            },
+            {
+                "name": "gpu0_nv_utilization",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The amount of gpu time of the jobs pertaining to this period."
+            },
+            {
+                "name": "gpu0_nv_utilization_bucketid",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: average % utilization of the gpu"
+            },
+            {
+                "name": "gpu0_nv_utilization_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with cpu user values that ran during the period"
+            },
+            {
+                "name": "granted_pe",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: number of granted processing elements (i.e. wayness)"
+            },
+            {
+                "name": "ib_rx_bytes",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total bytes per second written by block devices in this period."
+            },
+            {
+                "name": "ib_rx_bytes_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with ib_rx_bytes counts that ran during this period"
+            },
+            {
+                "name": "ibrxbyterate_bucket_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: number of bytes received per node over the data interconnect"
+            },
+            {
+                "name": "job_count",
+                "type": "int(11)",
+                "nullable": true,
+                "comment": "FACT: The number of jobs that ended during this period."
+            },
+            {
+                "name": "jobtime_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: Job time is bucketing of wall time based on prechosen intervals in the modw.job_times table."
+            },
+            {
+                "name": "max_mem_bucketid",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: Maximum ratio of memory used to total memory available for the compute node with the highest peak memory usage"
+            },
+            {
+                "name": "mem_transferred",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: Total memory transferred."
+            },
+            {
+                "name": "mem_transferred_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The weight for jobs with mem_transferred counts that ran during the period"
+            },
+            {
+                "name": "mem_usage_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The core weight for jobs with memory usage values that ran during the period"
+            },
+            {
+                "name": "mem_used_including_os_caches_weighted_by_duration",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total memory seconds used in byte seconds by the OS including the page and buffer caches in this period."
+            },
+            {
+                "name": "mem_used_weighted_by_duration",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total memory seconds used in byte seconds in this period. This value indicates the memory used by all processes including system services. It does not include the memory used by the OS page or buffer cache."
+            },
+            {
+                "name": "net_eth0_rx",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total number of bytes received by network via network interface i in this period."
+            },
+            {
+                "name": "net_eth0_rx_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "net_eth0_tx",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total number of bytes transmitted by by network via network interface i in this period."
+            },
+            {
+                "name": "net_eth0_tx_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "net_ib0_rx",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total number of bytes received by network via network interface i in this period."
+            },
+            {
+                "name": "net_ib0_rx_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "net_ib0_tx",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total number of bytes transmitted by by network via network interface i in this period."
+            },
+            {
+                "name": "net_ib0_tx_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "netdrv_gpfs_rx",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total bytes received by network drive i in this period."
+            },
+            {
+                "name": "netdrv_gpfs_rx_bucket_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: total number of bytes received per node from the :label_1 filesystem."
+            },
+            {
+                "name": "netdrv_gpfs_rx_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "netdrv_gpfs_tx",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total number of bytes transmitted by network drive i in this period."
+            },
+            {
+                "name": "netdrv_gpfs_tx_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "netdrv_isilon_rx",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total bytes received by network drive i in this period."
+            },
+            {
+                "name": "netdrv_isilon_rx_bucket_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: total number of bytes received per node from the :label_1 filesystem."
+            },
+            {
+                "name": "netdrv_isilon_rx_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "netdrv_isilon_tx",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total number of bytes transmitted by network drive i in this period."
+            },
+            {
+                "name": "netdrv_isilon_tx_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "netdrv_panasas_rx",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total bytes received by network drive i in this period."
+            },
+            {
+                "name": "netdrv_panasas_rx_bucket_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: total number of bytes received per node from the :label_1 filesystem."
+            },
+            {
+                "name": "netdrv_panasas_rx_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "netdrv_panasas_tx",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The total number of bytes transmitted by network drive i in this period."
+            },
+            {
+                "name": "netdrv_panasas_tx_weight",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The node weight for jobs with :field_name counts that ran during this period"
+            },
+            {
+                "name": "node_time",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The amount of the node_time of the jobs pertaining to this period. If a job took more than one period, its node_time is distributed linearly across the periods it spans."
+            },
+            {
+                "name": "nodecount_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: foreign key to the nodecount table."
+            },
+            {
+                "name": "organization_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The organization that owns the resource on which the job ran."
+            },
+            {
+                "name": "person_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The name of the job owner."
+            },
+            {
+                "name": "person_organization_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The name of the organization of the job owner."
+            },
+            {
+                "name": "piperson_organization_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The organization of the job owner's PI."
+            },
+            {
+                "name": "principalinvestigator_person_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The PI of the job owner."
+            },
+            {
+                "name": "processorbucket_id",
+                "type": "int(11)",
+                "nullable": true,
+                "comment": "FACT: Processor bucket or job size buckets are prechosen in the modw.processor_buckets table."
+            },
+            {
+                "name": "queue_id",
+                "type": "varchar(50)",
+                "nullable": false,
+                "comment": "DIMENSION: The name of the queue to which the job was submitted."
+            },
+            {
+                "name": "requested_wall_time",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The requested wall time of the jobs that were running during this period. This will only count the walltime of the jobs that fell during the period."
+            },
+            {
+                "name": "resource_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The resource that ran the job."
+            },
+            {
+                "name": "running_job_count",
+                "type": "int(11)",
+                "nullable": true,
+                "comment": "FACT: The number of jobs that were running during this period."
+            },
+            {
+                "name": "shared",
+                "type": "tinyint(4)",
+                "nullable": false,
+                "comment": "DIMENSION: Whether the job ran on a node that ran at least one other job."
+            },
+            {
+                "name": "started_job_count",
+                "type": "int(11)",
+                "nullable": true,
+                "comment": "FACT: The number of jobs that started during this period."
+            },
+            {
+                "name": "submitted_job_count",
+                "type": "int(11)",
+                "nullable": true,
+                "comment": "FACT: The number of jobs that started during this period."
+            },
+            {
+                "name": "sum_weighted_expansion_factor",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The sum of expansion factor per job multiplied by nodecount and the [adjusted] duration of jobs that ran in this period."
+            },
+            {
+                "name": "systemaccount_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The username on the resource of the user that ran the job. May be a UID or string username depending on the resource."
+            },
+            {
+                "name": "wait_time",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The amount of time jobs waited to execute during this period."
+            },
+            {
+                "name": "wall_time",
+                "type": "double",
+                "nullable": true,
+                "comment": "FACT: The wall_time of the jobs that were running during this period. This will only count the walltime of the jobs that fell during the period."
+            }
+        ],
+        "indexes": [
+            {
+                "name": "index_supremmfact_by_${AGGREGATION_UNIT}_${AGGREGATION_UNIT}_id",
+                "columns": [
+                    "${AGGREGATION_UNIT}_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_by_${AGGREGATION_UNIT}_${AGGREGATION_UNIT}",
+                "columns": [
+                    "${AGGREGATION_UNIT}"
+                ]
+            },
+            {
+                "name": "index_supremmfact_application_id",
+                "columns": [
+                    "application_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_catastrophe_bucket_id",
+                "columns": [
+                    "catastrophe_bucket_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_cores",
+                "columns": [
+                    "cores"
+                ]
+            },
+            {
+                "name": "index_supremmfact_cpibucket_id",
+                "columns": [
+                    "cpibucket_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_cpu_user_bucketid",
+                "columns": [
+                    "cpu_user_bucketid"
+                ]
+            },
+            {
+                "name": "index_supremmfact_cpu_user_cv_id",
+                "columns": [
+                    "cpu_user_cv_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_datasource_id",
+                "columns": [
+                    "datasource_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_exit_status_id",
+                "columns": [
+                    "exit_status_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_fos_id",
+                "columns": [
+                    "fos_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_gpu0_nv_utilization_bucketid",
+                "columns": [
+                    "gpu0_nv_utilization_bucketid"
+                ]
+            },
+            {
+                "name": "index_supremmfact_granted_pe",
+                "columns": [
+                    "granted_pe"
+                ]
+            },
+            {
+                "name": "index_supremmfact_ibrxbyterate_bucket_id",
+                "columns": [
+                    "ibrxbyterate_bucket_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_jobtime_id",
+                "columns": [
+                    "jobtime_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_max_mem_bucketid",
+                "columns": [
+                    "max_mem_bucketid"
+                ]
+            },
+            {
+                "name": "index_supremmfact_netdrv_gpfs_rx_bucket_id",
+                "columns": [
+                    "netdrv_gpfs_rx_bucket_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_netdrv_isilon_rx_bucket_id",
+                "columns": [
+                    "netdrv_isilon_rx_bucket_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_netdrv_panasas_rx_bucket_id",
+                "columns": [
+                    "netdrv_panasas_rx_bucket_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_nodecount_id",
+                "columns": [
+                    "nodecount_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_organization_id",
+                "columns": [
+                    "organization_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_person_id",
+                "columns": [
+                    "person_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_person_organization_id",
+                "columns": [
+                    "person_organization_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_piperson_organization_id",
+                "columns": [
+                    "piperson_organization_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_principalinvestigator_person_id",
+                "columns": [
+                    "principalinvestigator_person_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_queue_id",
+                "columns": [
+                    "queue_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_resource_id",
+                "columns": [
+                    "resource_id"
+                ]
+            },
+            {
+                "name": "index_supremmfact_shared",
+                "columns": [
+                    "shared"
+                ]
+            },
+            {
+                "name": "index_supremmfact_systemaccount_id",
+                "columns": [
+                    "systemaccount_id"
+                ]
+            }
+        ]
+    }
+}
