@@ -104,7 +104,7 @@ try
         $scriptOptions['last-modified-start-date'] = $last_modified;
     }
 
-    $etlConfig = new \ETL\Configuration\EtlConfiguration(
+    $etlConfig = \ETL\Configuration\EtlConfiguration::factory(
         CONFIG_DIR . '/etl/etl.json',
         null,
         $logger,
@@ -113,7 +113,6 @@ try
             'default_module_name' => $scriptOptions['default-module-name']
         )
     );
-    $etlConfig->initialize();
     $overseerOptions = new \ETL\EtlOverseerOptions($scriptOptions, $logger);
     $overseer = new \ETL\EtlOverseer($overseerOptions, $logger);
     $overseer->execute($etlConfig);
@@ -138,13 +137,12 @@ try
         $scriptOptions['last-modified-start-date'] = $last_modified;
     }
 
-    $etlConfig = new \ETL\Configuration\EtlConfiguration(
+    $etlConfig = \ETL\Configuration\EtlConfiguration::factory(
         CONFIG_DIR . '/etl/etl.json',
         null,
         $logger,
         array('default_module_name' => $scriptOptions['default-module-name'])
     );
-    $etlConfig->initialize();
     $overseerOptions = new \ETL\EtlOverseerOptions($scriptOptions, $logger);
     $overseer = new \ETL\EtlOverseer($overseerOptions, $logger);
     $overseer->execute($etlConfig);
