@@ -25,8 +25,3 @@ an upgrade script.
     $ cd {{ page.summ_sw_version }}
     $ python setup.py install
 
-## Upgrade Database Schema
-
-    # supremm-upgrade
-
-

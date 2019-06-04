@@ -1,0 +1,54 @@
+{
+    "table_definition": {
+        "name": "jobhost",
+        "engine": "MyISAM",
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "columns": [
+            {
+                "name": "host_id",
+                "type": "int(11)",
+                "nullable": false
+            },
+            {
+                "name": "local_job_id",
+                "type": "int(11)",
+                "nullable": false
+            },
+            {
+                "name": "resource_id",
+                "type": "int(11)",
+                "nullable": false
+            },
+            {
+                "name": "end_time_ts",
+                "type": "int(11)",
+                "nullable": false
+            }
+        ],
+        "indexes": [
+            {
+                "name": "PRIMARY",
+                "columns": [
+                    "host_id",
+                    "resource_id",
+                    "local_job_id",
+                    "end_time_ts"
+                ],
+                "type": "BTREE",
+                "is_unique": true
+            },
+            {
+                "name": "job_lookup",
+                "columns": [
+                    "resource_id",
+                    "local_job_id",
+                    "end_time_ts"
+                ],
+                "type": "BTREE",
+                "is_unique": false
+            }
+        ],
+        "triggers": []
+    }
+}

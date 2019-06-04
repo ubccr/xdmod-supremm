@@ -41,6 +41,29 @@ class SupremmDbInterface {
 
     }
 
+    /**
+     * Update the etl ingest version number for all documents in mongo for a
+     * resource.
+     */
+    public function updateEtlVersion($resource_id, $new_etl_version) {
+
+        $resconf =& $this->getResourceConfig($resource_id);
+
+        if( $resconf === null) {
+            return null;
+        }
+
+        $collection = $resconf['handle']->selectCollection($resconf['collection']);
+
+        $result = $collection->update(
+            array('processed.' . $this->getEtlUid() . '.version' => $this->etl_version),
+            array('$set' => array('processed.' . $this->getEtlUid() . '.version' => $new_etl_version)),
+            array('multiple' => true, 'socketTimeoutMS' => -1, 'wTimeoutMS' => -1)
+        );
+
+        return $result;
+    }
+
     /** get the list of configured resources
      * @return array list of resource ids of the configured resources
      */

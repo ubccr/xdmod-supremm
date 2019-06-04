@@ -112,50 +112,10 @@ EOT
             return;
         }
 
-        $this->nodeNpmSetup();
         $this->mongoSetup();
 
         $aclConfig = new AclConfig($this->console);
         $aclConfig->handle();
-    }
-
-    /**
-     * run the npm setup commands
-     */
-    private function nodeNpmSetup()
-    {
-        $this->console->displayBlankLine();
-
-        $this->console->displayMessage(<<<"EOT"
-SUPReMM integration with Open XDMoD uses Node.js for the ETL process.
-You need to install the prerequisite packages that are not bundled with
-Open XDMoD before you can ingest data from SUPReMM.
-EOT
-            );
-
-        $this->console->displayBlankLine();
-
-        $installNodePackages = $this->console->prompt(
-            'Install Node.js packages using npm?',
-            'y',
-            array('y', 'n')
-        );
-
-        $etlPath = DATA_DIR . '/etl/js';
-
-        if ($installNodePackages === 'y') {
-            $this->executeCommand("cd $etlPath && npm install");
-        } else {
-            $this->console->displayMessage(<<<"EOT"
-You will need to install the Node.js packages manually using npm.  e.g.:
-
-    # cd $etlPath
-    # npm install
-EOT
-            );
-            $this->console->displayBlankLine();
-            $this->console->prompt('Press ENTER to continue.');
-        }
     }
 
     /**

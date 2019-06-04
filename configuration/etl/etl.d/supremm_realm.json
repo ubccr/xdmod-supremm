@@ -43,6 +43,7 @@
             "definition_file_list": [
                 "supremm/job.json",
                 "supremm/job_errors.json",
+                "supremm/jobhost.json",
                 "supremm/job_scripts.json"
             ]
         }

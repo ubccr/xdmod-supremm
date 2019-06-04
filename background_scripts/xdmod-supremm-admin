@@ -1,0 +1,278 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Perform administrative tasks for the Open XDMoD
+ * Job Performance (SUPREMM) module.
+ */
+require_once __DIR__ . '/../configuration/linker.php';
+
+use CCR\DB;
+use CCR\DB\MySQLHelper;
+use CCR\Log;
+
+// Catch any unexpected exceptions.
+try {
+    main();
+} catch (Exception $e) {
+    do {
+        $logger->crit(array(
+            'message'    => $e->getMessage(),
+            'stacktrace' => $e->getTraceAsString(),
+        ));
+    } while ($e = $e->getPrevious());
+    exit(1);
+}
+
+/**
+ * Main function.
+ */
+function main()
+{
+    global $argv, $logger;
+
+    $opts = array(
+        'h' => 'help',
+        'v' => 'verbose',
+        'd' => 'debug',
+        'q' => 'quiet',
+        'f' => 'force',
+        'r:' => 'resource:',
+        'a:' => 'action:'
+     );
+
+    $shortOptions = implode('', array_keys($opts));
+    $longOptions = array_values($opts);
+
+    $args = getopt($shortOptions, $longOptions);
+
+    if ($args === false) {
+        fwrite(STDERR, "Failed to parse arguments\n");
+        exit(1);
+    }
+
+    $help = false;
+
+    $config = array(
+        'logLevel' => -1,
+        'action' => null,
+        'resource' => null,
+        'force' => false
+    );
+
+    foreach ($args as $key => $value) {
+        if (is_array($value)) {
+            fwrite(STDERR, "Multiple values not allowed for '$key'\n");
+            exit(1);
+        }
+
+        switch ($key) {
+            case 'h':
+            case 'help':
+                $help = true;
+                break;
+            case 'q':
+            case 'quiet':
+                $config['logLevel'] = max($config['logLevel'], Log::WARNING);
+                break;
+            case 'v':
+            case 'verbose':
+                $config['logLevel'] = max($config['logLevel'], Log::INFO);
+                break;
+            case 'd':
+            case 'debug':
+                $config['logLevel'] = max($config['logLevel'], Log::DEBUG);
+                break;
+            case 'f':
+            case 'force':
+                $config['force'] = true;
+                break;
+            case 'r':
+            case 'resource':
+                $config['resource'] = $value;
+                break;
+            case 'a':
+            case 'action':
+                $config['action'] = $value;
+                break;
+            default:
+                fwrite(STDERR, "Unexpected option '$key'\n");
+                exit(1);
+                break;
+        }
+    }
+
+    if ($help) {
+        displayHelpText();
+        exit;
+    }
+
+    if ($config['logLevel'] === -1) { $config['logLevel'] = Log::NOTICE; }
+
+    $logConf = array(
+        'file'            => false,
+        'mail'            => false,
+        'consoleLogLevel' => $config['logLevel'],
+    );
+
+    $logger = Log::factory('xdmod-supremm-admin', $logConf);
+
+    $cmd = implode(' ', array_map('escapeshellarg', $argv));
+    $logger->info("Command: $cmd");
+
+    switch ($config['action']) {
+        case 'truncate':
+            truncateAction($config);
+            break;
+        default:
+            $logger->crit('No action specified');
+            displayHelpText();
+            exit(1);
+    }
+
+    exit;
+}
+
+/**
+ * Truncate all the job tables.
+ */
+function truncateAction($config)
+{
+    global $logger;
+
+    if ($config['resource'] === null) {
+        $logger->crit('No resource specified');
+        exit(1);
+    }
+
+    if (!$config['force'] && !confirm('Truncate all job data for resource ' . $config['resource'] . '?')) {
+        return;
+    }
+
+    $db = DB::factory('datawarehouse');
+
+    $searchColumn = 'code';
+    if (is_numeric($config['resource'])) {
+        $searchColumn = 'id';
+    }
+    $resourceQuery = $db->prepare('SELECT id FROM `modw`.`resourcefact` WHERE ' . $searchColumn . ' = :resource');
+    $resourceQuery->execute(array('resource' => $config['resource']));
+    $result = $resourceQuery->fetchAll(PDO::FETCH_COLUMN, 0);
+    
+    if (count($result) !== 1) {
+        $logger->crit('Unable to find resource ' . $config['resource'] . ' in the database');
+        return;
+    }
+
+    $resource_id = $result[0];
+
+    $logger->notice('Reset job ingest status for job summaries in mongo for resource_id ' . $resource_id);
+
+    $sdb = new \DataWarehouse\Query\SUPREMM\SupremmDbInterface();
+
+    $docs_updated = $sdb->updateEtlVersion($resource_id, 0);
+    if ($docs_updated === null) {
+        $logger->warning('No mongo data found for resource. No action taken');
+    } else {
+        if ($docs_updated['ok']) {
+            $logger->notice('Job summary documents status reset for ' . $docs_updated['nModified'] . ' jobs');
+        } else {
+            $logger->warning('Job summary document update failed ' . json_encode($docs_updated));
+        }
+    }
+
+    $logger->notice('Removing job data from sql database for resource_id ' . $resource_id);
+
+    $tables = array(
+        'executable',
+        'cwd',
+        'host',
+        'jobhost',
+        'job_errors'
+    );
+
+    foreach ($tables as $table) {
+        $rows = $db->execute('DELETE FROM `modw_supremm`.`' . $table . '` WHERE resource_id = :resource_id', array('resource_id' => $resource_id));
+        $logger->notice('Deleted ' . $rows . ' rows from ' . $table);
+    }
+
+    $multiDel = <<<EOF
+DELETE FROM `modw_supremm` . `job_name` , `modw_supremm` . `job_peers`
+USING `modw_supremm`.`job`
+        LEFT JOIN `modw_supremm`.`job_name` ON `modw_supremm`.`job`.jobname_id = `modw_supremm`.`job_name`.id
+        LEFT JOIN `modw_supremm`.`job_peers` ON `modw_supremm`.`job`._id = `modw_supremm`.`job_peers`.job_id 
+WHERE
+    `modw_supremm`.`job`.resource_id = :resource_id
+EOF;
+    $rows = $db->execute($multiDel, array('resource_id' => $resource_id));
+    $logger->notice('Deleted ' . $rows . ' rows from job_name and job_peers tables.');
+}
+
+/**
+ * Prompt the user for confirmation.
+ *
+ * @param string $msg Confirmation message.
+ *
+ * @return bool True if the message is confirmed.
+ */
+function confirm($msg)
+{
+    $response = null;
+
+    while ($response === null) {
+        $response = readline("$msg (yes/no): [no] ");
+
+        if (!in_array($response, array('yes', 'no', ''))) {
+            echo "\n'$response' is not a valid option.\n\n";
+            $response = null;
+        }
+    }
+
+    return $response == 'yes';
+}
+
+/**
+ * Output help text to STDOUT.
+ */
+function displayHelpText()
+{
+    echo <<<'EOF'
+
+Perform administrative tasks.
+
+This command currently supports truncating all job data for a given resource.
+
+Usage: xdmod-supremm-admin -a ACTION [OPTS]
+
+    -h, --help
+        Display this message and exit.
+
+    -v, --verbose
+        Output info level logging.
+
+    --debug
+        Output debug level logging.
+
+    -q, --quiet
+        Output warning level logging.
+
+    -f, --force
+        Force the action.  You will not be prompted to confirm the
+        action requested.
+
+    -a, --action=[ACTION]
+        Perform the requested ACTION.
+
+Actions:
+
+    truncate --resource=RESOURCE
+
+The truncate action removes the data for a given resource
+
+    Examples:
+        xdmod-admin --action=truncate --resource='hpc'
+
+    This will remove all job data from the supremm realm for the resource 'hpc'.
+
+EOF;
+}
+

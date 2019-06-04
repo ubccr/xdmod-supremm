@@ -1,9 +1,9 @@
-var logIn = require('../../../../../xdmod/open_xdmod/modules/xdmod/automated_tests/test/specs/xdmod/loginPage.page.js');
+var logIn = require('../../../../../xdmod/tests/ui/test/specs/xdmod/loginPage.page.js');
 
 var fs = require('fs');
 var jV = require('./jobViewer.page.js');
-var me = require('../../../../../xdmod/open_xdmod/modules/xdmod/automated_tests/test/specs/xdmod/metricExplorer.page.js');
-var xdmod = require('../../../../../xdmod/open_xdmod/modules/xdmod/automated_tests/test/specs/xdmod/xdmod.page.js');
+var me = require('../../../../../xdmod/tests/ui/test/specs/xdmod/metricExplorer.page.js');
+var xdmod = require('../../../../../xdmod/tests/ui/test/specs/xdmod/xdmod.page.js');
 
 
 describe('Job Viewer', function jobViewer() {

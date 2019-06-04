@@ -1,5 +1,40 @@
 Open XDMoD SUPReMM Change Log
 =============================
+
+## 2019-04-23 v8.1.0
+- Features
+    - Add support for GPU metrics. If available, the GPU usage and GPU memory
+      usage for job are shown in the Job Viewer. It is now possible to group
+      and filter by GPU usage in the Metric and Usage Explorer tabs.
+    - Add support for energy metrics. If available, energy metrics for a job
+      are shown in the Job Viewer.  Energy metrics are not available in the
+      Metric or Usage Explorer tabs.
+    - Improve the application identification algorithm and add more community
+      applications to the database.
+    - Add more command line options to the sharedjobs script to control which
+      resources are scanned and the scan time range.
+    - Improve performance of the sharedjobs script when processing large
+      amounts of data (~millions of jobs at a time).
+
+- Bug Fixes
+    - The data mapping for InfiniBand metrics previously would only use data for the
+      hardcoded mlx0 device. The mapping has been updated to default to the first
+      available InfiniBand device.
+    - Add job end time as an additional unique constraint on the jobhosts table.
+    - Updated label for GPU usage displayed in the job viewer.
+
+- Miscellaneous
+    - Several updates required by internal API changes in xdmod 8.1. This
+      includes updates to the internal API for the Job Viewer search and
+      updates for the internal configuration file API.
+    - The nodejs library dependencies are now packaged in the main xdmod and no
+      longer need to be installed/updated as a separate step. Removed code
+      associated with this install step.
+    - The dynamically generated MySQL tables are now managed via the ETLv2
+      framework.
+    - Updates to the continuous integration (CI) scripts to add more tests.
+    - Update mongodb driver version
+
 ## 2018-11-08 v8.0.0
 - Features
     - Improved performance of aggregation process by switching to the ETLv2 framework.

@@ -43,14 +43,6 @@ created, `modw_etl` and `modw_supremm`.  The database user that is
 specified in your `portal_settings.ini` will be granted access to these
 databases.
 
-In addition to the databases, the setup script will also install the
-necessary Node.js packages that are required. (The list of required packages
-can be found on the [license notices page][notices].) If you prefer to install
-these packages manually, you may do so with the following commands:
-
-    # cd /usr/share/xdmod/etl/js
-    # npm install
-
 The script also prompts for the location of the document database that
 contains the job summary data. I.e. the MongoDB instance. Enter the uri
 in the standard MongoDB connection string format (see the [mongo documentation][] for
