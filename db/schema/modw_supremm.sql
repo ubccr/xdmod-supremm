@@ -359,21 +359,6 @@ CREATE TABLE `host` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `jobhost`
---
-
-DROP TABLE IF EXISTS `jobhost`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jobhost` (
-  `host_id` int(11) NOT NULL,
-  `local_job_id` int(11) NOT NULL,
-  `resource_id` int(11) NOT NULL,
-  PRIMARY KEY (`host_id`,`local_job_id`,`resource_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `job_name`
 --
 
