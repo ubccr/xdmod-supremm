@@ -91,9 +91,9 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                         renderToDivId: this.coreChartDivId,
                         chartTitle: 'Core<br />Efficiency',
                         seriesLabel: 'Core Efficiency',
-                        totalDataValue: data.core_time,
-                        numberGoodDataValue: data.core_time - data.core_time_bad,
-                        numberBadDataValue: data.core_time_bad
+                        totalDataValue: Math.round(data.core_time * 100) / 100,
+                        numberGoodDataValue: Math.round(data.core_time - data.core_time_bad * 100) / 100,
+                        numberBadDataValue: Math.round(data.core_time_bad * 100) / 100
                      },
                      {
                          renderToDivId: this.jobChartDivId,
