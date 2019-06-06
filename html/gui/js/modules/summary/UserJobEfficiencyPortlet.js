@@ -85,15 +85,19 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                 load: function(jobStore, records, options){
                   if(records.length > 0){
                      var data = records[0].data;
+
+                     data.core_time = Math.round(data.core_time * 100) / 100;
+                     data.core_time_bad = Math.round(data.core_time_bad * 100) / 100;
+
                      this.update(data);
 
                      var chartsToMake = [{
                         renderToDivId: this.coreChartDivId,
                         chartTitle: 'Core<br />Efficiency',
                         seriesLabel: 'Core Efficiency',
-                        totalDataValue: Math.round(data.core_time * 100) / 100,
-                        numberGoodDataValue: Math.round(data.core_time - data.core_time_bad * 100) / 100,
-                        numberBadDataValue: Math.round(data.core_time_bad * 100) / 100
+                        totalDataValue: data.core_time,
+                        numberGoodDataValue: data.core_time - data.core_time_bad,
+                        numberBadDataValue: data.core_time_bad
                      },
                      {
                          renderToDivId: this.jobChartDivId,
@@ -153,7 +157,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                       chartsToMake.forEach(function(value, index){
                           chart_details.chart.renderTo = value.renderToDivId;
                           chart_details.title.text = value.chartTitle;
-                          chart_details.series.name = value.seriesLabel;
+                          chart_details.series[0].name = value.seriesLabel;
                           chart_details.series[0].data[0].y = value.numberGoodDataValue;
                           chart_details.series[0].data[1].y = value.numberBadDataValue;
 
