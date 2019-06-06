@@ -92,6 +92,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                         chartTitle: 'Core<br />Efficiency',
                         seriesLabel: 'Core Efficiency',
                         totalDataValue: data.core_time,
+                        numberGoodDataValue: data.core_time - data.core_time_bad,
                         numberBadDataValue: data.core_time_bad
                      },
                      {
@@ -99,6 +100,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                          chartTitle: 'Job<br />Efficiency',
                          seriesLabel: 'Job Efficiency',
                          totalDataValue: data.job_count,
+                         numberGoodDataValue: data.job_count - data.job_count_bad,
                          numberBadDataValue: data.job_count_bad
                      }];
 
@@ -152,7 +154,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                           chart_details.chart.renderTo = value.renderToDivId;
                           chart_details.title.text = value.chartTitle;
                           chart_details.series.name = value.seriesLabel;
-                          chart_details.series[0].data[0].y = value.totalDataValue;
+                          chart_details.series[0].data[0].y = value.numberGoodDataValue;
                           chart_details.series[0].data[1].y = value.numberBadDataValue;
 
                           new Highcharts.Chart(chart_details);
