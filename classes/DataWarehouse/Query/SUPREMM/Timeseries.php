@@ -9,9 +9,9 @@ namespace DataWarehouse\Query\SUPREMM;
 class Timeseries extends \DataWarehouse\Query\Timeseries
 {
     public function __construct(
-        $aggregation_unit_name, 
-        $start_date, 
-        $end_date, 
+        $aggregation_unit_name,
+        $start_date,
+        $end_date,
         $group_by,
         $stat = 'job_count',
         array $parameters = array()
@@ -20,11 +20,11 @@ class Timeseries extends \DataWarehouse\Query\Timeseries
         parent::__construct(
             'SUPREMM', 'modw_aggregates', 'supremmfact',
             array('started_job_count', 'running_job_count'),
-            $aggregation_unit_name, 
-            $start_date, 
-            $end_date, 
+            $aggregation_unit_name,
+            $start_date,
+            $end_date,
             $group_by,
-            $stat ,
+            $stat,
             $parameters
         );
 	}

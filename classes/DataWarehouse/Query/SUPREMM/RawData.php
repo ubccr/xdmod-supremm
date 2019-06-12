@@ -15,9 +15,9 @@ class RawData extends \DataWarehouse\Query\Query
 {
 	
     public function __construct(
-        $aggregation_unit_name, 
-        $start_date, 
-        $end_date, 
+        $aggregation_unit_name,
+        $start_date,
+        $end_date,
         $group_by,
         $stat = 'jl.jobid',
         array $parameters = array()
@@ -27,9 +27,9 @@ class RawData extends \DataWarehouse\Query\Query
         parent::__construct(
             'SUPREMM', 'modw_aggregates', 'supremmfact',
             array(),
-            $aggregation_unit_name, 
-            $start_date, 
-            $end_date, 
+            $aggregation_unit_name,
+            $start_date,
+            $end_date,
             null,
             null,
             $parameters
