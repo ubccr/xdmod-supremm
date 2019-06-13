@@ -14,28 +14,26 @@ use \DataWarehouse\Query\Model\Schema;
 class RawData extends \DataWarehouse\Query\Query
 {
 	
-	public function __construct($aggregation_unit_name, 
-								$start_date, 
-								$end_date, 
-								$group_by,
-								$stat = 'jl.jobid',
-								array $parameters = array(),
-								$query_groupname = 'query_groupname',
-								array $parameterDescriptions = array(),
-								$single_stat = false)
+    public function __construct(
+        $aggregation_unit_name,
+        $start_date,
+        $end_date,
+        $group_by,
+        $stat = 'jl.jobid',
+        array $parameters = array()
+    )
 	{
 
-		parent::__construct('SUPREMM', 'modw_aggregates', 'supremmfact',
-								array(),
-								$aggregation_unit_name, 
-								$start_date, 
-								$end_date, 
-								null,
-								null,
-                                $parameters,
-								$query_groupname,
-								$parameterDescriptions,
-								$single_stat);
+        parent::__construct(
+            'SUPREMM', 'modw_aggregates', 'supremmfact',
+            array(),
+            $aggregation_unit_name,
+            $start_date,
+            $end_date,
+            null,
+            null,
+            $parameters
+        );
 
 
         $dataTable = $this->getDataTable();
