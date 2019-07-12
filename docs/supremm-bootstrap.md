@@ -214,6 +214,7 @@ in [Step 5.](supremm-bootstrap.md#run-the-xdmod-ingest-and-aggregation-script)
 The recommended strategy for advanced troubleshooting is to identify an HPC job that
 - Has accounting data present in the XDMoD datawarehouse
 - Has PCP archive data for the compute nodes on which the job ran
+- Had a wall time long enough for multiple data points to be recorded. For example if you have setup a 30 second collection period, then choose a job that ran for at least ten minutes.
 
 The information about this job should be manually traced though each step in the dataflow. The
 `xdmod-supremm-jobinfo` script provides low-level debug information about a given job
