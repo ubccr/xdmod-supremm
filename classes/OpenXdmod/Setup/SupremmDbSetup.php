@@ -87,7 +87,8 @@ EOT
             //
             $scriptOptions = array(
                 'process-sections' => array(
-                    'supremm.bootstrap'
+                    'supremm.bootstrap',
+                    'jobefficiency.bootstrap'
                 )
             );
 

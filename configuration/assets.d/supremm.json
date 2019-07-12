@@ -1,0 +1,9 @@
+{
+    "+xdmod": {
+        "+portal": {
+            "+js": [
+                "gui/js/modules/summary/JobEfficiencyPortlet.js"
+            ]
+        }
+    }
+}
