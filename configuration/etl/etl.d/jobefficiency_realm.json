@@ -49,27 +49,45 @@
                     "path": "jobefficiency/job_category.json"
                 }
             }
-        }
-    ],
-    "aggregation": [
+        },
         {
-            "name": "create",
+            "name": "table-create",
             "description": "Setup tables",
             "class": "ManageTables",
             "namespace": "ETL\\Maintenance",
             "options_class": "MaintenanceOptions",
             "definition_file_list": [
-                 "jobefficiency/jobefficiency_by_day_joblist.json"
-            ]
-        },
+                "jobefficiency/jobefficiency_by_day_joblist.json"
+            ],
+            "endpoints": {
+                "destination": {
+                    "type": "mysql",
+                    "name": "modw_aggregates",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates",
+                    "create_schema_if_not_exists": true
+                }
+            }
+        }
+    ],
+    "aggregation": [
         {
             "name": "days",
-            "description": "Aggregate Job Efficienct data by day",
+            "description": "Aggregate Job Efficiency data by day",
             "class": "JobListAggregator",
             "definition_file": "jobefficiency/jobefficiency_by_day.json",
             "table_prefix": "jobefficiency_by_",
             "aggregation_units": ["day"]
         },
+        {
+            "name": "years",
+            "description": "Aggregate Job Efficiency data by year",
+            "definition_file": "jobefficiency/jobefficiency_by.json",
+            "table_prefix": "jobefficiency_by_",
+            "aggregation_units": ["year"]
+        }
+    ],
+    "joblist": [
         {
             "name": "joblist",
             "namespace": "ETL\\Ingestor",
@@ -88,13 +106,6 @@
                     "schema": "modw_aggregates"
                 }
             }
-        },
-        {
-            "name": "years",
-            "description": "Aggregate Job Efficiency data by year",
-            "definition_file": "jobefficiency/jobefficiency_by.json",
-            "table_prefix": "jobefficiency_by_",
-            "aggregation_units": ["year"]
         }
     ]
 }

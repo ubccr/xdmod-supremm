@@ -2,14 +2,6 @@
 
 namespace DataWarehouse\Query\JobEfficiency\GroupBys;
 
-/*
-* @author Amin Ghadersohi
-* @date 2011-Jan-07
-*
-* class for adding group by day to a query
-*
-*/
-
 class GroupByDay extends \DataWarehouse\Query\JobEfficiency\GroupBy
 {
     public static function getLabel()
@@ -23,17 +15,17 @@ class GroupByDay extends \DataWarehouse\Query\JobEfficiency\GroupBy
             'day',
             array(),
             "select distinct gt.id,
-												 date(gt.day_start) as long_name,
-												 date(gt.day_start) as short_name,
-												 gt.day_start_ts as start_ts
-												 from  modw.days gt
-												 where 1
-												 order by gt.id asc",
+                date(gt.day_start) as long_name,
+                date(gt.day_start) as short_name,
+                gt.day_start_ts as start_ts
+             from  modw.days gt
+             where 1
+             order by gt.id asc",
             array()
         );
         $this->setAvailableOnDrilldown(false);
     }
-    
+
     public function applyTo(\DataWarehouse\Query\Query &$query, \DataWarehouse\Query\Model\Table $data_table, $multi_group = false)
     {
         $id_field = new \DataWarehouse\Query\Model\TableField($query->getDataTable(), "day_id", $this->getIdColumnName($multi_group));
@@ -44,7 +36,7 @@ class GroupByDay extends \DataWarehouse\Query\JobEfficiency\GroupBy
         $query->addField($name_field);
         $query->addField($shortname_field);
         $query->addField($value_field);
-        
+
         $query->addGroup($id_field);
 
         $this->addOrder($query, $multi_group);
@@ -53,11 +45,9 @@ class GroupByDay extends \DataWarehouse\Query\JobEfficiency\GroupBy
     public function addOrder(\DataWarehouse\Query\Query &$query, $multi_group = false, $dir = 'asc', $prepend = false)
     {
         $orderField = new \DataWarehouse\Query\Model\OrderBy(new \DataWarehouse\Query\Model\TableField($query->getDataTable(), "day_id"), $dir, $this->getName());
-        if($prepend === true)
-        {
+        if ($prepend === true) {
             $query->prependOrder($orderField);
-        }else
-        {
+        } else {
             $query->addOrder($orderField);
         }
     }
@@ -65,14 +55,14 @@ class GroupByDay extends \DataWarehouse\Query\JobEfficiency\GroupBy
     public function pullQueryParameters(&$request)
     {
         $parameters = array();
-        
+
         return $parameters;
     }
 
     public function pullQueryParameterDescriptions(&$request)
     {
         $parameters = array();
-        
+
         return $parameters;
     }
 }

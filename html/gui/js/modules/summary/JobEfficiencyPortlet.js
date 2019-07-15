@@ -1,4 +1,4 @@
-/* eslint no-param-reassign: false */
+/* eslint no-param-reassign: 0 */
 /**
  * XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet
  *
@@ -23,7 +23,7 @@ XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, 
             mdata.attr = 'ext:qtip="' + Ext.util.Format.number(value, '00.0') + ' % of CPU Core Hours"';
 
             var left = '<div style="float: left; width: ' + width + 'px; height: 15px; border-right: thin solid black; background-color: #cc0a0c"> </div>';
-            var right = '<div style="float: left; width: ' + (100 - width)  + 'px; height: 15px; background-color: #4CAF50;"></div>';
+            var right = '<div style="float: left; width: ' + (100 - width) + 'px; height: 15px; background-color: #4CAF50;"></div>';
 
             return left + right;
         };

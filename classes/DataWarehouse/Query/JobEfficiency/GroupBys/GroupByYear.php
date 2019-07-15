@@ -2,14 +2,6 @@
 
 namespace DataWarehouse\Query\JobEfficiency\GroupBys;
 
-/*
-* @author Amin Ghadersohi
-* @date 2011-Jan-07
-*
-* class for adding group by day to a query
-*
-*/
-
 class GroupByYear extends \DataWarehouse\Query\JobEfficiency\GroupBy
 {
     public static function getLabel()
@@ -53,12 +45,9 @@ class GroupByYear extends \DataWarehouse\Query\JobEfficiency\GroupBy
     public function addOrder(\DataWarehouse\Query\Query &$query, $multi_group = false, $dir = 'asc', $prepend = false)
     {
         $orderField = new \DataWarehouse\Query\Model\OrderBy(new \DataWarehouse\Query\Model\TableField($query->getDataTable(), "year_id"), $dir, $this->getName());
-        if($prepend === true)
-        {
+        if ($prepend === true) {
             $query->prependOrder($orderField);
-        }
-        else
-        {
+        } else {
             $query->addOrder($orderField);
         }
     }

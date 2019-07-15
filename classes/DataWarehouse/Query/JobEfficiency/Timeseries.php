@@ -1,11 +1,6 @@
 <?php
 namespace DataWarehouse\Query\JobEfficiency;
 
-/*
-* @author Amin Ghadersohi
-* @date 2013-Feb-07
-*
-*/
 class Timeseries extends \DataWarehouse\Query\Timeseries
 {
     public function __construct(
@@ -14,13 +9,10 @@ class Timeseries extends \DataWarehouse\Query\Timeseries
         $end_date,
         $group_by,
         $stat = 'job_count',
-        array $parameters = array(),
-        $query_groupname = 'query_groupname',
-        array $parameter_description = array(),
-        $single_stat = false
+        array $parameters = array()
     ) {
         parent::__construct(
-            'SUPREMM',
+            'JobEfficiency',
             'modw_aggregates',
             'jobefficiency',
             array('job_count', 'core_time'),
@@ -29,10 +21,7 @@ class Timeseries extends \DataWarehouse\Query\Timeseries
             $end_date,
             $group_by,
             $stat,
-            $parameters,
-            $query_groupname,
-            $parameter_description,
-            $single_stat
+            $parameters
         );
     }
 }

@@ -14,7 +14,7 @@ class core_time_bad_Statistic extends \DataWarehouse\Query\JobEfficiency\Statist
         parent::__construct(
             'SUM(CASE WHEN jf.job_category_id = 2 THEN jf.cpu_time ELSE 0 END) / 3600.0',
             'core_time_bad',
-            'CPU Hours Bad: Total',
+            'CPU Hours Inefficient: Total',
             'CPU Hour',
             0
         );

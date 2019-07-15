@@ -43,9 +43,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/xdmod/etl/
 %{_docdir}/%{name}-%{version}__PRERELEASE__/
 %{_sysconfdir}/xdmod/modules.d/supremm.json
+%{_sysconfdir}/xdmod/assets.d/supremm.json
 
 %config(noreplace) %{_datadir}/xdmod/etl/js/config/supremm/etl.profile.js
 %config(noreplace) %attr(0440,apache,xdmod) %{_sysconfdir}/xdmod/*.d/supremm.ini
+
 %config(noreplace) %{_sysconfdir}/xdmod/assets.d/supremm*.json
 %config(noreplace) %{_sysconfdir}/xdmod/datawarehouse.d/*.json
 %config(noreplace) %{_sysconfdir}/xdmod/internal_dashboard.d/supremm*.json

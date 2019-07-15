@@ -2,14 +2,6 @@
 
 namespace DataWarehouse\Query\JobEfficiency\GroupBys;
 
-/*
-* @author Amin Ghadersohi
-* @date 2011-Jan-07
-*
-* class for adding no group by to a query
-*
-*/
-
 class GroupByNone extends \DataWarehouse\Query\JobEfficiency\GroupBy
 {
     public function __construct()
@@ -34,12 +26,9 @@ class GroupByNone extends \DataWarehouse\Query\JobEfficiency\GroupBy
 
     public function getDefaultDisplayType($dataset_type = null)
     {
-        if($dataset_type == 'timeseries')
-        {
+        if ($dataset_type == 'timeseries') {
             return 'line';
-        }
-        else
-        {
+        } else {
             return 'h_bar';
         }
     }

@@ -14,7 +14,7 @@ class bad_job_ratio_Statistic extends \DataWarehouse\Query\JobEfficiency\Statist
         parent::__construct(
             '100.0 * COALESCE(SUM(CASE WHEN jf.job_category_id = 2 THEN job_count ELSE 0 END) / SUM(jf.job_count), 0)',
             'bad_job_ratio',
-            'Percent of Jobs Ended Bad',
+            'Percent of Inefficient Jobs Ended',
             '%',
             4
         );

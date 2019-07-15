@@ -14,7 +14,7 @@ class job_count_bad_Statistic extends \DataWarehouse\Query\JobEfficiency\Statist
         parent::__construct(
             'SUM(CASE WHEN jf.job_category_id = 2 THEN job_count ELSE 0 END)',
             'job_count_bad',
-            'Number of Bad Jobs Ended',
+            'Number of Inefficient Jobs Ended',
             'Number of Jobs',
             0
         );
