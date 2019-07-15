@@ -93,7 +93,6 @@ class GroupByPi extends \DataWarehouse\Query\JobEfficiency\GroupBy
     public function addOrder(\DataWarehouse\Query\Query &$query, $multi_group = false, $dir = 'asc', $prepend = false)
     {
         $orderField = new \DataWarehouse\Query\Model\OrderBy(new \DataWarehouse\Query\Model\TableField($this->pi_person_table, $this->_order_id_field_name), $dir, $this->getName());
-
         if ($prepend === true) {
             $query->prependOrder($orderField);
         } else {

@@ -14,13 +14,14 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
     jobChartDivId: this.id+"-job-ratio-chart",
     cls: 'user-efficiency-portlet',
     tpl: new Ext.XTemplate(
+        "<div><p>Job Efficiency for {start_date} to {end_date}</p></div>",
         "<div class='user-efficiency-data-row'>",
-          "<div id='"+this.id+"-job-ratio-chart' class='float-left'></div>",
+          "<div id='{job_ratio_chart_id}' class='float-left'></div>",
           "<div class='user-efficiency-details float-left'><div class='user-job-efficiency-portlet-job-count user-efficiency-detail'><h2>Total Job Count</h2>{job_count}</div>",
           "<div class='user-job-efficiency-portlet-job-count-bad user-efficiency-detail'><h2>Inefficient Job Count</h2>{job_count_bad}</div></div>",
         "</div>",
         "<div class='user-efficiency-data-row'>",
-          "<div id='"+this.id+"-core-ratio-chart' class='float-left'></div>",
+          "<div id='{core_ratio_chart_id}' class='float-left'></div>",
           "<div class='user-efficiency-details float-left'><div class='user-core-efficiency-portlet-core-time user-efficiency-detail'><h2>Total Core Time</h2>{core_time}</div>",
           "<div class='user-core-efficiency-portlet-bad-core-time user-efficiency-detail'><h2>Inefficient Core Time</h2>{core_time_bad}</div></div>",
         "</div>"
@@ -28,8 +29,11 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
     initComponent: function () {
         this.height = this.width * (11.0 / 17.0);
 
-        var end_date = new Date();
-        var start_date = end_date.add(Date.DAY, -30);
+        /*var end_date = new Date();
+        var start_date = end_date.add(Date.DAY, -30);*/
+
+        var end_date = new Date('2017-01-28');
+        var start_date = new Date('2016-12-01');
 
         var jobStore = new Ext.data.JsonStore({
            restful: true,
@@ -43,10 +47,8 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                    realm: 'JobEfficiency',
                    group_by: 'person',
                    aggregation_unit: 'day',
-                   start_date: '2016-12-01',
-                   end_date: '2017-01-28',
-//                    start_date: Ext.util.Format.date(start_date, 'Y-m-d'),
-//                    end_date: Ext.util.Format.date(end_date, 'Y-m-d'),
+                   start_date: Ext.util.Format.date(start_date, 'Y-m-d'),
+                   end_date: Ext.util.Format.date(end_date, 'Y-m-d'),
                    person_id: CCR.xdmod.ui.mappedPID,
                    order_by: {
                        field: 'core_time_bad',
@@ -88,6 +90,10 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
 
                      data.core_time = Math.round(data.core_time * 100) / 100;
                      data.core_time_bad = Math.round(data.core_time_bad * 100) / 100;
+                     data.job_ratio_chart_id = this.jobChartDivId;
+                     data.core_ratio_chart_id = this.coreChartDivId;
+                     data.start_date = Ext.util.Format.date(start_date, 'm-d-Y');
+                     data.end_date = Ext.util.Format.date(end_date, 'm-d-Y');
 
                      this.update(data);
 
@@ -165,7 +171,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                       });
                   }
                   else {
-                      this.tpl = new Ext.XTemplate('<h3>No Data to display</h3>');
+                      this.tpl = new Ext.XTemplate('<h3>No Job efficiency data available for this user or time frame</h3>');
                       this.update();
                   }
               }.bind(this)

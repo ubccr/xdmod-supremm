@@ -15,14 +15,14 @@ class GroupByCategory extends \DataWarehouse\Query\JobEfficiency\GroupBy
             'category',
             array(),
             "
-      			select
-      				gt.id,
-      				gt.description as short_name,
-      				gt.description as long_name
-      			from modw_jobefficiency.job_category gt
-      			where 1
-      			order by gt.id
-    		"
+			select
+				gt.id,
+				gt.description as short_name,
+				gt.description as long_name
+				from modw_jobefficiency.job_category gt
+			where 1
+			order by gt.id
+		"
         );
 
         $this->_id_field_name = 'id';

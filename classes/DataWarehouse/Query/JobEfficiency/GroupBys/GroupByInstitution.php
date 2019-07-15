@@ -28,13 +28,13 @@ class GroupByInstitution extends \DataWarehouse\Query\JobEfficiency\GroupBy
             'institution',
             array(),
             "SELECT distinct
-      			gt.id,
-      			gt.short_name as short_name,
-      			gt.long_name as long_name
-      	FROM
-      			organization gt
-      	where 1
-      	order by gt.order_id"
+ 			gt.id,
+			gt.short_name as short_name,
+			gt.long_name as long_name
+		FROM
+			organization gt
+		where 1
+		order by gt.order_id"
         );
 
         $this->_id_field_name = 'id';
