@@ -52,6 +52,35 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
         if (isset($parameters['primary_key'])) {
             $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, '_id'), "=", $parameters['primary_key']));
+        } elseif (isset($parameters['start_date']) && isset($parameters['end_date'])) {
+            $startDate = date_parse_from_format('Y-m-d', $parameters['start_date']);
+            $startDateTs = mktime(
+                $startDate['hour'],
+                $startDate['minute'],
+                $startDate['second'],
+                $startDate['month'],
+                $startDate['day'],
+                $startDate['year']
+            );
+            if ($startDateTs === false) {
+                throw new \Exception('invalid "start_date" query parameter');
+            }
+
+            $endDate = date_parse_from_format('Y-m-d', $parameters['end_date']);
+            $endDateTs = mktime(
+                23,
+                59,
+                59,
+                $endDate['month'],
+                $endDate['day'],
+                $endDate['year']
+            );
+            if ($startDateTs === false) {
+                throw new \Exception('invalid "end_date" query parameter');
+            }
+
+            $this->addPdoWhereCondition(new WhereCondition(new TableField($factTable, 'end_time_ts'), ">=", $startDateTs));
+            $this->addPdoWhereCondition(new WhereCondition(new TableField($factTable, 'end_time_ts'), "<=", $endDateTs));
         } else {
             $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, 'resource_id'), '=', $parameters['resource_id']));
             $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, 'local_job_id'), '=', $parameters['job_identifier']));
