@@ -9,7 +9,7 @@ use \DataWarehouse\Query\Model\FormulaField;
 use \DataWarehouse\Query\Model\WhereCondition;
 use \DataWarehouse\Query\Model\Schema;
 
-/* 
+/*
 * @author Joe White
 * @date 2015-03-25
 *
@@ -23,7 +23,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
         array $parameters,
         $stat = "all"
     ) {
-    
+
         parent::__construct('SUPREMM', 'modw_supremm', 'job', array());
 
         $this->loadRawStatsConfig();
@@ -79,8 +79,8 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                 throw new \Exception('invalid "end_date" query parameter');
             }
 
-            $this->addPdoWhereCondition(new WhereCondition(new TableField($factTable, 'end_time_ts'), ">=", $startDateTs));
-            $this->addPdoWhereCondition(new WhereCondition(new TableField($factTable, 'end_time_ts'), "<=", $endDateTs));
+            $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, 'end_time_ts'), ">=", $startDateTs));
+            $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, 'end_time_ts'), "<=", $endDateTs));
         } else {
             $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, 'resource_id'), '=', $parameters['resource_id']));
             $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, 'local_job_id'), '=', $parameters['job_identifier']));
