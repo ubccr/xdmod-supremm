@@ -28,7 +28,7 @@ class GroupByInstitution extends \DataWarehouse\Query\JobEfficiency\GroupBy
             'institution',
             array(),
             "SELECT distinct
- 			gt.id,
+			gt.id,
 			gt.short_name as short_name,
 			gt.long_name as long_name
 		FROM
