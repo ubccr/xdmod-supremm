@@ -81,7 +81,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                 }
             ],
             listeners: {
-                load: function(jobStore, records, options) {
+                load: function (jobStore, records, options) {
                     if (records.length > 0) {
                         var data = records[0].data;
 
@@ -157,7 +157,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                             }]
                         };
 
-                        chartsToMake.forEach(function(value, index) {
+                        chartsToMake.forEach(function (value, index) {
                             chart_details.chart.renderTo = value.renderToDivId;
                             chart_details.title.text = value.chartTitle;
                             chart_details.series[0].name = value.seriesLabel;
