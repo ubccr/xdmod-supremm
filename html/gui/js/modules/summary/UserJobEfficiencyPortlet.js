@@ -29,11 +29,8 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
     initComponent: function () {
         this.height = this.width * (11.0 / 17.0);
 
-        /*var end_date = new Date();
-        var start_date = end_date.add(Date.DAY, -30);*/
-
-        var end_date = new Date('2017-01-28');
-        var start_date = new Date('2016-12-01');
+        var end_date = new Date();
+        var start_date = end_date.add(Date.DAY, -30);
 
         var jobStore = new Ext.data.JsonStore({
            restful: true,
