@@ -1,0 +1,111 @@
+{
+    "module": "jobefficiency",
+    "defaults": {
+        "global": {
+            "namespace": "ETL\\Aggregator",
+            "options_class": "AggregatorOptions",
+            "class": "SimpleAggregator",
+            "truncate_destination": false,
+            "endpoints": {
+                "source": {
+                    "type": "mysql",
+                    "name": "SUPReMM DB",
+                    "config": "datawarehouse",
+                    "schema": "modw_supremm"
+                },
+                "destination": {
+                    "type": "mysql",
+                    "name": "modw_aggregates",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates",
+                    "create_schema_if_not_exists": true
+                }
+            }
+        },
+        "bootstrap": {
+            "endpoints": {
+                "destination": {
+                    "type": "mysql",
+                    "name": "Datawarehouse",
+                    "config": "datawarehouse",
+                    "schema": "modw_jobefficiency",
+                    "create_schema_if_not_exists": true
+                }
+            }
+        }
+    },
+    "bootstrap": [
+        {
+            "name": "dimension-job-category-load",
+            "description": "Load data into job_category dimension table",
+            "class": "StructuredFileIngestor",
+            "namespace": "ETL\\Ingestor",
+            "options_class": "IngestorOptions",
+            "definition_file": "jobefficiency/job_category.json",
+            "endpoints": {
+                "source": {
+                    "type": "jsonfile",
+                    "name": "job categories",
+                    "path": "jobefficiency/job_category.json"
+                }
+            }
+        },
+        {
+            "name": "table-create",
+            "description": "Setup tables",
+            "class": "ManageTables",
+            "namespace": "ETL\\Maintenance",
+            "options_class": "MaintenanceOptions",
+            "definition_file_list": [
+                "jobefficiency/jobefficiency_by_day_joblist.json"
+            ],
+            "endpoints": {
+                "destination": {
+                    "type": "mysql",
+                    "name": "modw_aggregates",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates",
+                    "create_schema_if_not_exists": true
+                }
+            }
+        }
+    ],
+    "aggregation": [
+        {
+            "name": "days",
+            "description": "Aggregate Job Efficiency data by day",
+            "class": "JobListAggregator",
+            "definition_file": "jobefficiency/jobefficiency_by_day.json",
+            "table_prefix": "jobefficiency_by_",
+            "aggregation_units": ["day"]
+        },
+        {
+            "name": "years",
+            "description": "Aggregate Job Efficiency data by year",
+            "definition_file": "jobefficiency/jobefficiency_by.json",
+            "table_prefix": "jobefficiency_by_",
+            "aggregation_units": ["year"]
+        }
+    ],
+    "joblist": [
+        {
+            "name": "joblist",
+            "namespace": "ETL\\Ingestor",
+            "class": "ExplodeTransformIngestor",
+            "options_class": "IngestorOptions",
+            "definition_file": "jobefficiency/jobefficiency_by_day_joblist.json",
+            "description": "Populate the job list table, which contains the back references from the aggregates table to the fact table",
+            "explode_column": {
+                "job_id_list": "job_id"
+            },
+            "endpoints": {
+                "source": {
+                    "type": "mysql",
+                    "name": "modw_aggregates",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates"
+                }
+            }
+        }
+    ]
+}

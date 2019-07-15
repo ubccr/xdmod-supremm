@@ -59,6 +59,9 @@ class RawData extends \DataWarehouse\Query\Query
 
         $this->addField( new TableField($factTable, "_id", "jobid") );
         $this->addField( new TableField($factTable, "local_job_id" ) );
+        $this->addField(new TableField($factTable, "start_time_ts"));
+        $this->addField(new TableField($factTable, "end_time_ts"));
+        $this->addField(new TableField($factTable, "cpu_user"));
 
         $this->addTable( $joblistTable );
         $this->addTable( $factTable );
