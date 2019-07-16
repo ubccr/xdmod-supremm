@@ -10,4 +10,8 @@ if [ ! -x "$phpunit" ]; then
     exit 127
 fi
 
+# Run subset of xdmod tests that work with this module
+$phpunit ${PHPUNITARGS} ../../../xdmod/tests/integration/lib/Rest/ReportThumbnailsTest.php
+
+# Run module specific tests
 $phpunit ${PHPUNITARGS} .
