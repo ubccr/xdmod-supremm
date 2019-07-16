@@ -1,4 +1,3 @@
-/* eslint no-param-reassign: false */
 /**
  * XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet
  *
@@ -10,17 +9,17 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
 
     layout: 'fit',
     title: 'User Job Efficiency Rating Past 30 Days',
-    coreChartDivId: this.id + '-core-ratio-chart',
-    jobChartDivId: this.id + '-job-ratio-chart',
+    coreChartDivId: 'core-ratio-chart',
+    jobChartDivId:  'job-ratio-chart',
     cls: 'user-efficiency-portlet',
     tpl: new Ext.XTemplate(
         "<div class='user-efficiency-data-row'>",
-        "<div id='{job_ratio_chart_id}' class='float-left'></div>",
+        "<div id='user-efficiency-job-ratio-chart' class='float-left'></div>",
         "<div class='user-efficiency-details float-left'><div class='user-job-efficiency-portlet-job-count user-efficiency-detail'><h2>Total Job Count</h2>{job_count}</div>",
         "<div class='user-job-efficiency-portlet-job-count-bad user-efficiency-detail'><h2>Inefficient Job Count</h2>{job_count_bad}</div></div>",
         '</div>',
         "<div class='user-efficiency-data-row'>",
-        "<div id='{core_ratio_chart_id}' class='float-left'></div>",
+        "<div id='user-efficiency-core-ratio-chart' class='float-left'></div>",
         "<div class='user-efficiency-details float-left'><div class='user-core-efficiency-portlet-core-time user-efficiency-detail'><h2>Total Core Time</h2>{core_time}</div>",
         "<div class='user-core-efficiency-portlet-bad-core-time user-efficiency-detail'><h2>Inefficient Core Time</h2>{core_time_bad}</div></div>",
         '</div>'
@@ -94,7 +93,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                         this.update(data);
 
                         var chartsToMake = [{
-                            renderToDivId: this.coreChartDivId,
+                            renderToDivId: 'user-efficiency-core-ratio-chart',
                             chartTitle: 'Core<br />Efficiency',
                             seriesLabel: 'Core Efficiency',
                             totalDataValue: data.core_time,
@@ -102,7 +101,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                             numberBadDataValue: data.core_time_bad
                         },
                         {
-                            renderToDivId: this.jobChartDivId,
+                            renderToDivId: 'user-efficiency-job-ratio-chart',
                             chartTitle: 'Job<br />Efficiency',
                             seriesLabel: 'Job Efficiency',
                             totalDataValue: data.job_count,
