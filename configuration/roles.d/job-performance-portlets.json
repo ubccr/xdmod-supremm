@@ -1,36 +1,6 @@
 {
     "+roles": {
-        "+cd": {
-            "summary_portlets": [{
-                "name": "User Job Efficiency Portlet",
-                "type": "UserJobEfficiencyPortlet"
-            }]
-        },
         "+usr": {
-            "summary_portlets": [{
-                "name": "User Job Efficiency Portlet",
-                "type": "UserJobEfficiencyPortlet"
-            }]
-        },
-        "+pi": {
-            "summary_portlets": [{
-                "name": "User Job Efficiency Portlet",
-                "type": "UserJobEfficiencyPortlet"
-            }]
-        },
-        "+mgr": {
-            "summary_portlets": [{
-                "name": "User Job Efficiency Portlet",
-                "type": "UserJobEfficiencyPortlet"
-            }]
-        },
-        "+cs": {
-            "summary_portlets": [{
-                "name": "User Job Efficiency Portlet",
-                "type": "UserJobEfficiencyPortlet"
-            }]
-        },
-        "+dev": {
             "summary_portlets": [{
                 "name": "User Job Efficiency Portlet",
                 "type": "UserJobEfficiencyPortlet"

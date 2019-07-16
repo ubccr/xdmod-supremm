@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: false */
 /**
  * XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet
  *
@@ -9,28 +10,28 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
 
     layout: 'fit',
     title: 'User Job Efficiency Rating Past 30 Days',
-    coreChartDivId: this.id + "-core-ratio-chart",
-    jobChartDivId: this.id + "-job-ratio-chart",
+    coreChartDivId: this.id + '-core-ratio-chart',
+    jobChartDivId: this.id + '-job-ratio-chart',
     cls: 'user-efficiency-portlet',
     tpl: new Ext.XTemplate(
         "<div class='user-efficiency-data-row'>",
         "<div id='{job_ratio_chart_id}' class='float-left'></div>",
         "<div class='user-efficiency-details float-left'><div class='user-job-efficiency-portlet-job-count user-efficiency-detail'><h2>Total Job Count</h2>{job_count}</div>",
         "<div class='user-job-efficiency-portlet-job-count-bad user-efficiency-detail'><h2>Inefficient Job Count</h2>{job_count_bad}</div></div>",
-        "</div>",
+        '</div>',
         "<div class='user-efficiency-data-row'>",
         "<div id='{core_ratio_chart_id}' class='float-left'></div>",
         "<div class='user-efficiency-details float-left'><div class='user-core-efficiency-portlet-core-time user-efficiency-detail'><h2>Total Core Time</h2>{core_time}</div>",
         "<div class='user-core-efficiency-portlet-bad-core-time user-efficiency-detail'><h2>Inefficient Core Time</h2>{core_time_bad}</div></div>",
-        "</div>"
+        '</div>'
     ),
-    initComponent: function() {
+    initComponent: function () {
         this.height = this.width * (11.0 / 17.0);
 
         var end_date = new Date();
         var start_date = end_date.add(Date.DAY, -30);
 
-        var jobStore = new Ext.data.JsonStore({
+        new Ext.data.JsonStore({
             restful: true,
             url: XDMoD.REST.url + '/warehouse/aggregatedata',
             root: 'results',
@@ -53,34 +54,33 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                 })
             },
             fields: [{
-                    name: 'name',
-                    type: 'string'
-                }, {
-                    name: 'core_time_bad',
-                    type: 'float'
-                }, {
-                    name: 'bad_core_ratio',
-                    type: 'float'
-                },
-                {
-                    name: 'bad_job_ratio',
-                    type: 'float'
-                },
-                {
-                    name: 'core_time',
-                    type: 'float',
-                },
-                {
-                    name: 'job_count',
-                    type: 'float',
-                },
-                {
-                    name: 'job_count_bad',
-                    type: 'float'
-                }
-            ],
+                name: 'name',
+                type: 'string'
+            }, {
+                name: 'core_time_bad',
+                type: 'float'
+            }, {
+                name: 'bad_core_ratio',
+                type: 'float'
+            },
+            {
+                name: 'bad_job_ratio',
+                type: 'float'
+            },
+            {
+                name: 'core_time',
+                type: 'float'
+            },
+            {
+                name: 'job_count',
+                type: 'float'
+            },
+            {
+                name: 'job_count_bad',
+                type: 'float'
+            }],
             listeners: {
-                load: function (jobStore, records, options) {
+                load: function (store, records, options) {
                     if (records.length > 0) {
                         var data = records[0].data;
 
@@ -94,22 +94,21 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                         this.update(data);
 
                         var chartsToMake = [{
-                                renderToDivId: this.coreChartDivId,
-                                chartTitle: 'Core<br />Efficiency',
-                                seriesLabel: 'Core Efficiency',
-                                totalDataValue: data.core_time,
-                                numberGoodDataValue: data.core_time - data.core_time_bad,
-                                numberBadDataValue: data.core_time_bad
-                            },
-                            {
-                                renderToDivId: this.jobChartDivId,
-                                chartTitle: 'Job<br />Efficiency',
-                                seriesLabel: 'Job Efficiency',
-                                totalDataValue: data.job_count,
-                                numberGoodDataValue: data.job_count - data.job_count_bad,
-                                numberBadDataValue: data.job_count_bad
-                            }
-                        ];
+                            renderToDivId: this.coreChartDivId,
+                            chartTitle: 'Core<br />Efficiency',
+                            seriesLabel: 'Core Efficiency',
+                            totalDataValue: data.core_time,
+                            numberGoodDataValue: data.core_time - data.core_time_bad,
+                            numberBadDataValue: data.core_time_bad
+                        },
+                        {
+                            renderToDivId: this.jobChartDivId,
+                            chartTitle: 'Job<br />Efficiency',
+                            seriesLabel: 'Job Efficiency',
+                            totalDataValue: data.job_count,
+                            numberGoodDataValue: data.job_count - data.job_count_bad,
+                            numberBadDataValue: data.job_count_bad
+                        }];
 
                         var chart_details = {
                             chart: {
@@ -137,7 +136,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                                     size: '200%',
                                     sliceOffset: 0,
                                     dataLabels: {
-                                        enabled: false,
+                                        enabled: false
                                     }
                                 }
                             },
@@ -145,14 +144,13 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                                 type: 'pie',
                                 innerSize: '60%',
                                 data: [{
-                                        name: 'Good',
-                                        color: 'green'
-                                    },
-                                    {
-                                        name: 'Bad',
-                                        color: 'red'
-                                    }
-                                ]
+                                    name: 'Good',
+                                    color: 'green'
+                                },
+                                {
+                                    name: 'Bad',
+                                    color: 'red'
+                                }]
                             }]
                         };
 
@@ -166,7 +164,8 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                             new Highcharts.Chart(chart_details);
                         });
                     } else {
-                        this.tpl = new Ext.XTemplate('<div class="grid-data-empty"><div class="empty-grid-heading">No Job Efficiency data available.</div><div class="empty-grid-body">There is no Job Efficiency data available for this user for the past 30 days in the XDMoD datawarehouse.</div></div>');
+                        var emptyTpl = new Ext.XTemplate('<div class="grid-data-empty"><div class="empty-grid-heading">No Job Efficiency data available.</div><div class="empty-grid-body">There is no Job Efficiency data available for this user for the past 30 days in the XDMoD datawarehouse.</div></div>');
+                        this.tpl = emptyTpl;
                         this.update();
                     }
                 }.bind(this)
