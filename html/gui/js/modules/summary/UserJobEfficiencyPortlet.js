@@ -11,7 +11,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
     title: 'User Job Efficiency Portlet',
     cls: 'user-efficiency-portlet',
     tpl: new Ext.XTemplate(
-        "<div><h2>User Efficiency for {start_date} to {end_date}</h2></div>",
+        '<div><h2>User Efficiency for {start_date} to {end_date}</h2></div>',
         "<div class='user-efficiency-data-row'>",
         "<div id='user-efficiency-job-ratio-chart'></div>",
         "<div class='user-efficiency-details'><div class='user-job-efficiency-portlet-job-count user-efficiency-detail'><h2>Total Job Count</h2>{job_count}</div>",
@@ -166,7 +166,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(Ext.ux.Portl
                             chart_details.series[0].data[0].y = value.numberGoodDataValue;
                             chart_details.series[0].data[1].y = value.numberBadDataValue;
 
-                            var hc = new Highcharts.Chart(chart_details);
+                            new Highcharts.Chart(chart_details);
                         });
                     } else {
                         var emptyTpl = new Ext.XTemplate('<div class="grid-data-empty"><div class="empty-grid-heading">No Job Efficiency data available.</div><div class="empty-grid-body">There is no Job Efficiency data available for this user for the past 30 days in the XDMoD datawarehouse.</div></div>');
