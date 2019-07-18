@@ -2,7 +2,7 @@
     background-color: white;
 }
 .user-efficiency-data-row {
-    font-size: 18px;
+    font-size: 14px;
 }
 #user-efficiency-job-ratio-chart, #user-efficiency-core-ratio-chart{
     float: left;
@@ -11,6 +11,7 @@
     width: 270px;
     text-align: center;
     float: left;
+    margin-top: 10px;
 }
 .user-efficiency-detail:first-child {
     padding-bottom: 19px;
