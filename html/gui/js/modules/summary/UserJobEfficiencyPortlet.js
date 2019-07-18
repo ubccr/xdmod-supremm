@@ -34,7 +34,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(CCR.xdmod.ui
             return element.text === timeframe;
         }, this);
 
-        this.setTitle(this.title + ' - ' + date.start.format('Y-m-d') + ' to '  + date.end.format('Y-m-d'));
+        this.setTitle(this.title + ' - ' + date.start.format('Y-m-d') + ' to ' + date.end.format('Y-m-d'));
 
         this.jobStore = new Ext.data.JsonStore({
             restful: true,
