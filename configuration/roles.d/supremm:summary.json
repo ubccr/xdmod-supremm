@@ -1,0 +1,10 @@
+{
+    "+roles": {
+        "+usr": {
+            "summary_portlets": [{
+                "name": "User Job Efficiency Portlet",
+                "type": "UserJobEfficiencyPortlet"
+            }]
+        }
+    }
+}
