@@ -5,6 +5,7 @@ use \DataWarehouse\Query\Model\Table;
 use \DataWarehouse\Query\Model\TableField;
 use \DataWarehouse\Query\Model\WhereCondition;
 use \DataWarehouse\Query\Model\Schema;
+use \DataWarehouse\Query\Model\OrderBy;
 
 /* 
 * @author Amin Ghadersohi
@@ -82,7 +83,9 @@ class RawData extends \DataWarehouse\Query\Query
                 // All other metrics show running job count
                 break;
         }
-	}
+
+        $this->addOrder(new OrderBy(new TableField($factTable, 'end_time_ts'), 'DESC', 'end_time_ts'));
+    }
 
     public function getQueryString($limit = NULL, $offset = NULL, $extraHavingClause = NULL)
     {
