@@ -1,4 +1,3 @@
-/* eslint no-param-reassign: 0 */
 /**
  * XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet
  *
@@ -14,7 +13,12 @@ XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, 
     initComponent: function () {
         this.height = this.width * (11.0 / 17.0);
 
-        var DEFAULT_PAGE_SIZE = 11;
+        var DEFAULT_PAGE_SIZE = 12;
+
+        if (this.config.multiuser) {
+            // multiuser view has an extra toolbar at the top
+            DEFAULT_PAGE_SIZE -= 1;
+        }
 
         var maxCoreTime = -1;
 
@@ -40,8 +44,19 @@ XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, 
             return '<div style="width: ' + width + 'px; height: 15px; background-color: #1199ff; margin-right: 5px; float: left"></div><div>' + XDMoD.utils.format.convertToSiPrefix(value, '', 2) + '</div>';
         };
 
-        var end_date = new Date();
-        var start_date = end_date.add(Date.DAY, -30);
+        // Sync date ranges
+        var dateRanges = CCR.xdmod.ui.DurationToolbar.getDateRanges();
+
+        var timeframe = this.config.timeframe ? this.config.timeframe : '30 day';
+
+        var date = dateRanges.find(function (element) {
+            return element.text === timeframe;
+        }, this);
+
+        var start_datestr = date.start.format('Y-m-d');
+        var end_datestr = date.end.format('Y-m-d');
+
+        this.title += ' - ' + start_datestr + ' to ' + end_datestr;
 
         var jobStore = new Ext.data.JsonStore({
             restful: true,
@@ -55,8 +70,8 @@ XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, 
                     realm: 'JobEfficiency',
                     group_by: 'person',
                     aggregation_unit: 'day',
-                    start_date: Ext.util.Format.date(start_date, 'Y-m-d'),
-                    end_date: Ext.util.Format.date(end_date, 'Y-m-d'),
+                    start_date: start_datestr,
+                    end_date: end_datestr,
                     order_by: {
                         field: 'core_time_bad',
                         dirn: 'desc'
@@ -117,9 +132,21 @@ XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, 
             }),
             viewConfig: {
                 deferEmptyText: true,
-                emptyText: '<div class="grid-data-empty"><div class="empty-grid-heading">No Job Data available.</div><div class="empty-grid-body">There are no performance data in the XDMoD datwarehouse for HPC jobs that ran in the previous 30 days.</div></div>'
+                emptyText: '<div class="no-data-alert">No Job Efficiency Data Found</div><div class="no-data-info">Job information only shows in XDMoD once the job has finished and there is a short delay between a job finishing and the job&apos;s data being available in XDMoD.</div>'
             },
-            tbar: {
+            bbar: new Ext.PagingToolbar({
+                store: jobStore,
+                displayInfo: true,
+                pageSize: DEFAULT_PAGE_SIZE,
+                prependButtons: true
+            }),
+            sm: new Ext.grid.RowSelectionModel({
+                singleSelect: true
+            })
+        }];
+
+        if (this.config.multiuser) {
+            this.items[0].tbar = {
                 items: [{
                     xtype: 'tbtext',
                     text: 'Group By:',
@@ -155,18 +182,8 @@ XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, 
                         ]
                     }
                 }]
-            },
-            bbar: new Ext.PagingToolbar({
-                store: jobStore,
-                displayInfo: true,
-                pageSize: DEFAULT_PAGE_SIZE,
-                prependButtons: true
-            }),
-            sm: new Ext.grid.RowSelectionModel({
-                singleSelect: true
-            })
-        }];
-
+            };
+        }
         XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet.superclass.initComponent.apply(this, arguments);
     }
 });
