@@ -169,7 +169,7 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(CCR.xdmod.ui
                             this.charts[index] = new Highcharts.Chart(chart_details);
                         }, this);
                     } else {
-                        var emptyTpl = new Ext.XTemplate('<div class="grid-data-empty"><div class="empty-grid-heading">No Job Efficiency data available.</div><div class="empty-grid-body">There is no Job Efficiency data available for this user for the past 30 days in the XDMoD datawarehouse.</div></div>');
+                        var emptyTpl = new Ext.XTemplate('<div class="x-grid-empty"><div class="no-data-alert">No Job Efficiency Data Found</div><div class="no-data-info">Job information only shows in XDMoD once the job has finished and there is a short delay between a job finishing and the job&apos;s data being available in XDMoD.</div></div>');
                         this.tpl = emptyTpl;
                         this.update();
                     }
