@@ -21,9 +21,8 @@ build:
         - ./tests/integration_tests/scripts/bootstrap.sh
         - ./tests/integration_tests/scripts/validate.sh
         - composer install -d ../xdmod --no-progress
-        - cp ~/assets/secrets.json ../xdmod/open_xdmod/modules/xdmod/integration_tests/.secrets.json
         - ./tests/integration_tests/runtests.sh --log-junit `pwd`/shippable/testresults/results.xml
-        - ../xdmod/open_xdmod/modules/xdmod/automated_tests/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
+        - ../xdmod/tests/ui/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
     on_failure:
         - cat /var/log/xdmod/*
 jobs:

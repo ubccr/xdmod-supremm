@@ -87,12 +87,12 @@ EOT
             //
             $scriptOptions = array(
                 'process-sections' => array(
-                    'supremm.bootstrap'
+                    'supremm.bootstrap',
+                    'jobefficiency.bootstrap'
                 )
             );
 
-            $etlConfig = new \ETL\Configuration\EtlConfiguration(CONFIG_DIR . '/etl/etl.json', null, $logger, array());
-            $etlConfig->initialize();
+            $etlConfig = \ETL\Configuration\EtlConfiguration::factory(CONFIG_DIR . '/etl/etl.json', null, $logger, array());
             \ETL\Utilities::setEtlConfig($etlConfig);
             $overseerOptions = new \ETL\EtlOverseerOptions($scriptOptions, $logger);
             $overseer = new \ETL\EtlOverseer($overseerOptions, $logger);

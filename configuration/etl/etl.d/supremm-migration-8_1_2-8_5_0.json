@@ -1,0 +1,50 @@
+{
+    "module": "supremm",
+    "defaults": {
+        "global": {
+            "endpoints": {
+                "destination": {
+                    "type": "mysql",
+                    "name": "modw_aggregates",
+                    "config": "datawarehouse",
+                    "schema": "modw_aggregates",
+                    "create_schema_if_not_exists": true
+                }
+            }
+        }
+    },
+    "migration-8_1_2-8_5_0": [
+        {
+            "name": "dimension-job-category-load",
+            "description": "Load data into job_category dimension table",
+            "class": "StructuredFileIngestor",
+            "namespace": "ETL\\Ingestor",
+            "options_class": "IngestorOptions",
+            "definition_file": "jobefficiency/job_category.json",
+            "endpoints": {
+                "source": {
+                    "type": "jsonfile",
+                    "name": "job categories",
+                    "path": "jobefficiency/job_category.json"
+                },
+                "destination": {
+                    "type": "mysql",
+                    "name": "Datawarehouse",
+                    "config": "datawarehouse",
+                    "schema": "modw_jobefficiency",
+                    "create_schema_if_not_exists": true
+                }
+            }
+        },
+        {
+            "name": "table-create",
+            "description": "Setup tables",
+            "class": "ManageTables",
+            "namespace": "ETL\\Maintenance",
+            "options_class": "MaintenanceOptions",
+            "definition_file_list": [
+                "jobefficiency/jobefficiency_by_day_joblist.json"
+            ]
+        }
+    ]
+}

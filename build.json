@@ -1,6 +1,6 @@
 {
     "name": "xdmod-supremm",
-    "version": "8.1.0",
+    "version": "8.5.0",
     "release": "1.0",
     "files": {
         "include_paths": [
@@ -49,11 +49,11 @@
         ],
         "etc": {
             "configuration/portal_settings.d/supremm.ini": "portal_settings.d/supremm.ini",
-            "configuration/datawarehouse.d/supremm.json": "datawarehouse.d/supremm.json",
+            "configuration/datawarehouse.d": "",
             "configuration/rawstatistics.d/10_supremm.json": "rawstatistics.d/10_supremm.json",
             "configuration/rest.d/supremm_dataflow.json": "rest.d/supremm_dataflow.json",
-            "configuration/roles.d/supremm.json": "roles.d/supremm.json",
-            "configuration/roles.d/supremm:job-viewer.json": "roles.d/supremm:job-viewer.json",
+            "configuration/roles.d": "",
+            "configuration/assets.d": "",
             "configuration/setup.d/supremm.json": "setup.d/supremm.json",
             "configuration/internal_dashboard.d/supremm.json": "internal_dashboard.d/supremm.json",
             "configuration/rawstatisticsconfig.json": "",

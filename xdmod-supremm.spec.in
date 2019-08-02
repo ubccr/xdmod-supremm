@@ -4,14 +4,14 @@ Release:       __RELEASE__%{?dist}
 Summary:       SUPReMM module for Open XDMoD
 URL:           http://supremm.xdmod.org/supremm-overview.html
 Vendor:        Center for Computational Research, University at Buffalo
-Packager:      Jeffrey T. Palmer <jtpalmer@buffalo.edu>
+Packager:      XDMoD <ccr-xdmod-list@listserv.buffalo.edu>
 Group:         Applications/Internet
 License:       LGPLv3+
 Source:        %{name}-%{version}__PRERELEASE__.tar.gz
 BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}__PRERELEASE__-%{release}-XXXXXX)
 BuildArch:     noarch
 BuildRequires: php-cli
-Requires:      xdmod >= 8.1.0, xdmod < 8.2.0
+Requires:      xdmod >= 8.5.0, xdmod < 8.6.0
 Requires:      nodejs npm
 Requires:      php-pecl-mongo
 
@@ -43,12 +43,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/xdmod/etl/
 %{_docdir}/%{name}-%{version}__PRERELEASE__/
 %{_sysconfdir}/xdmod/modules.d/supremm.json
+%{_sysconfdir}/xdmod/assets.d/supremm.json
 
 %config(noreplace) %{_datadir}/xdmod/etl/js/config/supremm/etl.profile.js
 %config(noreplace) %attr(0440,apache,xdmod) %{_sysconfdir}/xdmod/*.d/supremm.ini
-%config(noreplace) %{_sysconfdir}/xdmod/datawarehouse.d/supremm*.json
+%config(noreplace) %{_sysconfdir}/xdmod/datawarehouse.d/*.json
 %config(noreplace) %{_sysconfdir}/xdmod/internal_dashboard.d/supremm*.json
-%config(noreplace) %{_sysconfdir}/xdmod/roles.d/supremm*.json
+%config(noreplace) %{_sysconfdir}/xdmod/roles.d/*.json
 %config(noreplace) %{_sysconfdir}/xdmod/setup.d/supremm*.json
 %config(noreplace) %{_sysconfdir}/xdmod/rest.d/supremm*.json
 %config(noreplace) %{_sysconfdir}/xdmod/rawstatistics.d/10_supremm.json
@@ -56,157 +57,23 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/supremmconfig.json
 
 %changelog
-* Thu Nov 8 2018 Benjamin D. Plessinger <bpless@buffalo.edu> 8.0.0-1.0
-- Features
-    - Improved performance of aggregation process by switching to the ETLv2 framework.
-    - Improved performance of shared jobs analysis script.
-
-- Bug Fixes
-    - Changed the database table that stores job scripts so that it can support job arrays and fixed
-      missing unique key that resulted in redundant data storage.
-    - Only show enabled resources in the Internal Dashboard dataflow diagram.
-
-- Miscellaneous
-    - Updated documentation and added troubleshooting information.
-    - Added a `xdmod-supremm-jobinfo` script that prints information about individual
-      jobs. This is intended to be used for troubleshooting purposes.
-
-* Wed Mar 14 2018 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 7.5.1-1.0
-- Bug Fixes
-    - Added acl-config call to the database setup
-* Thu Mar 01 2018 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 7.5.0-1.0
-- Features
-    - Added PDF export support to the Job Viewer
-- Bug Fixes
-    - Fix erroneous error message seen when running the ingest process for resources
-      where the exit status is not reported by the resource manager
-- Miscellaneous
-    - Added tests
-    - Additions to the application categorization database
-* Thu Sep 21 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 7.0.0-1.0
-- Features
-    - Added support for viewing job peers in Job Viewer
-    - Improved Mongo configuration process
-    - Enabled dataflow diagram for Open XDMoD administrators
-- Bug Fixes
-    - Fixed issue that allowed incompatible versions of XDMoD and this module
-      to be installed when installing via RPM
-- Miscellaneous
-    - Updated for compatibility with Open XDMoD 7.0.0
-    - Moved Node.js ETL framework to Open XDMoD repository
-    - Performed work in anticipation of federated instances
-    - Improved development workflow
-    - Improved quality assurance
-    - Improved documentation
-
-* Thu May 11 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.6.0-1.0
-- Features
-    - Improved application classification code
-- Bug Fixes
-    - Fixed Job Viewer load error with version 4 timeseries documents
-    - Fixed aggregators excluding data on certain time boundaries
-    - Fixed handling of certain errors in job summaries
-- Miscellaneous
-    - Cleaned up old and/or unused code
-    - Improved logging
-    - Improved quality assurance
-
-* Tue Jan 10 2017 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.5.0-1.0
-- Important Notes
-    - This update adds a dependency to npm. If you are updating from a previous
-      version installed via RPM, you will need to reinstall npm dependencies
-      afterward. From the `etl/js` directory inside the XDMoD share directory
-      (RPM default: `/usr/share/xdmod`), run `npm install`.
-- Features
-    - General
-        - Added peak memory usage metric.
-        - Improved application identification data.
-        - Added aggregation data removal to the data reset script.
-        - Added ability to track metrics for a "projects" filesystem.
-    - Job Viewer
-        - Added a count column to the detailed metrics pane to show how many
-          data points were used to calculate the metrics.
-    - Node ETL
-        - Added support for uppercase auto-generated labels.
-- Bug Fixes
-    - Job Viewer
-        - Fixed "Show Raw Data" button in Metric Explorer not filtering results
-          correctly when using some combinations of drilldowns and filters.
-        - Fixed single-point datasets not appearing in exported charts.
-        - Fixed Search History tree sorting nodes that should not be sorted.
-        - Fixed "Show Raw Data" window in Metric Explorer staying active after
-          the chart underneath it changes (for example, when a new chart is
-          imported from Usage).
-        - Improved handling of raw data specified in kilobytes and megabytes
-          in Detailed Metrics pane.
-        - Fixed handling of Search History entries that have numeric names.
-    - Node ETL
-        - Fixed ingestion process hanging indefinitely if it failed to
-          connect to the Mongo database at certain points.
-        - Fixed SQL statement queue sometimes batching more statements
-          together in one MySQL driver call than the driver can handle.
-- Refactors and Miscellaneous
-    - Moved to custom option parser that supports long options and
-      multi-character short options.
-        - This replaces minimist and removes it as a dependency.
-
-* Wed Sep 21 2016 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 6.0.0-1.0
-- Features
-    - General
-        - Added ability to redact specific job-level values for some users.
-    - Job Viewer
-        - Added sort options to search history panel.
-        - Organized advanced search filters into categories.
-        - Modified timeseries charts to use the timezone of a job's resource
-          instead of the timezone used by the web browser.
-        - Modified analytics pane to always be present and explain why missing
-          data is missing.
-        - Modified byte units to use IEC prefixes instead of SI ones.
-        - Allowed some metrics to be displayed in multiple tabs.
-        - Added tooltips to advanced search filters.
-        - Added tooltips to detailed metrics.
-        - Added help sections to tabs that didn't have any previously.
-        - Added a help button to the at-a-glance analytics.
-        - Added a loading message to charts that are loading.
-- Bug Fixes
-    - Job Viewer
-        - Fixed a number of cases where editing a search did not work as
-          expected.
-        - Fixed case where timeseries chart drilldowns stopped working after
-          leaving the Job Viewer and returning.
-        - Fixed case where a top-level timeseries chart was exported instead of
-          the current, drilled-down chart.
-        - Fixed case where timeseries chart drilldowns performed on a chart were
-          not reflected in the navigation tree.
-        - Fixed case where selecting a low-level timeseries chart in the
-          navigation tree opened a top-level chart instead.
-        - Fixed basic search resource list loading immediately on page load.
-* Tue May 24 2016 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 5.6.0-1.0
-- New Features
-    - Configuration
-        - Switched to URL-based method for specifying Mongo databases.
-            - This adds support for Mongo databases that require authentication.
-        - Improved setup process to be more user-friendly.
-            - The interactive setup script now generates the required
-              configuration files.
-        - Improved configuration file structure.
-    - Data Processing
-        - Added ability to transfer ingested/aggregated data between databases.
-            - This allows SUPReMM data to be reprocessed in a secondary database
-              before deploying a new version of the SUPReMM ingestor in the main
-              XDMoD instance.
-        - Improved logging for ingestion and aggregation scripts.
-    - Job Viewer
-        - Added ability to edit searches.
-        - Improved layout of search window.
-        - Added ability to export timeseries plots as images or CSV data.
-- Bug Fixes
-    - Job Viewer
-        - Added error dialog box for if Quick Job Lookup's resource list fails
-          to load instead of silently failing.
-        - Fixed existing searches breaking after performing a re-ingest of
-          SUPReMM data.
-        - Fixed charts sometimes not resizing properly.
-        - Fixed memory leak in search history right-click menu.
-* Fri Dec 18 2015 Jeffrey T. Palmer <jtpalmer@buffalo.edu> 5.5.0-0.6.beta1
+* Tue Apr 23 2019 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 8.1.0-1.0
+- Release 8.1.0.
+* Thu Nov 8 2018 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 8.0.0-1.0
+- Release 8.0.0.
+* Wed Mar 14 2018 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 7.5.1-1.0
+- Release 7.5.1.
+* Thu Mar 01 2018 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 7.5.0-1.0
+- Release 7.5.0.
+* Thu Sep 21 2017 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 7.0.0-1.0
+- Release 7.0.0.
+* Thu May 11 2017 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 6.6.0-1.0
+- Release 6.6.0.
+* Tue Jan 10 2017 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 6.5.0-1.0
+- Release 8.5.0.
+* Wed Sep 21 2016 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 6.0.0-1.0
+- Release 6.0.0.
+* Tue May 24 2016 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 5.6.0-1.0
+- Release 5.6.0.
+* Fri Dec 18 2015 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 5.5.0-0.6.beta1
 - Initial public release

@@ -1,0 +1,32 @@
+.user-efficiency-portlet .x-panel-body {
+    background-color: white;
+}
+.user-efficiency-data-row {
+    font-size: 14px;
+}
+#user-efficiency-job-ratio-chart, #user-efficiency-core-ratio-chart{
+    float: left;
+}
+.user-efficiency-details {
+    width: 270px;
+    text-align: center;
+    float: left;
+    margin-top: 10px;
+}
+.user-efficiency-detail:first-child {
+    padding-bottom: 19px;
+    border-bottom: 1px solid lightgray;
+    margin: 15px auto 0px;
+    width: 150px;
+}
+#user-efficiency-portlet-inefficient-count{
+    padding-top: 25px;
+}
+.user-efficiency-detail h2 {
+    margin-bottom: 5px;
+}
+.user-efficiency-data-row:first-child{
+    border-bottom: 2px solid lightgray;
+    padding-bottom: 4px;
+    height: 180px;
+}

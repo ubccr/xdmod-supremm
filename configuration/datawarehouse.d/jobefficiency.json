@@ -1,0 +1,61 @@
+{
+    "+realms": {
+        "JobEfficiency": {
+            "schema": "N/A",
+            "table": "N/A",
+            "datasource": "SUPREMM",
+            "group_bys": [
+                {
+                    "name": "none",
+                    "class": "GroupByNone"
+                },
+                {
+                    "name": "person",
+                    "class": "GroupByPerson"
+                },
+                {
+                    "name": "pi",
+                    "class": "GroupByPi"
+                },
+                {
+                    "name": "institution",
+                    "class": "GroupByInstitution"
+                },
+                {
+                    "name": "category",
+                    "class": "GroupByCategory"
+                },
+                {
+                    "name": "day",
+                    "class": "GroupByDay"
+                }
+            ],
+            "statistics": [
+                {
+                    "name": "job_count",
+                    "class": "job_count_Statistic"
+                },
+                {
+                    "name": "job_count_bad",
+                    "class": "job_count_bad_Statistic"
+                },
+                {
+                    "name": "core_time",
+                    "class": "core_time_Statistic"
+                },
+                {
+                    "name": "core_time_bad",
+                    "class": "core_time_bad_Statistic"
+                },
+                {
+                    "name": "bad_job_ratio",
+                    "class": "bad_job_ratio_Statistic"
+                },
+                {
+                    "name": "bad_core_ratio",
+                    "class": "bad_core_ratio_Statistic"
+                }
+            ]
+        }
+    }
+}
