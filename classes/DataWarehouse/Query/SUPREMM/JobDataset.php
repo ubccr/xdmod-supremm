@@ -230,6 +230,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
     private function addAccountingFields()
     {
+        $dataTable = $this->getDataTable();
         $i = 0;
         foreach ($this->sconf["modw_supremm.job"] as $sdata) {
             $sfield = $sdata['key'];
@@ -265,6 +266,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
     private function addMetricsFields()
     {
+        $dataTable = $this->getDataTable();
         foreach ($this->sconf["modw_supremm.job"] as $sdata) {
             $sfield = $sdata['key'];
             if ($sdata['dtype'] == "statistic") {
@@ -286,6 +288,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
     private function addAnalyticsFields()
     {
+        $dataTable = $this->getDataTable();
         $joberrors = new Table(new Schema('modw_supremm'), 'job_errors', 'je');
         $this->addTable($joberrors);
 
