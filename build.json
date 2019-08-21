@@ -59,7 +59,8 @@
             "configuration/rawstatisticsconfig.json": "",
             "configuration/supremmconfig.json": "",
             "configuration/etl": "",
-            "configuration/modules.d/supremm.json": "modules.d/supremm.json"
+            "configuration/modules.d/supremm.json": "modules.d/supremm.json",
+            "configuration/resource_types.d": ""
         }
     }
 }
