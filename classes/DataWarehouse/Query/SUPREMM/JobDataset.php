@@ -86,138 +86,16 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, 'local_job_id'), '=', $parameters['job_identifier']));
         }
 
-        if ($stat == "accounting" || $stat == 'batch') {
-            $i = 0;
-            foreach ($this->sconf["modw_supremm.job"] as $sdata) {
-                $sfield = $sdata['key'];
-                if ($sdata['dtype'] == "accounting") {
-                    $this->addField(new TableField($dataTable, $sfield));
-                    $this->documentation[$sfield] = $sdata;
-                } elseif ($sdata['dtype'] == "foreignkey") {
-                    if (isset($joinlist[$sfield])) {
-                        $info = $joinlist[$sfield];
-                        $i += 1;
-                        $tmptable = new Table(new Schema($info['schema']), $info['table'], "ft$i");
-                        $this->addTable($tmptable);
-                        $this->addWhereCondition(new WhereCondition(new TableField($dataTable, $sfield), '=', new TableField($tmptable, "id")));
-                        $fcol = isset($info['column']) ? $info['column'] : 'name';
-                        $this->addField(new TableField($tmptable, $fcol, $sdata['name']));
-
-                        $this->documentation[ $sdata['name'] ] = $sdata;
-                    }
-                }
-            }
-            $rf = new Table(new Schema('modw'), 'resourcefact', 'rf');
-            $this->addTable($rf);
-            $this->addWhereCondition(new WhereCondition(new TableField($dataTable, 'resource_id'), '=', new TableField($rf, 'id')));
-            $this->addField(new TableField($rf, 'timezone'));
-            $this->documentation['timezone'] = array(
-                "name" => "Timezone",
-                "documentation" => "The timezone of the resource.",
-                "group" => "Administration",
-                'visibility' => 'public',
-                'batchExport' => true,
-                "per" => "resource");
-        }
-
-        if ($stat == "metrics" || $stat == 'batch') {
-            foreach ($this->sconf["modw_supremm.job"] as $sdata) {
-                $sfield = $sdata['key'];
-                if ($sdata['dtype'] == "statistic") {
-                    // HACK
-                    if ($sdata['units'] == 'cpuratio' || $sdata['units'] == '%') {
-                        $this->addField(new FormulaField("100.0 * jf.$sfield", $sfield));
-                        $this->documentation[$sfield] = $sdata;
-                        $this->documentation[$sfield]['units'] = "%";
-                    } elseif ($sfield == "memory_used" || $sfield == "mem_used_including_os_caches") {
-                        $this->addField(new FormulaField("jf.cores_avail * jf.$sfield", $sfield));
-                        $this->documentation[$sfield] = $sdata;
-                    } else {
-                        $this->addField(new TableField($dataTable, $sfield));
-                        $this->documentation[$sfield] = $sdata;
-                    }
-                }
-            }
-        }
-
-        if ($stat == "analytics" || $stat == 'batch') {
-
-            $joberrors = new Table(new Schema('modw_supremm'), 'job_errors', 'je');
-            $this->addTable($joberrors);
-
-            $this->addWhereCondition(
-                new WhereCondition(
-                    new TableField($dataTable, '_id'),
-                    '=',
-                    new TableField($joberrors, '_id')
-                )
-            );
-
-            foreach ($this->sconf["modw_supremm.job"] as $sdata) {
-                $sfield = $sdata['key'];
-                // TODO work out a better way to have metrics have multiple
-                // meta-types (ie cpu user is an analytic as well as a metric).
-                if ($sfield == "cpu_user") {
-                    $this->addFieldWithError(new TableField($dataTable, $sfield), $sfield, $joberrors);
-                    $this->documentation[$sfield] = $sdata;
-                }
-            }
-            $this->addFieldWithError(
-                new FormulaField("(1.0 - (1.0 / (1.0 + 1000.0 * jf.catastrophe)))", "homogeneity"),
-                'catastrophe',
-                $joberrors,
-                'homogeneity_error'
-            );
-            $this->documentation['homogeneity'] = array(
-                'name'=> 'Homogeneity',
-                'units' => 'ratio',
-                'per' => 'job',
-                'visibility' => 'public',
-                'documentation' => 'A measure of how uniform the L1D load rate is over the lifetime of the job.
-                                    Jobs with a low homogeneity value (~0) should be investigated to check if there
-                                    has been a catastrophic failure during the job',
-                'batchExport' => true,
-                'dtype' => 'analysis'
-            );
-
-            $this->addFieldWithError(
-                new FormulaField('(1.0 - (jf.cpu_user_imbalance/100.0))', 'cpu_user_balance'),
-                'cpu_user_imbalance',
-                $joberrors,
-                'cpu_user_balance_error'
-            );
-            $this->documentation['cpu_user_balance'] = array(
-                'name'=> 'CPU User Balance',
-                'units' => 'ratio',
-                'per' => 'job',
-                'visibility' => 'public',
-                'documentation' => 'A measure of how uniform the CPU usage is between the cores that the job was
-                                    assigned. A value of CPU User Balance near 1 corresponds to a job with evenly
-                                    loaded CPUs. A value near 0 corresponds to a job with one or more CPU cores
-                                    with much lower utilization that the others.',
-                'batchExport' => true,
-                'dtype' => 'analysis'
-            );
-
-            $this->addFieldWithError(
-                new FormulaField('(1.0 - 1.0/POW(2-jf.max_memory, 5))', 'mem_coefficient'),
-                'max_memory',
-                $joberrors,
-                'mem_coefficient_error'
-            );
-            $this->documentation['mem_coefficient'] = array(
-                'name'=> 'Memory Headroom',
-                'units' => 'ratio',
-                'per' => 'job',
-                'visibility' => 'public',
-                'documentation' => 'A measure of the peak compute-node memory usage for the job. A value of 0 corresponds
-                to a job which used all of the available memory and 1 corresponds to a job with low memory usage.
-                The value is computed as 1 - 1 / (2 - m)^5, where m is the ratio of memory used to memory available for
-                the compute node that had the highest memory usage.',
-                'batchExport' => true,
-                'dtype' => 'analysis'
-            );
-
+        if ($stat == "accounting") {
+            $this->addAccountingFields();
+        } elseif ($stat == "metrics") {
+            $this->addMetricsFields();
+        } elseif ($stat == "analytics") {
+            $this->addAnalyticsFields();
+        } elseif ($stat == 'batch') {
+            $this->addAccountingFields();
+            $this->addMetricsFields();
+            $this->addAnalyticsFields();
         } elseif ($stat == "jobscript") {
             $batchscriptTable = new Table(new Schema("modw_supremm"), "job_scripts", "js");
             $this->addTable($batchscriptTable);
@@ -268,7 +146,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                     'start_time_ts'
                 )
             );
-        } elseif ($stat == 'brief') {
+        } else {
             // TODO This code is very similar to the code in ./classes/DataWarehouse/Query/SUPREMM/RawData.php ~ line 58
             // make this more common
 
@@ -348,5 +226,140 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
     public function getColumnDocumentation()
     {
         return $this->documentation;
+    }
+
+    private function addAccountingFields()
+    {
+        $i = 0;
+        foreach ($this->sconf["modw_supremm.job"] as $sdata) {
+            $sfield = $sdata['key'];
+            if ($sdata['dtype'] == "accounting") {
+                $this->addField(new TableField($dataTable, $sfield));
+                $this->documentation[$sfield] = $sdata;
+            } elseif ($sdata['dtype'] == "foreignkey") {
+                if (isset($joinlist[$sfield])) {
+                    $info = $joinlist[$sfield];
+                    $i += 1;
+                    $tmptable = new Table(new Schema($info['schema']), $info['table'], "ft$i");
+                    $this->addTable($tmptable);
+                    $this->addWhereCondition(new WhereCondition(new TableField($dataTable, $sfield), '=', new TableField($tmptable, "id")));
+                    $fcol = isset($info['column']) ? $info['column'] : 'name';
+                    $this->addField(new TableField($tmptable, $fcol, $sdata['name']));
+
+                    $this->documentation[ $sdata['name'] ] = $sdata;
+                }
+            }
+        }
+        $rf = new Table(new Schema('modw'), 'resourcefact', 'rf');
+        $this->addTable($rf);
+        $this->addWhereCondition(new WhereCondition(new TableField($dataTable, 'resource_id'), '=', new TableField($rf, 'id')));
+        $this->addField(new TableField($rf, 'timezone'));
+        $this->documentation['timezone'] = array(
+            "name" => "Timezone",
+            "documentation" => "The timezone of the resource.",
+            "group" => "Administration",
+            'visibility' => 'public',
+            'batchExport' => true,
+            "per" => "resource");
+    }
+
+    private function addMetricsFields()
+    {
+        foreach ($this->sconf["modw_supremm.job"] as $sdata) {
+            $sfield = $sdata['key'];
+            if ($sdata['dtype'] == "statistic") {
+                // HACK
+                if ($sdata['units'] == 'cpuratio' || $sdata['units'] == '%') {
+                    $this->addField(new FormulaField("100.0 * jf.$sfield", $sfield));
+                    $this->documentation[$sfield] = $sdata;
+                    $this->documentation[$sfield]['units'] = "%";
+                } elseif ($sfield == "memory_used" || $sfield == "mem_used_including_os_caches") {
+                    $this->addField(new FormulaField("jf.cores_avail * jf.$sfield", $sfield));
+                    $this->documentation[$sfield] = $sdata;
+                } else {
+                    $this->addField(new TableField($dataTable, $sfield));
+                    $this->documentation[$sfield] = $sdata;
+                }
+            }
+        }
+    }
+
+    private function addAnalyticsFields()
+    {
+        $joberrors = new Table(new Schema('modw_supremm'), 'job_errors', 'je');
+        $this->addTable($joberrors);
+
+        $this->addWhereCondition(
+            new WhereCondition(
+                new TableField($dataTable, '_id'),
+                '=',
+                new TableField($joberrors, '_id')
+            )
+        );
+
+        foreach ($this->sconf["modw_supremm.job"] as $sdata) {
+            $sfield = $sdata['key'];
+            // TODO work out a better way to have metrics have multiple
+            // meta-types (ie cpu user is an analytic as well as a metric).
+            if ($sfield == "cpu_user") {
+                $this->addFieldWithError(new TableField($dataTable, $sfield), $sfield, $joberrors);
+                $this->documentation[$sfield] = $sdata;
+            }
+        }
+        $this->addFieldWithError(
+            new FormulaField("(1.0 - (1.0 / (1.0 + 1000.0 * jf.catastrophe)))", "homogeneity"),
+            'catastrophe',
+            $joberrors,
+            'homogeneity_error'
+        );
+        $this->documentation['homogeneity'] = array(
+            'name'=> 'Homogeneity',
+            'units' => 'ratio',
+            'per' => 'job',
+            'visibility' => 'public',
+            'documentation' => 'A measure of how uniform the L1D load rate is over the lifetime of the job.
+                                Jobs with a low homogeneity value (~0) should be investigated to check if there
+                                has been a catastrophic failure during the job',
+            'batchExport' => true,
+            'dtype' => 'analysis'
+        );
+
+        $this->addFieldWithError(
+            new FormulaField('(1.0 - (jf.cpu_user_imbalance/100.0))', 'cpu_user_balance'),
+            'cpu_user_imbalance',
+            $joberrors,
+            'cpu_user_balance_error'
+        );
+        $this->documentation['cpu_user_balance'] = array(
+            'name'=> 'CPU User Balance',
+            'units' => 'ratio',
+            'per' => 'job',
+            'visibility' => 'public',
+            'documentation' => 'A measure of how uniform the CPU usage is between the cores that the job was
+                                assigned. A value of CPU User Balance near 1 corresponds to a job with evenly
+                                loaded CPUs. A value near 0 corresponds to a job with one or more CPU cores
+                                with much lower utilization that the others.',
+            'batchExport' => true,
+            'dtype' => 'analysis'
+        );
+
+        $this->addFieldWithError(
+            new FormulaField('(1.0 - 1.0/POW(2-jf.max_memory, 5))', 'mem_coefficient'),
+            'max_memory',
+            $joberrors,
+            'mem_coefficient_error'
+        );
+        $this->documentation['mem_coefficient'] = array(
+            'name'=> 'Memory Headroom',
+            'units' => 'ratio',
+            'per' => 'job',
+            'visibility' => 'public',
+            'documentation' => 'A measure of the peak compute-node memory usage for the job. A value of 0 corresponds
+            to a job which used all of the available memory and 1 corresponds to a job with low memory usage.
+            The value is computed as 1 - 1 / (2 - m)^5, where m is the ratio of memory used to memory available for
+            the compute node that had the highest memory usage.',
+            'batchExport' => true,
+            'dtype' => 'analysis'
+        );
     }
 }
