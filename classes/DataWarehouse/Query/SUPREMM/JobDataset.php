@@ -33,11 +33,12 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
         if (isset($parameters['primary_key'])) {
             $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, '_id'), "=", $parameters['primary_key']));
         } elseif (isset($parameters['start_date']) && isset($parameters['end_date'])) {
+            date_default_timezone_set('UTC');
             $startDate = date_parse_from_format('Y-m-d', $parameters['start_date']);
             $startDateTs = mktime(
-                $startDate['hour'],
-                $startDate['minute'],
-                $startDate['second'],
+                0,
+                0,
+                0,
                 $startDate['month'],
                 $startDate['day'],
                 $startDate['year']
