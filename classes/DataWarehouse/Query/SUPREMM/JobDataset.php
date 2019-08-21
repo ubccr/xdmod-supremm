@@ -28,26 +28,6 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
         $this->loadRawStatsConfig();
 
-        $joinlist = array(
-            "exit_status_id" => array( "schema" => "modw_supremm", "table" => "exit_status"),
-            "cluster_id" => array( "schema" => "modw_supremm", "table" => "cluster"),
-            "jobname_id" => array( "schema" => "modw_supremm", "table" => "job_name"),
-            "nodecount_id" => array( "schema" => "modw", "table" => "nodecount", "column" => "nodes"),
-            "application_id" => array( "schema" => "modw_supremm", "table" => "application"),
-            "cwd_id" => array( "schema" => "modw_supremm", "table" => "cwd", "column" => "cwd"),
-            "executable_id" => array( "schema" => "modw_supremm", "table" => "executable", "column" => "exec"),
-            "piperson_organization_id" => array( "schema" => "modw", "table" => "organization"),
-            "principalinvestigator_person_id" => array( "schema" => "modw", "table" => "person", "column" => "long_name" ),
-            "person_organization_id" => array( "schema" => "modw", "table" => "organization"),
-            "person_id" => array( "schema" => "modw", "table" => "person", "column" => "long_name" ),
-            "systemaccount_id" => array( "schema" => "modw", "table" => "systemaccount", "column" => "username" ),
-            "fos_id" => array( "schema" => "modw", "table" => "fieldofscience", "column" => "description" ),
-            "account_id" => array( "schema" => "modw", "table" => "account", "column" => "charge_number" ),
-            "organization_id" => array(  "schema" => "modw", "table" => "organization"),
-            "resource_id" => array(  "schema" => "modw", "table" => "resourcefact" )
-        );
-
-
         $dataTable = $this->getDataTable();
 
         if (isset($parameters['primary_key'])) {
@@ -230,6 +210,24 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
     private function addAccountingFields()
     {
+        $joinlist = array(
+            "exit_status_id" => array( "schema" => "modw_supremm", "table" => "exit_status"),
+            "cluster_id" => array( "schema" => "modw_supremm", "table" => "cluster"),
+            "jobname_id" => array( "schema" => "modw_supremm", "table" => "job_name"),
+            "nodecount_id" => array( "schema" => "modw", "table" => "nodecount", "column" => "nodes"),
+            "application_id" => array( "schema" => "modw_supremm", "table" => "application"),
+            "cwd_id" => array( "schema" => "modw_supremm", "table" => "cwd", "column" => "cwd"),
+            "executable_id" => array( "schema" => "modw_supremm", "table" => "executable", "column" => "exec"),
+            "piperson_organization_id" => array( "schema" => "modw", "table" => "organization"),
+            "principalinvestigator_person_id" => array( "schema" => "modw", "table" => "person", "column" => "long_name" ),
+            "person_organization_id" => array( "schema" => "modw", "table" => "organization"),
+            "person_id" => array( "schema" => "modw", "table" => "person", "column" => "long_name" ),
+            "systemaccount_id" => array( "schema" => "modw", "table" => "systemaccount", "column" => "username" ),
+            "fos_id" => array( "schema" => "modw", "table" => "fieldofscience", "column" => "description" ),
+            "account_id" => array( "schema" => "modw", "table" => "account", "column" => "charge_number" ),
+            "organization_id" => array(  "schema" => "modw", "table" => "organization"),
+            "resource_id" => array(  "schema" => "modw", "table" => "resourcefact" )
+        );
         $dataTable = $this->getDataTable();
         $i = 0;
         foreach ($this->sconf["modw_supremm.job"] as $sdata) {
