@@ -1,9 +1,36 @@
 {
     "+roles": {
         "+usr": {
-            "summary_portlets": [{
+            "+summary_portlets": [{
                 "name": "User Job Efficiency Portlet",
-                "type": "UserJobEfficiencyPortlet"
+                "type": "UserJobEfficiencyPortlet",
+                "location": {
+                    "row": 1,
+                    "column": 1
+                }
+            }]
+        },
+        "+pi": {
+            "+summary_portlets": [{
+                "name": "Job Efficiency Portlet",
+                "type": "JobEfficiencyPortlet",
+                "location": {
+                    "row": 1,
+                    "column": 1
+                }
+            }]
+        },
+        "+cs": {
+            "+summary_portlets": [{
+                "name": "Job Efficiency Portlet",
+                "type": "JobEfficiencyPortlet",
+                "config": {
+                    "multiuser": true
+                },
+                "location": {
+                    "row": 0,
+                    "column": 0
+                }
             }]
         }
     }

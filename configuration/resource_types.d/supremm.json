@@ -1,0 +1,19 @@
+{
+    "+resource_types": {
+        "+HPC": {
+            "+realms": [
+                "SUPREMM"
+            ]
+        },
+        "+HTC": {
+            "+realms": [
+                "SUPREMM"
+            ]
+        },
+        "+DIC": {
+            "+realms": [
+                "SUPREMM"
+            ]
+        }
+    }
+}
