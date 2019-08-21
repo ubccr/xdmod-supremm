@@ -76,7 +76,6 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
         } elseif ($stat == 'batch') {
             $this->addAccountingFields();
             $this->addMetricsFields();
-            $this->addAnalyticsFields();
         } elseif ($stat == "jobscript") {
             $batchscriptTable = new Table(new Schema("modw_supremm"), "job_scripts", "js");
             $this->addTable($batchscriptTable);
