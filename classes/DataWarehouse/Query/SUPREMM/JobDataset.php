@@ -86,7 +86,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, 'local_job_id'), '=', $parameters['job_identifier']));
         }
 
-        if ($stat == "accounting") {
+        if ($stat == "accounting" || $stat == 'batch') {
             $i = 0;
             foreach ($this->sconf["modw_supremm.job"] as $sdata) {
                 $sfield = $sdata['key'];
@@ -116,8 +116,11 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                 "documentation" => "The timezone of the resource.",
                 "group" => "Administration",
                 'visibility' => 'public',
+                'batchExport' => true,
                 "per" => "resource");
-        } elseif ($stat == "metrics") {
+        }
+
+        if ($stat == "metrics" || $stat == 'batch') {
             foreach ($this->sconf["modw_supremm.job"] as $sdata) {
                 $sfield = $sdata['key'];
                 if ($sdata['dtype'] == "statistic") {
@@ -135,7 +138,9 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                     }
                 }
             }
-        } elseif ($stat == "analytics") {
+        }
+
+        if ($stat == "analytics" || $stat == 'batch') {
 
             $joberrors = new Table(new Schema('modw_supremm'), 'job_errors', 'je');
             $this->addTable($joberrors);
@@ -171,6 +176,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                 'documentation' => 'A measure of how uniform the L1D load rate is over the lifetime of the job.
                                     Jobs with a low homogeneity value (~0) should be investigated to check if there
                                     has been a catastrophic failure during the job',
+                'batchExport' => true,
                 'dtype' => 'analysis'
             );
 
@@ -189,6 +195,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                                     assigned. A value of CPU User Balance near 1 corresponds to a job with evenly
                                     loaded CPUs. A value near 0 corresponds to a job with one or more CPU cores
                                     with much lower utilization that the others.',
+                'batchExport' => true,
                 'dtype' => 'analysis'
             );
 
@@ -207,6 +214,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                 to a job which used all of the available memory and 1 corresponds to a job with low memory usage.
                 The value is computed as 1 - 1 / (2 - m)^5, where m is the ratio of memory used to memory available for
                 the compute node that had the highest memory usage.',
+                'batchExport' => true,
                 'dtype' => 'analysis'
             );
 
@@ -260,7 +268,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                     'start_time_ts'
                 )
             );
-        } else {
+        } elseif ($stat == 'brief') {
             // TODO This code is very similar to the code in ./classes/DataWarehouse/Query/SUPREMM/RawData.php ~ line 58
             // make this more common
 
