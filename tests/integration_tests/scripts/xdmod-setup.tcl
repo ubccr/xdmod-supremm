@@ -60,7 +60,7 @@ proc confirmFileWrite { response } {
 set timeout 10
 spawn "xdmod-setup"
 
-selectMenuOption 8
+selectMenuOption 9
 
 selectMenuOption d
 answerQuestion {DB Admin Username:} root
