@@ -2,17 +2,20 @@
     "+resource_types": {
         "+HPC": {
             "+realms": [
-                "SUPREMM"
+                "SUPREMM",
+                "JobEfficiency"
             ]
         },
         "+HTC": {
             "+realms": [
-                "SUPREMM"
+                "SUPREMM",
+                "JobEfficiency"
             ]
         },
         "+DIC": {
             "+realms": [
-                "SUPREMM"
+                "SUPREMM",
+                "JobEfficiency"
             ]
         }
     }
