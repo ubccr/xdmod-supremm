@@ -182,6 +182,7 @@ module.exports = {
             group: "Administration",
             nullable: false,
             def: null,
+            batchExport: true,
             comments: "The unique identifier assigned to the job by the job scheduler.",
             per: "job",
             table: "job"
