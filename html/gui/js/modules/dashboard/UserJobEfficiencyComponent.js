@@ -1,25 +1,25 @@
 /**
- * XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet
+ * XDMoD.Module.Dashboard.UserJobEfficiencyComponent
  *
  */
 
-Ext.namespace('XDMoD.Modules.SummaryPortlets');
+Ext.namespace('XDMoD.Module.Dashboard');
 
-XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(CCR.xdmod.ui.Portlet, {
+XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Portlet, {
 
     layout: 'fit',
     title: 'Job Efficiency Report',
-    cls: 'user-efficiency-portlet',
+    cls: 'user-efficiency-component',
     tpl: new Ext.XTemplate(
         "<div class='user-efficiency-data-row'>",
         "<div id='user-efficiency-job-ratio-chart'></div>",
-        "<div class='user-efficiency-details'><div class='user-job-efficiency-portlet-job-count user-efficiency-detail'><h2>Total Job Count</h2>{job_count}</div>",
-        "<div id='user-efficiency-portlet-inefficient-count' class='user-efficiency-detail'><h2>Inefficient Job Count</h2>{job_count_bad}</div></div>",
+        "<div class='user-efficiency-details'><div class='user-job-efficiency-component-job-count user-efficiency-detail'><h2>Total Job Count</h2>{job_count}</div>",
+        "<div id='user-efficiency-component-inefficient-count' class='user-efficiency-detail'><h2>Inefficient Job Count</h2>{job_count_bad}</div></div>",
         '</div>',
         "<div class='user-efficiency-data-row'>",
         "<div id='user-efficiency-core-ratio-chart'></div>",
-        "<div class='user-efficiency-details'><div class='user-core-efficiency-portlet-core-time user-efficiency-detail'><h2>Total Core Hours</h2>{core_time}</div>",
-        "<div id='user-efficiency-portlet-inefficient-count' class='user-efficiency-detail'><h2>Inefficient Core Hours</h2>{core_time_bad}</div></div>",
+        "<div class='user-efficiency-details'><div class='user-core-efficiency-component-core-time user-efficiency-detail'><h2>Total Core Hours</h2>{core_time}</div>",
+        "<div id='user-efficiency-component-inefficient-count' class='user-efficiency-detail'><h2>Inefficient Core Hours</h2>{core_time_bad}</div></div>",
         '</div>'
     ),
     charts: [],
@@ -177,8 +177,8 @@ XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet = Ext.extend(CCR.xdmod.ui
             }
         });
 
-        XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet.superclass.initComponent.apply(this, arguments);
+        XDMoD.Module.Dashboard.UserJobEfficiencyComponent.superclass.initComponent.apply(this, arguments);
     }
 });
 
-Ext.reg('UserJobEfficiencyPortlet', XDMoD.Modules.SummaryPortlets.UserJobEfficiencyPortlet);
+Ext.reg('xdmod-userjobeff-cmp', XDMoD.Module.Dashboard.UserJobEfficiencyComponent);
