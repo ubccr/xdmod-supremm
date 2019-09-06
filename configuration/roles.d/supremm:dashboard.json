@@ -4,7 +4,7 @@
             "+dashboard_components": [
                 {
                     "name": "User Job Efficiency Component",
-                    "type": "xdmod-dash-jobeff-cmp",
+                    "type": "xdmod-dash-userjobeff-cmp",
                     "location": {
                         "row": 1,
                         "column": 1

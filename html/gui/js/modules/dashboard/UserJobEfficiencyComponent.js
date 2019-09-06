@@ -181,4 +181,4 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
     }
 });
 
-Ext.reg('xdmod-userjobeff-cmp', XDMoD.Module.Dashboard.UserJobEfficiencyComponent);
+Ext.reg('xdmod-dash-userjobeff-cmp', XDMoD.Module.Dashboard.UserJobEfficiencyComponent);
