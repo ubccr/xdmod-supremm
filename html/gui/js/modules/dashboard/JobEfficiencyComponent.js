@@ -1,11 +1,11 @@
 /**
- * XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet
+ * XDMoD.Module.Dashboard.JobEfficiencyComponent
  *
  */
 
-Ext.namespace('XDMoD.Modules.SummaryPortlets');
+Ext.namespace('XDMoD.Module.Dashboard');
 
-XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, {
+XDMoD.Module.Dashboard.JobEfficiencyComponent = Ext.extend(Ext.ux.Portlet, {
 
     layout: 'fit',
     title: 'Job Efficiency Dashboard',
@@ -184,8 +184,8 @@ XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, 
                 }]
             };
         }
-        XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet.superclass.initComponent.apply(this, arguments);
+        XDMoD.Module.Dashboard.JobEfficiencyComponent.superclass.initComponent.apply(this, arguments);
     }
 });
 
-Ext.reg('JobEfficiencyPortlet', XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet);
+Ext.reg('xdmod-dash-jobeff-cmp', XDMoD.Module.Dashboard.JobEfficiencyComponent);
