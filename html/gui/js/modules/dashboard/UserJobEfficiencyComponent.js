@@ -26,6 +26,11 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
     initComponent: function () {
         this.height = this.width * (11.0 / 17.0);
 
+        this.help = {
+            title: this.title,
+            html: '<img src="/gui/images/help/userjobefficiency-component.svg" />'
+        };
+
         var dateRanges = CCR.xdmod.ui.DurationToolbar.getDateRanges();
 
         var timeframe = this.config.timeframe ? this.config.timeframe : '30 day';

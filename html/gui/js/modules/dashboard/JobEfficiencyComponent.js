@@ -5,7 +5,7 @@
 
 Ext.namespace('XDMoD.Module.Dashboard');
 
-XDMoD.Module.Dashboard.JobEfficiencyComponent = Ext.extend(Ext.ux.Portlet, {
+XDMoD.Module.Dashboard.JobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Portlet, {
 
     layout: 'fit',
     title: 'Job Efficiency Dashboard',
@@ -14,11 +14,18 @@ XDMoD.Module.Dashboard.JobEfficiencyComponent = Ext.extend(Ext.ux.Portlet, {
         this.height = this.width * (11.0 / 17.0);
 
         var DEFAULT_PAGE_SIZE = 12;
+        var helpImageVariant = 'single';
 
         if (this.config.multiuser) {
             // multiuser view has an extra toolbar at the top
             DEFAULT_PAGE_SIZE -= 1;
+            helpImageVariant = 'multi';
         }
+
+        this.help = {
+            title: this.title,
+            html: '<img src="/gui/images/help/jobefficiency-' + helpImageVariant + '-component.svg" />'
+        };
 
         var maxCoreTime = -1;
 
