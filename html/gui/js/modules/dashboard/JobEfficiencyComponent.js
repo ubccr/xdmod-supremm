@@ -1,11 +1,11 @@
 /**
- * XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet
+ * XDMoD.Module.Dashboard.JobEfficiencyComponent
  *
  */
 
-Ext.namespace('XDMoD.Modules.SummaryPortlets');
+Ext.namespace('XDMoD.Module.Dashboard');
 
-XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, {
+XDMoD.Module.Dashboard.JobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Portlet, {
 
     layout: 'fit',
     title: 'Job Efficiency Dashboard',
@@ -14,11 +14,18 @@ XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, 
         this.height = this.width * (11.0 / 17.0);
 
         var DEFAULT_PAGE_SIZE = 12;
+        var helpImageVariant = 'single';
 
         if (this.config.multiuser) {
             // multiuser view has an extra toolbar at the top
             DEFAULT_PAGE_SIZE -= 1;
+            helpImageVariant = 'multi';
         }
+
+        this.help = {
+            title: this.title,
+            html: '<img src="/gui/images/help/jobefficiency-' + helpImageVariant + '-component.svg" />'
+        };
 
         var maxCoreTime = -1;
 
@@ -184,8 +191,8 @@ XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet = Ext.extend(Ext.ux.Portlet, 
                 }]
             };
         }
-        XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet.superclass.initComponent.apply(this, arguments);
+        XDMoD.Module.Dashboard.JobEfficiencyComponent.superclass.initComponent.apply(this, arguments);
     }
 });
 
-Ext.reg('JobEfficiencyPortlet', XDMoD.Modules.SummaryPortlets.JobEfficiencyPortlet);
+Ext.reg('xdmod-dash-jobeff-cmp', XDMoD.Module.Dashboard.JobEfficiencyComponent);

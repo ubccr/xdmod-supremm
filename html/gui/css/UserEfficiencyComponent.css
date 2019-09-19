@@ -1,4 +1,4 @@
-.user-efficiency-portlet .x-panel-body {
+.user-efficiency-component .x-panel-body {
     background-color: white;
 }
 .user-efficiency-data-row {
@@ -19,7 +19,7 @@
     margin: 15px auto 0px;
     width: 150px;
 }
-#user-efficiency-portlet-inefficient-count{
+#user-efficiency-component-inefficient-count{
     padding-top: 25px;
 }
 .user-efficiency-detail h2 {

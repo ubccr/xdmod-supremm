@@ -2,11 +2,11 @@
     "+xdmod": {
         "+portal": {
             "+js": [
-                "gui/js/modules/summary/JobEfficiencyPortlet.js",
-                "gui/js/modules/summary/UserJobEfficiencyPortlet.js"
+                "gui/js/modules/dashboard/JobEfficiencyComponent.js",
+                "gui/js/modules/dashboard/UserJobEfficiencyComponent.js"
             ],
             "+css": [
-                "gui/css/UserEfficiencyPortlet.css"
+                "gui/css/UserEfficiencyComponent.css"
             ]
         }
     }

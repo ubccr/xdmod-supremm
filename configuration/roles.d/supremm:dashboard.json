@@ -1,0 +1,43 @@
+{
+    "+roles": {
+        "+usr": {
+            "+dashboard_components": [
+                {
+                    "name": "User Job Efficiency Component",
+                    "type": "xdmod-dash-userjobeff-cmp",
+                    "location": {
+                        "row": 1,
+                        "column": 1
+                    }
+                }
+            ]
+        },
+        "+pi": {
+            "+dashboard_components": [
+                {
+                    "name": "Job Efficiency Component",
+                    "type": "xdmod-dash-jobeff-cmp",
+                    "location": {
+                        "row": 1,
+                        "column": 1
+                    }
+                }
+            ]
+        },
+        "+cs": {
+            "+dashboard_components": [
+                {
+                    "name": "Job Efficiency Component",
+                    "type": "xdmod-dash-jobeff-cmp",
+                    "config": {
+                        "multiuser": true
+                    },
+                    "location": {
+                        "row": 0,
+                        "column": 0
+                    }
+                }
+            ]
+        }
+    }
+}
