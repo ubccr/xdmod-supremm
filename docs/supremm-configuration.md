@@ -96,7 +96,16 @@ the `resources.json` and `resource_specs.json` main configuration files
             "enabled": true,
             "datasetmap": "pcp",
             "hardware": {
-                "gpfs": ""
+                "gpfs": "gpfs0",
+                "network": [
+                    "em1",
+                    "eno1"
+                ],
+                "mounts": {
+                   "projects": "/projects",
+                   "home": "/user",
+                   "util": "/util"
+                }
             }
         }
     ]
@@ -121,10 +130,78 @@ The `datasetmap` option allows the ingestion of Job Performance data from differ
 data sources. Currently PCP is the only supported data source.
 
 The `hardware` property is used by the dataset mapping code to process PCP
-metrics that have device-specific names. The only configurable mapping
-in this release is the name of the GPFS mount point. If the resource has
-a GPFS filesystem then set `hardware.gpfs` to the name of the GPFS mount point.
-Set this to an empty string if there is no GPFS filesystem for the resource.
+metrics that have device-specific names. There are configurable mappings
+for Ethernet network devices, GPFS devices and mounted NFS filesystems.
+The XDMoD statistics for each mapping setting is displayed in the table below.
+<table>
+<thead>
+<tr>
+<th>Configuration Property</th> <th>XDMoD Statistics</th> <th>XDMoD Group Bys</th> <th>Job Viewer Summary tab statistics</th>
+</tr>
+</thead>
+<tbody>
+<tr> <td><code>hardware.gpfs</code></td><td>"Average gpfs receive rate", "Average gpfs transmit rate"</td><td>"GPFS bytes received"</td><td>Parallel filesystem gpfs &ast;"</td></tr>
+<tr> <td><code>hardware.network</code></td><td>"Average eth0 receive rate", "Average eth0 transmit rate"</td><td> </td><td>"Net Eth0 &ast;"</td></tr>
+<tr> <td><code>hardware.mounts.projects</code></td><td>"Avg /projects write rate"</td><td></td><td>"Mount point "projects" data &ast;"</td></tr>
+<tr> <td><code>hardware.mounts.home</code></td><td>"Avg /home write rate"</td><td></td><td>"Mount point "home" data &ast;"</td></tr>
+<tr> <td><code>hardware.mounts.util</code></td><td>"Avg /util write rate"</td><td></td><td>"Mount point "util" data &ast;"</td></tr>
+</tbody>
+</table>
+<br />
+
+The mapping allows multiple modes of operation. The mapping software
+can compute the sum of all the statistics collected from the devices.
+It can also be given a list of device names in priority order and will
+use the statistics from the first device that is found. This feature
+is particularly useful for heterogeneous clusters.
+The list below describes the appropriate value to set in the configuration
+file for a given scenario.
+
+- Specify the name of the device as reported by the O/S on the compute nodes.
+- Specify an empty string if the device is absent or you do not wish the
+  data to appear in XDMoD.
+- Specify the string `all` if you would like the metric in XDMoD to be the
+  sum of all of the detected devices on the compute nodes.
+- Specify a list of device names. The mapping software will use the first device
+  name in the list that is present in the summary statistics for each job.
+
+
+#### Examples
+
+An example hardware configuration setting is shown below:
+```json
+    "hardware": {
+        "gpfs": "gpfs0.example.edu",
+        "network": [
+            "em1",
+            "eno1"
+        ],
+        "mounts": {
+           "projects": "/projects",
+           "home": "/user",
+           "util": "/util"
+        }
+    }
+```
+In this example the mapping would work as follows:
+- The various XDMoD GPFS parallel filesystem statistics would be based on the GPFS filesystem `gpfs0.example.edu` mounted on the compute nodes.
+- The various XDMoD Ethernet statistics would be based on the data read from and written to the `em1` device on compute nodes that had an `em1` Ethernet device and `eno1` for compute
+nodes that did not have an `em1` device but did have an `eno1` device.
+- The XDMoD `projects` filesystem statistics would be from the statistics collected from the NFS filesystem mounted at `/projects` on the compute nodes.
+- The XDMoD `home` filesystem statistics would be from the statistics collected from the NFS filesystem mounted at `/user` on the compute nodes.
+- The XDMoD `util` filesystem statistics would be from the statistics collected from the NFS filesystem mounted at `/util` on the compute nodes.
+
+```json
+    "hardware": {
+        "gpfs": "all",
+        "network": "eth1"
+    }
+```
+In this example the mapping would work as follows:
+- The various XDMoD GPFS parallel filesystem statistics would be based on sum of the statistics for all of the mounted GPFS filesystems.
+- The various XDMoD Ethernet statistics would be based on the data read from and written to the `eth1` device on compute nodes.
+- No data would be stored in XDMoD for NFS filesystems.
+
 
 ### portal_settings.d/supremm.ini
 

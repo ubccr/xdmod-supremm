@@ -310,25 +310,49 @@
         "value": null,
         "error": 2
     },
-    "net_eth0_rx": {
+    "netdir_home_read": {
         "value": null,
-        "error": 8
+        "error": 2
+    },
+    "netdir_home_write": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_projects_read": {
+        "value": 777175,
+        "error": 0
+    },
+    "netdir_projects_write": {
+        "value": 0,
+        "error": 0
+    },
+    "netdir_util_read": {
+        "value": 74117274.5,
+        "error": 0
+    },
+    "netdir_util_write": {
+        "value": 0,
+        "error": 0
+    },
+    "net_eth0_rx": {
+        "value": 477981132,
+        "error": 0
     },
     "net_eth0_rx_cov": {
-        "value": null,
-        "error": 8
+        "value": 0.919246733675849,
+        "error": 0
     },
     "net_eth0_rx_packets": {
         "value": null,
         "error": 8
     },
     "net_eth0_tx": {
-        "value": null,
-        "error": 8
+        "value": 318017689.5,
+        "error": 0
     },
     "net_eth0_tx_cov": {
-        "value": null,
-        "error": 8
+        "value": 1.24193968687913,
+        "error": 0
     },
     "net_eth0_tx_packets": {
         "value": null,

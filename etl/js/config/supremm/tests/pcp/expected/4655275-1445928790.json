@@ -316,6 +316,30 @@
         "value": null,
         "error": 2
     },
+    "netdir_home_read": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_home_write": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_projects_read": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_projects_write": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_util_read": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_util_write": {
+        "value": null,
+        "error": 2
+    },
     "net_eth0_rx": {
         "value": 37675901,
         "error": 0

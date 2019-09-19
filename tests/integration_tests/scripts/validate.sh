@@ -30,13 +30,24 @@ then
     exitcode=1
 fi
 
-# Check that the energy metric columns are present and correct
-hascolumn=$(echo "show columns from modw_supremm.job LIKE 'energy'"  | mysql -N modw_supremm)
-if [ -z "$hascolumn" ];
-then
-    echo "Misssing energy column from job table"
-    exitcode=1
-fi
+function checkForColumn
+{
+    # Check that the energy metric columns are present and correct
+    local hascolumn=$(echo "show columns from modw_supremm.job LIKE '""$1""'"  | mysql -N modw_supremm)
+    if [ -z "$hascolumn" ];
+    then
+        echo "Misssing $1 column from job table"
+        exitcode=1
+    fi
+}
+
+checkForColumn energy
+checkForColumn netdir_home_read
+checkForColumn netdir_home_write
+checkForColumn netdir_projects_read
+checkForColumn netdir_projects_write
+checkForColumn netdir_util_read
+checkForColumn netdir_util_write
 
 # Check that the jobhosts table has end_time_ts column with non-zero timestamps
 jobcount=$(echo 'SELECT COUNT(*) FROM modw_supremm.job j, modw_supremm.jobhost jh WHERE j.resource_id = jh.resource_id AND j.local_job_id = jh.local_job_id AND j.end_time_ts = jh.end_time_ts' | mysql -N modw_supremm)

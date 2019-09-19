@@ -5,7 +5,16 @@
             "resource_id": 1,
             "datasetmap": "pcp",
             "hardware": {
-                "gpfs": "gpfs0"
+                "gpfs": "gpfs0",
+                "network": [
+                    "em1",
+                    "eno1"
+                ],
+                "mounts": {
+                   "projects": "/projects",
+                   "home": "/user",
+                   "util": "/util"
+                }
             }
         }
     ]

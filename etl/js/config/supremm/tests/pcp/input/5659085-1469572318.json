@@ -205,7 +205,7 @@
         }
     },
     "gpfs" : {
-        "GSS-cbls-ccr-buffalo-edu:gpfs0" : {
+        "gpfs0" : {
             "write_bytes" : {
                 "std" : 1210008166.0,
                 "med" : 0.0,
