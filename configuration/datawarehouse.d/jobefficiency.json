@@ -3,6 +3,7 @@
         "JobEfficiency": {
             "schema": "N/A",
             "table": "N/A",
+            "show_in_catalog": false,
             "datasource": "SUPREMM",
             "group_bys": [
                 {
