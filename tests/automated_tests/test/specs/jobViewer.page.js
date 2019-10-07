@@ -14,6 +14,7 @@ class JobViewer {
                     resource_dropdown: '//input[@id="basic-resource"]/../img[contains(@class,"x-form-arrow-trigger")]'
                 },
                 advanced: {
+                    realm: '//input[@id="realm-field"]/../img[contains(@class,"x-form-arrow-trigger")]',
                     filters: '//input[@id="search-field"]/../img[contains(@class,"x-form-arrow-trigger")]',
                     values: '//input[@id="search-value"]/../img[contains(@class,"x-form-arrow-trigger")]'
                 },
