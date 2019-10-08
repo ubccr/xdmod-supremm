@@ -145,6 +145,8 @@ class JobViewer {
         browser.waitAndSet('#search_start_date', '2016-12-30');
         browser.waitAndSet('#search_end_date', '2017-01-02');
         browser.waitAndSet('#job-viewer-search-name', saveSearchName, true, false);
+        browser.click(this.selectors.search.advanced.realm);
+        browser.waitAndClick(this.selectors.extComboListByName('SUPREMM'));
         browser.click(this.selectors.search.advanced.filters);
         browser.waitAndClick(this.selectors.extComboListByName('Job Size'));
         browser.click(this.selectors.search.advanced.values);
