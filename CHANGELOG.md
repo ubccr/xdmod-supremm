@@ -1,6 +1,30 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
+## 2019-10-17 v8.5.0
+- Features
+    - Add Job Efficiency reporting capability. This includes classification
+      of jobs based on performance metrics and components for the new Dashboard
+      tab that show the efficiency metrics by user.
+    - Add ability to export Job Performance data via the new Data Export tab.
+    - Added extra statistics for mounted filesystems `/home`, /`projects` and
+      `/util`. The source data for these statistics defaults to be from the
+      nfs mounted filesystems.
+    - Added ability to configure which devices are used for the various I/O
+      metrics.
+
+- Miscellaneous
+    - Various updates to the module required to support XDMoD 8.5.
+    - The automated CI testing now confirms that the software works with a
+      password protected MongoDB database.
+    - Add more automated CI tests.
+
+- Bug Fixes
+    - Jobs listed in the advance search results in the job viewer and in the show raw data
+      dialog in the metric explorer are now guaranteed to be ordered based on the
+      job end time.
+
+
 ## 2019-04-23 v8.1.0
 - Features
     - Add support for GPU metrics. If available, the GPU usage and GPU memory
