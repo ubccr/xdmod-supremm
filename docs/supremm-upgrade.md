@@ -7,15 +7,16 @@ General Upgrade Notes
 
 The Job Performance (SUPReMM) XDMoD module should be upgraded at the same time as the main XDMoD
 software. The upgrade procedure is documented on the [XDMoD upgrade
-page](https://open.xdmod.org/upgrade.html).
-After the XDMoD software has been upgraded the ingestion and
-aggregation script `aggregate_supremm.sh` **must** be run.
+page](https://open.xdmod.org/upgrade.html).  The ingestion and aggregation
+script `aggregate_supremm.sh` **must** be run after the XDMoD software has been
+upgraded.
 
 8.1.0 to 8.5.0 Upgrade Notes
 ----------------------------
 
 - This upgrade includes database schema changes.
     - Modifies `modw_supremm` schema.
+    - Modifies the `modw_aggregates.supremmfact_by_` tables.
 
 The `modw_supremm.job` and `modw_supremm.job_error` table have extra columns to store metrics
 about job I/O. These columns are added to the tables by the upgrade script.
@@ -23,7 +24,7 @@ about job I/O. These columns are added to the tables by the upgrade script.
 See the [Configuration Guide](supremm-configuration.md#supremm_resourcesjson) for information
 about how to define the data mapping for the new I/O metrics.
 
-Changes to the mapping only affect job metrics ingested after the configuration file
+Changes to the mapping only affect the statistics for job data ingested after the configuration file
 is modified. The metrics for jobs that have already been ingested are not automatically
 updated. To update the data for existing jobs it is necessary to reset the job ingest
 status and then run the ingest and aggregation script.

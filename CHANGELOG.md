@@ -8,7 +8,7 @@ Open XDMoD SUPReMM Change Log
       tab that show the efficiency metrics by user.
     - Add ability to export Job Performance data via the new Data Export tab.
     - Added extra statistics for mounted filesystems `/home`, /`projects` and
-      `/util`. The source data for these statistics defaults to be from the
+      `/util`. The default source data for these statistics is from the
       nfs mounted filesystems.
     - Added ability to configure which devices are used for the various I/O
       metrics.
