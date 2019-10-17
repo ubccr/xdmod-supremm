@@ -24,7 +24,7 @@ and 4.3.2 respectively).
 ### Source code upgrade
 
     $ source activate supremm
-    $ tar xf {{ page.summ_sw_version }}.tar.gz
-    $ cd {{ page.summ_sw_version }}
+    $ tar xf supremm-{{ page.summ_sw_version }}.tar.gz
+    $ cd supremm-{{ page.summ_sw_version }}
     $ python setup.py install
 
