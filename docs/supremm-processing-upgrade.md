@@ -11,17 +11,20 @@ All periodic cron scripts should be disabled before upgrading the software.
 
 ## Upgrade Software
 
-The upgrade procedure involves installing the new software package and then running
-an upgrade script.
+The upgrade procedure involves installing the new software package.
 
 ### RPM upgrade
 
-    # yum install supremm-{{ page.summ_sw_version }}-1.x86_64.rpm
+RPMs are provided for Centos 7.6 and Centos 7.7 and are compiled against
+the version of PCP that ships with each distribution (PCP version 4.1.0
+and 4.3.2 respectively).
+
+    # yum install supremm-{{ page.summ_sw_version }}-1.el7_?.x86_64.rpm
 
 ### Source code upgrade
 
     $ source activate supremm
-    $ tar xf {{ page.summ_sw_version }}.tar.gz
-    $ cd {{ page.summ_sw_version }}
+    $ tar xf supremm-{{ page.summ_sw_version }}.tar.gz
+    $ cd supremm-{{ page.summ_sw_version }}
     $ python setup.py install
 
