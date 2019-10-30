@@ -58,6 +58,8 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/supremmconfig.json
 
 %changelog
+* Mon Oct 21 2019 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 8.5.0-1.0
+- Release 8.5.0.
 * Tue Apr 23 2019 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 8.1.0-1.0
 - Release 8.1.0.
 * Thu Nov 8 2018 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 8.0.0-1.0
