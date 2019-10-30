@@ -60,6 +60,27 @@ describe('Job Viewer', function jobViewer() {
                 me.clickLogoAndWaitForMask();
             });
         });
+
+        describe('Basic search with conflicting settings in advanced search dialog box', function () {
+            var saveSearchName = 'AUTOTEST cross realm ' + new Date();
+            it('Click the search button', function jvClickBeginSearch() {
+                browser.waitAndClick(selectors.search.button);
+            });
+            it('Select non-supremm realm in advanced search box', function () {
+                browser.click(selectors.search.advanced.realm);
+                browser.waitAndClick(selectors.extComboListByName('Jobs'));
+            });
+            it('Perform a basic search', function jvPerformSearch() {
+                jV.performSearch(6118004, saveSearchName, 'robertson', true);
+            });
+            it('View saved job then delete it.', function () {
+                var jobIdent = 'robertson-6118004';
+                jV.viewSaveJob(jobIdent, saveSearchName);
+                browser.waitUntilAnimEndAndClick(selectors.history.tree.searchnode(saveSearchName), 'right');
+                jV.performDelete(jobIdent);
+                me.clickLogoAndWaitForMask();
+            });
+        });
     });
 
     describe('Advanced Search', function () {
