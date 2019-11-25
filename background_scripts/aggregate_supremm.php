@@ -12,6 +12,7 @@ $options = array(
     'h'  => 'help',
     'a:' => 'append:',
     'u:' => 'useetllog:',
+    't:' => 'analyze-tables',
     'q'  => 'quiet',
     'v'  => 'verbose',
     'd'  => 'debug'
@@ -27,6 +28,10 @@ function usage_and_exit()
 Usage: {$argv[0]}
     -h, --help
         Display this help
+
+    -t, --analyze-tables=YESNO
+        whether to override the table analysis settings in the aggregation.
+        Default is to leave the settings unmodified.
 
     -a, --append
         this flag is deprecated and is ignored.
@@ -57,6 +62,10 @@ foreach ($args as $arg => $value) {
         case 'h':
         case 'help':
             usage_and_exit();
+            break;
+        case 't':
+        case 'analyze-tables':
+            $conf['analyze_table'] = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
             break;
         case 'q':
         case 'quiet':
@@ -103,6 +112,10 @@ function run_aggregation($sourceTable, $pipeline)
         ),
         'default-module-name' => 'xdmod'
     );
+
+    if (isset($conf['analyze_table'])) {
+        $scriptOptions['option-overrides']['analyze_table'] = $conf['analyze_table'];
+    }
 
     if ($last_modified !== null) {
         $scriptOptions['last-modified-start-date'] = $last_modified;
