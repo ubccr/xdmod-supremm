@@ -39,6 +39,7 @@ class JobViewer {
                         }
                     }
                 },
+                assist: '//span[contains(@class, "x-panel-header-text") and contains(text(), "Search History")]/../../div//b[contains(text(), "No saved searches")]',
                 tree: {
                     node: function (name, checkIfSelected = false) {
                         var extra = '';
@@ -66,6 +67,7 @@ class JobViewer {
                 }
             },
             info: {
+                container: '#info_display_container',
                 tabByName: function (name) {
                     return '//div[@id="info_display"]//span[contains(@class,"x-tab-strip-text") and contains(text(),"' + name + '")]';
                 },
@@ -131,14 +133,18 @@ class JobViewer {
         browser.waitUntilAnimEnd(this.selectors.history.tree.jobnode(saveName, jobID) + '/ancestor::node()[3]//span[contains(text(),"Timeseries")]');
         browser.waitForExist(this.selectors.info.tabByName(jobID));
     }
-    performDelete(searchName) {
+    performDelete(searchName, expectEmptyHistory) {
         browser.waitForVisible('#job-viewer-search-history-context-record-delete', 30000);
         browser.click('#job-viewer-search-history-context-record-delete');
         browser.waitForVisible(this.selectors.extMsgWindow('Delete All Saved Searches?'), 30000);
         browser.click(this.selectors.extMsgWindowButton('Delete All Saved Searches?', 'Yes'));
         browser.waitForInvisible(this.selectors.extMsgWindow('Delete All Saved Searches?'), 30000);
         browser.waitUntilNotExist(this.selectors.info.tabByName(searchName));
-        browser.waitUntilAnimEnd(this.selectors.history.tree.node('SUPREMM', true));
+        if (expectEmptyHistory === false) {
+            browser.waitUntilAnimEnd(this.selectors.history.tree.node('SUPREMM', true));
+        } else {
+            browser.waitForVisible(this.selectors.history.assist);
+        }
     }
     addFiltersRunSearch(saveSearchName) {
         browser.waitForVisible(this.selectors.search.window);
@@ -254,7 +260,7 @@ class JobViewer {
         browser.click(this.selectors.history.search.contextMenu.buttons.deleteAllSearches);
         browser.waitForVisible(this.selectors.extMsgWindow('Delete All Saved Searches?'), 30000);
         browser.click(this.selectors.extMsgWindowButton('Delete All Saved Searches?', 'Yes'));
-        browser.waitUntilAnimEnd(this.selectors.history.tree.node('SUPREMM'));
+        browser.waitForVisible(this.selectors.history.assist);
     }
     changeSelectedRecords() {
         var elems = browser.elements(this.selectors.search.results.all).value.slice(-3);
