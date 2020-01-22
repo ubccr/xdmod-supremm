@@ -1,0 +1,45 @@
+{
+    "job_count": {
+        "formula": "COALESCE(SUM(agg.job_count),0)",
+        "description_html": "The total number of jobs that ended within the selected duration.<br/><i>Job: </i>A scheduled process for a computer resource in a batch processing environment.",
+        "name": "Number of Jobs Ended",
+        "precision": 0,
+        "unit": "Number of Jobs"
+    },
+    "bad_job_ratio": {
+        "formula": "100.0 * COALESCE(SUM(CASE WHEN agg.job_category_id = 2 THEN job_count ELSE 0 END) / SUM(agg.job_count), 0)",
+        "description_html": "The total number of jobs that ended within the selected duration.<br/><i>Job: </i>A scheduled process for a computer resource in a batch processing environment.",
+        "name": "Percent of Inefficient Jobs Ended",
+        "precision": 4,
+        "unit": "%"
+
+    },
+    "core_time" :{
+        "formula": "SUM(agg.cpu_time) / 3600.0",
+        "description_html": "The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.",
+        "name": "CPU Hours: Total",
+        "precision": 0,
+        "unit": "CPU Hour"
+    },
+    "core_time_bad": {
+        "formula": "SUM(CASE WHEN agg.job_category_id = 2 THEN agg.cpu_time ELSE 0 END) / 3600.0",
+        "description_html": "The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.",
+        "name": "CPU Hours Inefficient: Total",
+        "precision": 0,
+        "unit": "CPU Hour"
+    },
+    "job_count_bad": {
+        "formula": "SUM(CASE WHEN agg.job_category_id = 2 THEN job_count ELSE 0 END)",
+        "description_html": "The total number of jobs that ended within the selected duration.<br/><i>Job: </i>A scheduled process for a computer resource in a batch processing environment.",
+        "name": "Number of Inefficient Jobs Ended",
+        "precision": 0,
+        "unit": "Number of Jobs"
+    },
+    "bad_core_ratio":{
+        "formula": "100.0 * COALESCE(SUM(CASE WHEN agg.job_category_id = 2 THEN agg.cpu_time ELSE 0 END) / SUM(agg.cpu_time), 0)",
+        "description_html": "The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.",
+        "name": "CPU Hours Inefficient: Ratio",
+        "precision": 0,
+        "unit": "%"
+    }
+}

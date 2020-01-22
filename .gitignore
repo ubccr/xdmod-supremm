@@ -277,11 +277,12 @@ external_libraries/
 .secrets
 
 # ETL Generated files / folders
-configuration/datawarehouse.d/supremm.json
 configuration/rawstatisticsconfig.json
 configuration/roles.d/supremm.json
 configuration/supremmconfig.json
 configuration/aggregation_meta/
+configuratuon/datawarehouse.d/ref/supremm-group-bys.json
+configuratuon/datawarehouse.d/ref/supremm-statistics.json
 
 # ETL resource-specific configuration
 /etl/js/config/supremm/dataset_maps/*
