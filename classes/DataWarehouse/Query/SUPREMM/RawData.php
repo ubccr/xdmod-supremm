@@ -64,6 +64,9 @@ class RawData extends \DataWarehouse\Query\Query
         $this->addField(new TableField($factTable, "end_time_ts"));
         $this->addField(new TableField($factTable, "cpu_user"));
 
+        // This is used by Integrations and not currently shown on the XDMoD interface
+        $this->addField(new TableField($factTable, 'name', 'job_name'));
+
         $this->addTable( $joblistTable );
         $this->addTable( $factTable );
 
