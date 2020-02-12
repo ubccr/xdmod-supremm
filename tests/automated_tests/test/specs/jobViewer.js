@@ -19,8 +19,8 @@ describe('Job Viewer', function jobViewer() {
 
         it('Has Instructions', function jvConfirmInstructions() {
             var instructions = 'No job is selected for viewing\n\nPlease refer to the instructions below:\n\n\n\nFor more information, please refer to the User Manual';
-            browser.waitForExist(selectors.container + '  .x-grid-empty img[src="gui/images/job_viewer_instructions.png"]');
-            expect(browser.getText(selectors.container + ' .x-grid-empty')).to.equal(instructions);
+            browser.waitForExist(selectors.info.container + '  .x-grid-empty img[src="gui/images/job_viewer_instructions.png"]');
+            expect(browser.getText(selectors.info.container + ' .x-grid-empty')).to.equal(instructions);
         });
     });
 
@@ -56,7 +56,7 @@ describe('Job Viewer', function jobViewer() {
                 var jobIdent = 'robertson-6118004';
                 jV.viewSaveJob(jobIdent, saveSearchName);
                 browser.waitUntilAnimEndAndClick(selectors.history.tree.searchnode(saveSearchName), 'right');
-                jV.performDelete(jobIdent);
+                jV.performDelete(jobIdent, true);
                 me.clickLogoAndWaitForMask();
             });
         });
@@ -77,7 +77,7 @@ describe('Job Viewer', function jobViewer() {
                 var jobIdent = 'robertson-6118004';
                 jV.viewSaveJob(jobIdent, saveSearchName);
                 browser.waitUntilAnimEndAndClick(selectors.history.tree.searchnode(saveSearchName), 'right');
-                jV.performDelete(jobIdent);
+                jV.performDelete(jobIdent, true);
                 me.clickLogoAndWaitForMask();
             });
         });
@@ -113,7 +113,7 @@ describe('Job Viewer', function jobViewer() {
             });
             it('Delete saved search.', function () {
                 browser.waitUntilAnimEndAndClick(selectors.history.tree.searchnode(saveSearchName), 'right');
-                jV.performDelete(jobs[0].ident);
+                jV.performDelete(jobs[0].ident, true);
                 me.clickLogoAndWaitForMask();
             });
         });
@@ -211,7 +211,7 @@ describe('Job Viewer', function jobViewer() {
             describe('Delete Basic search', function deleteSearch() {
                 it('Perform Delete', function performDelete() {
                     browser.waitUntilAnimEndAndClick(selectors.history.tree.searchnode(searchNameBasic), 'right');
-                    jV.performDelete(searchNameBasic);
+                    jV.performDelete(searchNameBasic, false);
                     me.clickLogoAndWaitForMask();
                 }); // Perform Delete
             }); // Delete Basic Search
@@ -259,7 +259,7 @@ describe('Job Viewer', function jobViewer() {
             describe('Delete the Advanced Search', function deleteAdvancedSearch() {
                 it('Perform Delete Action', function performDelete() {
                     browser.waitUntilAnimEndAndClick(selectors.history.tree.searchnode(searchNameAdvanced), 'right', 30000);
-                    jV.performDelete(searchNameAdvanced);
+                    jV.performDelete(searchNameAdvanced, false);
                     me.clickLogoAndWaitForMask();
                 });
             });
@@ -297,7 +297,7 @@ describe('Job Viewer', function jobViewer() {
 
             describe('Delete the Metric Explorer Search', function deleteMetricExplorerSearch() {
                 it('Perform Delete Action', function performDelete() {
-                    jV.performDelete(chartTitle);
+                    jV.performDelete(chartTitle, false);
                     me.clickLogoAndWaitForMask();
                 });
             });
