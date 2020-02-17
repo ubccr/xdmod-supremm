@@ -1,0 +1,11 @@
+title
+"Number of Jobs Ended: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Dunlin] Number of Jobs Ended","[Goose, Egyptian] Number of Jobs Ended","[Pipit, Meadow] Number of Jobs Ended","[Whimbrel] Number of Jobs Ended"
+2016-12,0,1,1,1
+2017-01,4,0,0,0
+---------

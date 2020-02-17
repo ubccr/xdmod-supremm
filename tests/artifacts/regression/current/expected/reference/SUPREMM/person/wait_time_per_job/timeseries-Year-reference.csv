@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Pipit, Meadow] Wait Hours: Per Job","[Dunlin] Wait Hours: Per Job","[Whimbrel] Wait Hours: Per Job","[Goose, Egyptian] Wait Hours: Per Job"
+2016,110.12305555555555,0,2.6,0.0011111111111111111
+2017,0,7.007222222222222,0,0
+---------

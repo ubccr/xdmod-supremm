@@ -1,0 +1,14 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+"0.1 - 0.5",53.115894039735096
+"0.5 - 1.0",80192435.57029077
+"1.0 - 1.5",83.84597432905484
+"&gt; 1.5",34411950.402730376
+NA,90.29615435511506
+---------

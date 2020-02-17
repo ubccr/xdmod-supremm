@@ -1,0 +1,14 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[0.6 - 0.7] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[0.7 - 0.8] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[0.8 - 0.9] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[&gt; 1.2] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+2016-12-28,0,0,1.4743134005490264,0,0
+2016-12-29,1.5222075046459211,0,1.4743134005490266,0,0
+2016-12-30,1.5222075046459214,0,1.4743134005490266,0,0
+2016-12-31,0,1.7895055154551072,1.4743134005490266,0,0
+2017-01-01,0,0,1.517950909756991,1.441073512252042,1.7358581677704195
+---------

@@ -1,0 +1,11 @@
+title
+"Number of Jobs Ended: by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[5 - 8] Number of Jobs Ended","[17 - 32] Number of Jobs Ended","[33 - 64] Number of Jobs Ended","[65 - 128] Number of Jobs Ended"
+2016,0,0,1,2
+2017,1,2,0,1
+---------

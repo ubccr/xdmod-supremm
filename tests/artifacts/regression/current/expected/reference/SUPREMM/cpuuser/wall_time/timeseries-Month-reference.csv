@@ -1,0 +1,11 @@
+title
+"CPU Hours: Total: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 10] CPU Hours: Total","[30 - 40] CPU Hours: Total","[50 - 60] CPU Hours: Total","[&gt; 90] CPU Hours: Total"
+2016-12,2248.088888888889,0,0,6577.45
+2017-01,96.64,1.9533333333333334,52.64,11.426666666666666
+---------

@@ -1,0 +1,12 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+CANCELLED,3318895249.669124
+COMPLETED,3615024069.149152
+TIMEOUT,3556366326.5185204
+---------

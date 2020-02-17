@@ -1,0 +1,13 @@
+title
+"Number of Jobs Submitted: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Number of Jobs Submitted"
+dunli,3
+egygo,1
+meapi,0
+whimb,0
+---------

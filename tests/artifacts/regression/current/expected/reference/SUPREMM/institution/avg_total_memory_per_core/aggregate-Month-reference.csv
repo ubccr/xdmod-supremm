@@ -1,0 +1,10 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by User Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"User Institution","Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+"screw - Screwdriver",3331976532.202483
+---------

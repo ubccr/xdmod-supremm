@@ -1,0 +1,14 @@
+title
+"Number of Jobs Started: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[CANCELLED] Number of Jobs Started","[COMPLETED] Number of Jobs Started","[TIMEOUT] Number of Jobs Started"
+2016-12-28,1,0,0
+2016-12-29,1,0,0
+2016-12-30,0,0,0
+2016-12-31,0,1,0
+2017-01-01,0,3,1
+---------

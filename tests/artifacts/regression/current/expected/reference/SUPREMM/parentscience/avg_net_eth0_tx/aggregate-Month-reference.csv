@@ -1,0 +1,12 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+"Environmental Biology",10441861.782546721
+"Astronomical Sciences",3980.3105878331294
+"Electrical and Communication Systems",3296.038222073229
+---------

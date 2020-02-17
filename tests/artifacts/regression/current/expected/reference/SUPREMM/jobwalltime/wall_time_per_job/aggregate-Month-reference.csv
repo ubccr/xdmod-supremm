@@ -1,0 +1,14 @@
+title
+"Wall Hours: Per Job: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Wall Hours: Per Job"
+"30s - 30min",0.08138888888888889
+"30 - 60min",0.5483333333333333
+"1 - 5hr",2.7275
+"5 - 10hr",7.0425
+18+hr,42.973194444444445
+---------

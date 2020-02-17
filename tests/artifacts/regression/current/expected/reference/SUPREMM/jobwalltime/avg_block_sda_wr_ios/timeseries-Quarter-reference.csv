@@ -1,0 +1,11 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[30s - 30min] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[30 - 60min] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[1 - 5hr] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[5 - 10hr] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[18+hr] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+"2016 Q4",0,0,0,1.7895055154551072,1.4843948970368657
+"2017 Q1",1.9488054607508531,1.5019630192502533,1.6914513388410382,0,0
+---------

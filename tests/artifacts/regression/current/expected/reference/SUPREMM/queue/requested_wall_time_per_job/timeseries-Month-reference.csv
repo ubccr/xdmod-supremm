@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Per Job: by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[crumpet] Wall Hours: Requested: Per Job","[chapti] Wall Hours: Requested: Per Job"
+2016-12,72,39.666666666666664
+2017-01,0,2.470833333333333
+---------

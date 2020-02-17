@@ -1,0 +1,13 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User Value","Avg: CPI: Per Core weighted by core-hour"
+"&lt; 10",1.2972810243580384
+"30 - 40",0.7000759878256008
+"50 - 60",0.7145831457263654
+"&gt; 90",0.7335836129329059
+---------

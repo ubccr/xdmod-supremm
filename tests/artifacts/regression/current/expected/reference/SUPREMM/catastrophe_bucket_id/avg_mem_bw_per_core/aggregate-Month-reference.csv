@@ -1,0 +1,14 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+"0.1 - 0.5",741082.4356144224
+"0.5 - 1.0",94409684.50625972
+"1.0 - 1.5",277490507.3201089
+"&gt; 1.5",40532221.21046644
+NA,34129588.90402918
+---------

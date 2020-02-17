@@ -1,0 +1,14 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+"30s - 30min",64325.061433447096
+"30 - 60min",110702.07339159067
+"1 - 5hr",120253.04037030527
+"5 - 10hr",0
+18+hr,84.46579395055174
+---------

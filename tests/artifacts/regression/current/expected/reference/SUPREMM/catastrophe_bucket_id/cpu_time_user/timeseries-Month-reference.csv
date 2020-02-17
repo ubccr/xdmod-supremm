@@ -1,0 +1,11 @@
+title
+"CPU Hours: User: Total: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[0.1 - 0.5] CPU Hours: User: Total","[0.5 - 1.0] CPU Hours: User: Total","[1.0 - 1.5] CPU Hours: User: Total","[&gt; 1.5] CPU Hours: User: Total","[NA] CPU Hours: User: Total"
+2016-12,0,6262.946898765169,0,0,282.7249385516484
+2017-01,0.45606780070971337,29.8351588379431,11.044948198953975,0.6293402865776171,0
+---------

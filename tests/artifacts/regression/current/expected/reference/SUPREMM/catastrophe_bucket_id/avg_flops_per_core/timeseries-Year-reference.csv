@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[0.1 - 0.5] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[0.5 - 1.0] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[1.0 - 1.5] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[&gt; 1.5] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[NA] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+2016,0,1187650968.071539,0,0,618053200.2575164
+2017,6946.687278674577,66121802.674133524,283419067.8501799,300689039.7733219,0
+---------

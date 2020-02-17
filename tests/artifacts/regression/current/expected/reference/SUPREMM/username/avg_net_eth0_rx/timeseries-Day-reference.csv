@@ -1,0 +1,14 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[dunli] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[whimb] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[meapi] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,0,209360.3217977668
+2016-12-29,0,0,209360.32179776678
+2016-12-30,0,0,209360.32179776678
+2016-12-31,0,210157.97467755293,209360.32179776678
+2017-01-01,10384491.307709059,0,0
+---------

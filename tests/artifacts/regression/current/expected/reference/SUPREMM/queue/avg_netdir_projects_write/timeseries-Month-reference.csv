@@ -1,0 +1,11 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[crumpet] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[chapti] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,35546.46916689732,4467.725321109751
+2017-01,0,2742.4583069369655
+---------

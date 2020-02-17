@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Pipit, Meadow] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[Whimbrel] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[Dunlin] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+"2016 Q4",1187650968.071539,618053200.2575164,0
+"2017 Q1",0,0,44923178.16478305
+---------

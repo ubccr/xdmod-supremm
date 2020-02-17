@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Dunlin] Number of Jobs Submitted","[Fieldfare] Number of Jobs Submitted","[Nuthatch] Number of Jobs Submitted","[White, Great] Number of Jobs Submitted"
+"2016 Q4",0,1,1,1
+"2017 Q1",3,0,0,0
+---------

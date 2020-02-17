@@ -1,0 +1,11 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[wrf] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[amber] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[enzo] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",35546.46916689732,4498.715323196161,3694.7268830776106
+"2017 Q1",0,0,2742.4583069369655
+---------

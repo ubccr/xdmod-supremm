@@ -1,0 +1,13 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User CV","Avg CPU %: Idle: weighted by core-hour"
+"&lt; 0.1",0.04122853022143806
+"0.1 - 0.2",66.49561518097951
+"0.4 - 0.8",99.11495753009484
+"1.6 - 3.2",98.34652698593992
+---------

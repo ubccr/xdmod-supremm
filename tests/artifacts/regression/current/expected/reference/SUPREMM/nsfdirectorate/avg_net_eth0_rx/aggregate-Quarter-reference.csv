@@ -1,0 +1,12 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+"Biological Sciences",10384491.307709059
+"Mathematical and Physical Sciences",210157.97467755293
+Engineering,209360.32179776678
+---------

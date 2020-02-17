@@ -1,0 +1,11 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by User Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[screw - Screwdriver] Avg: CPI: Per Core weighted by core-hour"
+2016,0.7333711683783726
+2017,1.0705283142764654
+---------

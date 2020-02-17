@@ -1,0 +1,14 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Avg: CPI: Per Core weighted by core-hour"
+"30s - 30min",0.7000759878256008
+"30 - 60min",0.7145831457263654
+"1 - 5hr",1.2506076222666993
+"5 - 10hr",0.6794453050304665
+18+hr,0.735533090751615
+---------

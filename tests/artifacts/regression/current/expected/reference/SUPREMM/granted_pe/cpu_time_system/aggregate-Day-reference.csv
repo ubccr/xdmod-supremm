@@ -1,0 +1,14 @@
+title
+"CPU Hours: System: Total: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","CPU Hours: System: Total"
+96,80.90052317640615
+112,6.36942767944878
+36,0.43109840030672986
+24,0.37347580709431205
+8,0.2815835960334169
+---------

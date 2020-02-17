@@ -1,0 +1,12 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+CANCELLED,1187650968.071539
+COMPLETED,513226602.07702434
+TIMEOUT,6946.687278674577
+---------

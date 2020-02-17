@@ -1,0 +1,14 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+36,21.251659895607357
+112,20.76810130085801
+96,19.4915680764132
+8,19.008556981719174
+24,18.51159645682602
+---------

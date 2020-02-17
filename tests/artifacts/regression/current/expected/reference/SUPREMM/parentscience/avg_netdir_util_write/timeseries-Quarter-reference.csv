@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Electrical and Communication Systems] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Astronomical Sciences] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Environmental Biology] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Mechanical and Structural Systems] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",472.818067485568,0,0,0
+"2017 Q1",0,0,0,0
+---------

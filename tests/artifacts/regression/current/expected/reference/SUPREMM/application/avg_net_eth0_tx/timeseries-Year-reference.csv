@@ -1,0 +1,11 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[enzo] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[amber] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016,3980.3105878331294,3296.038222073229
+2017,10441861.782546721,0
+---------

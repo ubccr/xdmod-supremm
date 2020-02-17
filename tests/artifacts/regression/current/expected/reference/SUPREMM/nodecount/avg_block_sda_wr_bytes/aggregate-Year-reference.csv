@@ -1,0 +1,14 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+3,21.251659895607357
+7,20.76810130085801
+8,19.4915680764132
+1,19.008556981719174
+2,18.51159645682602
+---------

@@ -1,0 +1,13 @@
+title
+"Wall Hours: Requested: Per Job: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Wall Hours: Requested: Per Job"
+"Goose, Egyptian",72
+"Pipit, Meadow",72
+Whimbrel,7.333333333333333
+Dunlin,2.470833333333333
+---------

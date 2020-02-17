@@ -1,0 +1,11 @@
+title
+"Avg CPU %: System: weighted by core-hour: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[0.1 - 0.5] Avg CPU %: System: weighted by core-hour","[0.5 - 1.0] Avg CPU %: System: weighted by core-hour","[1.0 - 1.5] Avg CPU %: System: weighted by core-hour","[&gt; 1.5] Avg CPU %: System: weighted by core-hour","[NA] Avg CPU %: System: weighted by core-hour"
+2016-12,0,0.9380498678995118,0,0,0.27184500844475196
+2017-01,0.36249253253854025,40.99354097708083,2.4642671764884794,1.1858203233310634,0
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[&lt; 100] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[100 - 1k] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[10M - 100M] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+"2016 Q4",0,618053200.2575164,1187650968.071539
+"2017 Q1",41814433.55965147,0,300689039.7733219
+---------

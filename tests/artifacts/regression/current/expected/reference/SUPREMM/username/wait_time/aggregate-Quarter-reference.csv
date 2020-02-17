@@ -1,0 +1,13 @@
+title
+"Wait Hours: Total: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Wait Hours: Total"
+meapi,110.12305555555555
+dunli,28.028888888888886
+whimb,2.6
+egygo,0.0011111111111111111
+---------

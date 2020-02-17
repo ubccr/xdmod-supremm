@@ -1,0 +1,12 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Application,"Avg CPU %: Idle: weighted by core-hour"
+wrf,98.3465269859399
+enzo,23.63115874928749
+amber,0.02326493821929594
+---------

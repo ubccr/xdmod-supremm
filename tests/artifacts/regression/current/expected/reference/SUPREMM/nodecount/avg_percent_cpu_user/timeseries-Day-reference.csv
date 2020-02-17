@@ -1,0 +1,14 @@
+title
+"Avg CPU %: User: weighted by core-hour: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[3] Avg CPU %: User: weighted by core-hour","[8] Avg CPU %: User: weighted by core-hour","[1] Avg CPU %: User: weighted by core-hour","[7] Avg CPU %: User: weighted by core-hour","[2] Avg CPU %: User: weighted by core-hour"
+2016-12-28,0,99.03583376711231,0,0,0
+2016-12-29,0,99.0358337671123,0,1.3396101558559381,0
+2016-12-30,0,99.0358337671123,0,1.339610155855938,0
+2016-12-31,99.63685223974439,99.03583376711228,0,0,0
+2017-01-01,0,56.67773335475514,96.65940664195428,0,1.1008939961667428
+---------

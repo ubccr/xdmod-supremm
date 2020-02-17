@@ -1,0 +1,11 @@
+title
+"CPU Hours: Total: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Fieldfare] CPU Hours: Total","[Nuthatch] CPU Hours: Total","[White, Great] CPU Hours: Total","[Dunlin] CPU Hours: Total"
+"2016 Q4",6323.92,2248.088888888889,253.53,0
+"2017 Q1",0,0,0,162.66000000000003
+---------

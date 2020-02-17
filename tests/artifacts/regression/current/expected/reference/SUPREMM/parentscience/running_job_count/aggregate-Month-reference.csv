@@ -1,0 +1,13 @@
+title
+"Number of Jobs Running: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Number of Jobs Running"
+"Environmental Biology",4
+"Astronomical Sciences",1
+"Electrical and Communication Systems",1
+"Mechanical and Structural Systems",1
+---------

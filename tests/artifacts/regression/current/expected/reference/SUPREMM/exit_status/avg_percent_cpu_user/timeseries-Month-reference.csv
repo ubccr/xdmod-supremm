@@ -1,0 +1,11 @@
+title
+"Avg CPU %: User: weighted by core-hour: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[CANCELLED] Avg CPU %: User: weighted by core-hour","[COMPLETED] Avg CPU %: User: weighted by core-hour","[TIMEOUT] Avg CPU %: User: weighted by core-hour"
+2016-12,73.41409239543037,99.63685223974439,0
+2017-01,0,62.87404926306376,0.47192446265491866
+---------

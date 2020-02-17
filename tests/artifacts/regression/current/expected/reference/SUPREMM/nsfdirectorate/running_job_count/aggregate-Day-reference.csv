@@ -1,0 +1,12 @@
+title
+"Number of Jobs Running: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Number of Jobs Running"
+Engineering,6
+"Biological Sciences",4
+"Mathematical and Physical Sciences",1
+---------

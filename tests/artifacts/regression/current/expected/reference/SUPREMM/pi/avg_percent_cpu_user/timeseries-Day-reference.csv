@@ -1,0 +1,14 @@
+title
+"Avg CPU %: User: weighted by core-hour: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[White, Great] Avg CPU %: User: weighted by core-hour","[Fieldfare] Avg CPU %: User: weighted by core-hour","[Dunlin] Avg CPU %: User: weighted by core-hour","[Nuthatch] Avg CPU %: User: weighted by core-hour"
+2016-12-28,0,99.03583376711231,0,0
+2016-12-29,0,99.0358337671123,0,1.3396101558559381
+2016-12-30,0,99.0358337671123,0,1.339610155855938
+2016-12-31,99.63685223974439,99.03583376711228,0,0
+2017-01-01,0,0,25.799529770185917,0
+---------

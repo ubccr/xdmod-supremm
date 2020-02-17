@@ -1,0 +1,11 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[30s - 30min] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[30 - 60min] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[1 - 5hr] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[5 - 10hr] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[18+hr] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,0,0,0,210157.97467755293,209360.32179776678
+2017-01,155779.68259385665,32816224.614045087,182115.16189136932,0,0
+---------

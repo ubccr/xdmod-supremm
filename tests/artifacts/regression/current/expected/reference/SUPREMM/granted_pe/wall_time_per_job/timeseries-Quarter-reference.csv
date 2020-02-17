@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[96] Wall Hours: Per Job","[112] Wall Hours: Per Job","[36] Wall Hours: Per Job","[24] Wall Hours: Per Job","[8] Wall Hours: Per Job"
+"2016 Q4",65.87416666666667,20.072222222222223,7.0425,0,0
+"2017 Q1",0.5483333333333333,0,0,2.054027777777778,1.4283333333333332
+---------

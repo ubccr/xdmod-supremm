@@ -1,0 +1,11 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Fieldfare] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[White, Great] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[Dunlin] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[Nuthatch] Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+"2016 Q4",4228070843.7430463,4104107695.7919683,0,761365718.1221551
+"2017 Q1",0,0,2817864004.5322976,0
+---------

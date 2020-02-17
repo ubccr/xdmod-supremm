@@ -1,0 +1,11 @@
+title
+"CPU Hours: System: Total: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[meapi] CPU Hours: System: Total","[dunli] CPU Hours: System: Total","[egygo] CPU Hours: System: Total","[whimb] CPU Hours: System: Total"
+2016,59.32152320607081,0,6.369427679448781,0.43109840030672986
+2017,0,22.234059373463076,0,0
+---------

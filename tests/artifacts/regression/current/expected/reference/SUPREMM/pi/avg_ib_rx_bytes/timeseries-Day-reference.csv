@@ -1,0 +1,14 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Fieldfare] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[Dunlin] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[White, Great] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[Nuthatch] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,80859953.01695362,0,0,0
+2016-12-29,80859953.01695362,0,0,19.229986951880115
+2016-12-30,80859953.01695362,0,0,19.229986951880115
+2016-12-31,80859953.01695362,0,562.9120025243561,0
+2017-01-01,0,399276.1550522648,0,0
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+"0.6 - 0.7",210157.97467755293
+"0.7 - 0.8",478438.8022841268
+"0.8 - 0.9",196871.43096071566
+"&gt; 1.2",179498.00075883002
+---------

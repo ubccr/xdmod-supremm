@@ -1,0 +1,11 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[frearson] Avg: CPU User CV: weighted by core-hour","[robertson] Avg: CPU User CV: weighted by core-hour"
+2016-12,2.491303567260018,0.002342013911677108
+2017-01,0,0.4355488906481971
+---------

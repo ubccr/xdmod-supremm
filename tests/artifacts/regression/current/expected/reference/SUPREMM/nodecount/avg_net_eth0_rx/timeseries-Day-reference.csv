@@ -1,0 +1,14 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[8] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[3] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[1] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[2] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,209360.3217977668,0,0,0
+2016-12-29,209360.32179776678,0,0,0
+2016-12-30,209360.32179776678,0,0,0
+2016-12-31,209360.32179776678,210157.97467755293,0,0
+2017-01-01,32816224.614045087,0,196871.43096071566,179028.09290689026
+---------

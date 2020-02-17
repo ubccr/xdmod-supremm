@@ -1,0 +1,11 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 0.1] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[0.1 - 0.2] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[0.4 - 0.8] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[1.6 - 3.2] Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+2016-12,4223292642.9357367,0,0,761365718.1221551
+2017-01,1722678943.286013,2201477584.957265,3556366326.5185204,0
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[0.6 - 0.7] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[0.7 - 0.8] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[0.8 - 0.9] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[&gt; 1.2] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",19.229986951880115,562.9120025243561,80859953.01695362,0,0
+"2017 Q1",0,0,1231302.116986201,83.84597432905484,53.115894039735096
+---------

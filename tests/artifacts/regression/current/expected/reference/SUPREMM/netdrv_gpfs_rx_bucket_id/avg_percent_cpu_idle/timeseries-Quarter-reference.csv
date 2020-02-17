@@ -1,0 +1,11 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Avg CPU %: Idle: weighted by core-hour","[&lt; 1Mi] Avg CPU %: Idle: weighted by core-hour","[128Mi - 256Mi] Avg CPU %: Idle: weighted by core-hour","[256Mi - 512Mi] Avg CPU %: Idle: weighted by core-hour","[512Mi - 1Gi] Avg CPU %: Idle: weighted by core-hour","[8Gi - 16Gi] Avg CPU %: Idle: weighted by core-hour"
+"2016 Q4",0.029668854637066314,0,0,0,0,98.34652698593992
+"2017 Q1",0,99.11495753009484,66.49561518097951,0.8665278367921907,1.3064786840210356,0
+---------

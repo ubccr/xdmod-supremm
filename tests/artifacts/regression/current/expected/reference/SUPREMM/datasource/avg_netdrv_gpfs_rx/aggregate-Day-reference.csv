@@ -1,0 +1,10 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Datasource,"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+pcp,5435.374749907791
+---------

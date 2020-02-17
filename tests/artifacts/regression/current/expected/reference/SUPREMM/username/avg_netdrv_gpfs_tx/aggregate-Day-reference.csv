@@ -1,0 +1,13 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+dunli,116618.20773281596
+egygo,401.27113400023717
+meapi,0
+whimb,0
+---------

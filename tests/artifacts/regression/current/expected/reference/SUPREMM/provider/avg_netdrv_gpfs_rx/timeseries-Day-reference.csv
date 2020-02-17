@@ -1,0 +1,14 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by Service Provider"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[screw] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0
+2016-12-29,2805.8286843932115
+2016-12-30,9330.994286371548
+2016-12-31,0
+2017-01-01,24080.867991764335
+---------

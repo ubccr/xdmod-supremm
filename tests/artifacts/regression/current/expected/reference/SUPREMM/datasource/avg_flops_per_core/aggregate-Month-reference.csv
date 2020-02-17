@@ -1,0 +1,10 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Datasource,"Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+pcp,1138647876.9676664
+---------

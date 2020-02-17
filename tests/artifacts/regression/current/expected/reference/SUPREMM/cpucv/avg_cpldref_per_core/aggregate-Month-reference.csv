@@ -1,0 +1,12 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User CV","Avg: CPLD: Per Core weighted by core-hour"
+"&lt; 0.1",2.940147230646119
+"0.1 - 0.2",2.1089584531875594
+"0.4 - 0.8",4.960459923970878
+---------

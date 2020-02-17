@@ -1,0 +1,13 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg: CPLD: Per Core weighted by core-hour"
+24,4.903965912818027
+96,2.9745711641883084
+8,2.155221659960016
+36,2.109724027027582
+---------

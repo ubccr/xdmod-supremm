@@ -1,0 +1,11 @@
+title
+"Number of Jobs Running: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Systematic and Population Biology] Number of Jobs Running","[Quantum Electronics, Waves, and Beams] Number of Jobs Running","[Stellar Astronomy and Astrophysics] Number of Jobs Running","[Structures and Building Systems] Number of Jobs Running"
+2016-12,0,1,1,1
+2017-01,4,0,0,0
+---------

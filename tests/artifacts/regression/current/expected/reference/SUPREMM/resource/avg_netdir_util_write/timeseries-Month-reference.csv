@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[robertson] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[frearson] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,454.5931376647992,0
+2017-01,0,0
+---------

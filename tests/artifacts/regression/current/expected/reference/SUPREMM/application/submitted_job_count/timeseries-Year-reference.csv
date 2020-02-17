@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[enzo] Number of Jobs Submitted","[amber] Number of Jobs Submitted","[wrf] Number of Jobs Submitted"
+2016,1,1,1
+2017,3,0,0
+---------

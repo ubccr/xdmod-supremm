@@ -1,0 +1,13 @@
+title
+"CPU Hours: Idle: Total: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"CPU Hours: Idle: Total"
+"Mechanical and Structural Systems",2210.917345779028
+"Environmental Biology",97.87032160037158
+"Electrical and Communication Systems",1.4712560810377
+"Astronomical Sciences",0.4801979982880181
+---------

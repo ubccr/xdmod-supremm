@@ -1,0 +1,9 @@
+title
+"GPU0 Hours: Total (GPU Hour): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","GPU0 Hours: Total (GPU Hour)"
+---------

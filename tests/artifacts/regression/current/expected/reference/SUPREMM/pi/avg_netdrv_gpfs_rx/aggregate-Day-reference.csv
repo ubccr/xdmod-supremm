@@ -1,0 +1,13 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+Nuthatch,24777.137709066465
+Dunlin,24080.867991764335
+Fieldfare,0
+"White, Great",0
+---------

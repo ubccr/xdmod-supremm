@@ -1,0 +1,14 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+"30s - 30min",4.621160409556314
+"30 - 60min",0.12284701114488349
+"1 - 5hr",0.21187086189722856
+"5 - 10hr",0.07112899196676264
+18+hr,0.06398096376356847
+---------

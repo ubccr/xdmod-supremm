@@ -1,0 +1,14 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+"0.1 - 0.5",0.7307188189845475
+"0.5 - 1.0",346.90284416676076
+"1.0 - 1.5",75575.3553092182
+"&gt; 1.5",280083.7918088737
+NA,21538.450083264735
+---------

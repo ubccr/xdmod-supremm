@@ -1,0 +1,11 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[CANCELLED] Avg: CPLD: Per Core weighted by core-hour","[COMPLETED] Avg: CPLD: Per Core weighted by core-hour","[TIMEOUT] Avg: CPLD: Per Core weighted by core-hour"
+2016-12,2.9824313601295205,2.109724027027582,0
+2017-01,0,2.0542362028580867,4.960459923970878
+---------

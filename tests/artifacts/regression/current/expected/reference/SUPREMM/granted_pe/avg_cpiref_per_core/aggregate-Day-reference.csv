@@ -1,0 +1,13 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg: CPI: Per Core weighted by core-hour"
+24,1.2854491847675316
+8,0.8558715448360987
+96,0.7353601440364381
+36,0.6794453050304665
+---------

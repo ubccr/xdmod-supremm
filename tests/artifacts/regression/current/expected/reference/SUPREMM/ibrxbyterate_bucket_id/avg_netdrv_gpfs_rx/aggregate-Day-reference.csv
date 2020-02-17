@@ -1,0 +1,12 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"InfiniBand Receive rate","Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+"&lt; 100",24444.64827097271
+"100 - 1k",0
+"10M - 100M",86.48560883819994
+---------

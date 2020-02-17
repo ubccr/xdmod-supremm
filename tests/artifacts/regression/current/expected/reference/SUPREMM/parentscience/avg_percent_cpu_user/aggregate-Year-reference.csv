@@ -1,0 +1,13 @@
+title
+"Avg CPU %: User: weighted by core-hour: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg CPU %: User: weighted by core-hour"
+"Astronomical Sciences",99.63685223974439
+"Electrical and Communication Systems",99.03583376711232
+"Environmental Biology",25.799529770185917
+"Mechanical and Structural Systems",1.339610155855938
+---------

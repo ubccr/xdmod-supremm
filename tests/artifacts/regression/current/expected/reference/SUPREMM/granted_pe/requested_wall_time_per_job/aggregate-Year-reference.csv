@@ -1,0 +1,14 @@
+title
+"Wall Hours: Requested: Per Job: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Wall Hours: Requested: Per Job"
+112,72
+96,38
+36,7.333333333333333
+24,2.058333333333333
+8,1.7666666666666666
+---------

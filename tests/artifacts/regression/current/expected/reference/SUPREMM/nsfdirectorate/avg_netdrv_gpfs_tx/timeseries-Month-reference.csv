@@ -1,0 +1,11 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Biological Sciences] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Engineering] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Mathematical and Physical Sciences] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,0,84.46579395055174,0
+2017-01,116618.20773281596,0,0
+---------

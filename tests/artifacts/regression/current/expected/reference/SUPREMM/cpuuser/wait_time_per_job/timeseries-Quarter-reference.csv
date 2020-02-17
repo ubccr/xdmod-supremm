@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[&lt; 10] Wait Hours: Per Job","[30 - 40] Wait Hours: Per Job","[50 - 60] Wait Hours: Per Job","[&gt; 90] Wait Hours: Per Job"
+"2016 Q4",0.0011111111111111111,0,0,56.36152777777777
+"2017 Q1",19.075,2.9883333333333333,3.1375,2.8280555555555558
+---------

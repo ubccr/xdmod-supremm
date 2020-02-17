@@ -1,0 +1,11 @@
+title
+"Number of Jobs Running: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Dunlin] Number of Jobs Running","[Fieldfare] Number of Jobs Running","[Nuthatch] Number of Jobs Running","[White, Great] Number of Jobs Running"
+2016-12,0,1,1,1
+2017-01,4,0,0,0
+---------

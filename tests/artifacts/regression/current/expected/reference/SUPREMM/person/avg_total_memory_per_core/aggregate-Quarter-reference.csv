@@ -1,0 +1,13 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+"Pipit, Meadow",4228070843.7430463
+Whimbrel,4104107695.7919683
+Dunlin,2817864004.5322976
+"Goose, Egyptian",761365718.1221551
+---------

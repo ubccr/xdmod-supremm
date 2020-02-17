@@ -1,0 +1,11 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[30s - 30min] Avg CPU %: Idle: weighted by core-hour","[30 - 60min] Avg CPU %: Idle: weighted by core-hour","[1 - 5hr] Avg CPU %: Idle: weighted by core-hour","[5 - 10hr] Avg CPU %: Idle: weighted by core-hour","[18+hr] Avg CPU %: Idle: weighted by core-hour"
+2016,0,0,0,0.18940480348992947,25.809452959478175
+2017,66.49561518097951,1.3064786840210356,88.72644374265988,0,0
+---------

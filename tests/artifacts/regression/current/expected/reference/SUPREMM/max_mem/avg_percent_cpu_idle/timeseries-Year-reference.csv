@@ -1,0 +1,11 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Avg CPU %: Idle: weighted by core-hour","[&lt; 10] Avg CPU %: Idle: weighted by core-hour","[20 - 30] Avg CPU %: Idle: weighted by core-hour","[40 - 50] Avg CPU %: Idle: weighted by core-hour"
+2016,98.34652698593992,0.18940480348992947,0.02326493821929595,0
+2017,99.11495753009484,3.638926723294309,0,0.8665278367921907
+---------

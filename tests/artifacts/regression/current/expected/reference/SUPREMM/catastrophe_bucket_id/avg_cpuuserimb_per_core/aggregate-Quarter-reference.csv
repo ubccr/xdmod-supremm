@@ -1,0 +1,14 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: CPU User Imbalance: weighted by core-hour (%)"
+"0.1 - 0.5",90.21065697492135
+"0.5 - 1.0",1.2707814381380247
+"1.0 - 1.5",0.8482826080657251
+"&gt; 1.5",32.53012048192771
+NA,89.71650571780634
+---------

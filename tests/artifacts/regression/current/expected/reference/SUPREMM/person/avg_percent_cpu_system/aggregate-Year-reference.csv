@@ -1,0 +1,13 @@
+title
+"Avg CPU %: System: weighted by core-hour: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Avg CPU %: System: weighted by core-hour"
+Dunlin,13.66903932956048
+"Pipit, Meadow",0.9380498678995118
+"Goose, Egyptian",0.28332632712743183
+Whimbrel,0.1700384176652585
+---------

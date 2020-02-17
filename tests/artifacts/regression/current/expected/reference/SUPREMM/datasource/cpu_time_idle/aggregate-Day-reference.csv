@@ -1,0 +1,10 @@
+title
+"CPU Hours: Idle: Total: by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Datasource,"CPU Hours: Idle: Total"
+pcp,2310.739121458725
+---------

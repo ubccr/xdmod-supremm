@@ -1,0 +1,14 @@
+title
+"CPU Hours: System: Total: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Engineering] CPU Hours: System: Total","[Biological Sciences] CPU Hours: System: Total","[Mathematical and Physical Sciences] CPU Hours: System: Total"
+2016-12-28,11.50694667044404,0,0
+2016-12-29,22.72408310061734,0,0
+2016-12-30,26.870500220072508,0,0
+2016-12-31,4.589420894385705,0,0.43109840030672986
+2017-01-01,0,22.234059373463076,0
+---------

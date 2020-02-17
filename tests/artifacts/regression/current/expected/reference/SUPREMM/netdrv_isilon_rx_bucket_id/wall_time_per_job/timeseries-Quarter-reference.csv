@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by isilon bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Wall Hours: Per Job"
+"2016 Q4",30.996296296296297
+"2017 Q1",1.5211805555555553
+---------

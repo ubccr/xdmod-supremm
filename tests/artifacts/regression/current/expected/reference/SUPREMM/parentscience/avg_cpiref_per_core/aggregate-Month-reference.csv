@@ -1,0 +1,12 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: CPI: Per Core weighted by core-hour"
+"Environmental Biology",1.0705283142764654
+"Electrical and Communication Systems",0.735533090751615
+"Astronomical Sciences",0.6794453050304665
+---------

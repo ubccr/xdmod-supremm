@@ -1,0 +1,13 @@
+title
+"CPU Hours: Total: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","CPU Hours: Total"
+meapi,6323.92
+egygo,2248.088888888889
+whimb,253.53
+dunli,162.66000000000003
+---------

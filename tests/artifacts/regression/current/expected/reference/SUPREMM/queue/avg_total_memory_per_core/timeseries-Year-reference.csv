@@ -1,0 +1,11 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[chapti] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[crumpet] Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+2016,4223292642.9357367,761365718.1221551
+2017,2817864004.5322976,0
+---------

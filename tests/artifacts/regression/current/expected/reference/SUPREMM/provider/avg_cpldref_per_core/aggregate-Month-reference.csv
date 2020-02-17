@@ -1,0 +1,10 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Service Provider"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Service Provider","Avg: CPLD: Per Core weighted by core-hour"
+screw,2.968873680205192
+---------

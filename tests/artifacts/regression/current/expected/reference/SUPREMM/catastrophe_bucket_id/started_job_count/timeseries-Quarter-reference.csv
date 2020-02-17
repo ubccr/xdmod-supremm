@@ -1,0 +1,11 @@
+title
+"Number of Jobs Started: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[0.1 - 0.5] Number of Jobs Started","[0.5 - 1.0] Number of Jobs Started","[1.0 - 1.5] Number of Jobs Started","[&gt; 1.5] Number of Jobs Started","[NA] Number of Jobs Started"
+"2016 Q4",0,1,0,0,2
+"2017 Q1",1,1,1,1,0
+---------

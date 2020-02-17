@@ -1,0 +1,13 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: CPU User Imbalance: weighted by core-hour (%)"
+"Mechanical and Structural Systems",99.81704865897794
+"Environmental Biology",66.92072234074402
+"Electrical and Communication Systems",0.9502148181129071
+"Astronomical Sciences",0.15346245747039997
+---------

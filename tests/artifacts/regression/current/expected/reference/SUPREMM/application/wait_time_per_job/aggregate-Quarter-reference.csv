@@ -1,0 +1,12 @@
+title
+"Wait Hours: Per Job: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Application,"Wait Hours: Per Job"
+amber,110.12305555555555
+enzo,6.1257777777777775
+wrf,0.0011111111111111111
+---------

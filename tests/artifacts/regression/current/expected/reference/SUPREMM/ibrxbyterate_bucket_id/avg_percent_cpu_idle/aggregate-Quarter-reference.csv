@@ -1,0 +1,12 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"InfiniBand Receive rate","Avg CPU %: Idle: weighted by core-hour"
+"&lt; 100",95.79429773693158
+"100 - 1k",0.18940480348992947
+"10M - 100M",0.043790587506328506
+---------

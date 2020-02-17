@@ -1,0 +1,13 @@
+title
+"Wait Hours: Per Job: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Wait Hours: Per Job"
+meapi,110.12305555555555
+dunli,7.007222222222222
+whimb,2.6
+egygo,0.0011111111111111111
+---------

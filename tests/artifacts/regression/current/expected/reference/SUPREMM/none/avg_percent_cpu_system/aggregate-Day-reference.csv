@@ -1,0 +1,10 @@
+title
+"Avg CPU %: System: weighted by core-hour"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Summary,"Avg CPU %: System: weighted by core-hour"
+SUPREMM,0.9830235150727942
+---------

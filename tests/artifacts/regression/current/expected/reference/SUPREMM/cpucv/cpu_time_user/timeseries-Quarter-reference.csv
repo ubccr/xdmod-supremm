@@ -1,0 +1,11 @@
+title
+"CPU Hours: User: Total: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[&lt; 0.1] CPU Hours: User: Total","[0.1 - 0.2] CPU Hours: User: Total","[0.4 - 0.8] CPU Hours: User: Total","[1.6 - 3.2] CPU Hours: User: Total"
+"2016 Q4",6515.556210248593,0,0,30.115627068224466
+"2017 Q1",40.88010703689707,0.6293402865776171,0.45606780070971337,0
+---------

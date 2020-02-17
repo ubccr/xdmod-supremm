@@ -1,0 +1,14 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+"30s - 30min",2201477584.957265
+"30 - 60min",1596530720.8366015
+"1 - 5hr",3423925005.7042103
+"5 - 10hr",4104107695.7919683
+18+hr,3318895249.6691256
+---------

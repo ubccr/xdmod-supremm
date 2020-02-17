@@ -1,0 +1,11 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[CANCELLED] Avg: CPI: Per Core weighted by core-hour","[COMPLETED] Avg: CPI: Per Core weighted by core-hour","[TIMEOUT] Avg: CPI: Per Core weighted by core-hour"
+"2016 Q4",0.735533090751615,0.6794453050304665,0
+"2017 Q1",0,0.7386079582891403,1.2972810243580384
+---------

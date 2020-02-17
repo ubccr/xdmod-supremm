@@ -1,0 +1,13 @@
+title
+"CPU Hours: Idle: Total: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User Value","CPU Hours: Idle: Total"
+"&lt; 10",2306.7020407361115
+"30 - 40",1.298881016535133
+"50 - 60",0.6877303792686731
+"&gt; 90",2.0504693268098393
+---------

@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 10] Wall Hours: Per Job","[30 - 40] Wall Hours: Per Job","[50 - 60] Wall Hours: Per Job","[&gt; 90] Wall Hours: Per Job"
+2016-12,20.072222222222223,0,0,36.458333333333336
+2017-01,4.026666666666666,0.08138888888888889,0.5483333333333333,1.4283333333333332
+---------

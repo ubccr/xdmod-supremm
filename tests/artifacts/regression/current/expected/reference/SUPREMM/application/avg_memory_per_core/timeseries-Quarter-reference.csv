@@ -1,0 +1,11 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[amber] Avg: Memory: Per Core weighted by core-hour (bytes)","[enzo] Avg: Memory: Per Core weighted by core-hour (bytes)","[wrf] Avg: Memory: Per Core weighted by core-hour (bytes)"
+"2016 Q4",1017787434.0461986,551892085.7885988,387085867.01000977
+"2017 Q1",0,393927260.8251174,0
+---------

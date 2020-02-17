@@ -1,0 +1,11 @@
+title
+"CPU Hours: User: Total: by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[pcp] CPU Hours: User: Total"
+"2016 Q4",6545.671837316817
+"2017 Q1",41.96551512418441
+---------

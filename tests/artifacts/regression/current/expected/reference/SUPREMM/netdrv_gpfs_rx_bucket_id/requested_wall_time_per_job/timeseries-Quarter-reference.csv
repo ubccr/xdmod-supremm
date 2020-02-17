@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Per Job: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Wall Hours: Requested: Per Job","[&lt; 1Mi] Wall Hours: Requested: Per Job","[128Mi - 256Mi] Wall Hours: Requested: Per Job","[256Mi - 512Mi] Wall Hours: Requested: Per Job","[512Mi - 1Gi] Wall Hours: Requested: Per Job","[8Gi - 16Gi] Wall Hours: Requested: Per Job"
+"2016 Q4",39.666666666666664,0,0,0,0,72
+"2017 Q1",0,4,0.11666666666666667,1.7666666666666666,4,0
+---------

@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 0.1] CPU Hours: Idle: Total","[0.1 - 0.2] CPU Hours: Idle: Total","[0.4 - 0.8] CPU Hours: Idle: Total","[1.6 - 3.2] CPU Hours: Idle: Total"
+2016,1.9514540793257185,0,0,2210.917345779028
+2017,0.7867456267527941,1.298881016535133,95.78469495708366,0
+---------

@@ -1,0 +1,14 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+8,80192435.57029077
+2,681822.3974575698
+3,562.9120025243561
+1,83.84597432905484
+7,19.229986951880115
+---------

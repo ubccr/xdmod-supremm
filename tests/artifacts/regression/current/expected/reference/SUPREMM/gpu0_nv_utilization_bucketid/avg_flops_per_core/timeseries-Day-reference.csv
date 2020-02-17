@@ -1,0 +1,14 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by GPU0 Usage Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+2016-12-28,1187650968.071539
+2016-12-29,1187650968.071539
+2016-12-30,1187650968.071539
+2016-12-31,993232869.6951118
+2017-01-01,44923178.16478305
+---------

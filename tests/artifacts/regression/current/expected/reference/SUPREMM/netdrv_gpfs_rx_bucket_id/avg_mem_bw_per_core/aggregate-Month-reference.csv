@@ -1,0 +1,14 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+NA,92732212.68144993
+"&lt; 1Mi",741082.4356144224
+"128Mi - 256Mi",40532221.21046644
+"256Mi - 512Mi",277490507.3201089
+"512Mi - 1Gi",13685414.294663966
+---------

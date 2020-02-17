@@ -1,0 +1,11 @@
+title
+"CPU Hours: Total: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] CPU Hours: Total","[&lt; 10] CPU Hours: Total","[20 - 30] CPU Hours: Total","[40 - 50] CPU Hours: Total"
+"2016 Q4",2248.088888888889,253.53,6323.92,0
+"2017 Q1",96.64,54.593333333333334,0,11.426666666666666
+---------

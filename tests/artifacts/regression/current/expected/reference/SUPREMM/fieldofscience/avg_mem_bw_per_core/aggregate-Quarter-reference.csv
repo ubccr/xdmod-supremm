@@ -1,0 +1,12 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Group","Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+"Quantum Electronics, Waves, and Beams",95081629.37335773
+"Stellar Astronomy and Astrophysics",34129588.90402918
+"Systematic and Population Biology",24849273.848053884
+---------

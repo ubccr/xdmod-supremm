@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[8] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[1] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[2] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[3] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[7] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016,472.818067485568,0,0,0,0
+2017,0,0,0,0,0
+---------

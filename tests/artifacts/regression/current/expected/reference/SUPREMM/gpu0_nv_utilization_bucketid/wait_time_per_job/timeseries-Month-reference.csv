@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by GPU0 Usage Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Wait Hours: Per Job"
+2016-12,37.57472222222222
+2017-01,7.007222222222222
+---------

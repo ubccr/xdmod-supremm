@@ -1,0 +1,14 @@
+title
+"Avg CPU %: User: weighted by core-hour: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[30s - 30min] Avg CPU %: User: weighted by core-hour","[30 - 60min] Avg CPU %: User: weighted by core-hour","[1 - 5hr] Avg CPU %: User: weighted by core-hour","[5 - 10hr] Avg CPU %: User: weighted by core-hour","[18+hr] Avg CPU %: User: weighted by core-hour"
+2016-12-28,0,0,0,0,99.03583376711231
+2016-12-29,0,0,0,0,84.82122820810667
+2016-12-30,0,0,0,0,55.45100600520698
+2016-12-31,0,0,0,99.63685223974439,99.03583376711228
+2017-01-01,32.21878600226709,56.67773335475514,10.642519432137899,0,0
+---------

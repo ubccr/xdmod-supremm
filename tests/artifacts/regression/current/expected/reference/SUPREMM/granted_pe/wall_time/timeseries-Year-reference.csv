@@ -1,0 +1,11 @@
+title
+"CPU Hours: Total: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[96] CPU Hours: Total","[112] CPU Hours: Total","[36] CPU Hours: Total","[24] CPU Hours: Total","[8] CPU Hours: Total"
+2016,6323.92,2248.088888888889,253.53,0,0
+2017,52.64,0,0,98.59333333333333,11.426666666666666
+---------

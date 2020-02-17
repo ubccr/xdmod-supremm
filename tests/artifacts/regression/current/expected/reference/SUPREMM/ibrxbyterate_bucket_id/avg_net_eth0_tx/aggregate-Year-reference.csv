@@ -1,0 +1,12 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"InfiniBand Receive rate","Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+"&lt; 100",10562772.039999198
+"100 - 1k",3980.3105878331294
+"10M - 100M",3338.4218363525038
+---------

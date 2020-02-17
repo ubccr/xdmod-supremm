@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[egygo] Wall Hours: Requested: Total","[meapi] Wall Hours: Requested: Total","[dunli] Wall Hours: Requested: Total","[whimb] Wall Hours: Requested: Total"
+"2016 Q4",72,72,0,7.333333333333333
+"2017 Q1",0,0,9.883333333333333,0
+---------

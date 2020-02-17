@@ -1,0 +1,11 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[crumpet] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[chapti] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",24777.137709066472,0
+"2017 Q1",0,24080.867991764335
+---------

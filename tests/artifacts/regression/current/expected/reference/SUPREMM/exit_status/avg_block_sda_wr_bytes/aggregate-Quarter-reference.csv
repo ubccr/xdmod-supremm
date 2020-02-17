@@ -1,0 +1,12 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+CANCELLED,19.752200586268142
+COMPLETED,21.050851105258303
+TIMEOUT,18.44457091611479
+---------

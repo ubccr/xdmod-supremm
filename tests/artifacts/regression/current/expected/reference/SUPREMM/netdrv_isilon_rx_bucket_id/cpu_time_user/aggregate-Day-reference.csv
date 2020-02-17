@@ -1,0 +1,10 @@
+title
+"CPU Hours: User: Total: by isilon bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"isilon bytes received","CPU Hours: User: Total"
+NA,6587.637352441002
+---------

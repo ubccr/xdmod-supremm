@@ -1,0 +1,13 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: CPU User CV: weighted by core-hour"
+"Mechanical and Structural Systems",2.491303567260018
+"Environmental Biology",0.4355488906481971
+"Electrical and Communication Systems",0.002420490384502186
+"Astronomical Sciences",0.000384537731233099
+---------

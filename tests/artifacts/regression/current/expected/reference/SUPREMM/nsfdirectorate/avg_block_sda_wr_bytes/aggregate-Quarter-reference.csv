@@ -1,0 +1,12 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+"Mathematical and Physical Sciences",21.251659895607357
+Engineering,19.752200586268142
+"Biological Sciences",19.252573645866327
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 0.1] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[0.1 - 0.2] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[0.4 - 0.8] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[1.6 - 3.2] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,454.5931376647992,0,0,0
+2017-01,0,0,0,0
+---------

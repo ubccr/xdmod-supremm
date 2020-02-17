@@ -1,0 +1,13 @@
+title
+"CPU Hours: Total: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"CPU Hours: Total"
+"Pipit, Meadow",6323.92
+"Goose, Egyptian",2248.088888888889
+Whimbrel,253.53
+Dunlin,162.66000000000003
+---------

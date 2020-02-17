@@ -1,0 +1,14 @@
+title
+"Avg CPU %: System: weighted by core-hour: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","Avg CPU %: System: weighted by core-hour"
+1,2.4642671764884794
+8,1.2687173519328
+2,0.3788043212127041
+7,0.28332632712743183
+3,0.1700384176652585
+---------

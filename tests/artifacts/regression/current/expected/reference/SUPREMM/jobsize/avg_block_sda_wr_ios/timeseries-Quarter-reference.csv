@@ -1,0 +1,11 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[5 - 8] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[17 - 32] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[33 - 64] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[65 - 128] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+"2016 Q4",0,0,1.7895055154551072,1.4843948970368657
+"2017 Q1",1.441073512252042,1.7400770843194266,0,1.5019630192502533
+---------

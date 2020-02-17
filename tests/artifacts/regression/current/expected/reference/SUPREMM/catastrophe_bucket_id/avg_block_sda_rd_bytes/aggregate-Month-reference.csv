@@ -1,0 +1,14 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+"0.1 - 0.5",0.13189845474613687
+"0.5 - 1.0",0.08100083221465283
+"1.0 - 1.5",0.662777129521587
+"&gt; 1.5",4.621160409556314
+NA,0.01055889626537476
+---------

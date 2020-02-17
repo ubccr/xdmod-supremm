@@ -1,0 +1,11 @@
+title
+"Number of Jobs Ended: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 10] Number of Jobs Ended","[30 - 40] Number of Jobs Ended","[50 - 60] Number of Jobs Ended","[&gt; 90] Number of Jobs Ended"
+2016,1,0,0,2
+2017,1,1,1,1
+---------

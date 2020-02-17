@@ -1,0 +1,13 @@
+title
+"Wait Hours: Total: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Wait Hours: Total"
+"Electrical and Communication Systems",110.12305555555555
+"Environmental Biology",28.028888888888886
+"Astronomical Sciences",2.6
+"Mechanical and Structural Systems",0.0011111111111111111
+---------

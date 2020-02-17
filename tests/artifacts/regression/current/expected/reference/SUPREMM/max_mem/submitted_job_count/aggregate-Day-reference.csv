@@ -1,0 +1,13 @@
+title
+"Number of Jobs Submitted: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Number of Jobs Submitted"
+NA,1
+"&lt; 10",2
+"20 - 30",0
+"40 - 50",1
+---------

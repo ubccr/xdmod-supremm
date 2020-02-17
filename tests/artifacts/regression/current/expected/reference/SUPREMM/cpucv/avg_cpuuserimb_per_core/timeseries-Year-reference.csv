@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 0.1] Avg: CPU User Imbalance: weighted by core-hour (%)","[0.1 - 0.2] Avg: CPU User Imbalance: weighted by core-hour (%)","[0.4 - 0.8] Avg: CPU User Imbalance: weighted by core-hour (%)","[1.6 - 3.2] Avg: CPU User Imbalance: weighted by core-hour (%)"
+2016,0.9195037331189209,0,0,99.81704865897794
+2017,32.8380536505878,32.53012048192771,90.21065697492135,0
+---------

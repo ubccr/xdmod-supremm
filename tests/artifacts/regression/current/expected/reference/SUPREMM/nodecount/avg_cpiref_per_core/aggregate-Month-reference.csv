@@ -1,0 +1,13 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","Avg: CPI: Per Core weighted by core-hour"
+2,1.2854491847675316
+1,0.8558715448360987
+8,0.7353601440364379
+3,0.6794453050304665
+---------

@@ -1,0 +1,11 @@
+title
+"CPU Hours: Total: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Electrical and Communication Systems] CPU Hours: Total","[Mechanical and Structural Systems] CPU Hours: Total","[Astronomical Sciences] CPU Hours: Total","[Environmental Biology] CPU Hours: Total"
+2016,6323.92,2248.088888888889,253.53,0
+2017,0,0,0,162.66000000000003
+---------

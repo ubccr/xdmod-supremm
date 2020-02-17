@@ -1,0 +1,11 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[wrf] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[enzo] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[amber] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+2016,20.76810130085801,21.251659895607357,19.48134385001708
+2017,0,19.252573645866327,0
+---------

@@ -1,0 +1,14 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[&lt; 10] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[30 - 40] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[50 - 60] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[&gt; 90] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,0,0,80859953.01695362
+2016-12-29,19.229986951880115,0,0,80859953.01695362
+2016-12-30,19.229986951880115,0,0,80859953.01695362
+2016-12-31,0,0,0,53260601.77578942
+2017-01-01,53.115894039735096,34411950.402730376,54.65653495440729,83.84597432905484
+---------

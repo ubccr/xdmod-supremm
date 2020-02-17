@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[&lt; 10] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[20 - 30] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[40 - 50] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016,0,0,472.818067485568,0
+2017,0,0,0,0
+---------

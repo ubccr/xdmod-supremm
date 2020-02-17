@@ -1,0 +1,13 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User Value","Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+"&lt; 10",20.642143407402973
+"30 - 40",21.82764505119454
+"50 - 60",20.71985815602837
+"&gt; 90",19.548175095040026
+---------

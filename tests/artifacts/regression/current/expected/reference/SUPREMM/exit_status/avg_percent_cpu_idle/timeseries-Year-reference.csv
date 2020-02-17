@@ -1,0 +1,11 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[CANCELLED] Avg CPU %: Idle: weighted by core-hour","[COMPLETED] Avg CPU %: Idle: weighted by core-hour","[TIMEOUT] Avg CPU %: Idle: weighted by core-hour"
+2016,25.809452959478175,0.18940480348992947,0
+2017,0,3.159083070717854,99.11495753009484
+---------

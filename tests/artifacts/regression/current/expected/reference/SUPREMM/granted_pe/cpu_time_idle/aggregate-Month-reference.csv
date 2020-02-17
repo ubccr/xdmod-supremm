@@ -1,0 +1,14 @@
+title
+"CPU Hours: Idle: Total: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","CPU Hours: Idle: Total"
+112,2210.917345779028
+24,97.08357597361879
+96,2.158986460306373
+36,0.4801979982880181
+8,0.099015247484121
+---------

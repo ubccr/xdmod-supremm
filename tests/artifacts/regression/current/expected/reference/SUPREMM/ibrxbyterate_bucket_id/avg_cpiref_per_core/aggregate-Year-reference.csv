@@ -1,0 +1,12 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"InfiniBand Receive rate","Avg: CPI: Per Core weighted by core-hour"
+"&lt; 100",1.0750310327552717
+"100 - 1k",0.6794453050304665
+"10M - 100M",0.7355221421382933
+---------

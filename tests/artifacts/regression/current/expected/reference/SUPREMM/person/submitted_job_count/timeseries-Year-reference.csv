@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Dunlin] Number of Jobs Submitted","[Goose, Egyptian] Number of Jobs Submitted","[Pipit, Meadow] Number of Jobs Submitted","[Whimbrel] Number of Jobs Submitted"
+2016,0,1,1,1
+2017,3,0,0,0
+---------

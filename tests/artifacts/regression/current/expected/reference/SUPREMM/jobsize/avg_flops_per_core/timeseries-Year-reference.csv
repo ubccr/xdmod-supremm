@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[5 - 8] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[17 - 32] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[33 - 64] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[65 - 128] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+2016,0,0,618053200.2575164,1187650968.071539
+2017,283419067.8501799,5964067.065547028,0,66121802.674133524
+---------

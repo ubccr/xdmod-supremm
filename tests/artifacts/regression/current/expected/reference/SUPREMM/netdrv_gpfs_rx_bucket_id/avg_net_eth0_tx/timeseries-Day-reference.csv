@@ -1,0 +1,14 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[&lt; 1Mi] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[128Mi - 256Mi] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[256Mi - 512Mi] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[512Mi - 1Gi] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,3296.0382220732286,0,0,0,0
+2016-12-29,3296.038222073229,0,0,0,0
+2016-12-30,3296.038222073229,0,0,0,0
+2016-12-31,3529.5976558349425,0,0,0,0
+2017-01-01,0,7760.028421633554,140555.44539249147,1305981.5608712563,32954446.61467832
+---------

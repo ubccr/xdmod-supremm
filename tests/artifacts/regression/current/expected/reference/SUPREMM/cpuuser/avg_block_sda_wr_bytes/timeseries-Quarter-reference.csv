@@ -1,0 +1,11 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[&lt; 10] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[30 - 40] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[50 - 60] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[&gt; 90] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",20.76810130085801,0,0,19.54958127136403
+"2017 Q1",18.44457091611479,21.82764505119454,20.71985815602837,19.008556981719174
+---------

@@ -1,0 +1,11 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Resource,"Avg CPU %: Idle: weighted by core-hour"
+frearson,98.34652698593992
+robertson,1.4810110766693318
+---------

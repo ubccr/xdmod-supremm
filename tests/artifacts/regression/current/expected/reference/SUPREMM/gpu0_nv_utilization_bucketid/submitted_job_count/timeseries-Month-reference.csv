@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by GPU0 Usage Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Number of Jobs Submitted"
+2016-12,3
+2017-01,3
+---------

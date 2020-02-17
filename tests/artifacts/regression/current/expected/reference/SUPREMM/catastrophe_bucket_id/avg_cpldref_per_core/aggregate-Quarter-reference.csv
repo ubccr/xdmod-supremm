@@ -1,0 +1,14 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: CPLD: Per Core weighted by core-hour"
+"0.1 - 0.5",4.960459923970878
+"0.5 - 1.0",2.9745711641883084
+"1.0 - 1.5",2.155221659960016
+"&gt; 1.5",2.1089584531875594
+NA,2.109724027027582
+---------

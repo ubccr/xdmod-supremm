@@ -1,0 +1,11 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[112] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[96] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[36] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[8] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[24] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",35546.46916689732,4498.715323196161,3694.7268830776106,0,0
+"2017 Q1",0,5807.017857142857,0,1465.1855309218204,1328.3063087429846
+---------

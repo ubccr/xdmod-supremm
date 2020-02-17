@@ -1,0 +1,14 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Structures and Building Systems] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[Systematic and Population Biology] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[Quantum Electronics, Waves, and Beams] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[Stellar Astronomy and Astrophysics] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,0,0,0
+2016-12-29,24777.137709066465,0,0,0
+2016-12-30,24777.13770906647,0,0,0
+2016-12-31,0,0,0,0
+2017-01-01,0,24080.867991764335,0,0
+---------

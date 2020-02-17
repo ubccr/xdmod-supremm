@@ -1,0 +1,12 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+CANCELLED,11034.129801298044
+COMPLETED,3953.429344428617
+TIMEOUT,1164.8939017660043
+---------

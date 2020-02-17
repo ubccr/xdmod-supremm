@@ -1,0 +1,14 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+"30s - 30min",21.82764505119454
+"30 - 60min",20.71985815602837
+"1 - 5hr",18.52953067322904
+"5 - 10hr",21.251659895607357
+18+hr,19.752200586268142
+---------

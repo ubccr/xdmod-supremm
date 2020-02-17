@@ -1,0 +1,13 @@
+title
+"Wall Hours: Requested: Per Job: by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Size","Wall Hours: Requested: Per Job"
+"5 - 8",1.7666666666666666
+"17 - 32",2.058333333333333
+"33 - 64",7.333333333333333
+"65 - 128",49.333333333333336
+---------

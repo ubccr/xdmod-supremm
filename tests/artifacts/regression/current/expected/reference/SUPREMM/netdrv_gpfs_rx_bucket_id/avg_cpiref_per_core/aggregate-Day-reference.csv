@@ -1,0 +1,14 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg: CPI: Per Core weighted by core-hour"
+NA,0.7333711683783728
+"&lt; 1Mi",1.2972810243580384
+"128Mi - 256Mi",0.7000759878256008
+"256Mi - 512Mi",0.8558715448360987
+"512Mi - 1Gi",0.7145831457263654
+---------

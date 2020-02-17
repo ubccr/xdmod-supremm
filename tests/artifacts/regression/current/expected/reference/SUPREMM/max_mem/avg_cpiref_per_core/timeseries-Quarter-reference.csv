@@ -1,0 +1,11 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Avg: CPI: Per Core weighted by core-hour","[&lt; 10] Avg: CPI: Per Core weighted by core-hour","[20 - 30] Avg: CPI: Per Core weighted by core-hour","[40 - 50] Avg: CPI: Per Core weighted by core-hour"
+"2016 Q4",0,0.6794453050304665,0.735533090751615,0
+"2017 Q1",1.2972810243580384,0.7140640839038078,0,0.8558715448360987
+---------

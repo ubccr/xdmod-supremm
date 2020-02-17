@@ -1,0 +1,11 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Avg: CPI: Per Core weighted by core-hour","[&lt; 1Mi] Avg: CPI: Per Core weighted by core-hour","[128Mi - 256Mi] Avg: CPI: Per Core weighted by core-hour","[256Mi - 512Mi] Avg: CPI: Per Core weighted by core-hour","[512Mi - 1Gi] Avg: CPI: Per Core weighted by core-hour"
+2016-12,0.7333711683783726,0,0,0,0
+2017-01,0,1.2972810243580384,0.7000759878256008,0.8558715448360987,0.7145831457263654
+---------

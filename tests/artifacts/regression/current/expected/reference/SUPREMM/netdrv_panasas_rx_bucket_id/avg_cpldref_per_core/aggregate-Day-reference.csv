@@ -1,0 +1,10 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by panasas bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"panasas bytes received","Avg: CPLD: Per Core weighted by core-hour"
+NA,2.9688736802051916
+---------

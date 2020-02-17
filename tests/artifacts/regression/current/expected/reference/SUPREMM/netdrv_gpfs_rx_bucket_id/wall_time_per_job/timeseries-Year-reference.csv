@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Wall Hours: Per Job","[&lt; 1Mi] Wall Hours: Per Job","[128Mi - 256Mi] Wall Hours: Per Job","[256Mi - 512Mi] Wall Hours: Per Job","[512Mi - 1Gi] Wall Hours: Per Job","[8Gi - 16Gi] Wall Hours: Per Job"
+2016,36.458333333333336,0,0,0,0,20.072222222222223
+2017,0,4.026666666666666,0.08138888888888889,1.4283333333333332,0.5483333333333333,0
+---------

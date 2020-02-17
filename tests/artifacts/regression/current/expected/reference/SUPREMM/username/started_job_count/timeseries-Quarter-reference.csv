@@ -1,0 +1,11 @@
+title
+"Number of Jobs Started: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[dunli] Number of Jobs Started","[egygo] Number of Jobs Started","[meapi] Number of Jobs Started","[whimb] Number of Jobs Started"
+"2016 Q4",0,1,1,1
+"2017 Q1",4,0,0,0
+---------

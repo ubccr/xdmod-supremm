@@ -1,0 +1,11 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[robertson] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[frearson] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,0,401.2711340002373
+2017-01,116618.20773281596,0
+---------

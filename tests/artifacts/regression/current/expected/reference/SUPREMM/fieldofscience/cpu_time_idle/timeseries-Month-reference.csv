@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Structures and Building Systems] CPU Hours: Idle: Total","[Systematic and Population Biology] CPU Hours: Idle: Total","[Quantum Electronics, Waves, and Beams] CPU Hours: Idle: Total","[Stellar Astronomy and Astrophysics] CPU Hours: Idle: Total"
+2016-12,2210.917345779028,0,1.4712560810377002,0.4801979982880181
+2017-01,0,97.87032160037158,0,0
+---------

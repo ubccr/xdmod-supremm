@@ -1,0 +1,13 @@
+title
+"Wall Hours: Requested: Per Job: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Wall Hours: Requested: Per Job"
+Fieldfare,72
+Nuthatch,72
+"White, Great",7.333333333333333
+Dunlin,2.470833333333333
+---------

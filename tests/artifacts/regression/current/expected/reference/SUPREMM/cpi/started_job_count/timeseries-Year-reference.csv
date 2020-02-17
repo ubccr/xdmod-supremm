@@ -1,0 +1,11 @@
+title
+"Number of Jobs Started: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Number of Jobs Started","[0.6 - 0.7] Number of Jobs Started","[0.7 - 0.8] Number of Jobs Started","[0.8 - 0.9] Number of Jobs Started","[&gt; 1.2] Number of Jobs Started"
+2016,1,1,1,0,0
+2017,0,0,2,1,1
+---------

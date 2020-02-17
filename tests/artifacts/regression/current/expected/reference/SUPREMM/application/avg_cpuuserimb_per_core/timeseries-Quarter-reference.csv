@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[wrf] Avg: CPU User Imbalance: weighted by core-hour (%)","[enzo] Avg: CPU User Imbalance: weighted by core-hour (%)","[amber] Avg: CPU User Imbalance: weighted by core-hour (%)"
+"2016 Q4",99.81704865897794,0.15346245747039997,0.9502148181129071
+"2017 Q1",0,66.92072234074402,0
+---------

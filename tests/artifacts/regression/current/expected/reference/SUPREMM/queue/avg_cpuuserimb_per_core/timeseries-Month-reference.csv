@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[crumpet] Avg: CPU User Imbalance: weighted by core-hour (%)","[chapti] Avg: CPU User Imbalance: weighted by core-hour (%)"
+2016-12,99.81704865897794,0.9195037331189209
+2017-01,0,66.92072234074402
+---------

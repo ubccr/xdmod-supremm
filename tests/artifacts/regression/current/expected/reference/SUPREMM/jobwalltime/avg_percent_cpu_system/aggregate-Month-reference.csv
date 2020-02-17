@@ -1,0 +1,14 @@
+title
+"Avg CPU %: System: weighted by core-hour: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Avg CPU %: System: weighted by core-hour"
+"30s - 30min",1.1858203233310634
+"30 - 60min",40.99354097708083
+"1 - 5hr",0.5847282968648941
+"5 - 10hr",0.1700384176652585
+18+hr,0.7663425427692774
+---------

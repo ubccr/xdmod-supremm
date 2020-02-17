@@ -1,0 +1,10 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by User Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"User Institution","Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+"screw - Screwdriver",2408.9458290687694
+---------

@@ -1,0 +1,13 @@
+title
+"Wall Hours: Requested: Total: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User CV","Wall Hours: Requested: Total"
+"&lt; 0.1",85.1
+"0.1 - 0.2",0.11666666666666667
+"0.4 - 0.8",4
+"1.6 - 3.2",72
+---------

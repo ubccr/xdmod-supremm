@@ -1,0 +1,12 @@
+title
+"CPU Hours: Total: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","CPU Hours: Total"
+CANCELLED,8572.00888888889
+COMPLETED,319.55
+TIMEOUT,96.64
+---------

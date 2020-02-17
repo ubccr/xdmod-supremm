@@ -1,0 +1,13 @@
+title
+"Wall Hours: Requested: Total: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Wall Hours: Requested: Total"
+egygo,72
+meapi,72
+dunli,9.883333333333333
+whimb,7.333333333333333
+---------

@@ -1,0 +1,12 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: CPLD: Per Core weighted by core-hour"
+"Environmental Biology",3.780889715758247
+"Electrical and Communication Systems",2.9824313601295205
+"Astronomical Sciences",2.109724027027582
+---------

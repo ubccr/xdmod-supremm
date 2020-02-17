@@ -1,0 +1,14 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[5 - 8] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[17 - 32] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[33 - 64] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[65 - 128] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+2016-12-28,0,0,0,0.0040317819748932095
+2016-12-29,0,0,0,0.0036488686108656775
+2016-12-30,0,0,0,0.0027583747879933083
+2016-12-31,0,0,0.0020378916367556764,0.0040317819748932095
+2017-01-01,0.028199144301828082,0.008080329974981405,0,0.003926038500506586
+---------

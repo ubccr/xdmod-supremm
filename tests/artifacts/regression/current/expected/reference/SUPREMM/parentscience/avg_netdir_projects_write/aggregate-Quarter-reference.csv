@@ -1,0 +1,13 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+"Mechanical and Structural Systems",35546.46916689732
+"Electrical and Communication Systems",4498.715323196161
+"Astronomical Sciences",3694.7268830776106
+"Environmental Biology",2742.4583069369655
+---------

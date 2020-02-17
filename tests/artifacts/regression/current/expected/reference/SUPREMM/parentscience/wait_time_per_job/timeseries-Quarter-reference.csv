@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Electrical and Communication Systems] Wait Hours: Per Job","[Environmental Biology] Wait Hours: Per Job","[Astronomical Sciences] Wait Hours: Per Job","[Mechanical and Structural Systems] Wait Hours: Per Job"
+"2016 Q4",110.12305555555555,0,2.6,0.0011111111111111111
+"2017 Q1",0,7.007222222222222,0,0
+---------

@@ -1,0 +1,11 @@
+title
+"Avg CPU %: User: weighted by core-hour: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 10] Avg CPU %: User: weighted by core-hour","[30 - 40] Avg CPU %: User: weighted by core-hour","[50 - 60] Avg CPU %: User: weighted by core-hour","[&gt; 90] Avg CPU %: User: weighted by core-hour"
+2016-12,1.339610155855938,0,0,99.05900022422965
+2017-01,0.47192446265491866,32.21878600226709,56.67773335475514,96.65940664195428
+---------

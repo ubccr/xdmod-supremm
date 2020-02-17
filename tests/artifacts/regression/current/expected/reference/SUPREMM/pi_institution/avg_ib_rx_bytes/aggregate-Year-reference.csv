@@ -1,0 +1,10 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by PI Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Institution","Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+"screw - Screwdriver",60652982.50786479
+---------

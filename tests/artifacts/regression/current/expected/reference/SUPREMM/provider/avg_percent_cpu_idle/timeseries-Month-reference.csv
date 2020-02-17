@@ -1,0 +1,11 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Service Provider"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[screw] Avg CPU %: Idle: weighted by core-hour"
+2016-12,25.073469481215415
+2017-01,60.16864723986941
+---------

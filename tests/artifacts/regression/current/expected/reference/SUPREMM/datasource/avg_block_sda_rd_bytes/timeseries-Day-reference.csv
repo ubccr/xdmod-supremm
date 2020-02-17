@@ -1,0 +1,14 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[pcp] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0.08065250667307619
+2016-12-29,0.07168353068434542
+2016-12-30,0.0508255025616156
+2016-12-31,0.07740189067054656
+2017-01-01,0.23519163763066203
+---------

@@ -1,0 +1,13 @@
+title
+"Wall Hours: Per Job: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Wall Hours: Per Job"
+Fieldfare,65.87416666666667
+Nuthatch,20.072222222222223
+"White, Great",7.0425
+Dunlin,1.5211805555555553
+---------

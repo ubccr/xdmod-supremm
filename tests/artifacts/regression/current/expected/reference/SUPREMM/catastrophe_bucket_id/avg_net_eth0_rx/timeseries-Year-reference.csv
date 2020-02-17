@@ -1,0 +1,11 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[0.1 - 0.5] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[0.5 - 1.0] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[1.0 - 1.5] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[&gt; 1.5] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[NA] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+2016,0,209360.32179776678,0,0,210157.97467755293
+2017,179498.00075883002,32816224.614045087,196871.43096071566,155779.68259385665,0
+---------

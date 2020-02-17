@@ -1,0 +1,13 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User Value","Avg: Memory: Per Core weighted by core-hour (bytes)"
+"&lt; 10",382686693.75302863
+"30 - 40",397344333.6752136
+"50 - 60",430653587.63285017
+"&gt; 90",1000149978.7752618
+---------

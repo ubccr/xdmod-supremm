@@ -1,0 +1,11 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[5 - 8] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[17 - 32] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[33 - 64] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[65 - 128] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",0,0,0,84.46579395055174
+"2017 Q1",785419.4507973552,3508.856244506052,0,110702.07339159067
+---------

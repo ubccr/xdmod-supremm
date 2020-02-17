@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[96] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[8] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[24] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[36] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[112] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",472.818067485568,0,0,0,0
+"2017 Q1",0,0,0,0,0
+---------

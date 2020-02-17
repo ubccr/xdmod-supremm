@@ -1,0 +1,12 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Avg: CPI: Per Core weighted by core-hour"
+dunli,1.0705283142764654
+meapi,0.735533090751615
+whimb,0.6794453050304665
+---------

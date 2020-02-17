@@ -1,0 +1,11 @@
+title
+"Avg CPU %: User: weighted by core-hour: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Avg CPU %: User: weighted by core-hour","[&lt; 1Mi] Avg CPU %: User: weighted by core-hour","[128Mi - 256Mi] Avg CPU %: User: weighted by core-hour","[256Mi - 512Mi] Avg CPU %: User: weighted by core-hour","[512Mi - 1Gi] Avg CPU %: User: weighted by core-hour","[8Gi - 16Gi] Avg CPU %: User: weighted by core-hour"
+"2016 Q4",99.05900022422965,0,0,0,0,1.339610155855938
+"2017 Q1",0,0.47192446265491866,32.21878600226709,96.65940664195428,56.67773335475514,0
+---------

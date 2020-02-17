@@ -1,0 +1,11 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Electrical and Communication Systems] Avg: Memory: Per Core weighted by core-hour (bytes)","[Astronomical Sciences] Avg: Memory: Per Core weighted by core-hour (bytes)","[Environmental Biology] Avg: Memory: Per Core weighted by core-hour (bytes)","[Mechanical and Structural Systems] Avg: Memory: Per Core weighted by core-hour (bytes)"
+"2016 Q4",1017787434.0461986,551892085.7885988,0,387085867.01000977
+"2017 Q1",0,0,393927260.8251174,0
+---------

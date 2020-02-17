@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Wall Hours: Per Job","[&lt; 10] Wall Hours: Per Job","[20 - 30] Wall Hours: Per Job","[40 - 50] Wall Hours: Per Job"
+"2016 Q4",20.072222222222223,7.0425,65.87416666666667,0
+"2017 Q1",4.026666666666666,0.3148611111111111,0,1.4283333333333332
+---------

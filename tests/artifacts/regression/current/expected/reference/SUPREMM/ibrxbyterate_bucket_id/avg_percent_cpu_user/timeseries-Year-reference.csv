@@ -1,0 +1,11 @@
+title
+"Avg CPU %: User: weighted by core-hour: by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 100] Avg CPU %: User: weighted by core-hour","[100 - 1k] Avg CPU %: User: weighted by core-hour","[10M - 100M] Avg CPU %: User: weighted by core-hour"
+2016,1.339610155855938,99.63685223974439,99.03583376711232
+2017,25.72150595553397,0,32.21878600226709
+---------

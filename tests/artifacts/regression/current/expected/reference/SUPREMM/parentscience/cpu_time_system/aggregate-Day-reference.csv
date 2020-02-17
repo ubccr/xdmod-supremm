@@ -1,0 +1,13 @@
+title
+"CPU Hours: System: Total: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"CPU Hours: System: Total"
+"Electrical and Communication Systems",59.32152320607081
+"Environmental Biology",22.234059373463076
+"Mechanical and Structural Systems",6.36942767944878
+"Astronomical Sciences",0.43109840030672986
+---------

@@ -1,0 +1,11 @@
+title
+"CPU Hours: System: Total: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 0.1] CPU Hours: System: Total","[0.1 - 0.2] CPU Hours: System: Total","[0.4 - 0.8] CPU Hours: System: Total","[1.6 - 3.2] CPU Hours: System: Total"
+2016-12,59.75262160637754,0,0,6.369427679448781
+2017-01,21.860583566368767,0.02316302364906677,0.3503127834452453,0
+---------

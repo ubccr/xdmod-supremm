@@ -1,0 +1,11 @@
+title
+"CPU Hours: User: Total: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] CPU Hours: User: Total","[&lt; 1Mi] CPU Hours: User: Total","[128Mi - 256Mi] CPU Hours: User: Total","[256Mi - 512Mi] CPU Hours: User: Total","[512Mi - 1Gi] CPU Hours: User: Total","[8Gi - 16Gi] CPU Hours: User: Total"
+2016,6515.556210248593,0,0,0,0,30.115627068224466
+2017,0,0.45606780070971337,0.6293402865776171,11.044948198953975,29.8351588379431,0
+---------

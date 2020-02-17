@@ -1,0 +1,11 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Service Provider"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[screw] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,3322.413728217876
+2017-01,10441861.782546721
+---------

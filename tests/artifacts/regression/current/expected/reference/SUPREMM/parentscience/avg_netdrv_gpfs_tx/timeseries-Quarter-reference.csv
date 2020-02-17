@@ -1,0 +1,11 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Environmental Biology] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Mechanical and Structural Systems] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Astronomical Sciences] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Electrical and Communication Systems] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",0,401.2711340002373,0,0
+"2017 Q1",116618.20773281596,0,0,0
+---------

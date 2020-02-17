@@ -1,0 +1,10 @@
+title
+"CPU Hours: User: Total: by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Datasource,"CPU Hours: User: Total"
+pcp,6587.637352441001
+---------

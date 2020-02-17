@@ -1,0 +1,14 @@
+title
+"Avg CPU %: System: weighted by core-hour: by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[&lt; 100] Avg CPU %: System: weighted by core-hour","[100 - 1k] Avg CPU %: System: weighted by core-hour","[10M - 100M] Avg CPU %: System: weighted by core-hour"
+2016-12-28,0,0,0.9380498678995118
+2016-12-29,0.2833263271274318,0,0.9380498678995118
+2016-12-30,0.28332632712743183,0,0.9380498678995118
+2016-12-31,0,0.1700384176652585,0.9380498678995117
+2017-01-01,13.820768491131261,0,1.1858203233310634
+---------

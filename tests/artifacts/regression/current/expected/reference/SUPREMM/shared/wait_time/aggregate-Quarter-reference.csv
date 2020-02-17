@@ -1,0 +1,10 @@
+title
+"Wait Hours: Total: by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Share Mode","Wait Hours: Total"
+Exclusive,140.75305555555553
+---------

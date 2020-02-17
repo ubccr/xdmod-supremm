@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[96] Wait Hours: Total","[24] Wait Hours: Total","[8] Wait Hours: Total","[36] Wait Hours: Total","[112] Wait Hours: Total"
+2016-12,110.12305555555555,0,0,2.6,0.0011111111111111111
+2017-01,3.1375,22.063333333333333,2.8280555555555558,0,0
+---------

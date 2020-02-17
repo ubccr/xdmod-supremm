@@ -1,0 +1,11 @@
+title
+"Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Biological Sciences] Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)","[Engineering] Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)","[Mathematical and Physical Sciences] Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,0,0,0
+2017-01,0,0,0
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+"0.6 - 0.7",618053200.2575164
+"0.7 - 0.8",1178123696.6854486
+"0.8 - 0.9",283419067.8501799
+"&gt; 1.2",6946.687278674577
+---------

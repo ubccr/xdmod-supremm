@@ -1,0 +1,13 @@
+title
+"Number of Jobs Ended: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Number of Jobs Ended"
+Dunlin,4
+"Goose, Egyptian",1
+"Pipit, Meadow",1
+Whimbrel,1
+---------

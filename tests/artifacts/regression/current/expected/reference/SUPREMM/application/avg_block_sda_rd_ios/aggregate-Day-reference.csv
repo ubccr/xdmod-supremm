@@ -1,0 +1,12 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Application,"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+enzo,0.004748323075586034
+amber,0.0040317819748932095
+wrf,0.0006504290063659009
+---------

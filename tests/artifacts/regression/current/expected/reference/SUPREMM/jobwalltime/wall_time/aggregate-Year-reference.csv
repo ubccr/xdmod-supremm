@@ -1,0 +1,14 @@
+title
+"CPU Hours: Total: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","CPU Hours: Total"
+"30s - 30min",1.9533333333333334
+"30 - 60min",52.64
+"1 - 5hr",108.06666666666666
+"5 - 10hr",253.53
+18+hr,8572.00888888889
+---------

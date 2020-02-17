@@ -1,0 +1,11 @@
+title
+"CPU Hours: System: Total: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[CANCELLED] CPU Hours: System: Total","[COMPLETED] CPU Hours: System: Total","[TIMEOUT] CPU Hours: System: Total"
+"2016 Q4",65.69095088551958,0.43109840030672986,0
+"2017 Q1",0,21.883746590017832,0.3503127834452453
+---------

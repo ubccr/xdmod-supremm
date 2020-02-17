@@ -1,0 +1,11 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Dunlin] Avg: CPI: Per Core weighted by core-hour","[Fieldfare] Avg: CPI: Per Core weighted by core-hour","[White, Great] Avg: CPI: Per Core weighted by core-hour"
+2016-12,0,0.735533090751615,0.6794453050304665
+2017-01,1.0705283142764654,0,0
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+dunli,0.008829585049097245
+meapi,0.0040317819748932095
+whimb,0.0020378916367556764
+egygo,0.000650429006365901
+---------

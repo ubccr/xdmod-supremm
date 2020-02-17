@@ -1,0 +1,12 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Application,"Avg: Memory: Per Core weighted by core-hour (bytes)"
+amber,1017787434.0461986
+enzo,490154517.7822558
+wrf,387085867.0100098
+---------

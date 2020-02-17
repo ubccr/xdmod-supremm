@@ -1,0 +1,13 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User CV","Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+"&lt; 0.1",2901.877403068647
+"0.1 - 0.2",64325.061433447096
+"0.4 - 0.8",2279.610375275938
+"1.6 - 3.2",401.27113400023717
+---------

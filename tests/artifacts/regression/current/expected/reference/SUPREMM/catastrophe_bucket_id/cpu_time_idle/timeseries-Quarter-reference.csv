@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[0.1 - 0.5] CPU Hours: Idle: Total","[0.5 - 1.0] CPU Hours: Idle: Total","[1.0 - 1.5] CPU Hours: Idle: Total","[&gt; 1.5] CPU Hours: Idle: Total","[NA] CPU Hours: Idle: Total"
+"2016 Q4",0,1.4712560810377002,0,0,2211.397543777316
+"2017 Q1",95.78469495708366,0.6877303792686731,0.099015247484121,1.298881016535133,0
+---------

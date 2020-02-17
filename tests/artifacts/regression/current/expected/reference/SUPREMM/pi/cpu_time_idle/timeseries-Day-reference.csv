@@ -1,0 +1,14 @@
+title
+"CPU Hours: Idle: Total: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Nuthatch] CPU Hours: Idle: Total","[Dunlin] CPU Hours: Idle: Total","[Fieldfare] CPU Hours: Idle: Total","[White, Great] CPU Hours: Idle: Total"
+2016-12-28,0,0,0.2853882427168487,0
+2016-12-29,385.81901344118603,0,0.5360219162786837,0
+2016-12-30,1825.0983323378418,0,0.5360219162786837,0
+2016-12-31,0,0,0.11382400576348391,0.4801979982880181
+2017-01-01,0,97.87032160037158,0,0
+---------

@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 0.1] Number of Jobs Submitted","[0.1 - 0.2] Number of Jobs Submitted","[0.4 - 0.8] Number of Jobs Submitted","[1.6 - 3.2] Number of Jobs Submitted"
+2016,2,0,0,1
+2017,2,1,0,0
+---------

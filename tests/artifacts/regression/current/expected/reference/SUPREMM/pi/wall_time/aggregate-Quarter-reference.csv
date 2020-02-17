@@ -1,0 +1,13 @@
+title
+"CPU Hours: Total: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"CPU Hours: Total"
+Fieldfare,6323.92
+Nuthatch,2248.088888888889
+"White, Great",253.53
+Dunlin,162.66000000000003
+---------

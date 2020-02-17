@@ -1,0 +1,13 @@
+title
+"Wait Hours: Total: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Wait Hours: Total"
+Fieldfare,110.12305555555555
+Dunlin,28.028888888888886
+"White, Great",2.6
+Nuthatch,0.0011111111111111111
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[0.1 - 0.5] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[0.5 - 1.0] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[1.0 - 1.5] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[&gt; 1.5] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[NA] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+2016,0,4498.715323196161,0,0,31383.04057372753
+2017,1164.8939017660043,5807.017857142857,1465.1855309218204,9413.037542662116,0
+---------

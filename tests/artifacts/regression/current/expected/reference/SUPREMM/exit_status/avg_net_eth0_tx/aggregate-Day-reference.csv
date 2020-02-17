@@ -1,0 +1,12 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+CANCELLED,3296.038222073229
+COMPLETED,5406051.323122803
+TIMEOUT,7760.028421633554
+---------

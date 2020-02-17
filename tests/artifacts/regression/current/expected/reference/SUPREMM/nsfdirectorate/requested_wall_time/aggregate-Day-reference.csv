@@ -1,0 +1,12 @@
+title
+"Wall Hours: Requested: Total: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Wall Hours: Requested: Total"
+Engineering,144.00000000000003
+"Biological Sciences",9.883333333333333
+"Mathematical and Physical Sciences",7.333333333333333
+---------

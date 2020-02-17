@@ -1,0 +1,11 @@
+title
+"CPU Hours: User: Total: by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Exclusive] CPU Hours: User: Total"
+2016-12,6545.671837316817
+2017-01,41.96551512418441
+---------

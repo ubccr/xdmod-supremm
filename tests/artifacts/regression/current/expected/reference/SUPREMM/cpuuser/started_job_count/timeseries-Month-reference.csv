@@ -1,0 +1,11 @@
+title
+"Number of Jobs Started: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 10] Number of Jobs Started","[30 - 40] Number of Jobs Started","[50 - 60] Number of Jobs Started","[&gt; 90] Number of Jobs Started"
+2016-12,1,0,0,2
+2017-01,1,1,1,1
+---------

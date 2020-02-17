@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Quantum Electronics, Waves, and Beams] Wall Hours: Per Job","[Structures and Building Systems] Wall Hours: Per Job","[Stellar Astronomy and Astrophysics] Wall Hours: Per Job","[Systematic and Population Biology] Wall Hours: Per Job"
+2016-12,65.87416666666667,20.072222222222223,7.0425,0
+2017-01,0,0,0,1.5211805555555553
+---------

@@ -1,0 +1,14 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[crumpet] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[chapti] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,19.481343850017076
+2016-12-29,20.76810130085801,19.481343850017076
+2016-12-30,20.76810130085801,19.481343850017076
+2016-12-31,0,20.08559741026157
+2017-01-01,0,19.252573645866327
+---------

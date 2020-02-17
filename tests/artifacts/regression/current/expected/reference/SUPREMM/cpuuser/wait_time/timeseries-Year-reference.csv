@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 10] Wait Hours: Total","[30 - 40] Wait Hours: Total","[50 - 60] Wait Hours: Total","[&gt; 90] Wait Hours: Total"
+2016,0.0011111111111111111,0,0,112.72305555555555
+2017,19.075,2.9883333333333333,3.1375,2.8280555555555558
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Avg: CPLD: Per Core weighted by core-hour","[&lt; 1Mi] Avg: CPLD: Per Core weighted by core-hour","[128Mi - 256Mi] Avg: CPLD: Per Core weighted by core-hour","[256Mi - 512Mi] Avg: CPLD: Per Core weighted by core-hour","[512Mi - 1Gi] Avg: CPLD: Per Core weighted by core-hour"
+"2016 Q4",2.9487925654353253,0,0,0,0
+"2017 Q1",0,4.960459923970878,2.1089584531875594,2.155221659960016,2.03028449404106
+---------

@@ -1,0 +1,11 @@
+title
+"Avg CPU %: User: weighted by core-hour: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[whimb] Avg CPU %: User: weighted by core-hour","[meapi] Avg CPU %: User: weighted by core-hour","[dunli] Avg CPU %: User: weighted by core-hour","[egygo] Avg CPU %: User: weighted by core-hour"
+2016,99.63685223974439,99.03583376711232,0,1.339610155855938
+2017,0,0,25.799529770185917,0
+---------

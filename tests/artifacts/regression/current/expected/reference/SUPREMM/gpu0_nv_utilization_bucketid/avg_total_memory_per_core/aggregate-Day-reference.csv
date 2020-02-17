@@ -1,0 +1,10 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by GPU0 Usage Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"GPU0 Usage Value","Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+NA,3331976532.2024827
+---------

@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Electrical and Communication Systems] Wait Hours: Total","[Environmental Biology] Wait Hours: Total","[Astronomical Sciences] Wait Hours: Total","[Mechanical and Structural Systems] Wait Hours: Total"
+2016,110.12305555555555,0,2.6,0.0011111111111111111
+2017,0,28.028888888888886,0,0
+---------

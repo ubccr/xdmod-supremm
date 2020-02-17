@@ -1,0 +1,14 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[&lt; 1Mi] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[128Mi - 256Mi] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[256Mi - 512Mi] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[512Mi - 1Gi] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[8Gi - 16Gi] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,4498.715323196161,0,0,0,0,0
+2016-12-29,4498.715323196161,0,0,0,0,35546.46916689731
+2016-12-30,4498.715323196161,0,0,0,0,35546.46916689731
+2016-12-31,4224.293770870986,0,0,0,0,0
+2017-01-01,0,1164.8939017660043,9413.037542662116,1465.1855309218204,5807.017857142857,0
+---------

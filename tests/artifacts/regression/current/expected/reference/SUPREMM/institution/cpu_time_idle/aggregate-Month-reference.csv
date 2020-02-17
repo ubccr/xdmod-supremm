@@ -1,0 +1,10 @@
+title
+"CPU Hours: Idle: Total: by User Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"User Institution","CPU Hours: Idle: Total"
+"screw - Screwdriver",2310.739121458725
+---------

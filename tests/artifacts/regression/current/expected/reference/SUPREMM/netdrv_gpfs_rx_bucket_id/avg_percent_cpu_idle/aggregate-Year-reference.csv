@@ -1,0 +1,15 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg CPU %: Idle: weighted by core-hour"
+NA,0.029668854637066314
+"&lt; 1Mi",99.11495753009484
+"128Mi - 256Mi",66.49561518097951
+"256Mi - 512Mi",0.8665278367921907
+"512Mi - 1Gi",1.3064786840210356
+"8Gi - 16Gi",98.34652698593992
+---------

@@ -1,0 +1,14 @@
+title
+"Wait Hours: Per Job: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Wait Hours: Per Job"
+96,56.63027777777778
+24,11.031666666666666
+8,2.8280555555555558
+36,2.6
+112,0.0011111111111111111
+---------

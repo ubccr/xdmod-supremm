@@ -1,0 +1,10 @@
+title
+"Wall Hours: Requested: Total: by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Share Mode","Wall Hours: Requested: Total"
+Exclusive,161.2166666666667
+---------

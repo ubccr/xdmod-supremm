@@ -1,0 +1,12 @@
+title
+"CPU Hours: System: Total: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Application,"CPU Hours: System: Total"
+amber,59.32152320607081
+enzo,22.665157773769806
+wrf,6.36942767944878
+---------

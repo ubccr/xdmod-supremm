@@ -1,0 +1,12 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+Dunlin,10384491.307709059
+Whimbrel,210157.97467755293
+"Pipit, Meadow",209360.32179776675
+---------

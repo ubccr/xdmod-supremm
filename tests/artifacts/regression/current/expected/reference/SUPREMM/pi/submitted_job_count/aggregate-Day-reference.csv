@@ -1,0 +1,13 @@
+title
+"Number of Jobs Submitted: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Number of Jobs Submitted"
+Dunlin,3
+Nuthatch,1
+Fieldfare,0
+"White, Great",0
+---------

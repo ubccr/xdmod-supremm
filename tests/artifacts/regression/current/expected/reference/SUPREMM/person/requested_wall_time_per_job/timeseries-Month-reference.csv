@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Per Job: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Goose, Egyptian] Wall Hours: Requested: Per Job","[Pipit, Meadow] Wall Hours: Requested: Per Job","[Whimbrel] Wall Hours: Requested: Per Job","[Dunlin] Wall Hours: Requested: Per Job"
+2016-12,72,72,7.333333333333333,0
+2017-01,0,0,0,2.470833333333333
+---------

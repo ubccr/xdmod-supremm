@@ -1,0 +1,11 @@
+title
+"Avg CPU %: System: weighted by core-hour: by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Queue,"Avg CPU %: System: weighted by core-hour"
+chapti,1.2163997468860392
+crumpet,0.28332632712743183
+---------

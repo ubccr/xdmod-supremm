@@ -1,0 +1,14 @@
+title
+"Number of Jobs Started: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Systematic and Population Biology] Number of Jobs Started","[Quantum Electronics, Waves, and Beams] Number of Jobs Started","[Stellar Astronomy and Astrophysics] Number of Jobs Started","[Structures and Building Systems] Number of Jobs Started"
+2016-12-28,0,1,0,0
+2016-12-29,0,0,0,1
+2016-12-30,0,0,0,0
+2016-12-31,0,0,1,0
+2017-01-01,4,0,0,0
+---------

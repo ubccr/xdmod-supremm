@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[5 - 8] CPU Hours: Idle: Total","[17 - 32] CPU Hours: Idle: Total","[33 - 64] CPU Hours: Idle: Total","[65 - 128] CPU Hours: Idle: Total"
+2016-12,0,0,0.4801979982880181,2212.3886018600656
+2017-01,0.099015247484121,97.08357597361879,0,0.6877303792686731
+---------

@@ -1,0 +1,14 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Mechanical and Structural Systems] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[Environmental Biology] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[Astronomical Sciences] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[Electrical and Communication Systems] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,0,0,0
+2016-12-29,24777.137709066465,0,0,0
+2016-12-30,24777.13770906647,0,0,0
+2016-12-31,0,0,0,0
+2017-01-01,0,24080.867991764335,0,0
+---------

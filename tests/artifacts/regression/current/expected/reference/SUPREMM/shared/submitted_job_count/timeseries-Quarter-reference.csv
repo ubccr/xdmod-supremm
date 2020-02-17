@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Exclusive] Number of Jobs Submitted"
+"2016 Q4",3
+"2017 Q1",3
+---------

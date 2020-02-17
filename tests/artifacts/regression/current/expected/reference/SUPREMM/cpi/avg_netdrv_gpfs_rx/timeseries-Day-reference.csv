@@ -1,0 +1,14 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[0.6 - 0.7] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[0.7 - 0.8] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[0.8 - 0.9] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[&gt; 1.2] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,0,0,0,0
+2016-12-29,24777.137709066465,0,0,0,0
+2016-12-30,24777.13770906647,0,0,0,0
+2016-12-31,0,0,0,0,0
+2017-01-01,0,0,50539.94028574917,75575.3553092182,0.7307188189845475
+---------

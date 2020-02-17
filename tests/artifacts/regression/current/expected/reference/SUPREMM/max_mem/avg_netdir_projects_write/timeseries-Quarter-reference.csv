@@ -1,0 +1,11 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[&lt; 10] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[20 - 30] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[40 - 50] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",35546.46916689732,3694.7268830776106,4498.715323196161,0
+"2017 Q1",1164.8939017660043,5936.040175845646,0,1465.1855309218204
+---------

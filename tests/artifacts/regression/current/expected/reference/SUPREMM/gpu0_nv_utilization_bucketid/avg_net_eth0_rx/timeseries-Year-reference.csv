@@ -1,0 +1,11 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by GPU0 Usage Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+2016,209391.06759357097
+2017,10384491.307709059
+---------

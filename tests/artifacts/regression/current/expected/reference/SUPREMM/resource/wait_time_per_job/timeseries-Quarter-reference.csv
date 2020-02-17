@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[robertson] Wait Hours: Per Job","[frearson] Wait Hours: Per Job"
+"2016 Q4",56.36152777777777,0.0011111111111111111
+"2017 Q1",7.007222222222222,0
+---------

@@ -1,0 +1,13 @@
+title
+"Avg CPU %: User: weighted by core-hour: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Avg CPU %: User: weighted by core-hour"
+"White, Great",99.63685223974439
+Fieldfare,99.0358337671123
+Dunlin,25.799529770185917
+Nuthatch,1.339610155855938
+---------

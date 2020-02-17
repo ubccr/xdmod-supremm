@@ -1,0 +1,14 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg: CPU User CV: weighted by core-hour"
+112,2.491303567260018
+24,0.6657303475723793
+96,0.0032123314385813983
+8,0.00290302323892242
+36,0.000384537731233099
+---------

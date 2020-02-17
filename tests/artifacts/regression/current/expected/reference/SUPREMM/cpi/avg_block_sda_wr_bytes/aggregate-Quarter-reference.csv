@@ -1,0 +1,14 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+NA,20.76810130085801
+"0.6 - 0.7",21.251659895607357
+"0.7 - 0.8",19.492283468352603
+"0.8 - 0.9",19.008556981719174
+"&gt; 1.2",18.44457091611479
+---------

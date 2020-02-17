@@ -1,0 +1,11 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Biological Sciences] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[Mathematical and Physical Sciences] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[Engineering] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",0,3980.3105878331294,3296.038222073229
+"2017 Q1",10441861.782546721,0,0
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[enzo] Avg: CPI: Per Core weighted by core-hour","[amber] Avg: CPI: Per Core weighted by core-hour"
+2016-12,0.6794453050304665,0.735533090751615
+2017-01,1.0705283142764654,0
+---------

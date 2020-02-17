@@ -1,0 +1,11 @@
+title
+"Number of Jobs Running: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Number of Jobs Running","[&lt; 1Mi] Number of Jobs Running","[128Mi - 256Mi] Number of Jobs Running","[256Mi - 512Mi] Number of Jobs Running","[512Mi - 1Gi] Number of Jobs Running","[8Gi - 16Gi] Number of Jobs Running"
+2016-12,2,0,0,0,0,1
+2017-01,0,1,1,1,1,0
+---------

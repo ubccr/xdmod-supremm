@@ -1,0 +1,12 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Group","Avg: CPI: Per Core weighted by core-hour"
+"Systematic and Population Biology",1.0705283142764654
+"Quantum Electronics, Waves, and Beams",0.735533090751615
+"Stellar Astronomy and Astrophysics",0.6794453050304665
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Avg: Memory: Per Core weighted by core-hour (bytes)"
+Fieldfare,1017787434.0461986
+"White, Great",551892085.7885988
+Dunlin,393927260.8251174
+Nuthatch,387085867.0100098
+---------

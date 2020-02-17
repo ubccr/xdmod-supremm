@@ -1,0 +1,13 @@
+title
+"Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Group","Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+"Quantum Electronics, Waves, and Beams",0
+"Stellar Astronomy and Astrophysics",0
+"Structures and Building Systems",0
+"Systematic and Population Biology",0
+---------

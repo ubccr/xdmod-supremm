@@ -1,0 +1,11 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 10] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[30 - 40] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[50 - 60] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[&gt; 90] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,401.2711340002373,0,0,0
+2017-01,2279.610375275938,64325.061433447096,110702.07339159067,785419.4507973552
+---------

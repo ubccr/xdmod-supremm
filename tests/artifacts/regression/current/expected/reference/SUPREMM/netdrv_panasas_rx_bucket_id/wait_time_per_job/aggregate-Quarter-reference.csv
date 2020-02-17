@@ -1,0 +1,10 @@
+title
+"Wait Hours: Per Job: by panasas bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"panasas bytes received","Wait Hours: Per Job"
+NA,20.107579365079363
+---------

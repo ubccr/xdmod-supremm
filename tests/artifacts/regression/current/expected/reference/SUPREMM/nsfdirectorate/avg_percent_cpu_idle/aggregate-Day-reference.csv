@@ -1,0 +1,12 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Avg CPU %: Idle: weighted by core-hour"
+"Biological Sciences",60.16864723986941
+Engineering,25.809452959478172
+"Mathematical and Physical Sciences",0.18940480348992947
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Fieldfare] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Dunlin] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Nuthatch] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[White, Great] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016,472.818067485568,0,0,0
+2017,0,0,0,0
+---------

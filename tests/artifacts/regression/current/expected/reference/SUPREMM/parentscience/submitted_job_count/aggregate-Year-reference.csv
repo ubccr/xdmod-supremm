@@ -1,0 +1,13 @@
+title
+"Number of Jobs Submitted: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Number of Jobs Submitted"
+"Environmental Biology",3
+"Astronomical Sciences",1
+"Electrical and Communication Systems",1
+"Mechanical and Structural Systems",1
+---------

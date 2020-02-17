@@ -1,0 +1,13 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Size","Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+"5 - 8",785419.4507973552
+"17 - 32",3508.856244506052
+"33 - 64",0
+"65 - 128",806.6759501039363
+---------

@@ -1,0 +1,12 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Avg: CPI: Per Core weighted by core-hour"
+Dunlin,1.0705283142764654
+Fieldfare,0.735533090751615
+"White, Great",0.6794453050304665
+---------

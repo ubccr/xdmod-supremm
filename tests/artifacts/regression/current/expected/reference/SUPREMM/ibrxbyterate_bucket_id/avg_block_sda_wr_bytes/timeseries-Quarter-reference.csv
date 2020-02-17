@@ -1,0 +1,11 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[&lt; 100] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[100 - 1k] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[10M - 100M] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",20.76810130085801,21.251659895607357,19.48134385001708
+"2017 Q1",19.222349076633417,0,21.82764505119454
+---------

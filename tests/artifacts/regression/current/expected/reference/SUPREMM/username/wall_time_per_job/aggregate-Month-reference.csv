@@ -1,0 +1,13 @@
+title
+"Wall Hours: Per Job: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Wall Hours: Per Job"
+meapi,65.87416666666667
+egygo,20.072222222222223
+whimb,7.0425
+dunli,1.5211805555555553
+---------

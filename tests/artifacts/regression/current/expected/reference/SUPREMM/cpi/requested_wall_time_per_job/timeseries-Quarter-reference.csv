@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Per Job: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Wall Hours: Requested: Per Job","[0.6 - 0.7] Wall Hours: Requested: Per Job","[0.7 - 0.8] Wall Hours: Requested: Per Job","[0.8 - 0.9] Wall Hours: Requested: Per Job","[&gt; 1.2] Wall Hours: Requested: Per Job"
+"2016 Q4",72,7.333333333333333,72,0,0
+"2017 Q1",0,0,2.058333333333333,1.7666666666666666,4
+---------

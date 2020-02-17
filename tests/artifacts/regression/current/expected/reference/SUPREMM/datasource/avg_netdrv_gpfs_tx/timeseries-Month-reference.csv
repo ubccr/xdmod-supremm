@@ -1,0 +1,11 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[pcp] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,81.87432912944651
+2017-01,116618.20773281596
+---------

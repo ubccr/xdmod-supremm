@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[CANCELLED] Wait Hours: Per Job","[COMPLETED] Wait Hours: Per Job","[TIMEOUT] Wait Hours: Per Job"
+"2016 Q4",55.062083333333334,2.6,0
+"2017 Q1",0,2.9846296296296297,19.075
+---------

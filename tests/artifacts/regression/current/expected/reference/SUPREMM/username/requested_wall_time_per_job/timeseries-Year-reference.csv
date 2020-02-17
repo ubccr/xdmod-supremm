@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Per Job: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[egygo] Wall Hours: Requested: Per Job","[meapi] Wall Hours: Requested: Per Job","[whimb] Wall Hours: Requested: Per Job","[dunli] Wall Hours: Requested: Per Job"
+2016,72,72,7.333333333333333,0
+2017,0,0,0,2.470833333333333
+---------

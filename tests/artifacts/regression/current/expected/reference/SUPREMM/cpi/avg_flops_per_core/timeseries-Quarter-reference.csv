@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[0.6 - 0.7] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[0.7 - 0.8] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[0.8 - 0.9] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[&gt; 1.2] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+"2016 Q4",618053200.2575164,1187650968.071539,0,0
+"2017 Q1",0,74514549.09861298,283419067.8501799,6946.687278674577
+---------

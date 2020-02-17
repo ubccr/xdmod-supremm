@@ -1,0 +1,11 @@
+title
+"CPU Hours: System: Total: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[30s - 30min] CPU Hours: System: Total","[30 - 60min] CPU Hours: System: Total","[1 - 5hr] CPU Hours: System: Total","[5 - 10hr] CPU Hours: System: Total","[18+hr] CPU Hours: System: Total"
+2016-12,0,0,0,0.43109840030672986,65.69095088551958
+2017-01,0.02316302364906677,21.57899997033535,0.6318963794786623,0,0
+---------

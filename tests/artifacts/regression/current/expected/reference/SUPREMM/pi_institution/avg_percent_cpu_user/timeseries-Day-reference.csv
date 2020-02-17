@@ -1,0 +1,14 @@
+title
+"Avg CPU %: User: weighted by core-hour: by PI Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[screw - Screwdriver] Avg CPU %: User: weighted by core-hour"
+2016-12-28,99.03583376711231
+2016-12-29,84.82122820810667
+2016-12-30,55.45100600520698
+2016-12-31,99.24097654529886
+2017-01-01,25.799529770185917
+---------

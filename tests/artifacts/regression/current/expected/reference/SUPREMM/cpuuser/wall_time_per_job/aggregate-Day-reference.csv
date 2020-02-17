@@ -1,0 +1,13 @@
+title
+"Wall Hours: Per Job: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User Value","Wall Hours: Per Job"
+"&lt; 10",12.049444444444447
+"30 - 40",0.08138888888888889
+"50 - 60",0.5483333333333333
+"&gt; 90",24.781666666666666
+---------

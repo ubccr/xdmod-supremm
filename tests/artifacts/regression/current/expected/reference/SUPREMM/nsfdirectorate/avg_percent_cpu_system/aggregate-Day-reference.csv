@@ -1,0 +1,12 @@
+title
+"Avg CPU %: System: weighted by core-hour: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Avg CPU %: System: weighted by core-hour"
+"Biological Sciences",13.66903932956048
+Engineering,0.7663425427692773
+"Mathematical and Physical Sciences",0.1700384176652585
+---------

@@ -1,0 +1,13 @@
+title
+"Wait Hours: Per Job: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Wait Hours: Per Job"
+Fieldfare,110.12305555555555
+Dunlin,7.007222222222222
+"White, Great",2.6
+Nuthatch,0.0011111111111111111
+---------

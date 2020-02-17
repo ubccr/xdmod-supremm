@@ -1,0 +1,11 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[frearson] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[robertson] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",20.76810130085801,19.54958127136403
+"2017 Q1",0,19.252573645866327
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Queue,"Avg: CPU User CV: weighted by core-hour"
+crumpet,2.491303567260018
+chapti,0.012796654944236268
+---------

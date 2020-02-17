@@ -1,0 +1,14 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+"30s - 30min",140555.44539249147
+"30 - 60min",32954446.61467832
+"1 - 5hr",203326.18298470732
+"5 - 10hr",3980.3105878331294
+18+hr,3296.038222073229
+---------

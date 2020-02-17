@@ -1,0 +1,11 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[SUPREMM] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,5055.463390687178
+2017-01,24080.867991764335
+---------

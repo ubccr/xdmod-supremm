@@ -1,0 +1,10 @@
+title
+"Wait Hours: Per Job: by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Datasource,"Wait Hours: Per Job"
+pcp,20.107579365079363
+---------

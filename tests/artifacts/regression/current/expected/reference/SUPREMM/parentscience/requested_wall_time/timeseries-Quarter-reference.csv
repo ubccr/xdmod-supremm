@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Electrical and Communication Systems] Wall Hours: Requested: Total","[Mechanical and Structural Systems] Wall Hours: Requested: Total","[Environmental Biology] Wall Hours: Requested: Total","[Astronomical Sciences] Wall Hours: Requested: Total"
+"2016 Q4",72,72,0,7.333333333333333
+"2017 Q1",0,0,9.883333333333333,0
+---------

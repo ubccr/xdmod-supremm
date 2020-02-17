@@ -1,0 +1,10 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Queue,"Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+chapti,1138647876.9676664
+---------

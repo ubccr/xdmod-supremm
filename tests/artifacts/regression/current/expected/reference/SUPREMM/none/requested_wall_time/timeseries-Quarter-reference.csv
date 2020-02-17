@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[SUPREMM] Wall Hours: Requested: Total"
+"2016 Q4",151.33333333333331
+"2017 Q1",9.883333333333333
+---------

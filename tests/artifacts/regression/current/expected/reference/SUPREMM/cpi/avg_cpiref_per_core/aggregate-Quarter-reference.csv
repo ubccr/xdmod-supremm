@@ -1,0 +1,13 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: CPI: Per Core weighted by core-hour"
+"0.6 - 0.7",0.6794453050304665
+"0.7 - 0.8",0.7353493387414007
+"0.8 - 0.9",0.8558715448360987
+"&gt; 1.2",1.2972810243580384
+---------

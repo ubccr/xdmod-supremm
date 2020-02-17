@@ -1,0 +1,13 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+1,1305981.5608712563
+8,275315.523076706
+2,10390.974203800122
+3,3980.3105878331294
+---------

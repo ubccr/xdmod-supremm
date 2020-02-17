@@ -1,0 +1,14 @@
+title
+"Avg CPU %: System: weighted by core-hour: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg CPU %: System: weighted by core-hour"
+NA,0.28332632712743183
+"0.6 - 0.7",0.1700384176652585
+"0.7 - 0.8",1.2686919658403455
+"0.8 - 0.9",2.4642671764884794
+"&gt; 1.2",0.36249253253854025
+---------

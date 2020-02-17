@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Wall Hours: Requested: Total","[0.6 - 0.7] Wall Hours: Requested: Total","[0.7 - 0.8] Wall Hours: Requested: Total","[0.8 - 0.9] Wall Hours: Requested: Total","[&gt; 1.2] Wall Hours: Requested: Total"
+2016,72,7.333333333333333,72,0,0
+2017,0,0,4.116666666666666,1.7666666666666666,4
+---------

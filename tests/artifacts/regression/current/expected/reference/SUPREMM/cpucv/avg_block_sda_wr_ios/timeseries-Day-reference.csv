@@ -1,0 +1,14 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[&lt; 0.1] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[0.1 - 0.2] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[0.4 - 0.8] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[1.6 - 3.2] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+2016-12-28,1.4743134005490264,0,0,0
+2016-12-29,1.4743134005490266,0,0,1.5222075046459211
+2016-12-30,1.4743134005490266,0,0,1.5222075046459214
+2016-12-31,1.5818964267930702,0,0,0
+2017-01-01,1.4870067832234641,1.9488054607508531,1.7358581677704195,0
+---------

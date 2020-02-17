@@ -1,0 +1,14 @@
+title
+"Wait Hours: Per Job: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","Wait Hours: Per Job"
+8,56.63027777777778
+2,11.031666666666666
+1,2.8280555555555558
+3,2.6
+7,0.0011111111111111111
+---------

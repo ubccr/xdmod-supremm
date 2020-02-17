@@ -1,0 +1,13 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+NA,503.09534752398963
+"&lt; 10",19320.203262762745
+"20 - 30",0
+"40 - 50",785419.4507973552
+---------

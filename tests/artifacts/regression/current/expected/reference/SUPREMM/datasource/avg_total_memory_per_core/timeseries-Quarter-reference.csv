@@ -1,0 +1,11 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[pcp] Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+"2016 Q4",3341451935.8921223
+"2017 Q1",2817864004.5322976
+---------

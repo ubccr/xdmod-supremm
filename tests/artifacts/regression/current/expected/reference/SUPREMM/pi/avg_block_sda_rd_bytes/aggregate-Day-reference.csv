@@ -1,0 +1,13 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+Dunlin,0.23519163763066203
+Fieldfare,0.08065250667307619
+"White, Great",0.07112899196676264
+Nuthatch,0.0014511090901901862
+---------

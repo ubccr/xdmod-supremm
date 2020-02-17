@@ -1,0 +1,14 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[&lt; 1Mi] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[128Mi - 256Mi] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[256Mi - 512Mi] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[512Mi - 1Gi] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,209360.3217977668,0,0,0,0
+2016-12-29,209360.32179776678,0,0,0,0
+2016-12-30,209360.32179776678,0,0,0,0
+2016-12-31,209632.5808634012,0,0,0,0
+2017-01-01,0,179498.00075883002,155779.68259385665,196871.43096071566,32816224.614045087
+---------

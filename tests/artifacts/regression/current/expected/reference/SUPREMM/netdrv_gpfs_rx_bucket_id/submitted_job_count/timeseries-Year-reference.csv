@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Number of Jobs Submitted","[&lt; 1Mi] Number of Jobs Submitted","[128Mi - 256Mi] Number of Jobs Submitted","[256Mi - 512Mi] Number of Jobs Submitted","[512Mi - 1Gi] Number of Jobs Submitted","[8Gi - 16Gi] Number of Jobs Submitted"
+2016,2,0,0,0,0,1
+2017,0,0,1,1,1,0
+---------

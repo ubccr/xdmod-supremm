@@ -1,0 +1,13 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+meapi,4228070843.7430453
+whimb,4104107695.7919683
+dunli,2817864004.5322976
+egygo,761365718.1221551
+---------

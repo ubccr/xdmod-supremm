@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Wait Hours: Total","[0.6 - 0.7] Wait Hours: Total","[0.7 - 0.8] Wait Hours: Total","[0.8 - 0.9] Wait Hours: Total","[&gt; 1.2] Wait Hours: Total"
+"2016 Q4",0.0011111111111111111,2.6,110.12305555555555,0,0
+"2017 Q1",0,0,6.1258333333333335,2.8280555555555558,19.075
+---------

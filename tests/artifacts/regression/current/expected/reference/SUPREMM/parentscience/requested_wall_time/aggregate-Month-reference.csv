@@ -1,0 +1,13 @@
+title
+"Wall Hours: Requested: Total: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Wall Hours: Requested: Total"
+"Electrical and Communication Systems",72
+"Mechanical and Structural Systems",72
+"Environmental Biology",9.883333333333333
+"Astronomical Sciences",7.333333333333333
+---------

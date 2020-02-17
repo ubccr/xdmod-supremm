@@ -1,0 +1,11 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by GPU0 Usage Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+2016,19.798204961164636
+2017,19.252573645866327
+---------

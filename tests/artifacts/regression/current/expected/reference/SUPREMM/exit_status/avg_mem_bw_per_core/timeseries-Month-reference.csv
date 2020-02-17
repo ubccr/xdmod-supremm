@@ -1,0 +1,11 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[CANCELLED] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[COMPLETED] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[TIMEOUT] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+2016-12,95081629.37335773,34129588.90402918,0
+2017-01,0,60138816.68504494,741082.4356144224
+---------

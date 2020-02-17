@@ -1,0 +1,14 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[2] Avg CPU %: Idle: weighted by core-hour","[7] Avg CPU %: Idle: weighted by core-hour","[1] Avg CPU %: Idle: weighted by core-hour","[3] Avg CPU %: Idle: weighted by core-hour","[8] Avg CPU %: Idle: weighted by core-hour"
+2016-12-28,0,0,0,0,0.023264938219295945
+2016-12-29,0,98.3465269859399,0,0,0.023264938219295945
+2016-12-30,0,98.3465269859399,0,0,0.023264938219295945
+2016-12-31,0,0,0,0.18940480348992947,0.02326493821929594
+2017-01-01,98.4687023871987,0,0.8665278367921907,0,1.3064786840210356
+---------

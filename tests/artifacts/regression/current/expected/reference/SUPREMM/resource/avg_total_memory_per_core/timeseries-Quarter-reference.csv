@@ -1,0 +1,11 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[robertson] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[frearson] Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+"2016 Q4",4223292642.9357367,761365718.1221551
+"2017 Q1",2817864004.5322976,0
+---------

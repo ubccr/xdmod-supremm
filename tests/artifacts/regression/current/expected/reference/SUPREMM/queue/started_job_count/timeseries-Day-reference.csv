@@ -1,0 +1,14 @@
+title
+"Number of Jobs Started: by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[chapti] Number of Jobs Started","[crumpet] Number of Jobs Started"
+2016-12-28,1,0
+2016-12-29,0,1
+2016-12-30,0,0
+2016-12-31,1,0
+2017-01-01,4,0
+---------

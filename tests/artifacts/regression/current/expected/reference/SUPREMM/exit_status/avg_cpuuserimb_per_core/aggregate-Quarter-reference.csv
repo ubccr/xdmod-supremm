@@ -1,0 +1,12 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: CPU User Imbalance: weighted by core-hour (%)"
+CANCELLED,26.878959587074803
+COMPLETED,6.904315890256594
+TIMEOUT,90.21065697492135
+---------

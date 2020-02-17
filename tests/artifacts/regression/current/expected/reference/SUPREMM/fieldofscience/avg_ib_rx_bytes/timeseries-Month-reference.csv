@@ -1,0 +1,11 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Quantum Electronics, Waves, and Beams] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[Systematic and Population Biology] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[Stellar Astronomy and Astrophysics] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[Structures and Building Systems] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,80859953.01695362,0,562.9120025243561,19.229986951880115
+2017-01,0,399276.1550522648,0,0
+---------

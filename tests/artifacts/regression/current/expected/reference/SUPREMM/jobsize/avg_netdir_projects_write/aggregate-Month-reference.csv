@@ -1,0 +1,13 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Size","Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+"5 - 8",1465.1855309218204
+"17 - 32",1328.3063087429846
+"33 - 64",3694.7268830776106
+"65 - 128",11000.002564094084
+---------

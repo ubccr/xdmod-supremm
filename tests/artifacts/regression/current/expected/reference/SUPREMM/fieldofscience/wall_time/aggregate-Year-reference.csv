@@ -1,0 +1,13 @@
+title
+"CPU Hours: Total: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Group","CPU Hours: Total"
+"Quantum Electronics, Waves, and Beams",6323.92
+"Structures and Building Systems",2248.088888888889
+"Stellar Astronomy and Astrophysics",253.53
+"Systematic and Population Biology",162.66000000000003
+---------

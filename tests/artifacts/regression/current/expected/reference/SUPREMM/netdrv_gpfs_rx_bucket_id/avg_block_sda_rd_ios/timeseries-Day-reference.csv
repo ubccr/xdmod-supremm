@@ -1,0 +1,14 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[&lt; 1Mi] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[128Mi - 256Mi] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[256Mi - 512Mi] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[512Mi - 1Gi] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[8Gi - 16Gi] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+2016-12-28,0.0040317819748932095,0,0,0,0,0
+2016-12-29,0.0040317819748932095,0,0,0,0,0.0006504290063659009
+2016-12-30,0.0040317819748932095,0,0,0,0,0.000650429006365901
+2016-12-31,0.0033512168641844178,0,0,0,0,0
+2017-01-01,0,0.006415562913907285,0.09044368600682594,0.028199144301828082,0.003926038500506586,0
+---------

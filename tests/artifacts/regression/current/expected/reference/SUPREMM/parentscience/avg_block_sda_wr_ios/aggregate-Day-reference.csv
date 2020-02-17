@@ -1,0 +1,13 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+"Astronomical Sciences",1.7895055154551072
+"Environmental Biology",1.635195597085841
+"Mechanical and Structural Systems",1.5222075046459216
+"Electrical and Communication Systems",1.4743134005490266
+---------

@@ -1,0 +1,14 @@
+title
+"Wall Hours: Requested: Per Job: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[CANCELLED] Wall Hours: Requested: Per Job","[COMPLETED] Wall Hours: Requested: Per Job","[TIMEOUT] Wall Hours: Requested: Per Job"
+2016-12-28,13.966265791826201,0,0
+2016-12-29,19.398087065361132,0,0
+2016-12-30,42.83363321058469,0,0
+2016-12-31,5.570293656282153,7.333333333333333,0
+2017-01-01,0,1.961111111111111,4
+---------

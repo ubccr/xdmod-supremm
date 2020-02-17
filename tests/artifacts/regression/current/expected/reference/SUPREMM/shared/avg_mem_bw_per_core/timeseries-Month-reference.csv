@@ -1,0 +1,11 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Exclusive] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+2016-12,92732212.68144993
+2017-01,24849273.848053884
+---------

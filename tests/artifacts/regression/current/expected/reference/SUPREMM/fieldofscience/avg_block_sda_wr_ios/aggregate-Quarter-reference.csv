@@ -1,0 +1,13 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Group","Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+"Stellar Astronomy and Astrophysics",1.7895055154551072
+"Systematic and Population Biology",1.635195597085841
+"Structures and Building Systems",1.5222075046459216
+"Quantum Electronics, Waves, and Beams",1.4743134005490266
+---------

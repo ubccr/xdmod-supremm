@@ -1,0 +1,11 @@
+title
+"Avg: ib0 receive rate: Per Node weighted by node-hour (bytes/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Engineering] Avg: ib0 receive rate: Per Node weighted by node-hour (bytes/s)","[Biological Sciences] Avg: ib0 receive rate: Per Node weighted by node-hour (bytes/s)","[Mathematical and Physical Sciences] Avg: ib0 receive rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",0.002982942959538842,0,0
+"2017 Q1",0,0,0
+---------

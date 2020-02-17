@@ -1,0 +1,11 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Structures and Building Systems] Avg: CPU User CV: weighted by core-hour","[Systematic and Population Biology] Avg: CPU User CV: weighted by core-hour","[Quantum Electronics, Waves, and Beams] Avg: CPU User CV: weighted by core-hour","[Stellar Astronomy and Astrophysics] Avg: CPU User CV: weighted by core-hour"
+2016-12,2.491303567260018,0,0.002420490384502186,0.000384537731233099
+2017-01,0,0.4355488906481971,0,0
+---------

@@ -1,0 +1,12 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+CANCELLED,0.0033200221723215517
+COMPLETED,0.004252964264852069
+TIMEOUT,0.006415562913907285
+---------

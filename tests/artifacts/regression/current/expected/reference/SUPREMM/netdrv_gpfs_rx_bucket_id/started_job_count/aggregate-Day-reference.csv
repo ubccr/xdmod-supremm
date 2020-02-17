@@ -1,0 +1,15 @@
+title
+"Number of Jobs Started: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Number of Jobs Started"
+NA,2
+"&lt; 1Mi",1
+"128Mi - 256Mi",1
+"256Mi - 512Mi",1
+"512Mi - 1Gi",1
+"8Gi - 16Gi",1
+---------

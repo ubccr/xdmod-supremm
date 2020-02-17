@@ -1,0 +1,13 @@
+title
+"Wait Hours: Per Job: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Wait Hours: Per Job"
+"Pipit, Meadow",110.12305555555555
+Dunlin,7.007222222222222
+Whimbrel,2.6
+"Goose, Egyptian",0.0011111111111111111
+---------

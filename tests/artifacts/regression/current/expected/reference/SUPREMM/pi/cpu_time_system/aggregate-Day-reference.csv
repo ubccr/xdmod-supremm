@@ -1,0 +1,13 @@
+title
+"CPU Hours: System: Total: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"CPU Hours: System: Total"
+Fieldfare,59.32152320607081
+Dunlin,22.234059373463076
+Nuthatch,6.36942767944878
+"White, Great",0.43109840030672986
+---------

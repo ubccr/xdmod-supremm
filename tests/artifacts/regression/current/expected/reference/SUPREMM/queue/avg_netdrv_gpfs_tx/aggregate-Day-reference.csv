@@ -1,0 +1,11 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Queue,"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+chapti,2910.7486800474567
+crumpet,401.27113400023717
+---------

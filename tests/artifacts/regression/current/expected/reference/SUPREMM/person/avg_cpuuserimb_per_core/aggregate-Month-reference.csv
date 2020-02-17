@@ -1,0 +1,13 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Avg: CPU User Imbalance: weighted by core-hour (%)"
+"Goose, Egyptian",99.81704865897794
+Dunlin,66.92072234074402
+"Pipit, Meadow",0.9502148181129071
+Whimbrel,0.15346245747039997
+---------

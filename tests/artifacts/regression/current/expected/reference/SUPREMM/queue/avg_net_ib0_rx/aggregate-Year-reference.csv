@@ -1,0 +1,11 @@
+title
+"Avg: ib0 receive rate: Per Node weighted by node-hour (bytes/s): by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Queue,"Avg: ib0 receive rate: Per Node weighted by node-hour (bytes/s)"
+chapti,0.003541944719374507
+crumpet,0
+---------

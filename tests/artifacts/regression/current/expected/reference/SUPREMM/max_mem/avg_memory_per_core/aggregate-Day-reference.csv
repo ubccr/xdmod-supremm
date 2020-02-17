@@ -1,0 +1,13 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Avg: Memory: Per Core weighted by core-hour (bytes)"
+NA,382686693.7530287
+"&lt; 10",530199870.0566514
+"20 - 30",1017787434.0461986
+"40 - 50",1184715393.471265
+---------
