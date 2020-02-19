@@ -1,0 +1,11 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Resource,"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+frearson,1.5222075046459216
+robertson,1.4901749082271647
+---------

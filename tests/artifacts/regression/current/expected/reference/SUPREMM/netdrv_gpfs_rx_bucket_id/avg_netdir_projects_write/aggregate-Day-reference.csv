@@ -1,0 +1,15 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+NA,4467.725321109751
+"&lt; 1Mi",1164.8939017660043
+"128Mi - 256Mi",9413.037542662116
+"256Mi - 512Mi",1465.1855309218204
+"512Mi - 1Gi",5807.017857142857
+"8Gi - 16Gi",35546.46916689731
+---------

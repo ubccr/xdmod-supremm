@@ -1,0 +1,14 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+"0.1 - 0.5",1164.8939017660043
+"0.5 - 1.0",4509.515667799984
+"1.0 - 1.5",1465.1855309218204
+"&gt; 1.5",9413.037542662116
+NA,31383.04057372753
+---------

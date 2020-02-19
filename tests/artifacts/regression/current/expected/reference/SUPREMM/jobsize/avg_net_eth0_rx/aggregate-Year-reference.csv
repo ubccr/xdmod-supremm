@@ -1,0 +1,13 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Size","Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+"5 - 8",196871.43096071566
+"17 - 32",179028.09290689026
+"33 - 64",210157.97467755293
+"65 - 128",478537.6425387147
+---------

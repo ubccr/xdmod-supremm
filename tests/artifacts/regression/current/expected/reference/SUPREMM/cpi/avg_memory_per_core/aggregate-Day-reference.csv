@@ -1,0 +1,14 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: Memory: Per Core weighted by core-hour (bytes)"
+NA,387085867.0100098
+"0.6 - 0.7",551892085.7885988
+"0.7 - 0.8",1012751988.2947973
+"0.8 - 0.9",1184715393.471265
+"&gt; 1.2",280350885.39917684
+---------

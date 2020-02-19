@@ -1,0 +1,13 @@
+title
+"CPU Hours: Idle: Total: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","CPU Hours: Idle: Total"
+NA,2306.7020407361115
+"&lt; 10",2.466809394091824
+"20 - 30",1.4712560810377002
+"40 - 50",0.099015247484121
+---------

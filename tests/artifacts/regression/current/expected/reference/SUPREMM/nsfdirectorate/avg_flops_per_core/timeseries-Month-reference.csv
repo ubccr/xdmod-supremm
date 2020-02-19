@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Engineering] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[Mathematical and Physical Sciences] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[Biological Sciences] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+2016-12,1187650968.071539,618053200.2575164,0
+2017-01,0,0,44923178.16478305
+---------

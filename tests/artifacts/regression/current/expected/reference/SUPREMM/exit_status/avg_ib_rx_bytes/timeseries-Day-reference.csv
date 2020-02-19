@@ -1,0 +1,14 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[CANCELLED] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[COMPLETED] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[TIMEOUT] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,80859953.01695362,0,0
+2016-12-29,71703159.99664494,0,0
+2016-12-30,50408349.24326675,0,0
+2016-12-31,80859953.01695362,562.9120025243561,0
+2017-01-01,0,937114.182527881,53.115894039735096
+---------

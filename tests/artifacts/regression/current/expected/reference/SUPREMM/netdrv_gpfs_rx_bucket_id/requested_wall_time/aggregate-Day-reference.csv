@@ -1,0 +1,15 @@
+title
+"Wall Hours: Requested: Total: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Wall Hours: Requested: Total"
+NA,79.33333333333334
+"&lt; 1Mi",4
+"128Mi - 256Mi",0.11666666666666667
+"256Mi - 512Mi",1.7666666666666666
+"512Mi - 1Gi",4
+"8Gi - 16Gi",72
+---------

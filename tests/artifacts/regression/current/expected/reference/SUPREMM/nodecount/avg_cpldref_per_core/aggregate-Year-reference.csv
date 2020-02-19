@@ -1,0 +1,13 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","Avg: CPLD: Per Core weighted by core-hour"
+2,4.903965912818027
+8,2.9745711641883084
+1,2.155221659960016
+3,2.109724027027582
+---------

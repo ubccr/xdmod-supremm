@@ -1,0 +1,11 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[0.1 - 0.5] Avg: CPU User CV: weighted by core-hour","[0.5 - 1.0] Avg: CPU User CV: weighted by core-hour","[1.0 - 1.5] Avg: CPU User CV: weighted by core-hour","[&gt; 1.5] Avg: CPU User CV: weighted by core-hour","[NA] Avg: CPU User CV: weighted by core-hour"
+"2016 Q4",0,0.002420490384502186,0,0,2.238857959193424
+"2017 Q1",0.6768662926552396,0.09834036104938328,0.00290302323892242,0.11478611575960022,0
+---------

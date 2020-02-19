@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Wait Hours: Total","[&lt; 10] Wait Hours: Total","[20 - 30] Wait Hours: Total","[40 - 50] Wait Hours: Total"
+2016-12,0.0011111111111111111,2.6,110.12305555555555,0
+2017-01,19.075,6.1258333333333335,0,2.8280555555555558
+---------

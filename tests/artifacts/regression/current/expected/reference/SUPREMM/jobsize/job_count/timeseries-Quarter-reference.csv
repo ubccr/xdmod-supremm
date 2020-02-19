@@ -1,0 +1,11 @@
+title
+"Number of Jobs Ended: by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[5 - 8] Number of Jobs Ended","[17 - 32] Number of Jobs Ended","[33 - 64] Number of Jobs Ended","[65 - 128] Number of Jobs Ended"
+"2016 Q4",0,0,1,2
+"2017 Q1",1,2,0,1
+---------

@@ -1,0 +1,10 @@
+title
+"Avg: isilon transmit rate: Per Node weighted by node-hour (bytes/s)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Summary,"Avg: isilon transmit rate: Per Node weighted by node-hour (bytes/s)"
+SUPREMM,
+---------

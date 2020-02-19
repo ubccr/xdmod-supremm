@@ -1,0 +1,14 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+"0.1 - 0.5",1.7358581677704195
+"0.5 - 1.0",1.474541654643465
+"1.0 - 1.5",1.441073512252042
+"&gt; 1.5",1.9488054607508531
+NA,1.557146760752665
+---------

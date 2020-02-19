@@ -1,0 +1,13 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Size","Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+"5 - 8",83.84597432905484
+"17 - 32",681822.3974575698
+"33 - 64",562.9120025243561
+"65 - 128",63422496.23155895
+---------

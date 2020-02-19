@@ -1,0 +1,11 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[&lt; 10] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[30 - 40] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[50 - 60] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[&gt; 90] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+"2016 Q4",0,0,0,92732212.68144993
+"2017 Q1",741082.4356144224,40532221.21046644,13685414.294663966,277490507.3201089
+---------

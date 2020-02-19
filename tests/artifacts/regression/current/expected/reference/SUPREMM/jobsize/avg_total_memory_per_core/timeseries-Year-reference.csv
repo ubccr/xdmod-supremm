@@ -1,0 +1,11 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[5 - 8] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[17 - 32] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[33 - 64] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[65 - 128] Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+2016,0,0,4104107695.7919683,3318895249.6691256
+2017,2303814511.81609,3529523240.354652,0,1596530720.8366015
+---------

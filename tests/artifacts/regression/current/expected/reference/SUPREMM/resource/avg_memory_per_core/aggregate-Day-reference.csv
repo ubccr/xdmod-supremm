@@ -1,0 +1,11 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Resource,"Avg: Memory: Per Core weighted by core-hour (bytes)"
+robertson,985207024.6137278
+frearson,387085867.0100098
+---------

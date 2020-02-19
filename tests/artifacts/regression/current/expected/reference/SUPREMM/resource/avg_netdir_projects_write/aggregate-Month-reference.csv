@@ -1,0 +1,11 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Resource,"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+frearson,35546.46916689732
+robertson,4424.663274608931
+---------

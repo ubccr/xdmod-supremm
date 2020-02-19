@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[0.1 - 0.5] Wait Hours: Total","[0.5 - 1.0] Wait Hours: Total","[1.0 - 1.5] Wait Hours: Total","[&gt; 1.5] Wait Hours: Total","[NA] Wait Hours: Total"
+2016,0,110.12305555555555,0,0,2.6011111111111114
+2017,19.075,3.1375,2.8280555555555558,2.9883333333333333,0
+---------

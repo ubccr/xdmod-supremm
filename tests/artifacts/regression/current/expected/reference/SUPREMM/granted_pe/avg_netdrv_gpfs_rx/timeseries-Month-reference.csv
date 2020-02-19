@@ -1,0 +1,11 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[8] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[112] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[24] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[96] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[36] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,0,24777.137709066472,0,0,0
+2017-01,75575.3553092182,0,5549.7426127527215,42022.16565349544,0
+---------

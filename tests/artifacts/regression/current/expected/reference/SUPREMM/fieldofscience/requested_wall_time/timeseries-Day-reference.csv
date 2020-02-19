@@ -1,0 +1,14 @@
+title
+"Wall Hours: Requested: Total: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Quantum Electronics, Waves, and Beams] Wall Hours: Requested: Total","[Structures and Building Systems] Wall Hours: Requested: Total","[Systematic and Population Biology] Wall Hours: Requested: Total","[Stellar Astronomy and Astrophysics] Wall Hours: Requested: Total"
+2016-12-28,13.966265791826201,0,0,0
+2016-12-29,26.231720275945825,12.564453854776435,0,0
+2016-12-30,26.231720275945825,59.43554614522356,0,0
+2016-12-31,5.570293656282153,0,0,7.333333333333333
+2017-01-01,0,0,9.883333333333333,0
+---------

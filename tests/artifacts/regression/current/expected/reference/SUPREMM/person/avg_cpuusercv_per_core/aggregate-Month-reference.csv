@@ -1,0 +1,13 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Avg: CPU User CV: weighted by core-hour"
+"Goose, Egyptian",2.491303567260018
+Dunlin,0.4355488906481971
+"Pipit, Meadow",0.002420490384502186
+Whimbrel,0.000384537731233099
+---------

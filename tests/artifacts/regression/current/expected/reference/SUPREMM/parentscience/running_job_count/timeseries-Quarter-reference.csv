@@ -1,0 +1,11 @@
+title
+"Number of Jobs Running: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Environmental Biology] Number of Jobs Running","[Astronomical Sciences] Number of Jobs Running","[Electrical and Communication Systems] Number of Jobs Running","[Mechanical and Structural Systems] Number of Jobs Running"
+"2016 Q4",0,1,1,1
+"2017 Q1",4,0,0,0
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 10] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[30 - 40] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[50 - 60] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[&gt; 90] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016,0,0,0,3322.413728217876
+2017,7760.028421633554,140555.44539249147,32954446.61467832,1305981.5608712563
+---------

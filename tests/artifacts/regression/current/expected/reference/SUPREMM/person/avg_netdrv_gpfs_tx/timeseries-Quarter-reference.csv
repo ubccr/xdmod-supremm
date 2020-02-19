@@ -1,0 +1,11 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Dunlin] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Goose, Egyptian] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Pipit, Meadow] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Whimbrel] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",0,401.2711340002373,0,0
+"2017 Q1",116618.20773281596,0,0,0
+---------

@@ -1,0 +1,15 @@
+title
+"CPU Hours: System: Total: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","CPU Hours: System: Total"
+NA,59.75262160637754
+"&lt; 1Mi",0.3503127834452453
+"128Mi - 256Mi",0.02316302364906677
+"256Mi - 512Mi",0.2815835960334169
+"512Mi - 1Gi",21.57899997033535
+"8Gi - 16Gi",6.369427679448781
+---------

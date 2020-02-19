@@ -1,0 +1,11 @@
+title
+"Number of Jobs Running: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[dunli] Number of Jobs Running","[egygo] Number of Jobs Running","[meapi] Number of Jobs Running","[whimb] Number of Jobs Running"
+2016,0,1,1,1
+2017,4,0,0,0
+---------

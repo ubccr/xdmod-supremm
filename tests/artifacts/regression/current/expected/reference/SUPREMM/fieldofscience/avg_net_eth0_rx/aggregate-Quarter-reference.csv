@@ -1,0 +1,12 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Group","Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+"Systematic and Population Biology",10384491.307709059
+"Stellar Astronomy and Astrophysics",210157.97467755293
+"Quantum Electronics, Waves, and Beams",209360.32179776678
+---------

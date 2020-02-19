@@ -1,0 +1,14 @@
+title
+"Wall Hours: Requested: Total: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Wall Hours: Requested: Total"
+"30s - 30min",0.11666666666666667
+"30 - 60min",4
+"1 - 5hr",5.766666666666667
+"5 - 10hr",7.333333333333333
+18+hr,144.00000000000003
+---------

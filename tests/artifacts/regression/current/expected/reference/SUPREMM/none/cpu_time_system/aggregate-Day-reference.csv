@@ -1,0 +1,10 @@
+title
+"CPU Hours: System: Total"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Summary,"CPU Hours: System: Total"
+SUPREMM,88.3561086592894
+---------

@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[robertson] Number of Jobs Submitted","[frearson] Number of Jobs Submitted"
+2016,2,1
+2017,3,0
+---------

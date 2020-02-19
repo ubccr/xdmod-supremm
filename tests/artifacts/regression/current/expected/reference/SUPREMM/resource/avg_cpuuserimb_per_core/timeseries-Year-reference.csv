@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[frearson] Avg: CPU User Imbalance: weighted by core-hour (%)","[robertson] Avg: CPU User Imbalance: weighted by core-hour (%)"
+2016,99.81704865897794,0.9195037331189209
+2017,0,66.92072234074402
+---------

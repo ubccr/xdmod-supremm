@@ -1,0 +1,11 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[0.6 - 0.7] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[0.7 - 0.8] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[0.8 - 0.9] Avg: Total Memory: Per Core weighted by core-hour (bytes)","[&gt; 1.2] Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+2016-12,761365718.1221551,4104107695.7919683,4228070843.7430463,0,0
+2017-01,0,0,1618175540.8619225,2303814511.81609,3556366326.5185204
+---------

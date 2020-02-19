@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[8] Wall Hours: Per Job","[7] Wall Hours: Per Job","[3] Wall Hours: Per Job","[2] Wall Hours: Per Job","[1] Wall Hours: Per Job"
+2016-12,65.87416666666667,20.072222222222223,7.0425,0,0
+2017-01,0.5483333333333333,0,0,2.054027777777778,1.4283333333333332
+---------

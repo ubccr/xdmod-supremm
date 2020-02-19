@@ -1,0 +1,14 @@
+title
+"Wall Hours: Requested: Total: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Goose, Egyptian] Wall Hours: Requested: Total","[Pipit, Meadow] Wall Hours: Requested: Total","[Dunlin] Wall Hours: Requested: Total","[Whimbrel] Wall Hours: Requested: Total"
+2016-12-28,0,13.966265791826201,0,0
+2016-12-29,12.564453854776435,26.231720275945825,0,0
+2016-12-30,59.43554614522356,26.231720275945825,0,0
+2016-12-31,0,5.570293656282153,0,7.333333333333333
+2017-01-01,0,0,9.883333333333333,0
+---------

@@ -1,0 +1,14 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Engineering] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Biological Sciences] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Mathematical and Physical Sciences] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,472.818067485568,0,0
+2016-12-29,419.27489749443043,0,0
+2016-12-30,294.7562292698213,0,0
+2016-12-31,472.818067485568,0,0
+2017-01-01,0,0,0
+---------

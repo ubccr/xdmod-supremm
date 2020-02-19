@@ -1,0 +1,11 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by isilon bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+2016,61880682.262526646
+2017,399276.1550522648
+---------

@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[wrf] CPU Hours: Idle: Total","[enzo] CPU Hours: Idle: Total","[amber] CPU Hours: Idle: Total"
+2016,2210.917345779028,0.4801979982880181,1.4712560810377002
+2017,0,97.87032160037158,0
+---------

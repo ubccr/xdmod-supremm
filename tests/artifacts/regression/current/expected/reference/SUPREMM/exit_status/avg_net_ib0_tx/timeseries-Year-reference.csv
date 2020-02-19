@@ -1,0 +1,11 @@
+title
+"Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[CANCELLED] Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)","[COMPLETED] Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)","[TIMEOUT] Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016,0,0,0
+2017,0,0,0
+---------

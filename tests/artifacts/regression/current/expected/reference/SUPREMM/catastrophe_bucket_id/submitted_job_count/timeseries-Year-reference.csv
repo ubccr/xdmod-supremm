@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[0.1 - 0.5] Number of Jobs Submitted","[0.5 - 1.0] Number of Jobs Submitted","[1.0 - 1.5] Number of Jobs Submitted","[&gt; 1.5] Number of Jobs Submitted","[NA] Number of Jobs Submitted"
+2016,0,1,0,0,2
+2017,0,1,1,1,0
+---------

@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[96] Wall Hours: Requested: Total","[112] Wall Hours: Requested: Total","[36] Wall Hours: Requested: Total","[24] Wall Hours: Requested: Total","[8] Wall Hours: Requested: Total"
+"2016 Q4",72,72,7.333333333333333,0,0
+"2017 Q1",4,0,0,4.116666666666666,1.7666666666666666
+---------

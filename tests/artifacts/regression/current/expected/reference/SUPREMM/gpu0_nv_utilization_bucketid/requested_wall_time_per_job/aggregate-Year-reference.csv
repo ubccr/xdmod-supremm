@@ -1,0 +1,10 @@
+title
+"Wall Hours: Requested: Per Job: by GPU0 Usage Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"GPU0 Usage Value","Wall Hours: Requested: Per Job"
+NA,23.030952380952378
+---------

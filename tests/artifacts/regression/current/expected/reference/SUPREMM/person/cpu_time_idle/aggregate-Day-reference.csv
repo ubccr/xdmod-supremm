@@ -1,0 +1,13 @@
+title
+"CPU Hours: Idle: Total: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"CPU Hours: Idle: Total"
+"Goose, Egyptian",2210.917345779028
+Dunlin,97.87032160037158
+"Pipit, Meadow",1.4712560810377
+Whimbrel,0.4801979982880181
+---------

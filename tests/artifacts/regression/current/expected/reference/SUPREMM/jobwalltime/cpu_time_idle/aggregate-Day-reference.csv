@@ -1,0 +1,14 @@
+title
+"CPU Hours: Idle: Total: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","CPU Hours: Idle: Total"
+"30s - 30min",1.298881016535133
+"30 - 60min",0.6877303792686731
+"1 - 5hr",95.88371020456778
+"5 - 10hr",0.4801979982880181
+18+hr,2212.3886018600656
+---------

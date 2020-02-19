@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Structures and Building Systems] Avg: CPU User Imbalance: weighted by core-hour (%)","[Systematic and Population Biology] Avg: CPU User Imbalance: weighted by core-hour (%)","[Quantum Electronics, Waves, and Beams] Avg: CPU User Imbalance: weighted by core-hour (%)","[Stellar Astronomy and Astrophysics] Avg: CPU User Imbalance: weighted by core-hour (%)"
+"2016 Q4",99.81704865897794,0,0.9502148181129071,0.15346245747039997
+"2017 Q1",0,66.92072234074402,0,0
+---------

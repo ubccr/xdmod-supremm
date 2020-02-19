@@ -1,0 +1,11 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Avg: Memory: Per Core weighted by core-hour (bytes)","[&lt; 1Mi] Avg: Memory: Per Core weighted by core-hour (bytes)","[128Mi - 256Mi] Avg: Memory: Per Core weighted by core-hour (bytes)","[256Mi - 512Mi] Avg: Memory: Per Core weighted by core-hour (bytes)","[512Mi - 1Gi] Avg: Memory: Per Core weighted by core-hour (bytes)","[8Gi - 16Gi] Avg: Memory: Per Core weighted by core-hour (bytes)"
+2016-12,999829342.742768,0,0,0,0,387085867.01000977
+2017-01,0,280350885.39917684,397344333.6752136,1184715393.471265,430653587.63285017,0
+---------

@@ -1,0 +1,11 @@
+title
+"Number of Jobs Running: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 0.1] Number of Jobs Running","[0.1 - 0.2] Number of Jobs Running","[0.4 - 0.8] Number of Jobs Running","[1.6 - 3.2] Number of Jobs Running"
+2016-12,2,0,0,1
+2017-01,2,1,1,0
+---------

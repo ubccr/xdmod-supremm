@@ -1,0 +1,11 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[112] Avg: CPU User CV: weighted by core-hour","[24] Avg: CPU User CV: weighted by core-hour","[96] Avg: CPU User CV: weighted by core-hour","[8] Avg: CPU User CV: weighted by core-hour","[36] Avg: CPU User CV: weighted by core-hour"
+2016,2.491303567260018,0,0.002420490384502186,0,0.000384537731233099
+2017,0,0.6657303475723793,0.09834036104938328,0.00290302323892242,0
+---------

@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Number of Jobs Submitted","[0.6 - 0.7] Number of Jobs Submitted","[0.7 - 0.8] Number of Jobs Submitted","[0.8 - 0.9] Number of Jobs Submitted","[&gt; 1.2] Number of Jobs Submitted"
+"2016 Q4",1,1,1,0,0
+"2017 Q1",0,0,2,1,0
+---------

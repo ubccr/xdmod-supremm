@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[egygo] Avg: CPU User Imbalance: weighted by core-hour (%)","[dunli] Avg: CPU User Imbalance: weighted by core-hour (%)","[meapi] Avg: CPU User Imbalance: weighted by core-hour (%)","[whimb] Avg: CPU User Imbalance: weighted by core-hour (%)"
+"2016 Q4",99.81704865897794,0,0.9502148181129071,0.15346245747039997
+"2017 Q1",0,66.92072234074402,0,0
+---------

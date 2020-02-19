@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[8] Wait Hours: Total","[2] Wait Hours: Total","[1] Wait Hours: Total","[3] Wait Hours: Total","[7] Wait Hours: Total"
+2016,110.12305555555555,0,0,2.6,0.0011111111111111111
+2017,3.1375,22.063333333333333,2.8280555555555558,0,0
+---------

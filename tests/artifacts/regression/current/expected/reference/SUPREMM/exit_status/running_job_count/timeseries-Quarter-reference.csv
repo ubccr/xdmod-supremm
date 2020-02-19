@@ -1,0 +1,11 @@
+title
+"Number of Jobs Running: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[CANCELLED] Number of Jobs Running","[COMPLETED] Number of Jobs Running","[TIMEOUT] Number of Jobs Running"
+"2016 Q4",2,1,0
+"2017 Q1",0,3,1
+---------

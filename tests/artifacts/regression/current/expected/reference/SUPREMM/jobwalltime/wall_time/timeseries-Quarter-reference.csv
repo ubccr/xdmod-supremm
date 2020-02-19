@@ -1,0 +1,11 @@
+title
+"CPU Hours: Total: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[30s - 30min] CPU Hours: Total","[30 - 60min] CPU Hours: Total","[1 - 5hr] CPU Hours: Total","[5 - 10hr] CPU Hours: Total","[18+hr] CPU Hours: Total"
+"2016 Q4",0,0,0,253.53,8572.00888888889
+"2017 Q1",1.9533333333333334,52.64,108.06666666666666,0,0
+---------

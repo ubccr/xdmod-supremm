@@ -1,0 +1,12 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+Dunlin,10441861.782546721
+Whimbrel,3980.3105878331294
+"Pipit, Meadow",3296.038222073229
+---------

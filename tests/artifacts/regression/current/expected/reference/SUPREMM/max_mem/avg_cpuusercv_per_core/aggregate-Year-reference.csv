@@ -1,0 +1,13 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Avg: CPU User CV: weighted by core-hour"
+NA,2.4165199882079857
+"&lt; 10",0.017844620669502955
+"20 - 30",0.002420490384502186
+"40 - 50",0.00290302323892242
+---------

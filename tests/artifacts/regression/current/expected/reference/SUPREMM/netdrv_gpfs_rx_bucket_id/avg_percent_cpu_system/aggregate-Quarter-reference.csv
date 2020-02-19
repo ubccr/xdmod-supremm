@@ -1,0 +1,15 @@
+title
+"Avg CPU %: System: weighted by core-hour: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg CPU %: System: weighted by core-hour"
+NA,0.9084466108655717
+"&lt; 1Mi",0.36249253253854025
+"128Mi - 256Mi",1.1858203233310634
+"256Mi - 512Mi",2.4642671764884794
+"512Mi - 1Gi",40.99354097708083
+"8Gi - 16Gi",0.28332632712743183
+---------

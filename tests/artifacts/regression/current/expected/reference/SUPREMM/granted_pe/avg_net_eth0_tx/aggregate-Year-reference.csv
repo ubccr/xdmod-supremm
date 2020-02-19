@@ -1,0 +1,13 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+8,1305981.5608712563
+96,275315.5230767059
+24,10390.974203800122
+36,3980.3105878331294
+---------

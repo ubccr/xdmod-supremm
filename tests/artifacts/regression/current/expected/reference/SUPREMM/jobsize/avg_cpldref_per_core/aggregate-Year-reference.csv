@@ -1,0 +1,13 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Size","Avg: CPLD: Per Core weighted by core-hour"
+"5 - 8",2.155221659960016
+"17 - 32",4.903965912818027
+"33 - 64",2.109724027027582
+"65 - 128",2.9745711641883084
+---------

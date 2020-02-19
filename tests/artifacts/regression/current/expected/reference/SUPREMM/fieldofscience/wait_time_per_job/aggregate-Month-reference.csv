@@ -1,0 +1,13 @@
+title
+"Wait Hours: Per Job: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Group","Wait Hours: Per Job"
+"Quantum Electronics, Waves, and Beams",110.12305555555555
+"Systematic and Population Biology",7.007222222222222
+"Stellar Astronomy and Astrophysics",2.6
+"Structures and Building Systems",0.0011111111111111111
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+8,478537.6425387147
+3,210157.97467755293
+1,196871.43096071566
+2,179028.09290689026
+---------

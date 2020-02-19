@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Electrical and Communication Systems] Wall Hours: Per Job","[Mechanical and Structural Systems] Wall Hours: Per Job","[Astronomical Sciences] Wall Hours: Per Job","[Environmental Biology] Wall Hours: Per Job"
+2016,65.87416666666667,20.072222222222223,7.0425,0
+2017,0,0,0,1.5211805555555553
+---------

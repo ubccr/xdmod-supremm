@@ -1,0 +1,11 @@
+title
+"Avg CPU %: System: weighted by core-hour: by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Exclusive] Avg CPU %: System: weighted by core-hour"
+2016,0.7492125990070948
+2017,13.66903932956048
+---------

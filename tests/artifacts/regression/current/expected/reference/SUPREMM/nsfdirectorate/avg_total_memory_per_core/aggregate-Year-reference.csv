@@ -1,0 +1,12 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+"Mathematical and Physical Sciences",4104107695.7919683
+Engineering,3318895249.6691256
+"Biological Sciences",2817864004.5322976
+---------

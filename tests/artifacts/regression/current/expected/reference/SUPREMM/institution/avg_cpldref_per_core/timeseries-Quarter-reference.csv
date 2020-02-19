@@ -1,0 +1,11 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by User Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[screw - Screwdriver] Avg: CPLD: Per Core weighted by core-hour"
+"2016 Q4",2.9487925654353253
+"2017 Q1",3.780889715758247
+---------

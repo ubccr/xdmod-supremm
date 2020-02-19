@@ -1,0 +1,13 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+"Goose, Egyptian",24777.137709066465
+Dunlin,24080.867991764335
+"Pipit, Meadow",0
+Whimbrel,0
+---------

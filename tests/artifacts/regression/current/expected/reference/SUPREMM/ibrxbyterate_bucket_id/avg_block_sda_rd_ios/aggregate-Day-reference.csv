@@ -1,0 +1,12 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"InfiniBand Receive rate","Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+"&lt; 100",0.0012991546497860536
+"100 - 1k",0.0020378916367556764
+"10M - 100M",0.004058464654682726
+---------

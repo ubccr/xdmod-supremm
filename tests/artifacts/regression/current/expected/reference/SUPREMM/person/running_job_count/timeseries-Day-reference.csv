@@ -1,0 +1,14 @@
+title
+"Number of Jobs Running: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Dunlin] Number of Jobs Running","[Pipit, Meadow] Number of Jobs Running","[Goose, Egyptian] Number of Jobs Running","[Whimbrel] Number of Jobs Running"
+2016-12-28,0,1,0,0
+2016-12-29,0,1,1,0
+2016-12-30,0,1,1,0
+2016-12-31,0,1,0,1
+2017-01-01,4,0,0,0
+---------

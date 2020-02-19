@@ -1,0 +1,10 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Share Mode","Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+Exclusive,60652982.50786479
+---------

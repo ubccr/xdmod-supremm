@@ -1,0 +1,11 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[SUPREMM] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+2016,10808.952204771576
+2017,2742.4583069369655
+---------

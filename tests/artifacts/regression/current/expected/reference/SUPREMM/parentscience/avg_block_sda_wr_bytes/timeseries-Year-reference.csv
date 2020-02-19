@@ -1,0 +1,11 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Astronomical Sciences] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[Mechanical and Structural Systems] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[Electrical and Communication Systems] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[Environmental Biology] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+2016,21.251659895607357,20.76810130085801,19.48134385001708,0
+2017,0,0,0,19.252573645866327
+---------

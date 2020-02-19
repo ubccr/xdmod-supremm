@@ -1,0 +1,11 @@
+title
+"Avg CPU %: User: weighted by core-hour: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[amber] Avg CPU %: User: weighted by core-hour","[enzo] Avg CPU %: User: weighted by core-hour","[wrf] Avg CPU %: User: weighted by core-hour"
+2016,99.03583376711232,99.63685223974439,1.339610155855938
+2017,0,25.799529770185917,0
+---------

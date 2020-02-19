@@ -1,0 +1,12 @@
+title
+"Wait Hours: Per Job: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Wait Hours: Per Job"
+CANCELLED,55.062083333333334
+COMPLETED,2.888472222222222
+TIMEOUT,19.075
+---------

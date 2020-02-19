@@ -1,0 +1,13 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+meapi,472.818067485568
+dunli,0
+egygo,0
+whimb,0
+---------

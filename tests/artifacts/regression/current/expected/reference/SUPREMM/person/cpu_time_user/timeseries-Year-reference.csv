@@ -1,0 +1,11 @@
+title
+"CPU Hours: User: Total: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Pipit, Meadow] CPU Hours: User: Total","[Whimbrel] CPU Hours: User: Total","[Dunlin] CPU Hours: User: Total","[Goose, Egyptian] CPU Hours: User: Total"
+2016,6262.946898765169,252.60931148342394,0,30.115627068224466
+2017,0,0,41.96551512418441,0
+---------

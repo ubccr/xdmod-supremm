@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[0.1 - 0.5] Wall Hours: Requested: Total","[0.5 - 1.0] Wall Hours: Requested: Total","[1.0 - 1.5] Wall Hours: Requested: Total","[&gt; 1.5] Wall Hours: Requested: Total","[NA] Wall Hours: Requested: Total"
+2016,0,72,0,0,79.33333333333333
+2017,4,4,1.7666666666666666,0.11666666666666667,0
+---------

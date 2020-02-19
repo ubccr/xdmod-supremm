@@ -1,0 +1,13 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+NA,33682.65416258423
+"&lt; 10",4091.843071497344
+"20 - 30",4498.715323196161
+"40 - 50",1465.1855309218204
+---------

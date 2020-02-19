@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[CANCELLED] Wall Hours: Per Job","[COMPLETED] Wall Hours: Per Job","[TIMEOUT] Wall Hours: Per Job"
+"2016 Q4",42.973194444444445,7.0425,0
+"2017 Q1",0,0.6860185185185185,4.026666666666666
+---------

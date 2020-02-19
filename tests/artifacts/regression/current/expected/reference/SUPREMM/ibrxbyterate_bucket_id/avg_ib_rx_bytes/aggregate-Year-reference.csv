@@ -1,0 +1,12 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"InfiniBand Receive rate","Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+"&lt; 100",22.602267942549293
+"100 - 1k",562.9120025243561
+"10M - 100M",80845610.58121514
+---------

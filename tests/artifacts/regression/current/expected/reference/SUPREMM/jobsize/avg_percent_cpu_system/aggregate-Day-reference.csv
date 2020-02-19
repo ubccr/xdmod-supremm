@@ -1,0 +1,13 @@
+title
+"Avg CPU %: System: weighted by core-hour: by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Size","Avg CPU %: System: weighted by core-hour"
+"5 - 8",2.4642671764884794
+"17 - 32",0.3788043212127041
+"33 - 64",0.1700384176652585
+"65 - 128",1.0118667087802793
+---------

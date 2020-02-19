@@ -1,0 +1,11 @@
+title
+"CPU Hours: User: Total: by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Resource,"CPU Hours: User: Total"
+robertson,6557.521725372777
+frearson,30.115627068224466
+---------

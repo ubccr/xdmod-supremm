@@ -1,0 +1,11 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[2] Avg: CPLD: Per Core weighted by core-hour","[8] Avg: CPLD: Per Core weighted by core-hour","[1] Avg: CPLD: Per Core weighted by core-hour","[3] Avg: CPLD: Per Core weighted by core-hour"
+"2016 Q4",0,2.9824313601295205,0,2.109724027027582
+"2017 Q1",4.903965912818027,2.03028449404106,2.155221659960016,0
+---------

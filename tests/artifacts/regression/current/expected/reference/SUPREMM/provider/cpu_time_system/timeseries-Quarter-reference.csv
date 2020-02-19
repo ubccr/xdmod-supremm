@@ -1,0 +1,11 @@
+title
+"CPU Hours: System: Total: by Service Provider"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[screw] CPU Hours: System: Total"
+"2016 Q4",66.12204928582632
+"2017 Q1",22.234059373463076
+---------

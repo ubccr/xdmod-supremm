@@ -1,0 +1,13 @@
+title
+"Wall Hours: Requested: Per Job: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Wall Hours: Requested: Per Job"
+NA,38
+"&lt; 10",3.8166666666666664
+"20 - 30",72
+"40 - 50",1.7666666666666666
+---------

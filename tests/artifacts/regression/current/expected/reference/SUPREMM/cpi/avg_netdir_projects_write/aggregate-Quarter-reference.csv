@@ -1,0 +1,14 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+NA,35546.46916689732
+"0.6 - 0.7",3694.7268830776106
+"0.7 - 0.8",4511.017304972841
+"0.8 - 0.9",1465.1855309218204
+"&gt; 1.2",1164.8939017660043
+---------

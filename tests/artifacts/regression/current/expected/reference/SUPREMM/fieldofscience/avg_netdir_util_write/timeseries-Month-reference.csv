@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Quantum Electronics, Waves, and Beams] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Stellar Astronomy and Astrophysics] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Structures and Building Systems] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Systematic and Population Biology] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,472.818067485568,0,0,0
+2017-01,0,0,0,0
+---------

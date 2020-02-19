@@ -1,0 +1,15 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+NA,0
+"&lt; 1Mi",0.7307188189845475
+"128Mi - 256Mi",280083.7918088737
+"256Mi - 512Mi",75575.3553092182
+"512Mi - 1Gi",42022.16565349544
+"8Gi - 16Gi",24777.137709066472
+---------

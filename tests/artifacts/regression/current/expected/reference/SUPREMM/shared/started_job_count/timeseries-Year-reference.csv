@@ -1,0 +1,11 @@
+title
+"Number of Jobs Started: by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Exclusive] Number of Jobs Started"
+2016,3
+2017,4
+---------

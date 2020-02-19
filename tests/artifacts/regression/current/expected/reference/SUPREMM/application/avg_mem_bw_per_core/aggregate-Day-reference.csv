@@ -1,0 +1,11 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Application,"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+amber,95081629.37335773
+enzo,30502553.06221429
+---------

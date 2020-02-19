@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Fieldfare] Wall Hours: Requested: Total","[Nuthatch] Wall Hours: Requested: Total","[Dunlin] Wall Hours: Requested: Total","[White, Great] Wall Hours: Requested: Total"
+2016,72,72,0,7.333333333333333
+2017,0,0,9.883333333333333,0
+---------

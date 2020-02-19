@@ -1,0 +1,14 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: CPI: Per Core weighted by core-hour"
+"0.1 - 0.5",1.2972810243580384
+"0.5 - 1.0",0.7353601440364381
+"1.0 - 1.5",0.8558715448360987
+"&gt; 1.5",0.7000759878256008
+NA,0.6794453050304665
+---------

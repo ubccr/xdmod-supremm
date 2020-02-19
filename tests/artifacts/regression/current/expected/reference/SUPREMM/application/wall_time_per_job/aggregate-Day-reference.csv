@@ -1,0 +1,12 @@
+title
+"Wall Hours: Per Job: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Application,"Wall Hours: Per Job"
+amber,65.87416666666667
+wrf,20.072222222222223
+enzo,2.6254444444444447
+---------

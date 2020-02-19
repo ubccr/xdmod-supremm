@@ -1,0 +1,12 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+"Electrical and Communication Systems",95081629.37335773
+"Astronomical Sciences",34129588.90402918
+"Environmental Biology",24849273.848053884
+---------

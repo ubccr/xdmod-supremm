@@ -1,0 +1,14 @@
+title
+"Avg CPU %: User: weighted by core-hour: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg CPU %: User: weighted by core-hour"
+"0.1 - 0.5",0.47192446265491866
+"0.5 - 1.0",98.68615770263453
+"1.0 - 1.5",96.65940664195428
+"&gt; 1.5",32.21878600226709
+NA,11.301679076992524
+---------

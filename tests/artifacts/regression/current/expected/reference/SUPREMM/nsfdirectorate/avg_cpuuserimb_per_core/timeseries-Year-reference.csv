@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Biological Sciences] Avg: CPU User Imbalance: weighted by core-hour (%)","[Engineering] Avg: CPU User Imbalance: weighted by core-hour (%)","[Mathematical and Physical Sciences] Avg: CPU User Imbalance: weighted by core-hour (%)"
+2016,0,26.878959587074803,0.15346245747039997
+2017,66.92072234074402,0,0
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Engineering] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[Biological Sciences] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[Mathematical and Physical Sciences] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+2016,63839295.59258692,0,562.9120025243561
+2017,0,399276.1550522648,0
+---------

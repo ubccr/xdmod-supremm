@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Resource,"Wall Hours: Per Job"
+frearson,20.072222222222223
+robertson,13.166898148148148
+---------

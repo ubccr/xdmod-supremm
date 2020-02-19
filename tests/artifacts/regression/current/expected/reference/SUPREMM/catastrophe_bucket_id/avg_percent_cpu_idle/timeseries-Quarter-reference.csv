@@ -1,0 +1,11 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[0.1 - 0.5] Avg CPU %: Idle: weighted by core-hour","[0.5 - 1.0] Avg CPU %: Idle: weighted by core-hour","[1.0 - 1.5] Avg CPU %: Idle: weighted by core-hour","[&gt; 1.5] Avg CPU %: Idle: weighted by core-hour","[NA] Avg CPU %: Idle: weighted by core-hour"
+"2016 Q4",0,0.02326493821929595,0,0,88.39865870854226
+"2017 Q1",99.11495753009484,1.3064786840210356,0.8665278367921907,66.49561518097951,0
+---------

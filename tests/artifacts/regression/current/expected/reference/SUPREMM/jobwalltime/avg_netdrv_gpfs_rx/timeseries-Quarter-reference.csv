@@ -1,0 +1,11 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[30s - 30min] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[30 - 60min] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[1 - 5hr] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[5 - 10hr] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[18+hr] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",0,0,0,0,5215.4775938037355
+"2017 Q1",280083.7918088737,42022.16565349544,11385.412257573094,0,0
+---------

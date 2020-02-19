@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by PI Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[screw - Screwdriver] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+2016,1165695632.4819276
+2017,44923178.16478305
+---------

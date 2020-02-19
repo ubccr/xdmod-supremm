@@ -1,0 +1,11 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[30s - 30min] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[30 - 60min] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[1 - 5hr] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[5 - 10hr] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[18+hr] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+"2016 Q4",0,0,0,0.0020378916367556764,0.0033200221723215517
+"2017 Q1",0.09044368600682594,0.003926038500506586,0.009697076228979903,0,0
+---------

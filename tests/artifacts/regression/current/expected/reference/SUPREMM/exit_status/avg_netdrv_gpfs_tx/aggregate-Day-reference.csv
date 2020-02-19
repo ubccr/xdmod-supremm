@@ -1,0 +1,12 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+CANCELLED,84.46579395055171
+COMPLETED,59690.38876192623
+TIMEOUT,2279.610375275938
+---------

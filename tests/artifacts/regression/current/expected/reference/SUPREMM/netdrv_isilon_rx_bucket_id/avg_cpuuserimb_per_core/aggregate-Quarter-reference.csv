@@ -1,0 +1,10 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by isilon bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"isilon bytes received","Avg: CPU User Imbalance: weighted by core-hour (%)"
+NA,26.84975216064799
+---------

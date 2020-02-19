@@ -1,0 +1,11 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[CANCELLED] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[COMPLETED] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[TIMEOUT] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+"2016 Q4",0.0033200221723215517,0.0020378916367556764,0
+"2017 Q1",0,0.012081784386617101,0.006415562913907285
+---------

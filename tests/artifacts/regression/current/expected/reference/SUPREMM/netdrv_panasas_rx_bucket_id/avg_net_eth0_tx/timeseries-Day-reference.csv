@@ -1,0 +1,14 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by panasas bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,3296.0382220732286
+2016-12-29,3296.038222073229
+2016-12-30,3296.038222073229
+2016-12-31,3529.5976558349425
+2017-01-01,10441861.782546721
+---------

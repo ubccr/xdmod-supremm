@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[SUPREMM] Avg: CPU User Imbalance: weighted by core-hour (%)"
+2016-12,26.11122003342567
+2017-01,66.92072234074402
+---------

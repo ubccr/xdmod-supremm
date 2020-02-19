@@ -1,0 +1,10 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Summary,"Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+SUPREMM,3331976532.2024827
+---------

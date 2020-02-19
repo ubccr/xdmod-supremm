@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[5 - 8] Wait Hours: Per Job","[17 - 32] Wait Hours: Per Job","[33 - 64] Wait Hours: Per Job","[65 - 128] Wait Hours: Per Job"
+2016-12,0,0,2.6,55.062083333333334
+2017-01,2.8280555555555558,11.031666666666666,0,3.1375
+---------

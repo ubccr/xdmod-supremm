@@ -1,0 +1,11 @@
+title
+"Number of Jobs Running: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[0.1 - 0.5] Number of Jobs Running","[0.5 - 1.0] Number of Jobs Running","[1.0 - 1.5] Number of Jobs Running","[&gt; 1.5] Number of Jobs Running","[NA] Number of Jobs Running"
+2016,0,1,0,0,2
+2017,1,1,1,1,0
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+8,277490507.3201089
+96,94409684.50625972
+36,34129588.90402918
+24,1529425.3702977437
+---------

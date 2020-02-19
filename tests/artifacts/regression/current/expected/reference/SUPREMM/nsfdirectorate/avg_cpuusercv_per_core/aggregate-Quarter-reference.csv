@@ -1,0 +1,12 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Avg: CPU User CV: weighted by core-hour"
+Engineering,0.6551531768986311
+"Biological Sciences",0.4355488906481971
+"Mathematical and Physical Sciences",0.000384537731233099
+---------

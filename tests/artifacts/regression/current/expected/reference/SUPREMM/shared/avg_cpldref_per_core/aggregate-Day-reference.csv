@@ -1,0 +1,10 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Share Mode","Avg: CPLD: Per Core weighted by core-hour"
+Exclusive,2.9688736802051916
+---------

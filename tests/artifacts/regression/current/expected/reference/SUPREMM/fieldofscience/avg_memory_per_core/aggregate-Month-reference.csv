@@ -1,0 +1,13 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Group","Avg: Memory: Per Core weighted by core-hour (bytes)"
+"Quantum Electronics, Waves, and Beams",1017787434.0461986
+"Stellar Astronomy and Astrophysics",551892085.7885988
+"Systematic and Population Biology",393927260.8251174
+"Structures and Building Systems",387085867.01000977
+---------

@@ -1,0 +1,14 @@
+title
+"Wall Hours: Per Job: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Wall Hours: Per Job"
+"0.1 - 0.5",4.026666666666666
+"0.5 - 1.0",33.21125
+"1.0 - 1.5",1.4283333333333332
+"&gt; 1.5",0.08138888888888889
+NA,13.557361111111113
+---------

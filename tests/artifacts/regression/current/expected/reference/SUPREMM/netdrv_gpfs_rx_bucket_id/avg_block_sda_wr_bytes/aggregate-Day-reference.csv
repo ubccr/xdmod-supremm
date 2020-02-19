@@ -1,0 +1,15 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+NA,19.54958127136403
+"&lt; 1Mi",18.44457091611479
+"128Mi - 256Mi",21.82764505119454
+"256Mi - 512Mi",19.008556981719174
+"512Mi - 1Gi",20.71985815602837
+"8Gi - 16Gi",20.76810130085801
+---------

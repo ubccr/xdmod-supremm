@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[CANCELLED] CPU Hours: Idle: Total","[COMPLETED] CPU Hours: Idle: Total","[TIMEOUT] CPU Hours: Idle: Total"
+2016-12,2212.3886018600656,0.4801979982880181,0
+2017-01,0,2.0856266432879274,95.78469495708366
+---------

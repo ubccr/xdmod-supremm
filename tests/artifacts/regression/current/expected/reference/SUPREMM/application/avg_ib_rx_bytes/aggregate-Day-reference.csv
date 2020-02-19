@@ -1,0 +1,12 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Application,"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+amber,80859953.01695362
+enzo,159681.53580203996
+wrf,19.229986951880115
+---------

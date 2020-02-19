@@ -1,0 +1,11 @@
+title
+"Number of Jobs Running: by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Resource,"Number of Jobs Running"
+robertson,9
+frearson,2
+---------

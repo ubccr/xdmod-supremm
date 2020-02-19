@@ -1,0 +1,12 @@
+title
+"Number of Jobs Ended: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Number of Jobs Ended"
+"Biological Sciences",4
+Engineering,2
+"Mathematical and Physical Sciences",1
+---------

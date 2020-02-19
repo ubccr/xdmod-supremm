@@ -1,0 +1,14 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Service Provider"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[screw] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,80859953.01695362
+2016-12-29,71703159.99664494
+2016-12-30,50408349.24326675
+2016-12-31,53260601.77578942
+2017-01-01,399276.1550522648
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+"Goose, Egyptian",35546.46916689732
+"Pipit, Meadow",4498.715323196161
+Whimbrel,3694.7268830776106
+Dunlin,2742.4583069369655
+---------

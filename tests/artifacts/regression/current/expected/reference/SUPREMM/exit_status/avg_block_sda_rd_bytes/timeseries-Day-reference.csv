@@ -1,0 +1,14 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[CANCELLED] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)","[COMPLETED] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)","[TIMEOUT] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0.08065250667307619,0,0
+2016-12-29,0.07168353068434542,0,0
+2016-12-30,0.0508255025616156,0,0
+2016-12-31,0.08065250667307619,0.07112899196676264,0
+2017-01-01,0,0.37434944237918216,0.13189845474613687
+---------

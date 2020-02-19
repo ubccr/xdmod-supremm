@@ -1,0 +1,11 @@
+title
+"CPU Hours: System: Total: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Quantum Electronics, Waves, and Beams] CPU Hours: System: Total","[Systematic and Population Biology] CPU Hours: System: Total","[Structures and Building Systems] CPU Hours: System: Total","[Stellar Astronomy and Astrophysics] CPU Hours: System: Total"
+"2016 Q4",59.32152320607081,0,6.369427679448781,0.43109840030672986
+"2017 Q1",0,22.234059373463076,0,0
+---------

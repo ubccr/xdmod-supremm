@@ -1,0 +1,13 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Avg: CPU User CV: weighted by core-hour"
+Nuthatch,2.491303567260018
+Dunlin,0.4355488906481971
+Fieldfare,0.002420490384502186
+"White, Great",0.000384537731233099
+---------

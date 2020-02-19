@@ -1,0 +1,11 @@
+title
+"Number of Jobs Submitted: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[CANCELLED] Number of Jobs Submitted","[COMPLETED] Number of Jobs Submitted","[TIMEOUT] Number of Jobs Submitted"
+2016-12,2,1,0
+2017-01,0,3,0
+---------

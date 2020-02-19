@@ -1,0 +1,11 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[5 - 8] Avg: CPI: Per Core weighted by core-hour","[17 - 32] Avg: CPI: Per Core weighted by core-hour","[33 - 64] Avg: CPI: Per Core weighted by core-hour","[65 - 128] Avg: CPI: Per Core weighted by core-hour"
+2016,0,0,0.6794453050304665,0.735533090751615
+2017,0.8558715448360987,1.2854491847675316,0,0.7145831457263654
+---------

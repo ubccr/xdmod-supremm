@@ -1,0 +1,12 @@
+title
+"Wait Hours: Total: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Application,"Wait Hours: Total"
+amber,110.12305555555555
+enzo,30.628888888888888
+wrf,0.0011111111111111111
+---------

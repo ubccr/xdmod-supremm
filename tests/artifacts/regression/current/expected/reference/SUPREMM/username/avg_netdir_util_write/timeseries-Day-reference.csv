@@ -1,0 +1,14 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[meapi] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[dunli] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[egygo] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[whimb] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,472.818067485568,0,0,0
+2016-12-29,472.81806748556806,0,0,0
+2016-12-30,472.81806748556806,0,0,0
+2016-12-31,472.818067485568,0,0,0
+2017-01-01,0,0,0,0
+---------

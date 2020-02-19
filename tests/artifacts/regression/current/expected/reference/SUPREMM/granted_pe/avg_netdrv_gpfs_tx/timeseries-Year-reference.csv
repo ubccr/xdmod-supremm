@@ -1,0 +1,11 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[8] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[24] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[96] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[112] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[36] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016,0,0,0,401.2711340002373,0
+2017,785419.4507973552,3508.856244506052,110702.07339159067,0,0
+---------

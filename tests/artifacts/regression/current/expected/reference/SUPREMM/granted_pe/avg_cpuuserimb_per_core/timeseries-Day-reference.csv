@@ -1,0 +1,14 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[112] Avg: CPU User Imbalance: weighted by core-hour (%)","[24] Avg: CPU User Imbalance: weighted by core-hour (%)","[96] Avg: CPU User Imbalance: weighted by core-hour (%)","[8] Avg: CPU User Imbalance: weighted by core-hour (%)","[36] Avg: CPU User Imbalance: weighted by core-hour (%)"
+2016-12-28,0,0,0.9502148181129071,0,0
+2016-12-29,99.81704865897794,0,0.9502148181129071,0,0
+2016-12-30,99.81704865897794,0,0.9502148181129071,0,0
+2016-12-31,0,0,0.950214818112907,0,0.15346245747039997
+2017-01-01,0,89.06788889104502,39.78213515601876,0.8482826080657251,0
+---------

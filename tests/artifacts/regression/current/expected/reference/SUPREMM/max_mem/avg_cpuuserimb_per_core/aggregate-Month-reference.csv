@@ -1,0 +1,13 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Avg: CPU User Imbalance: weighted by core-hour (%)"
+NA,99.42111303642194
+"&lt; 10",7.128902171630397
+"20 - 30",0.9502148181129071
+"40 - 50",0.8482826080657251
+---------

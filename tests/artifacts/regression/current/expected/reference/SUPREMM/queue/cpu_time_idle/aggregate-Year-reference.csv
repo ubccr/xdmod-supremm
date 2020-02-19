@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Queue,"CPU Hours: Idle: Total"
+crumpet,2210.917345779028
+chapti,99.8217756796973
+---------

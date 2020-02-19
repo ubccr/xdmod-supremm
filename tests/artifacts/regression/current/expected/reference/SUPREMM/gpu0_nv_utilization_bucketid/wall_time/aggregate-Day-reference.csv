@@ -1,0 +1,10 @@
+title
+"CPU Hours: Total: by GPU0 Usage Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"GPU0 Usage Value","CPU Hours: Total"
+NA,8988.198888888888
+---------

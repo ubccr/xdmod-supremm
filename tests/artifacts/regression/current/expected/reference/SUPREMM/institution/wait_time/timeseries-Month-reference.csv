@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by User Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[screw - Screwdriver] Wait Hours: Total"
+2016-12,112.72416666666666
+2017-01,28.028888888888886
+---------

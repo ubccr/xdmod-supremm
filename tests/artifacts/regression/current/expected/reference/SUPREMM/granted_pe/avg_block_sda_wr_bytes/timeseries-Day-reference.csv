@@ -1,0 +1,14 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[36] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[112] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[96] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[8] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[24] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,0,19.481343850017076,0,0
+2016-12-29,0,20.76810130085801,19.481343850017076,0,0
+2016-12-30,0,20.76810130085801,19.481343850017076,0,0
+2016-12-31,21.251659895607357,0,19.48134385001708,0,0
+2017-01-01,0,0,20.71985815602837,19.008556981719174,18.51159645682602
+---------

@@ -1,0 +1,14 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: CPU User Imbalance: weighted by core-hour (%)","[&lt; 1Mi] Avg: CPU User Imbalance: weighted by core-hour (%)","[128Mi - 256Mi] Avg: CPU User Imbalance: weighted by core-hour (%)","[256Mi - 512Mi] Avg: CPU User Imbalance: weighted by core-hour (%)","[512Mi - 1Gi] Avg: CPU User Imbalance: weighted by core-hour (%)","[8Gi - 16Gi] Avg: CPU User Imbalance: weighted by core-hour (%)"
+2016-12-28,0.9502148181129071,0,0,0,0,0
+2016-12-29,0.9502148181129071,0,0,0,0,99.81704865897794
+2016-12-30,0.9502148181129071,0,0,0,0,99.81704865897794
+2016-12-31,0.6782631223969531,0,0,0,0,0
+2017-01-01,0,90.21065697492135,32.53012048192771,0.8482826080657251,39.78213515601876,0
+---------

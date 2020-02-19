@@ -1,0 +1,13 @@
+title
+"Wait Hours: Total: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+User,"Wait Hours: Total"
+"Pipit, Meadow",110.12305555555555
+Dunlin,28.028888888888886
+Whimbrel,2.6
+"Goose, Egyptian",0.0011111111111111111
+---------

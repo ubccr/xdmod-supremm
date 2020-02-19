@@ -1,0 +1,14 @@
+title
+"Avg CPU %: User: weighted by core-hour: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg CPU %: User: weighted by core-hour"
+36,99.63685223974439
+96,98.68615770263449
+8,96.65940664195428
+112,1.339610155855938
+24,1.1008939961667428
+---------

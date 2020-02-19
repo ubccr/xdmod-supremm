@@ -1,0 +1,11 @@
+title
+"CPU Hours: Total: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] CPU Hours: Total","[0.6 - 0.7] CPU Hours: Total","[0.7 - 0.8] CPU Hours: Total","[0.8 - 0.9] CPU Hours: Total","[&gt; 1.2] CPU Hours: Total"
+"2016 Q4",2248.088888888889,253.53,6323.92,0,0
+"2017 Q1",0,0,54.593333333333334,11.426666666666666,96.64
+---------

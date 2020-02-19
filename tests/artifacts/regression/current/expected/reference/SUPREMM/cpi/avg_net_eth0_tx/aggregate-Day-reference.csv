@@ -1,0 +1,13 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+"0.6 - 0.7",3980.3105878331294
+"0.7 - 0.8",275274.2546277764
+"0.8 - 0.9",1305981.5608712563
+"&gt; 1.2",7760.028421633554
+---------

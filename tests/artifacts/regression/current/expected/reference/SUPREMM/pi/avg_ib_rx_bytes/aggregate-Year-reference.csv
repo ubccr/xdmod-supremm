@@ -1,0 +1,13 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+Fieldfare,80859953.01695362
+Dunlin,399276.1550522648
+"White, Great",562.9120025243561
+Nuthatch,19.229986951880115
+---------

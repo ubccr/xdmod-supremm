@@ -1,0 +1,11 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[&lt; 100] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[100 - 1k] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[10M - 100M] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",0,210157.97467755293,209360.32179776678
+"2017 Q1",10504549.494071225,0,155779.68259385665
+---------

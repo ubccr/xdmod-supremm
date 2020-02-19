@@ -1,0 +1,11 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by User Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[screw - Screwdriver] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+2016,0.06420026986089457
+2017,0.23519163763066203
+---------

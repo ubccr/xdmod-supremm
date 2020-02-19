@@ -1,0 +1,15 @@
+title
+"Wait Hours: Per Job: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Wait Hours: Per Job"
+NA,56.36152777777777
+"&lt; 1Mi",19.075
+"128Mi - 256Mi",2.9883333333333333
+"256Mi - 512Mi",2.8280555555555558
+"512Mi - 1Gi",3.1375
+"8Gi - 16Gi",0.0011111111111111111
+---------

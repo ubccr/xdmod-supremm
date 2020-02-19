@@ -1,0 +1,14 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg CPU %: Idle: weighted by core-hour"
+24,98.4687023871987
+112,98.34652698593992
+8,0.8665278367921907
+36,0.18940480348992947
+96,0.03385816898619904
+---------

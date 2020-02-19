@@ -1,0 +1,13 @@
+title
+"Number of Jobs Started: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User CV","Number of Jobs Started"
+"&lt; 0.1",4
+"0.1 - 0.2",1
+"0.4 - 0.8",1
+"1.6 - 3.2",1
+---------

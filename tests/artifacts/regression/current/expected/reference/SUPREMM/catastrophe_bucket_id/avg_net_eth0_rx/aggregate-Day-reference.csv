@@ -1,0 +1,14 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+"0.1 - 0.5",179498.00075883002
+"0.5 - 1.0",478537.6425387147
+"1.0 - 1.5",196871.43096071566
+"&gt; 1.5",155779.68259385665
+NA,210157.97467755293
+---------

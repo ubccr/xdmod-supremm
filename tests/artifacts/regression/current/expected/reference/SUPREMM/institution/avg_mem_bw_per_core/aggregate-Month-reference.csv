@@ -1,0 +1,10 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by User Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"User Institution","Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+"screw - Screwdriver",91093984.39873049
+---------

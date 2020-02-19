@@ -1,0 +1,13 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+"Environmental Biology",0.23519163763066203
+"Electrical and Communication Systems",0.08065250667307619
+"Astronomical Sciences",0.07112899196676264
+"Mechanical and Structural Systems",0.0014511090901901862
+---------

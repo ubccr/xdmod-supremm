@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] CPU Hours: Idle: Total","[0.6 - 0.7] CPU Hours: Idle: Total","[0.7 - 0.8] CPU Hours: Idle: Total","[0.8 - 0.9] CPU Hours: Idle: Total","[&gt; 1.2] CPU Hours: Idle: Total"
+2016,2210.917345779028,0.4801979982880181,1.4712560810377002,0,0
+2017,0,0,1.986611395803806,0.099015247484121,95.78469495708366
+---------

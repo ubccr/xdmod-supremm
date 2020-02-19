@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Engineering] Wait Hours: Total","[Biological Sciences] Wait Hours: Total","[Mathematical and Physical Sciences] Wait Hours: Total"
+2016,110.12416666666667,0,2.6
+2017,0,28.028888888888886,0
+---------

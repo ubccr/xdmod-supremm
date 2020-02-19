@@ -1,0 +1,12 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: CPI: Per Core weighted by core-hour"
+CANCELLED,0.735533090751615
+COMPLETED,0.6916684887830487
+TIMEOUT,1.2972810243580384
+---------

@@ -1,0 +1,11 @@
+title
+"Avg CPU %: System: weighted by core-hour: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[30s - 30min] Avg CPU %: System: weighted by core-hour","[30 - 60min] Avg CPU %: System: weighted by core-hour","[1 - 5hr] Avg CPU %: System: weighted by core-hour","[5 - 10hr] Avg CPU %: System: weighted by core-hour","[18+hr] Avg CPU %: System: weighted by core-hour"
+"2016 Q4",0,0,0,0.1700384176652585,0.7663425427692774
+"2017 Q1",1.1858203233310634,40.99354097708083,0.5847282968648941,0,0
+---------

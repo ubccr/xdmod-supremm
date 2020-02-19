@@ -1,0 +1,14 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[&lt; 100] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[100 - 1k] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[10M - 100M] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,0,472.818067485568
+2016-12-29,0,0,472.81806748556806
+2016-12-30,0,0,472.81806748556806
+2016-12-31,0,0,472.818067485568
+2017-01-01,0,0,0
+---------

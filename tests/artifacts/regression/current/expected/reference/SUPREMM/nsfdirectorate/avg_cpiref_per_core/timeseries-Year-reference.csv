@@ -1,0 +1,11 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Biological Sciences] Avg: CPI: Per Core weighted by core-hour","[Engineering] Avg: CPI: Per Core weighted by core-hour","[Mathematical and Physical Sciences] Avg: CPI: Per Core weighted by core-hour"
+2016,0,0.735533090751615,0.6794453050304665
+2017,1.0705283142764654,0,0
+---------

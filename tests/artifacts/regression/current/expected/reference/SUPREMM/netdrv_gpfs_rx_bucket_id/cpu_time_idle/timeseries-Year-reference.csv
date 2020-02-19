@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] CPU Hours: Idle: Total","[&lt; 1Mi] CPU Hours: Idle: Total","[128Mi - 256Mi] CPU Hours: Idle: Total","[256Mi - 512Mi] CPU Hours: Idle: Total","[512Mi - 1Gi] CPU Hours: Idle: Total","[8Gi - 16Gi] CPU Hours: Idle: Total"
+2016,1.9514540793257185,0,0,0,0,2210.917345779028
+2017,0,95.78469495708366,1.298881016535133,0.099015247484121,0.6877303792686731,0
+---------

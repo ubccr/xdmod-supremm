@@ -1,0 +1,11 @@
+title
+"CPU Hours: System: Total: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[8] CPU Hours: System: Total","[7] CPU Hours: System: Total","[3] CPU Hours: System: Total","[2] CPU Hours: System: Total","[1] CPU Hours: System: Total"
+"2016 Q4",59.32152320607081,6.369427679448781,0.43109840030672986,0,0
+"2017 Q1",21.57899997033535,0,0,0.37347580709431205,0.2815835960334169
+---------

@@ -1,0 +1,13 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Group","Avg CPU %: Idle: weighted by core-hour"
+"Structures and Building Systems",98.34652698593992
+"Systematic and Population Biology",60.16864723986941
+"Stellar Astronomy and Astrophysics",0.18940480348992947
+"Quantum Electronics, Waves, and Beams",0.02326493821929595
+---------

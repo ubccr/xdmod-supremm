@@ -1,0 +1,11 @@
+title
+"CPU Hours: System: Total: by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[5 - 8] CPU Hours: System: Total","[17 - 32] CPU Hours: System: Total","[33 - 64] CPU Hours: System: Total","[65 - 128] CPU Hours: System: Total"
+2016-12,0,0,0.43109840030672986,65.69095088551958
+2017-01,0.2815835960334169,0.37347580709431205,0,21.57899997033535
+---------

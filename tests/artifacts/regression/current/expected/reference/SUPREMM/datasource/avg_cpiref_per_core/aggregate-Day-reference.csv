@@ -1,0 +1,10 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Datasource,"Avg: CPI: Per Core weighted by core-hour"
+pcp,0.7415078280696512
+---------

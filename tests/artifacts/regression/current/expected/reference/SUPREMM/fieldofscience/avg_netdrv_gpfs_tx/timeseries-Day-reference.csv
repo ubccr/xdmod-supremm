@@ -1,0 +1,14 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Systematic and Population Biology] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Structures and Building Systems] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Quantum Electronics, Waves, and Beams] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)","[Stellar Astronomy and Astrophysics] Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,0,0,0
+2016-12-29,0,401.2711340002373,0,0
+2016-12-30,0,401.27113400023717,0,0
+2016-12-31,0,0,0,0
+2017-01-01,116618.20773281596,0,0,0
+---------

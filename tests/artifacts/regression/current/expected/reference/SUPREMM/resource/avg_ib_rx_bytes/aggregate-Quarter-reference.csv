@@ -1,0 +1,11 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Resource,"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+robertson,75812724.25681669
+frearson,19.229986951880115
+---------

@@ -1,0 +1,11 @@
+title
+"Number of Jobs Ended: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[0.1 - 0.5] Number of Jobs Ended","[0.5 - 1.0] Number of Jobs Ended","[1.0 - 1.5] Number of Jobs Ended","[&gt; 1.5] Number of Jobs Ended","[NA] Number of Jobs Ended"
+2016-12,0,1,0,0,2
+2017-01,1,1,1,1,0
+---------

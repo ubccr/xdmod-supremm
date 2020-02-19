@@ -1,0 +1,11 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[&lt; 1Mi] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[128Mi - 256Mi] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[256Mi - 512Mi] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[512Mi - 1Gi] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[8Gi - 16Gi] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,77743200.90583028,0,0,0,0,19.229986951880115
+2017-01,0,53.115894039735096,34411950.402730376,83.84597432905484,54.65653495440729,0
+---------

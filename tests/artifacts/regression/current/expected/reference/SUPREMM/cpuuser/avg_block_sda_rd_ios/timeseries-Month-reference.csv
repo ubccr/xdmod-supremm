@@ -1,0 +1,11 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 10] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[30 - 40] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[50 - 60] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[&gt; 90] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+2016-12,0.000650429006365901,0,0,0.003954926808008169
+2017-01,0.006415562913907285,0.09044368600682594,0.003926038500506586,0.028199144301828082
+---------

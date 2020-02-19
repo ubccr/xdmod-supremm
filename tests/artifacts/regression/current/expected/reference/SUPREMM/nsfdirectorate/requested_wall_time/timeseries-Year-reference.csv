@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Engineering] Wall Hours: Requested: Total","[Biological Sciences] Wall Hours: Requested: Total","[Mathematical and Physical Sciences] Wall Hours: Requested: Total"
+2016,144,0,7.333333333333333
+2017,0,9.883333333333333,0
+---------

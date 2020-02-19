@@ -1,0 +1,11 @@
+title
+"Wall Hours: Per Job: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[meapi] Wall Hours: Per Job","[egygo] Wall Hours: Per Job","[whimb] Wall Hours: Per Job","[dunli] Wall Hours: Per Job"
+"2016 Q4",65.87416666666667,20.072222222222223,7.0425,0
+"2017 Q1",0,0,0,1.5211805555555553
+---------

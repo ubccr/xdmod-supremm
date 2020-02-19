@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[&lt; 100] Avg: CPU User Imbalance: weighted by core-hour (%)","[100 - 1k] Avg: CPU User Imbalance: weighted by core-hour (%)","[10M - 100M] Avg: CPU User Imbalance: weighted by core-hour (%)"
+"2016 Q4",99.81704865897794,0.15346245747039997,0.9502148181129071
+"2017 Q1",67.33872807975644,0,32.53012048192771
+---------

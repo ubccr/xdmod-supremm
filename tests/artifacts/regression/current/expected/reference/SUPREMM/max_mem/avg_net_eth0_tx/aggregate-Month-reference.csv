@@ -1,0 +1,13 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+NA,7760.028421633554
+"&lt; 10",5634126.214318941
+"20 - 30",3296.038222073229
+"40 - 50",1305981.5608712563
+---------

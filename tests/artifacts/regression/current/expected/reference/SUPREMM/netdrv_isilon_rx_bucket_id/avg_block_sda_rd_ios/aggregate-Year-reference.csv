@@ -1,0 +1,10 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by isilon bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"isilon bytes received","Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+NA,0.0033914895316075836
+---------

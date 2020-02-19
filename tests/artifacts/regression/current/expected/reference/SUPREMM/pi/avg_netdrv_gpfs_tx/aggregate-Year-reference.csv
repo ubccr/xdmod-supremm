@@ -1,0 +1,13 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+Dunlin,116618.20773281596
+Nuthatch,401.2711340002373
+Fieldfare,0
+"White, Great",0
+---------

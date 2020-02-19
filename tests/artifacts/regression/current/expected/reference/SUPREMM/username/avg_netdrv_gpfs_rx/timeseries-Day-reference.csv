@@ -1,0 +1,14 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[egygo] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[dunli] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[meapi] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[whimb] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,0,0,0
+2016-12-29,24777.137709066465,0,0,0
+2016-12-30,24777.13770906647,0,0,0
+2016-12-31,0,0,0,0
+2017-01-01,0,24080.867991764335,0,0
+---------

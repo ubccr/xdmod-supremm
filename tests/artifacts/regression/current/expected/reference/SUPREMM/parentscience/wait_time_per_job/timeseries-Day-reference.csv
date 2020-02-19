@@ -1,0 +1,14 @@
+title
+"Wait Hours: Per Job: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Electrical and Communication Systems] Wait Hours: Per Job","[Environmental Biology] Wait Hours: Per Job","[Astronomical Sciences] Wait Hours: Per Job","[Mechanical and Structural Systems] Wait Hours: Per Job"
+2016-12-28,110.12305555555555,0,0,0
+2016-12-29,0,0,0,0.0011111111111111111
+2016-12-30,0,0,0,0
+2016-12-31,0,0,2.6,0
+2017-01-01,0,7.007222222222222,0,0
+---------

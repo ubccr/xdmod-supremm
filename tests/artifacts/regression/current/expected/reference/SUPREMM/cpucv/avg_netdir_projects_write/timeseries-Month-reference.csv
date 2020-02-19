@@ -1,0 +1,11 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 0.1] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[0.1 - 0.2] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[0.4 - 0.8] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[1.6 - 3.2] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,4467.725321109751,0,0,35546.46916689732
+2017-01,4740.537403267412,9413.037542662116,1164.8939017660043,0
+---------

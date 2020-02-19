@@ -1,0 +1,14 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+96,4206346862.1495547
+36,4104107695.7919683
+24,3529523240.354652
+8,2303814511.81609
+112,761365718.1221551
+---------

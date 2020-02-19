@@ -1,0 +1,14 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Electrical and Communication Systems] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Astronomical Sciences] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Environmental Biology] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Mechanical and Structural Systems] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,472.818067485568,0,0,0
+2016-12-29,472.81806748556806,0,0,0
+2016-12-30,472.81806748556806,0,0,0
+2016-12-31,472.818067485568,0,0,0
+2017-01-01,0,0,0,0
+---------

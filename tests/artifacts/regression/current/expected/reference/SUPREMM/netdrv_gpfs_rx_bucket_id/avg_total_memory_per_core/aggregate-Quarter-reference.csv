@@ -1,0 +1,15 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+NA,4223292642.9357367
+"&lt; 1Mi",3556366326.5185204
+"128Mi - 256Mi",2201477584.957265
+"256Mi - 512Mi",2303814511.81609
+"512Mi - 1Gi",1596530720.8366015
+"8Gi - 16Gi",761365718.1221551
+---------

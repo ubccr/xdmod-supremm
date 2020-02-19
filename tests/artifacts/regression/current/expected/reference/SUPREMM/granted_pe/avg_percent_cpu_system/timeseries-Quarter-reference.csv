@@ -1,0 +1,11 @@
+title
+"Avg CPU %: System: weighted by core-hour: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[8] Avg CPU %: System: weighted by core-hour","[96] Avg CPU %: System: weighted by core-hour","[24] Avg CPU %: System: weighted by core-hour","[112] Avg CPU %: System: weighted by core-hour","[36] Avg CPU %: System: weighted by core-hour"
+"2016 Q4",0,0.9380498678995118,0,0.28332632712743183,0.1700384176652585
+"2017 Q1",2.4642671764884794,40.99354097708083,0.3788043212127041,0,0
+---------

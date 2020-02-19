@@ -1,0 +1,14 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: CPU User Imbalance: weighted by core-hour (%)"
+NA,99.81704865897794
+"0.6 - 0.7",0.15346245747039997
+"0.7 - 0.8",1.280354187420073
+"0.8 - 0.9",0.8482826080657251
+"&gt; 1.2",90.21065697492135
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[wrf] Avg: CPU User CV: weighted by core-hour","[enzo] Avg: CPU User CV: weighted by core-hour","[amber] Avg: CPU User CV: weighted by core-hour"
+"2016 Q4",2.491303567260018,0.000384537731233099,0.002420490384502186
+"2017 Q1",0,0.4355488906481971,0
+---------

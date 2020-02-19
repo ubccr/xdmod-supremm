@@ -1,0 +1,14 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[SUPREMM] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,472.818067485568
+2016-12-29,419.27489749443043
+2016-12-30,294.7562292698213
+2016-12-31,311.4333241581058
+2017-01-01,0
+---------

@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Per Job: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[0.1 - 0.5] Wall Hours: Requested: Per Job","[0.5 - 1.0] Wall Hours: Requested: Per Job","[1.0 - 1.5] Wall Hours: Requested: Per Job","[&gt; 1.5] Wall Hours: Requested: Per Job","[NA] Wall Hours: Requested: Per Job"
+"2016 Q4",0,72,0,0,39.666666666666664
+"2017 Q1",4,4,1.7666666666666666,0.11666666666666667,0
+---------

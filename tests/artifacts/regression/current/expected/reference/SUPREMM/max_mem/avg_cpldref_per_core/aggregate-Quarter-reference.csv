@@ -1,0 +1,13 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Avg: CPLD: Per Core weighted by core-hour"
+NA,4.960459923970878
+"&lt; 10",2.096147669820042
+"20 - 30",2.9824313601295205
+"40 - 50",2.155221659960016
+---------

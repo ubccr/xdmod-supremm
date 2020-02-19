@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Fieldfare] Wait Hours: Total","[Dunlin] Wait Hours: Total","[White, Great] Wait Hours: Total","[Nuthatch] Wait Hours: Total"
+"2016 Q4",110.12305555555555,0,2.6,0.0011111111111111111
+"2017 Q1",0,28.028888888888886,0,0
+---------

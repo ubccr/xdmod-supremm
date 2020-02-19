@@ -1,0 +1,13 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Size","Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+"5 - 8",1.441073512252042
+"17 - 32",1.7400770843194266
+"33 - 64",1.7895055154551072
+"65 - 128",1.4845095973685996
+---------

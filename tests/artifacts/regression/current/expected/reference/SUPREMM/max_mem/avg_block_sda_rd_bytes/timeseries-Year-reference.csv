@@ -1,0 +1,11 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)","[&lt; 10] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)","[20 - 30] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)","[40 - 50] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+2016,0.0014511090901901862,0.07112899196676264,0.08065250667307619,0
+2017,0.13189845474613687,0.28379533520576383,0,0.662777129521587
+---------

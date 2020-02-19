@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[8] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[3] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[1] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[2] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+2016,1187650968.071539,618053200.2575164,0,0
+2017,66121802.674133524,0,283419067.8501799,5964067.065547028
+---------

@@ -1,0 +1,14 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[robertson] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)","[frearson] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0.08065250667307619,0
+2016-12-29,0.08065250667307619,0.0014511090901901857
+2016-12-30,0.08065250667307619,0.0014511090901901862
+2016-12-31,0.07740189067054656,0
+2017-01-01,0.23519163763066203,0
+---------

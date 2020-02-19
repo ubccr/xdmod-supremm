@@ -1,0 +1,14 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+96,468.91484332200014
+8,0
+24,0
+36,0
+112,0
+---------

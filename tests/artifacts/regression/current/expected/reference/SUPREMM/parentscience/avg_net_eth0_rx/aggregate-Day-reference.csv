@@ -1,0 +1,12 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+"Environmental Biology",10384491.307709059
+"Astronomical Sciences",210157.97467755293
+"Electrical and Communication Systems",209360.32179776675
+---------

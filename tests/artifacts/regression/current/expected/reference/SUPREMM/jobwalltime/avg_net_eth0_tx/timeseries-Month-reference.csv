@@ -1,0 +1,11 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[30s - 30min] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[30 - 60min] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[1 - 5hr] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[5 - 10hr] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[18+hr] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,0,0,0,3980.3105878331294,3296.038222073229
+2017-01,140555.44539249147,32954446.61467832,203326.18298470732,0,0
+---------

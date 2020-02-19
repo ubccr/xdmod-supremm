@@ -1,0 +1,10 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by User Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"User Institution","Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+"screw - Screwdriver",1.4965802447612575
+---------

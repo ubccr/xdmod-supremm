@@ -1,0 +1,11 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Goose, Egyptian] Avg CPU %: Idle: weighted by core-hour","[Dunlin] Avg CPU %: Idle: weighted by core-hour","[Whimbrel] Avg CPU %: Idle: weighted by core-hour","[Pipit, Meadow] Avg CPU %: Idle: weighted by core-hour"
+2016,98.34652698593992,0,0.18940480348992947,0.02326493821929595
+2017,0,60.16864723986941,0,0
+---------

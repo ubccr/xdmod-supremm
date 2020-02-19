@@ -1,0 +1,11 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[0.1 - 0.5] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[0.5 - 1.0] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[1.0 - 1.5] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[&gt; 1.5] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[NA] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+2016,0,95081629.37335773,0,0,34129588.90402918
+2017,741082.4356144224,13685414.294663966,277490507.3201089,40532221.21046644,0
+---------

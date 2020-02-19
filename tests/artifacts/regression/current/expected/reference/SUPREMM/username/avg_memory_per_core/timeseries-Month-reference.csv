@@ -1,0 +1,11 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[meapi] Avg: Memory: Per Core weighted by core-hour (bytes)","[whimb] Avg: Memory: Per Core weighted by core-hour (bytes)","[dunli] Avg: Memory: Per Core weighted by core-hour (bytes)","[egygo] Avg: Memory: Per Core weighted by core-hour (bytes)"
+2016-12,1017787434.0461986,551892085.7885988,0,387085867.01000977
+2017-01,0,0,393927260.8251174,0
+---------

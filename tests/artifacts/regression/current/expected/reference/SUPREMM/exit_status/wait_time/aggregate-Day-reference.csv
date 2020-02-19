@@ -1,0 +1,12 @@
+title
+"Wait Hours: Total: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Wait Hours: Total"
+CANCELLED,110.12416666666667
+COMPLETED,11.553888888888888
+TIMEOUT,19.075
+---------

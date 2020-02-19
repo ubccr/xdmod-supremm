@@ -1,0 +1,12 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Group","Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+"Quantum Electronics, Waves, and Beams",1187650968.071539
+"Stellar Astronomy and Astrophysics",618053200.2575164
+"Systematic and Population Biology",44923178.16478305
+---------

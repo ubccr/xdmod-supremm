@@ -1,0 +1,14 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[chapti] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[crumpet] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,80859953.01695362,0
+2016-12-29,80859953.01695362,19.229986951880115
+2016-12-30,80859953.01695362,19.229986951880115
+2016-12-31,53260601.77578942,0
+2017-01-01,399276.1550522648,0
+---------

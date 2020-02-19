@@ -1,0 +1,14 @@
+title
+"Avg CPU %: System: weighted by core-hour: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Systematic and Population Biology] Avg CPU %: System: weighted by core-hour","[Quantum Electronics, Waves, and Beams] Avg CPU %: System: weighted by core-hour","[Structures and Building Systems] Avg CPU %: System: weighted by core-hour","[Stellar Astronomy and Astrophysics] Avg CPU %: System: weighted by core-hour"
+2016-12-28,0,0.9380498678995118,0,0
+2016-12-29,0,0.9380498678995118,0.2833263271274318,0
+2016-12-30,0,0.9380498678995118,0.28332632712743183,0
+2016-12-31,0,0.9380498678995117,0,0.1700384176652585
+2017-01-01,13.66903932956048,0,0,0
+---------

@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[SUPREMM] CPU Hours: Idle: Total"
+"2016 Q4",2212.8687998583537
+"2017 Q1",97.87032160037158
+---------

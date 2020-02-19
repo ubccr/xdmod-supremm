@@ -1,0 +1,14 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Avg: CPLD: Per Core weighted by core-hour"
+"30s - 30min",2.1089584531875594
+"30 - 60min",2.03028449404106
+"1 - 5hr",4.663841886678181
+"5 - 10hr",2.109724027027582
+18+hr,2.98243136012952
+---------

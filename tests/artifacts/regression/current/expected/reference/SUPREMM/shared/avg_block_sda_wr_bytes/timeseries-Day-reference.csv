@@ -1,0 +1,14 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[Exclusive] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,19.481343850017076
+2016-12-29,19.627059671102618
+2016-12-30,19.965932770768372
+2016-12-31,20.08559741026157
+2017-01-01,19.252573645866327
+---------

@@ -1,0 +1,15 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg: CPU User CV: weighted by core-hour"
+NA,0.0023420139116771075
+"&lt; 1Mi",0.6768662926552396
+"128Mi - 256Mi",0.11478611575960022
+"256Mi - 512Mi",0.00290302323892242
+"512Mi - 1Gi",0.09834036104938328
+"8Gi - 16Gi",2.491303567260018
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User CV","Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+"&lt; 0.1",0.004017212182116962
+"0.1 - 0.2",0.09044368600682594
+"0.4 - 0.8",0.006415562913907285
+"1.6 - 3.2",0.0006504290063659009
+---------

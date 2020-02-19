@@ -1,0 +1,11 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[30s - 30min] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[30 - 60min] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[1 - 5hr] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[5 - 10hr] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[18+hr] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+2016,0,0,0,3694.7268830776106,11034.129801298046
+2017,9413.037542662116,5807.017857142857,1210.1303099548836,0,0
+---------

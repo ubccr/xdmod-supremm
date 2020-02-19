@@ -1,0 +1,10 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by GPU0 Usage Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"GPU0 Usage Value","Avg: CPI: Per Core weighted by core-hour"
+NA,0.7415078280696513
+---------

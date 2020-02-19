@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 100] CPU Hours: Idle: Total","[100 - 1k] CPU Hours: Idle: Total","[10M - 100M] CPU Hours: Idle: Total"
+2016-12,2210.917345779028,0.4801979982880181,1.4712560810377002
+2017-01,96.57144058383645,0,1.298881016535133
+---------

@@ -1,0 +1,11 @@
+title
+"CPU Hours: System: Total: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[0.1 - 0.5] CPU Hours: System: Total","[0.5 - 1.0] CPU Hours: System: Total","[1.0 - 1.5] CPU Hours: System: Total","[&gt; 1.5] CPU Hours: System: Total","[NA] CPU Hours: System: Total"
+"2016 Q4",0,59.32152320607081,0,0,6.80052607975551
+"2017 Q1",0.3503127834452453,21.57899997033535,0.2815835960334169,0.02316302364906677,0
+---------

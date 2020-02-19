@@ -1,0 +1,14 @@
+title
+"Wait Hours: Total: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Wait Hours: Total"
+"0.1 - 0.5",19.075
+"0.5 - 1.0",113.26055555555556
+"1.0 - 1.5",2.8280555555555558
+"&gt; 1.5",2.9883333333333333
+NA,2.6011111111111114
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+"Electrical and Communication Systems",472.818067485568
+"Astronomical Sciences",0
+"Environmental Biology",0
+"Mechanical and Structural Systems",0
+---------

@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Wait Hours: Total","[&lt; 1Mi] Wait Hours: Total","[128Mi - 256Mi] Wait Hours: Total","[256Mi - 512Mi] Wait Hours: Total","[512Mi - 1Gi] Wait Hours: Total","[8Gi - 16Gi] Wait Hours: Total"
+"2016 Q4",112.72305555555555,0,0,0,0,0.0011111111111111111
+"2017 Q1",0,19.075,2.9883333333333333,2.8280555555555558,3.1375,0
+---------

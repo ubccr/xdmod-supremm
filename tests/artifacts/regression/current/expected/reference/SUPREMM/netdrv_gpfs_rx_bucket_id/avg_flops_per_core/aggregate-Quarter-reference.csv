@@ -1,0 +1,14 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+NA,1165695632.4819276
+"&lt; 1Mi",6946.687278674577
+"128Mi - 256Mi",300689039.7733219
+"256Mi - 512Mi",283419067.8501799
+"512Mi - 1Gi",66121802.674133524
+---------

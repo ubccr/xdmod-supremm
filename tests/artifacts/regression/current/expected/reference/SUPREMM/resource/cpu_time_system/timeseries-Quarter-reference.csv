@@ -1,0 +1,11 @@
+title
+"CPU Hours: System: Total: by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[robertson] CPU Hours: System: Total","[frearson] CPU Hours: System: Total"
+"2016 Q4",59.75262160637754,6.369427679448781
+"2017 Q1",22.234059373463076,0
+---------

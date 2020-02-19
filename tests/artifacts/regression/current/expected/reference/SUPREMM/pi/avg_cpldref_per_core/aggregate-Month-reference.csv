@@ -1,0 +1,12 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Avg: CPLD: Per Core weighted by core-hour"
+Dunlin,3.780889715758247
+Fieldfare,2.9824313601295205
+"White, Great",2.109724027027582
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[dunli] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[whimb] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[meapi] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016,0,3980.3105878331294,3296.038222073229
+2017,10441861.782546721,0,0
+---------

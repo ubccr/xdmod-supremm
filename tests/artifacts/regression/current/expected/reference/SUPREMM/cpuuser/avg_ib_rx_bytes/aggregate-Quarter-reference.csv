@@ -1,0 +1,13 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User Value","Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+"&lt; 10",21.06693193122069
+"30 - 40",34411950.402730376
+"50 - 60",54.65653495440729
+"&gt; 90",77541138.75694673
+---------

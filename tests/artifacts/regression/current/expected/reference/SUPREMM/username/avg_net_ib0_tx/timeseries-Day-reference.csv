@@ -1,0 +1,14 @@
+title
+"Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[dunli] Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)","[egygo] Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)","[meapi] Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)","[whimb] Avg: ib0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,0,0,0
+2016-12-29,0,0,0,0
+2016-12-30,0,0,0,0
+2016-12-31,0,0,0,0
+2017-01-01,0,0,0,0
+---------

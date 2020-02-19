@@ -1,0 +1,12 @@
+title
+"CPU Hours: Idle: Total: by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"InfiniBand Receive rate","CPU Hours: Idle: Total"
+"&lt; 100",2307.488786362864
+"100 - 1k",0.4801979982880181
+"10M - 100M",2.7701370975728334
+---------

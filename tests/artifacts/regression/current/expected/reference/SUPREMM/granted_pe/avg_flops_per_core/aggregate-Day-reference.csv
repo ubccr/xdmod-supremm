@@ -1,0 +1,13 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+96,1178392481.479
+36,618053200.2575164
+8,283419067.8501799
+24,5964067.065547028
+---------

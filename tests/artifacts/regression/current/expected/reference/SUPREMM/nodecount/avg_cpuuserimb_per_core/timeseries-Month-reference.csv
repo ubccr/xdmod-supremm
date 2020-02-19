@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[7] Avg: CPU User Imbalance: weighted by core-hour (%)","[2] Avg: CPU User Imbalance: weighted by core-hour (%)","[8] Avg: CPU User Imbalance: weighted by core-hour (%)","[1] Avg: CPU User Imbalance: weighted by core-hour (%)","[3] Avg: CPU User Imbalance: weighted by core-hour (%)"
+2016-12,99.81704865897794,0,0.9502148181129071,0,0.15346245747039997
+2017-01,0,89.06788889104502,39.78213515601876,0.8482826080657251,0
+---------

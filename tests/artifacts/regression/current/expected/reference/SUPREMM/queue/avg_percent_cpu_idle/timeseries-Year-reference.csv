@@ -1,0 +1,11 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[crumpet] Avg CPU %: Idle: weighted by core-hour","[chapti] Avg CPU %: Idle: weighted by core-hour"
+2016,98.34652698593992,0.029668854637066314
+2017,0,60.16864723986941
+---------

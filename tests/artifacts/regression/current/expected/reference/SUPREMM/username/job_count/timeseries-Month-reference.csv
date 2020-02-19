@@ -1,0 +1,11 @@
+title
+"Number of Jobs Ended: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[dunli] Number of Jobs Ended","[egygo] Number of Jobs Ended","[meapi] Number of Jobs Ended","[whimb] Number of Jobs Ended"
+2016-12,0,1,1,1
+2017-01,4,0,0,0
+---------

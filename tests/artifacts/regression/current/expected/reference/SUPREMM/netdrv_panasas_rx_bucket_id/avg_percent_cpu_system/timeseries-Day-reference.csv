@@ -1,0 +1,14 @@
+title
+"Avg CPU %: System: weighted by core-hour: by panasas bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg CPU %: System: weighted by core-hour"
+2016-12-28,0.9380498678995118
+2016-12-29,0.8427888993762784
+2016-12-30,0.645960658087639
+2016-12-31,0.6759081705068034
+2017-01-01,13.66903932956048
+---------

@@ -1,0 +1,11 @@
+title
+"CPU Hours: Total: by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[chapti] CPU Hours: Total","[crumpet] CPU Hours: Total"
+2016,6577.45,2248.088888888889
+2017,162.66000000000003,0
+---------

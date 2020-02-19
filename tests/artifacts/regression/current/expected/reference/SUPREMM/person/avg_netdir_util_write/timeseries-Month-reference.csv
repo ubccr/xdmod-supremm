@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Pipit, Meadow] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Dunlin] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Goose, Egyptian] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[Whimbrel] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,472.818067485568,0,0,0
+2017-01,0,0,0,0
+---------

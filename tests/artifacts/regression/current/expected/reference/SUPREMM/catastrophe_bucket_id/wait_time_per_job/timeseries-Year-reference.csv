@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[0.1 - 0.5] Wait Hours: Per Job","[0.5 - 1.0] Wait Hours: Per Job","[1.0 - 1.5] Wait Hours: Per Job","[&gt; 1.5] Wait Hours: Per Job","[NA] Wait Hours: Per Job"
+2016,0,110.12305555555555,0,0,1.3005555555555557
+2017,19.075,3.1375,2.8280555555555558,2.9883333333333333,0
+---------

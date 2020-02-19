@@ -1,0 +1,14 @@
+title
+"Avg: Total Memory: Per Core weighted by core-hour (bytes): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","Avg: Total Memory: Per Core weighted by core-hour (bytes)"
+8,4206346862.1495547
+3,4104107695.7919683
+2,3529523240.354652
+1,2303814511.81609
+7,761365718.1221551
+---------

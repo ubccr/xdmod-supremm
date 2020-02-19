@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Per Job: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[&lt; 0.1] Wall Hours: Requested: Per Job","[0.1 - 0.2] Wall Hours: Requested: Per Job","[0.4 - 0.8] Wall Hours: Requested: Per Job","[1.6 - 3.2] Wall Hours: Requested: Per Job"
+"2016 Q4",39.666666666666664,0,0,72
+"2017 Q1",2.8833333333333333,0.11666666666666667,4,0
+---------

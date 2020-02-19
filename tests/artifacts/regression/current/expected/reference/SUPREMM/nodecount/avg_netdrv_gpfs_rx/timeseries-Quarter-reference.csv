@@ -1,0 +1,11 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[1] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[7] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[2] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[8] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[3] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",0,24777.137709066472,0,0,0
+"2017 Q1",75575.3553092182,0,5549.7426127527215,42022.16565349544,0
+---------

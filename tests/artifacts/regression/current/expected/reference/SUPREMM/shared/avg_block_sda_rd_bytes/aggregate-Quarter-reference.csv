@@ -1,0 +1,10 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Share Mode","Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+Exclusive,0.06761473406318157
+---------

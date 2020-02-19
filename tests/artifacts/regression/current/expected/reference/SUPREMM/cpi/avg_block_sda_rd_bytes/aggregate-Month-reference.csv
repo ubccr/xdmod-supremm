@@ -1,0 +1,14 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+NA,0.0014511090901901862
+"0.6 - 0.7",0.07112899196676264
+"0.7 - 0.8",0.08239119460438535
+"0.8 - 0.9",0.662777129521587
+"&gt; 1.2",0.13189845474613687
+---------

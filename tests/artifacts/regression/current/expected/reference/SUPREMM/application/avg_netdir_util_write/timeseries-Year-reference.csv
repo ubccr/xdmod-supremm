@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[amber] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[enzo] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[wrf] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+2016,472.818067485568,0,0
+2017,0,0,0
+---------

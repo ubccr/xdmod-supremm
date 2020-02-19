@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Fieldfare] Wait Hours: Per Job","[Dunlin] Wait Hours: Per Job","[White, Great] Wait Hours: Per Job","[Nuthatch] Wait Hours: Per Job"
+2016-12,110.12305555555555,0,2.6,0.0011111111111111111
+2017-01,0,7.007222222222222,0,0
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Avg: CPI: Per Core weighted by core-hour"
+NA,1.2972810243580384
+"&lt; 10",0.6855790648927249
+"20 - 30",0.735533090751615
+"40 - 50",0.8558715448360987
+---------

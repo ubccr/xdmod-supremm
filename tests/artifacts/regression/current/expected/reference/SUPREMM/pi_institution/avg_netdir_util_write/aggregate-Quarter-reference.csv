@@ -1,0 +1,10 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by PI Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"PI Institution","Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+"screw - Screwdriver",354.61369080162734
+---------

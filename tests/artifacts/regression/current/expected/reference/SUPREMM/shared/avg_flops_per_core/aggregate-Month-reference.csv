@@ -1,0 +1,10 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Share Mode","Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+Exclusive,1138647876.9676664
+---------

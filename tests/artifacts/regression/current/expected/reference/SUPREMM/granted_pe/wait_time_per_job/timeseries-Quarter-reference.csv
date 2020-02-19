@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[96] Wait Hours: Per Job","[24] Wait Hours: Per Job","[8] Wait Hours: Per Job","[36] Wait Hours: Per Job","[112] Wait Hours: Per Job"
+"2016 Q4",110.12305555555555,0,0,2.6,0.0011111111111111111
+"2017 Q1",3.1375,11.031666666666666,2.8280555555555558,0,0
+---------

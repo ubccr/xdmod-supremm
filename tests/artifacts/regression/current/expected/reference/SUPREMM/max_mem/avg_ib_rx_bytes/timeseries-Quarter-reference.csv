@@ -1,0 +1,11 @@
+title
+"Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[&lt; 10] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[20 - 30] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[40 - 50] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",19.229986951880115,562.9120025243561,80859953.01695362,0
+"2017 Q1",53.115894039735096,1231302.116986201,0,83.84597432905484
+---------

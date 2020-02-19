@@ -1,0 +1,11 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[pcp] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+"2016 Q4",1.493755886819776
+"2017 Q1",1.635195597085841
+---------

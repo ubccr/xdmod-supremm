@@ -1,0 +1,12 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+CANCELLED,95081629.37335773
+COMPLETED,39503174.31508429
+TIMEOUT,741082.4356144224
+---------

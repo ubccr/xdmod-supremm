@@ -1,0 +1,13 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+NA,20.642143407402973
+"&lt; 10",21.16445795514783
+"20 - 30",19.48134385001708
+"40 - 50",19.008556981719174
+---------

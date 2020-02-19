@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[amber] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[enzo] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+2016,1187650968.071539,618053200.2575164
+2017,0,44923178.16478305
+---------

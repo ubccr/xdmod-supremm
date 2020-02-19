@@ -1,0 +1,13 @@
+title
+"Wall Hours: Requested: Total: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User Value","Wall Hours: Requested: Total"
+"&lt; 10",76
+"30 - 40",0.11666666666666667
+"50 - 60",4
+"&gt; 90",81.1
+---------

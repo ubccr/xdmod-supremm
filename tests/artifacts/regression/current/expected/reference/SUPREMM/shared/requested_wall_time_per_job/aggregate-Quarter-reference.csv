@@ -1,0 +1,10 @@
+title
+"Wall Hours: Requested: Per Job: by Share Mode"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Share Mode","Wall Hours: Requested: Per Job"
+Exclusive,23.03095238095238
+---------

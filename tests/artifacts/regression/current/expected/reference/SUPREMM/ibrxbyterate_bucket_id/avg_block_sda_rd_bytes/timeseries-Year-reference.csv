@@ -1,0 +1,11 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 100] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)","[100 - 1k] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)","[10M - 100M] Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+2016,0.0014511090901901862,0.07112899196676264,0.08065250667307619
+2017,0.18371189360253173,0,4.621160409556314
+---------

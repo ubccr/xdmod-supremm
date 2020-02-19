@@ -1,0 +1,14 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+NA,401.27113400023717
+"0.6 - 0.7",0
+"0.7 - 0.8",933.2904266093353
+"0.8 - 0.9",785419.4507973552
+"&gt; 1.2",2279.610375275938
+---------

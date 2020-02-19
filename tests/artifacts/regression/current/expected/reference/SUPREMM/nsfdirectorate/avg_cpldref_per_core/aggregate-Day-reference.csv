@@ -1,0 +1,12 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Avg: CPLD: Per Core weighted by core-hour"
+"Biological Sciences",3.780889715758247
+Engineering,2.98243136012952
+"Mathematical and Physical Sciences",2.109724027027582
+---------

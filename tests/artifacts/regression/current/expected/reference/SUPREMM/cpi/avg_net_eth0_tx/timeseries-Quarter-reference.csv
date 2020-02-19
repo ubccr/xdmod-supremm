@@ -1,0 +1,11 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[0.6 - 0.7] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[0.7 - 0.8] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[0.8 - 0.9] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[&gt; 1.2] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",3980.3105878331294,3296.038222073229,0,0
+"2017 Q1",0,31780375.285749175,1305981.5608712563,7760.028421633554
+---------

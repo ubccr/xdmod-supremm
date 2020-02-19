@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[meapi] Wait Hours: Total","[dunli] Wait Hours: Total","[whimb] Wait Hours: Total","[egygo] Wait Hours: Total"
+2016-12,110.12305555555555,0,2.6,0.0011111111111111111
+2017-01,0,28.028888888888886,0,0
+---------

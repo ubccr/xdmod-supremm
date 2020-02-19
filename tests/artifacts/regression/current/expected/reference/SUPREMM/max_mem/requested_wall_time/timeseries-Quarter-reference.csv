@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Wall Hours: Requested: Total","[&lt; 10] Wall Hours: Requested: Total","[20 - 30] Wall Hours: Requested: Total","[40 - 50] Wall Hours: Requested: Total"
+"2016 Q4",72,7.333333333333333,72,0
+"2017 Q1",4,4.116666666666666,0,1.7666666666666666
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Biological Sciences] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[Engineering] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)","[Mathematical and Physical Sciences] Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+2016-12,0,0.0033200221723215517,0.0020378916367556764
+2017-01,0.008829585049097245,0,0
+---------

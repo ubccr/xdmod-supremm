@@ -1,0 +1,14 @@
+title
+"CPU Hours: System: Total: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","CPU Hours: System: Total"
+8,80.90052317640615
+7,6.36942767944878
+3,0.43109840030672986
+2,0.37347580709431205
+1,0.2815835960334169
+---------

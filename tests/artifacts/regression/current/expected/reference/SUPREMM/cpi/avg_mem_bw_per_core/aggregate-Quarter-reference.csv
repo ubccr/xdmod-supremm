@@ -1,0 +1,13 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+"0.6 - 0.7",34129588.90402918
+"0.7 - 0.8",94393185.26271011
+"0.8 - 0.9",277490507.3201089
+"&gt; 1.2",741082.4356144224
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 10] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[30 - 40] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[50 - 60] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[&gt; 90] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+2016-12,0,0,0,1165695632.4819276
+2017-01,6946.687278674577,300689039.7733219,66121802.674133524,283419067.8501799
+---------

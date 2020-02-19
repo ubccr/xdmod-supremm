@@ -1,0 +1,13 @@
+title
+"Wait Hours: Per Job: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User Value","Wait Hours: Per Job"
+"&lt; 10",9.538055555555555
+"30 - 40",2.9883333333333333
+"50 - 60",3.1375
+"&gt; 90",38.517037037037035
+---------

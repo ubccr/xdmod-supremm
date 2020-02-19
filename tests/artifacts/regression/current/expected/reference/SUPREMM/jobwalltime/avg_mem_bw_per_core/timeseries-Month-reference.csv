@@ -1,0 +1,11 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[30s - 30min] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[30 - 60min] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[1 - 5hr] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[5 - 10hr] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[18+hr] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+2016-12,0,0,0,34129588.90402918,95081629.37335773
+2017-01,40532221.21046644,13685414.294663966,30003791.519638084,0,0
+---------

@@ -1,0 +1,11 @@
+title
+"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s): by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Queue,"Avg: block sda read rate: Per Node weighted by node-hour (bytes/s)"
+chapti,0.08415182332574181
+crumpet,0.0014511090901901862
+---------

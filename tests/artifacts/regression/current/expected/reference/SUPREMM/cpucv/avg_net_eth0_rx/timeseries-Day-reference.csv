@@ -1,0 +1,14 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[&lt; 0.1] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[0.1 - 0.2] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[0.4 - 0.8] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,209360.3217977668,0,0
+2016-12-29,209360.32179776678,0,0
+2016-12-30,209360.32179776678,0,0
+2016-12-31,209632.5808634012,0,0
+2017-01-01,24803961.59372313,155779.68259385665,179498.00075883002
+---------

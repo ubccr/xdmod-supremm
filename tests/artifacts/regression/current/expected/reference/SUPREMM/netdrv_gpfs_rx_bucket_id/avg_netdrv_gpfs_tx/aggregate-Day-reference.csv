@@ -1,0 +1,15 @@
+title
+"Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"gpfs bytes received","Avg: gpfs transmit rate: Per Node weighted by node-hour (bytes/s)"
+NA,0
+"&lt; 1Mi",2279.610375275938
+"128Mi - 256Mi",64325.061433447096
+"256Mi - 512Mi",785419.4507973552
+"512Mi - 1Gi",110702.07339159067
+"8Gi - 16Gi",401.27113400023717
+---------

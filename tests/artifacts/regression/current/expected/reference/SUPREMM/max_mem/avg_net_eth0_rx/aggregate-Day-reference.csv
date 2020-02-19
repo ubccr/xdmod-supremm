@@ -1,0 +1,13 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+NA,179498.00075883002
+"&lt; 10",5780255.865021583
+"20 - 30",209360.32179776675
+"40 - 50",196871.43096071566
+---------

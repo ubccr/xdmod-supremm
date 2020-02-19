@@ -1,0 +1,14 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[5 - 8] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[17 - 32] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[33 - 64] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[65 - 128] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+2016-12-28,0,0,0,95081629.37335773
+2016-12-29,0,0,0,95081629.37335773
+2016-12-30,0,0,0,95081629.37335773
+2016-12-31,0,0,34129588.90402918,95081629.37335773
+2017-01-01,277490507.3201089,1529425.3702977437,0,13685414.294663966
+---------

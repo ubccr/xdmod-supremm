@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 0.1] Wait Hours: Per Job","[0.1 - 0.2] Wait Hours: Per Job","[0.4 - 0.8] Wait Hours: Per Job","[1.6 - 3.2] Wait Hours: Per Job"
+2016,56.36152777777777,0,0,0.0011111111111111111
+2017,2.9827777777777778,2.9883333333333333,19.075,0
+---------

@@ -1,0 +1,14 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Node Count","Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+7,35546.46916689731
+8,4509.515667799984
+3,3694.7268830776106
+1,1465.1855309218204
+2,1328.3063087429846
+---------

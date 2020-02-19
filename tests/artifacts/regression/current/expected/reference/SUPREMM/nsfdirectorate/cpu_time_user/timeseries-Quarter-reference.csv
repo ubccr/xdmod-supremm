@@ -1,0 +1,11 @@
+title
+"CPU Hours: User: Total: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[Engineering] CPU Hours: User: Total","[Mathematical and Physical Sciences] CPU Hours: User: Total","[Biological Sciences] CPU Hours: User: Total"
+"2016 Q4",6293.062525833393,252.60931148342394,0
+"2017 Q1",0,0,41.96551512418441
+---------

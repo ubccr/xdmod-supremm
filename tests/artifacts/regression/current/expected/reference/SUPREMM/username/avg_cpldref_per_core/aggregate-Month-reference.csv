@@ -1,0 +1,12 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Avg: CPLD: Per Core weighted by core-hour"
+dunli,3.780889715758247
+meapi,2.9824313601295205
+whimb,2.109724027027582
+---------

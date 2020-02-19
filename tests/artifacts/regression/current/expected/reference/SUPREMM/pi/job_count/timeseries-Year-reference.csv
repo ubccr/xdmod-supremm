@@ -1,0 +1,11 @@
+title
+"Number of Jobs Ended: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Dunlin] Number of Jobs Ended","[Fieldfare] Number of Jobs Ended","[Nuthatch] Number of Jobs Ended","[White, Great] Number of Jobs Ended"
+2016,0,1,1,1
+2017,4,0,0,0
+---------

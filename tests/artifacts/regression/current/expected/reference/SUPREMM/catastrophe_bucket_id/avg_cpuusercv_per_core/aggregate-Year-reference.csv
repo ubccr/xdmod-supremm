@@ -1,0 +1,14 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Catastrophe Rank","Avg: CPU User CV: weighted by core-hour"
+"0.1 - 0.5",0.6768662926552396
+"0.5 - 1.0",0.0032123314385813983
+"1.0 - 1.5",0.00290302323892242
+"&gt; 1.5",0.11478611575960022
+NA,2.238857959193424
+---------

@@ -1,0 +1,13 @@
+title
+"Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Size","Avg: block sda read ops rate: Per Node weighted by node-hour (ops/s)"
+"5 - 8",0.028199144301828082
+"17 - 32",0.008080329974981405
+"33 - 64",0.0020378916367556764
+"65 - 128",0.0033239787860697176
+---------

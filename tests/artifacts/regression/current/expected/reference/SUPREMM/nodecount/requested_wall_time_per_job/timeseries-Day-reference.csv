@@ -1,0 +1,14 @@
+title
+"Wall Hours: Requested: Per Job: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[7] Wall Hours: Requested: Per Job","[8] Wall Hours: Requested: Per Job","[3] Wall Hours: Requested: Per Job","[2] Wall Hours: Requested: Per Job","[1] Wall Hours: Requested: Per Job"
+2016-12-28,0,13.966265791826201,0,0,0
+2016-12-29,12.564453854776435,26.231720275945825,0,0,0
+2016-12-30,59.43554614522356,26.231720275945825,0,0,0
+2016-12-31,0,5.570293656282153,7.333333333333333,0,0
+2017-01-01,0,4,0,2.058333333333333,1.7666666666666666
+---------

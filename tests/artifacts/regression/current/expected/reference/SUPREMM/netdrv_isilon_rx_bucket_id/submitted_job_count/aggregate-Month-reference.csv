@@ -1,0 +1,10 @@
+title
+"Number of Jobs Submitted: by isilon bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"isilon bytes received","Number of Jobs Submitted"
+NA,6
+---------

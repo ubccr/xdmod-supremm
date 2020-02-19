@@ -1,0 +1,11 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by PI Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[screw - Screwdriver] Avg: Memory: Per Core weighted by core-hour (bytes)"
+"2016 Q4",843748018.2053838
+"2017 Q1",393927260.8251174
+---------

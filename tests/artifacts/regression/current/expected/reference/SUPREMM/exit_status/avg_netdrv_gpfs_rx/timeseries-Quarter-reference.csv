@@ -1,0 +1,11 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[CANCELLED] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[COMPLETED] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[TIMEOUT] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",5215.4775938037355,0,0
+"2017 Q1",0,56521.91538104089,0.7307188189845475
+---------

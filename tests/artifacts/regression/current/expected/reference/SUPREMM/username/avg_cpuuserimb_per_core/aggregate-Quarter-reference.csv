@@ -1,0 +1,13 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Avg: CPU User Imbalance: weighted by core-hour (%)"
+egygo,99.81704865897794
+dunli,66.92072234074402
+meapi,0.9502148181129071
+whimb,0.15346245747039997
+---------

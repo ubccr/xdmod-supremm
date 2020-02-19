@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Resource,"CPU Hours: Idle: Total"
+frearson,2210.917345779028
+robertson,99.8217756796973
+---------

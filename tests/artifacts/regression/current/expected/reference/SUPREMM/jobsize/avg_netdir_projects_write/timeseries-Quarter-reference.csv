@@ -1,0 +1,11 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Job Size"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[5 - 8] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[17 - 32] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[33 - 64] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[65 - 128] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",0,0,3694.7268830776106,11034.129801298046
+"2017 Q1",1465.1855309218204,1328.3063087429846,0,5807.017857142857
+---------

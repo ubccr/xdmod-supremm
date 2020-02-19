@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[30s - 30min] Avg: CPU User Imbalance: weighted by core-hour (%)","[30 - 60min] Avg: CPU User Imbalance: weighted by core-hour (%)","[1 - 5hr] Avg: CPU User Imbalance: weighted by core-hour (%)","[5 - 10hr] Avg: CPU User Imbalance: weighted by core-hour (%)","[18+hr] Avg: CPU User Imbalance: weighted by core-hour (%)"
+"2016 Q4",0,0,0,0.15346245747039997,26.878959587074803
+"2017 Q1",32.53012048192771,39.78213515601876,80.76172979017178,0,0
+---------

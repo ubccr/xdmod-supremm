@@ -1,0 +1,11 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[CANCELLED] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[COMPLETED] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)","[TIMEOUT] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+2016,209360.32179776678,210157.97467755293,0
+2017,0,24132779.688522305,179498.00075883002
+---------

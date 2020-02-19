@@ -1,0 +1,13 @@
+title
+"CPU Hours: Total: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Peak Memory Usage (%)","CPU Hours: Total"
+NA,2344.728888888889
+"&lt; 10",308.12333333333333
+"20 - 30",6323.92
+"40 - 50",11.426666666666666
+---------

@@ -1,0 +1,14 @@
+title
+"Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s): by PI Institution"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[screw - Screwdriver] Avg: eth0 receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,209360.3217977668
+2016-12-29,209360.32179776678
+2016-12-30,209360.32179776678
+2016-12-31,209632.5808634012
+2017-01-01,10384491.307709059
+---------

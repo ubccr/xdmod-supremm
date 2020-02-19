@@ -1,0 +1,13 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Department,"Avg CPU %: Idle: weighted by core-hour"
+"Mechanical and Structural Systems",98.34652698593992
+"Environmental Biology",60.16864723986941
+"Astronomical Sciences",0.18940480348992947
+"Electrical and Communication Systems",0.02326493821929595
+---------

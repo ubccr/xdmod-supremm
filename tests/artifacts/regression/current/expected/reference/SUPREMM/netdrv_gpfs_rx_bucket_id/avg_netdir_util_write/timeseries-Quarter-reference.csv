@@ -1,0 +1,11 @@
+title
+"Avg: /util write rate: Per Node weighted by node-hour (bytes/s): by gpfs bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[NA] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[&lt; 1Mi] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[128Mi - 256Mi] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[256Mi - 512Mi] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[512Mi - 1Gi] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)","[8Gi - 16Gi] Avg: /util write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",454.5931376647992,0,0,0,0,0
+"2017 Q1",0,0,0,0,0,0
+---------

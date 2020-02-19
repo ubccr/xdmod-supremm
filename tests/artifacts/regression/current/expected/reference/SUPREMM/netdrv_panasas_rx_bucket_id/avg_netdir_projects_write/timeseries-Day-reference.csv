@@ -1,0 +1,14 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by panasas bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,4498.715323196161
+2016-12-29,8014.645183357499
+2016-12-30,16191.204468713406
+2016-12-31,4224.293770870986
+2017-01-01,2742.4583069369655
+---------

@@ -1,0 +1,10 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Datasource,"Avg: Memory: Per Core weighted by core-hour (bytes)"
+pcp,835607583.6978737
+---------

@@ -1,0 +1,12 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Exit Status"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Exit Status","Avg: CPU User CV: weighted by core-hour"
+CANCELLED,0.6551531768986308
+COMPLETED,0.017310329781357856
+TIMEOUT,0.6768662926552396
+---------

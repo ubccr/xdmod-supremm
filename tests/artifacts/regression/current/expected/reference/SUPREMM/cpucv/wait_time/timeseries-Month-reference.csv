@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[&lt; 0.1] Wait Hours: Total","[0.1 - 0.2] Wait Hours: Total","[0.4 - 0.8] Wait Hours: Total","[1.6 - 3.2] Wait Hours: Total"
+2016-12,112.72305555555555,0,0,0.0011111111111111111
+2017-01,5.9655555555555555,2.9883333333333333,19.075,0
+---------

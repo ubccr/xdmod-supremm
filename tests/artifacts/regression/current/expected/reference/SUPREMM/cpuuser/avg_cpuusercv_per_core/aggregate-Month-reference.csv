@@ -1,0 +1,13 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User Value","Avg: CPU User CV: weighted by core-hour"
+"&lt; 10",2.4165199882079857
+"30 - 40",0.11478611575960022
+"50 - 60",0.09834036104938328
+"&gt; 90",0.0023429868342105882
+---------

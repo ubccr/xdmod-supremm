@@ -1,0 +1,10 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by isilon bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"isilon bytes received","Avg CPU %: Idle: weighted by core-hour"
+NA,25.70858911806274
+---------

@@ -1,0 +1,12 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+Engineering,95081629.37335773
+"Mathematical and Physical Sciences",34129588.90402918
+"Biological Sciences",24849273.848053884
+---------

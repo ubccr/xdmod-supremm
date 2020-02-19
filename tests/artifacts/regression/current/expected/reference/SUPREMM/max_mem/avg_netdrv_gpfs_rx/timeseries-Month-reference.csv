@@ -1,0 +1,11 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[&lt; 10] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[20 - 30] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)","[40 - 50] Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,24777.137709066472,0,0,0
+2017-01,0.7307188189845475,50539.94028574917,0,75575.3553092182
+---------

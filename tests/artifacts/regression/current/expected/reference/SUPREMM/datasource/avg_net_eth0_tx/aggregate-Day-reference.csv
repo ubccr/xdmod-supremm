@@ -1,0 +1,10 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by Datasource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Datasource,"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+pcp,263864.616186213
+---------

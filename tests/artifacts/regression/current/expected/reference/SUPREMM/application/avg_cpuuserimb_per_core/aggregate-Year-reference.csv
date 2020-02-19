@@ -1,0 +1,12 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Application,"Avg: CPU User Imbalance: weighted by core-hour (%)"
+wrf,99.81704865897794
+enzo,26.248184802104557
+amber,0.9502148181129071
+---------

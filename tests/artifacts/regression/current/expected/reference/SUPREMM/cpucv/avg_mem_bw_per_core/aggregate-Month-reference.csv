@@ -1,0 +1,12 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by CPU User CV"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User CV","Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+"&lt; 0.1",92423570.5258666
+"0.1 - 0.2",40532221.21046644
+"0.4 - 0.8",741082.4356144224
+---------

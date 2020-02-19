@@ -1,0 +1,13 @@
+title
+"Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s): by CPU User Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPU User Value","Avg: gpfs receive rate: Per Node weighted by node-hour (bytes/s)"
+"&lt; 10",23434.016029932016
+"30 - 40",280083.7918088737
+"50 - 60",42022.16565349544
+"&gt; 90",196.42791894568123
+---------

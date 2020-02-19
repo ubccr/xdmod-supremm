@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Per Job: by isilon bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Wall Hours: Requested: Per Job"
+2016,50.444444444444436
+2017,2.470833333333333
+---------

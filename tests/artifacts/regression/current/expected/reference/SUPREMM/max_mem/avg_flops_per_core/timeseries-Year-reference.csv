@@ -1,0 +1,11 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[NA] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[&lt; 10] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[20 - 30] Avg: FLOPS: Per Core weighted by core-hour (ops/s)","[40 - 50] Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+2016,0,618053200.2575164,1187650968.071539,0
+2017,6946.687278674577,74514549.09861298,0,283419067.8501799
+---------

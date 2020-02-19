@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by Queue"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Queue,"Wait Hours: Total"
+chapti,140.75194444444443
+crumpet,0.0011111111111111111
+---------

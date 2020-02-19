@@ -1,0 +1,11 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by PI Group"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Systematic and Population Biology] Avg: CPLD: Per Core weighted by core-hour","[Quantum Electronics, Waves, and Beams] Avg: CPLD: Per Core weighted by core-hour","[Stellar Astronomy and Astrophysics] Avg: CPLD: Per Core weighted by core-hour"
+2016-12,0,2.9824313601295205,2.109724027027582
+2017-01,3.780889715758247,0,0
+---------

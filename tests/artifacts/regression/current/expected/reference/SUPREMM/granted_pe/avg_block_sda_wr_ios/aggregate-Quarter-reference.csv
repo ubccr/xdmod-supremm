@@ -1,0 +1,14 @@
+title
+"Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s): by Granted Processing Element"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Granted Processing Element","Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+36,1.7895055154551072
+24,1.7400770843194266
+112,1.5222075046459216
+96,1.474541654643465
+8,1.441073512252042
+---------

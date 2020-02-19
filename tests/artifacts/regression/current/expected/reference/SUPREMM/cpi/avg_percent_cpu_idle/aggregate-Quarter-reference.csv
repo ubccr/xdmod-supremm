@@ -1,0 +1,14 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg CPU %: Idle: weighted by core-hour"
+NA,98.34652698593992
+"0.6 - 0.7",0.18940480348992947
+"0.7 - 0.8",0.05421118207547067
+"0.8 - 0.9",0.8665278367921907
+"&gt; 1.2",99.11495753009484
+---------

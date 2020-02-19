@@ -1,0 +1,11 @@
+title
+"CPU Hours: Idle: Total: by Node Count"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[7] CPU Hours: Idle: Total","[2] CPU Hours: Idle: Total","[8] CPU Hours: Idle: Total","[3] CPU Hours: Idle: Total","[1] CPU Hours: Idle: Total"
+"2016 Q4",2210.917345779028,0,1.4712560810377002,0.4801979982880181,0
+"2017 Q1",0,97.08357597361879,0.6877303792686731,0,0.099015247484121
+---------

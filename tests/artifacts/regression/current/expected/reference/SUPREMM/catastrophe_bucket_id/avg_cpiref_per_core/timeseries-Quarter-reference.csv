@@ -1,0 +1,11 @@
+title
+"Avg: CPI: Per Core weighted by core-hour: by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Quarter,"[0.1 - 0.5] Avg: CPI: Per Core weighted by core-hour","[0.5 - 1.0] Avg: CPI: Per Core weighted by core-hour","[1.0 - 1.5] Avg: CPI: Per Core weighted by core-hour","[&gt; 1.5] Avg: CPI: Per Core weighted by core-hour","[NA] Avg: CPI: Per Core weighted by core-hour"
+"2016 Q4",0,0.735533090751615,0,0,0.6794453050304665
+"2017 Q1",1.2972810243580384,0.7145831457263654,0.8558715448360987,0.7000759878256008,0
+---------

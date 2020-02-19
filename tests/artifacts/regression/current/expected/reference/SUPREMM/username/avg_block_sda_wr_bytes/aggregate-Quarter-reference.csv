@@ -1,0 +1,13 @@
+title
+"Avg: block sda write rate: Per Node weighted by node-hour (bytes/s): by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+whimb,21.251659895607357
+egygo,20.76810130085801
+meapi,19.48134385001708
+dunli,19.252573645866327
+---------

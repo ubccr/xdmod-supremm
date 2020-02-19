@@ -1,0 +1,14 @@
+title
+"Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s): by GPU0 Usage Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[NA] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+2016-12-28,95081629.37335773
+2016-12-29,95081629.37335773
+2016-12-30,95081629.37335773
+2016-12-31,74277159.1492415
+2017-01-01,24849273.848053884
+---------

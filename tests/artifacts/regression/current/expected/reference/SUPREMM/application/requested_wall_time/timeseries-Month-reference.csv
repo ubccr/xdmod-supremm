@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[amber] Wall Hours: Requested: Total","[wrf] Wall Hours: Requested: Total","[enzo] Wall Hours: Requested: Total"
+2016-12,72,72,7.333333333333333
+2017-01,0,0,9.883333333333333
+---------

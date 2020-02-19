@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Total: by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 100] Wall Hours: Requested: Total","[100 - 1k] Wall Hours: Requested: Total","[10M - 100M] Wall Hours: Requested: Total"
+2016,72,7.333333333333333,72
+2017,9.766666666666666,0,0.11666666666666667
+---------

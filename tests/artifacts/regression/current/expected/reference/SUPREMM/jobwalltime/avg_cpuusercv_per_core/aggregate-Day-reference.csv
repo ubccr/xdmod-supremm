@@ -1,0 +1,14 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by Job Wall Time"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Job Wall Time","Avg: CPU User CV: weighted by core-hour"
+"30s - 30min",0.11478611575960022
+"30 - 60min",0.09834036104938328
+"1 - 5hr",0.6056033041432367
+"5 - 10hr",0.000384537731233099
+18+hr,0.6551531768986308
+---------

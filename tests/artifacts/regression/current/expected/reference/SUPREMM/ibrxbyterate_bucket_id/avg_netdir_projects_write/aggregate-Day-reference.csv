@@ -1,0 +1,12 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"InfiniBand Receive rate","Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+"&lt; 100",32592.454193102596
+"100 - 1k",3694.7268830776106
+"10M - 100M",4500.232791045452
+---------

@@ -1,0 +1,13 @@
+title
+"Avg CPU %: Idle: weighted by core-hour: by System Username"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"System Username","Avg CPU %: Idle: weighted by core-hour"
+egygo,98.3465269859399
+dunli,60.16864723986941
+whimb,0.18940480348992947
+meapi,0.02326493821929594
+---------

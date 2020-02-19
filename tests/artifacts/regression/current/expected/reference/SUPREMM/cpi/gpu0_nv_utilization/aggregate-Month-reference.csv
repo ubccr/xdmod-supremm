@@ -1,0 +1,9 @@
+title
+"GPU0 Hours: Total (GPU Hour): by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","GPU0 Hours: Total (GPU Hour)"
+---------

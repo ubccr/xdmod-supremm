@@ -1,0 +1,13 @@
+title
+"CPU Hours: Idle: Total: by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"CPU Hours: Idle: Total"
+Nuthatch,2210.917345779028
+Dunlin,97.87032160037158
+Fieldfare,1.4712560810377002
+"White, Great",0.4801979982880181
+---------

@@ -1,0 +1,11 @@
+title
+"Wait Hours: Per Job: by Peak Memory Usage (%)"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Wait Hours: Per Job","[&lt; 10] Wait Hours: Per Job","[20 - 30] Wait Hours: Per Job","[40 - 50] Wait Hours: Per Job"
+2016-12,0.0011111111111111111,2.6,110.12305555555555,0
+2017-01,19.075,3.0629166666666667,0,2.8280555555555558
+---------

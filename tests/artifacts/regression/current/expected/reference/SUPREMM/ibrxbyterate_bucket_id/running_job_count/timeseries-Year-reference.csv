@@ -1,0 +1,11 @@
+title
+"Number of Jobs Running: by InfiniBand Receive rate"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[&lt; 100] Number of Jobs Running","[100 - 1k] Number of Jobs Running","[10M - 100M] Number of Jobs Running"
+2016,1,1,1
+2017,3,0,1
+---------

@@ -1,0 +1,14 @@
+title
+"Wall Hours: Requested: Per Job: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Wall Hours: Requested: Per Job"
+NA,72
+"0.6 - 0.7",7.333333333333333
+"0.7 - 0.8",25.372222222222224
+"0.8 - 0.9",1.7666666666666666
+"&gt; 1.2",4
+---------

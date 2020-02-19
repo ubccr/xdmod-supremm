@@ -1,0 +1,11 @@
+title
+"Avg: CPLD: Per Core weighted by core-hour: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[0.6 - 0.7] Avg: CPLD: Per Core weighted by core-hour","[0.7 - 0.8] Avg: CPLD: Per Core weighted by core-hour","[0.8 - 0.9] Avg: CPLD: Per Core weighted by core-hour","[&gt; 1.2] Avg: CPLD: Per Core weighted by core-hour"
+2016,2.109724027027582,2.9824313601295205,0,0
+2017,0,2.033099425049721,2.155221659960016,4.960459923970878
+---------

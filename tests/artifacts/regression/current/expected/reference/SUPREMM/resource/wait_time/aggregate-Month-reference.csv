@@ -1,0 +1,11 @@
+title
+"Wait Hours: Total: by Resource"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Resource,"Wait Hours: Total"
+robertson,140.75194444444443
+frearson,0.0011111111111111111
+---------

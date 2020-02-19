@@ -1,0 +1,12 @@
+title
+"Avg: FLOPS: Per Core weighted by core-hour (ops/s): by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+PI,"Avg: FLOPS: Per Core weighted by core-hour (ops/s)"
+Fieldfare,1187650968.071539
+"White, Great",618053200.2575164
+Dunlin,44923178.16478305
+---------

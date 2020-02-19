@@ -1,0 +1,11 @@
+title
+"Avg: CPU User Imbalance: weighted by core-hour (%): by PI"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Nuthatch] Avg: CPU User Imbalance: weighted by core-hour (%)","[Dunlin] Avg: CPU User Imbalance: weighted by core-hour (%)","[Fieldfare] Avg: CPU User Imbalance: weighted by core-hour (%)","[White, Great] Avg: CPU User Imbalance: weighted by core-hour (%)"
+2016,99.81704865897794,0,0.9502148181129071,0.15346245747039997
+2017,0,66.92072234074402,0,0
+---------

@@ -1,0 +1,14 @@
+title
+"Avg: CPU User CV: weighted by core-hour: by CPI Value"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"CPI Value","Avg: CPU User CV: weighted by core-hour"
+NA,2.491303567260018
+"0.6 - 0.7",0.000384537731233099
+"0.7 - 0.8",0.003246499399146983
+"0.8 - 0.9",0.00290302323892242
+"&gt; 1.2",0.6768662926552396
+---------

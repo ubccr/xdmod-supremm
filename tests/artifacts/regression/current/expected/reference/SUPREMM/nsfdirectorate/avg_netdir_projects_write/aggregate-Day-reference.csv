@@ -1,0 +1,12 @@
+title
+"Avg: /projects write rate: Per Node weighted by node-hour (bytes/s): by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+"Decanal Unit","Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+Engineering,11034.129801298044
+"Mathematical and Physical Sciences",3694.7268830776106
+"Biological Sciences",2742.4583069369655
+---------

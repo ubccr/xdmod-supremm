@@ -1,0 +1,14 @@
+title
+"Number of Jobs Ended: by Application"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[enzo] Number of Jobs Ended","[amber] Number of Jobs Ended","[wrf] Number of Jobs Ended"
+2016-12-28,0,0,0
+2016-12-29,0,0,0
+2016-12-30,0,0,1
+2016-12-31,1,1,0
+2017-01-01,4,0,0
+---------

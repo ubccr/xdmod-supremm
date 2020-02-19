@@ -1,0 +1,11 @@
+title
+"Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s): by User"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[Dunlin] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[Whimbrel] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[Pipit, Meadow] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016-12,0,3980.3105878331294,3296.038222073229
+2017-01,10441861.782546721,0,0
+---------

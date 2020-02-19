@@ -1,0 +1,11 @@
+title
+"Wall Hours: Requested: Per Job: by panasas bytes received"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Month,"[NA] Wall Hours: Requested: Per Job"
+2016-12,50.444444444444436
+2017-01,2.470833333333333
+---------

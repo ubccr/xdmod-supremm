@@ -1,0 +1,14 @@
+title
+"Avg: Memory: Per Core weighted by core-hour (bytes): by Catastrophe Rank"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Day,"[0.1 - 0.5] Avg: Memory: Per Core weighted by core-hour (bytes)","[0.5 - 1.0] Avg: Memory: Per Core weighted by core-hour (bytes)","[1.0 - 1.5] Avg: Memory: Per Core weighted by core-hour (bytes)","[&gt; 1.5] Avg: Memory: Per Core weighted by core-hour (bytes)","[NA] Avg: Memory: Per Core weighted by core-hour (bytes)"
+2016-12-28,0,1017787434.0461987,0,0,0
+2016-12-29,0,1017787434.0461987,0,0,387085867.01000977
+2016-12-30,0,1017787434.0461987,0,0,387085867.0100098
+2016-12-31,0,1017787434.0461987,0,0,551892085.7885988
+2017-01-01,280350885.39917684,430653587.63285017,1184715393.471265,397344333.6752136,0
+---------

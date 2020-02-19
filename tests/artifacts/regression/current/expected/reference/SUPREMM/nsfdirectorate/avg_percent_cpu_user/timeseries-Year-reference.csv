@@ -1,0 +1,11 @@
+title
+"Avg CPU %: User: weighted by core-hour: by Decanal Unit"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Mathematical and Physical Sciences] Avg CPU %: User: weighted by core-hour","[Engineering] Avg CPU %: User: weighted by core-hour","[Biological Sciences] Avg CPU %: User: weighted by core-hour"
+2016,99.63685223974439,73.41409239543037,0
+2017,0,0,25.799529770185917
+---------
