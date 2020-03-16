@@ -7,31 +7,32 @@ use \DataWarehouse\Query\Model\WhereCondition;
 use \DataWarehouse\Query\Model\Schema;
 use \DataWarehouse\Query\Model\OrderBy;
 
-/* 
+/*
 * @author Amin Ghadersohi
 * @date 2013-Feb-07
 *
 */
-class RawData extends \DataWarehouse\Query\Query
+class RawData extends \DataWarehouse\Query\Query implements \DataWarehouse\Query\iQuery
 {
-	
+
     public function __construct(
-        $aggregation_unit_name,
+        $realmId,
+        $aggregationUnitName,
         $start_date,
         $end_date,
-        $group_by,
-        $stat = 'jl.jobid',
-        array $parameters = array()
+        $groupById = null,
+        $statisticId = null,
+        array $parameters = array(),
+        Log $logger = null
     )
 	{
-
+        $realmId = 'SUPREMM';
         parent::__construct(
-            'SUPREMM', 'modw_aggregates', 'supremmfact',
-            array(),
-            $aggregation_unit_name,
+            $realmId,
+            $aggregationUnitName,
             $start_date,
             $end_date,
-            null,
+            $groupById,
             null,
             $parameters
         );
@@ -43,17 +44,17 @@ class RawData extends \DataWarehouse\Query\Query
 
 		$resourcefactTable = new Table(new Schema('modw'),'resourcefact', 'rf');
 		$this->addTable($resourcefactTable);
-		
-		$this->addWhereCondition(new WhereCondition(new TableField($dataTable,"resource_id"), 
+
+		$this->addWhereCondition(new WhereCondition(new TableField($dataTable,"resource_id"),
 													'=',
-													new TableField($resourcefactTable,"id") ));	
-								
+													new TableField($resourcefactTable,"id") ));
+
 		$personTable = new Table(new Schema('modw'),'person', 'p');
 
 		$this->addTable($personTable);
-		$this->addWhereCondition(new WhereCondition(new TableField($dataTable,"person_id"), 
+		$this->addWhereCondition(new WhereCondition(new TableField($dataTable,"person_id"),
 													'=',
-													new TableField($personTable,"id") ));	
+													new TableField($personTable,"id") ));
 
 		$this->addField(new TableField($resourcefactTable,"code", 'resource'));
 		$this->addField(new TableField($personTable, "long_name", "name"));
@@ -67,17 +68,16 @@ class RawData extends \DataWarehouse\Query\Query
         $this->addTable( $joblistTable );
         $this->addTable( $factTable );
 
-        $this->addWhereCondition(new WhereCondition( new TableField($joblistTable, "agg_id"), "=", 
+        $this->addWhereCondition(new WhereCondition( new TableField($joblistTable, "agg_id"), "=",
                                                                                 new TableField($dataTable, "id") ));
-        $this->addWhereCondition(new WhereCondition( new TableField($joblistTable, "jobid"), "=", 
+        $this->addWhereCondition(new WhereCondition( new TableField($joblistTable, "jobid"), "=",
                                                                                 new TableField($factTable, "_id") ));
-
-        switch($stat) {
+        switch($statisticId) {
             case "job_count":
-                $this->addWhereCondition(new WhereCondition( "sj.end_time_ts", "between", "d.day_start_ts and d.day_end_ts") );
+                $this->addWhereCondition(new WhereCondition( "sj.end_time_ts", "BETWEEN", "duration.day_start_ts and duration.day_end_ts") );
                 break;
             case "started_job_count":
-                $this->addWhereCondition(new WhereCondition( "sj.start_time_ts", "between", "d.day_start_ts and d.day_end_ts") );
+                $this->addWhereCondition(new WhereCondition( "sj.start_time_ts", "BETWEEN", "duration.day_start_ts and duration.day_end_ts") );
                 break;
             default:
                 // All other metrics show running job count
@@ -137,11 +137,10 @@ class RawData extends \DataWarehouse\Query\Query
         {
             $data_query .= " GROUP BY \n".implode(",\n",$groups);
         }
-       /* if($extraHavingClause != NULL)
-        {
-            $data_query .= " HAVING " . $extraHavingClause . "\n";
-        }*/
         return $data_query . ') as a';
+    }
+    public function getQueryType(){
+        return 'timeseries';
     }
 }
 ?>
