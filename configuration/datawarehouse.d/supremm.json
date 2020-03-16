@@ -1,0 +1,17 @@
+{
+    "SUPREMM": {
+        "aggregate_schema": "modw_aggregates",
+        "aggregate_table_alias": "jf",
+        "aggregate_table_prefix": "supremmfact_by_",
+        "datasource": "SUPREMM",
+        "group_bys": {
+            "$ref": "datawarehouse.d/ref/supremm-group-bys.json"
+        },
+        "module": "xdmod",
+        "name": "SUPREMM",
+        "order": 40,
+        "statistics": {
+            "$ref": "datawarehouse.d/ref/supremm-statistics.json"
+        }
+    }
+}

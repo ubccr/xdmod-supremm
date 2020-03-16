@@ -114,28 +114,28 @@ class UsageExplorerJobsTest extends \PHPUnit_Framework_TestCase
             'jobsize',
             'jobwalltime',
             'nodecount',
-            'pi',
-            'fieldofscience',
             'pi_institution',
             'max_mem',
             'queue',
             'resource',
             'provider',
             'shared',
-            'username',
-            'person',
             'institution',
             'netdrv_gpfs_rx_bucket_id',
             'netdrv_isilon_rx_bucket_id',
-            'netdrv_panasas_rx_bucket_id'
+            'netdrv_panasas_rx_bucket_id',
+            'fieldofscience',
+            'pi',
+            'username',
+            'person'
         ];
 
         $settings = [
             'realm' => ['SUPREMM'],
             'dataset_type' => ['aggregate', 'timeseries'],
+            'aggregation_unit' => ['Day', 'Month', 'Quarter', 'Year'],
             'statistic' => $statistics,
-            'group_by' => $groupBys,
-            'aggregation_unit' => ['Day', 'Month', 'Quarter', 'Year']
+            'group_by' => $groupBys
         ];
 
         return RegressionTestHelper::generateTests($settings);
