@@ -31,7 +31,7 @@ toc:
     subfolderitems:
       - page: PCP Data collection
         url: /supremm-compute-pcp.html
-      - page: Job Script collection
+      - page: Job Batch Script collection
         url: /supremm-jobscript.html
       - page: Job Performance module
         url: /supremm-configuration.html
