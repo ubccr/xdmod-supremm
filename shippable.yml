@@ -26,6 +26,7 @@ build:
         - ./tests/integration_tests/scripts/validate.sh
         - composer install -d ../xdmod --no-progress
         - ./tests/integration_tests/runtests.sh --log-junit `pwd`/shippable/testresults/results.xml
+        - ./tests/regression_tests/runtests.sh --junit-output-dir `pwd`/shippable/testresults
         - ../xdmod/tests/ui/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
     on_failure:
         - cat /var/log/xdmod/*
