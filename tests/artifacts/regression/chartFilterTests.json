@@ -1,0 +1,458 @@
+[
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "application",
+            "filter_values": [
+                "amber",
+                "enzo"
+            ]
+        },
+        "expected": {
+            "subtitle": "Application = ( amber,  enzo )",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2016-12-29",
+            "filter_dimension": "cpi",
+            "filter_values": [
+                "NA",
+                "0.6 - 0.7"
+            ]
+        },
+        "expected": {
+            "subtitle": "CPI Value = ( NA,  0.6 - 0.7 )",
+            "yvalue": 392.30568202611
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "cpucv",
+            "filter_values": [
+                "&lt; 0.1",
+                "0.1 - 0.2"
+            ]
+        },
+        "expected": {
+            "subtitle": "CPU User CV = ( &lt; 0.1,  0.1 - 0.2 )",
+            "yvalue": 66.02
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "cpuuser",
+            "filter_values": [
+                "&lt; 10",
+                "30 - 40"
+            ]
+        },
+        "expected": {
+            "subtitle": "CPU User Value = ( &lt; 10,  30 - 40 )",
+            "yvalue": 98.593333333333
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "catastrophe_bucket_id",
+            "filter_values": [
+                "0.1 - 0.5",
+                "0.5 - 1.0"
+            ]
+        },
+        "expected": {
+            "subtitle": "Catastrophe Rank = ( 0.1 - 0.5,  0.5 - 1.0 )",
+            "yvalue": 149.28
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "datasource",
+            "filter_values": [
+                "pcp"
+            ]
+        },
+        "expected": {
+            "subtitle": "Datasource =  pcp",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "nsfdirectorate",
+            "filter_values": [
+                "Biological Sciences",
+                "Engineering"
+            ]
+        },
+        "expected": {
+            "subtitle": "Decanal Unit = ( Biological Sciences,  Engineering )",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2016-12-29",
+            "filter_dimension": "parentscience",
+            "filter_values": [
+                "Astronomical Sciences",
+                "Electrical and Communication Systems"
+            ]
+        },
+        "expected": {
+            "subtitle": "Department = ( Astronomical Sciences,  Electrical and Communication Systems )",
+            "yvalue": 2303.990284548
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "exit_status",
+            "filter_values": [
+                "CANCELLED",
+                "COMPLETED"
+            ]
+        },
+        "expected": {
+            "subtitle": "Exit Status = ( CANCELLED,  COMPLETED )",
+            "yvalue": 66.02
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "gpu0_nv_utilization_bucketid",
+            "filter_values": [
+                "NA"
+            ]
+        },
+        "expected": {
+            "subtitle": "GPU0 Usage Value =  NA",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "granted_pe",
+            "filter_values": [
+                "8",
+                "24"
+            ]
+        },
+        "expected": {
+            "subtitle": "Granted Processing Element = ( 8,  24 )",
+            "yvalue": 110.02
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "ibrxbyterate_bucket_id",
+            "filter_values": [
+                "&lt; 100",
+                "100 - 1k"
+            ]
+        },
+        "expected": {
+            "subtitle": "InfiniBand Receive rate = ( &lt; 100,  100 - 1k )",
+            "yvalue": 160.70666666667
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "jobsize",
+            "filter_values": [
+                "5 - 8",
+                "17 - 32"
+            ]
+        },
+        "expected": {
+            "subtitle": "Job Size = ( 5 - 8,  17 - 32 )",
+            "yvalue": 110.02
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "jobwalltime",
+            "filter_values": [
+                "30s - 30min",
+                "30 - 60min"
+            ]
+        },
+        "expected": {
+            "subtitle": "Job Wall Time = ( 30s - 30min,  30 - 60min )",
+            "yvalue": 54.593333333333
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "nodecount",
+            "filter_values": [
+                "1",
+                "2"
+            ]
+        },
+        "expected": {
+            "subtitle": "Node Count = ( 1,  2 )",
+            "yvalue": 110.02
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "pi",
+            "filter_values": [
+                "Dunlin",
+                "Fieldfare"
+            ]
+        },
+        "expected": {
+            "subtitle": "PI = ( Dunlin,  Fieldfare )",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2016-12-29",
+            "filter_dimension": "fieldofscience",
+            "filter_values": [
+                "Quantum Electronics, Waves, and Beams",
+                "Stellar Astronomy and Astrophysics"
+            ]
+        },
+        "expected": {
+            "subtitle": "PI Group = ( Quantum Electronics, Waves, and Beams,  Stellar Astronomy and Astrophysics )",
+            "yvalue": 2303.990284548
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "pi_institution",
+            "filter_values": [
+                "screw - Screwdriver"
+            ]
+        },
+        "expected": {
+            "subtitle": "PI Institution =  screw - Screwdriver",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "max_mem",
+            "filter_values": [
+                "NA",
+                "&lt; 10"
+            ]
+        },
+        "expected": {
+            "subtitle": "Peak Memory Usage (%) = ( NA,  &lt; 10 )",
+            "yvalue": 151.23333333333
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "queue",
+            "filter_values": [
+                "chapti",
+                "crumpet"
+            ]
+        },
+        "expected": {
+            "subtitle": "Queue = ( chapti,  crumpet )",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "resource",
+            "filter_values": [
+                "frearson",
+                "robertson"
+            ]
+        },
+        "expected": {
+            "subtitle": "Resource = ( frearson,  robertson )",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "provider",
+            "filter_values": [
+                "screw"
+            ]
+        },
+        "expected": {
+            "subtitle": "Service Provider =  screw",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "shared",
+            "filter_values": [
+                "Exclusive"
+            ]
+        },
+        "expected": {
+            "subtitle": "Share Mode =  Exclusive",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "username",
+            "filter_values": [
+                "dunli",
+                "egygo"
+            ]
+        },
+        "expected": {
+            "subtitle": "System Username = ( dunli,  egygo )",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "person",
+            "filter_values": [
+                "Dunlin",
+                "Goose, Egyptian"
+            ]
+        },
+        "expected": {
+            "subtitle": "User = ( Dunlin,  Goose, Egyptian )",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "institution",
+            "filter_values": [
+                "screw - Screwdriver"
+            ]
+        },
+        "expected": {
+            "subtitle": "User Institution =  screw - Screwdriver",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "netdrv_gpfs_rx_bucket_id",
+            "filter_values": [
+                "NA",
+                "&lt; 1Mi"
+            ]
+        },
+        "expected": {
+            "subtitle": "gpfs bytes received = ( NA,  &lt; 1Mi )",
+            "yvalue": 96.64
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "netdrv_isilon_rx_bucket_id",
+            "filter_values": [
+                "NA"
+            ]
+        },
+        "expected": {
+            "subtitle": "isilon bytes received =  NA",
+            "yvalue": 162.66
+        }
+    },
+    {
+        "settings": {
+            "realm": "SUPREMM",
+            "metric": "wall_time",
+            "date": "2017-01-01",
+            "filter_dimension": "netdrv_panasas_rx_bucket_id",
+            "filter_values": [
+                "NA"
+            ]
+        },
+        "expected": {
+            "subtitle": "panasas bytes received =  NA",
+            "yvalue": 162.66
+        }
+    }
+]

@@ -27,6 +27,7 @@ build:
         - composer install -d ../xdmod --no-progress
         - ./tests/integration_tests/runtests.sh --log-junit `pwd`/shippable/testresults/results.xml
         - ../xdmod/tests/ui/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
+        - ./tests/regression_tests/runtests.sh --junit-output-dir `pwd`/shippable/testresults
     on_failure:
         - cat /var/log/xdmod/*
 jobs:
