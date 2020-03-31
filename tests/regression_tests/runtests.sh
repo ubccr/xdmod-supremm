@@ -38,14 +38,14 @@ export REG_TEST_BASE="/../../../../../xdmod-supremm/tests/artifacts/regression/c
 
 if [ "$REG_TEST_ALL" == "1" ]; then
     set +e
-    REG_TEST_USER_ROLE=cd $phpunit $CD ./lib/Controllers/UsageExplorerSupremmTest.php
+    REG_TEST_USER_ROLE=cd $phpunit $CD .
 
     #REG_TEST_USER_ROLE=usr $phpunit $REGUSER ./lib/Controllers/UsageExplorerSupremmTest.php
     #REG_TEST_USER_ROLE=pi $phpunit $PI ./lib/Controllers/UsageExplorerSupremmTest.php
     #REG_TEST_USER_ROLE=cs $phpunit $CS ./lib/Controllers/UsageExplorerSupremmTest.php
     #$phpunit $PUB ./lib/Controllers/UsageExplorerSupremmTest.php
 else
-    REG_TEST_USER_ROLE=cd $phpunit $CD ./lib/Controllers/UsageExplorerSupremmTest.php & cdpid=$!
+    REG_TEST_USER_ROLE=cd $phpunit $CD . & cdpid=$!
 
     #REG_TEST_USER_ROLE=usr $phpunit $REGUSER ./lib/Controllers/UsageExplorerSupremmTest.php & usrpid=$!
     #REG_TEST_USER_ROLE=pi $phpunit $PI ./lib/Controllers/UsageExplorerSupremmTest.php & pipid=$!
