@@ -263,6 +263,7 @@
             }
         ],
         "attribute_values_query": {
+            "query_hint": "DISTINCT",
             "joins": [
                 {
                     "name": "queue"
