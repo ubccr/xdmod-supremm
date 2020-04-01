@@ -20,7 +20,10 @@
             "options_class": "MaintenanceOptions",
             "class": "ExecuteSql",
             "sql_file_list": [
-                "supremm/migration-8_5_1-9_0_0.sql"
+                {
+                    "sql_file": "supremm/migration-8_5_1-9_0_0.sql",
+                    "delimiter": ";"
+                }
             ]
         }
     ]
