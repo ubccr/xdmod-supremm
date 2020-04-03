@@ -1,0 +1,30 @@
+{
+    "module": "supremm",
+    "defaults": {
+        "global": {
+            "endpoints": {
+                "destination": {
+                    "type": "mysql",
+                    "name": "SUPReMM DB",
+                    "config": "datawarehouse",
+                    "schema": "modw_supremm"
+                }
+            }
+        }
+    },
+    "migration-8_5_1-9_0_0": [
+        {
+            "name": "update-application-ident",
+            "description": "Update the application identification",
+            "namespace": "ETL\\Maintenance",
+            "options_class": "MaintenanceOptions",
+            "class": "ExecuteSql",
+            "sql_file_list": [
+                {
+                    "sql_file": "supremm/migration-8_5_1-9_0_0.sql",
+                    "delimiter": ";"
+                }
+            ]
+        }
+    ]
+}
