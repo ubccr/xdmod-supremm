@@ -10,7 +10,7 @@
     "attribute_values_query": {
       "joins": [
         {
-          "name": "organization"
+          "name": "job_category"
         }
       ],
       "orderby": [
