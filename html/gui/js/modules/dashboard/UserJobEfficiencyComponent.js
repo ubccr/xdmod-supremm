@@ -60,7 +60,7 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                         field: 'core_time_bad',
                         dirn: 'desc'
                     },
-                    statistics: ['core_time_bad', 'bad_core_ratio']
+                    statistics: ['core_time', 'core_time_bad', 'bad_core_ratio', 'job_count', 'job_count_bad', 'bad_job_ratio']
                 })
             },
             fields: [{
