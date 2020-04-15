@@ -129,7 +129,7 @@ class JobViewer {
         }
     }
     viewSaveJob(jobID, saveName) {
-        browser.waitAndClick(this.selectors.history.tree.jobnode(saveName, jobID));
+        browser.waitUntilAnimEndAndClick(this.selectors.history.tree.jobnode(saveName, jobID));
         browser.waitUntilAnimEnd(this.selectors.history.tree.jobnode(saveName, jobID) + '/ancestor::node()[3]//span[contains(text(),"Timeseries")]');
         browser.waitForExist(this.selectors.info.tabByName(jobID));
     }
