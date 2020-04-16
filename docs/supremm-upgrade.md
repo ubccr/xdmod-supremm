@@ -22,7 +22,7 @@ be updated to the correct values. If this reaggregation step is not run then
 the list of jobs in  the drilldown could include jobs that are not categorized
 as inefficient.
 
-After the XDMoD upgrade procedure has completed the followgin command should
+After the XDMoD upgrade procedure has completed the following command should
 be run:
 ```bash
 /usr/share/xdmod/tools/etl/etl_overseer.php --last-modified-start-date 2000-01-01 -p jobefficiency.aggregation -p jobefficiency.joblist
