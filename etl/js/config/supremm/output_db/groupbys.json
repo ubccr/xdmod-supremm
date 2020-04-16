@@ -53,7 +53,7 @@
                 }
             ],
             "orderby": [
-                "id"
+                "name"
             ],
             "records": {
                 "id": "id",
