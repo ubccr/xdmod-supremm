@@ -51,6 +51,7 @@
         },
         "groupby": [
             "application_id",
+            "job_category_id",
             "fos_id",
             "organization_id",
             "person_id",
