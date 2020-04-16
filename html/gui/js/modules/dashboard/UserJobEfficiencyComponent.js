@@ -145,6 +145,44 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                     center: ['50%', '100%'],
                                     size: '200%',
                                     sliceOffset: 0,
+                                    events: {
+                                        click: function (evt) {
+                                            var title = 'Jobs categorized as ' + evt.point.name;
+                                            var searchParams = {
+                                                person: CCR.xdmod.ui.mappedPID,
+                                                category: 2
+                                            };
+                                            if (evt.point.name === 'Efficient') {
+                                                searchParams.category = [-1, 1];
+                                            }
+                                            var rawdataWindow = new Ext.Window({
+                                                height: 530,
+                                                width: 480,
+                                                closable: true,
+                                                modal: true,
+                                                title: title,
+                                                layout: 'fit',
+                                                autoScroll: true,
+                                                items: [{
+                                                    xtype: 'xdmod-jobgrid',
+                                                    height: 500,
+                                                    config: {
+                                                        realm: 'JobEfficiency',
+                                                        job_viewer_realm: 'SUPREMM',
+                                                        start_date: date.start.format('Y-m-d'),
+                                                        end_date: date.end.format('Y-m-d'),
+                                                        params: searchParams,
+                                                        multiuser: false,
+                                                        page_size: 15,
+                                                        row_click_callback: function () {
+                                                            rawdataWindow.destroy();
+                                                        }
+                                                    }
+                                                }]
+                                            });
+                                            rawdataWindow.show();
+                                        }
+                                    },
                                     dataLabels: {
                                         enabled: false
                                     }
