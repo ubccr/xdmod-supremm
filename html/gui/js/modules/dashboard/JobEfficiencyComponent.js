@@ -149,7 +149,56 @@ XDMoD.Module.Dashboard.JobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Portlet,
             }),
             sm: new Ext.grid.RowSelectionModel({
                 singleSelect: true
-            })
+            }),
+            listeners: {
+                rowclick: function (panel, rowIndex) {
+                    var store = panel.getStore();
+                    var info = store.getAt(rowIndex);
+                    var config = JSON.parse(store.baseParams.config);
+
+                    var searchParams = {
+                        category: 2
+                    };
+                    searchParams[config.group_by] = info.id;
+
+                    var title = 'Inefficient jobs for user ' + info.data.name;
+                    var width = 480;
+                    var multiuser = false;
+
+                    if (config.group_by === 'pi') {
+                        multiuser = true;
+                        title = 'Inefficient jobs with PI ' + info.data.name;
+                        width = 600;
+                    }
+
+                    var rawdataWindow = new Ext.Window({
+                        height: 530,
+                        width: width,
+                        closable: true,
+                        modal: true,
+                        title: title,
+                        layout: 'fit',
+                        autoScroll: true,
+                        items: [{
+                            xtype: 'xdmod-jobgrid',
+                            height: 500,
+                            config: {
+                                realm: config.realm,
+                                job_viewer_realm: 'SUPREMM',
+                                start_date: config.start_date,
+                                end_date: config.end_date,
+                                params: searchParams,
+                                multiuser: multiuser,
+                                page_size: 15,
+                                row_click_callback: function () {
+                                    rawdataWindow.destroy();
+                                }
+                            }
+                        }]
+                    });
+                    rawdataWindow.show();
+                }
+            }
         }];
 
         if (this.config.multiuser) {
