@@ -1,6 +1,5 @@
 {
     "application": {
-        "attribute_table": "application",
         "attribute_table_schema": "modw_supremm",
         "attribute_to_aggregate_table_key_map": [
             {
@@ -39,7 +38,6 @@
         "$ref": "datawarehouse.d/ref/group-by-time-period.json#/day"
     },
     "exit_status": {
-        "attribute_table": "exit_status",
         "attribute_table_schema": "modw_supremm",
         "attribute_to_aggregate_table_key_map": [
             {
@@ -76,7 +74,6 @@
         "$ref": "datawarehouse.d/ref/group-by-hierarchy.json#/fieldofscience"
     },
     "granted_pe": {
-        "attribute_table": "granted_pe",
         "attribute_table_schema": "modw_supremm",
         "attribute_to_aggregate_table_key_map": [
             {
@@ -109,7 +106,6 @@
         "name": "Granted Processing Element"
     },
     "institution": {
-        "attribute_table": "organization",
         "attribute_table_schema": "modw",
         "attribute_to_aggregate_table_key_map": [
             {
@@ -201,7 +197,6 @@
         "$ref": "datawarehouse.d/ref/group-by-common.json#/pi"
     },
     "pi_institution": {
-        "attribute_table": "organization",
         "attribute_table_schema": "modw",
         "attribute_to_aggregate_table_key_map": [
             {
@@ -255,7 +250,6 @@
                 "operation": "="
             }
         ],
-        "attribute_table": "queue",
         "attribute_table_schema": "modw",
         "attribute_to_aggregate_table_key_map": [
             {
@@ -263,7 +257,6 @@
             }
         ],
         "attribute_values_query": {
-            "query_hint": "DISTINCT",
             "joins": [
                 {
                     "name": "queue"
@@ -272,6 +265,7 @@
             "orderby": [
                 "id"
             ],
+            "query_hint": "DISTINCT",
             "records": {
                 "id": "id",
                 "name": "id",
@@ -289,7 +283,15 @@
         "name": "Queue"
     },
     "resource": {
-        "attribute_table": "resourcefact",
+        "additional_join_constraints": [
+            {
+                "attribute_table": "resourcefact",
+                "attribute_expr": "id",
+                "operation": "=",
+                "aggregate_table": "resourcespecs",
+                "aggregate_expr": "resource_id"
+            }
+        ],
         "attribute_table_schema": "modw",
         "attribute_to_aggregate_table_key_map": [
             {
@@ -332,7 +334,6 @@
         "name": "Resource"
     },
     "shared": {
-        "attribute_table": "shared",
         "attribute_table_schema": "modw_supremm",
         "attribute_to_aggregate_table_key_map": [
             {
