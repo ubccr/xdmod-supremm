@@ -1,7 +1,7 @@
 <?php
 namespace DataWarehouse\Query\SUPREMM;
 
-use Configuration\XdmodConfiguration;
+use DataWarehouse\Data\RawStatisticsConfiguration;
 use \DataWarehouse\Query\Model\Table;
 use \DataWarehouse\Query\Model\TableField;
 use \DataWarehouse\Query\Model\Field;
@@ -16,7 +16,24 @@ use \DataWarehouse\Query\Model\Schema;
 */
 class JobDataset extends \DataWarehouse\Query\RawQuery
 {
-    private $sconf = null;
+    /**
+     * Tables that have been added to the query with their alias used as key.
+     * @var \DataWarehouse\Query\Model\Table[]
+     */
+    private $tables = [];
+
+    /**
+     * Table definitions with their alias used as key.
+     * @var array[]
+     */
+    private $tableDefs = [];
+
+    /**
+     * Field definitions with their alias used as key.
+     * @var array
+     */
+    private $fieldDefs = [];
+
     private $documentation = array();
 
     public function __construct(
@@ -26,9 +43,18 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
         parent::__construct('SUPREMM', 'modw_supremm', 'job', array());
 
-        $this->loadRawStatsConfig();
+        $conf = RawStatisticsConfiguration::factory();
 
         $dataTable = $this->getDataTable();
+        $this->tables[$dataTable->getAlias()] = $dataTable;
+
+        foreach ($conf->getQueryTableDefinitions('SUPREMM') as $tableDef) {
+            $this->tableDefs[$tableDef['alias']] = $tableDef;
+        }
+
+        foreach ($conf->getQueryFieldDefinitions('SUPREMM') as $fieldDef) {
+            $this->fieldDefs[$fieldDef['alias']] = $fieldDef;
+        }
 
         if (isset($parameters['primary_key'])) {
             $this->addPdoWhereCondition(new WhereCondition(new TableField($dataTable, '_id'), "=", $parameters['primary_key']));
@@ -144,6 +170,53 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
         }
     }
 
+    /**
+     * Add a field to the query using it's raw statistics definition.
+     *
+     * Also add and join the necessary table if not already part of the query
+     * and adds the field to the documentation array.
+     *
+     * @param array $fieldDef Field definition from raw statistics configuration.
+     */
+    private function addFieldByDefinition(array $fieldDef)
+    {
+        $tableAlias = $fieldDef['tableAlias'];
+        $table = null;
+        if (array_key_exists($tableAlias, $this->tables)) {
+            $table = $this->tables[$tableAlias];
+        } elseif (array_key_exists($tableAlias, $this->tableDefs)) {
+            $table = $this->addTableByDefinition($this->tableDefs[$tableAlias]);
+        } else {
+            throw new \Exception(sprintf('Unrecognized table alias "%s"', $tableAlias));
+        }
+        $this->addField(new TableField($table, $fieldDef['column'], $fieldDef['alias']));
+        $this->documentation[$fieldDef['alias']] = $fieldDef;
+    }
+
+    /**
+     * Add a table to this query using it's raw statistics definition.
+     *
+     * @param array $tableDef Table definition from raw statistics configuration.
+     * @return \DataWarehouse\Query\Model\Table
+     */
+    private function addTableByDefinition(array $tableDef)
+    {
+        $table = new Table(new Schema($tableDef['schema']), $tableDef['name'], $tableDef['alias']);
+        $this->tables[$tableDef['alias']] = $table;
+        $this->addTable($table);
+        if (!array_key_exists($tableDef['foreignTableAlias'], $this->tables)) {
+            throw new \Exception(sprintf('Unrecognized table alias "%s"', $tableDef['foreignTableAlias']));
+        }
+        $this->addWhereCondition(
+            new WhereCondition(
+                new TableField($this->tables[$tableDef['foreignTableAlias']], $tableDef['foreignKey']),
+                '=',
+                new TableField($table, $tableDef['primaryKey'])
+            )
+        );
+        return $table;
+    }
+
     private function joinTo($othertable, $joinkey, $otherkey, $colalias, $idcol = "id")
     {
         $this->addTable($othertable);
@@ -196,13 +269,6 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
         );
     }
 
-    private function loadRawStatsConfig()
-    {
-        if ($this->sconf == null) {
-            $this->sconf = XdmodConfiguration::assocArrayFactory('rawstatisticsconfig.json', CONFIG_DIR);
-        }
-    }
-
     public function getColumnDocumentation()
     {
         return $this->documentation;
@@ -210,63 +276,17 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
     private function addAccountingFields()
     {
-        $joinlist = array(
-            "exit_status_id" => array( "schema" => "modw_supremm", "table" => "exit_status"),
-            "cluster_id" => array( "schema" => "modw_supremm", "table" => "cluster"),
-            "jobname_id" => array( "schema" => "modw_supremm", "table" => "job_name"),
-            "nodecount_id" => array( "schema" => "modw", "table" => "nodecount", "column" => "nodes"),
-            "application_id" => array( "schema" => "modw_supremm", "table" => "application"),
-            "cwd_id" => array( "schema" => "modw_supremm", "table" => "cwd", "column" => "cwd"),
-            "executable_id" => array( "schema" => "modw_supremm", "table" => "executable", "column" => "exec"),
-            "piperson_organization_id" => array( "schema" => "modw", "table" => "organization"),
-            "principalinvestigator_person_id" => array( "schema" => "modw", "table" => "person", "column" => "long_name" ),
-            "person_organization_id" => array( "schema" => "modw", "table" => "organization"),
-            "person_id" => array( "schema" => "modw", "table" => "person", "column" => "long_name" ),
-            "systemaccount_id" => array( "schema" => "modw", "table" => "systemaccount", "column" => "username" ),
-            "fos_id" => array( "schema" => "modw", "table" => "fieldofscience", "column" => "description" ),
-            "account_id" => array( "schema" => "modw", "table" => "account", "column" => "charge_number" ),
-            "organization_id" => array(  "schema" => "modw", "table" => "organization"),
-            "resource_id" => array(  "schema" => "modw", "table" => "resourcefact" )
-        );
-        $dataTable = $this->getDataTable();
-        $i = 0;
-        foreach ($this->sconf["modw_supremm.job"] as $sdata) {
-            $sfield = $sdata['key'];
-            if ($sdata['dtype'] == "accounting") {
-                $this->addField(new TableField($dataTable, $sfield));
-                $this->documentation[$sfield] = $sdata;
-            } elseif ($sdata['dtype'] == "foreignkey") {
-                if (isset($joinlist[$sfield])) {
-                    $info = $joinlist[$sfield];
-                    $i += 1;
-                    $tmptable = new Table(new Schema($info['schema']), $info['table'], "ft$i");
-                    $this->addTable($tmptable);
-                    $this->addWhereCondition(new WhereCondition(new TableField($dataTable, $sfield), '=', new TableField($tmptable, "id")));
-                    $fcol = isset($info['column']) ? $info['column'] : 'name';
-                    $this->addField(new TableField($tmptable, $fcol, $sdata['name']));
-
-                    $this->documentation[ $sdata['name'] ] = $sdata;
-                }
+        foreach ($this->fieldDefs as $sdata) {
+            if ($sdata['dtype'] == "accounting" || $sdata['dtype'] == "foreignkey") {
+                $this->addFieldByDefinition($sdata);
             }
         }
-        $rf = new Table(new Schema('modw'), 'resourcefact', 'rf');
-        $this->addTable($rf);
-        $this->addWhereCondition(new WhereCondition(new TableField($dataTable, 'resource_id'), '=', new TableField($rf, 'id')));
-        $this->addField(new TableField($rf, 'timezone'));
-        $this->documentation['timezone'] = array(
-            "name" => "Timezone",
-            "documentation" => "The timezone of the resource.",
-            "group" => "Administration",
-            'visibility' => 'public',
-            'batchExport' => true,
-            "per" => "resource");
     }
 
     private function addMetricsFields()
     {
         $dataTable = $this->getDataTable();
-        foreach ($this->sconf["modw_supremm.job"] as $sdata) {
-            $sfield = $sdata['key'];
+        foreach ($this->fieldDefs as $sfield => $sdata) {
             if ($sdata['dtype'] == "statistic") {
                 // HACK
                 if ($sdata['units'] == 'cpuratio' || $sdata['units'] == '%') {
@@ -277,8 +297,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
                     $this->addField(new FormulaField("jf.cores_avail * jf.$sfield", $sfield));
                     $this->documentation[$sfield] = $sdata;
                 } else {
-                    $this->addField(new TableField($dataTable, $sfield));
-                    $this->documentation[$sfield] = $sdata;
+                    $this->addFieldByDefinition($sdata);
                 }
             }
         }
@@ -298,8 +317,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             )
         );
 
-        foreach ($this->sconf["modw_supremm.job"] as $sdata) {
-            $sfield = $sdata['key'];
+        foreach ($this->fieldDefs as $sfield => $sdata) {
             // TODO work out a better way to have metrics have multiple
             // meta-types (ie cpu user is an analytic as well as a metric).
             if ($sfield == "cpu_user") {
