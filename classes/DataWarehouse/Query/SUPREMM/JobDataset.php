@@ -46,7 +46,7 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
         $conf = RawStatisticsConfiguration::factory();
 
         $dataTable = $this->getDataTable();
-        $this->tables[$dataTable->getAlias()] = $dataTable;
+        $this->tables[$dataTable->getAlias()->getName()] = $dataTable;
 
         foreach ($conf->getQueryTableDefinitions('SUPREMM') as $tableDef) {
             $this->tableDefs[$tableDef['alias']] = $tableDef;
