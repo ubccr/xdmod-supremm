@@ -204,16 +204,19 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
         $table = new Table(new Schema($tableDef['schema']), $tableDef['name'], $tableDef['alias']);
         $this->tables[$tableDef['alias']] = $table;
         $this->addTable($table);
-        if (!array_key_exists($tableDef['foreignTableAlias'], $this->tables)) {
-            throw new \Exception(sprintf('Unrecognized table alias "%s"', $tableDef['foreignTableAlias']));
+
+        $join = $tableDef['join'];
+        if (!array_key_exists($join['foreignTableAlias'], $this->tables)) {
+            throw new \Exception(sprintf('Unrecognized table alias "%s"', $join['foreignTableAlias']));
         }
         $this->addWhereCondition(
             new WhereCondition(
-                new TableField($this->tables[$tableDef['foreignTableAlias']], $tableDef['foreignKey']),
+                new TableField($this->tables[$join['foreignTableAlias']], $join['foreignKey']),
                 '=',
-                new TableField($table, $tableDef['primaryKey'])
+                new TableField($table, $join['primaryKey'])
             )
         );
+
         return $table;
     }
 
