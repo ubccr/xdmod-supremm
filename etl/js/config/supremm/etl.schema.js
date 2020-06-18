@@ -247,8 +247,8 @@ module.exports = {
                 dimension: true
             },
             join: {
-                schema: "modw",
-                table: "resourcefact"
+                schema: 'modw',
+                table: 'resourcefact'
             }
         },
         organization_id: {
@@ -269,8 +269,8 @@ module.exports = {
                 dimension: true
             },
             join: {
-                schema: "modw",
-                table: "organization"
+                schema: 'modw',
+                table: 'organization'
             }
         },
         account: {
@@ -2211,9 +2211,9 @@ module.exports = {
             table: "job",
             queries: ['jobfact', 'account'],
             join: {
-                schema: "modw",
-                table: "account",
-                column: "charge_number"
+                schema: 'modw',
+                table: 'account',
+                column: 'charge_number'
             }
         },
         fos_id: {
@@ -2234,9 +2234,9 @@ module.exports = {
                 dimension: true
             },
             join: {
-                schema: "modw",
-                table: "fieldofscience",
-                column: "description"
+                schema: 'modw',
+                table: 'fieldofscience',
+                column: 'description'
             }
         },
         systemaccount_id: {
@@ -2258,9 +2258,9 @@ module.exports = {
                 dimension: true
             },
             join: {
-                schema: "modw",
-                table: "systemaccount",
-                column: "username"
+                schema: 'modw',
+                table: 'systemaccount',
+                column: 'username'
             }
         },
         person_id: {
@@ -2280,9 +2280,9 @@ module.exports = {
                 dimension: true
             },
             join: {
-                schema: "modw",
-                table: "person",
-                column: "long_name"
+                schema: 'modw',
+                table: 'person',
+                column: 'long_name'
             }
         },
         person_organization_id: {
@@ -2302,8 +2302,8 @@ module.exports = {
                 dimension: true
             },
             join: {
-                schema: "modw",
-                table: "organization"
+                schema: 'modw',
+                table: 'organization'
             }
         },
         principalinvestigator_person_id: {
@@ -2324,9 +2324,9 @@ module.exports = {
                 dimension: true
             },
             join: {
-                schema: "modw",
-                table: "person",
-                column: "long_name"
+                schema: 'modw',
+                table: 'person',
+                column: 'long_name'
             }
         },
         piperson_organization_id: {
@@ -2346,8 +2346,8 @@ module.exports = {
                 dimension: true
             },
             join: {
-                schema: "modw",
-                table: "organization"
+                schema: 'modw',
+                table: 'organization'
             }
         },
         executable_id: {
@@ -2360,9 +2360,9 @@ module.exports = {
             table: "job",
             queries: ["executable"],
             join: {
-                schema: "modw_supremm",
-                table: "executable",
-                column: "exec"
+                schema: 'modw_supremm',
+                table: 'executable',
+                column: 'exec'
             }
         },
         cwd_id: {
@@ -2376,9 +2376,9 @@ module.exports = {
             table: "job",
             queries: ["cwd"],
             join: {
-                schema: "modw_supremm",
-                table: "cwd",
-                column: "cwd"
+                schema: 'modw_supremm',
+                table: 'cwd',
+                column: 'cwd'
             }
         },
         datasource_id: {
@@ -2413,8 +2413,8 @@ module.exports = {
                 dimension: true
             },
             join: {
-                schema: "modw_supremm",
-                table: "application"
+                schema: 'modw_supremm',
+                table: 'application'
             }
         },
         nodecount_id: {
@@ -2443,8 +2443,8 @@ module.exports = {
             table: "job",
             queries: ["job_name"],
             join: {
-                schema: "modw_supremm",
-                table: "job_name"
+                schema: 'modw_supremm',
+                table: 'job_name'
             }
         },
         exit_status_id: {
@@ -2463,8 +2463,8 @@ module.exports = {
                 dimension: true
             },
             join: {
-                schema: "modw_supremm",
-                table: "exit_status"
+                schema: 'modw_supremm',
+                table: 'exit_status'
             }
         },
         queue_id: {
@@ -2500,19 +2500,19 @@ module.exports = {
         // Fields not already defined as part of the ETL schema.
         fields: {
             timezone: {
-                name: "Timezone",
-                table: "job",
-                dtype: "foreignkey",
-                group: "Administration",
-                per: "resource",
-                visibility: "public",
+                name: 'Timezone',
+                table: 'job',
+                dtype: 'foreignkey',
+                group: 'Administration',
+                per: 'resource',
+                visibility: 'public',
                 batchExport: true,
-                comments: "The timezone of the resource.",
+                comments: 'The timezone of the resource.',
                 join: {
-                    schema: "modw",
-                    table: "resourcefact",
-                    foreignKey: "resource_id",
-                    column: "timezone"
+                    schema: 'modw',
+                    table: 'resourcefact',
+                    foreignKey: 'resource_id',
+                    column: 'timezone'
                 }
             }
         }
