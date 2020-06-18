@@ -2511,7 +2511,8 @@ module.exports = {
                 join: {
                     schema: "modw",
                     table: "resourcefact",
-                    foreignKey: "resource_id"
+                    foreignKey: "resource_id",
+                    column: "timezone"
                 }
             }
         }
