@@ -2358,7 +2358,7 @@ module.exports = {
             comments: "The full path to the main job executable.",
             per: "job",
             table: "job",
-            queries: ["executable"],
+            queries: ['executable'],
             join: {
                 schema: 'modw_supremm',
                 table: 'executable',
@@ -2374,7 +2374,7 @@ module.exports = {
             comments: "The working directory where the main job executable was launched.",
             per: "job",
             table: "job",
-            queries: ["cwd"],
+            queries: ['cwd'],
             join: {
                 schema: 'modw_supremm',
                 table: 'cwd',
@@ -2441,7 +2441,7 @@ module.exports = {
             comments: "foreign key to the jobname table.",
             per: "job",
             table: "job",
-            queries: ["job_name"],
+            queries: ['job_name'],
             join: {
                 schema: 'modw_supremm',
                 table: 'job_name'
