@@ -288,7 +288,6 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
 
     private function addMetricsFields()
     {
-        $dataTable = $this->getDataTable();
         foreach ($this->fieldDefs as $sfield => $sdata) {
             if ($sdata['dtype'] == "statistic") {
                 // HACK
