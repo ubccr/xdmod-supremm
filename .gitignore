@@ -277,7 +277,7 @@ external_libraries/
 .secrets
 
 # ETL Generated files / folders
-configuration/rawstatisticsconfig.json
+configuration/rawstatistics.d/10_supremm.json
 configuration/roles.d/supremm.json
 configuration/supremmconfig.json
 configuration/aggregation_meta/
