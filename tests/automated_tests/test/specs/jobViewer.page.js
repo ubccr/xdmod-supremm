@@ -129,7 +129,7 @@ class JobViewer {
         }
     }
     viewSaveJob(jobID, saveName) {
-        browser.waitAndClick(this.selectors.history.tree.jobnode(saveName, jobID));
+        browser.waitUntilAnimEndAndClick(this.selectors.history.tree.jobnode(saveName, jobID));
         browser.waitUntilAnimEnd(this.selectors.history.tree.jobnode(saveName, jobID) + '/ancestor::node()[3]//span[contains(text(),"Timeseries")]');
         browser.waitForExist(this.selectors.info.tabByName(jobID));
     }
@@ -166,7 +166,7 @@ class JobViewer {
         browser.waitAndClick('#job-viewer-search-search button');
     }
     viewSavedJobTimeseries(saveSearchName, jobIdent, user, timeseries, host, metric) {
-        browser.waitAndClick(this.selectors.history.tree.jobnode(saveSearchName, jobIdent));
+        browser.waitUntilAnimEndAndClick(this.selectors.history.tree.jobnode(saveSearchName, jobIdent));
         browser.waitUntilAnimEnd(this.selectors.history.tree.jobsubnode(saveSearchName, jobIdent, timeseries));
         browser.click(this.selectors.history.tree.unfoldsubnode(saveSearchName, jobIdent, timeseries));
         browser.waitUntilAnimEndAndClick(this.selectors.history.tree.jobsubnode(saveSearchName, jobIdent, user));
@@ -211,7 +211,7 @@ class JobViewer {
         var jobid = this.getJobIdFromJobTab(this.selectors.info.tabByName(jobs[0].ident));
 
         browser.waitForExist(this.selectors.history.tree.jobsubnode_selected(saveSearchName, jobs[0].ident, 'Accounting data'));
-        browser.waitAndClick(this.selectors.history.tree.jobnode(saveSearchName, jobs[1].ident));
+        browser.waitUntilAnimEndAndClick(this.selectors.history.tree.jobnode(saveSearchName, jobs[1].ident));
         browser.waitUntilAnimEnd(this.selectors.history.tree.jobsubnode(saveSearchName, jobs[1].ident, 'Timeseries'));
         browser.waitForExist(this.selectors.info.tabByName(jobs[1].ident));
         browser.waitAndClick(this.selectors.history.tree.jobsubnode(saveSearchName, jobs[0].ident, 'Executable information'));

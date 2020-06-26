@@ -245,6 +245,10 @@ module.exports = {
                 table: 'supremmfact',
                 roles: { disable: [ "pub" ] },
                 dimension: true
+            },
+            join: {
+                schema: 'modw',
+                table: 'resourcefact'
             }
         },
         organization_id: {
@@ -263,6 +267,10 @@ module.exports = {
                 alias: 'provider',
                 roles: { disable: [ "pub" ] },
                 dimension: true
+            },
+            join: {
+                schema: 'modw',
+                table: 'organization'
             }
         },
         account: {
@@ -2201,7 +2209,12 @@ module.exports = {
             comments: "The name of the account or project (also known as a charge number).",
             per: "job",
             table: "job",
-            queries: ['jobfact', 'account']
+            queries: ['jobfact', 'account'],
+            join: {
+                schema: 'modw',
+                table: 'account',
+                column: 'charge_number'
+            }
         },
         fos_id: {
             type: "int32",
@@ -2219,6 +2232,11 @@ module.exports = {
                 alias: [ 'fieldofscience', 'nsfdirectorate', 'parentscience' ],
                 roles: { disable: [ "pub" ] },
                 dimension: true
+            },
+            join: {
+                schema: 'modw',
+                table: 'fieldofscience',
+                column: 'description'
             }
         },
         systemaccount_id: {
@@ -2238,6 +2256,11 @@ module.exports = {
                 alias: "username",
                 roles: { disable: [ "pub" ] },
                 dimension: true
+            },
+            join: {
+                schema: 'modw',
+                table: 'systemaccount',
+                column: 'username'
             }
         },
         person_id: {
@@ -2255,6 +2278,11 @@ module.exports = {
                 table: 'supremmfact',
                 roles: { disable: [ "pub" ] },
                 dimension: true
+            },
+            join: {
+                schema: 'modw',
+                table: 'person',
+                column: 'long_name'
             }
         },
         person_organization_id: {
@@ -2272,6 +2300,10 @@ module.exports = {
                 alias: 'institution',
                 roles: { disable: [ "pub" ] },
                 dimension: true
+            },
+            join: {
+                schema: 'modw',
+                table: 'organization'
             }
         },
         principalinvestigator_person_id: {
@@ -2290,6 +2322,11 @@ module.exports = {
                 alias: 'pi',
                 roles: { disable: [ "pub" ] },
                 dimension: true
+            },
+            join: {
+                schema: 'modw',
+                table: 'person',
+                column: 'long_name'
             }
         },
         piperson_organization_id: {
@@ -2307,6 +2344,10 @@ module.exports = {
                 alias: 'pi_institution',
                 roles: { disable: [ "pub" ] },
                 dimension: true
+            },
+            join: {
+                schema: 'modw',
+                table: 'organization'
             }
         },
         executable_id: {
@@ -2317,7 +2358,12 @@ module.exports = {
             comments: "The full path to the main job executable.",
             per: "job",
             table: "job",
-            queries: ["executable"]
+            queries: ['executable'],
+            join: {
+                schema: 'modw_supremm',
+                table: 'executable',
+                column: 'exec'
+            }
         },
         cwd_id: {
             type: "int32",
@@ -2328,7 +2374,12 @@ module.exports = {
             comments: "The working directory where the main job executable was launched.",
             per: "job",
             table: "job",
-            queries: ["cwd"]
+            queries: ['cwd'],
+            join: {
+                schema: 'modw_supremm',
+                table: 'cwd',
+                column: 'cwd'
+            }
         },
         datasource_id: {
             type: "int32",
@@ -2360,6 +2411,10 @@ module.exports = {
                 table: 'supremmfact',
                 roles: { disable: [ "pub" ] },
                 dimension: true
+            },
+            join: {
+                schema: 'modw_supremm',
+                table: 'application'
             }
         },
         nodecount_id: {
@@ -2386,7 +2441,11 @@ module.exports = {
             comments: "foreign key to the jobname table.",
             per: "job",
             table: "job",
-            queries: ["job_name"]
+            queries: ['job_name'],
+            join: {
+                schema: 'modw_supremm',
+                table: 'job_name'
+            }
         },
         exit_status_id: {
             type: "int32",
@@ -2402,6 +2461,10 @@ module.exports = {
                 table: 'supremmfact',
                 roles: { disable: [ "pub" ] },
                 dimension: true
+            },
+            join: {
+                schema: 'modw_supremm',
+                table: 'exit_status'
             }
         },
         queue_id: {
@@ -2425,6 +2488,33 @@ module.exports = {
     },
     groupByNoneRoleConfig: {
         disable: [ "pub" ]
-    }
+    },
+    rawStatistics: {
+        realmName: 'SUPREMM',
+        realmDisplay: 'SUPREMM',
+        realmOrder: 10,
 
+        // Include columns from this table in the raw statistics configuration.
+        table: 'modw_supremm.job',
+
+        // Fields not already defined as part of the ETL schema.
+        fields: {
+            timezone: {
+                name: 'Timezone',
+                table: 'job',
+                dtype: 'foreignkey',
+                group: 'Administration',
+                per: 'resource',
+                visibility: 'public',
+                batchExport: true,
+                comments: 'The timezone of the resource.',
+                join: {
+                    schema: 'modw',
+                    table: 'resourcefact',
+                    foreignKey: 'resource_id',
+                    column: 'timezone'
+                }
+            }
+        }
+    }
 };
