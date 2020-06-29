@@ -68,6 +68,12 @@ class RawData extends \DataWarehouse\Query\Query implements \DataWarehouse\Query
         $this->addTable( $joblistTable );
         $this->addTable( $factTable );
 
+        // This is used by Integrations and not currently shown on the XDMoD interface
+        $jobnameTable = new Table(new Schema('modw_supremm'), "job_name", "jn" );
+        $this->addWhereCondition(new WhereCondition(new TableField($factTable, "jobname_id"), '=', new TableField($jobnameTable, "id") ));
+        $this->addField(new TableField($jobnameTable, 'name', 'job_name'));
+        $this->addTable($jobnameTable );
+
         $this->addWhereCondition(new WhereCondition( new TableField($joblistTable, "agg_id"), "=",
                                                                                 new TableField($dataTable, "id") ));
         $this->addWhereCondition(new WhereCondition( new TableField($joblistTable, "jobid"), "=",
