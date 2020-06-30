@@ -72,6 +72,13 @@ class RawData extends \DataWarehouse\Query\Query implements \DataWarehouse\Query
                                                                                 new TableField($dataTable, "id") ));
         $this->addWhereCondition(new WhereCondition( new TableField($joblistTable, "jobid"), "=",
                                                                                 new TableField($factTable, "_id") ));
+
+        // This is used by Integrations and not currently shown on the XDMoD interface
+        $jobnameTable = new Table(new Schema('modw_supremm'), "job_name", "jn" );
+        $this->addWhereCondition(new WhereCondition(new TableField($factTable, "jobname_id"), '=', new TableField($jobnameTable, "id") ));
+        $this->addField(new TableField($jobnameTable, 'name', 'job_name'));
+        $this->addTable($jobnameTable );
+
         switch($statisticId) {
             case "job_count":
                 $this->addWhereCondition(new WhereCondition( "sj.end_time_ts", "BETWEEN", "duration.day_start_ts and duration.day_end_ts") );
