@@ -108,13 +108,18 @@ The various settings are described in the table below:
 </tr>
 <tr>
 <td><code>hostname_mode</code></td><td><code>hostname</code> | <code>fqdn</code></td><td>Determines how compute node names as reported by the resource manager are compared
-with the node name information from the PCP archives. In <code>hostname</code> mode only the hostname of nodes is used to
-match nodes. In <code>fqdn</code> (full-qualified domain name) mode then the full name is used.</td>
+with the node name information from the PCP archives.
+ If the resource manager reports just the hostname for compute nodes in the accounting logs then
+this value should be set to <code>hostname</code>. If the resource manager reports
+full domain names in the accounting logs then this value should be set to
+<code>fqdn</code> (see also the <code>host_name_ext</code> setting below).
+Typically, the Slurm resource manager reports just the hostname in the accounting logs.
 </tr>
 <tr>
-<td><code>host_name_ext</code></td><td>[domain name]</td><td>If the hostname_mode is fqdn and the host_name_ext is specified then the string will
-be appended to the node name from the PCP archives if it is absent. This is used to workaround misconfigured /etc/hosts files.
-This setting should be omitted if not required.</td>
+<td><code>host_name_ext</code></td><td>[domain name]</td><td>If the <code>hostname_mode</code> is <code>fqdn</code> and the <code>host_name_ext</code> is specified then the string will
+be appended to the node name from the PCP archives if it is absent. This is used to workaround misconfigured <code>/etc/hosts</code> files on the compute
+nodes that result in only the hostname information begin recorded in the PCP achive metadata.
+This setting is ignored if the <code>hostname_mode</code> is set to <code>hostname</code> and may be omitted in this case.</td>
 </tr>
 <tr>
 <td><code>pcp_log_dir</code></td><td>[filesystem path]</td><td>Path to the PCP log files for the resource.</td>
