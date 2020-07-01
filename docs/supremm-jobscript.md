@@ -22,7 +22,7 @@ where `YYYY` is the four digit year, `MM` two digit month, `DD` two digit day
 and `JOBID` is the identifier for the job from the resource manager.
 The date can refer to either the submit day, start day or end day of the job
 but must be the same for all jobs for a resource. The configuration
-settings for the path name and datestamp meaning described in the [configuration guide](supremm-processing-configuration.md).
+settings for the path name and the datestamp meaning are described in the [configuration guide](supremm-processing-configuration.md).
 
 The files are stored in datestamped directories because:
 1. Storing the files by date limits the number of files per directory.

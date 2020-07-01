@@ -57,7 +57,6 @@
             "configuration/assets.d": "",
             "configuration/setup.d/supremm.json": "setup.d/supremm.json",
             "configuration/internal_dashboard.d/supremm.json": "internal_dashboard.d/supremm.json",
-            "configuration/rawstatisticsconfig.json": "",
             "configuration/supremmconfig.json": "",
             "configuration/etl": "",
             "configuration/modules.d/supremm.json": "modules.d/supremm.json",
