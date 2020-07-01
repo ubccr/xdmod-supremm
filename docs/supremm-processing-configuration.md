@@ -116,7 +116,7 @@ full domain names in the accounting logs then this value should be set to
 Typically, the Slurm resource manager reports just the hostname in the sacct log files.
 </tr>
 <tr>
-<td><code>host_name_ext</code></td><td>[domain name]</td><td>If the hostname_mode is <code>fqdn</code> and the host_name_ext is specified then the string will
+<td><code>host_name_ext</code></td><td>[domain name]</td><td>If the <code>hostname_mode</code> is <code>fqdn</code> and the <code>host_name_ext</code> is specified then the string will
 be appended to the node name from the PCP archives if it is absent. This is used to workaround misconfigured /etc/hosts files on the compute
 nodes that result in only the hostname information begin recorded in the PCP achive metadata.
 This setting is ignored if the <code>hostname_mode</code> is set to <code>hostname</code> and may be omitted in this case.</td>
