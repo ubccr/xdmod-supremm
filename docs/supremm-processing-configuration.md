@@ -89,6 +89,50 @@ available, then the `script_dir` field should be set to an empty string.
 }
 ```
 
+The various settings are described in the table below:
+<table>
+<thead>
+<tr>
+<th>Setting</th> <th>Allowed values</th> <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td><td><code>true</code> | <code>false</code></td><td>If set to <code>false</code> then this resource will be ignored by the software</td>
+</tr>
+<tr>
+<td><code>resource_id</code></td><td>[integer]</td><td>The value from the <code>id</code> column in the <code>modw</code>.<code>resourcefact</code> table in the XDMoD database</td>
+</tr>
+<tr>
+<td><code>batch_system</code></td><td><code>XDMoD</code></td><td>Sets the module used to obtain job accounting information. This should be set to XDMoD</td>
+</tr>
+<tr>
+<td><code>hostname_mode</code></td><td><code>hostname</code> | <code>fqdn</code></td><td>Determines how compute node names as reported by the resource manager are compared
+with the node name information from the PCP archives.
+ If the resource manager reports just the hostname for compute nodes in the accounting logs then
+this value should be set to <code>hostname</code>. If the resource manager reports
+full domain names in the accounting logs then this value should be set to
+<code>fqdn</code> (see also the <code>host_name_ext</code> setting below).
+Typically, the Slurm resource manager reports just the hostname in the accounting logs.
+</tr>
+<tr>
+<td><code>host_name_ext</code></td><td>[domain name]</td><td>If the <code>hostname_mode</code> is <code>fqdn</code> and the <code>host_name_ext</code> is specified then the string will
+be appended to the node name from the PCP archives if it is absent. This is used to workaround misconfigured <code>/etc/hosts</code> files on the compute
+nodes that result in only the hostname information begin recorded in the PCP achive metadata.
+This setting is ignored if the <code>hostname_mode</code> is set to <code>hostname</code> and may be omitted in this case.</td>
+</tr>
+<tr>
+<td><code>pcp_log_dir</code></td><td>[filesystem path]</td><td>Path to the PCP log files for the resource.</td>
+</tr>
+<tr>
+<td><code>script_dir</code></td><td>[filesystem path]</td><td>Path to the batch script files. The batch scripts must be stored following
+the naming convention described in the <a href="supremm-jobscript.html">job script documentation</a>. Set this to an empty string if the
+batch script files are not saved.</td>
+</tr>
+</tbody>
+</table>
+<br />
+
 Database authentication settings
 --------------------------------
 
@@ -196,12 +240,12 @@ the Open XDMoD SUPReMM module was installed.  The database creation script is
 located in the `/usr/share/supremm/setup` directory and should be run on the
 XDMoD datawarehouse DB instance.
 
-    $ mysql -u root -p < /usr/share/supremm/setup/modw_supremm.sql
+    $ mysql -u root -p < /usr/lib64/python2.7/site-packages/supremm/assets/modw_supremm.sql
 
 
 Setup MongoDB
 -----------
 
-    $ mongo [MONGO CONNECTION URI] /usr/share/supremm/setup/mongo_setup.js
+    $ mongo [MONGO CONNECTION URI] /usr/lib64/python2.7/site-packages/supremm/assets/mongo_setup.js
 
 where [MONGO CONNECTION URI] is the uri of the MongoDB database.
