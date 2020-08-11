@@ -1,6 +1,29 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
+## 2020-08-12 v9.0.0
+- Features
+    - Add analyze-tables flag to the aggregate_supremm.sh script to control
+      whether the SQL table analyze is run after aggregation. ([\#208](https://github.com/ubccr/xdmod-suprem/pull/208))
+    - Add ability to drill down to the list of jobs from the job efficiency dashboard
+      components ([\#230](https://github.com/ubccr/xdmod-suprem/pull/230) and [\#233](https://github.com/ubccr/xdmod-suprem/pull/233))
+
+- Changes
+    - Update internal configuration files to work with the new Open XDMoD datawarehouse
+      Group By and Statistics configuration mechanism. ([\#218](https://github.com/ubccr/xdmod-suprem/pull/218))
+    - Update internal configuration files to work with the new Open XDMoD raw data
+      configuration mechanism ([\#238](https://github.com/ubccr/xdmod-suprem/pull/238))
+    - Update the display order of the 'Exit Status' filter to be deterministic ([\#235](https://github.com/ubccr/xdmod-suprem/pull/235))
+    - Add extra fields to support integration with Open On Demand ([\#241](https://github.com/ubccr/xdmod-suprem/pull/241))
+
+- Miscellaneous
+    - Various updates to CI tests ([\#211](https://github.com/ubccr/xdmod-suprem/pull/211), [\#216](https://github.com/ubccr/xdmod-suprem/pull/216), [\#217](https://github.com/ubccr/xdmod-suprem/pull/217), [\#223](https://github.com/ubccr/xdmod-suprem/pull/223), [\#224](https://github.com/ubccr/xdmod-suprem/pull/224), [\#225](https://github.com/ubccr/xdmod-suprem/pull/225), [\#234](https://github.com/ubccr/xdmod-suprem/pull/234))
+    - Remove legacy code in the admin dashboard tab ([\#239](https://github.com/ubccr/xdmod-suprem/pull/239))
+
+- Bug Fixes
+    - Update the application category for the pegasus workflow software. Previously
+      it was incorrectly marked as having a proprietary license. ([\#227](https://github.com/ubccr/xdmod-suprem/pull/227))
+
 ## 2019-10-21 v8.5.0
 - Features
     - Add Job Efficiency reporting capability. This includes classification
