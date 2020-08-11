@@ -7,7 +7,7 @@ file
 /etc/xdmod/etl/etl_macros.d/jobefficiency/job_categorization.sql
 ```
 
-If the definition file is modified then any new jobs categorized using the updated
+If the definition file is modified then any new jobs will be categorized using the updated
 algorithm. It does not automatically re-categorize existing jobs.
 
 The contents of the file must be valid SQL fragment. The SQL itself is used in a
@@ -41,7 +41,7 @@ Not all performance metrics will be present for all jobs. If a column in the
 database is nullable then a null value is used to indicate that the corresponding
 metric was not present.
 
-# Examples
+## Examples
 
 The example below shows how to categorize jobs solely based on the CPU User metric.
 The example will mark jobs with CPU User less than 20% as inefficient.
@@ -61,11 +61,12 @@ CASE
 END
 ```
 
-The example below shows how to use different criteria based on the partition
-on which the job ran. The partition of the job is stored in the `queue_id` column.
-If the job ran on a partition with a name that starts with 'gpu' then the job's efficiency
+The example below shows how to use different criteria based on the other accounting
+information about the job.  In this case, if the job ran on a partition with a name
+ that starts with 'gpu' then the job's efficiency
 is determined based on the GPU usage. Otherwise the CPU usage is used. In both cases
-a 10% (ratio of 0.1) threshold is used.
+a 10% (ratio of 0.1) threshold is used. The job's partition (also known as the queue)
+is stored as text in the `queue_id` column.
 ```sql
 CASE
     WHEN
@@ -84,3 +85,14 @@ CASE
         END
 END
 ```
+
+# Reprocessing existing jobs.
+
+If the sql definition is updated then all new jobs will be categoried with the
+new definition. Existing data that has already been ingested into Open XDMoD
+will not automatically be reprocessed. All jobs can be reprocessed by running
+the following command:
+```bash
+/usr/share/xdmod/tools/etl/etl_overseer.php --last-modified-start-date 2000-01-01 -p jobefficiency.aggregation -p jobefficiency.joblist
+```
+This will reaggregate all job efficiency data.
