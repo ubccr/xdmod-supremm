@@ -53,6 +53,12 @@ toc:
          url: /supremm-upgrade.html
        - page: Job Summarization
          url: /supremm-processing-upgrade.html
+  - title: Advanced Usage
+    subfolderitems:
+       - page: Extending the Data Mapping
+         url: /extending.html
+       - page: Job Efficiency Algorithm
+         url: /jobefficiency.html
   - title: Developing
     subfolderitems:
        - page: Developer Guide
