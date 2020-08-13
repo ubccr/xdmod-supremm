@@ -1,7 +1,7 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-## 2020-08-12 v9.0.0
+## 2020-08-13 v9.0.0
 - Features
     - Add analyze-tables flag to the aggregate_supremm.sh script to control
       whether the SQL table analyze is run after aggregation. ([\#208](https://github.com/ubccr/xdmod-suprem/pull/208))
