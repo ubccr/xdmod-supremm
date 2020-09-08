@@ -353,6 +353,7 @@
             }
         },
         "data_sort_order": null,
+        "category": "Usage",
         "description_html": "A categorization of jobs into discrete groups based on whether the job shared nodes.",
         "name": "Share Mode"
     },
