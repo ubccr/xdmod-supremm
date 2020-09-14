@@ -279,6 +279,7 @@
             },
             "dataset_type": "aggregate"
         },
+        "category": "Usage",
         "description_html": "Queue pertains to the low level job queues on each resource.",
         "name": "Queue"
     },
@@ -321,6 +322,7 @@
             },
             "dataset_type": "aggregate"
         },
+        "category": "Administrative",
         "description_html": "A resource is a remote computer that can run jobs.",
         "name": "Resource"
     },
