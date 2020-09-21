@@ -1,3 +1,5 @@
+/* eslint no-template-curly-in-string: "off" */
+
 /*node.js javascript document
  *
  * @authors: Amin Ghadersohi
