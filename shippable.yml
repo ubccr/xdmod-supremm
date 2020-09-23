@@ -16,7 +16,7 @@ build:
         image_name: pseudo_repo/xdmod-open-supremm
         image_tag: latest
         pull: false
-        options: "--user root -e HOME=/root --shm-size 2g"
+        options: "--user root -e HOME=/root --shm-size 2g --cap-add=SYS_ADMIN"
     ci:
         - git clone --depth=1 --branch=$BRANCH https://github.com/ubccr/xdmod.git ../xdmod
         - ln -s $SHIPPABLE_BUILD_DIR ../xdmod/open_xdmod/modules/supremm
@@ -26,7 +26,9 @@ build:
         - ./tests/integration_tests/scripts/validate.sh
         - composer install -d ../xdmod --no-progress
         - ./tests/integration_tests/runtests.sh --log-junit `pwd`/shippable/testresults/results.xml
-        - ../xdmod/tests/ui/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
+        - yum install -y chromedriver
+        - sed -i -- 's%npm install fibers%npm install fibers;\\cp /usr/lib64/chromium-browser/chromedriver ./node_modules/chromedriver/lib/chromedriver/chromedriver;%' ../xdmod/tests/ui/runtests.sh
+        - bash -x ../xdmod/tests/ui/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
         - ./tests/regression_tests/runtests.sh --junit-output-dir `pwd`/shippable/testresults
     on_failure:
         - cat /var/log/xdmod/*
