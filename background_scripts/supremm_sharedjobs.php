@@ -2,7 +2,6 @@
 require_once __DIR__ . '/../configuration/linker.php';
 
 use CCR\DB;
-use CCR\Log;
 use CCR\DB\MySQLHelper;
 use CCR\Logging;
 use Monolog\Logger;
