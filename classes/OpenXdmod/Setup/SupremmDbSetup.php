@@ -6,7 +6,8 @@
 namespace OpenXdmod\Setup;
 
 use CCR\DB\MySQLHelper;
-use CCR\Log;
+use CCR\Logging;
+use Monolog\Logger;
 
 /**
  * SUPReMM setup.
@@ -19,12 +20,12 @@ class SupremmDbSetup extends DatabaseSetupItem
      */
     public function handle()
     {
-        $conf = array(
-            'console' => true,
-            'consoleLogLevel' => Log::WARNING
-        );
-
-        $logger = Log::factory('xdmod-setup', $conf);
+        $logger = Logging::factory('xdmod-setup', array(
+            'console'=> array('level' => Logger::WARNING),
+            'mysql' => array(),
+            'file' => array(),
+            'email' => array()
+        ));
 
         $settings = $this->loadIniConfig('portal_settings');
 

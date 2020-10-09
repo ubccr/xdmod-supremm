@@ -8,7 +8,7 @@ require_once __DIR__ . '/../configuration/linker.php';
 
 use CCR\DB;
 use CCR\DB\MySQLHelper;
-use CCR\Log;
+use Monolog\Logger;
 
 // Catch any unexpected exceptions.
 try {
@@ -72,15 +72,15 @@ function main()
                 break;
             case 'q':
             case 'quiet':
-                $config['logLevel'] = max($config['logLevel'], Log::WARNING);
+                $config['logLevel'] = max($config['logLevel'], Logger::WARNING);
                 break;
             case 'v':
             case 'verbose':
-                $config['logLevel'] = max($config['logLevel'], Log::INFO);
+                $config['logLevel'] = max($config['logLevel'], Logger::INFO);
                 break;
             case 'd':
             case 'debug':
-                $config['logLevel'] = max($config['logLevel'], Log::DEBUG);
+                $config['logLevel'] = max($config['logLevel'], Logger::DEBUG);
                 break;
             case 'f':
             case 'force':
@@ -106,15 +106,12 @@ function main()
         exit;
     }
 
-    if ($config['logLevel'] === -1) { $config['logLevel'] = Log::NOTICE; }
+    if ($config['logLevel'] === -1) { $config['logLevel'] = Logger::NOTICE; }
 
-    $logConf = array(
-        'file'            => false,
-        'mail'            => false,
-        'consoleLogLevel' => $config['logLevel'],
-    );
-
-    $logger = Log::factory('xdmod-supremm-admin', $logConf);
+    $logger = \CCR\Logging::factory('xdmod-supremm-admin', array(
+        'console' => array('level' => $config['logLevel']),
+        'mysql' => array()
+    ));
 
     $cmd = implode(' ', array_map('escapeshellarg', $argv));
     $logger->info("Command: $cmd");

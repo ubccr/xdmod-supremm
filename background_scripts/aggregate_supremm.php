@@ -2,7 +2,9 @@
 require_once __DIR__ . '/../configuration/linker.php';
 
 use CCR\DB;
+use CCR\Logging;
 use ETL\Utilities;
+use Monolog\Logger;
 
 $conf = array(
     'emailSubject' => gethostname() . ': XDMOD: Data Warehouse: SUPReMM ETL Log',
@@ -69,30 +71,38 @@ foreach ($args as $arg => $value) {
             break;
         case 'q':
         case 'quiet':
-            $conf['consoleLogLevel'] = CCR\Log::ERR;
+            $conf['consoleLogLevel'] = Logger::ERROR;
             break;
         case 'v':
         case 'verbose':
-            $conf['consoleLogLevel'] = CCR\Log::INFO;
+            $conf['consoleLogLevel'] = Logger::INFO;
             break;
         case 'd':
         case 'debug':
-            $conf['consoleLogLevel'] = CCR\Log::DEBUG;
+            $conf['consoleLogLevel'] = Logger::DEBUG;
             break;
         default:
             break;
     }
 }
 
-$logger = CCR\Log::factory('SUPREMM', $conf);
+$logger = Logging::factory('SUPREMM', array(
+    'console' => array(
+        'level' => $conf['consoleLogLevel']
+    ),
+    'email' => array(
+        'subject' => $conf['emailSubject']
+    ),
+    'mysql' => array()
+));
 
 $logger->info('Command: ' . implode(' ', array_map('escapeshellarg', $argv)));
 
 $process_start_time = date('Y-m-d H:i:s');
-$logger->notice(array(
+$logger->notice(json_encode(array(
     'message'            => 'aggregate_supremm start',
     'process_start_time' => $process_start_time
-));
+)));
 
 function run_aggregation($sourceTable, $pipeline)
 {
@@ -148,14 +158,14 @@ try {
     run_aggregation(array('modw_aggregates', 'supremmfact_by_day'), array('supremm.supremm-realm-joblist'));
     run_aggregation(array('modw_aggregates', 'jobefficiency_by_day'), array('jobefficiency.joblist'));
 
-    $logger->notice(array(
+    $logger->notice(json_encode(array(
         'message'          => 'aggregate_supremm end',
         'process_end_time' => date('Y-m-d H:i:s')
-    ));
+    )));
 } catch (\Exception $e) {
     $msg = 'Caught exception while executing: ' . $e->getMessage();
-    $logger->err(array(
+    $logger->err(json_encode(array(
         'message'    => $msg,
         'stacktrace' => $e->getTraceAsString()
-    ));
+    )));
 }
