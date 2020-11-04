@@ -288,6 +288,7 @@ configuratuon/datawarehouse.d/ref/supremm-statistics.json
 /etl/js/config/supremm/dataset_maps/*
 /etl/js/config/supremm/tests/*
 !/etl/js/config/supremm/dataset_maps/pcp.js
+!/etl/js/config/supremm/dataset_maps/prometheus.js
 !/etl/js/config/supremm/tests/pcp
 
 # Local ETL configuration files
