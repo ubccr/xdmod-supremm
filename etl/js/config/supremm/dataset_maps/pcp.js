@@ -243,6 +243,10 @@ module.exports = function(config) {
                 ref: "acct.ncpus",
                 required: true
             },
+            "gpus": {
+                ref: "acct.gpus",
+                required: false
+            },
             "cores_avail": {
                 formula: function(job) {
                     if (job.summarization.complete && job.hasOwnProperty("cpu") && job.cpu.hasOwnProperty("nodecpus") && ! job.cpu.nodecpus.hasOwnProperty("error")) {
