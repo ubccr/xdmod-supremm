@@ -5,6 +5,6 @@ UPDATE
 SET
   j.gpus = jt.gpu_count
 WHERE
-  j.resource_id = jt.resource_id AND (j.local_job_id = jt.local_job_id_raw OR j.local_job_id = jt.local_jobid);
+  j.resource_id = jt.resource_id AND (j.local_job_id = jt.local_job_id_raw OR j.local_job_id = jt.local_jobid) AND jt.gpu_count > 0;
 
 UNLOCK TABLES;
