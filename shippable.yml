@@ -22,7 +22,7 @@ build:
         pull: false
         options: "--user root -e HOME=/root --shm-size 2g"
     ci:
-        - git clone --depth=1 --branch=migrate_travis https://github.com/ryanrath/xdmod.git ../xdmod
+        - git clone --depth=1 --branch=xdmod9.5 https://github.com/ubccr/xdmod.git ../xdmod
         - ln -s $SHIPPABLE_BUILD_DIR ../xdmod/open_xdmod/modules/supremm
         - composer install -d ../xdmod --no-progress
         - cd ../xdmod && ~/bin/buildrpm xdmod supremm && cd $SHIPPABLE_BUILD_DIR
