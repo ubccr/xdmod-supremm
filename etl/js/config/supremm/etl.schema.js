@@ -659,7 +659,8 @@ module.exports = {
                     decimals: 0
                 }, {
                     name: 'wall_time_per_job',
-                    sql: 'coalesce(sum(jf.wall_time/3600.0)/sum(case when :timeseries then jf.running_job_count else jf.job_count end),0)',
+                    aggregate_sql: 'COALESCE(SUM(jf.wall_time)/SUM(CASE ${DATE_TABLE_ID_FIELD} WHEN ${MIN_DATE_ID} THEN jf.running_job_count ELSE jf.started_job_count END),0)/3600.0',
+                    timeseries_sql: 'COALESCE(SUM(jf.wall_time)/SUM(jf.running_job_count),0)/3600.0',
                     label: 'Wall Hours: Per Job',
                     unit: 'Hour',
                     description: 'The average time, in hours, a job takes to execute.<br/>'
@@ -695,7 +696,8 @@ module.exports = {
                     decimals: 0
                 }, {
                     name: 'requested_wall_time_per_job',
-                    sql: 'coalesce(sum(jf.requested_wall_time/3600.0)/sum(case when :timeseries then jf.running_job_count else jf.job_count end),0)',
+                    aggregate_sql: 'COALESCE(SUM(jf.requested_wall_time)/SUM(CASE ${DATE_TABLE_ID_FIELD} WHEN ${MIN_DATE_ID} THEN jf.running_job_count ELSE jf.started_job_count END),0)/3600.0',
+                    timeseries_sql: 'COALESCE(SUM(jf.requested_wall_time)/SUM(jf.running_job_count),0)/3600.0',
                     label: 'Wall Hours: Requested: Per Job',
                     unit: 'Hour',
                     description: 'The average time, in hours, a job requested for execution.<br/>'
