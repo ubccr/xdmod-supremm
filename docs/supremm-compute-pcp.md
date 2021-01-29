@@ -69,7 +69,7 @@ of the compute node running the logger.
 * Can be updated to change metrics logged or frequency
     * You may wish to reduce logging frequency from the default 30 seconds until confirming impact on your system and storage utilization
 
-#### /usr/share/supremm/slurm/slurm-prolog
+#### /usr/share/supremm/templates/slurm/slurm-prolog
 
 This is a template perl script that **must** be edited. The string `/<GLOBAL_SHARED_SPACE>/supremm/pmlogger` must be
 changed to match the directory where the PCP archives are to be saved.
@@ -77,14 +77,14 @@ This script will run data collection at job start time and three additional samp
 at ten second intervals. This script should be merged into your existing prologue script.
 This script is designed for and tested with the [Slurm][] resource manager.
 
-#### /usr/share/supremm/slurm/slurm-epilog
+#### /usr/share/supremm/templates/slurm/slurm-epilog
 
 This is a template perl script that **must** be edited. The string `/<GLOBAL_SHARED_SPACE>/supremm/pmlogger` must be
 changed to match the directory where the PCP archives are to be saved.
 This script will run data collection at job end. This script should be merged into your existing epilogue script.
 This script is designed for and tested with the [Slurm][] resource manager.
 
-#### /usr/share/supremm/hotproc/hotproc.conf
+#### /usr/share/supremm/templates/hotproc/hotproc.conf
 * Moved to /var/lib/pcp/pmdas/proc
 
 This configuration file sets the parameters for process logging into the pcp
@@ -141,7 +141,7 @@ Restart PMCD
 After making configuration changes to the PMDAs, you will need to restart the pmcd
 service.  On a systemd enabled system, this can be done with:
 
-    $ systemctl restart pmcd
+    $ systemctl restart pmcd pmlogger
 
 [Job Summarization software]: supremm-processing-install.md
 [Slurm]: https://www.schedmd.com/
