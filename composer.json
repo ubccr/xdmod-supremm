@@ -27,7 +27,7 @@
     ],
     "extra": {
         "installer-paths": {
-            "html/gui/lib/{$name}": [ 
+            "html/gui/lib/{$name}": [
                 "sporritt/jsplumb-jquery-min-file"
             ]
         }
