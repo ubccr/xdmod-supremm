@@ -5,6 +5,11 @@ scripts executed periodically via cron.
 Before setting up the batch processing workflow, we highly recommend manually
 running the various scripts in debug mode.
 
+All data processing scripts and commands should be run under an unprivileged
+user account. For a typical installation the `xdmod` user account is recommended
+since this will have the necessary access permissions to the XDMoD configuration
+files.
+
 ## Prerequisites
 
 The following software components should have been installed and configured:
@@ -24,7 +29,7 @@ The following data should be present:
 The following steps should be performed in order:
 
 1. Ingest job accounting data into XDMoD
-1. Run the PCP archive indexer script 
+1. Run the PCP archive indexer script
 1. Run the job summarization script
 1. [Optional] Ingest the job batch scripts
 1. Run the XDMoD ingest and aggregation script
@@ -118,7 +123,7 @@ jobs are ingested by default.
 ### 5. Run the XDMoD ingest and aggregation script
 
 Once there are job summary data in MongoDB it is ingested and aggregated into
-XDMoD as follows:
+XDMoD by running the following command as the `xdmod` user on the XDMoD host:
 
     $ aggregate_supremm.sh -d
 
@@ -136,6 +141,7 @@ run the shared jobs script with the `-a` flag to process all jobs in the databas
     $ /usr/lib64/xdmod/supremm_sharedjobs.php -a -d
     $ aggregate_supremm.sh -d
 
+This commands should be run as the `xdmod` user on the XDMoD host.
 It is not necessary to run the `supremm_sharedjobs.php` with the `-a` flag every
 time, only on initial ingest if there are older jobs.
 
@@ -148,7 +154,7 @@ The Job Performance data is displayed in the 'SUPREMM' realm in XDMoD. There are
 access controls enabled on the data as follows:
 
 - Accounts with 'User' role may only see job performance data for jobs that they ran;
-- Accounts with 'Principal Investigator' role may only see job performance data for 
+- Accounts with 'Principal Investigator' role may only see job performance data for
   their jobs and the job that they were PI on;
 - Accounts with 'Center Staff' and 'Center Director' role may see all jobs.
 
