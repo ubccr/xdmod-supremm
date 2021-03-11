@@ -83,7 +83,7 @@ The top level properties are listed in the table below:
 <td><code>outputdatabase</code></td><td>Contains configuration settings for the database used to store the job summary data.</td>
 </tr>
 <tr>
-<td><code>xdmodroot</code><td><td>This optional setting defines the path to the XDMoD configuration directory. This
+<td><code>xdmodroot</code></td><td>This optional setting defines the path to the XDMoD configuration directory. This
 is only used if the summarization software runs on the same machine as the XDMoD software is installed. If present
 then the software will read the XDMoD database configuration directly from the XDMoD portal settings file. This
 obviates the need to redundantly specify database settings.</td>
