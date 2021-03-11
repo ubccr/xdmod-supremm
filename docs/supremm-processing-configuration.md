@@ -117,8 +117,9 @@ is typically improved by using <code>tmpfs</code> for temporary files but this i
 <tr><td><code>subdir_out_format</code></td><td><code>%r/%j</code></td><td>Specifies the path under
 the <code>archive_out_dir</code> to be used for temporary files during the summarization of each job.
 Different subdirectories should used for each job because jobs are processed in parallel.
-The format string includes the following substitutions:  <code>%r</code> means the resource name, <code>%j</code> the job identifier
-also any valid format specifiers to the <code>strftime</code> function which is called with
+The format string includes the following substitutions:  <code>%r</code> is replaced by the resource name
+and <code>%j</code> the job identifier. Additionally any valid format specifiers to the <code>strftime</code> function
+are permitted. The <code>strftime</code> function is called with
 the end time of the job.</td></tr>
 </thead>
 <tbody>
