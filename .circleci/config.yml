@@ -1,0 +1,111 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2.1
+jobs:
+  build:
+    parameters:
+      install-type:
+        type: string
+    docker:
+      # The first image entry here will be used as the image for the parent container.
+      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-9.0.0:centos7.8-0.1
+    environment:
+      COMPOSER_ALLOW_SUPERUSER: 1
+      XDMOD_REALMS: 'jobs,storage,cloud'
+      XDMOD_IS_CORE: 'yes'
+      XDMOD_INSTALL_DIR: /xdmod
+      XDMOD_TEST_MODE: << parameters.install-type >>
+      XDMOD_SRC_DIR:  ./../xdmod
+      REG_TEST_BASE: /../../../../../project/tests/artifacts/regression/current
+    steps:
+      - checkout
+      - run:
+          name: Checkout XDMoD
+          command: |
+            git clone --depth=1 --branch=xdmod9.5 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
+      - run:
+          name: Link the SUPREMM module into the XDMoD Source Directory
+          command: |
+              ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
+      - run:
+          name: Add Upstream Git repo to facilitate QA tests
+          command: |
+            git remote add upstream https://github.com/ubccr/xdmod-supremm.git
+      # We need to update our acct before we can enable docker layer caching.
+      #- setup_remote_docker:
+      #    docker_layer_caching: true
+      # Download and cache dependencies
+      - run:
+          name: Install SUPREMM Dependencies
+          command: |
+            composer install --no-progress
+      - run:
+          name: Install XDMoD Dependencies
+          command: composer install -d $XDMOD_SRC_DIR --no-progress
+      - run:
+          name: Create Test Artifact Directories
+          command: |
+            mkdir ~/phpunit
+            mkdir /tmp/screenshots
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export XDMOD_SOURCE_DIR=${CIRCLE_WORKING_DIRECTORY}/${XDMOD_SRC_DIR}" >> $BASH_ENV
+            echo "export SHIPPABLE_BUILD_DIR=${CIRCLE_WORKING_DIRECTORY}" >> $BASH_ENV
+      - run:
+          name: Build RPMS
+          command: |
+            pwd
+            pushd $XDMOD_SRC_DIR
+            pwd
+            ~/bin/buildrpm xdmod supremm
+            popd
+            pwd
+      - run:
+          name: Install / Upgrade XDMoD from RPM
+          command: |
+              echo `pwd`
+              ./tests/integration_tests/scripts/bootstrap.sh
+      - run:
+          name: Validate the newly installed / Upgraded XDMoD
+          command: ./tests/integration_tests/scripts/validate.sh
+      - run:
+          name: Make sure that the Composer Test Depedencies are installed
+          command: composer install -d $XDMOD_SRC_DIR --no-progress
+      - run:
+          name: Setup & Run QA Tests
+          command: $XDMOD_SRC_DIR/tests/ci/scripts/qa-test-setup.sh
+      - run:
+          name: Make sure that the Composer Test Depedencies are installed
+          command: composer install -d $XDMOD_SRC_DIR --no-progress
+      - run:
+          name: Updating XDMOD_INSTALL_DIR env variable
+          command: echo "export XDMOD_INSTALL_DIR=/usr/share/xdmod" >> $BASH_ENV
+      - run:
+          name: Run Post Install Tests
+          command: ./tests/ci/scripts/post-install-test.sh
+      - run:
+          name: Run Integration Tests
+          command: ./tests/integration_tests/runtests.sh --log-junit ~/phpunit
+      - run:
+          name: Run UI Tests
+          command: $XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit
+      - run:
+          name: Run Regression Tests
+          command: ./tests/regression_tests/runtests.sh --log-junit ~/phpunit
+      - store_artifacts:
+          path: /tmp/screenshots
+      - store_artifacts:
+          path: /var/log/xdmod
+      - store_test_results:
+          path: ~/phpunit
+
+workflows:
+  full-build:
+    jobs:
+      - build:
+          matrix:
+            parameters:
+              install-type: ["fresh_install", "upgrade"]

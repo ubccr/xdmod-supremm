@@ -34,7 +34,7 @@ if [ ! -x "$phpunit" ]; then
     exit 127
 fi
 
-export REG_TEST_BASE="/../../../../../xdmod-supremm/tests/artifacts/regression/current/"
+export REG_TEST_BASE=${REG_TEST_BASE:-/../../../../../xdmod-supremm/tests/artifacts/regression/current/}
 
 if [ "$REG_TEST_ALL" == "1" ]; then
     set +e
