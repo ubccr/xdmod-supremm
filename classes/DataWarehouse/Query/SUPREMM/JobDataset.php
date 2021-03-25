@@ -382,5 +382,23 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             'batchExport' => true,
             'dtype' => 'analysis'
         );
+
+        $this->addFieldWithError(
+            new FormulaField("LEAST(jf.wall_time / jf.requested_wall_time, 1)", "wall_accuracy"),
+            'requested_wall_time',
+            $joberrors,
+            'requested_wall_time_error'
+        );
+        $this->documentation['wall_accuracy'] = array(
+            'name'=> 'Walltime Accuracy',
+            'units' => 'ratio',
+            'per' => 'job',
+            'visibility' => 'public',
+            'documentation' => 'The ratio of actual wall time to requested wall time. A value near 1 indicates that
+                               the requested wall time close to the actual wall time. A good wall time accuracy improves
+                               system wide scheduling.',
+            'batchExport' => true,
+            'dtype' => 'analysis'
+        );
     }
 }
