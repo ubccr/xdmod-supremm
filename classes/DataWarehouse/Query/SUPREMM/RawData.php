@@ -6,6 +6,7 @@ use \DataWarehouse\Query\Model\TableField;
 use \DataWarehouse\Query\Model\WhereCondition;
 use \DataWarehouse\Query\Model\Schema;
 use \DataWarehouse\Query\Model\OrderBy;
+use Psr\Log\LoggerInterface;
 
 /*
 * @author Amin Ghadersohi
@@ -23,7 +24,7 @@ class RawData extends \DataWarehouse\Query\Query implements \DataWarehouse\Query
         $groupById = null,
         $statisticId = null,
         array $parameters = array(),
-        Log $logger = null
+        LoggerInterface $logger = null
     )
 	{
         $realmId = 'SUPREMM';

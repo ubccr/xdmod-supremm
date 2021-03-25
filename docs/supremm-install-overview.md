@@ -18,7 +18,7 @@ Overview
 
 The steps to install and configure the software are as follows:
 
-1. Install the [PCP Data collection](supremm-compute.html) software on the HPC compute nodes.
+1. Install the [PCP Data collection](supremm-install-pcp.html) software on the HPC compute nodes.
 1. Install [MongoDB document database](supremm-mongo.html) to store job-level performance data.
 1. Install and configure the [Job Performance module](supremm-install.html) on an existing XDMoD instance.
 1. Install and configure the [Job Summarization](supremm-processing-install.html) software.

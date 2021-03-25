@@ -3,6 +3,10 @@ env:
     global:
         - COMPOSER_ALLOW_SUPERUSER=1
         - XDMOD_REALMS='jobs,storage,cloud,supremm,jobefficiency'
+        - XDMOD_SOURCE_DIR=$SHIPPABLE_BUILD_DIR/../xdmod
+        - XDMOD_INSTALL_DIR=/xdmod
+        - XDMOD_MODULE_DIR=$SHIPPABLE_BUILD_DIR
+        - XDMOD_MODULE_NAME=supremm
     matrix:
         - XDMOD_TEST_MODE=fresh_install
         - XDMOD_TEST_MODE=upgrade
@@ -18,13 +22,18 @@ build:
         pull: false
         options: "--user root -e HOME=/root --shm-size 2g"
     ci:
-        - git clone --depth=1 --branch=$BRANCH https://github.com/ubccr/xdmod.git ../xdmod
+        - git clone --depth=1 --branch=xdmod9.5 https://github.com/ubccr/xdmod.git ../xdmod
         - ln -s $SHIPPABLE_BUILD_DIR ../xdmod/open_xdmod/modules/supremm
         - composer install -d ../xdmod --no-progress
         - cd ../xdmod && ~/bin/buildrpm xdmod supremm && cd $SHIPPABLE_BUILD_DIR
+        - git remote add upstream https://github.com/ubccr/xdmod-supremm.git
         - ./tests/integration_tests/scripts/bootstrap.sh
         - ./tests/integration_tests/scripts/validate.sh
         - composer install -d ../xdmod --no-progress
+        - ../xdmod/tests/ci/scripts/qa-test-setup.sh
+        - composer install -d ../xdmod --no-progress
+        - export XDMOD_INSTALL_DIR=/usr/share/xdmod
+        - ./tests/ci/scripts/post-install-test.sh
         - ./tests/integration_tests/runtests.sh --log-junit `pwd`/shippable/testresults/results.xml
         - ../xdmod/tests/ui/runtests.sh --headless --log-junit $SHIPPABLE_BUILD_DIR/shippable/testresults
         - ./tests/regression_tests/runtests.sh --junit-output-dir `pwd`/shippable/testresults

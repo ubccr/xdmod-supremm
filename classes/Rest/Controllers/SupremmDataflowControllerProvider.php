@@ -12,8 +12,6 @@ use \Symfony\Component\HttpFoundation\JsonResponse;
 use XDUser;
 use \CCR\DB;
 
-require_once("Log.php");
-
 class SupremmDataflowControllerProvider extends BaseControllerProvider
 {
     /**

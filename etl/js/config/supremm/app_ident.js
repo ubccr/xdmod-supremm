@@ -138,6 +138,7 @@ module.exports = function (configfile) {
             'sh',
             'csh',
             'bash',
+            'sleep',
             'srun',
             'mpiexec',
             'mpirun.mpich',
