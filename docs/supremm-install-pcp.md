@@ -10,53 +10,45 @@ that data are collected:
 The archive data for each node are stored on a shared filesystem for
 subsequent processing by the job summarization software.
 
-Obtain the suggested version of PCP (3.12.2)
+Install the PCP data collector on the compute nodes
 -------------------------------------------
 
-We have tested the install and configuration on Centos 7.
+The PCP software has been included in the official CentOS packages since CentOS 7.6. Builds
+for other distributions (and earlier CentOS versions) are available from the
+[official PCP dowload page](https://pcp.io/download.html),
 
-* https://bintray.com/pcp/el7/pcp/3.12.2/
+The CentOS RPM packages of the summarization software are tested against the version of PCP
+that is provided with CentOS (This is PCP version 4.3.2 as of CentOS 7.8).
 
-The "Set Me Up" link on the bintray website provides instructions
-for adding a yum repository, otherwise the files can be individually
-downloaded from the "Files" link.
+For an RPM based install on CentOS 7 the following command will install PCP with
+all of the associated PMDAS (monitoring plugins) that have been tested with the
+summarization software:
 
-Install the desired modules on all compute nodes you wish to monitor
-------------------------------------------------------------
-For a full install with all monitors that have been tested with XDMoD:
+    # yum install pcp \
+                  pcp-manager \
+                  pcp-conf \
+                  pcp-libs \
+                  python-pcp \
+                  perl-PCP-PMDA \
+                  pcp-system-tools \
+                  pcp-pmda-gpfs \
+                  pcp-pmda-lustre \
+                  pcp-pmda-infiniband \
+                  pcp-pmda-mic \
+                  pcp-pmda-nvidia-gpu \
+                  pcp-pmda-nfsclient \
+                  pcp-pmda-perfevent \
+                  pcp-pmda-json
 
-    # yum install pcp-3.*.x86_64.rpm pcp-conf-3.*.x86_64.rpm pcp-libs-3.*.x86_64.rpm \
-               pcp-libs-devel-3.*.x86_64.rpm pcp-pmda-gpfs-3.*.x86_64.rpm \
-               pcp-pmda-lustre-3.*.x86_64.rpm pcp-pmda-libvirt-3.*.x86_64.rpm \
-               pcp-pmda-mic-3.*.x86_64.rpm pcp-pmda-nfsclient-3.*.x86_64.rpm \
-               pcp-pmda-nvidia-gpu-3.*.x86_64.rpm pcp-pmda-perfevent-3.*.x86_64.rpm \
-               pcp-pmda-slurm-3.*.x86_64.rpm pcp-system-tools-3.*.x86_64.rpm \
-               perl-PCP-LogImport-3.*.x86_64.rpm perl-PCP-PMDA-3.*.x86_64.rpm \
-               python-pcp-3.*.x86_64.rpm
+For a source code install follow the instructions on the [official PCP site](https://pcp.io/docs/installation.html).
 
-#### PMDAs are the modules that monitor the actual subsystems you are interested in.
-* The packages that are strictly required:
-    * pcp
-    * pcp-libs
-    * pcp-libs-devel
-    * pcp-conf
-    * perl-PCP-PMDA
-    * python-pcp
+Note that the node that runs the summarization software does not need to have all of the
+PCP data collection components installed. It only requires the python pcp libraries.
 
-<!-- Empty Comment to fix broken markdown parsing -->
+Compatibility notes
+-------------------
 
-    # yum install pcp-3.*.x86_64.rpm pcp-libs-* pcp-conf-3.*.x86_64.rpm \
-      perl-PCP-PMDA-3.*.x86_64.rpm  python-pcp-3.*.x86_64.rpm
-
-#### Dependencies
-* pcp-pmda-nvidia-gpu
-    * Depends on Nvidia NVML
-* pcp-pmda-perfevent
-    * Depends on libpfm
-* pcp-pmda-slurm
-    * Depends on the SLURM perl bindings
-* pcp-pmda-gpfs
-    * Depends on the GPFS mmfs tools being installed
-* pcp-pmda-infiniband
-    * Depends on the libmad and libumad packages
-
+The summarization software is tested on CentOS 7 with the package versions of PCP that
+are supplied with CentOS 7. In general any version of PCP will work as long as the
+summarization software is built against the same or newer version of PCP as the version
+installed on the compute nodes.
