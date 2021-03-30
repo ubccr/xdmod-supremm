@@ -1,6 +1,27 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
+## 2021-04-xx v 9.5.0
+
+- Features
+   - added configuration parameter to `aggregate_supremm.sh` script to control whether
+     database table analysis runs.
+
+- Changes
+   - The application classifier now ignores the `sleep` program when searching
+     for candidate scientific codes.
+
+- Miscellaneous
+   - Updates to internal logging code for compatibility with Open XDMoD 9.5
+
+
+- Bug Fixes
+   - fix numerical error in the calculation for "Walltime per Job' and 'Requested Wall time per Job' metrics
+     in aggregate plot mode. Previously the calculation would ignore jobs that were running, but did not
+     end in the time interval that was plotted.
+   - add missing category information for Share mode, Resource and Queue search filters in the
+     Job Viewer advanced search interface.
+
 ## 2020-08-13 v9.0.0
 - Features
     - Add analyze-tables flag to the aggregate_supremm.sh script to control
