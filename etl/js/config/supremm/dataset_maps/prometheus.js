@@ -243,10 +243,6 @@ module.exports = function(config) {
                 ref: "acct.ncpus",
                 required: true
             },
-            "gpus": {
-                ref: "acct.gpus",
-                required: false
-            },
             "cores_avail": {
                 formula: function(job) {
                     if (job.summarization.complete && job.hasOwnProperty("cpu") && job.cpu.hasOwnProperty("nodecpus") && ! job.cpu.nodecpus.hasOwnProperty("error")) {
@@ -723,7 +719,7 @@ module.exports = function(config) {
                     if (!job.gpu) {
                         return { value: null, error: this.metricErrors.codes.missingCollectionFailed.value };
                     }
-                    var job_gpus = this.ref(job, this.attributes.gpus.ref);
+                    var job_gpus = this.ref(job, "acct.gpus");
                     if (job_gpus.value === undefined || job_gpus.value === 0) {
                         return { value: null, error: this.metricErrors.codes.metricMissingNotAvailOnThisHost.value };
                     }
@@ -743,7 +739,7 @@ module.exports = function(config) {
                     if (!job.gpu) {
                         return { value: null, error: this.metricErrors.codes.missingCollectionFailed.value };
                     }
-                    var job_gpus = this.ref(job, this.attributes.gpus.ref);
+                    var job_gpus = this.ref(job, "acct.gpus");
                     if (job_gpus.value === undefined || job_gpus.value === 0) {
                         return { value: null, error: this.metricErrors.codes.metricMissingNotAvailOnThisHost.value };
                     }
