@@ -39,7 +39,7 @@
                 "name": "fos_id",
                 "type": "int(11)",
                 "nullable": false,
-                "comment": "DIMENSION: config://hierarchy.json:bottom_level_info"
+                "comment": "DIMENSION: ${HIERARCHY_BOTTOM_LEVEL_INFO}"
             },
             {
                 "name": "job_category_id",
