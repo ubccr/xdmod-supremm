@@ -2239,5 +2239,57 @@
             "^gr-co-[0-9]{4}$",
             "^gr-[0-9]{4}-[23]d-co$"
         ]
+    },
+    {
+        "name": "NEXMD",
+        "license_type": "permissive",
+        "science_area": "Molecular Dynamics",
+        "url": "https://github.com/lanl/NEXMD",
+        "hints": [
+            "nexmd"
+        ],
+        "execmatch": [
+            "^nexmd$"
+        ]
+    },
+    {
+        "name": "Libra",
+        "license_type": "permissive",
+        "science_area": "Quantum Chemistry",
+        "url": "https://quantum-dynamics-hub.github.io/libra/index.html",
+        "hints": [
+            "libra"
+        ],
+        "execmatch": [
+            "^libra$"
+        ]
+    },
+    {
+        "name": "DFTB+",
+        "license_type": "permissive",
+        "science_area": "Quantum Chemistry",
+        "url": "https://dftbplus.org",
+        "hints": [
+            "dftbp",
+            "dftbplus",
+            "dftb+"
+        ],
+        "execmatch": [
+            "^dftb$"
+        ]
+    },
+    {
+        "name": "Newton-X",
+        "license_type": "permissive",
+        "science_area": "Quantum Chemistry",
+        "url": "https://newtonx.org",
+        "hints": [
+            "nx2",
+            "newtonx",
+            "newton-x"
+        ],
+        "execmatch": [
+            "^nx2$"
+        ]
     }
 ]
