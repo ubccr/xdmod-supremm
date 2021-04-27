@@ -2267,5 +2267,13 @@
             "dftbp",
             "dftbplus"
         ]
-    }
+    },
+    {
+        "name": "CDO",
+        "license_type": "permissive",
+        "science_area": "Climate Science",
+        "url": "https://code.mpimet.mpg.de/projects/cdo",
+        "hints": [
+            "cdo"
+        ]
 ]
