@@ -3,29 +3,27 @@
  *
  */
 
-XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule,  {
+XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
-    title: 'Efficiency',   
+    title: 'Efficiency',
     module_id: 'efficiency',
     usesToolbar: true,
     toolbarItems: {
-       printButton: true,
+        printButton: true
     },
     initComponent: function () {
- 
-       var mainArea = new Ext.Panel({
-          region: 'center',
-          html: 'New Efficiency Tab'
-       });//mainArea
+        var mainArea = new Ext.Panel({
+            region: 'center',
+            html: 'New Efficiency Tab'
+        });// mainArea
 
-       Ext.apply(this, {
-          items: [
-             mainArea   
-          ]  
-       });//Ext.apply
- 
-       XDMoD.Module.Efficiency.superclass.initComponent.apply(this, arguments);
-         
-    },//initComponent
-     
- });//XDMoD.Module.Efficiency
+        Ext.apply(this, {
+            items: [
+                mainArea
+            ]
+        });// Ext.apply
+
+        XDMoD.Module.Efficiency.superclass.initComponent.apply(this, arguments);
+
+    }, // initComponent
+});// XDMoD.Module.Efficiency
