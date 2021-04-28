@@ -15,7 +15,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule,  {
  
        var mainArea = new Ext.Panel({
           region: 'center',
-          html: 'This is my new module'
+          html: 'New Efficiency Tab'
        });//mainArea
 
        Ext.apply(this, {
