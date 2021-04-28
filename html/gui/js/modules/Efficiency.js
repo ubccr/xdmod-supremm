@@ -24,6 +24,5 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         });// Ext.apply
 
         XDMoD.Module.Efficiency.superclass.initComponent.apply(this, arguments);
-
-    }, // initComponent
+    } // initComponent
 });// XDMoD.Module.Efficiency
