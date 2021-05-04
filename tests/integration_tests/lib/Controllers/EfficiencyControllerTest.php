@@ -5,7 +5,7 @@ namespace IntegrationTests\Controllers;
 class EfficiencyControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Check that the efficiency tab shows when supremm module is installed. 
+     * Check that the efficiency tab shows when supremm module is installed.
      */
     public function testGetEfficiencyTab()
     {
