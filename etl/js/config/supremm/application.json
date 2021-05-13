@@ -2245,8 +2245,8 @@
         "license_type": "permissive",
         "science_area": "Molecular Dynamics",
         "url": "https://github.com/lanl/NEXMD",
-        "hints": [
-            "nexmd"
+        "execmatch": [
+            "^nexmd$"
         ]
     },
     {
@@ -2254,8 +2254,8 @@
         "license_type": "permissive",
         "science_area": "Quantum Chemistry",
         "url": "https://quantum-dynamics-hub.github.io/libra/index.html",
-        "hints": [
-            "libra"
+        "execmatch": [
+            "^libra$"
         ]
     },
     {
@@ -2263,9 +2263,9 @@
         "license_type": "permissive",
         "science_area": "Quantum Chemistry",
         "url": "https://dftbplus.org",
-        "hints": [
-            "dftbp",
-            "dftbplus"
+        "execmatch": [
+            "^dftbp$",
+            "^dftbplus$"
         ]
     },
     {
@@ -2273,7 +2273,7 @@
         "license_type": "permissive",
         "science_area": "Climate Science",
         "url": "https://code.mpimet.mpg.de/projects/cdo",
-        "hints": [
-            "cdo"
+        "execmatch": [
+            "^cdo$"
         ]
 ]
