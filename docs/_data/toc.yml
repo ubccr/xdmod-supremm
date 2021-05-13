@@ -59,6 +59,8 @@ toc:
          url: /extending.html
        - page: Job Efficiency Algorithm
          url: /jobefficiency.html
+       - page: Customization
+         url: /customization.html
   - title: Developing
     subfolderitems:
        - page: Developer Guide
