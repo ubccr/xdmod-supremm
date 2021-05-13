@@ -719,19 +719,20 @@ module.exports = function(config) {
                     if (!job.gpu) {
                         return { value: null, error: this.metricErrors.codes.missingCollectionFailed.value };
                     }
-                    var job_gpus = this.ref(job, "acct.gpus");
-                    if (job_gpus.value === undefined || job_gpus.value === 0) {
-                        return { value: null, error: this.metricErrors.codes.metricMissingNotAvailOnThisHost.value };
-                    }
+                    var device_count = 0;
                     var util = 0.0;
                     for (let gpu in job.gpu) {
                         if (job.gpu.hasOwnProperty(gpu)) {
                             if (job.gpu[gpu].memused && job.gpu[gpu].memused.avg) {
+                                device_count += 1;
                                 util += job.gpu[gpu].memused.avg;
                             }
                         }
                     }
-                    return { value: util / job_gpus.value, error: 0 };
+                    if (device_count === 0) {
+                        return { value: null, error: this.metricErrors.codes.missingCollectionFailed.value };
+                    }
+                    return { value: util / device_count, error: 0 };
                 }
             },
             "gpu0_nv_utilization": {
@@ -739,19 +740,20 @@ module.exports = function(config) {
                     if (!job.gpu) {
                         return { value: null, error: this.metricErrors.codes.missingCollectionFailed.value };
                     }
-                    var job_gpus = this.ref(job, "acct.gpus");
-                    if (job_gpus.value === undefined || job_gpus.value === 0) {
-                        return { value: null, error: this.metricErrors.codes.metricMissingNotAvailOnThisHost.value };
-                    }
+                    var device_count = 0;
                     var util = 0.0;
                     for (let gpu in job.gpu) {
                         if (job.gpu.hasOwnProperty(gpu)) {
                             if (job.gpu[gpu].util && job.gpu[gpu].util.avg) {
+                                device_count += 1;
                                 util += job.gpu[gpu].util.avg;
                             }
                         }
                     }
-                    return { value: util / job_gpus.value / 100.0, error: 0 };
+                    if (device_count === 0) {
+                        return { value: null, error: this.metricErrors.codes.missingCollectionFailed.value };
+                    }
+                    return { value: util / device_count / 100.0, error: 0 };
                 }
             }
         }
