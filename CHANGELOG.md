@@ -1,7 +1,7 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-## 2021-04-xx v 9.5.0
+## 2021-05-21 v 9.5.0
 
 - Features
    - added configuration parameter to `aggregate_supremm.sh` script to control whether
@@ -10,6 +10,7 @@ Open XDMoD SUPReMM Change Log
 - Changes
    - The application classifier now ignores the `sleep` program when searching
      for candidate scientific codes.
+   - Update to latest version of the nodejs mongo driver.
 
 - Miscellaneous
    - Updates to internal logging code for compatibility with Open XDMoD 9.5
