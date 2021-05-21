@@ -28,8 +28,8 @@ github_url: https://github.com/ubccr/xdmod-supremm
 xdmod_module_name: Job Performance (SUPReMM)
 latest_version: "9.5"
 version_list:
-  - "8.5"
   - "9.0"
+  - "9.5"
 
 defaults:
   -
