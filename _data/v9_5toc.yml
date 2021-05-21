@@ -1,0 +1,67 @@
+toc:
+  - title: About
+    subfolderitems:
+      - page: Overview
+        url: /9.5/supremm-overview.html
+      - page: License Notices
+        url: /9.5/supremm-notices.html
+      - page: Architecture
+        url: /9.5/supremm-architecture.html
+  - title: Download
+    subfolderitems:
+      - page: Job Performance module
+        url: https://github.com/ubccr/xdmod-supremm/releases/latest
+      - page: Job summarization package
+        url: https://github.com/ubccr/supremm/releases/latest
+      - page: PCP software
+        url: http://pcp.io
+  - title: Install
+    subfolderitems:
+      - page: Overview
+        url: /9.5/supremm-install-overview.html
+      - page: PCP Data collection
+        url: /9.5/supremm-install-pcp.html
+      - page: MongoDB
+        url: /9.5/supremm-mongo.html
+      - page: Job Performance module
+        url: /9.5/supremm-install.html
+      - page: Job Summarization
+        url: /9.5/supremm-processing-install.html
+  - title: Configure
+    subfolderitems:
+      - page: PCP Data collection
+        url: /9.5/supremm-compute-pcp.html
+      - page: Job Batch Script collection
+        url: /9.5/supremm-jobscript.html
+      - page: Job Performance module
+        url: /9.5/supremm-configuration.html
+      - page: Job Summarization
+        url: /9.5/supremm-processing-configuration.html
+  - title: Use
+    subfolderitems:
+      - page: PCP Data collection
+        url: /9.5/supremm-pcp-use.html
+      - page: Initial Ingest Setup
+        url: /9.5/supremm-bootstrap.html
+      - page: Automate dataflow
+        url: /9.5/supremm-ingestor.html
+  - title: Upgrade
+    subfolderitems:
+      - page: Overview
+        url: /9.5/supremm-upgrade-overview.html
+      - page: Job Performance module
+        url: /9.5/supremm-upgrade.html
+      - page: Job Summarization
+        url: /9.5/supremm-processing-upgrade.html
+  - title: Advanced Usage
+    subfolderitems:
+      - page: Extending the Data Mapping
+        url: /9.5/extending.html
+      - page: Job Efficiency Algorithm
+        url: /9.5/jobefficiency.html
+      - page: Customization
+        url: /9.5/customization.html
+  - title: Developing
+    subfolderitems:
+      - page: Developer Guide
+        url: /9.5/supremm-developer.html

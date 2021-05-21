@@ -1,6 +1,7 @@
 ---
 redirect_from:
-    - "/9.0/"
+    - "/9.5/"
+    - ""
 ---
 
 This documentation is intended to be used by system administrators to install and configure

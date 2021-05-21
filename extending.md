@@ -1,3 +1,3 @@
 ---
-redirect_to: /9.0/extending.html
+redirect_to: /9.5/extending.html
 ---
