@@ -37,7 +37,9 @@ var markAsProcessedMongoUpdate = function(collection, _id, config, endFn, dbkey)
     }, {
         $set: setter
     }, {
-        w: 0
+        writeConcern: {
+            w: 0
+        }
     }, function(err /*, result */ ) {
         endFn(err);
     });
