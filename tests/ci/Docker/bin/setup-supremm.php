@@ -22,4 +22,3 @@ $databases = array(
     $settings,
     $databases
 );
-
