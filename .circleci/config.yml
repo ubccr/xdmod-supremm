@@ -10,7 +10,7 @@ jobs:
         type: string
     docker:
       # The first image entry here will be used as the image for the parent container.
-      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-9.0.0:centos7.8-0.1
+      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-9.5.0:centos7.9-0.1
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
       XDMOD_REALMS: 'jobs,storage,cloud'
@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Checkout XDMoD
           command: |
-            git clone --depth=1 --branch=xdmod9.5 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
+            git clone --depth=1 --branch=xdmod10.0 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
       - run:
           name: Link the SUPREMM module into the XDMoD Source Directory
           command: |
