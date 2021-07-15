@@ -4,7 +4,7 @@ This guide explains how to configure the Job Summarization software.
 ## Prerequisites
 
 The Job Performance (SUPReMM) XDMoD module must be [installed](supremm-install.md) and [configured](supremm-configuration.md)
-before configuring the Job Summarization software. 
+before configuring the Job Summarization software.
 
 Setup Script
 ------------
@@ -60,6 +60,71 @@ under `[PREFIX]/etc/supremm/config.json` for source code installs, where
 The paths shown in this configuration guide show the default values for
 RPM-based installs.  For source code installs you will need to adjust the paths
 in the examples to match the installed location of the package.
+
+The top level properties are listed in the table below:
+
+<table>
+<thead>
+<tr>
+<th>Setting</th> <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>summary</code></td><td>Contains configuration settings for the <code>summarize_jobs.py</code> script.</td>
+</tr>
+<tr>
+<td><code>resources</code></td><td>Contains details about the compute resources.</td>
+</tr>
+<tr>
+<td><code>datawarehouse</code></td><td>Contains configuration to access XDMoD's database.</td>
+</tr>
+<tr>
+<td><code>outputdatabase</code></td><td>Contains configuration settings for the database used to store the job summary data.</td>
+</tr>
+<tr>
+<td><code>xdmodroot</code></td><td>This optional setting defines the path to the XDMoD configuration directory. This
+is only used if the summarization software runs on the same machine as the XDMoD software is installed. If present
+then the software will read the XDMoD database configuration directly from the XDMoD portal settings file. This
+obviates the need to redundantly specify database settings.</td>
+</tr>
+</tbody>
+</table>
+
+Summary settings
+-------------------
+
+The `summary` element contains configuration for the `summarize_jobs.py` script.
+
+```json
+{
+    ...
+    "summary": {
+        "archive_out_dir": "/dev/shm/supremm_test",
+        "subdir_out_format": "%r/%j"
+    }
+}
+```
+
+<table>
+<thead>
+<th>Setting</th> <th>Example value</th> <th>Description</th>
+<tr><td><code>archive_out_dir</code></td><td><code>/dev/shm/supremm</code></td><td>Path to a directory that is used
+to store temporary files. The summary script will try to create the directory if is does not exist.
+The default value is to use a path under <code>/dev/shm</code> because this is
+the typical location of a <code>tmpfs</code> filesystem. The summarization software performance
+is typically improved by using <code>tmpfs</code> for temporary files but this is not required.</td></tr>
+<tr><td><code>subdir_out_format</code></td><td><code>%r/%j</code></td><td>Specifies the path under
+the <code>archive_out_dir</code> to be used for temporary files during the summarization of each job.
+Different subdirectories should used for each job because jobs are processed in parallel.
+The format string includes the following substitutions:  <code>%r</code> is replaced by the resource name
+and <code>%j</code> the job identifier. Additionally any valid format specifiers to the <code>strftime</code> function
+are permitted. The <code>strftime</code> function is called with
+the end time of the job.</td></tr>
+</thead>
+<tbody>
+</tbody>
+</table>
 
 Resource settings
 -----------------

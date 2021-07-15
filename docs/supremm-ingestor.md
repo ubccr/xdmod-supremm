@@ -23,10 +23,13 @@ after the Open XDMoD daily update process is expected to finish.
 
     $ /usr/bin/supremm_update
 
-This script calls indexarchives.py and summarize_jobs.py in turn while providing a
-locking mechanisms so that processes do not conflict with each other.
+This script calls `indexarchives.py` and `summarize_jobs.py` in turn while providing a
+locking mechanisms so that processes do not conflict with each other. This script (and
+all data processing commands) should be run under an unprivileged user account.
+Typically the `xdmod` user account is used.
 
-The job-level summaries are ingested into Open XDMoD with the following command:
+The job-level summaries are ingested into Open XDMoD with the following command that
+must be run by the `xdmod` user:
 
     $ aggregate_supremm.sh
 
@@ -41,10 +44,24 @@ factors mainly the number and size of HPC jobs and the IO bandwidth of the host
 that runs the scripts.
 
     # Shred and ingest accounting data
-    0 1 * * * root /usr/bin/xdmod-slurm-helper -q -r resource-name && /usr/bin/xdmod-ingestor -q
+    0 1 * * * xdmod /usr/bin/xdmod-slurm-helper -q -r resource-name && /usr/bin/xdmod-ingestor -q
 
     # Create job level summaries
-    0 2 * * * root /usr/bin/supremm_update
+    0 2 * * * xdmod /usr/bin/supremm_update
 
     # Ingest job level sumamries into XDMoD and run aggregation
-    0 4 * * * root /usr/bin/aggregate_supremm.sh
+    0 4 * * * xdmod /usr/bin/aggregate_supremm.sh
+
+By default, the `aggregate_supremm.sh` runs an SQL `ANALYSE TABLE` command after the
+aggregation. This helps the load performance of plots in the XDMoD portal.
+When there are large amounts of data in the SUPREMM realm (10s or 100s of millions of jobs)
+ the `ANALYSE TABLE` step can take a long time to run. The `-a` option to the
+script is used to selectively disable the analyse step. For large databases
+the analyse tables step need only be run weekly. This reduces the aggregation
+time without adversely impacting overall portal load performance.
+
+The following `crontab` configuration could be used to run the analyse table step
+once a week.
+
+    0 4 * * 1-6 xdmod /usr/bin/aggregate_supremm.sh -a false
+    0 4 * * 0   xdmod /usr/bin/aggregate_supremm.sh
