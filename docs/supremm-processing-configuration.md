@@ -133,6 +133,9 @@ directory timestamp names for the batch scripts. <code>start</code> means that t
 to the job start time, <code>submit</code> the job submit time, <code>end</code> the job end time and <code>none</code> the timestamp
 should not be included in the job lookup.</td>
 </tr>
+<tr>
+<td><code>hyperthreaded_ratio</code></td><td>[integer]</td><td>Indicates the number of virtual cores per physical core on a hyperthreaded node. If this setting is absent, then hyperthreading is off.</td>
+</tr>
 </tbody>
 </table>
 <br />
