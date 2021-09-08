@@ -2127,7 +2127,7 @@ module.exports = {
             },
             table: 'modw.job_tasks jt, modw.job_records jr',
             // bind these using the same query format function just replace with attributes.:resource_id.value
-            where: 'jt.resource_id = :resource_id and jt.local_job_id_raw = :local_job_id and jt.job_record_id = jr.job_record_id',
+            where: 'jt.resource_id = :resource_id and jt.local_job_id_raw = :local_job_id and jt.end_time_ts = :end_time_ts AND jt.job_record_id = jr.job_record_id',
             cacheable: false
         },
         account: {
