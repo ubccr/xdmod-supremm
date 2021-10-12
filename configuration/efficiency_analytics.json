@@ -1,0 +1,104 @@
+[
+    {
+        "type": "Usage Analytics",
+        "typeDescription": "Analytics that demonstrate if jobs have used the resources that they requested.",
+        "analytics": [
+            {
+                "analytic": "CPU Usage",
+                "description": "Ratio of idle core cycles to total cycles",
+                "title": "CPU Usage",
+                "field": "avg_percent_cpu_idle",
+                "statistics": [
+                    "avg_percent_cpu_idle",
+                    "wall_time"
+                ],
+                "statisticLabels": [
+                    "Average CPU % Idle: Weighted by Core Hour",
+                    "Total CPU Hours"
+                ],
+                "realm": "SUPREMM"
+            },
+            {
+                "analytic": "GPU Usage",
+                "description": "Measure of overall average GPU Usage for a GPU job",
+                "title": "GPU Usage",
+                "field": "avg_percent_gpu0_nv_utilization",
+                "statistics": [
+                    "avg_percent_gpu0_nv_utilization",
+                    "gpu0_nv_utilization"
+                ],
+                "statisticLabels": [
+                    "Average % GPU Usage: Weighted by Node Hours",
+                    "Total GPU Hours"
+                ],
+                "realm": "SUPREMM"
+            },
+            {
+                "analytic": "Memory Headroom",
+                "description": "Measure of the memory allocated for the job to the high-water mark memory usage",
+                "title": "Memory Headroom",
+                "field": "avg_percent_cpu_idle",
+                "statistics": [
+                    "avg_percent_cpu_idle",
+                    "wall_time"
+                ],
+                "statisticLabels": [
+                    "Average CPU % Idle: Weighted by Core Hore",
+                    "Total CPU Hours"
+                ],
+                "realm": "SUPREMM"
+            },
+            {
+                "analytic": "Homogeneity",
+                "description": "A measure of how uniform the L1D load rate is over the lifetime of the job.",
+                "title": "Homogeneity",
+                "field": "avg_percent_cpu_idle",
+                "statistics": [
+                    "avg_percent_cpu_idle",
+                    "wall_time"
+                ],
+                "statisticLabels": [
+                    "Average CPU % Idle: Weighted by Core Hore",
+                    "Total CPU Hours"
+                ],
+                "realm": "SUPREMM"
+            }
+        ]
+    },
+    {
+        "type": "Design Analytics",
+        "typeDescription": "Analytics that demonstrate if a resource is being used as it is designed.",
+        "analytics": [
+            {
+                "analytic": "Wall Time Accuracy",
+                "description": "Ratio of wall time used to wall time allocated",
+                "title": "Wall Time Accuracy",
+                "field": "wall_time",
+                "statistics": [
+                    "wall_time",
+                    "requested_wall_time"
+                ],
+                "statisticLabels": [
+                    "Wall Time Used",
+                    "Wall Time Allocated"
+                ],
+                "realm": "SUPREMM"
+            },
+            {
+                "analytic": "Short Job Count",
+                "description": "Count of all jobs that were running for less than a threshold (30s)",
+                "title": "Short Job Count",
+                "field": "avg_percent_cpu_idle",
+                "statistics": [
+                    "avg_percent_cpu_idle",
+                    "wall_time"
+                ],
+                "statisticLabels": [
+                    "Average CPU % Idle: Weighted by Core Hore",
+                    "Total CPU Hours"
+                ],
+                "realm": "SUPREMM"
+            }
+        ]
+    }
+]

@@ -1,0 +1,6 @@
+{
+    "efficiency": {
+      "prefix": "efficiency",
+      "controller": "Rest\\Controllers\\EfficiencyControllerProvider"
+    }
+}
