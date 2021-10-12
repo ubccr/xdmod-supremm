@@ -139,8 +139,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     analtyicCardPanel.doLayout()
                 }else{
                     Ext.MessageBox.show({
-                        title: 'Deletion Error',
-                        msg: 'There was an error removing all searches for the realm: [' + realm + '].',
+                        title: 'Analytic Loading error',
+                        msg: 'There was an error loading analytic data.',
                         icon: Ext.MessageBox.ERROR,
                         buttons: Ext.MessageBox.OK
                     });
