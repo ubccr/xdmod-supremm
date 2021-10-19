@@ -5,17 +5,18 @@
 }
 
 .analyticCard{
+    min-width: 400px;
     width: 24%;
     height: auto;
     margin: 20px 0 20px 0.8%;
     float: left;
-    background-color: rgb(233, 233, 233);
+    background-color: #F8F7F7;
 }
 
 .analyticCardContents{
     font-family: tahoma;
     width: 100%;
-    background-color: rgb(233, 233, 233);
+    background-color: #F8F7F7;
     height: 100%;
 }
 
@@ -33,7 +34,7 @@
 }
 
 .analyticScatterPlotThumbnail{
-    height: 250px;
+    height: 300px;
     width: 90%;
     margin-left: 5%;
     padding-bottom: 15px;

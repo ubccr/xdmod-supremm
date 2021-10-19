@@ -4,7 +4,6 @@
  *
  */
 XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
-
     //Portal Module Properties 
     title: 'Efficiency',
     module_id: 'efficiency',
@@ -22,20 +21,41 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     initComponent: function () {
         var self = this;
 
+        //Get the analytics that will be displayed 
+        var analytics = []
+        Ext.Ajax.request({
+            url: self.analyticURL,
+            method: 'GET',
+            params: {
+                token: self.token
+            },
+            callback: function (o, success, response) {
+                if (success) {
+                    analytics = JSON.parse(response.responseText)
+                    self.getAnalyticCardDisplay(analytics)
+                } 
+            },
+            failure: function(response){
+                Ext.Msg.alert(
+                    response.statusText || 'Analytics Not Found',
+                    JSON.parse(response.responseText).message || 'No analytics found to display in job efficiency tab.'
+                )
+            }
+        })
+
         //Handle duration change for each active item
         self.on('duration_change', function () {
+
             var mainPanel = Ext.getCmp('efficiency_display_panel')
             var activeItem = mainPanel.getLayout().activeItem
             var activeItemIndex = mainPanel.items.indexOf(activeItem)
 
             if (activeItemIndex == 0) {
-                self.reloadCharts(self.analyticURL, self.token)
+                self.reloadCharts(analytics)
             } else if (activeItemIndex == 1) {
-                //reload chart with filters 
+                //reload analytic chart with filters
             }
         })
-
-        self.getAnalyticCardDisplay(self.analyticURL, self.token)
 
         //Container for the analytic card display 
         var analyticCardPanel = new Ext.Panel({
@@ -59,6 +79,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         });
 
         Ext.apply(this, {
+            customOrder: self.getToolbarConfig(),
             items: [
                 mainPanel
             ]
@@ -66,6 +87,29 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
         XDMoD.Module.Efficiency.superclass.initComponent.apply(this, arguments);
     }, // initComponent
+
+    getToolbarConfig: function () {
+        var breadcrumbMenu = {
+            xtype: 'buttongroup',
+            id: 'breadcrumb_btns',
+            frame: false,
+            items: [{
+                text: 'Analytic Cards', 
+                handler: function(){
+                   var mainPanel = Ext.getCmp('efficiency_display_panel')
+                   mainPanel.layout.setActiveItem(0)
+                   mainPanel.doLayout()
+
+                }
+            }]
+        }
+
+        return [
+            XDMoD.ToolbarItem.DURATION_SELECTOR,
+            '->',
+            breadcrumbMenu
+        ];
+    },
 
     analyticCardTemplate: [
         //Template for creating cards for each analytic 
@@ -78,83 +122,52 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         '</div>'
     ], //analyticCardTemplate
 
-    getAnalyticCardDisplay: function (url, token) {
+    getAnalyticCardDisplay: function (data) {
         var self = this;
 
-        //Ajax request to get each analytic and corresponding chart config 
-        Ext.Ajax.request({
-            url: url,
-            method: 'GET',
-            params: {
-                token: token
-            },
-            success: function (response) {
-                var exists = CCR.exists;
+        var analtyicCardPanel = Ext.getCmp('analytic_card_panel')
 
-                var data = JSON.parse(response.responseText);
-                var success = exists(data) && data.success;
-                if (success) {
-                    var analtyicCardPanel = Ext.getCmp('analytic_card_panel')
+        //Add container for each type of analytic 
+        for (i = 0; i < data.data.length; i++) {
+            var analytics = data.data[i].analytics
 
-                    //Add container for each type of analytic 
-                    for (i = 0; i < data.data.length; i++) {
-                        var analytics = data.data[i].analytics
+            var typePanel = new Ext.Panel({
+                border: false,
+                frame: false,
+                items: [
+                    new Ext.BoxComponent({
+                        data: data.data[i],
+                        tpl: '<div> <h1>{type}</h1><p>{typeDescription}</p}</div>',
+                        cls: 'analyticTypeHeader'
+                    })
+                ]
+            })
 
-                        var typePanel = new Ext.Panel({
-                            border: false,
-                            frame: false,
-                            items: [
-                                new Ext.BoxComponent({
-                                    data: data.data[i],
-                                    tpl: '<div> <h1>{type}</h1><p>{typeDescription}</p}</div>',
-                                    cls: 'analyticTypeHeader'
-                                })
-                            ]
-                        })
+            //Add analytic card for each analytic within type 
+            for (j = 0; j < analytics.length; j++) {
+                var analyticCard = new Ext.Panel({
+                    id: 'analytic_card_' + analytics[j].analytic,
+                    frame: false,
+                    border: false,
+                    data: analytics[j],
+                    tpl: self.analyticCardTemplate,
+                    cls: 'analyticCard',
+                    listeners: {
+                        afterrender: function (comp) {
+                            self.getAnalyticPlots(comp.initialConfig.data)
 
-                        //Add analytic card for each analytic within type 
-                        for (j = 0; j < analytics.length; j++) {
-                            var analyticCard = new Ext.Panel({
-                                id: 'analytic_card_' + analytics[j].analytic,
-                                frame: false,
-                                border: false,
-                                data: analytics[j],
-                                tpl: self.analyticCardTemplate,
-                                cls: 'analyticCard',
-                                listeners: {
-                                    afterrender: function (comp) {
-                                        var el = comp.getEl();
-                                        el.on('click', function () {
-                                            self.showAnalyticPanel(comp.initialConfig.data)
-                                        })
-                                    }
-                                }
+                            var el = comp.getEl();
+                            el.on('click', function () {
+                                self.showAnalyticPanel(comp.initialConfig.data)
                             })
-
-                            self.getAnalyticPlots(analytics[j])
-                            typePanel.add(analyticCard)
                         }
-                        analtyicCardPanel.add(typePanel)
                     }
-                    analtyicCardPanel.doLayout()
-                }else{
-                    Ext.MessageBox.show({
-                        title: 'Analytic Loading error',
-                        msg: 'There was an error loading analytic data.',
-                        icon: Ext.MessageBox.ERROR,
-                        buttons: Ext.MessageBox.OK
-                    });
-                }
-            },
-            error: function () {
-                Ext.MessageBox.show({
-                    title: 'Analytic Loading error',
-                    msg: 'There was an error loading analytic data.',
-                    icon: Ext.MessageBox.ERROR,
-                    buttons: Ext.MessageBox.OK
-                });
+                })
+                typePanel.add(analyticCard)
             }
-        })
+            analtyicCardPanel.add(typePanel)
+        }
+        analtyicCardPanel.doLayout()
     },
 
     getAnalyticPlots: function (config) {
@@ -166,6 +179,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         var yStatistic = config.statistics[1]
 
         var analyticStore = new Ext.data.JsonStore({
+            id: 'analytic_store_' + config.analytic,
             restful: true,
             url: XDMoD.REST.url + '/warehouse/aggregatedata',
             root: 'results',
@@ -187,148 +201,169 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     statistics: config.statistics
                 })
             },
-            fields: [xStatistic, yStatistic, 'name'],
-            listeners: {
-                load: function () {
-                    //Get record from store and push individual data points to the data array to be used by Highcharts
-                    //Data array includes x value, y value, person(name), and data point color 
-                    var record = analyticStore.data.items;
-                    var data = [];
-
-                    // These are just placeholders - need to get values from data
-                    var xAxisMax = 100
-                    var yAxisMax = 1000
-
-                    for (i = 1; i < record.length; i++) {
-                        var x = parseInt(record[i].data.xStatistic)
-                        var y = parseInt(record[i].data.yStatistic)
-                        var person = record[i].data.name;
-                        var personId = record[i].id;
-
-                        if (x > xAxisMax / 2 && y > yAxisMax / 2) {
-                            var color = '#ff0000';
-                        } else {
-                            var color = '#2f7ed8';
-                        }
-
-                        var dataPt = { x, y, person, personId, color, drilldown }
-                        data.push(dataPt);
-                    };
-
-                    //Create new chart from data store 
-                    new Highcharts.Chart({
-                        chart: {
-                            renderTo: renderId,
-                            type: 'scatter',
-                            zoomType: 'xy',
-                            backgroundColor: '#F8F7F7',
-                            selectionMarkerFill: 'none',
-                            width: null,
-                            height: null,
-                        },
-                        title: {
-                            text: null,
-                        },
-                        navigation: {
-                            buttonOptions: {
-                                enabled: false
-                            }
-                        },
-                        credits: { enabled: false },
-                        legend: {
-                            enabled: false
-                        },
-                        tooltip: { enabled: false },
-                        plotOptions: {
-                            series: {
-                                allowPointSelect: false,
-                                states: { hover: { enabled: false } }
-                            },
-                        },
-                        xAxis: {
-                            title: {
-                                text: config.statisticLabels[0],
-                            },
-                            min: 0,
-                            max: xAxisMax,
-                            tickInterval: xAxisMax / 4,
-                            tickLength: 0,
-                            gridLineWidth: 1,
-                            showLastLabel: true,
-                            showFirstLabel: true,
-                            lineColor: '#ccc',
-                            lineWidth: 1,
-                            //Placement of x-axis plot line, should be in center of scatter plot 
-                            plotLines: [{
-                                color: 'black', // Color value
-                                dashStyle: 'solid', // Style of the plot line. Default to solid
-                                value: xAxisMax / 2, // Value of where the line will appear
-                                width: 2 // Width of the line    
-                            }]
-
-                        },
-                        yAxis: {
-                            title: {
-                                text: config.statisticLabels[1],
-                            },
-                            min: 0,
-                            max: yAxisMax,
-                            tickInterval: yAxisMax / 4,
-                            tickLength: 0,
-                            gridLineWidth: 1,
-                            showLastLabel: true,
-                            showFirstLabel: true,
-                            lineColor: '#ccc',
-                            lineWidth: 1,
-                            //Placement of y-axis plot line, should be in center of scatter plot 
-                            plotLines: [{
-                                color: 'black', // Color value
-                                dashStyle: 'solid', // Style of the plot line. Default to solid
-                                value: yAxisMax / 2, // Value of where the line will appear
-                                width: 2 // Width of the line    
-                            }]
-                        },
-                        series: [{
-                            data: data
-                        }]
-                    })
-                }
-            }
+            fields: [xStatistic, yStatistic, 'name']
         })
-        analyticStore.load()
-    },
 
-    reloadCharts: function (url, token) {
-        var self = this;
 
-        Ext.Ajax.request({
-            url: url,
-            method: 'GET',
-            params: {
-                token: token
-            },
-            success: function (response) {
-                var data = JSON.parse(response.responseText);
+        //Get record from store and push individual data points to the data array to be used by Highcharts
+        //Data array includes x value, y value, person(name), and data point color 
+        analyticStore.on("load", function () {
+            var record = this.data.items;
 
-                //Reload each chart with new start and end date 
-                for (i = 0; i < data.data.length; i++) {
-                    var analytics = data.data[i].analytics
-                    for (j = 0; j < analytics.length; j++) {
-                        self.getAnalyticPlots(analytics[j])
+
+            //Check that data is available for the analytic 
+            if (record.length > 0) {
+                var data = [];
+
+                //Set minimum axis values 
+                var xAxisMax = 100
+                var yAxisMax = 100
+                //Set maximum axis values 
+                for (let i = 0; i < record.length; i++) {
+                    if (parseInt(record[i].data[yStatistic]) > parseInt(yAxisMax)) {
+                        yAxisMax = parseInt(record[i].data[yStatistic]);
+                    }
+
+                    if (parseInt(record[i].data[xStatistic]) > parseInt(xAxisMax)) {
+                        xAxisMax = parseInt(record[i].data[xStatistic]);
                     }
                 }
 
-            },
-            error: function () {
-                Ext.MessageBox.show({
-                    title: 'Analytic Loading Error',
-                    msg: 'There was an error loading analytic data.',
-                    icon: Ext.MessageBox.ERROR,
-                    buttons: Ext.MessageBox.OK
-                });
+                //Get the series data 
+                for (let i = 0; i < record.length; i++) {
+                    var x = parseInt(record[i].data[xStatistic])
+                    var y = parseInt(record[i].data[yStatistic])
+
+                    var person = record[i].data.name;
+                    var personId = record[i].id;
+
+                    if (x > xAxisMax / 2 && y > yAxisMax / 2) {
+                        var color = '#ff0000';
+                    } else {
+                        var color = '#2f7ed8';
+                    }
+
+                    var dataPt = { x, y, person, personId, color }
+                    data.push(dataPt);
+                };
+
+                //Chart Config 
+                var chartConfig = {
+                    chart: {
+                        renderTo: renderId,
+                        type: 'scatter',
+                        backgroundColor: '#F8F7F7',
+                        width: null,
+                        height: null,
+                        events: {
+                            load: function (event) {
+                            }
+                        }
+                    },
+                    title: {
+                        text: null,
+                    },
+                    navigation: {
+                        buttonOptions: {
+                            enabled: false
+                        }
+                    },
+                    loading: {
+                        style: {
+                            opacity: 0.7
+                        }
+                    },
+                    credits: { enabled: false },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: { enabled: false },
+                    plotOptions: {
+                        series: {
+                            allowPointSelect: false,
+                            states: { hover: { enabled: false } }
+                        },
+                    },
+                    xAxis: {
+                        title: {
+                            text: config.statisticLabels[0],
+                        },
+                        min: 0,
+                        max: xAxisMax,
+                        tickInterval: xAxisMax / 4,
+                        tickLength: 0,
+                        gridLineWidth: 1,
+                        showLastLabel: true,
+                        showFirstLabel: true,
+                        lineColor: '#ccc',
+                        lineWidth: 1,
+                        //Placement of x-axis plot line, should be in center of scatter plot 
+                        plotLines: [{
+                            color: 'black', // Color value
+                            dashStyle: 'solid', // Style of the plot line. Default to solid
+                            value: xAxisMax / 2, // Value of where the line will appear
+                            width: 2 // Width of the line    
+                        }]
+
+                    },
+                    yAxis: {
+                        title: {
+                            text: config.statisticLabels[1],
+                        },
+                        min: 0,
+                        max: yAxisMax,
+                        tickInterval: yAxisMax / 4,
+                        tickLength: 0,
+                        gridLineWidth: 1,
+                        showLastLabel: true,
+                        showFirstLabel: true,
+                        lineColor: '#ccc',
+                        lineWidth: 1,
+                        //Placement of y-axis plot line, should be in center of scatter plot 
+                        plotLines: [{
+                            color: 'black', // Color value
+                            dashStyle: 'solid', // Style of the plot line. Default to solid
+                            value: yAxisMax / 2, // Value of where the line will appear
+                            width: 2 // Width of the line    
+                        }]
+                    },
+                    series: [{
+                        data: data
+                    }]
+                }
+
+                new Highcharts.Chart(chartConfig)
+            } else {
+                document.getElementById(config.analytic + 'Chart').innerHTML = "No data available during this time frame for this analytic.";
             }
         })
+    },
 
+    reloadCharts: function (data) {
+        //Reload each chart with new start and end date 
+        for (i = 0; i < data.data.length; i++) {
+            var analytics = data.data[i].analytics
+            for (j = 0; j < analytics.length; j++) {
+                var analyticStore = Ext.StoreMgr.lookup('analytic_store_' + analytics[j].analytic)
+                analyticStore.reload({
+                    params: {
+                        config: JSON.stringify({
+                            realm: analytics[j].realm,
+                            group_by: 'person',
+                            aggregation_unit: 'day',
+                            start_date: Ext.getCmp('efficiency').getDurationSelector().getStartDate(),
+                            end_date: Ext.getCmp('efficiency').getDurationSelector().getEndDate(),
+                            order_by: {
+                                field: analytics[j].field,
+                                dirn: 'asc'
+                            },
+                            filters: [],
+                            statistics: analytics[j].statistics
+                        })
+                    }
+                })
+            }
+        }
     },
 
     showAnalyticPanel: function (chartConfig) {
@@ -337,10 +372,16 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             config: chartConfig
         })
 
+        //Add new breadcrumb 
+        var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
+        breadcrumbMenu.add({ text: chartConfig.analytic })
+        breadcrumbMenu.doLayout()
+
+        //Load new panel with corresponding analytic chart 
         var mainPanel = Ext.getCmp('efficiency_display_panel')
         mainPanel.add(analyticPanel)
         mainPanel.layout.setActiveItem(1)
         mainPanel.doLayout()
-    },
+    }
 
-});// XDMoD.Module.Efficiency
+});// XDMoD.Module.Efficiency 
