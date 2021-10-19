@@ -4,6 +4,7 @@
             "+js": [
                 "gui/js/modules/efficiency/Efficiency.js",
                 "gui/js/modules/efficiency/AnalyticPanel.js",
+                "gui/js/modules/efficiency/ScatterPlotPanel.js",
                 "gui/js/modules/dashboard/JobEfficiencyComponent.js",
                 "gui/js/modules/dashboard/UserJobEfficiencyComponent.js"
             ],
