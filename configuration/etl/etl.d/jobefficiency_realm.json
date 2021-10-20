@@ -51,6 +51,21 @@
             }
         },
         {
+            "name": "dimension-short-job-load",
+            "description": "Load data into short_job dimension table",
+            "class": "StructuredFileIngestor",
+            "namespace": "ETL\\Ingestor",
+            "options_class": "IngestorOptions",
+            "definition_file": "jobefficiency/short_job.json",
+            "endpoints": {
+                "source": {
+                    "type": "jsonfile",
+                    "name": "short jobs",
+                    "path": "jobefficiency/short_job.json"
+                }
+            }
+        },
+        {
             "name": "table-create",
             "description": "Setup tables",
             "class": "ManageTables",

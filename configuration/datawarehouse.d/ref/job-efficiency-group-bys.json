@@ -26,6 +26,33 @@
         "description_html": "Organizations that have users with allocations.",
         "name": "Category"
     },
+    "shortjob": {
+        "attribute_table_schema": "modw_jobefficiency",
+        "attribute_to_aggregate_table_key_map": [
+            {
+                "id": "short_job_id"
+            }
+        ],
+        "attribute_values_query": {
+            "joins": [
+                {
+                    "name": "short_job"
+                }
+            ],
+            "orderby": [
+                "id"
+            ],
+            "records": {
+                "id": "id",
+                "name": "categorization",
+                "order_id": "id",
+                "short_name": "categorization"
+            }
+        },
+        "category": "Administrative",
+        "description_html": "Categorization of jobs based on wall time. Jobs with a wall time of less than 30 seconds are cateorized as short jobs.",
+        "name": "Short Job"
+    },
     "day": {
         "$ref": "datawarehouse.d/ref/group-by-time-period.json#/day"
     },

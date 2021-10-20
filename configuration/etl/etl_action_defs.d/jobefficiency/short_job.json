@@ -1,0 +1,5 @@
+{
+    "table_definition": [{
+        "$ref": "${table_definition_dir}/jobefficiency/short_job.json#/table_definition"
+    }]
+}

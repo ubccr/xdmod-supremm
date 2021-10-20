@@ -88,16 +88,16 @@
                 "analytic": "Short Job Count",
                 "description": "Count of all jobs that were running for less than a threshold (30s)",
                 "title": "Short Job Count",
-                "field": "avg_percent_cpu_idle",
+                "field": "short_job_count",
                 "statistics": [
-                    "avg_percent_cpu_idle",
-                    "wall_time"
+                    "short_job_count",
+                    "job_count"
                 ],
                 "statisticLabels": [
-                    "Average CPU % Idle: Weighted by Core Hore",
-                    "Total CPU Hours"
+                    "Total number of jobs that ran for less than 30 seconds.",
+                    "Total number of jobs."
                 ],
-                "realm": "SUPREMM"
+                "realm": "JobEfficiency"
             }
         ]
     }

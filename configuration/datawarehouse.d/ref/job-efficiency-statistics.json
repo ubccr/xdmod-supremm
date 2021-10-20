@@ -41,5 +41,12 @@
         "name": "CPU Hours Inefficient: Ratio",
         "precision": 0,
         "unit": "%"
+    },
+    "short_job_count":{
+        "formula": "SUM(agg.short_job_count)",
+        "description_html": "The total number of jobs that ended within the selected duration that ran for less than 30 seconds.",
+        "name": "Number of Short Jobs",
+        "precision": 0,
+        "unit": "Number of Jobs"
     }
 }
