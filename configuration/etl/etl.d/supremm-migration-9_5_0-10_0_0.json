@@ -13,5 +13,27 @@
         }
     },
     "migration-9_5_0-10_0_0": [
+        {
+            "name": "dimension-short-job-load",
+            "description": "Load data into short_job dimension table",
+            "class": "StructuredFileIngestor",
+            "namespace": "ETL\\Ingestor",
+            "options_class": "IngestorOptions",
+            "definition_file": "jobefficiency/short_job.json",
+            "endpoints": {
+                "source": {
+                    "type": "jsonfile",
+                    "name": "short jobs",
+                    "path": "jobefficiency/short_job.json"
+                },
+                "destination": {
+                    "type": "mysql",
+                    "name": "Datawarehouse",
+                    "config": "datawarehouse",
+                    "schema": "modw_jobefficiency",
+                    "create_schema_if_not_exists": true
+                }
+            }
+        }
     ]
 }
