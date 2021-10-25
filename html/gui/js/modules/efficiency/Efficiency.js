@@ -4,60 +4,55 @@
  *
  */
 XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
-    //Portal Module Properties 
+    //Portal Module Properties
     title: 'Efficiency',
     module_id: 'efficiency',
 
-    //Portal Module Toolbar Config 
+    //Portal Module Toolbar Config
     usesToolbar: true,
     toolbarItems: {
         durationSelector: true
     },
 
-    //Efficiency Tab Properties 
-    token: XDMoD.REST.token,
-    analyticURL: XDMoD.REST.url + '/efficiency/analytics',
-
     initComponent: function () {
         var self = this;
 
-        //Get the analytics that will be displayed 
+        //Get the analytics that will be displayed
         var analytics = []
         Ext.Ajax.request({
-            url: self.analyticURL,
+            url: XDMoD.REST.url + '/efficiency/analytics',
             method: 'GET',
             params: {
-                token: self.token
+                token: XDMoD.REST.token,
             },
             callback: function (o, success, response) {
                 if (success) {
-                    analytics = JSON.parse(response.responseText)
-                    self.getAnalyticCardDisplay(analytics)
+                    analytics = JSON.parse(response.responseText);
+                    self.getAnalyticCardDisplay(analytics);
                 } 
             },
             failure: function(response){
                 Ext.Msg.alert(
                     response.statusText || 'Analytics Not Found',
-                    JSON.parse(response.responseText).message || 'No analytics found to display in job efficiency tab.'
-                )
+                    JSON.parse(response.responseText).message || 'Analytics not found. Please contact system administrator to troubleshoot error.'
+                );
             }
         })
 
         //Handle duration change for each active item
         self.on('duration_change', function () {
-
-            var mainPanel = Ext.getCmp('efficiency_display_panel')
-            var activeItem = mainPanel.getLayout().activeItem
-            var activeItemIndex = mainPanel.items.indexOf(activeItem)
+            var mainPanel = Ext.getCmp('efficiency_display_panel');
+            var activeItem = mainPanel.getLayout().activeItem;
+            var activeItemIndex = mainPanel.items.indexOf(activeItem);
 
             if (activeItemIndex == 0) {
-                self.reloadCharts(analytics)
+                self.reloadCharts(analytics);
             } else if (activeItemIndex == 1) {
                 //reload analytic chart with filters
             }
         })
 
-        //Container for the analytic card display 
+        //Container for the analytic card display
         var analyticCardPanel = new Ext.Panel({
             id: 'analytic_card_panel',
             border: false,
@@ -65,7 +60,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             autoScroll: true
         })
 
-        //Efficiency tab main panel with card layout to allow for switching between views 
+        //Efficiency tab main panel with card layout to allow for switching between views
         var mainPanel = new Ext.Panel({
             id: 'efficiency_display_panel',
             frame: false,
@@ -83,10 +78,10 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             items: [
                 mainPanel
             ]
-        });// Ext.apply
+        });
 
         XDMoD.Module.Efficiency.superclass.initComponent.apply(this, arguments);
-    }, // initComponent
+    },
 
     getToolbarConfig: function () {
         var breadcrumbMenu = {
@@ -96,9 +91,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             items: [{
                 text: 'Analytic Cards', 
                 handler: function(){
-                   var mainPanel = Ext.getCmp('efficiency_display_panel')
-                   mainPanel.layout.setActiveItem(0)
-                   mainPanel.doLayout()
+                   var mainPanel = Ext.getCmp('efficiency_display_panel');
+                   mainPanel.layout.setActiveItem(0);
+                   mainPanel.doLayout();
 
                 }
             }]
@@ -112,7 +107,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     },
 
     analyticCardTemplate: [
-        //Template for creating cards for each analytic 
+        //Template for creating cards for each analytic
         '<div class="analyticCardContents">',
         '<div class="analyticHeader">',
         '<h1>{analytic}</h1>',
@@ -120,16 +115,17 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         '</div>',
         '<div class="analyticScatterPlotThumbnail" id="{analytic}Chart"></div>',
         '</div>'
-    ], //analyticCardTemplate
+    ],
 
     getAnalyticCardDisplay: function (data) {
         var self = this;
 
         var analtyicCardPanel = Ext.getCmp('analytic_card_panel')
 
-        //Add container for each type of analytic 
+        //Add container for each type of analytic
+        var i, j;
         for (i = 0; i < data.data.length; i++) {
-            var analytics = data.data[i].analytics
+            var analytics = data.data[i].analytics;
 
             var typePanel = new Ext.Panel({
                 border: false,
@@ -141,9 +137,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         cls: 'analyticTypeHeader'
                     })
                 ]
-            })
+            });
 
-            //Add analytic card for each analytic within type 
+            //Add analytic card for each analytic within type
             for (j = 0; j < analytics.length; j++) {
                 var analyticCard = new Ext.Panel({
                     id: 'analytic_card_' + analytics[j].analytic,
@@ -154,29 +150,26 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     cls: 'analyticCard',
                     listeners: {
                         afterrender: function (comp) {
-                            self.getAnalyticPlots(comp.initialConfig.data)
-
+                            self.getAnalyticPlots(comp.initialConfig.data);
                             var el = comp.getEl();
                             el.on('click', function () {
                                 self.showAnalyticPanel(comp.initialConfig.data)
-                            })
+                            });
                         }
                     }
                 })
-                typePanel.add(analyticCard)
+                typePanel.add(analyticCard);
             }
-            analtyicCardPanel.add(typePanel)
+            analtyicCardPanel.add(typePanel);
         }
-        analtyicCardPanel.doLayout()
+        analtyicCardPanel.doLayout();
     },
 
     getAnalyticPlots: function (config) {
-        var renderId = config.analytic + 'Chart'
-        var startDate = Ext.getCmp('efficiency').getDurationSelector().getStartDate();
-        var endDate = Ext.getCmp('efficiency').getDurationSelector().getEndDate();
+        var renderId = config.analytic + 'Chart';
 
-        var xStatistic = config.statistics[0]
-        var yStatistic = config.statistics[1]
+        var xStatistic = config.statistics[0];
+        var yStatistic = config.statistics[1];
 
         var analyticStore = new Ext.data.JsonStore({
             id: 'analytic_store_' + config.analytic,
@@ -191,8 +184,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     realm: config.realm,
                     group_by: 'person',
                     aggregation_unit: 'day',
-                    start_date: startDate,
-                    end_date: endDate,
+                    start_date: Ext.getCmp('efficiency').getDurationSelector().getStartDate(),
+                    end_date: Ext.getCmp('efficiency').getDurationSelector().getEndDate(),
                     order_by: {
                         field: config.field,
                         dirn: 'asc'
@@ -206,20 +199,21 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
 
         //Get record from store and push individual data points to the data array to be used by Highcharts
-        //Data array includes x value, y value, person(name), and data point color 
+        //Data array includes x value, y value, person(name), and data point color
         analyticStore.on("load", function () {
             var record = this.data.items;
 
-
-            //Check that data is available for the analytic 
+            //Check that data is available for the analytic
             if (record.length > 0) {
                 var data = [];
 
-                //Set minimum axis values 
-                var xAxisMax = 100
-                var yAxisMax = 100
-                //Set maximum axis values 
-                for (let i = 0; i < record.length; i++) {
+                //Set minimum axis values
+                var xAxisMax = 100;
+                var yAxisMax = 100;
+
+                //Set maximum axis values
+                var i;
+                for (i = 0; i < record.length; i++) {
                     if (parseInt(record[i].data[yStatistic]) > parseInt(yAxisMax)) {
                         yAxisMax = parseInt(record[i].data[yStatistic]);
                     }
@@ -229,10 +223,11 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     }
                 }
 
-                //Get the series data 
-                for (let i = 0; i < record.length; i++) {
-                    var x = parseInt(record[i].data[xStatistic])
-                    var y = parseInt(record[i].data[yStatistic])
+                //Get the series data
+                var i;
+                for (i = 0; i < record.length; i++) {
+                    var x = parseInt(record[i].data[xStatistic]);
+                    var y = parseInt(record[i].data[yStatistic]);
 
                     var person = record[i].data.name;
                     var personId = record[i].id;
@@ -243,7 +238,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         var color = '#2f7ed8';
                     }
 
-                    var dataPt = { x, y, person, personId, color }
+                    var dataPt = { x, y, person, personId, color };
                     data.push(dataPt);
                 };
 
@@ -297,12 +292,11 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         showFirstLabel: true,
                         lineColor: '#ccc',
                         lineWidth: 1,
-                        //Placement of x-axis plot line, should be in center of scatter plot 
                         plotLines: [{
-                            color: 'black', // Color value
-                            dashStyle: 'solid', // Style of the plot line. Default to solid
-                            value: xAxisMax / 2, // Value of where the line will appear
-                            width: 2 // Width of the line    
+                            color: 'black',
+                            dashStyle: 'solid',
+                            value: xAxisMax / 2,
+                            width: 2    
                         }]
 
                     },
@@ -319,12 +313,11 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         showFirstLabel: true,
                         lineColor: '#ccc',
                         lineWidth: 1,
-                        //Placement of y-axis plot line, should be in center of scatter plot 
                         plotLines: [{
-                            color: 'black', // Color value
-                            dashStyle: 'solid', // Style of the plot line. Default to solid
-                            value: yAxisMax / 2, // Value of where the line will appear
-                            width: 2 // Width of the line    
+                            color: 'black',
+                            dashStyle: 'solid',
+                            value: yAxisMax / 2,
+                            width: 2   
                         }]
                     },
                     series: [{
@@ -332,7 +325,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     }]
                 }
 
-                new Highcharts.Chart(chartConfig)
+                new Highcharts.Chart(chartConfig);
+
             } else {
                 document.getElementById(config.analytic + 'Chart').innerHTML = "No data available during this time frame for this analytic.";
             }
@@ -340,11 +334,12 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     },
 
     reloadCharts: function (data) {
-        //Reload each chart with new start and end date 
+        //Reload each chart with new start and end date
+        var i, j;
         for (i = 0; i < data.data.length; i++) {
-            var analytics = data.data[i].analytics
+            var analytics = data.data[i].analytics;
             for (j = 0; j < analytics.length; j++) {
-                var analyticStore = Ext.StoreMgr.lookup('analytic_store_' + analytics[j].analytic)
+                var analyticStore = Ext.StoreMgr.lookup('analytic_store_' + analytics[j].analytic);
                 analyticStore.reload({
                     params: {
                         config: JSON.stringify({
@@ -361,7 +356,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             statistics: analytics[j].statistics
                         })
                     }
-                })
+                });
             }
         }
     },
@@ -370,18 +365,17 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         var analyticPanel = new XDMoD.Module.Efficiency.AnalyticPanel({
             id: 'analytic_panel_' + chartConfig.analytic,
             config: chartConfig
-        })
+        });
 
-        //Add new breadcrumb 
+        //Add new breadcrumb
         var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
-        breadcrumbMenu.add({ text: chartConfig.analytic })
-        breadcrumbMenu.doLayout()
+        breadcrumbMenu.add({ text: chartConfig.analytic });
+        breadcrumbMenu.doLayout();
 
-        //Load new panel with corresponding analytic chart 
-        var mainPanel = Ext.getCmp('efficiency_display_panel')
-        mainPanel.add(analyticPanel)
-        mainPanel.layout.setActiveItem(1)
-        mainPanel.doLayout()
+        //Load new panel with corresponding analytic chart
+        var mainPanel = Ext.getCmp('efficiency_display_panel');
+        mainPanel.add(analyticPanel);
+        mainPanel.layout.setActiveItem(1);
+        mainPanel.doLayout();
     }
-
-});// XDMoD.Module.Efficiency 
+});

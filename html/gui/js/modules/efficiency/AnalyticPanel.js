@@ -1,6 +1,6 @@
 Ext.namespace('XDMoD.Module.Efficiency.AnalyticPanel');
 /*
-This component builds the panel that is used to display the scatter plot and further information about a specific analytic. 
+This component builds the panel that is used to display the scatter plot and further information about a specific analytic.
 */
 XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
     id: 'analytic_panel',
@@ -16,7 +16,6 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
             self.getComponents()
         ]
 
-        // FINISH: the component creation by calling our superclass' initComponent.
         XDMoD.Module.Efficiency.AnalyticPanel.superclass.initComponent.apply(this, arguments);
     },
 
@@ -27,7 +26,7 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
             region: 'west',
             title: 'Filters',
             width: 300
-        })
+        });
 
         var analyticScatterPlot = new XDMoD.Module.Efficiency.ScatterPlotPanel({
             region: 'center',
@@ -51,19 +50,18 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                     })
                 }
             }
-        })
+        });
 
         var descriptionPanel = new Ext.Panel({
             region: 'south',
             height: 200,
             title: 'Chart Description'
-
-        })
+        });
 
         return [
             searchPanel,
             analyticScatterPlot,
             descriptionPanel
-        ]
-    } //getComponents
+        ];
+    }
 })

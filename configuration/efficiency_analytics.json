@@ -16,6 +16,9 @@
                     "Average CPU % Idle: Weighted by Core Hour",
                     "Total CPU Hours"
                 ],
+                "valueLabels": [
+                    "%", "Core Hours"
+                ],
                 "realm": "SUPREMM"
             },
             {
@@ -30,6 +33,9 @@
                 "statisticLabels": [
                     "Average % GPU Usage: Weighted by Node Hours",
                     "Total GPU Hours"
+                ],
+                "valueLabels": [
+                    "%", "GPU Hours"
                 ],
                 "realm": "SUPREMM"
             },
@@ -46,6 +52,9 @@
                     "Average CPU % Idle: Weighted by Core Hore",
                     "Total CPU Hours"
                 ],
+                "valueLabels": [
+                    "%", "Core Hours"
+                ],
                 "realm": "SUPREMM"
             },
             {
@@ -60,6 +69,9 @@
                 "statisticLabels": [
                     "Average CPU % Idle: Weighted by Core Hore",
                     "Total CPU Hours"
+                ],
+                "valueLabels": [
+                    "%", "Core Hours"
                 ],
                 "realm": "SUPREMM"
             }
@@ -82,6 +94,9 @@
                     "Wall Time Used",
                     "Wall Time Allocated"
                 ],
+                "valueLabels": [
+                    "Seconds", "Seconds"
+                ],
                 "realm": "SUPREMM"
             },
             {
@@ -96,6 +111,9 @@
                 "statisticLabels": [
                     "Total number of jobs that ran for less than 30 seconds.",
                     "Total number of jobs."
+                ],
+                "valueLabels": [
+                    "Jobs", "Jobs"
                 ],
                 "realm": "JobEfficiency"
             }

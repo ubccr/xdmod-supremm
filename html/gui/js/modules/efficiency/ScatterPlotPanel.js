@@ -1,5 +1,11 @@
 Ext.namespace('XDMoD', 'XDMoD.Module', 'XDMoD.Module.Efficiency');
 
+/**
+ * @class XDMoD.Module.Efficiency.ScatterPlotPanel
+ * @extends Ext.Panel
+ * @param {Object} config The config object to be used to populate analytic scatter plot
+ */
+
 XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     chart: null,
     store: null,
@@ -61,12 +67,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     showFirstLabel: true,
                     lineColor: '#ccc',
                     lineWidth: 1,
-                    //Placement of x-axis plot line, should be in center of scatter plot 
                     plotLines: [{
-                        color: 'black', // Color value
-                        dashStyle: 'solid', // Style of the plot line. Default to solid
-                        value: 100 / 2, // Value of where the line will appear
-                        width: 2 // Width of the line    
+                        color: 'black',
+                        dashStyle: 'solid',
+                        value: 100 / 2,
+                        width: 2
                     }]
 
                 },
@@ -83,12 +88,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     showFirstLabel: true,
                     lineColor: '#ccc',
                     lineWidth: 1,
-                    //Placement of y-axis plot line, should be in center of scatter plot 
                     plotLines: [{
-                        color: 'black', // Color value
-                        dashStyle: 'solid', // Style of the plot line. Default to solid
-                        value: 10000 / 2, // Value of where the line will appear
-                        width: 2 // Width of the line    
+                        color: 'black',
+                        dashStyle: 'solid',
+                        value: 10000 / 2,
+                        width: 2  
                     }]
                 }
             };
@@ -131,19 +135,15 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     var store = inst;
 
                     var record = store.data.items;
-                    var data = self.getSeriesData(record)
+                    var data = self.getSeriesData(record);
 
                     if (data.length < 1) {
                         self.chart.hideLoading();
                         self.chart.renderer.image('gui/images/report_thumbnail_no_data.png', (self.chart.chartWidth - 400) / 2, (self.chart.chartHeight - 300) / 2, 400, 300).add();
-
                     } else {
-
-                        //Sex x axis max 
                         var xAxisMax = self.getMax(record, self.config.statistics[0]);
                         var yAxisMax = self.getMax(record, self.config.statistics[1]);
 
-                        //Only update x axis if value is greater than 100 - this is to serve any statistics that are not a percentage (wall time, short job count)
                         if (xAxisMax > 100){
                             self.chart.xAxis[0].update({
                                 max: Math.ceil(xAxisMax / 1000) * 1000,
@@ -168,20 +168,16 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             }]
                         });
 
-
-                        //Set new or update series data
                         if (!self.chart.series[0]) {
                             self.chart.addSeries({
                                 data: data
-                            })
+                            });
                         } else {
-                            //Update series when adding 
                             self.chart.series[0].update({
                                 data: data
-                            })
+                            });
                         }
 
-                        //Redraw chart to reflect the changes 
                         self.chart.hideLoading();
                         self.chart.redraw();
                     }
@@ -211,35 +207,34 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     },
 
     getMax: function (record, property) {
-        var max;
+        var max, i;
 
         for (i = 0; i < record.length; i++) {
             if (max == null || record[i].data[property] > max) {
-                var max = record[i].data[property]
+                var max = record[i].data[property];
             }
         }
 
-        return max
+        return max;
     },
 
     getSeriesData: function (record) {
         var data = [];
 
+        var i;
         for (i = 0; i < record.length; i++) {
-            var x = parseInt(record[i].data[this.config.statistics[0]])
-            var y = parseInt(record[i].data[this.config.statistics[1]])
+            var x = parseInt(record[i].data[this.config.statistics[0]]);
+            var y = parseInt(record[i].data[this.config.statistics[1]]);
             var person = record[i].data.name;
 
-            data.push({ x, y, person })
+            data.push({ x, y, person });
         }
 
-        return data
+        return data;
     },
 
     listeners: {
         destroy: function (e) {
-
-            console.log(e)
             if (this.chart) {
                 this.chart.destroy();
                 this.chart = null;
