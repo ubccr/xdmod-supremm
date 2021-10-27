@@ -29,6 +29,20 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         $base = get_class($this);
 
         // QUERY ROUTES
+        /**
+        * @OA\Get(
+        *   path="/analytics",
+        *   summary="analytic list",
+        *   @OA\Response(
+        *     response=200,
+        *     description="Returns a json object of analytics to be displayed in the efficiency tab."
+        *   ),
+        *   @OA\Response(
+        *     response="default",
+        *     description="An error occurred while retrieving analytics."
+        *   )
+        * )
+        */
         $controller->get("$root/analytics", "$base::getAnalytics");
     } // function setupRoutes
 

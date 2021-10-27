@@ -27,7 +27,7 @@
                 {
                     "name": "efficiency",
                     "title": "Efficiency",
-                    "position": 2000,
+                    "position": 400,
                     "javascriptClass": "XDMoD.Module.Efficiency",
                     "javascriptReference": "CCR.xdmod.ui.efficiency",
                     "tooltip": "Displays job efficiency information.",
