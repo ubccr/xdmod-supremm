@@ -48,6 +48,12 @@
                 "comment": "DIMENSION: The categorized job type."
             },
             {
+                "name": "short_job_id",
+                "type": "int(11)",
+                "nullable": false,
+                "comment": "DIMENSION: The job categorized by wall time."
+            },
+            {
                 "name": "organization_id",
                 "type": "int(11)",
                 "nullable": false,
@@ -132,6 +138,12 @@
                 "comment": "FACT: The number of jobs that started during this period."
             },
             {
+                "name": "short_job_count",
+                "type": "int(11)",
+                "nullable": true,
+                "comment": "FACT: The number of jobs that ran for less than 30 seconds and ended during this period."
+            },
+            {
                 "name": "wall_time",
                 "type": "double",
                 "nullable": true,
@@ -175,6 +187,12 @@
                 "name": "index_jobefficiency_job_category_id",
                 "columns": [
                     "job_category_id"
+                ]
+            },
+            {
+                "name": "index_jobefficiency_short_job_id",
+                "columns": [
+                    "short_job_id"
                 ]
             },
             {

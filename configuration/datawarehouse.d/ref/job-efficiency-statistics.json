@@ -28,6 +28,13 @@
         "precision": 0,
         "unit": "CPU Hour"
     },
+    "short_job_count":{
+        "formula": "SUM(agg.short_job_count)",
+        "description_html": "The total number of jobs that ended within the selected duration that ran for less than 30 seconds.",
+        "name": "Number of Short Jobs",
+        "precision": 0,
+        "unit": "Number of Jobs"
+    },
     "job_count_bad": {
         "formula": "SUM(CASE WHEN agg.job_category_id = 2 THEN job_count ELSE 0 END)",
         "description_html": "The total number of jobs that ended within the selected duration.<br/><i>Job: </i>A scheduled process for a computer resource in a batch processing environment.",

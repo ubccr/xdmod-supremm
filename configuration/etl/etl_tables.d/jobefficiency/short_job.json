@@ -1,0 +1,39 @@
+{
+    "table_definition": {
+        "name": "short_job",
+        "engine": "InnoDB",
+        "charset": "utf8",
+        "collation": "utf8_unicode_ci",
+        "columns": [
+            {
+                "name": "id",
+                "type": "int(11)",
+                "nullable": false
+            },
+            {
+                "name": "categorization",
+                "type": "varchar(45)",
+                "nullable": false
+            }
+        ],
+        "indexes": [
+            {
+                "name": "PRIMARY",
+                "columns": [
+                    "id"
+                ],
+                "type": "BTREE",
+                "is_unique": true
+            },
+            {
+                "name": "categorization",
+                "columns": [
+                    "categorization"
+                ],
+                "type": "BTREE",
+                "is_unique": true
+            }
+        ],
+        "triggers": []
+    }
+}
