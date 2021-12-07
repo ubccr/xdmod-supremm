@@ -2020,6 +2020,120 @@ module.exports = {
             table: "job"
         },
 
+        gpus: {
+            unit: null,
+            type: 'int32',
+            dtype: 'accounting',
+            group: 'Allocated resource',
+            nullable: false,
+            def: 0,
+            batchExport: true,
+            comments: 'The total number of GPUs assigned to the job.',
+            per: 'job',
+            table: 'job',
+            agg: [
+                {
+                    table: 'supremmfact',
+                    type: 'int32',
+                    alias: 'gpu_count',
+                    roles: { disable: ['pub'] },
+                    dimension: true,
+                    comments: 'Number of GPU devices assigned to the jobs.'
+                },
+                {
+                    name: 'gpu_bucket_id',
+                    type: 'int32',
+                    dimension: false, // don't need to group by this since we are grouping by cores.
+                    table: 'supremmfact',
+                    sql: '(select id from gpu_buckets gb where gpus between gb.min_gpus and gb.max_gpus)',
+                    comments: 'Binning of GPU count from the modw.gpu_buckets table.'
+                }
+            ]
+        },
+
+        gpu_time: {
+            unit: 'seconds',
+            type: 'int32',
+            dtype: 'accounting',
+            group: 'Allocated resource',
+            nullable: true,
+            def: null,
+            batchExport: true,
+            comments: 'Total GPU time. This value is calculated as number of assigned GPU devices multiplied by duration of the job.',
+            per: 'job',
+            table: 'job',
+            agg: [{
+                name: 'gpu_time',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: 'coalesce(sum(' + getDistributionSQLCaseStatement('gpu_time', ':seconds', 'start_time_ts', 'end_time_ts', ':period_start_ts', ':period_end_ts') + '), 0)',
+                comments: 'The amount of GPU time of the jobs pertaining to this period. If a job took more than one period, its GPU time is distributed linearly across the periods it spans. GPU time is defined as the number of GPUs assigned to the job multiplied by its duration.'
+            }]
+        },
+
+        gpu_usage: {
+            unit: '%',
+            type: 'double',
+            name: 'Average GPU utilization',
+            group: 'Accelerator Statistics',
+            nullable: true,
+            def: null,
+            batchExport: true,
+            comments: 'Average % utilization of the GPUs assigned to the job.',
+            per: 'gpu',
+            raw_per: 'gpu',
+            algorithm: '',
+            algorithm_description: '',
+            typical_usage: '',
+            table: 'job',
+            agg: [{
+                name: 'gpu_time_active',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: getSumMetric('gpu_usage*gpu_time'),
+                comments: 'The amount of gpu time that the GPUs were used for jobs pertaining to this period.',
+                stats: [{
+                    sql: 'SUM(jf.gpu_time_active) / 3600.0',
+                    label: 'GPU Hours Active: Total',
+                    requirenotnull: 'jf.gpu_time_active',
+                    unit: 'GPU Hour',
+                    description: 'The amount of time that the allocated GPU devices were active for jobs that were running during the time period. The time active is calculated by multiplying the average utilization reported by the GPU device(s) by the amount of GPU time that was allocated for the job.'
+                }, {
+                    sql: 'SUM(jf.gpu_time) / 3600.0',
+                    name: 'gpu_time',
+                    label: 'GPU Hours: Total',
+                    unit: 'GPU Hour',
+                    description: 'The total GPU time in hours for all jobs that were executing during the time period. The GPU time is calculated as the number of allocated GPU devices multiplied by the wall time of the job.'
+                }, {
+                    name: 'avg_percent_gpu_active',
+                    sql: 'sum(100.0 * jf.gpu_time_active / jf.gpu_time * jf.gpu_usage_weight)/sum(jf.gpu_usage_weight)',
+                    label: 'Avg GPU active: weighted by gpu-hour',
+                    requirenotnull: 'jf.gpu_time_active',
+                    unit: 'GPU %',
+                    description: 'The average GPU usage % weighted by gpu hours, over all jobs that were executing.'
+                }]
+            }, {
+                name: 'gpu_usage_bucketid',
+                type: 'int32',
+                roles: { disable: ['pub'] },
+                dimension: true,
+                category: 'Metrics',
+                table: 'supremmfact',
+                sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * gpu_usage, -1.0) > cb.min AND coalesce(100.0 * gpu_usage, -1.0) <= cb.max)',
+                label: 'GPU Active Value',
+                dimension_table: 'percentages_buckets'
+            }, {
+                name: 'gpu_usage_weight',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: getWeightMetric('gpu_usage', 'nodes'),
+                comments: 'The node weight for jobs with cpu user values that ran during the period'
+            }]
+        },
+
         gpu_energy: {
             unit: 'joules',
             type: 'double',
