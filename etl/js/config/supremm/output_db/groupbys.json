@@ -299,7 +299,7 @@
                 {
                     "alias": "rs",
                     "name": "resourcespecs",
-                    "on": "rf.id = rs.resource_id"
+                    "on": "rf.id = rs.resource_id AND rs.end_date_ts IS NULL"
                 }
             ],
             "orderby": [
