@@ -1,0 +1,83 @@
+.analyticTypeHeader{
+    font-family: arial,tahoma,verdana,sans-serif;
+    font-size: 18px;
+    padding: 5px 15px;
+}
+
+.text{
+    font-family: arial,tahoma,verdana,sans-serif;
+    font-size: 18px;
+    padding: 15px;
+}
+
+.detailDescriptionText{
+    font-family: arial,tahoma,verdana,sans-serif;
+    font-size: 13px;
+    padding: 5px;
+}
+
+.statisticInfo{
+    font-family: arial,tahoma,verdana,sans-serif;
+    font-size: 13px;
+}
+
+.analyticCard{
+    min-width: 400px;
+    width: 24%;
+    height: auto;
+    margin: 20px 0 20px 0.8%;
+    float: left;
+    background-color: #F8F7F7;
+}
+
+.analyticCardContents{
+    font-family: arial,tahoma,verdana,sans-serif;
+    width: 100%;
+    background-color: #F8F7F7;
+    height: 100%;
+}
+
+.analyticHeader{
+    padding: 15px 0 0 15px;
+    min-height: 75px;
+}
+
+.analyticHeader h1{
+    font-size: 18px;
+}
+
+.analyticHeader p{
+    font-size: 15px;
+}
+
+.analyticScatterPlotThumbnail{
+    height: 300px;
+    width: 90%;
+    margin-left: 5%;
+    padding-bottom: 15px;
+}
+
+.analyticInfoError{
+    width: 50%; 
+    margin-left: 25%;
+    padding-top: 75px;
+}
+
+.filterFieldSet{
+    margin-top: 10px;
+    margin-left: 25px;
+}
+
+.filterApplyBtn{
+    margin-left: 10px;
+    margin-top: 15px;
+    height: 25px;
+}
+
+.rotate90{
+    transform:rotate(180deg);
+    -ms-transform:rotate(180deg); /* IE 9 */
+    -moz-transform:rotate(180deg); /* Firefox */
+    -webkit-transform:rotate(180deg); /* Safari and Chrome */
+    -o-transform:rotate(180deg); /* Opera */
+}
