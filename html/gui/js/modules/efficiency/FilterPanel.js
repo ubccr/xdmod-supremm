@@ -1,6 +1,6 @@
 Ext.namespace('XDMoD.Module.Efficiency.FilterPanel');
 /*
-This component builds the panel that is used to display the filters for the analytic/drilldown plots. 
+This component builds the panel that is used to display the filters for the analytic/drilldown plots.
 */
 XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
     dimensions: ['Queue', 'Application', 'Resource', 'PI'],
@@ -11,7 +11,6 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
             this.getComponents(this.dimensions)
         ]
 
-        // FINISH: the component creation by calling our superclass' initComponent.
         XDMoD.Module.Efficiency.FilterPanel.superclass.initComponent.apply(this, arguments);
     },
 
@@ -110,6 +109,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                             dirn: 'asc'
                                         },
                                         filters: filterObj,
+                                        mandatory_filters: self.config.mandatoryFilters,
                                         statistics: self.config.statistics
                                     })
                                 }
@@ -188,7 +188,8 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                             field: self.config.field,
                                             dirn: 'asc'
                                         },
-                                        filters: self.config.filters,
+                                        filters: [],
+                                        mandatory_filters: self.config.mandatoryFilters,
                                         statistics: self.config.statistics
                                     })
                                 }
@@ -282,7 +283,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                 Ext.getCmp('add_btn_' + dimension).enable();
                             }, this)
 
-                        } else if (this.getText() === 'Show Remaining ' + dimension + ' Filters' || (store.totalLength < 15 && this.getText() == 'Show More ' + dimension + ' Filters')) {
+                        } else if (this.getText() === 'Show Remaining ' + dimension + ' Filters' || ((store.totalLength == 15 || store.totalLength < 15) && this.getText() == 'Show More ' + dimension + ' Filters')) {
                             store.reload({
                                 params: {
                                     start: 0,
@@ -414,7 +415,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                 load: function (response) {
                     if (this.data.items.length > 0) {
                         if (Ext.getCmp('checkbox_group' + dimension)) {
-                            var searchPanel = Ext.getCmp(dimension + ' FieldSet');
+                            var searchPanel = Ext.getCmp(dimension + 'FieldSet');
                             searchPanel.remove(Ext.getCmp('checkbox_group' + dimension));
                         }
                         var filters = response.data.items;
@@ -451,9 +452,9 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                         fieldSet.doLayout();
 
                         //Handle button text depnding on length of filter list
-                        if (this.totalLength < 5) {
+                        if (this.totalLength < 5 || this.totalLength == 5) {
                             Ext.getCmp('add_btn_' + dimension).destroy();
-                        } else if (this.totalLength > 5 && this.totalLength < 15) {
+                        } else if (this.totalLength > 5 && (this.totalLength < 15 || this.totalLength == 15)){
                             Ext.getCmp('add_btn_' + dimension).setText('Show Remaining ' + dimension + ' Filters');
                         } else if (this.totalLength > 15) {
                             Ext.getCmp('add_btn_' + dimension).setText('Show More ' + dimension + ' Filters');

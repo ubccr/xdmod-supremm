@@ -3,7 +3,6 @@ Ext.namespace('XDMoD.Module.Efficiency.AnalyticPanel');
 This component builds the panel that is used to display the scatter plot and further information about a specific analytic.
 */
 XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
-    autoScroll: true,
     region: 'center',
     border: true,
     layout: 'border',
@@ -46,13 +45,15 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                 new XDMoD.Module.Efficiency.ScatterPlotPanel({
                     id: 'analytic_scatter_plot_' + self.config.analytic,
                     config: self.config,
-                    autoScroll: true,
                     border: false,
+                    boxMinWidth: 800, 
+                    boxMinHeight: 600,
+                    autoScroll: true,
                     panelSettings: {
-                        url: XDMoD.REST.url + '/efficiency/scatterPlot',
+                        url: XDMoD.REST.url + '/efficiency/scatterPlot/' + self.config.analytic,
                         baseParams: {
                             start: 0,
-                            limit: 10000,
+                            limit: 3000,
                             config: JSON.stringify({
                                 realm: 'SUPREMM',
                                 group_by: 'person',
@@ -63,7 +64,8 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                                     field: self.config.field,
                                     dirn: 'asc'
                                 },
-                                filters: self.config.filters,
+                                filters: [],
+                                mandatory_filters: self.config.mandatoryFilters,
                                 statistics: self.config.statistics
                             })
                         }
@@ -107,4 +109,3 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
         ];
     }
 })
-

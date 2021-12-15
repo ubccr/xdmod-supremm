@@ -4,11 +4,11 @@
  *
  */
 XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
-    //Portal Module Properties 
+    //Portal Module Properties
     title: 'Efficiency',
     module_id: 'efficiency',
 
-    //Portal Module Toolbar Config 
+    //Portal Module Toolbar Config
     usesToolbar: true,
     toolbarItems: {
         durationSelector: true
@@ -66,9 +66,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
                     //If filters have been applied, keep applied 
                     //Otherwise, only use filters that are needed for initial plot
-                    if(scatterPlotPanel.aggFilters){
+                    if (scatterPlotPanel.aggFilters) {
                         var filterObj = scatterPlotPanel.aggFilters;
-                    }else{
+                    } else {
                         var filterObj = analyticConfig.filters;
                     }
 
@@ -85,11 +85,12 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                     dirn: 'asc'
                                 },
                                 filters: filterObj,
+                                mandatory_filters: analyticConfig.mandatoryFilters,
                                 statistics: analyticConfig.statistics
                             })
                         }
                     })
-                } 
+                }
                 //Active item is drilldown histogram
                 else if (activeItemIndex == 1) {
                     var store = Ext.StoreMgr.lookup('histogram_chart_store_' + analytic);
@@ -114,7 +115,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             data: filters,
                             total: filters.length
                         }
-                    } 
+                    }
                     //If no filters applied, keep filtering on person
                     else {
                         var filters = [{
@@ -181,30 +182,30 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             items: [
                 { xtype: 'tbtext', text: 'Navigation: ' },
                 {
-                xtype: 'button',
-                text: 'Analytic Cards',
-                id: 'analytic_breadcrumb_btn',
-                disabled: true,
-                iconCls: 'btn_dashboard',
-                handler: function () {
-                    //Display card view and remove panel for scatterplot/drilldown view
-                    var mainPanel = Ext.getCmp('efficiency_display_panel');
-                    mainPanel.layout.setActiveItem(0);
-                    mainPanel.doLayout();
-                    mainPanel.remove(mainPanel.items.items[1], true);
+                    xtype: 'button',
+                    text: 'Analytic Cards',
+                    id: 'analytic_breadcrumb_btn',
+                    disabled: true,
+                    iconCls: 'btn_dashboard',
+                    handler: function () {
+                        //Display card view and remove panel for scatterplot/drilldown view
+                        var mainPanel = Ext.getCmp('efficiency_display_panel');
+                        mainPanel.layout.setActiveItem(0);
+                        mainPanel.doLayout();
+                        mainPanel.remove(mainPanel.items.items[1], true);
 
-                    //Disable this button when in analytic card view
-                    this.disable();
+                        //Disable this button when in analytic card view
+                        this.disable();
 
-                    //Remove all other links in breadcrumb menu
-                    var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
-                    var length = breadcrumbMenu.items.length;
-                    for (var i = 2; i < length; i++) {
-                        breadcrumbMenu.remove(2)
+                        //Remove all other links in breadcrumb menu
+                        var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
+                        var length = breadcrumbMenu.items.length;
+                        for (var i = 2; i < length; i++) {
+                            breadcrumbMenu.remove(2)
+                        }
+                        breadcrumbMenu.doLayout()
                     }
-                    breadcrumbMenu.doLayout()
-                }
-            }]
+                }]
         }
 
         return [
@@ -214,7 +215,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     },
 
     analyticCardTemplate: [
-        //Template for creating cards for each analytic 
+        //Template for creating cards for each analytic
         '<div class="analyticCardContents">',
         '<div class="analyticHeader">',
         '<h1>{analytic}</h1>',
@@ -278,9 +279,14 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     getAnalyticPlots: function (config) {
         var self = this;
 
-        //Get the statistics that will be shown in the scatter plot
-        var xStatistic = config.statistics[0];
-        var yStatistic = config.statistics[1];
+        //Get the statistics that will be shown in the scatter plot - since scatter plot uses job_count statistic for both, need to specify short_job_count for x axis
+        if (config.analytic == "Short Job Count") {
+            var xStatistic = 'short_' + config.statistics[0];
+            var yStatistic = config.statistics[1];
+        } else {
+            var xStatistic = config.statistics[0];
+            var yStatistic = config.statistics[1];
+        }
 
         //Chart settings
         var chartConfig = {
@@ -357,12 +363,12 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         new Ext.data.JsonStore({
             id: 'analytic_store_' + config.analytic,
             restful: true,
-            url: XDMoD.REST.url + '/efficiency/scatterPlot',
+            url: XDMoD.REST.url + '/efficiency/scatterPlot/' + config.analytic,
             root: 'results',
             autoLoad: true,
             baseParams: {
                 start: 0,
-                limit: 10000,
+                limit: 3000,
                 config: JSON.stringify({
                     realm: config.realm,
                     group_by: 'person',
@@ -373,27 +379,16 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         field: config.field,
                         dirn: 'asc'
                     },
-                    filters: config.filters,
+                    filters: [],
+                    mandatory_filters: config.mandatoryFilters,
                     statistics: config.statistics
                 })
             },
             fields: [xStatistic, yStatistic],
             listeners: {
                 exception: function (proxy, type, action, exception, response) {
-                    switch (response.status) {
-                        case 403:
-                        case 500:
-                            var details = Ext.decode(response.responseText);
-                            document.getElementById(config.analytic + 'Chart').innerHTML = '<div class="analyticInfoError">Error: ' + response.status + ' (' + response.statusText + ')<br>Details: ' + details.message + '</div>';
-                            break;
-                        case 401:
-                            // Do nothing
-                            break;
-                        default:
-                            var details = Ext.decode(response.responseText);
-                            document.getElementById(config.analytic + 'Chart').innerHTML = '<div class="analyticInfoError">Error: ' + response.status + ' (' + response.statusText + ')<br>Details: ' + details.message + '</div>';
-                            break;
-                    }
+                    var details = Ext.decode(response.responseText);
+                    document.getElementById(config.analytic + 'Chart').innerHTML = '<div class="analyticInfoError">Error: ' + response.status + ' (' + response.statusText + ')<br>Details: ' + details.message + '</div>';
                 },
                 beforeLoad: function () {
                     //Remove any prior error messages before redrawing chart
@@ -418,13 +413,13 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         //Users with both specific and general data
                         if (resultData.length > 0 && generalData.length > 0) {
                             //Get the general data series without name information
-                            var dataset = self.formatData(generalData, false, xStatistic, yStatistic);
+                            var dataset = self.formatData(generalData, xStatistic, yStatistic);
                             var generalSeriesData = dataset[0];
                             var generalXMax = dataset[1];
                             var generalYMax = dataset[2];
 
                             //Get the result data series with name information
-                            var dataset = self.formatData(resultData, true, xStatistic, yStatistic);
+                            var dataset = self.formatData(resultData, xStatistic, yStatistic);
                             var resultSeriesData = dataset[0];
                             var resultXMax = dataset[1];
                             var resultYMax = dataset[2];
@@ -434,22 +429,21 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             var yAxisMax = Math.max(generalYMax, resultYMax);
 
                             chart.series[0].update({
-                                    data: generalSeriesData
-                            });
-                            
-                            chart.series[1].update({
-                                    data: resultSeriesData,
-                                    marker: {
-                                        fillColor: 'transparent',
-                                        symbol: 'circle',
-                                        radius: 10,
-                                        lineWidth: 2,
-                                        lineColor: 'black' // inherit from series
-                                    }
+                                data: generalSeriesData
                             });
 
+                            chart.series[1].update({
+                                data: resultSeriesData,
+                                marker: {
+                                    fillColor: 'transparent',
+                                    symbol: 'circle',
+                                    radius: 10,
+                                    lineWidth: 2,
+                                    lineColor: 'black' // inherit from series
+                                }
+                            });
                         } else if (generalData.length > 0) {
-                            var dataset = self.formatData(generalData, false, xStatistic, yStatistic);
+                            var dataset = self.formatData(generalData, xStatistic, yStatistic);
                             var generalSeriesData = dataset[0]
                             var xAxisMax = dataset[1]
                             var yAxisMax = dataset[2]
@@ -457,11 +451,10 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             chart.series[0].update({
                                 data: generalSeriesData
                             });
-                            
                         } else if (resultData.length > 0) {
                             //If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency)
                             //Get the general data series with name information and x and y axis max
-                            var dataset = self.formatData(resultData, false, xStatistic, yStatistic);
+                            var dataset = self.formatData(resultData, xStatistic, yStatistic);
                             var resultSeriesData = dataset[0]
                             var xAxisMax = dataset[1]
                             var yAxisMax = dataset[2]
@@ -563,7 +556,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                 field: analytics[j].field,
                                 dirn: 'asc'
                             },
-                            filters: analytics[j].filters,
+                            filters: [],
+                            mandatory_filters: analytics[j].mandatoryFilters,
                             statistics: analytics[j].statistics
                         })
                     }
@@ -637,7 +631,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     //Check all filters that were applied prior to navigating to the histogram - these are stored in the aggregate filter variable in the scatter plot panel 
                     Ext.each(filters, function (filter) {
                         if (filter[dimensions[i].toLowerCase()]) {
-                            Ext.each(filter[dimensions[i].toLowerCase()], function(value){
+                            Ext.each(filter[dimensions[i].toLowerCase()], function (value) {
                                 Ext.getCmp('checkbox_group' + dimensions[i]).setValue(value, true)
                             })
                         }

@@ -71,6 +71,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 },
                 plotOptions: {
                     series: {
+                        turboThreshold: 3000,
                         animation: false,
                         point: {
                             events: {
@@ -237,8 +238,14 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
                     self.chart.setTitle(null, { text: self.subtitle })
 
-                    var xStatistic = self.config.statistics[0]
-                    var yStatistic = self.config.statistics[1]
+                    //Get the statistics that will be shown in the scatter plot - since scatter plot uses job_count statistic for both, need to specify short_job_count for x axis
+                    if (self.config.analytic == "Short Job Count") {
+                        var xStatistic = 'short_' + self.config.statistics[0];
+                        var yStatistic = self.config.statistics[1];
+                    } else {
+                        var xStatistic = self.config.statistics[0];
+                        var yStatistic = self.config.statistics[1];
+                    }
 
                     var resultData = this.data.items[0].json.results
                     var generalData = this.data.items[0].json.hiddenData
@@ -252,13 +259,13 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
                         if (resultData.length > 0 && generalData.length > 0) {
                             //Get the general data series without name information and the x and y axis max from this dataset
-                            var dataset = self.formatData(generalData, "general", xStatistic, yStatistic);
+                            var dataset = self.formatData(generalData, xStatistic, yStatistic);
                             var generalSeriesData = dataset[0]
                             var generalXMax = dataset[1];
                             var generalYMax = dataset[2];
 
                             //Get the result data series with name information
-                            var dataset = self.formatData(resultData, "restricted", xStatistic, yStatistic);
+                            var dataset = self.formatData(resultData, xStatistic, yStatistic);
                             var resultSeriesData = dataset[0];
                             var resultXMax = dataset[1];
                             var resultYMax = dataset[2];
@@ -288,7 +295,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 }
                             });
                         } else if (generalData.length > 0) {
-                            var dataset = self.formatData(generalData, "general", xStatistic, yStatistic);
+                            var dataset = self.formatData(generalData, xStatistic, yStatistic);
                             var generalSeriesData = dataset[0]
                             var xAxisMax = dataset[1]
                             var yAxisMax = dataset[2]
@@ -300,7 +307,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         } else if (resultData.length > 0) {
                             //If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency){
                             //Get the general data series with name information and x and y axis max 
-                            var dataset = self.formatData(resultData, "fullAccess", xStatistic, yStatistic);
+                            var dataset = self.formatData(resultData, xStatistic, yStatistic);
                             var resultSeriesData = dataset[0];
                             var xAxisMax = dataset[1];
                             var yAxisMax = dataset[2];
@@ -737,9 +744,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 }
                             }
                         ]
-
                         self.updateDescription(chartStore);
-
                     }
                     self.unmask();
                 }
@@ -750,6 +755,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             id: 'hc-panel-' + self.config.analytic,
             person: person,
             personId: personId,
+            boxMinWidth: 800,
+            boxMinHeight: 600,
+            autoScroll: true,
             baseChartOptions: {
                 plotOptions: {
                     series: {
@@ -1074,6 +1082,3 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         }
     }
 });
-
-
-
