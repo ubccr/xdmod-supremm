@@ -90,11 +90,6 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                             analyticScatterPlot.aggFilters = filterObj;
                             analyticScatterPlot.MEFilters = MEFilters;
 
-                            //Add any initial filters if needed (short job count)
-                            if (Object.keys(self.config.filters).length > 0) {
-                                jQuery.extend(filterObj, self.config.filters)
-                            }
-
                             //Reload store with new filters applied
                             analyticScatterPlot.store.reload({
                                 params: {
