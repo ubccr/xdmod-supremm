@@ -28,7 +28,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             callback: function (o, success, response) {
                 if (success) {
                     var analytics = JSON.parse(response.responseText);
-                    self.analytics = analytics
+                    self.analytics = analytics;
                     self.getAnalyticCardDisplay(analytics);
                 }
             },
@@ -502,20 +502,20 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         chart.hideLoading();
                     } else {
                         document.getElementById(config.analytic + 'Chart').innerHTML = "<div class='analyticInfoError'> No data available during this time frame for this analytic.";
-                    };
+                    }
                 }
             }
         });
     },
 
     formatData: function (dataset, xStatistic, yStatistic) {
-        var data = []
+        var data = [];
 
         // Get x and y axis max to use for scatter plot plot lines
         var xAxisMax = this.getMax(dataset, xStatistic);
         if (xAxisMax < 100) {
             xAxisMax = 100;
-        };
+        }
         var yAxisMax = this.getMax(dataset, yStatistic);
 
         for (var i = 0; i < dataset.length; i++) {

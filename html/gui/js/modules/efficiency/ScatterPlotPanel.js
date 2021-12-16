@@ -53,7 +53,6 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         if (this.point.person) {
                             return '<b>' + this.point.person + '</b><br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y + ' ' + self.config.valueLabels[1] + '</b>';
                         }
-                        
                         return 'User (Access denied to view name) <br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y + ' ' + self.config.valueLabels[1] + '</b>';
                     },
                     positioner: function (labelWidth, labelHeight, point) {
