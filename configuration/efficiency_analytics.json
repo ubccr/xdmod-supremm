@@ -194,20 +194,20 @@
                 "title": "Short Job Count",
                 "field": "job_count",
                 "statistics": [
-                    "job_count",
-                    "wall_time"
+                    "job_count", "job_count"
                 ],
-                "filters" : {"jobwalltime" : "[0,1]"},
+                "mandatoryFilters" : {"jobwalltime" : "[0,1]"},
                 "statisticLabels": [
                     "Number of Short Jobs (< 30s)",
-                    "Total CPU Hours"
+                    "Total Number of Jobs Ended"
                 ],
                 "statisticDescription": [
-                    "<ul><li><b>Number of Short Jobs (<30s): Total number of jobs ended that had a wall time of less than 30 seconds.</li></ul><ul><li><b>CPU Hours: Total:</b> The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.</li></ul>"
+
+                    "<ul><li><b>Number of Short Jobs(<30s): </b>Total number of jobs ended within the time period selected with a wall time of less than 30 seconds.</li></ul><ul><li><b>Total Number of Jobs Ended:</b> Total number of jobs ended within the time period selected.</li></ul>"
                 ],
                 "valueLabels": [
                     "Jobs",
-                    "CPU Hours"
+                    "Jobs"
                 ],
                 "realm": "SUPREMM",
                 "documentation": [
