@@ -622,13 +622,13 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 var filters = Ext.getCmp('analytic_scatter_plot_' + chartConfig.analytic).aggFilters;
 
                 for (var i = 0; i < dimensions.length; i++) {
-                    //Get all boxes that were checked in drilldown view and remove the checks 
+                    //Get all boxes that were checked in drilldown view and remove the checks
                     var filterList = Ext.getCmp('checkbox_group' + dimensions[i]).getValue()
                     Ext.each(filterList, function (f) {
                         Ext.getCmp('checkbox_group' + dimensions[i]).setValue(f.id, false)
                     })
 
-                    //Check all filters that were applied prior to navigating to the histogram - these are stored in the aggregate filter variable in the scatter plot panel 
+                    //Check all filters that were applied prior to navigating to the histogram - these are stored in the aggregate filter variable in the scatter plot panel
                     Ext.each(filters, function (filter) {
                         if (filter[dimensions[i].toLowerCase()]) {
                             Ext.each(filter[dimensions[i].toLowerCase()], function (value) {

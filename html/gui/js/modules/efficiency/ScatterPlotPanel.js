@@ -10,6 +10,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     img: null,
     aggFilters: null,
     MEFilters: null,
+    jobListFilters: null,
     subtitle: 'No filters applied.',
 
     initComponent: function () {
@@ -856,7 +857,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     getJobList: function (personId, person, dataPoint, datasetId, drilldownId, drilldownLabel) {
         var self = this;
 
-        if (self.MEFilters == null) {
+        if (self.jobListFilters == null) {
             var filters = {
                 data: [
                     {
@@ -881,7 +882,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 total: 2
             }
         } else {
-            var filterData = self.MEFilters.slice()
+            var filterData = self.jobListFilters.slice()
 
             filterData.push({
                 dimension_id: "person",

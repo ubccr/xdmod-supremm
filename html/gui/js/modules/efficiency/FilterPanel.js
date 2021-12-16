@@ -86,9 +86,10 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
                         //Apply filters for scatter plot
                         if (activeItemIndex == 0) {
-                            //Keep track of filters applied to the scatter plot 
+                            //Keep track of filters applied to the scatter plot
                             analyticScatterPlot.aggFilters = filterObj;
                             analyticScatterPlot.MEFilters = MEFilters;
+                            analyticScatterPlot.jobListFilters = MEFilters;
 
                             //Reload store with new filters applied
                             analyticScatterPlot.store.reload({
@@ -116,7 +117,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                         }
                         //Apply filters to drilldown chart
                         else if (activeItemIndex == 1) {
-                            analyticScatterPlot.MEFilters = MEFilters;
+                            analyticScatterPlot.jobListFilters = MEFilters;
                             
                             var store = Ext.StoreMgr.lookup('histogram_chart_store_' + self.config.analytic);
                             var hcPanel = Ext.getCmp('hc-panel-' + self.config.analytic);
@@ -169,6 +170,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
                             analyticScatterPlot.aggFilters = null
                             analyticScatterPlot.MEFilters = null
+                            analyticScatterPlot.jobListFilters = null
 
                             //Reload scatter plot store with only filters that are applied initially
                             analyticScatterPlot.store.reload({
@@ -190,6 +192,8 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                 }
                             })
                         } else if (activeItemIndex == 1) {
+                            analyticScatterPlot.jobListFilters = null
+
                             var store = Ext.StoreMgr.lookup('histogram_chart_store_' + self.config.analytic);
                             var hcPanel = Ext.getCmp('hc-panel-' + self.config.analytic);
                             var person = hcPanel.person;
