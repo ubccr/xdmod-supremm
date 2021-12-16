@@ -83,14 +83,11 @@ class EfficiencyControllerProvider extends BaseControllerProvider
      /**
      * Retrieve efficiency analytics
      *
-     * @param Request $request
      * @param Application $app
      * @return JsonResponse
      */
-    public function getAnalytics(Request $request, Application $app)
+    public function getAnalytics(Application $app)
     {
-        $user = $this->authorize($request);
-
         $efficiencyAnalytics = \Configuration\XdmodConfiguration::assocArrayFactory(
             'efficiency_analytics.json',
             CONFIG_DIR,
@@ -113,7 +110,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
      */
     public function getScatterPlotData(Request $request, Application $app, $analytic)
     {
-        //Datasets array to be returned - includes user data dataset and restricted data dataset. 
+        //Datasets array to be returned - includes user data dataset and restricted data dataset.
         $datasets = array();
         $user = $this->authorize($request);
 
@@ -185,12 +182,12 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     unset($val[$config->group_by . '_short_name']);
                     unset($val[$config->group_by . '_order_id']);
                 }
-                //Dataset that shows detailed information that the user has access to 
+                //Dataset that shows detailed information that the user has access to
                 $datasets['results'] = $results;
                 $datasets['hiddenData'] = array();
                 /*
                     If user is restricted from viewing data, get dataset that has all points without name attached
-                    Runs the same query as above without role restrictions and returns data without name 
+                    Runs the same query as above without role restrictions and returns data without name
                 */
                 if (count($roles) > 0) {
                     $query = new \DataWarehouse\Query\AggregateQuery(
@@ -293,13 +290,13 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     }
                 }
 
-                //Dataset that shows detailed information that the user has access to 
+                //Dataset that shows detailed information that the user has access to
                 $datasets['results'] = $efficiencyResults;
                 $datasets['hiddenData'] = array();
 
                 /*
                     If user is restricted from viewing data, get dataset that has all points without name attached
-                    Runs the same query as above without role restrictions and returns data without name 
+                    Runs the same query as above without role restrictions and returns data without name
                 */
                 if (count($roles) > 0) {
                     $query = new \DataWarehouse\Query\AggregateQuery(
@@ -364,11 +361,11 @@ class EfficiencyControllerProvider extends BaseControllerProvider
     }
 
     /**
-     * Get histogram chart object 
+     * Get histogram chart object
      *
      * @param Request $request
      * @param Application $app
-     * @param $dimension 
+     * @param $dimension
      * @return JsonResponse
      */
     public function getHistogramData(Request $request, Application $app, $dimension)
@@ -394,42 +391,44 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                 }
             }
 
-            if($dimension == 'cpuuser'){
-                foreach ($chartData as &$dataPoint) {
-                    if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 2 || $dataPoint['drilldown']['id'] == 3) {
-                        $dataPoint['color'] = '#FF0000';
-                    } else if ($dataPoint['drilldown']['id'] == 4 || $dataPoint['drilldown']['id'] == 5) {
-                        $dataPoint['color'] = '#FFB336';
-                    } else if ($dataPoint['drilldown']['id'] == 6 || $dataPoint['drilldown']['id'] == 7 || $dataPoint['drilldown']['id'] == 8) {
-                        $dataPoint['color'] = '#DDDF00';
-                    } else if ($dataPoint['drilldown']['id'] == 9 || $dataPoint['drilldown']['id'] == 10) {
-                        $dataPoint['color'] = '#50B432';
-                    } else {
-                        $dataPoint['color'] = "gray";
+            switch($dimension){
+                case 'cpuuser':
+                    foreach ($chartData as &$dataPoint) {
+                        if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 2 || $dataPoint['drilldown']['id'] == 3) {
+                            $dataPoint['color'] = '#FF0000';
+                        } elseif ($dataPoint['drilldown']['id'] == 4 || $dataPoint['drilldown']['id'] == 5) {
+                            $dataPoint['color'] = '#FFB336';
+                        } elseif ($dataPoint['drilldown']['id'] == 6 || $dataPoint['drilldown']['id'] == 7 || $dataPoint['drilldown']['id'] == 8) {
+                            $dataPoint['color'] = '#DDDF00';
+                        } elseif ($dataPoint['drilldown']['id'] == 9 || $dataPoint['drilldown']['id'] == 10) {
+                            $dataPoint['color'] = '#50B432';
+                        } else {
+                            $dataPoint['color'] = "gray";
+                        }
                     }
-                }
 
-                array_multisort(array_map(function ($element) {
-                    return $element['drilldown']['id'];
-                }, $chartData), SORT_ASC, $chartData);
+                    array_multisort(array_map(function ($element) {
+                        return $element['drilldown']['id'];
+                    }, $chartData), SORT_ASC, $chartData);
 
-                //Move NA bucket to end of array 
-                $naBucket = array_shift($chartData);
-                array_push($chartData, $naBucket);
+                    //Move NA bucket to end of array
+                    $naBucket = array_shift($chartData);
+                    array_push($chartData, $naBucket);
 
-                $results['data'][0]['series'][0]['data'] = $chartData;
-            }else if($dimension == 'jobwalltime'){
-                foreach ($chartData as &$dataPoint) {
-                    if ($dataPoint['drilldown']['id'] == 0 || $dataPoint['drilldown']['id'] == 1) {
-                        $dataPoint['color'] = '#FF0000';
+                    $results['data'][0]['series'][0]['data'] = $chartData;  
+                case 'jobwalltime':
+                    foreach ($chartData as &$dataPoint) {
+                        if ($dataPoint['drilldown']['id'] == 0 || $dataPoint['drilldown']['id'] == 1) {
+                            $dataPoint['color'] = '#FF0000';
+                        }
                     }
-                }
+                    array_multisort(array_map(function ($element) {
+                        return $element['drilldown']['id'];
+                    }, $chartData), SORT_ASC, $chartData);
 
-                array_multisort(array_map(function ($element) {
-                    return $element['drilldown']['id'];
-                }, $chartData), SORT_ASC, $chartData);
-
-                $results['data'][0]['series'][0]['data'] = $chartData;
+                    $results['data'][0]['series'][0]['data'] = $chartData;
+                default: 
+                    $results['data'][0]['series'][0]['data'] = $chartData;
             }
         }
 
@@ -445,14 +444,12 @@ class EfficiencyControllerProvider extends BaseControllerProvider
      * Get dimensions values to be used to show all buckets on histogram
      *
      * @param Request $request
-     * @param $dimension 
+     * @param $dimension
      * @return JsonResponse
      */
     private function getDimensionValues(Request $request, $dimension)
     {
         $user = $this->authorize($request);
-
-        $action = 'dimensionValues';
 
         //Get parameters from the request.
         $offset = $this->getIntParam($request, 'offset', false, 0);
@@ -460,7 +457,6 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         $searchText = $this->getStringParam($request, 'search_text');
 
         $realmParameter = $this->getStringParam($request, 'realm');
-        $realms = array('SUPREMM');
         if ($realmParameter !== null) {
             $realms = preg_split('/,\s*/', trim($realmParameter), null, PREG_SPLIT_NO_EMPTY);
         }
@@ -491,4 +487,4 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         // Return the found dimension values.
         return $dimensionValuesData;
     }
-} 
+}
