@@ -7,6 +7,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     // Portal Module Properties
     title: 'Efficiency',
     module_id: 'efficiency',
+    analytics: null,
 
     // Portal Module Toolbar Config
     usesToolbar: true,
@@ -27,6 +28,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             callback: function (o, success, response) {
                 if (success) {
                     var analytics = JSON.parse(response.responseText);
+                    self.analytics = analytics
                     self.getAnalyticCardDisplay(analytics);
                 }
             },
@@ -45,8 +47,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             var activeItemIndex = mainPanel.items.indexOf(activeItem);
 
             // Active item is analytic cards view
-            if (activeItemIndex == 0) {
-                self.reloadCharts(analytics);
+            if (activeItemIndex === 0) {
+                self.reloadCharts(self.analytics);
             } else if (activeItemIndex === 1) {
                 // Active item is scatter plot or drilldown histogram view
                 var analytic = activeItem.config.analytic;
@@ -54,6 +56,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 activeItemIndex = Ext.getCmp('detailed_analytic_panel_' + analytic).items.indexOf(activeItem);
 
                 var scatterPlotPanel = Ext.getCmp('analytic_scatter_plot_' + analytic);
+
+                var filterObj;
 
                 // Active item is scatter plot
                 if (activeItemIndex === 0) {
@@ -64,9 +68,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     // If filters have been applied, keep applied
                     // Otherwise, only use filters that are needed for initial plot
                     if (scatterPlotPanel.aggFilters) {
-                        var filterObj = scatterPlotPanel.aggFilters;
+                        filterObj = scatterPlotPanel.aggFilters;
                     } else {
-                        var filterObj = analyticConfig.filters;
+                        filterObj = analyticConfig.filters;
                     }
 
                     scatterPlotPanel.store.reload({
@@ -87,7 +91,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             })
                         }
                     });
-                }else if (activeItemIndex == 1) {
+                } else if (activeItemIndex === 1) {
                     // Active item is drilldown histogram
                     var store = Ext.StoreMgr.lookup('histogram_chart_store_' + analytic);
                     var hcPanel = Ext.getCmp('hc-panel-' + analytic);
@@ -95,8 +99,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     var personId = hcPanel.personId;
 
                     // If filters have applied, keep applied
+                    var filters;
                     if (scatterPlotPanel.MEFilters) {
-                        var filters = scatterPlotPanel.MEFilters.slice();
+                        filters = scatterPlotPanel.MEFilters.slice();
                         filters.push({
                             dimension_id: 'person',
                             id: 'person=' + personId,
@@ -107,13 +112,13 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         });
 
                         // Format filter as needed for ME
-                        var filterObj = {
+                        filterObj = {
                             data: filters,
                             total: filters.length
                         };
                     } else {
                     // If no filters applied, keep filtering on person
-                        var filters = [{
+                        filters = [{
                             dimension_id: 'person',
                             id: 'person=' + personId,
                             realms: ['SUPREMM'],
@@ -122,7 +127,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             checked: true
                         }];
 
-                        var filterObj = {
+                        filterObj = {
                             data: filters,
                             total: filters.length
                         };
@@ -192,12 +197,12 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         this.disable();
 
                         // Remove all other links in breadcrumb menu
-                        var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
-                        var length = breadcrumbMenu.items.length;
+                        var breadcrumbBtns = Ext.getCmp('breadcrumb_btns');
+                        var length = breadcrumbBtns.items.length;
                         for (var i = 2; i < length; i++) {
-                            breadcrumbMenu.remove(2)
+                            breadcrumbBtns.remove(2);
                         }
-                        breadcrumbMenu.doLayout();
+                        breadcrumbBtns.doLayout();
                     }
                 }]
         };
@@ -236,7 +241,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         cls: 'analyticTypeHeader'
                     })
                 ]
-            })
+            });
 
             // Add the analytic card to the analytic type container
             for (var j = 0; j < analytics.length; j++) {
@@ -259,9 +264,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             });
                         }
                     }
-                })
+                });
                 typePanel.add(analyticCard);
-            };
+            }
             analtyicCardPanel.add(typePanel);
         }
 
@@ -273,12 +278,14 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         var self = this;
 
         // Get the statistics that will be shown in the scatter plot - since scatter plot uses job_count statistic for both, need to specify short_job_count for x axis
+        var xStatistic;
+        var yStatistic;
         if (config.analytic === 'Short Job Count') {
-            var xStatistic = 'short_' + config.statistics[0];
-            var yStatistic = config.statistics[1];
+            xStatistic = 'short_' + config.statistics[0];
+            yStatistic = config.statistics[1];
         } else {
-            var xStatistic = config.statistics[0];
-            var yStatistic = config.statistics[1];
+            xStatistic = config.statistics[0];
+            yStatistic = config.statistics[1];
         }
 
         // Chart settings
@@ -353,7 +360,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
         var chart = new Highcharts.Chart(chartConfig);
 
-        new Ext.data.JsonStore({
+        var analyticStore = new Ext.data.JsonStore({
             id: 'analytic_store_' + config.analytic,
             restful: true,
             url: XDMoD.REST.url + '/efficiency/scatterPlot/' + config.analytic,
@@ -400,25 +407,35 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     var resultData = this.data.items[0].json.results;
                     var generalData = this.data.items[0].json.hiddenData;
 
+                    var dataset;
+                    var generalSeriesData;
+                    var generalXMax;
+                    var generalYMax;
+                    var resultSeriesData;
+                    var resultXMax;
+                    var resultYMax;
+                    var xAxisMax;
+                    var yAxisMax;
+
                     // Check if any data is available
                     if (resultData.length > 0 || generalData.length > 0) {
                         // Users with both specific and general data
                         if (resultData.length > 0 && generalData.length > 0) {
                             // Get the general data series without name information
-                            var dataset = self.formatData(generalData, xStatistic, yStatistic);
-                            var generalSeriesData = dataset[0];
-                            var generalXMax = dataset[1];
-                            var generalYMax = dataset[2];
+                            dataset = self.formatData(generalData, xStatistic, yStatistic);
+                            generalSeriesData = dataset[0];
+                            generalXMax = dataset[1];
+                            generalYMax = dataset[2];
 
                             // Get the result data series with name information
-                            var dataset = self.formatData(resultData, xStatistic, yStatistic);
-                            var resultSeriesData = dataset[0];
-                            var resultXMax = dataset[1];
-                            var resultYMax = dataset[2];
+                            dataset = self.formatData(resultData, xStatistic, yStatistic);
+                            resultSeriesData = dataset[0];
+                            resultXMax = dataset[1];
+                            resultYMax = dataset[2];
 
                             // Get axis max values for scatter plot
-                            var xAxisMax = Math.max(generalXMax, resultXMax);
-                            var yAxisMax = Math.max(generalYMax, resultYMax);
+                            xAxisMax = Math.max(generalXMax, resultXMax);
+                            yAxisMax = Math.max(generalYMax, resultYMax);
 
                             chart.series[0].update({
                                 data: generalSeriesData
@@ -435,10 +452,10 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                 }
                             });
                         } else if (generalData.length > 0) {
-                            var dataset = self.formatData(generalData, xStatistic, yStatistic);
-                            var generalSeriesData = dataset[0];
-                            var xAxisMax = dataset[1];
-                            var yAxisMax = dataset[2];
+                            dataset = self.formatData(generalData, xStatistic, yStatistic);
+                            generalSeriesData = dataset[0];
+                            xAxisMax = dataset[1];
+                            yAxisMax = dataset[2];
 
                             chart.series[0].update({
                                 data: generalSeriesData
@@ -446,17 +463,17 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         } else if (resultData.length > 0) {
                             // If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency)
                             // Get the general data series with name information and x and y axis max
-                            var dataset = self.formatData(resultData, xStatistic, yStatistic);
-                            var resultSeriesData = dataset[0];
-                            var xAxisMax = dataset[1];
-                            var yAxisMax = dataset[2];
+                            dataset = self.formatData(resultData, xStatistic, yStatistic);
+                            resultSeriesData = dataset[0];
+                            xAxisMax = dataset[1];
+                            yAxisMax = dataset[2];
 
                             chart.series[0].update({
                                 data: resultSeriesData
                             });
                         }
 
-                        //Update x and y axis to reflect the max and min
+                        // Update x and y axis to reflect the max and min
                         chart.yAxis[0].update({
                             min: 0,
                             max: yAxisMax,
@@ -502,28 +519,28 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         var yAxisMax = this.getMax(dataset, yStatistic);
 
         for (var i = 0; i < dataset.length; i++) {
-            var x = parseInt(dataset[i][xStatistic]);
-            var y = parseInt(dataset[i][yStatistic]);
-
+            var x = parseInt(dataset[i][xStatistic], 10);
+            var y = parseInt(dataset[i][yStatistic], 10);
+            var color;
             if (x > xAxisMax / 2 && y > yAxisMax / 2) {
-                var color = '#ff0000';
+                color = '#ff0000';
             } else {
-                var color = '#2f7ed8';
+                color = '#2f7ed8';
             }
 
             var dataPt = { x: x, y: y, color: color };
             data.push(dataPt);
         }
 
-        return [data, xAxisMax, yAxisMax]
+        return [data, xAxisMax, yAxisMax];
     },
 
     getMax: function (record, property) {
         var max;
         for (var i = 0; i < record.length; i++) {
-            if (parseInt(record[i][property])) {
-                if (max == null || parseInt(record[i][property]) > max) {
-                    max = parseInt(record[i][property]);
+            if (parseInt(record[i][property], 10)) {
+                if (max == null || parseInt(record[i][property], 10) > max) {
+                    max = parseInt(record[i][property], 10);
                 }
             }
         }
@@ -573,15 +590,16 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             iconCls: 'scatter',
             handler: function () {
                 // Display the scatter plot panel and remove the drilldown histogram panel
-                var analyticPanel = Ext.getCmp('detailed_analytic_panel_' + chartConfig.analytic);
-                analyticPanel.layout.setActiveItem(0);
-                analyticPanel.doLayout();
-                analyticPanel.remove(analyticPanel.items.items[1], true);
+                var detailedAnalyticPanel = Ext.getCmp('detailed_analytic_panel_' + chartConfig.analytic);
+                detailedAnalyticPanel.layout.setActiveItem(0);
+                detailedAnalyticPanel.doLayout();
+                detailedAnalyticPanel.remove(detailedAnalyticPanel.items.items[1], true);
 
                 // Remove all other links in breadcrumb menu
                 var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
                 var length = breadcrumbMenu.items.length;
-                for (var i = 4; i < length; i++) {
+                var i;
+                for (i = 4; i < length; i++) {
                     breadcrumbMenu.remove(4);
                 }
                 breadcrumbMenu.doLayout();
@@ -613,7 +631,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 var dimensions = ['Queue', 'Application', 'Resource', 'PI'];
                 var filters = Ext.getCmp('analytic_scatter_plot_' + chartConfig.analytic).aggFilters;
 
-                for (var i = 0; i < dimensions.length; i++) {
+                for (i = 0; i < dimensions.length; i++) {
                     // Get all boxes that were checked in drilldown view and remove the checks
                     var filterList = Ext.getCmp('checkbox_group' + dimensions[i]).getValue();
                     Ext.each(filterList, function (f) {
@@ -625,7 +643,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         if (filter[dimensions[i].toLowerCase()]) {
                             Ext.each(filter[dimensions[i].toLowerCase()], function (value) {
                                 Ext.getCmp('checkbox_group' + dimensions[i]).setValue(value, true);
-                            })
+                            });
                         }
                     }
                     );
@@ -634,7 +652,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 // Disable this btn on showing the scatter plot
                 this.disable();
             }
-        }
+        };
 
         // Enable breadcrumb btn that navigates to analytic card view
         Ext.getCmp('analytic_breadcrumb_btn').enable();

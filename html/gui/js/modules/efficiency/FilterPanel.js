@@ -221,7 +221,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
         }
         );
 
-        // Add fieldset or access denied message to Filter Panel items 
+        // Add fieldset or access denied message to Filter Panel items
         for (var i = 0; i < dimensionList.length; i++) {
             var fieldSet = this.getFieldSet(dimensionList[i]);
 
@@ -256,7 +256,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                     text: '<img src="/gui/images/loading.gif">',
                     id: 'add_btn_' + dimension,
                     handler: function () {
-                        // Show more/fewer filters in the checkbox group 
+                        // Show more/fewer filters in the checkbox group
                         // Store any already checked filters in filterList
                         var filterList = Ext.getCmp('checkbox_group' + dimension).getValue();
 
@@ -487,5 +487,3 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
         }
     }
 });
-
-

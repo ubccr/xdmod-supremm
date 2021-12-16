@@ -52,18 +52,20 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     formatter: function () {
                         if (this.point.person) {
                             return '<b>' + this.point.person + '</b><br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y + ' ' + self.config.valueLabels[1] + '</b>';
-                        } else {
-                            return 'User (Access denied to view name) <br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y + ' ' + self.config.valueLabels[1] + '</b>';
                         }
+                        
+                        return 'User (Access denied to view name) <br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y + ' ' + self.config.valueLabels[1] + '</b>';
                     },
                     positioner: function (labelWidth, labelHeight, point) {
+                        var tooltipX;
+                        var tooltipY;
                         if (point.plotX < self.chart.plotWidth / 2) {
-                            var tooltipX = point.plotX + 300;
+                            tooltipX = point.plotX + 300;
                         } else if (point.plotX > 50) {
-                            var tooltipX = point.plotX - 50;
+                            tooltipX = point.plotX - 50;
                         }
 
-                        var tooltipY = point.plotY + 25;
+                        tooltipY = point.plotY + 25;
                         return {
                             x: tooltipX,
                             y: tooltipY
@@ -98,7 +100,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                         analyticBtn.enable();
 
                                         // Load the drilldown on person chart
-                                        self.getPersonChart(e.point.person, e.point.personId)
+                                        self.getPersonChart(e.point.person, e.point.personId);
                                     }
                                 }
                             }
@@ -238,14 +240,15 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     createChart();
 
                     self.chart.setTitle(null, { text: self.subtitle });
-
+                    var xStatistic;
+                    var yStatistic;
                     // Get the statistics that will be shown in the scatter plot - since scatter plot uses job_count statistic for both, need to specify short_job_count for x axis
                     if (self.config.analytic === 'Short Job Count') {
-                        var xStatistic = 'short_' + self.config.statistics[0];
-                        var yStatistic = self.config.statistics[1];
+                        xStatistic = 'short_' + self.config.statistics[0];
+                        yStatistic = self.config.statistics[1];
                     } else {
-                        var xStatistic = self.config.statistics[0];
-                        var yStatistic = self.config.statistics[1];
+                        xStatistic = self.config.statistics[0];
+                        yStatistic = self.config.statistics[1];
                     }
 
                     var resultData = this.data.items[0].json.results;
@@ -258,21 +261,31 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             self.img = null;
                         }
 
+                        var dataset;
+                        var generalSeriesData;
+                        var generalXMax;
+                        var generalYMax;
+                        var resultSeriesData;
+                        var resultXMax;
+                        var resultYMax;
+                        var xAxisMax;
+                        var yAxisMax;
+
                         if (resultData.length > 0 && generalData.length > 0) {
                             // Get the general data series without name information and the x and y axis max from this dataset
-                            var dataset = self.formatData(generalData, xStatistic, yStatistic);
-                            var generalSeriesData = dataset[0];
-                            var generalXMax = dataset[1];
-                            var generalYMax = dataset[2];
+                            dataset = self.formatData(generalData, xStatistic, yStatistic);
+                            generalSeriesData = dataset[0];
+                            generalXMax = dataset[1];
+                            generalYMax = dataset[2];
 
                             // Get the result data series with name information
-                            var dataset = self.formatData(resultData, xStatistic, yStatistic);
-                            var resultSeriesData = dataset[0];
-                            var resultXMax = dataset[1];
-                            var resultYMax = dataset[2];
+                            dataset = self.formatData(resultData, xStatistic, yStatistic);
+                            resultSeriesData = dataset[0];
+                            resultXMax = dataset[1];
+                            resultYMax = dataset[2];
 
-                            var xAxisMax = Math.max(generalXMax, resultXMax);
-                            var yAxisMax = Math.max(generalYMax, resultYMax);
+                            xAxisMax = Math.max(generalXMax, resultXMax);
+                            yAxisMax = Math.max(generalYMax, resultYMax);
 
                             self.chart.series[0].update({
                                 data: generalSeriesData
@@ -296,22 +309,21 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 }
                             });
                         } else if (generalData.length > 0) {
-                            var dataset = self.formatData(generalData, xStatistic, yStatistic);
-                            var generalSeriesData = dataset[0];
-                            var xAxisMax = dataset[1];
-                            var yAxisMax = dataset[2];
+                            dataset = self.formatData(generalData, xStatistic, yStatistic);
+                            generalSeriesData = dataset[0];
+                            xAxisMax = dataset[1];
+                            yAxisMax = dataset[2];
 
                             self.chart.series[0].update({
                                 data: generalSeriesData
                             });
-
                         } else if (resultData.length > 0) {
-                            // If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency){
-                            // Get the general data series with name information and x and y axis max 
-                            var dataset = self.formatData(resultData, xStatistic, yStatistic);
-                            var resultSeriesData = dataset[0];
-                            var xAxisMax = dataset[1];
-                            var yAxisMax = dataset[2];
+                            // If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency)
+                            // Get the general data series with name information and x and y axis max
+                            dataset = self.formatData(resultData, xStatistic, yStatistic);
+                            resultSeriesData = dataset[0];
+                            xAxisMax = dataset[1];
+                            yAxisMax = dataset[2];
 
                             if (!self.chart.series[0]) {
                                 self.chart.addSeries({
@@ -410,7 +422,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 resize: function () {
                     if (self.chart) {
                         self.chart.reflow();
-                        // Update arrow size based on new chart dimensions 
+                        // Update arrow size based on new chart dimensions
                         self.chart.xAxis[1].update({
                             title: {
                                 text: "<img src='gui/images/right_arrow.png' style='width: " + (self.chart.chartWidth * (2 / 3)) + "px; height: 100px;' />"
@@ -438,20 +450,21 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
         var xAxisMax = this.getMax(dataset, xStatistic);
         if (xAxisMax < 100) {
-            xAxisMax = 100
+            xAxisMax = 100;
         }
         var yAxisMax = this.getMax(dataset, yStatistic);
 
         for (var i = 0; i < dataset.length; i++) {
-            var x = parseInt(dataset[i][xStatistic]);
-            var y = parseInt(dataset[i][yStatistic]);
+            var x = parseInt(dataset[i][xStatistic], 10);
+            var y = parseInt(dataset[i][yStatistic], 10);
             var person = dataset[i].name || null;
             var personId = dataset[i].id || null;
 
+            var color;
             if (x > xAxisMax / 2 && y > yAxisMax / 2) {
-                var color = '#ff0000';
+                color = '#ff0000';
             } else {
-                var color = '#2f7ed8';
+                color = '#2f7ed8';
             }
 
             var dataPt = { x: x, y: y, person: person, personId: personId, color: color };
@@ -464,9 +477,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     getMax: function (record, property) {
         var max;
         for (var i = 0; i < record.length; i++) {
-            if (parseInt(record[i][property]) || parseInt(record[i][property]) === 0) {
-                if (max === null || parseInt(record[i][property]) > max) {
-                    var max = parseInt(record[i][property]);
+            if (parseInt(record[i][property], 10) || parseInt(record[i][property], 10) === 0) {
+                if (max === null || parseInt(record[i][property], 10) > max) {
+                    max = parseInt(record[i][property], 10);
                 }
             }
         }
@@ -504,8 +517,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         var self = this;
 
         // Person filter is not stored in MEFilters, so need to add prior to setting filters on chart
+        var filterObj;
         if (self.MEFilters == null) {
-            var filterObj = {
+            filterObj = {
                 data: [
                     {
                         dimension_id: 'person',
@@ -530,7 +544,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 checked: true
             });
 
-            var filterObj = {
+            filterObj = {
                 data: filterData,
                 total: filterData.length
             };
@@ -595,11 +609,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
 
         // Add rotate class to arrow image if specified by histogram config
-        var rotate = self.config.histogram.rotate
+        var rotate = self.config.histogram.rotate;
+        var cls;
         if (rotate) {
-            var cls = 'rotate90'
+            cls = 'rotate90';
         } else {
-            cls = ''
+            cls = '';
         }
 
         var chartStore = new CCR.xdmod.CustomJsonStore({
@@ -707,7 +722,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         chartObj.yAxis = [
                             {
                                 allowDecimals: false,
-                                dtitle: "yAxis0",
+                                dtitle: 'yAxis0',
                                 endOnTick: true,
                                 gridLineWidth: 1,
                                 labels: {
@@ -773,7 +788,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                     jobGrid.destroy();
                                 }
 
-                                self.getJobList(personId, person, dataPoint, datasetId, drilldownId, drilldownLabel)
+                                self.getJobList(personId, person, dataPoint, datasetId, drilldownId, drilldownLabel);
                             }
                         }
                     }
@@ -849,15 +864,15 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
         commentsTemplate.overwrite(descriptionPanel.body, {
             comments: dimsDesc + metricsDesc,
-            subnotes: ""
+            subnotes: ''
         });
     },
 
     getJobList: function (personId, person, dataPoint, datasetId, drilldownId, drilldownLabel) {
         var self = this;
-
+        var filters;
         if (self.jobListFilters == null) {
-            var filters = {
+            filters = {
                 data: [
                     {
                         dimension_id: 'person',
@@ -903,7 +918,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 checked: true
             });
 
-            var filters = {
+            filters = {
                 data: filterData,
                 total: filterData.length
             };
@@ -953,7 +968,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         baseParams.global_filters = encodeURIComponent(Ext.util.JSON.encode(baseParams.global_filters));
         baseParams.data_series = encodeURIComponent(Ext.util.JSON.encode(baseParams.data_series));
 
-        var store = new CCR.xdmod.CustomJsonStore({
+        var jobListStore = new CCR.xdmod.CustomJsonStore({
             autoDestroy: false,
             autoLoad: true,
             root: 'data',
@@ -979,13 +994,13 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 { name: 'wall_time', mapping: 'wall_time', type: 'int' }
 
             ]
-        })
+        });
 
         // Needs updated once all statistics are in - currently just shows cpuuser
         var rawDataGrid = new Ext.grid.GridPanel({
             id: 'raw_data_grid_efficiency',
             region: 'center',
-            store: store,
+            store: jobListStore,
             loadMask: true,
             border: false,
             colModel: new Ext.grid.ColumnModel({
@@ -1021,7 +1036,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
                     var info = {
                         realm: self.config.realm,
-                        text: record.get('resource') + "-" + record.get('local_job_id'),
+                        text: record.get('resource') + '-' + record.get('local_job_id'),
                         local_job_id: record.get('local_job_id'),
                         job_id: record.get('jobid'),
                         title: 'efficiency-tab'
@@ -1038,7 +1053,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 displayInfo: true,
                 displayMsg: 'Showing jobs {0} - {1} of {2}',
                 emptyMsg: 'No jobs to display',
-                store: store,
+                store: jobListStore,
                 listeners: {
                     load: function (store, records, options) {
                         this.onLoad(store, records, options);
