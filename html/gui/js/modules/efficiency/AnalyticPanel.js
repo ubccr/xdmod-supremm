@@ -12,7 +12,7 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
 
         this.items = [
             self.getComponents()
-        ]
+        ];
 
         XDMoD.Module.Efficiency.AnalyticPanel.superclass.initComponent.apply(this, arguments);
     },
@@ -46,7 +46,7 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                     id: 'analytic_scatter_plot_' + self.config.analytic,
                     config: self.config,
                     border: false,
-                    boxMinWidth: 800, 
+                    boxMinWidth: 800,
                     boxMinHeight: 600,
                     autoScroll: true,
                     panelSettings: {
@@ -73,16 +73,16 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                 })
 
             ]
-        })
+        });
 
-        //Panel above scatter plot/drill down histogram to show information about analytic and improving behavior
+        // Panel above scatter plot/drill down histogram to show information about analytic and improving behavior
         var details = new Ext.Panel({
             region: 'north',
             border: false,
             html: self.config.documentation
-        })
+        });
 
-        //South panel to show detailed information about the statistics being shown
+        // South panel to show detailed information about the statistics being shown
         var descriptionPanel = new Ext.Panel({
             id: 'descriptionPanel',
             region: 'south',
@@ -93,7 +93,7 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
             title: 'Description',
             layout: 'fit',
             height: 100,
-            plugins: [new Ext.ux.collapsedPanelTitlePlugin()],
+            plugins: [new Ext.ux.collapsedPanelTitlePlugin()]
         });
 
         return [
@@ -108,4 +108,4 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
 
         ];
     }
-})
+});

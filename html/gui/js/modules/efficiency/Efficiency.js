@@ -4,11 +4,11 @@
  *
  */
 XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
-    //Portal Module Properties
+    // Portal Module Properties
     title: 'Efficiency',
     module_id: 'efficiency',
 
-    //Portal Module Toolbar Config
+    // Portal Module Toolbar Config
     usesToolbar: true,
     toolbarItems: {
         durationSelector: true
@@ -17,16 +17,16 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     initComponent: function () {
         var self = this;
 
-        //Get the analytics that will be displayed
+        // Get the analytics that will be displayed
         Ext.Ajax.request({
             url: XDMoD.REST.url + '/efficiency/analytics',
             method: 'GET',
             params: {
-                token: XDMoD.REST.token,
+                token: XDMoD.REST.token
             },
             callback: function (o, success, response) {
                 if (success) {
-                    analytics = JSON.parse(response.responseText);
+                    var analytics = JSON.parse(response.responseText);
                     self.getAnalyticCardDisplay(analytics);
                 }
             },
@@ -36,36 +36,33 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     JSON.parse(response.responseText).message || 'Analytics not found. Please contact system administrator to troubleshoot error.'
                 );
             }
-        })
+        });
 
-        //Handle duration change for each active item
+        // Handle duration change for each active item
         self.on('duration_change', function () {
             var mainPanel = Ext.getCmp('efficiency_display_panel');
             var activeItem = mainPanel.getLayout().activeItem;
             var activeItemIndex = mainPanel.items.indexOf(activeItem);
 
-            //Active item is analytic cards view
+            // Active item is analytic cards view
             if (activeItemIndex == 0) {
                 self.reloadCharts(analytics);
-            }
-            //Active item is scatter plot or drilldown histogram view
-            else if (activeItemIndex == 1) {
-                analytic = activeItem.config.analytic
-                var activeItem = Ext.getCmp('detailed_analytic_panel_' + analytic).getLayout().activeItem;
-                var activeItemIndex = Ext.getCmp('detailed_analytic_panel_' + analytic).items.indexOf(activeItem);
+            } else if (activeItemIndex === 1) {
+                // Active item is scatter plot or drilldown histogram view
+                var analytic = activeItem.config.analytic;
+                activeItem = Ext.getCmp('detailed_analytic_panel_' + analytic).getLayout().activeItem;
+                activeItemIndex = Ext.getCmp('detailed_analytic_panel_' + analytic).items.indexOf(activeItem);
 
-                var scatterPlotPanel = Ext.getCmp('analytic_scatter_plot_' + analytic)
+                var scatterPlotPanel = Ext.getCmp('analytic_scatter_plot_' + analytic);
 
-                //Active item is scatter plot
-                if (activeItemIndex == 0) {
-
+                // Active item is scatter plot
+                if (activeItemIndex === 0) {
                     var id = mainPanel.getLayout().activeItem.id;
+                    var analyticPanel = Ext.getCmp(id);
+                    var analyticConfig = analyticPanel.config;
 
-                    var analyticPanel = Ext.getCmp(id)
-                    var analyticConfig = analyticPanel.config
-
-                    //If filters have been applied, keep applied 
-                    //Otherwise, only use filters that are needed for initial plot
+                    // If filters have been applied, keep applied
+                    // Otherwise, only use filters that are needed for initial plot
                     if (scatterPlotPanel.aggFilters) {
                         var filterObj = scatterPlotPanel.aggFilters;
                     } else {
@@ -89,69 +86,66 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                 statistics: analyticConfig.statistics
                             })
                         }
-                    })
-                }
-                //Active item is drilldown histogram
-                else if (activeItemIndex == 1) {
+                    });
+                }else if (activeItemIndex == 1) {
+                    // Active item is drilldown histogram
                     var store = Ext.StoreMgr.lookup('histogram_chart_store_' + analytic);
                     var hcPanel = Ext.getCmp('hc-panel-' + analytic);
                     var person = hcPanel.person;
                     var personId = hcPanel.personId;
 
-                    //If filters have applied, keep applied
+                    // If filters have applied, keep applied
                     if (scatterPlotPanel.MEFilters) {
                         var filters = scatterPlotPanel.MEFilters.slice();
                         filters.push({
-                            dimension_id: "person",
-                            id: "person=" + personId,
-                            realms: ["SUPREMM"],
+                            dimension_id: 'person',
+                            id: 'person=' + personId,
+                            realms: ['SUPREMM'],
                             value_id: personId,
                             value_name: person,
                             checked: true
-                        })
+                        });
 
-                        //Format filter as needed for ME
+                        // Format filter as needed for ME
                         var filterObj = {
                             data: filters,
                             total: filters.length
-                        }
-                    }
-                    //If no filters applied, keep filtering on person
-                    else {
+                        };
+                    } else {
+                    // If no filters applied, keep filtering on person
                         var filters = [{
-                            dimension_id: "person",
-                            id: "person=" + personId,
-                            realms: ["SUPREMM"],
+                            dimension_id: 'person',
+                            id: 'person=' + personId,
+                            realms: ['SUPREMM'],
                             value_id: personId,
                             value_name: person,
                             checked: true
-                        }]
+                        }];
 
                         var filterObj = {
                             data: filters,
                             total: filters.length
-                        }
+                        };
                     }
 
-                    store.baseParams.start_date = Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d')
-                    store.baseParams.end_date = Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d')
+                    store.baseParams.start_date = Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d');
+                    store.baseParams.end_date = Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d');
 
-                    store.baseParams.global_filters = encodeURIComponent(Ext.util.JSON.encode(filterObj))
-                    store.reload()
-
+                    store.baseParams.global_filters = encodeURIComponent(Ext.util.JSON.encode(filterObj));
+                    store.reload();
                 }
             }
-        })
+        });
 
-        //Container for the analytic card display
+        // Container for the analytic card display
         var analyticCardPanel = new Ext.Panel({
             id: 'analytic_card_panel',
             border: false,
             frame: false,
             autoScroll: true
-        })
+        });
 
-        //Efficiency tab main panel with card layout to allow for switching between views
+        // Efficiency tab main panel with card layout to allow for switching between views
         var mainPanel = new Ext.Panel({
             id: 'efficiency_display_panel',
             frame: false,
@@ -188,25 +182,25 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     disabled: true,
                     iconCls: 'btn_dashboard',
                     handler: function () {
-                        //Display card view and remove panel for scatterplot/drilldown view
+                        // Display card view and remove panel for scatterplot/drilldown view
                         var mainPanel = Ext.getCmp('efficiency_display_panel');
                         mainPanel.layout.setActiveItem(0);
                         mainPanel.doLayout();
                         mainPanel.remove(mainPanel.items.items[1], true);
 
-                        //Disable this button when in analytic card view
+                        // Disable this button when in analytic card view
                         this.disable();
 
-                        //Remove all other links in breadcrumb menu
+                        // Remove all other links in breadcrumb menu
                         var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
                         var length = breadcrumbMenu.items.length;
                         for (var i = 2; i < length; i++) {
                             breadcrumbMenu.remove(2)
                         }
-                        breadcrumbMenu.doLayout()
+                        breadcrumbMenu.doLayout();
                     }
                 }]
-        }
+        };
 
         return [
             XDMoD.ToolbarItem.DURATION_SELECTOR,
@@ -215,7 +209,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     },
 
     analyticCardTemplate: [
-        //Template for creating cards for each analytic
+        // Template for creating cards for each analytic
         '<div class="analyticCardContents">',
         '<div class="analyticHeader">',
         '<h1>{analytic}</h1>',
@@ -227,11 +221,10 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
     getAnalyticCardDisplay: function (data) {
         var self = this;
-        var analtyicCardPanel = Ext.getCmp('analytic_card_panel')
+        var analtyicCardPanel = Ext.getCmp('analytic_card_panel');
 
-        //Add container for each type of analytic
-        var i, j;
-        for (i = 0; i < data.data.length; i++) {
+        // Add container for each type of analytic
+        for (var i = 0; i < data.data.length; i++) {
             var analytics = data.data[i].analytics;
             var typePanel = new Ext.Panel({
                 border: false,
@@ -245,8 +238,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 ]
             })
 
-            //Add the analytic card to the analytic type container
-            for (j = 0; j < analytics.length; j++) {
+            // Add the analytic card to the analytic type container
+            for (var j = 0; j < analytics.length; j++) {
                 var analyticCard = new Ext.Panel({
                     id: 'analytic_card_' + analytics[j].analytic,
                     frame: false,
@@ -256,10 +249,10 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     cls: 'analyticCard',
                     listeners: {
                         afterrender: function (component) {
-                            //Get the scatter plot for the analytic
+                            // Get the scatter plot for the analytic
                             self.getAnalyticPlots(component.initialConfig.data);
 
-                            //Add listener so user can see detailed view of analytic when card is clicked
+                            // Add listener so user can see detailed view of analytic when card is clicked
                             var el = component.getEl();
                             el.on('click', function () {
                                 self.showAnalyticPanel(component.initialConfig.data);
@@ -268,19 +261,19 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     }
                 })
                 typePanel.add(analyticCard);
-            }
+            };
             analtyicCardPanel.add(typePanel);
         }
 
         analtyicCardPanel.doLayout();
     },
 
-    //Config parameter is the analytic and associated information needed to populate scatter plot and drilldown chart
+    // Config parameter is the analytic and associated information needed to populate scatter plot and drilldown chart
     getAnalyticPlots: function (config) {
         var self = this;
 
-        //Get the statistics that will be shown in the scatter plot - since scatter plot uses job_count statistic for both, need to specify short_job_count for x axis
-        if (config.analytic == "Short Job Count") {
+        // Get the statistics that will be shown in the scatter plot - since scatter plot uses job_count statistic for both, need to specify short_job_count for x axis
+        if (config.analytic === 'Short Job Count') {
             var xStatistic = 'short_' + config.statistics[0];
             var yStatistic = config.statistics[1];
         } else {
@@ -288,7 +281,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             var yStatistic = config.statistics[1];
         }
 
-        //Chart settings
+        // Chart settings
         var chartConfig = {
             chart: {
                 renderTo: config.analytic + 'Chart',
@@ -296,7 +289,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 backgroundColor: '#F8F7F7'
             },
             title: {
-                text: null,
+                text: null
             },
             navigation: {
                 buttonOptions: {
@@ -318,11 +311,11 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     turboThreshold: 3000,
                     allowPointSelect: false,
                     states: { hover: { enabled: false } }
-                },
+                }
             },
             xAxis: {
                 title: {
-                    text: config.statisticLabels[0],
+                    text: config.statisticLabels[0]
                 },
                 min: 0,
                 gridLineWidth: 1,
@@ -338,7 +331,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             },
             yAxis: {
                 title: {
-                    text: config.statisticLabels[1],
+                    text: config.statisticLabels[1]
                 },
                 min: 0,
                 gridLineWidth: 1,
@@ -356,7 +349,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 { data: [] },
                 { data: [] }
             ]
-        }
+        };
 
         var chart = new Highcharts.Chart(chartConfig);
 
@@ -391,15 +384,15 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     document.getElementById(config.analytic + 'Chart').innerHTML = '<div class="analyticInfoError">Error: ' + response.status + ' (' + response.statusText + ')<br>Details: ' + details.message + '</div>';
                 },
                 beforeLoad: function () {
-                    //Remove any prior error messages before redrawing chart
+                    // Remove any prior error messages before redrawing chart
                     document.getElementById(config.analytic + 'Chart').innerHTML = '';
                     chart.redraw();
 
-                    //Add loading message
+                    // Add loading message
                     chart.showLoading();
                 },
                 load: function () {
-                    /*  
+                    /*
                         Result dataset is what a user has access to and is allowed to drilldown on
                         General dataset is all data without identifying information(name) attached
                         Both datasets are included on scatterplot as separate series and depending on user access
@@ -407,24 +400,23 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     var resultData = this.data.items[0].json.results;
                     var generalData = this.data.items[0].json.hiddenData;
 
-                    //Check if any data is available
+                    // Check if any data is available
                     if (resultData.length > 0 || generalData.length > 0) {
-
-                        //Users with both specific and general data
+                        // Users with both specific and general data
                         if (resultData.length > 0 && generalData.length > 0) {
-                            //Get the general data series without name information
+                            // Get the general data series without name information
                             var dataset = self.formatData(generalData, xStatistic, yStatistic);
                             var generalSeriesData = dataset[0];
                             var generalXMax = dataset[1];
                             var generalYMax = dataset[2];
 
-                            //Get the result data series with name information
+                            // Get the result data series with name information
                             var dataset = self.formatData(resultData, xStatistic, yStatistic);
                             var resultSeriesData = dataset[0];
                             var resultXMax = dataset[1];
                             var resultYMax = dataset[2];
 
-                            //Get axis max values for scatter plot
+                            // Get axis max values for scatter plot
                             var xAxisMax = Math.max(generalXMax, resultXMax);
                             var yAxisMax = Math.max(generalYMax, resultYMax);
 
@@ -439,25 +431,25 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                     symbol: 'circle',
                                     radius: 10,
                                     lineWidth: 2,
-                                    lineColor: 'black' // inherit from series
+                                    lineColor: 'black'
                                 }
                             });
                         } else if (generalData.length > 0) {
                             var dataset = self.formatData(generalData, xStatistic, yStatistic);
-                            var generalSeriesData = dataset[0]
-                            var xAxisMax = dataset[1]
-                            var yAxisMax = dataset[2]
+                            var generalSeriesData = dataset[0];
+                            var xAxisMax = dataset[1];
+                            var yAxisMax = dataset[2];
 
                             chart.series[0].update({
                                 data: generalSeriesData
                             });
                         } else if (resultData.length > 0) {
-                            //If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency)
-                            //Get the general data series with name information and x and y axis max
+                            // If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency)
+                            // Get the general data series with name information and x and y axis max
                             var dataset = self.formatData(resultData, xStatistic, yStatistic);
-                            var resultSeriesData = dataset[0]
-                            var xAxisMax = dataset[1]
-                            var yAxisMax = dataset[2]
+                            var resultSeriesData = dataset[0];
+                            var xAxisMax = dataset[1];
+                            var yAxisMax = dataset[2];
 
                             chart.series[0].update({
                                 data: resultSeriesData
@@ -489,24 +481,24 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             }]
                         });
 
-                        chart.redraw()
-                        chart.hideLoading()
+                        chart.redraw();
+                        chart.hideLoading();
                     } else {
                         document.getElementById(config.analytic + 'Chart').innerHTML = "<div class='analyticInfoError'> No data available during this time frame for this analytic.";
-                    }
+                    };
                 }
             }
-        })
+        });
     },
 
     formatData: function (dataset, xStatistic, yStatistic) {
         var data = []
 
-        //Get x and y axis max to use for scatter plot plot lines
+        // Get x and y axis max to use for scatter plot plot lines
         var xAxisMax = this.getMax(dataset, xStatistic);
         if (xAxisMax < 100) {
             xAxisMax = 100;
-        }
+        };
         var yAxisMax = this.getMax(dataset, yStatistic);
 
         for (var i = 0; i < dataset.length; i++) {
@@ -527,11 +519,11 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     },
 
     getMax: function (record, property) {
-        var max, i;
-        for (i = 0; i < record.length; i++) {
+        var max;
+        for (var i = 0; i < record.length; i++) {
             if (parseInt(record[i][property])) {
                 if (max == null || parseInt(record[i][property]) > max) {
-                    var max = parseInt(record[i][property]);
+                    max = parseInt(record[i][property]);
                 }
             }
         }
@@ -539,7 +531,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     },
 
     reloadCharts: function (data) {
-        //Reload each chart with new start and end date
+        // Reload each chart with new start and end date
         for (var i = 0; i < data.data.length; i++) {
             var analytics = data.data[i].analytics;
             for (var j = 0; j < analytics.length; j++) {
@@ -572,7 +564,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             config: chartConfig
         });
 
-        //Add new breadcrumb for the scatter plot
+        // Add new breadcrumb for the scatter plot
         var btn = {
             xtype: 'button',
             text: chartConfig.analytic,
@@ -580,13 +572,13 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             disabled: true,
             iconCls: 'scatter',
             handler: function () {
-                //Display the scatter plot panel and remove the drilldown histogram panel 
+                // Display the scatter plot panel and remove the drilldown histogram panel
                 var analyticPanel = Ext.getCmp('detailed_analytic_panel_' + chartConfig.analytic);
                 analyticPanel.layout.setActiveItem(0);
                 analyticPanel.doLayout();
                 analyticPanel.remove(analyticPanel.items.items[1], true);
 
-                //Remove all other links in breadcrumb menu
+                // Remove all other links in breadcrumb menu
                 var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
                 var length = breadcrumbMenu.items.length;
                 for (var i = 4; i < length; i++) {
@@ -594,7 +586,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 }
                 breadcrumbMenu.doLayout();
 
-                //Update the description panel to match the chart being shown
+                // Update the description panel to match the chart being shown
                 var descriptionPanel = Ext.getCmp('descriptionPanel');
                 var commentsTemplate = new Ext.XTemplate(
                     '<table class="xd-table">',
@@ -612,52 +604,51 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 );
 
                 commentsTemplate.overwrite(descriptionPanel.body, {
-                    'comments': chartConfig.statisticDescription,
-                    'subnotes': ""
+                    comments: chartConfig.statisticDescription,
+                    subnotes: ''
                 });
 
 
-                //Update the filter check boxes to reflect what was checked previously prior to navigating to the histogram
+                // Update the filter check boxes to reflect what was checked previously prior to navigating to the histogram
                 var dimensions = ['Queue', 'Application', 'Resource', 'PI'];
                 var filters = Ext.getCmp('analytic_scatter_plot_' + chartConfig.analytic).aggFilters;
 
                 for (var i = 0; i < dimensions.length; i++) {
-                    //Get all boxes that were checked in drilldown view and remove the checks
-                    var filterList = Ext.getCmp('checkbox_group' + dimensions[i]).getValue()
+                    // Get all boxes that were checked in drilldown view and remove the checks
+                    var filterList = Ext.getCmp('checkbox_group' + dimensions[i]).getValue();
                     Ext.each(filterList, function (f) {
-                        Ext.getCmp('checkbox_group' + dimensions[i]).setValue(f.id, false)
-                    })
+                        Ext.getCmp('checkbox_group' + dimensions[i]).setValue(f.id, false);
+                    });
 
-                    //Check all filters that were applied prior to navigating to the histogram - these are stored in the aggregate filter variable in the scatter plot panel
+                    // Check all filters that were applied prior to navigating to the histogram - these are stored in the aggregate filter variable in the scatter plot panel
                     Ext.each(filters, function (filter) {
                         if (filter[dimensions[i].toLowerCase()]) {
                             Ext.each(filter[dimensions[i].toLowerCase()], function (value) {
-                                Ext.getCmp('checkbox_group' + dimensions[i]).setValue(value, true)
+                                Ext.getCmp('checkbox_group' + dimensions[i]).setValue(value, true);
                             })
                         }
                     }
-                    )
+                    );
                 }
 
-                //Disable this btn on showing the scatter plot 
-                this.disable()
+                // Disable this btn on showing the scatter plot
+                this.disable();
             }
         }
 
-        //Enable breadcrumb btn that navigates to analytic card view
-        Ext.getCmp('analytic_breadcrumb_btn').enable()
+        // Enable breadcrumb btn that navigates to analytic card view
+        Ext.getCmp('analytic_breadcrumb_btn').enable();
 
-        //Add new spacer and scatter plot button 
+        // Add new spacer and scatter plot button
         var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
-        breadcrumbMenu.add({ xtype: 'tbtext', text: '&#10142' })
+        breadcrumbMenu.add({ xtype: 'tbtext', text: '&#10142' });
         breadcrumbMenu.add(btn);
         breadcrumbMenu.doLayout();
 
-        //Load new panel with corresponding analytic chart
+        // Load new panel with corresponding analytic chart
         var mainPanel = Ext.getCmp('efficiency_display_panel');
         mainPanel.add(analyticPanel);
         mainPanel.layout.setActiveItem(1);
         mainPanel.doLayout();
     }
-
 });

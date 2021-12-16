@@ -34,33 +34,33 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                     disabled: true,
                     handler: function () {
 
-                        //Enable the remove filters btn when filters have been applied
+                        // Enable the remove filters btn when filters have been applied
                         Ext.getCmp('removeFiltersBtn').enable()
 
-                        //Set the variables needed to keep track of filtering between charts 
+                        // Set the variables needed to keep track of filtering between charts
                         var subtitle = '';
                         var MEFilters = [];
                         var filterObj = {};
 
                         for (var i = 0; i < dimensionList.length; i++) {
-                            //Check each fieldset for filters that a user intends to apply
+                            // Check each fieldset for filters that a user intends to apply
                             var fieldSet = Ext.getCmp('checkbox_group' + dimensionList[i]).getValue()
                             if (fieldSet.length > 0) {
                                 var dimension = dimensionList[i].toLowerCase()
                                 var filters = [];
                                 var filterSubtitle = '';
-                                //Add all filters that are checked in the fieldset for each dimension to a filter object
+                                // Add all filters that are checked in the fieldset for each dimension to a filter object
                                 for (var j = 0; j < fieldSet.length; j++) {
-                                    //Add filter to filter list
+                                    // Add filter to filter list
                                     filters.push(fieldSet[j].id);
 
-                                    //Update the string that will be used for chart subtitle
+                                    // Update the string that will be used for chart subtitle
                                     filterSubtitle += fieldSet[j].name;
                                     if (j < fieldSet.length - 1) {
                                         filterSubtitle = filterSubtitle + ', ';
                                     }
 
-                                    //Create the ME filter object and add to ME filter array
+                                    // Create the ME filter object and add to ME filter array
                                     var filterME = {
                                         dimension_id: dimension,
                                         id: dimension + "=" + fieldSet[j].id,
@@ -72,7 +72,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                     MEFilters.push(filterME);
                                 }
 
-                                //Add filters for each dimension to the filterObj to be applied to the scatter plot
+                                // Add filters for each dimension to the filterObj to be applied to the scatter plot
                                 jQuery.extend(filterObj, { [dimension]: filters })
 
                                 subtitle += dimensionList[i] + ': ' + filterSubtitle + ' <br> ';
@@ -84,14 +84,14 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                         var activeItemIndex = Ext.getCmp('detailed_analytic_panel_' + self.config.analytic).items.indexOf(activeItem);
                         var analyticScatterPlot = Ext.getCmp('analytic_scatter_plot_' + self.config.analytic);
 
-                        //Apply filters for scatter plot
+                        // Apply filters for scatter plot
                         if (activeItemIndex == 0) {
-                            //Keep track of filters applied to the scatter plot
+                            // Keep track of filters applied to the scatter plot
                             analyticScatterPlot.aggFilters = filterObj;
                             analyticScatterPlot.MEFilters = MEFilters;
                             analyticScatterPlot.jobListFilters = MEFilters;
 
-                            //Reload store with new filters applied
+                            // Reload store with new filters applied
                             analyticScatterPlot.store.reload({
                                 params: {
                                     config: JSON.stringify({
@@ -111,20 +111,18 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                 }
                             })
 
-                            //Update subtitle
+                            // Update subtitle
                             analyticScatterPlot.subtitle = subtitle;
 
-                        }
-                        //Apply filters to drilldown chart
-                        else if (activeItemIndex == 1) {
+                        } else if (activeItemIndex == 1) {
+                        // Apply filters to drilldown chart
                             analyticScatterPlot.jobListFilters = MEFilters;
-                            
                             var store = Ext.StoreMgr.lookup('histogram_chart_store_' + self.config.analytic);
                             var hcPanel = Ext.getCmp('hc-panel-' + self.config.analytic);
                             var person = hcPanel.person;
                             var personId = hcPanel.personId;
 
-                            //Use ME filter object formatting with person added as a filter
+                            // Use ME filter object formatting with person added as a filter
                             var filterObj = MEFilters.slice();
 
                             filterObj.push({
@@ -153,7 +151,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                     disabled: true,
                     cls: 'filterApplyBtn',
                     handler: function () {
-                        // Remove any boxes that are checked 
+                        // Remove any boxes that are checked
                         for (var i = 0; i < dimensionList.length; i++) {
                             var fieldSet = Ext.getCmp('checkbox_group' + dimensionList[i]).getValue();
                             for (var j = 0; j < fieldSet.length; j++) {
@@ -214,7 +212,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                             }
 
                             store.baseParams.global_filters = encodeURIComponent(Ext.util.JSON.encode(filters));
-                            //Reload drilldown chart store with only person filter applied 
+                            // Reload drilldown chart store with only person filter applied
                             store.reload();
 
                         }
@@ -223,7 +221,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
         }
         );
 
-        //Add fieldset or access denied message to Filter Panel items 
+        // Add fieldset or access denied message to Filter Panel items 
         for (var i = 0; i < dimensionList.length; i++) {
             var fieldSet = this.getFieldSet(dimensionList[i]);
 
@@ -234,11 +232,9 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                 var filterMessage = new Ext.Container({
                     html: '<div> You do not have permission to view ' + dimensionList[i] + ' filters.'
                 })
-
                 items.push(filterMessage);
             }
         }
-
         return items
     },
 
@@ -260,8 +256,8 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                     text: '<img src="/gui/images/loading.gif">',
                     id: 'add_btn_' + dimension,
                     handler: function () {
-                        //Show more/fewer filters in the checkbox group 
-                        //Store any already checked filters in filterList
+                        // Show more/fewer filters in the checkbox group 
+                        // Store any already checked filters in filterList
                         var filterList = Ext.getCmp('checkbox_group' + dimension).getValue();
 
                         if (store.baseParams.limit == 5 && store.totalLength > 15 && this.getText() == 'Show More ' + dimension + ' Filters') {
@@ -272,12 +268,12 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                 }
                             })
 
-                            //Show button as loading
+                            // Show button as loading
                             this.setText('<img src="/gui/images/loading.gif">');
                             this.disable();
 
                             store.on('load', function (t, op) {
-                                //Update and enable btn
+                                // Update and enable btn
                                 Ext.getCmp('add_btn_' + dimension).setText('Show Remaining ' + dimension + ' Filters');
                                 Ext.getCmp('add_btn_' + dimension).enable();
                             }, this)
@@ -315,7 +311,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                             }, this)
                         }
 
-                        //Update new filter checkbox list to check true on any previously checked filters
+                        // Update new filter checkbox list to check true on any previously checked filters
                         store.on('load', function (t, op) {
                             Ext.each(filterList, function (f) {
                                 Ext.getCmp('checkbox_group' + dimension).setValue(f.id, true);
@@ -359,7 +355,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                     var filter = e.value;
                     var checkbox_group = Ext.getCmp('checkbox_group' + dimension);
 
-                    //Check filter if showing, if not showing show all filter checkboxes and check filter
+                    // Check filter if showing, if not showing show all filter checkboxes and check filter
                     if (checkbox_group.items.keys.includes(filter)) {
                         checkbox_group.setValue(filter, true)
                     } else {
@@ -421,7 +417,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
                         var checkBoxes = [];
                         for (var i = 0; i < filters.length; i++) {
-                            //Handles formatting in situation where filter is missing a name property (Queue dimension)
+                            // Handles formatting in situation where filter is missing a name property (Queue dimension)
                             if (!filters[i].data.name) {
                                 filters[i].data.name = '  ';
                             }
@@ -450,7 +446,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                         fieldSet.insert(1, checkboxGroup);
                         fieldSet.doLayout();
 
-                        //Handle button text depnding on length of filter list
+                        // Handle button text depnding on length of filter list
                         if (this.totalLength < 5 || this.totalLength == 5) {
                             Ext.getCmp('add_btn_' + dimension).destroy();
                         } else if (this.totalLength > 5 && (this.totalLength < 15 || this.totalLength == 15)){
@@ -471,7 +467,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
         return fieldSet
     },
 
-    //Check handler for filter checkbox - handles enable/disable of apply filters btn
+    // Check handler for filter checkbox - handles enable/disable of apply filters btn
     onCheck: function (checked) {
         if (checked) {
             Ext.getCmp('applyFiltersBtn').enable();
