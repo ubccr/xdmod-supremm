@@ -308,7 +308,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     );
 
                     $query->addStat($config->statistics[0]);
-    
+
                     if (property_exists($config, 'filters')) {
                         $query->setRoleParameters($config->filters);
                     }
@@ -429,7 +429,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
 
                     $results['data'][0]['series'][0]['data'] = $chartData;
                     break;
-                default: 
+                default:
                     $results['data'][0]['series'][0]['data'] = $chartData;
                     break;
             }
