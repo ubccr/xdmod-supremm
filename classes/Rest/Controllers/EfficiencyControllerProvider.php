@@ -312,24 +312,24 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     if (property_exists($config, 'filters')) {
                         $query->setRoleParameters($config->filters);
                     }
-    
+
                     if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
                         throw new BadRequestException('Malformed config property order_by');
                     }
-    
+
                     $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
                     $query->addOrderBy($config->order_by->field, $dirn);
-    
+
                     $usageStatDataSet = new \DataWarehouse\Data\SimpleDataset($query);
                     $usageData = $usageStatDataSet->getResults($limit, $start);
-    
+
                     if (property_exists($config, 'mandatory_filters')) {
                         $query->setRoleParameters($config->mandatory_filters);
                     }
-    
+
                     $efficiencyStatDataset = new \DataWarehouse\Data\SimpleDataset($query);
                     $efficiencyData = $efficiencyStatDataset->getResults($limit, $start);
-    
+
                     foreach($efficiencyData as &$val){
                         $val['short_job_count'] = $val['job_count'];
                         $val['id'] = $val[$config->group_by . '_id'];
@@ -339,7 +339,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                         unset($val[$config->group_by . '_name']);
                         unset($val[$config->group_by . '_short_name']);
                         unset($val[$config->group_by . '_order_id']);
-    
+
                         foreach($usageData as $val2){
                             if($val2[$config->group_by . '_id'] == $val['id']){
                                 $val['job_count'] = $val2['job_count'];
@@ -415,7 +415,8 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     $naBucket = array_shift($chartData);
                     array_push($chartData, $naBucket);
 
-                    $results['data'][0]['series'][0]['data'] = $chartData;  
+                    $results['data'][0]['series'][0]['data'] = $chartData;
+                    break;
                 case 'jobwalltime':
                     foreach ($chartData as &$dataPoint) {
                         if ($dataPoint['drilldown']['id'] == 0 || $dataPoint['drilldown']['id'] == 1) {
@@ -427,8 +428,10 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     }, $chartData), SORT_ASC, $chartData);
 
                     $results['data'][0]['series'][0]['data'] = $chartData;
+                    break;
                 default: 
                     $results['data'][0]['series'][0]['data'] = $chartData;
+                    break;
             }
         }
 
@@ -467,7 +470,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         $dimensionValues = MetricExplorer::getDimensionValues(
             $user,
             $dimension,
-            $realms = null,
+            $realms,
             $offset,
             $limit,
             $searchText,
