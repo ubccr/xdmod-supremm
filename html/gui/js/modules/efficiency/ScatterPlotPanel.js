@@ -324,17 +324,10 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             xAxisMax = dataset[1];
                             yAxisMax = dataset[2];
 
-                            if (!self.chart.series[0]) {
-                                self.chart.addSeries({
-                                    data: resultSeriesData,
-                                    clickable: true
-                                });
-                            } else {
-                                self.chart.series[0].update({
-                                    data: resultSeriesData,
-                                    clickable: true
-                                });
-                            }
+                            self.chart.series[0].update({
+                                data: resultSeriesData,
+                                clickable: true
+                            });
                         }
 
                         // Update x and y axis to reflect the max and min
@@ -477,7 +470,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         var max;
         for (var i = 0; i < record.length; i++) {
             if (parseInt(record[i][property], 10) || parseInt(record[i][property], 10) === 0) {
-                if (max === null || parseInt(record[i][property], 10) > max) {
+                if (!max || parseInt(record[i][property], 10) > max) {
                     max = parseInt(record[i][property], 10);
                 }
             }
