@@ -238,6 +238,26 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
         return items
     },
 
+    updateFilterList: function(button, store, newStoreLimit, newText){
+        //Reload store with new limit set
+        store.reload({
+            params: {
+                start: 0,
+                limit: newStoreLimit
+            }
+        })
+
+        //Show button as loading
+        button.setText('<img src="/gui/images/loading.gif">');
+        button.disable();
+
+        store.on('load', function (t, op) {
+            //Update btn text and enable
+            button.setText(newText);
+            button.enable();
+        }, button)
+    },
+
     getFieldSet: function (dimension) {
         var self = this;
 
@@ -261,54 +281,11 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                         var filterList = Ext.getCmp('checkbox_group' + dimension).getValue();
 
                         if (store.baseParams.limit == 5 && store.totalLength > 15 && this.getText() == 'Show More ' + dimension + ' Filters') {
-                            store.reload({
-                                params: {
-                                    start: 0,
-                                    limit: 15
-                                }
-                            })
-
-                            // Show button as loading
-                            this.setText('<img src="/gui/images/loading.gif">');
-                            this.disable();
-
-                            store.on('load', function (t, op) {
-                                // Update and enable btn
-                                Ext.getCmp('add_btn_' + dimension).setText('Show Remaining ' + dimension + ' Filters');
-                                Ext.getCmp('add_btn_' + dimension).enable();
-                            }, this)
-
+                            self.updateFilterList(this, store, 15, 'Show Remaining ' + dimension + ' Filters');
                         } else if (this.getText() === 'Show Remaining ' + dimension + ' Filters' || ((store.totalLength == 15 || store.totalLength < 15) && this.getText() == 'Show More ' + dimension + ' Filters')) {
-                            store.reload({
-                                params: {
-                                    start: 0,
-                                    limit: store.totalLength
-                                }
-                            })
-
-                            this.setText('<img src="/gui/images/loading.gif">');
-                            this.disable();
-
-                            store.on('load', function (t, op) {
-                                Ext.getCmp('add_btn_' + dimension).setText('Show Fewer ' + dimension + ' Filters');
-                                Ext.getCmp('add_btn_' + dimension).enable();
-                            }, this)
-
-                        } else if (this.getText() === 'Show Fewer ' + dimension + ' Filters') {
-                            store.reload({
-                                params: {
-                                    start: 0,
-                                    limit: 5
-                                }
-                            })
-
-                            this.setText('<img src="/gui/images/loading.gif">');
-                            this.disable();
-
-                            store.on('load', function (t, op) {
-                                Ext.getCmp('add_btn_' + dimension).setText('Show More ' + dimension + ' Filters');
-                                Ext.getCmp('add_btn_' + dimension).enable();
-                            }, this)
+                            self.updateFilterList(this, store, store.totalLength, 'Show Fewer ' + dimension + ' Filters');
+                        } else if (this.getText() === 'Show Fewer ' + dimension + ' Filters') {  
+                            self.updateFilterList(this, store, 5, 'Show More ' + dimension + ' Filters');
                         }
 
                         // Update new filter checkbox list to check true on any previously checked filters
