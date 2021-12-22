@@ -352,10 +352,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     width: 2
                 }]
             },
-            series: [
-                { data: [] },
-                { data: [] }
-            ]
+            series: []
         };
 
         var chart = new Highcharts.Chart(chartConfig);
@@ -366,6 +363,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             url: XDMoD.REST.url + '/efficiency/scatterPlot/' + config.analytic,
             root: 'results',
             autoLoad: true,
+            chartInst: null,
             baseParams: {
                 start: 0,
                 limit: 3000,
@@ -387,16 +385,21 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             fields: [xStatistic, yStatistic],
             listeners: {
                 exception: function (proxy, type, action, exception, response) {
+                    if(this.chartInst){
+                        this.chartInst.destroy()
+                        this.chartInst = null;
+                    }
                     var details = Ext.decode(response.responseText);
                     document.getElementById(config.analytic + 'Chart').innerHTML = '<div class="analyticInfoError">Error: ' + response.status + ' (' + response.statusText + ')<br>Details: ' + details.message + '</div>';
                 },
                 beforeLoad: function () {
-                    // Remove any prior error messages before redrawing chart
-                    document.getElementById(config.analytic + 'Chart').innerHTML = '';
-                    chart.redraw();
-
-                    // Add loading message
-                    chart.showLoading();
+                    if(this.chartInst){
+                        this.chartInst.destroy()
+                        this.chartInst = null;
+                    } 
+                    this.chartInst = new Highcharts.Chart(chartConfig);
+                    //Add loading message
+                    this.chartInst.showLoading();
                 },
                 load: function () {
                     /*
@@ -437,11 +440,11 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             xAxisMax = Math.max(generalXMax, resultXMax);
                             yAxisMax = Math.max(generalYMax, resultYMax);
 
-                            chart.series[0].update({
+                            this.chartInst.addSeries({
                                 data: generalSeriesData
                             });
 
-                            chart.series[1].update({
+                            this.chartInst.addSeries({
                                 data: resultSeriesData,
                                 marker: {
                                     fillColor: 'transparent',
@@ -457,7 +460,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             xAxisMax = dataset[1];
                             yAxisMax = dataset[2];
 
-                            chart.series[0].update({
+                            this.chartInst.addSeries({
                                 data: generalSeriesData
                             });
                         } else if (resultData.length > 0) {
@@ -468,13 +471,13 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             xAxisMax = dataset[1];
                             yAxisMax = dataset[2];
 
-                            chart.series[0].update({
+                            this.chartInst.addSeries({
                                 data: resultSeriesData
                             });
                         }
 
                         // Update x and y axis to reflect the max and min
-                        chart.yAxis[0].update({
+                        this.chartInst.yAxis[0].update({
                             min: 0,
                             max: yAxisMax,
                             tickInterval: Math.ceil(yAxisMax) / 4,
@@ -486,7 +489,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             }]
                         });
 
-                        chart.xAxis[0].update({
+                        this.chartInst.xAxis[0].update({
                             min: 0,
                             max: xAxisMax,
                             tickInterval: Math.ceil(xAxisMax) / 4,
@@ -498,9 +501,13 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             }]
                         });
 
-                        chart.redraw();
-                        chart.hideLoading();
+                        this.chartInst.redraw();
+                        this.chartInst.hideLoading();
                     } else {
+                        if(this.chartInst){
+                            this.chartInst.destroy();
+                            this.chartInst = null;
+                        }
                         document.getElementById(config.analytic + 'Chart').innerHTML = "<div class='analyticInfoError'> No data available during this time frame for this analytic.";
                     }
                 }
