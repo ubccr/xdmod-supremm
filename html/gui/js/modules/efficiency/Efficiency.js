@@ -355,8 +355,6 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             series: []
         };
 
-        var chart = new Highcharts.Chart(chartConfig);
-
         var analyticStore = new Ext.data.JsonStore({
             id: 'analytic_store_' + config.analytic,
             restful: true,
@@ -385,20 +383,20 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             fields: [xStatistic, yStatistic],
             listeners: {
                 exception: function (proxy, type, action, exception, response) {
-                    if(this.chartInst){
-                        this.chartInst.destroy()
+                    if (this.chartInst) {
+                        this.chartInst.destroy();
                         this.chartInst = null;
                     }
                     var details = Ext.decode(response.responseText);
                     document.getElementById(config.analytic + 'Chart').innerHTML = '<div class="analyticInfoError">Error: ' + response.status + ' (' + response.statusText + ')<br>Details: ' + details.message + '</div>';
                 },
                 beforeLoad: function () {
-                    if(this.chartInst){
-                        this.chartInst.destroy()
+                    if (this.chartInst) {
+                        this.chartInst.destroy();
                         this.chartInst = null;
-                    } 
+                    }
                     this.chartInst = new Highcharts.Chart(chartConfig);
-                    //Add loading message
+                    // Add loading message
                     this.chartInst.showLoading();
                 },
                 load: function () {
@@ -504,7 +502,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         this.chartInst.redraw();
                         this.chartInst.hideLoading();
                     } else {
-                        if(this.chartInst){
+                        if (this.chartInst) {
                             this.chartInst.destroy();
                             this.chartInst = null;
                         }
