@@ -51,9 +51,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 tooltip: {
                     formatter: function () {
                         if (this.point.person) {
-                            return '<b>' + this.point.person + '</b><br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y + ' ' + self.config.valueLabels[1] + '</b>';
+                            return '<b>' + this.point.person + '</b><br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x.toFixed(0) + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y.toFixed(0) + ' ' + self.config.valueLabels[1] + '</b>';
                         }
-                        return 'User (Access denied to view name) <br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y + ' ' + self.config.valueLabels[1] + '</b>';
+                        return 'User (Access denied to view name) <br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x.toFixed(0) + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y.toFixed(0) + ' ' + self.config.valueLabels[1] + '</b>';
                     },
                     positioner: function (labelWidth, labelHeight, point) {
                         var tooltipX;
@@ -447,8 +447,8 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         var yAxisMax = this.getMax(dataset, yStatistic);
 
         for (var i = 0; i < dataset.length; i++) {
-            var x = parseInt(dataset[i][xStatistic], 10);
-            var y = parseInt(dataset[i][yStatistic], 10);
+            var x = parseFloat(dataset[i][xStatistic]);
+            var y = parseFloat(dataset[i][yStatistic]);
             var person = dataset[i].name || null;
             var personId = dataset[i].id || null;
 
@@ -469,9 +469,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     getMax: function (record, property) {
         var max;
         for (var i = 0; i < record.length; i++) {
-            if (parseInt(record[i][property], 10) || parseInt(record[i][property], 10) === 0) {
-                if (!max || parseInt(record[i][property], 10) > max) {
-                    max = parseInt(record[i][property], 10);
+            if (parseFloat(record[i][property]) || parseFloat(record[i][property]) === 0) {
+                if (!max || parseFloat(record[i][property]) > max) {
+                    max = Math.ceil(parseFloat(record[i][property]));
                 }
             }
         }

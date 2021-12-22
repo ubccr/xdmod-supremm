@@ -396,7 +396,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         this.chartInst = null;
                     }
                     this.chartInst = new Highcharts.Chart(chartConfig);
-                    // Add loading message
+                    // /Add loading message
                     this.chartInst.showLoading();
                 },
                 load: function () {
@@ -478,11 +478,11 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         this.chartInst.yAxis[0].update({
                             min: 0,
                             max: yAxisMax,
-                            tickInterval: Math.ceil(yAxisMax) / 4,
+                            tickInterval: Math.ceil(yAxisMax / 4),
                             plotLines: [{
                                 color: 'black',
                                 dashStyle: 'solid',
-                                value: Math.ceil(yAxisMax) / 2,
+                                value: Math.ceil(yAxisMax / 2),
                                 width: 2
                             }]
                         });
@@ -490,11 +490,11 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         this.chartInst.xAxis[0].update({
                             min: 0,
                             max: xAxisMax,
-                            tickInterval: Math.ceil(xAxisMax) / 4,
+                            tickInterval: Math.ceil(xAxisMax / 4),
                             plotLines: [{
                                 color: 'black',
                                 dashStyle: 'solid',
-                                value: Math.ceil(xAxisMax) / 2,
+                                value: Math.ceil(xAxisMax / 2),
                                 width: 2
                             }]
                         });
@@ -524,8 +524,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         var yAxisMax = this.getMax(dataset, yStatistic);
 
         for (var i = 0; i < dataset.length; i++) {
-            var x = parseInt(dataset[i][xStatistic], 10);
-            var y = parseInt(dataset[i][yStatistic], 10);
+            var x = parseFloat(dataset[i][xStatistic]);
+            var y = parseFloat(dataset[i][yStatistic]);
             var color;
             if (x > xAxisMax / 2 && y > yAxisMax / 2) {
                 color = '#ff0000';
@@ -543,9 +543,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     getMax: function (record, property) {
         var max;
         for (var i = 0; i < record.length; i++) {
-            if (parseInt(record[i][property], 10)) {
-                if (max == null || parseInt(record[i][property], 10) > max) {
-                    max = parseInt(record[i][property], 10);
+            if (parseFloat(record[i][property])) {
+                if (max == null || parseFloat(record[i][property]) > max) {
+                    max = Math.ceil(parseFloat(record[i][property]));
                 }
             }
         }
