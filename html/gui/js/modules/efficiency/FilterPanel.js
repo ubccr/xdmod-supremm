@@ -285,7 +285,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                             self.updateFilterList(this, store, 15, 'Show Remaining ' + dimension + ' Filters');
                         } else if (this.getText() === 'Show Remaining ' + dimension + ' Filters' || ((store.totalLength == 15 || store.totalLength < 15) && this.getText() == 'Show More ' + dimension + ' Filters')) {
                             self.updateFilterList(this, store, store.totalLength, 'Show Fewer ' + dimension + ' Filters');
-                        } else if (this.getText() === 'Show Fewer ' + dimension + ' Filters') {  
+                        } else if (this.getText() === 'Show Fewer ' + dimension + ' Filters') {
                             self.updateFilterList(this, store, 5, 'Show More ' + dimension + ' Filters');
                         }
 
