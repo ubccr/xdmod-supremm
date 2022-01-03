@@ -21,6 +21,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
         items.push({
             xtype: "buttongroup",
+            itemId: 'button_group',
             border: false,
             frame: false,
             width: 300,
@@ -28,14 +29,14 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
             items: [
                 {
                     xtype: 'button',
-                    id: 'applyFiltersBtn',
+                    itemId: 'applyFiltersBtn',
                     text: 'Apply Filters to Chart',
                     cls: 'filterApplyBtn',
                     disabled: true,
                     handler: function () {
 
-                        // Enable the remove filters btn when filters have been applied
-                        Ext.getCmp('removeFiltersBtn').enable()
+                        //Enable the remove filters btn when filters have been applied
+                        this.ownerCt.getComponent('remove_filters_btn').enable()
 
                         // Set the variables needed to keep track of filtering between charts
                         var subtitle = '';
@@ -147,7 +148,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                 {
                     xtype: 'button',
                     text: 'Remove Filters from Chart',
-                    id: 'removeFiltersBtn',
+                    itemId: 'removeFiltersBtn',
                     disabled: true,
                     cls: 'filterApplyBtn',
                     handler: function () {
@@ -263,7 +264,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
         var fieldSet = new Ext.form.FieldSet({
             title: 'Filter by ' + dimension,
-            id: dimension + 'FieldSet',
+            itemId: dimension + '_field_set',
             width: 225,
             autoHeight: true,
             border: true,
@@ -274,7 +275,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                 {
                     xtype: 'button',
                     text: '<img src="/gui/images/loading.gif">',
-                    id: 'add_btn_' + dimension,
+                    itemId: 'show_filters_btn_' + dimension,
                     handler: function () {
                         // Show more/fewer filters in the checkbox group
                         // Store any already checked filters in filterList
@@ -351,7 +352,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                             })
                             Ext.getCmp('checkbox_group' + dimension).setValue(filter, true);
 
-                            Ext.getCmp('add_btn_' + dimension).setText('Show Fewer ' + dimension + ' Filters');
+                            fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show Fewer ' + dimension + ' Filters');
                         }, this)
                     }
                 }
@@ -425,11 +426,11 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
                         // Handle button text depnding on length of filter list
                         if (this.totalLength < 5 || this.totalLength == 5) {
-                            Ext.getCmp('add_btn_' + dimension).destroy();
+                            fieldSet.getComponent('show_filters_btn_' + dimension).destroy();
                         } else if (this.totalLength > 5 && (this.totalLength < 15 || this.totalLength == 15)){
-                            Ext.getCmp('add_btn_' + dimension).setText('Show Remaining ' + dimension + ' Filters');
+                            fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show Remaining ' + dimension + ' Filters');
                         } else if (this.totalLength > 15) {
-                            Ext.getCmp('add_btn_' + dimension).setText('Show More ' + dimension + ' Filters');
+                            fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show More ' + dimension + ' Filters');
                         }
                     } else {
                         var fieldSetErrorMessage = new Ext.Container({ html: '<div> Access denied for this filter. </div>' });
@@ -446,8 +447,9 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
     // Check handler for filter checkbox - handles enable/disable of apply filters btn
     onCheck: function (checked) {
+        var applyFiltersBtn = this.getComponent('button_group').getComponent('apply_filters_btn');
         if (checked) {
-            Ext.getCmp('applyFiltersBtn').enable();
+            applyFiltersBtn.enable();
         } else {
             var i;
             var filterCount = 0;
@@ -459,7 +461,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
             if (filterCount > 0) {
                 return
             } else {
-                Ext.getCmp('applyFiltersBtn').disable();
+                applyFiltersBtn.disable();
             }
         }
     }

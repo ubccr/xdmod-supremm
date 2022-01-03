@@ -42,7 +42,6 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
         // Handle duration change for each active item
         self.on('duration_change', function () {
-            var mainPanel = Ext.getCmp('efficiency_display_panel');
             var activeItem = mainPanel.getLayout().activeItem;
             var activeItemIndex = mainPanel.items.indexOf(activeItem);
 
@@ -144,7 +143,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
         // Container for the analytic card display
         var analyticCardPanel = new Ext.Panel({
-            id: 'analytic_card_panel',
+            itemId: 'analytic_card_panel',
             border: false,
             frame: false,
             autoScroll: true
@@ -152,7 +151,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
         // Efficiency tab main panel with card layout to allow for switching between views
         var mainPanel = new Ext.Panel({
-            id: 'efficiency_display_panel',
+            itemId: 'efficiency_display_panel',
             frame: false,
             layout: 'card',
             border: false,
@@ -174,6 +173,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     },
 
     getToolbarConfig: function () {
+        var self = this;
+
         var breadcrumbMenu = {
             xtype: 'buttongroup',
             id: 'breadcrumb_btns',
@@ -183,12 +184,12 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 {
                     xtype: 'button',
                     text: 'Analytic Cards',
-                    id: 'analytic_breadcrumb_btn',
+                    itemId: 'analytic_breadcrumb_btn',
                     disabled: true,
                     iconCls: 'btn_dashboard',
                     handler: function () {
                         // Display card view and remove panel for scatterplot/drilldown view
-                        var mainPanel = Ext.getCmp('efficiency_display_panel');
+                        var mainPanel = self.getComponent('efficiency_display_panel');
                         mainPanel.layout.setActiveItem(0);
                         mainPanel.doLayout();
                         mainPanel.remove(mainPanel.items.items[1], true);
@@ -226,7 +227,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
     getAnalyticCardDisplay: function (data) {
         var self = this;
-        var analtyicCardPanel = Ext.getCmp('analytic_card_panel');
+        var analtyicCardPanel = self.getComponent('efficiency_display_panel').getComponent('analytic_card_panel');
 
         // Add container for each type of analytic
         for (var i = 0; i < data.data.length; i++) {
@@ -355,8 +356,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             series: []
         };
 
-        var analyticStore = new Ext.data.JsonStore({
-            id: 'analytic_store_' + config.analytic,
+        new Ext.data.JsonStore({
+            storeId: 'analytic_store_' + config.analytic,
             restful: true,
             url: XDMoD.REST.url + '/efficiency/scatterPlot/' + config.analytic,
             root: 'results',
@@ -581,8 +582,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     },
 
     showAnalyticPanel: function (chartConfig) {
+        var self = this;
+
         var analyticPanel = new XDMoD.Module.Efficiency.AnalyticPanel({
-            id: 'analytic_panel_' + chartConfig.analytic,
             config: chartConfig
         });
 
@@ -594,11 +596,11 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             disabled: true,
             iconCls: 'scatter',
             handler: function () {
-                // Display the scatter plot panel and remove the drilldown histogram panel
-                var detailedAnalyticPanel = Ext.getCmp('detailed_analytic_panel_' + chartConfig.analytic);
-                detailedAnalyticPanel.layout.setActiveItem(0);
-                detailedAnalyticPanel.doLayout();
-                detailedAnalyticPanel.remove(detailedAnalyticPanel.items.items[1], true);
+                //Display the scatter plot panel and remove the drilldown histogram panel 
+                var scatterPlotPanel = Ext.getCmp('detailed_analytic_panel_' + chartConfig.analytic);
+                scatterPlotPanel.layout.setActiveItem(0);
+                scatterPlotPanel.doLayout();
+                scatterPlotPanel.remove(scatterPlotPanel.items.items[1], true);
 
                 // Remove all other links in breadcrumb menu
                 var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
@@ -659,17 +661,17 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             }
         };
 
-        // Enable breadcrumb btn that navigates to analytic card view
-        Ext.getCmp('analytic_breadcrumb_btn').enable();
-
         // Add new spacer and scatter plot button
         var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
         breadcrumbMenu.add({ xtype: 'tbtext', text: '&#10142' });
         breadcrumbMenu.add(btn);
         breadcrumbMenu.doLayout();
 
+        //Enable breadcrumb btn that navigates to analytic card view
+        breadcrumbMenu.getComponent('analytic_breadcrumb_btn').enable();
+
         // Load new panel with corresponding analytic chart
-        var mainPanel = Ext.getCmp('efficiency_display_panel');
+        var mainPanel = self.getComponent('efficiency_display_panel');
         mainPanel.add(analyticPanel);
         mainPanel.layout.setActiveItem(1);
         mainPanel.doLayout();

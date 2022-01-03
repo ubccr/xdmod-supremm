@@ -21,7 +21,6 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
         var self = this;
 
         var filterPanel = new XDMoD.Module.Efficiency.FilterPanel({
-            id: 'filter_panel_' + self.config.analytic,
             config: self.config,
             region: 'west',
             title: 'Filters',
