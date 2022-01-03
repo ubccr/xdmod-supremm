@@ -74,7 +74,9 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                 }
 
                                 // Add filters for each dimension to the filterObj to be applied to the scatter plot
-                                jQuery.extend(filterObj, { [dimension]: filters })
+                                dimensionObj = {};
+                                dimensionObj[dimension] = filters
+                                jQuery.extend(filterObj, dimensionObj)
 
                                 subtitle += dimensionList[i] + ': ' + filterSubtitle + ' <br> ';
                             }
