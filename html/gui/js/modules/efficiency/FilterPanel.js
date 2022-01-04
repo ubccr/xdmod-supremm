@@ -257,7 +257,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
     getFieldSet: function (dimension) {
         var self = this;
-        var fieldset = null;
+        var fieldSet = null;
 
         var store = new Ext.data.JsonStore({
             url: 'controllers/metric_explorer.php',

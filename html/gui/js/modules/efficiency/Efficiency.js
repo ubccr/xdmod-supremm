@@ -356,7 +356,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             series: []
         };
 
-        new Ext.data.JsonStore({
+        var analyticStore = new Ext.data.JsonStore({
             storeId: 'analytic_store_' + config.analytic,
             restful: true,
             url: XDMoD.REST.url + '/efficiency/scatterPlot/' + config.analytic,
@@ -406,8 +406,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         General dataset is all data without identifying information(name) attached
                         Both datasets are included on scatterplot as separate series and depending on user access
                     */
-                    var resultData = this.data.items[0].json.results;
-                    var generalData = this.data.items[0].json.hiddenData;
+                    var store = analyticStore;
+                    var resultData = store.data.items[0].json.results;
+                    var generalData = store.data.items[0].json.hiddenData;
 
                     var dataset;
                     var generalSeriesData;
@@ -644,15 +645,15 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     var j;
                     for (j = 0; j < filterList.length; j++) {
                         Ext.getCmp('checkbox_group' + dimensions[i]).setValue(filterList[j].id, false);
-                    };
+                    }
 
                     // Check all filters that were applied prior to navigating to the histogram - these are stored in the aggregate filter variable in the scatter plot panel
                     for (var key in filters) {
-                        if (Object.prototype.hasOwnProperty.call(foo, key)) {
+                        if (Object.prototype.hasOwnProperty.call(filters, key)) {
                             var values = filters[key];
-                            if(key === dimensions[i].toLowerCase()){
+                            if (key === dimensions[i].toLowerCase()) {
                                 var k;
-                                for(k = 0; k < values.length; k ++){
+                                for (k = 0; k < values.length; k++) {
                                     Ext.getCmp('checkbox_group' + dimensions[i]).setValue(values[k], true);
                                 }
                             }
