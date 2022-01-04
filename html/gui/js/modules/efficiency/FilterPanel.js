@@ -28,7 +28,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
             items: [
                 {
                     xtype: 'button',
-                    itemId: 'applyFiltersBtn',
+                    itemId: 'apply_filters_btn',
                     text: 'Apply Filters to Chart',
                     cls: 'filterApplyBtn',
                     disabled: true,
@@ -146,7 +146,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                 {
                     xtype: 'button',
                     text: 'Remove Filters from Chart',
-                    itemId: 'removeFiltersBtn',
+                    itemId: 'remove_filters_btn',
                     disabled: true,
                     cls: 'filterApplyBtn',
                     handler: function () {
@@ -284,10 +284,11 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                 },
                 load: function (response) {
                     if (this.data.items.length > 0) {
+                        // Removes prior checkbox group when store is reloaded (show more/fewer filters)
                         if (Ext.getCmp('checkbox_group' + dimension)) {
-                            var searchPanel = Ext.getCmp(dimension + 'FieldSet');
-                            searchPanel.remove(Ext.getCmp('checkbox_group' + dimension));
+                            fieldSet.remove(Ext.getCmp('checkbox_group' + dimension));
                         }
+                        
                         var filters = response.data.items;
 
                         var checkBoxes = [];

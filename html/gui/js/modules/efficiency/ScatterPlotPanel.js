@@ -187,10 +187,6 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         }
                     }
                 ],
-                series: [
-                    { data: [] },
-                    { data: [] }
-                ],
                 credits: {
                     text: Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d') + ' to ' + Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d') + ' Powered by XDMoD/Highcharts',
                     href: ''
@@ -286,11 +282,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             xAxisMax = Math.max(generalXMax, resultXMax);
                             yAxisMax = Math.max(generalYMax, resultYMax);
 
-                            self.chart.series[0].update({
+                            self.chart.addSeries({
                                 data: generalSeriesData
                             });
 
-                            self.chart.series[1].update({
+                            self.chart.addSeries({
                                 data: resultSeriesData,
                                 clickable: true,
                                 dataLabels: {
@@ -313,7 +309,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             xAxisMax = dataset[1];
                             yAxisMax = dataset[2];
 
-                            self.chart.series[0].update({
+                            self.chart.addSeries({
                                 data: generalSeriesData
                             });
                         } else if (resultData.length > 0) {
@@ -324,7 +320,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             xAxisMax = dataset[1];
                             yAxisMax = dataset[2];
 
-                            self.chart.series[0].update({
+                            self.chart.addSeries({
                                 data: resultSeriesData,
                                 clickable: true
                             });
@@ -875,10 +871,10 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         checked: true
                     },
                     {
-                        id: 'cpuuser=' + drilldownId,
+                        id: self.config.histogram.group_by + '=' + drilldownId,
                         value_id: drilldownId,
                         value_name: drilldownLabel,
-                        dimension_id: 'cpuuser',
+                        dimension_id: self.config.histogram.group_by,
                         realm: [
                             'SUPREMM'
                         ],
@@ -900,10 +896,10 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             });
 
             filterData.push({
-                id: 'cpuuser=' + drilldownId,
+                id: self.config.histogram.group_by + '=' + drilldownId,
                 value_id: drilldownId,
                 value_name: drilldownLabel,
-                dimension_id: 'cpuuser',
+                dimension_id: self.config.histogram.group_by,
                 realm: [
                     'SUPREMM'
                 ],
