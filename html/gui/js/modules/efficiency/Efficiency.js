@@ -647,12 +647,14 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     };
 
                     // Check all filters that were applied prior to navigating to the histogram - these are stored in the aggregate filter variable in the scatter plot panel
-                    for (var key in filters){
-                        var values = filters[key];
-                        if(key === dimensions[i].toLowerCase()){
-                            var k;
-                            for(k = 0; k < values.length; k ++){
-                                Ext.getCmp('checkbox_group' + dimensions[i]).setValue(values[k], true);
+                    for (var key in filters) {
+                        if (Object.prototype.hasOwnProperty.call(foo, key)) {
+                            var values = filters[key];
+                            if(key === dimensions[i].toLowerCase()){
+                                var k;
+                                for(k = 0; k < values.length; k ++){
+                                    Ext.getCmp('checkbox_group' + dimensions[i]).setValue(values[k], true);
+                                }
                             }
                         }
                     }

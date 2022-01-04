@@ -40,7 +40,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                         var subtitle = '';
                         var MEFilters = [];
                         var filterObj = {};
-                        
+
                         for (var i = 0; i < dimensionList.length; i++) {
                             var filterValues = [];
                             // Check each fieldset for filters that a user intends to apply
@@ -257,6 +257,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
     getFieldSet: function (dimension) {
         var self = this;
+        var fieldset = null;
 
         var store = new Ext.data.JsonStore({
             url: 'controllers/metric_explorer.php',
@@ -338,7 +339,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
             }
         });
 
-        var fieldSet = new Ext.form.FieldSet({
+        fieldSet = new Ext.form.FieldSet({
             title: 'Filter by ' + dimension,
             itemId: dimension + '_field_set',
             width: 225,
@@ -424,7 +425,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
                         store.on('load', function (t, op) {
                             Ext.each(filterList, function (f) {
-                                Ext.getCmp('checkbox_group' + dimension).setValue(filter.id, true);
+                                Ext.getCmp('checkbox_group' + dimension).setValue(f.id, true);
                             });
                             Ext.getCmp('checkbox_group' + dimension).setValue(filter, true);
 
