@@ -288,7 +288,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                         if (Ext.getCmp('checkbox_group' + dimension)) {
                             fieldSet.remove(Ext.getCmp('checkbox_group' + dimension));
                         }
-                        
+
                         var filters = response.data.items;
 
                         var checkBoxes = [];
