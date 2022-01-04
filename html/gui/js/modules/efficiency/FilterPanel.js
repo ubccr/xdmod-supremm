@@ -40,18 +40,18 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                         var subtitle = '';
                         var MEFilters = [];
                         var filterObj = {};
-
+                        
                         for (var i = 0; i < dimensionList.length; i++) {
+                            var filterValues = [];
                             // Check each fieldset for filters that a user intends to apply
                             var fieldSet = Ext.getCmp('checkbox_group' + dimensionList[i]).getValue();
                             if (fieldSet.length > 0) {
                                 var dimension = dimensionList[i].toLowerCase();
-                                var filters = [];
                                 var filterSubtitle = '';
                                 // Add all filters that are checked in the fieldset for each dimension to a filter object
                                 for (var j = 0; j < fieldSet.length; j++) {
                                     // Add filter to filter list
-                                    filters.push(fieldSet[j].id);
+                                    filterValues.push(fieldSet[j].id);
 
                                     // Update the string that will be used for chart subtitle
                                     filterSubtitle += fieldSet[j].name;
@@ -73,7 +73,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
                                 // Add filters for each dimension to the filterObj to be applied to the scatter plot
                                 var dimensionObj = {};
-                                dimensionObj[dimension] = filters;
+                                dimensionObj[dimension] = filterValues;
                                 jQuery.extend(filterObj, dimensionObj);
 
                                 subtitle += dimensionList[i] + ': ' + filterSubtitle + ' <br> ';
@@ -113,7 +113,6 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
                             // Update subtitle
                             analyticScatterPlot.subtitle = subtitle;
-
                         } else if (activeItemIndex === 1) {
                         // Apply filters to drilldown chart
                             analyticScatterPlot.jobListFilters = MEFilters;
@@ -134,7 +133,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                 checked: true
                             });
 
-                            filters = {
+                            var filters = {
                                 data: filterObj,
                                 total: filterObj.length
                             };
@@ -259,6 +258,86 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
     getFieldSet: function (dimension) {
         var self = this;
 
+        var store = new Ext.data.JsonStore({
+            url: 'controllers/metric_explorer.php',
+            fields: ['checked', 'name', 'id'],
+            root: 'data',
+            totalProperty: 'totalCount',
+            autoLoad: true,
+            idProperty: 'name',
+            messageProperty: 'message',
+            baseParams: {
+                operation: 'get_dimension',
+                dimension_id: dimension.toLowerCase(),
+                realm: 'SUPREMM',
+                start: 0,
+                limit: 5,
+                public_user: CCR.xdmod.publicUser
+            },
+            listeners: {
+                exception: function (proxy, type, action, exception, response) {
+                    var fieldSetErrorMessage = new Ext.Container({ html: '<div> There was an error loading ' + dimension + ' filters. <br> Error Message: ' + response.message });
+                    fieldSet.removeAll();
+                    fieldSet.insert(0, fieldSetErrorMessage);
+                    fieldSet.doLayout();
+                },
+                load: function (response) {
+                    if (this.data.items.length > 0) {
+                        if (Ext.getCmp('checkbox_group' + dimension)) {
+                            var searchPanel = Ext.getCmp(dimension + 'FieldSet');
+                            searchPanel.remove(Ext.getCmp('checkbox_group' + dimension));
+                        }
+                        var filters = response.data.items;
+
+                        var checkBoxes = [];
+                        for (var i = 0; i < filters.length; i++) {
+                            // Handles formatting in situation where filter is missing a name property (Queue dimension)
+                            if (!filters[i].data.name) {
+                                filters[i].data.name = '  ';
+                            }
+
+                            var checkBox = {
+                                id: filters[i].data.id,
+                                name: filters[i].data.name,
+                                boxLabel: filters[i].data.name,
+                                listeners: {
+                                    scope: this,
+                                    check: function (checkbox, checked) {
+                                        self.onCheck(checked);
+                                    }
+                                }
+                            };
+
+                            checkBoxes.push(checkBox);
+                        }
+
+                        var checkboxGroup = new Ext.form.CheckboxGroup({
+                            id: 'checkbox_group' + dimension,
+                            columns: 1,
+                            items: checkBoxes
+                        });
+
+                        fieldSet.insert(1, checkboxGroup);
+                        fieldSet.doLayout();
+
+                        // Handle button text depnding on length of filter list
+                        if (this.totalLength < 5 || this.totalLength === 5) {
+                            fieldSet.getComponent('show_filters_btn_' + dimension).destroy();
+                        } else if (this.totalLength > 5 && (this.totalLength < 15 || this.totalLength === 15)) {
+                            fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show Remaining ' + dimension + ' Filters');
+                        } else if (this.totalLength > 15) {
+                            fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show More ' + dimension + ' Filters');
+                        }
+                    } else {
+                        var fieldSetErrorMessage = new Ext.Container({ html: '<div> Access denied for this filter. </div>' });
+                        fieldSet.removeAll();
+                        fieldSet.insert(0, fieldSetErrorMessage);
+                        fieldSet.doLayout();
+                    }
+                }
+            }
+        });
+
         var fieldSet = new Ext.form.FieldSet({
             title: 'Filter by ' + dimension,
             itemId: dimension + '_field_set',
@@ -346,7 +425,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                         store.on('load', function (t, op) {
                             Ext.each(filterList, function (f) {
                                 Ext.getCmp('checkbox_group' + dimension).setValue(filter.id, true);
-                            })
+                            });
                             Ext.getCmp('checkbox_group' + dimension).setValue(filter, true);
 
                             fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show Fewer ' + dimension + ' Filters');
@@ -358,86 +437,6 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
         fieldSet.insert(0, comboBox);
         fieldSet.doLayout();
-
-        var store = new Ext.data.JsonStore({
-            url: 'controllers/metric_explorer.php',
-            fields: ['checked', 'name', 'id'],
-            root: 'data',
-            totalProperty: 'totalCount',
-            autoLoad: true,
-            idProperty: 'name',
-            messageProperty: 'message',
-            baseParams: {
-                operation: 'get_dimension',
-                dimension_id: dimension.toLowerCase(),
-                realm: 'SUPREMM',
-                start: 0,
-                limit: 5,
-                public_user: CCR.xdmod.publicUser
-            },
-            listeners: {
-                exception: function (proxy, type, action, exception, response) {
-                    var fieldSetErrorMessage = new Ext.Container({ html: '<div> There was an error loading ' + dimension + ' filters. <br> Error Message: ' + response.message });
-                    fieldSet.removeAll();
-                    fieldSet.insert(0, fieldSetErrorMessage);
-                    fieldSet.doLayout();
-                },
-                load: function (response) {
-                    if (this.data.items.length > 0) {
-                        if (Ext.getCmp('checkbox_group' + dimension)) {
-                            var searchPanel = Ext.getCmp(dimension + 'FieldSet');
-                            searchPanel.remove(Ext.getCmp('checkbox_group' + dimension));
-                        }
-                        var filters = response.data.items;
-
-                        var checkBoxes = [];
-                        for (var i = 0; i < filters.length; i++) {
-                            // Handles formatting in situation where filter is missing a name property (Queue dimension)
-                            if (!filters[i].data.name) {
-                                filters[i].data.name = '  ';
-                            }
-
-                            var checkBox = {
-                                id: filters[i].data.id,
-                                name: filters[i].data.name,
-                                boxLabel: filters[i].data.name,
-                                listeners: {
-                                    scope: this,
-                                    check: function (checkbox, checked) {
-                                        self.onCheck(checked);
-                                    }
-                                }
-                            };
-
-                            checkBoxes.push(checkBox);
-                        }
-
-                        var checkboxGroup = new Ext.form.CheckboxGroup({
-                            id: 'checkbox_group' + dimension,
-                            columns: 1,
-                            items: checkBoxes
-                        });
-
-                        fieldSet.insert(1, checkboxGroup);
-                        fieldSet.doLayout();
-
-                        // Handle button text depnding on length of filter list
-                        if (this.totalLength < 5 || this.totalLength === 5) {
-                            fieldSet.getComponent('show_filters_btn_' + dimension).destroy();
-                        } else if (this.totalLength > 5 && (this.totalLength < 15 || this.totalLength === 15)) {
-                            fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show Remaining ' + dimension + ' Filters');
-                        } else if (this.totalLength > 15) {
-                            fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show More ' + dimension + ' Filters');
-                        }
-                    } else {
-                        var fieldSetErrorMessage = new Ext.Container({ html: '<div> Access denied for this filter. </div>' });
-                        fieldSet.removeAll();
-                        fieldSet.insert(0, fieldSetErrorMessage);
-                        fieldSet.doLayout();
-                    }
-                }
-            }
-        });
 
         return fieldSet;
     },
