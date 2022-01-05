@@ -1,6 +1,7 @@
 Ext.namespace('XDMoD', 'XDMoD.Module', 'XDMoD.Module.Efficiency');
 
 /**
+ * global moment
  * @class XDMoD.Module.Efficiency.ScatterPlotPanel
  */
 
@@ -451,18 +452,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             var personId = dataset[i].id || null;
 
             var color;
-            if (reversed) {
-                if (x < xAxisMax / 2 && y > yAxisMax / 2) {
-                    color = '#ff0000';
-                } else {
-                    color = '#2f7ed8';
-                }
+            if (reversed && (x < xAxisMax / 2 && y > yAxisMax / 2)) {
+                color = '#ff0000';
+            } else if (x > xAxisMax / 2 && y > yAxisMax / 2) {
+                color = '#ff0000';
             } else {
-                if (x > xAxisMax / 2 && y > yAxisMax / 2) {
-                    color = '#ff0000';
-                } else {
-                    color = '#2f7ed8';
-                }
+                color = '#2f7ed8';
             }
 
             var dataPt = { x: x, y: y, person: person, personId: personId, color: color };
@@ -980,17 +975,17 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             }),
             fields: [
                 { name: 'name', mapping: 'name', type: 'string' },
-                { name: 'resource', mapping: 'resource', type: 'string'},
+                { name: 'resource', mapping: 'resource', type: 'string' },
                 { name: 'local_job_id', mapping: 'local_job_id', type: 'int' },
                 { name: 'start_time_ts', mapping: 'start_time_ts', type: 'int' },
                 { name: 'cpu_user', mapping: 'cpu_user', type: 'string' },
-                {name: 'gpu_usage', mapping: 'gpu_usage', type: 'int'},
+                { name: 'gpu_usage', mapping: 'gpu_usage', type: 'int' },
                 { name: 'end_time_ts', mapping: 'end_time_ts', type: 'int' }
             ]
         });
 
         var column;
-        switch(self.config.analytic){
+        switch (self.config.analytic) {
             case 'CPU Usage':
                 column = {
                     id: 'cpu_user_value',
@@ -999,7 +994,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     renderer: function (value) {
                         return (Number(value) * 100).toFixed(2) + '%';
                     }
-                }
+                };
                 break;
             case 'GPU Usage':
                 column = {
@@ -1009,7 +1004,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     renderer: function (value, p, r) {
                         return (Number(r.json['gpu_usage']) * 100).toFixed(2) + '%';
                     }
-                }
+                };
                 break;
             case 'Short Job Count':
                 column = {
@@ -1019,7 +1014,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     renderer: function (value, p, r) {
                         return (r.json['end_time_ts'] - r.json['start_time_ts']) + 's'
                     }
-                }
+                };
+                break;
+            default: 
                 break;
         }
 
@@ -1046,12 +1043,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     id: 'raw_data_username',
                     dataIndex: 'name',
                     header: 'User'
-                }, 
+                },
                 {
                     id: 'local_job_id',
                     dataIndex: 'local_job_id',
                     header: 'Job Id'
-                }, 
+                },
                 column]
             }),
             listeners: {

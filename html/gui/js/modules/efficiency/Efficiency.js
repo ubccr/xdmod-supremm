@@ -531,18 +531,12 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             var x = parseFloat(dataset[i][xStatistic]);
             var y = parseFloat(dataset[i][yStatistic]);
             var color;
-            if (reversed){
-                if (x < xAxisMax / 2 && y > yAxisMax / 2) {
-                    color = '#ff0000';
-                } else {
-                    color = '#2f7ed8';
-                } 
+            if (reversed && (x < xAxisMax / 2 && y > yAxisMax / 2)) {
+                color = '#ff0000';
+            } else if (x > xAxisMax / 2 && y > yAxisMax / 2) {
+                color = '#ff0000';
             } else {
-                if (x > xAxisMax / 2 && y > yAxisMax / 2) {
-                    color = '#ff0000';
-                } else {
-                    color = '#2f7ed8';
-                }
+                color = '#2f7ed8';
             }
 
             var dataPt = { x: x, y: y, color: color };
