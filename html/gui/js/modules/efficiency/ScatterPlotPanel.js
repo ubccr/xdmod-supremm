@@ -969,22 +969,50 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 url: 'controllers/metric_explorer.php'
             }),
             fields: [
-                { name: 'cpu_user', mapping: 'cpu_user', type: 'string' },
-                { name: 'dtype', mapping: 'dtype', type: 'string' },
-                { name: 'resource', mapping: 'resource', type: 'string' },
                 { name: 'name', mapping: 'name', type: 'string' },
-                { name: 'jobid', mapping: 'jobid', type: 'int' },
+                { name: 'resource', mapping: 'resource', type: 'string'},
                 { name: 'local_job_id', mapping: 'local_job_id', type: 'int' },
-                { name: 'text', mapping: 'text', type: 'string' },
-                { name: 'end_time_ts', mapping: 'end_time_ts', type: 'int' },
                 { name: 'start_time_ts', mapping: 'start_time_ts', type: 'int' },
-                { name: 'job_name', mapping: 'job_name', type: 'string' },
-                { name: 'wall_time', mapping: 'wall_time', type: 'int' }
-
+                { name: 'cpu_user', mapping: 'cpu_user', type: 'string' },
+                {name: 'gpu_usage', mapping: 'gpu_usage', type: 'int'},
+                { name: 'end_time_ts', mapping: 'end_time_ts', type: 'int' }
             ]
         });
 
-        // Needs updated once all statistics are in - currently just shows cpuuser
+        var column;
+        switch(self.config.analytic){
+            case 'CPU Usage':
+                column = {
+                    id: 'cpu_user_value',
+                    dataIndex: 'cpu_user',
+                    header: 'CPU User Value',
+                    renderer: function (value) {
+                        return (Number(value) * 100).toFixed(2) + '%';
+                    }
+                }
+                break;
+            case 'GPU Usage':
+                column = {
+                    id: 'gpu_usage',
+                    dataIndex: 'gpu_usage',
+                    header: 'GPU Usage Value',
+                    renderer: function (value, p, r) {
+                        return (Number(r.json['gpu_usage']) * 100).toFixed(2) + '%';
+                    }
+                }
+                break;
+            case 'Short Job Count':
+                column = {
+                    id: 'job_wall_time',
+                    dataIndex: 'start_time_ts',
+                    header: 'Job Wall Time',
+                    renderer: function (value, p, r) {
+                        return (r.json['end_time_ts'] - r.json['start_time_ts']) + 's'
+                    }
+                }
+                break;
+        }
+
         var rawDataGrid = new Ext.grid.GridPanel({
             id: 'raw_data_grid_efficiency',
             region: 'center',
@@ -998,25 +1026,23 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     menuDisabled: true
                 },
                 columns: [{
-                    id: 'resource',
-                    dataIndex: 'resource',
-                    header: 'Resource'
+                    id: 'start_time_ts',
+                    dataIndex: 'start_time_ts',
+                    header: 'Start Time',
+                    renderer: function (value) {
+                        return moment(value * 1000).format('Y-MM-DD HH:mm:ss');
+                    }
                 }, {
                     id: 'raw_data_username',
                     dataIndex: 'name',
                     header: 'User'
-                }, {
-                    id: 'cpu_user_value',
-                    dataIndex: 'cpu_user',
-                    header: 'CPU User Value',
-                    renderer: function (value) {
-                        return (Number(value) * 100).toFixed(2) + '%';
-                    }
-                }, {
+                }, 
+                {
                     id: 'local_job_id',
                     dataIndex: 'local_job_id',
                     header: 'Job Id'
-                }]
+                }, 
+                column]
             }),
             listeners: {
                 rowclick: function (grid, row_index) {
