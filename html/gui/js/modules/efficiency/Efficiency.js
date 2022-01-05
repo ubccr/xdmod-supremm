@@ -325,6 +325,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 title: {
                     text: config.statisticLabels[0]
                 },
+                reversed: config.reversed,
                 min: 0,
                 gridLineWidth: 1,
                 showLastLabel: true,
@@ -419,19 +420,20 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     var resultYMax;
                     var xAxisMax;
                     var yAxisMax;
+                    var reversed = config.reversed;
 
                     // Check if any data is available
                     if (resultData.length > 0 || generalData.length > 0) {
                         // Users with both specific and general data
                         if (resultData.length > 0 && generalData.length > 0) {
                             // Get the general data series without name information
-                            dataset = self.formatData(generalData, xStatistic, yStatistic);
+                            dataset = self.formatData(generalData, xStatistic, yStatistic, reversed);
                             generalSeriesData = dataset[0];
                             generalXMax = dataset[1];
                             generalYMax = dataset[2];
 
                             // Get the result data series with name information
-                            dataset = self.formatData(resultData, xStatistic, yStatistic);
+                            dataset = self.formatData(resultData, xStatistic, yStatistic, reversed);
                             resultSeriesData = dataset[0];
                             resultXMax = dataset[1];
                             resultYMax = dataset[2];
@@ -455,7 +457,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                 }
                             });
                         } else if (generalData.length > 0) {
-                            dataset = self.formatData(generalData, xStatistic, yStatistic);
+                            dataset = self.formatData(generalData, xStatistic, yStatistic, reversed);
                             generalSeriesData = dataset[0];
                             xAxisMax = dataset[1];
                             yAxisMax = dataset[2];
@@ -466,7 +468,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         } else if (resultData.length > 0) {
                             // If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency)
                             // Get the general data series with name information and x and y axis max
-                            dataset = self.formatData(resultData, xStatistic, yStatistic);
+                            dataset = self.formatData(resultData, xStatistic, yStatistic, reversed);
                             resultSeriesData = dataset[0];
                             xAxisMax = dataset[1];
                             yAxisMax = dataset[2];
@@ -515,7 +517,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         });
     },
 
-    formatData: function (dataset, xStatistic, yStatistic) {
+    formatData: function (dataset, xStatistic, yStatistic, reversed) {
         var data = [];
 
         // Get x and y axis max to use for scatter plot plot lines
@@ -529,10 +531,18 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             var x = parseFloat(dataset[i][xStatistic]);
             var y = parseFloat(dataset[i][yStatistic]);
             var color;
-            if (x > xAxisMax / 2 && y > yAxisMax / 2) {
-                color = '#ff0000';
+            if (reversed){
+                if (x < xAxisMax / 2 && y > yAxisMax / 2) {
+                    color = '#ff0000';
+                } else {
+                    color = '#2f7ed8';
+                } 
             } else {
-                color = '#2f7ed8';
+                if (x > xAxisMax / 2 && y > yAxisMax / 2) {
+                    color = '#ff0000';
+                } else {
+                    color = '#2f7ed8';
+                }
             }
 
             var dataPt = { x: x, y: y, color: color };

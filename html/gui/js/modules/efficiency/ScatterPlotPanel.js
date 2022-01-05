@@ -112,6 +112,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         title: {
                             text: self.config.statisticLabels[0]
                         },
+                        reversed: self.config.reversed,
                         min: 0,
                         max: 100,
                         tickInterval: 100 / 4,
@@ -265,16 +266,17 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         var resultYMax;
                         var xAxisMax;
                         var yAxisMax;
+                        var reversed = self.config.reversed;
 
                         if (resultData.length > 0 && generalData.length > 0) {
                             // Get the general data series without name information and the x and y axis max from this dataset
-                            dataset = self.formatData(generalData, xStatistic, yStatistic);
+                            dataset = self.formatData(generalData, xStatistic, yStatistic, reversed);
                             generalSeriesData = dataset[0];
                             generalXMax = dataset[1];
                             generalYMax = dataset[2];
 
                             // Get the result data series with name information
-                            dataset = self.formatData(resultData, xStatistic, yStatistic);
+                            dataset = self.formatData(resultData, xStatistic, yStatistic, reversed);
                             resultSeriesData = dataset[0];
                             resultXMax = dataset[1];
                             resultYMax = dataset[2];
@@ -304,7 +306,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 }
                             });
                         } else if (generalData.length > 0) {
-                            dataset = self.formatData(generalData, xStatistic, yStatistic);
+                            dataset = self.formatData(generalData, xStatistic, yStatistic, reversed);
                             generalSeriesData = dataset[0];
                             xAxisMax = dataset[1];
                             yAxisMax = dataset[2];
@@ -315,7 +317,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         } else if (resultData.length > 0) {
                             // If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency)
                             // Get the general data series with name information and x and y axis max
-                            dataset = self.formatData(resultData, xStatistic, yStatistic);
+                            dataset = self.formatData(resultData, xStatistic, yStatistic, reversed);
                             resultSeriesData = dataset[0];
                             xAxisMax = dataset[1];
                             yAxisMax = dataset[2];
@@ -433,7 +435,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         XDMoD.Module.Efficiency.ScatterPlotPanel.superclass.initComponent.call(this, arguments);
     },
 
-    formatData: function (dataset, xStatistic, yStatistic) {
+    formatData: function (dataset, xStatistic, yStatistic, reversed) {
         var data = [];
 
         var xAxisMax = this.getMax(dataset, xStatistic);
@@ -449,10 +451,18 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             var personId = dataset[i].id || null;
 
             var color;
-            if (x > xAxisMax / 2 && y > yAxisMax / 2) {
-                color = '#ff0000';
+            if (reversed) {
+                if (x < xAxisMax / 2 && y > yAxisMax / 2) {
+                    color = '#ff0000';
+                } else {
+                    color = '#2f7ed8';
+                }
             } else {
-                color = '#2f7ed8';
+                if (x > xAxisMax / 2 && y > yAxisMax / 2) {
+                    color = '#ff0000';
+                } else {
+                    color = '#2f7ed8';
+                }
             }
 
             var dataPt = { x: x, y: y, person: person, personId: personId, color: color };
