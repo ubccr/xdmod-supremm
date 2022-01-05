@@ -1,7 +1,6 @@
 Ext.namespace('XDMoD', 'XDMoD.Module', 'XDMoD.Module.Efficiency');
 
 /**
- * global moment
  * @class XDMoD.Module.Efficiency.ScatterPlotPanel
  */
 
@@ -1002,7 +1001,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'gpu_usage',
                     header: 'GPU Usage Value',
                     renderer: function (value, p, r) {
-                        return (Number(r.json['gpu_usage']) * 100).toFixed(2) + '%';
+                        return (Number(r.json.gpu_usage) * 100).toFixed(2) + '%';
                     }
                 };
                 break;
@@ -1012,11 +1011,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'start_time_ts',
                     header: 'Job Wall Time',
                     renderer: function (value, p, r) {
-                        return (r.json['end_time_ts'] - r.json['start_time_ts']) + 's'
+                        return (r.json.end_time_ts - r.json.start_time_ts) + 's';
                     }
                 };
                 break;
-            default: 
+            default:
                 break;
         }
 
@@ -1033,11 +1032,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     menuDisabled: true
                 },
                 columns: [{
+                    width: 175,
                     id: 'start_time_ts',
                     dataIndex: 'start_time_ts',
                     header: 'Start Time',
                     renderer: function (value) {
-                        return moment(value * 1000).format('Y-MM-DD HH:mm:ss');
+                        return new Date(value * 1000);
                     }
                 }, {
                     id: 'raw_data_username',
