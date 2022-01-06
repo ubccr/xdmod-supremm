@@ -509,6 +509,36 @@ module.exports = {
                 }
             ]
         },
+        gpus: {
+            name: "GPUs",
+            unit: null,
+            type: "int32",
+            dtype: "accounting",
+            group: "Allocated resources",
+            nullable: false,
+            def: 0,
+            batchExport: true,
+            comments: "The total number of GPUs assigned to the job.",
+            per: "job",
+            table: "job",
+            agg: [
+                {
+                    table: 'supremmfact',
+                    type: 'int32',
+                    roles: { disable: [ "pub" ] },
+                    dimension: true,
+                    comments: "Number of GPUs each of the jobs used."
+                },
+                {
+                    name: 'gpubucket_id',
+                    type: 'int32',
+                    dimension: false, //don't need to group by this since we are grouping by cores.
+                    table: 'supremmfact',
+                    sql: '(select id from gpu_buckets gb where gpus between gb.min_gpus and gb.max_gpus)',
+                    comments: 'GPUs bucket or job size buckets are prechosen in the modw.gpu_buckets table.'
+                }
+            ]
+        },
         cores_avail: {
             name: "Total Cores Available",
             unit: null,
