@@ -11,7 +11,7 @@ Source:        %{name}-%{version}__PRERELEASE__.tar.gz
 BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}__PRERELEASE__-%{release}-XXXXXX)
 BuildArch:     noarch
 BuildRequires: php-cli
-Requires:      xdmod >= 9.5.0, xdmod < 9.6.0
+Requires:      xdmod >= 10.0.0, xdmod < 10.1.0
 Requires:      nodejs npm
 Requires:      php-pecl-mongo
 
@@ -53,9 +53,10 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/internal_dashboard.d/supremm*.json
 %config(noreplace) %{_sysconfdir}/xdmod/roles.d/*.json
 %config(noreplace) %{_sysconfdir}/xdmod/setup.d/supremm*.json
-%config(noreplace) %{_sysconfdir}/xdmod/rest.d/supremm*.json
+%config(noreplace) %{_sysconfdir}/xdmod/rest.d/*.json
 %config(noreplace) %{_sysconfdir}/xdmod/rawstatistics.d/10_supremm.json
 %config(noreplace) %{_sysconfdir}/xdmod/supremmconfig.json
+%config(noreplace) %{_sysconfdir}/xdmod/efficiency_analytics.json
 
 %changelog
 * Fri May 21 2021 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 9.5.0-1.0
