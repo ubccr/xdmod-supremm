@@ -48,6 +48,9 @@ checkForColumn netdir_projects_read
 checkForColumn netdir_projects_write
 checkForColumn netdir_util_read
 checkForColumn netdir_util_write
+checkForColumn gpus
+checkForColumn gpu_time
+checkForColumn gpu_usage
 
 # Check that the jobhosts table has end_time_ts column with non-zero timestamps
 jobcount=$(echo 'SELECT COUNT(*) FROM modw_supremm.job j, modw_supremm.jobhost jh WHERE j.resource_id = jh.resource_id AND j.local_job_id = jh.local_job_id AND j.end_time_ts = jh.end_time_ts' | mysql -N modw_supremm)

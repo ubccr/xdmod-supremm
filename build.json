@@ -52,7 +52,7 @@
             "configuration/portal_settings.d/supremm.ini": "portal_settings.d/supremm.ini",
             "configuration/datawarehouse.d": "",
             "configuration/rawstatistics.d/10_supremm.json": "rawstatistics.d/10_supremm.json",
-            "configuration/rest.d/supremm_dataflow.json": "rest.d/supremm_dataflow.json",
+            "configuration/rest.d": "",
             "configuration/roles.d": "",
             "configuration/assets.d": "",
             "configuration/setup.d/supremm.json": "setup.d/supremm.json",
@@ -60,7 +60,8 @@
             "configuration/supremmconfig.json": "",
             "configuration/etl": "",
             "configuration/modules.d/supremm.json": "modules.d/supremm.json",
-            "configuration/resource_types.d": ""
+            "configuration/resource_types.d": "",
+            "configuration/efficiency_analytics.json": "efficiency_analytics.json"
         }
     }
 }

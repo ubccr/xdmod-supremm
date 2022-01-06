@@ -684,6 +684,65 @@ module.exports = function(config) {
             "net_ib0_tx_packets": {
                 ref: "network.ib0.out-packets.avg"
             },
+            gpus: {
+                ref: 'acct.gpus'
+            },
+            gpu_time: {
+                formula: function (job) {
+                    var wall_time = this.attributes.wall_time.formula.call(this, job);
+                    var num_gpus = this.ref(job, this.attributes.gpus.ref);
+
+                    var combined_error = wall_time.error | num_gpus.error;
+
+                    if (wall_time.value === undefined || num_gpus.value === undefined) {
+                        return {
+                            value: null,
+                            error: combined_error
+                        };
+                    }
+
+                    return {
+                        value: wall_time.value * num_gpus.value,
+                        error: combined_error
+                    };
+                }
+            },
+            gpu_usage: {
+                formula: function (job) {
+                    if (!job.hasOwnProperty('gpu')) {
+                        return {
+                            value: null,
+                            error: this.metricErrors.codes.metricMissingUnknownReason.value
+                        };
+                    }
+
+                    var count = 0.0;
+                    var avg = 0.0;
+                    var error = 0;
+
+                    for (var gpu in job.gpu) {
+                        if (job.gpu.hasOwnProperty(gpu) &&
+                            job.gpu[gpu].hasOwnProperty('gpuactive') &&
+                            job.gpu[gpu].gpuactive.hasOwnProperty('avg')) {
+                            count += 1.0;
+                            avg += job.gpu[gpu].gpuactive.avg;
+                        } else {
+                            error = this.metricErrors.codes.metricMissingUnknownReason.value;
+                        }
+                    }
+
+                    if (error === 0) {
+                        return {
+                            value: (avg / 100.0) / count,
+                            error: 0
+                        };
+                    }
+                    return {
+                        value: null,
+                        error: error
+                    };
+                }
+            },
             gpu_energy: {
                 formula: function (job) {
                     if (!job.gpupower) {
