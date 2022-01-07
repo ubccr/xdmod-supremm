@@ -271,6 +271,7 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'wait_time_per_job' => 'Wait Hours: Per Job',
             'wait_time' => 'Wait Hours: Total',
             'wall_time_per_job' => 'Wall Hours: Per Job',
+            'wall_time_total' => 'Wall Hours: Total',
             'requested_wall_time_per_job' => 'Wall Hours: Requested: Per Job',
             'requested_wall_time' => 'Wall Hours: Requested: Total'
         );

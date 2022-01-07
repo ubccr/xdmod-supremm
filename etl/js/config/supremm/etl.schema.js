@@ -658,6 +658,14 @@ module.exports = {
                             +	 '<i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.',
                     decimals: 0
                 }, {
+                    name: 'wall_time_total',
+                    sql: 'COALESCE(SUM(jf.wall_time/3600), 0)',
+                    label: 'Wall Hours: Total',
+                    unit: 'Hour',
+                    description: 'The total time, in hours, jobs took to execute.<br/>'
+                            +	 '<i>Wall Time:</i> Wall time is defined as the linear time between start and end time of execution for a particular job.',
+                    decimals: 0
+                }, {
                     name: 'wall_time_per_job',
                     aggregate_sql: 'COALESCE(SUM(jf.wall_time)/SUM(CASE ${DATE_TABLE_ID_FIELD} WHEN ${MIN_DATE_ID} THEN jf.running_job_count ELSE jf.started_job_count END),0)/3600.0',
                     timeseries_sql: 'COALESCE(SUM(jf.wall_time)/SUM(jf.running_job_count),0)/3600.0',
