@@ -664,7 +664,7 @@ module.exports = {
                     unit: '%',
                     description: 'The ratio of total wall time used while jobs were excuting to total requested wall time.<br/>'
                             +	 '<i>Wall Time:</i> Wall time is defined as the linear time between start and end time of execution for a particular job.'
-                            +    '<i>Requested Wall Time:</i> Requsted wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
+                            +    '<i>Requested Wall Time:</i> Requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
                     decimals: 0
                 }, {
                     name: 'wall_time_per_job',
@@ -701,7 +701,7 @@ module.exports = {
                     label: 'Wall Hours: Requested: Total',
                     unit: 'Hour',
                     description: 'The total time, in hours, jobs requested for execution.<br/>'
-                            +	 '<i>Requested Wall Time:</i> Requsted wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
+                            +	 '<i>Requested Wall Time:</i> Requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
                     decimals: 0
                 }, {
                     name: 'requested_wall_time_per_job',
