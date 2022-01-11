@@ -1067,7 +1067,29 @@ module.exports = {
             per: "job",
             typical_usage: "Measure of catastrophic job failure (smaller is higher probabilty of failure)",
             table: "job",
-            agg: [ {
+            agg: [{
+                name: 'homogeneity_weighted_by_node_hour',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: 'sum( 100.0 * COALESCE(1.0 - (1.0 / (1.0 + 1000.0 * jf.catastrophe)), 0.0) * nodes * ' + wallduration_case_statement + ')',
+                comments: 'Total max memory core seconds.',
+                stats: [{
+                    name: "avg_homogeneity",
+                    sql: 'sum(jf.homogeneity_weighted_by_node_hour / jf.wall_time / jf.nodecount_id * jf.homogeneity_weight)/sum(jf.homogeneity_weight)',
+                    requirenotnull: 'jf.homogeneity_weighted_by_node_hour',
+                    label: 'Avg: Homogeneity: weighted by node-hour',
+                    unit: '%',
+                    description: 'The average homogeneity value weighted by node hour. The homogeneity is a measure of the how uniform the L1D load rate is over the lifetime of a job. Jobs with low homogeneity value (near 0) should be investigated to check if an error has caused data processing to stop prematurely.'
+                }]
+            }, {
+                    name: 'homogeneity_weight',
+                    table: 'supremmfact',
+                    type: 'double',
+                    dimension: false,
+                    sql: getWeightMetric('catastrophe', 'nodes'),
+                    comments: 'The catastrophe node weight'
+            }, {
                     name: 'catastrophe_bucket_id',
                     type: 'int32',
                     roles: { disable: [ "pub" ] },
@@ -1376,6 +1398,28 @@ module.exports = {
             typical_usage: "Measure of peak memory usage for the job.",
             table: "job",
             agg: [{
+                name: 'max_mem_weighted_by_core_seconds',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: 'sum(max_memory * cores * ' + wallduration_case_statement + ')',
+                comments: 'Total max memory core seconds.',
+                stats: [{
+                    name: "avg_max_memory_per_core",
+                    sql: '100.0 * sum(jf.max_mem_weighted_by_core_seconds / jf.wall_time / jf.cores * jf.max_memory_weight)/sum(jf.max_memory_weight)',
+                    requirenotnull: 'jf.max_mem_weighted_by_core_seconds',
+                    label: 'Avg: Max Memory: weighted by core-hour',
+                    unit: '%',
+                    description: 'The average job max memory usage percentage weighted by core-hour. Max Memory usage is defined as memory used / total available for the largest memory usage measured during the execution of the job.'
+                }]
+            }, {
+                name: 'max_memory_weight',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: getWeightMetric('max_memory', 'cores'),
+                comments: 'The core weight for jobs with max memory statistics that ran during this period'
+            }, {
                 name: 'max_mem_bucketid',
                 type: 'int32',
                 alias: 'max_mem',
