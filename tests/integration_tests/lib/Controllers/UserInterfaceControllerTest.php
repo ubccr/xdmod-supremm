@@ -223,7 +223,13 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
         'netdrv_panasas_rx_bucket_id' => array(
             'defaultChartSettings' => '0',
             'label' => 'panasas bytes received'
+        ),
+
+        'wall_time_accuracy_bucketid' => array(
+            'defaultChartSettings' => '0',
+            'label' => 'Wall Time Accuracy Value'
         )
+
         );
         $statistics = array(
             'avg_percent_cpu_idle' => 'Avg CPU %: Idle: weighted by core-hour',
