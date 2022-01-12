@@ -676,6 +676,16 @@ module.exports = {
                             +	 '<i>Wall Time:</i> Wall time is defined as the linear time between start and end time of execution for a particular job.',
                     decimals: 2
                 }]
+            }, {
+                name: 'wall_time_accuracy_bucketid',
+                type: 'int32',
+                roles: { disable: ['pub'] },
+                dimension: true,
+                category: 'Metrics',
+                table: 'supremmfact',
+                sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(jf.wall_time/jf.requested_wall_time * 100, -1.0) > cb.min AND coalesce(jf.wall_time/jf.requested_wall_time * 100, -1.0) <= cb.max)',
+                label: 'Wall Time Accuracy Value',
+                dimension_table: 'percentages_buckets'
             }]
         },
         requested_wall_time: {
