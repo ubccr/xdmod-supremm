@@ -1075,7 +1075,7 @@ module.exports = {
                 sql: 'sum( 100.0 * COALESCE(1.0 - (1.0 / (1.0 + 1000.0 * jf.catastrophe)), 0.0) * nodes * ' + wallduration_case_statement + ')',
                 comments: 'Total max memory core seconds.',
                 stats: [{
-                    name: "avg_homogeneity",
+                    name: 'avg_homogeneity',
                     sql: 'sum(jf.homogeneity_weighted_by_node_hour / jf.wall_time / jf.nodecount_id * jf.homogeneity_weight)/sum(jf.homogeneity_weight)',
                     requirenotnull: 'jf.homogeneity_weighted_by_node_hour',
                     label: 'Avg: Homogeneity: weighted by node-hour',
@@ -1405,7 +1405,7 @@ module.exports = {
                 sql: 'sum(max_memory * cores * ' + wallduration_case_statement + ')',
                 comments: 'Total max memory core seconds.',
                 stats: [{
-                    name: "avg_max_memory_per_core",
+                    name: 'avg_max_memory_per_core',
                     sql: '100.0 * sum(jf.max_mem_weighted_by_core_seconds / jf.wall_time / jf.cores * jf.max_memory_weight)/sum(jf.max_memory_weight)',
                     requirenotnull: 'jf.max_mem_weighted_by_core_seconds',
                     label: 'Avg: Max Memory: weighted by core-hour',
