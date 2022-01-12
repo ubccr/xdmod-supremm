@@ -276,10 +276,10 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'submitted_job_count' => 'Number of Jobs Submitted',
             'wait_time_per_job' => 'Wait Hours: Per Job',
             'wait_time' => 'Wait Hours: Total',
-            'wall_time_accuracy' => 'Wall Time Accuracy',
             'wall_time_per_job' => 'Wall Hours: Per Job',
             'requested_wall_time_per_job' => 'Wall Hours: Requested: Per Job',
-            'requested_wall_time' => 'Wall Hours: Requested: Total'
+            'requested_wall_time' => 'Wall Hours: Requested: Total',
+            'wall_time_accuracy' => 'Wall Time Accuracy',
         );
         $realmGroupBys = array();
         foreach($groupbys as $name => $settings){
