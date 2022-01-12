@@ -709,7 +709,7 @@ module.exports = {
                     label: 'Wall Hours: Requested: Total',
                     unit: 'Hour',
                     description: 'The total time, in hours, jobs requested for execution.<br/>'
-                            +	 '<i>Requested Wall Time:</i> Requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
+                            +	 '<i>Requested Wall Time:</i> Requsted wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
                     decimals: 0
                 }, {
                     name: 'requested_wall_time_per_job',
