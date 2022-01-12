@@ -135,6 +135,11 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'label' => 'Granted Processing Element'
         ),
 
+        'homogeneity_bucket_id' => array(
+            'defaultChartSettings' => '0',
+            'label' => 'Homogeneity Rank'
+        ),
+
         'ibrxbyterate_bucket_id' => array(
             'defaultChartSettings' => '0',
             'label' => 'InfiniBand Receive rate'

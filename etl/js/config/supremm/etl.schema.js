@@ -1091,6 +1091,7 @@ module.exports = {
                     comments: 'The catastrophe node weight'
             }, {
                     name: 'catastrophe_bucket_id',
+                    alternate_group_by: 'homogeneity_bucket_id',
                     type: 'int32',
                     roles: { disable: [ "pub" ] },
                     dimension: true,

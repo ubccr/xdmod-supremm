@@ -25,6 +25,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             "gpu0_nv_utilization_bucketid",
             "gpu_usage_bucketid",
             "granted_pe",
+            "homogeneity_bucket_id",
             "ibrxbyterate_bucket_id",
             "institution",
             "jobsize",
