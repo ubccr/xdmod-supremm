@@ -658,6 +658,13 @@ module.exports = {
                             +	 '<i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.',
                     decimals: 0
                 }, {
+                    name: 'wall_time_accuracy',
+                    sql: 'COALESCE((SUM(jf.wall_time)/SUM(jf.requested_wall_time))*100, 0)',
+                    label: 'Wall Time Accuracy',
+                    unit: '%',
+                    description: 'The ratio of total job wall time to total requested wall time during the time period. The wall time and requested wall time contribution outside of the time period are not included in the calculation. The requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
+                    decimals: 0
+                }, {
                     name: 'wall_time_per_job',
                     aggregate_sql: 'COALESCE(SUM(jf.wall_time)/SUM(CASE ${DATE_TABLE_ID_FIELD} WHEN ${MIN_DATE_ID} THEN jf.running_job_count ELSE jf.started_job_count END),0)/3600.0',
                     timeseries_sql: 'COALESCE(SUM(jf.wall_time)/SUM(jf.running_job_count),0)/3600.0',
@@ -667,6 +674,16 @@ module.exports = {
                             +	 '<i>Wall Time:</i> Wall time is defined as the linear time between start and end time of execution for a particular job.',
                     decimals: 2
                 }]
+            }, {
+                name: 'wall_time_accuracy_bucketid',
+                type: 'int32',
+                roles: { disable: ['pub'] },
+                dimension: true,
+                category: 'Metrics',
+                table: 'supremmfact',
+                sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(jf.wall_time/jf.requested_wall_time * 100, -1.0) > cb.min AND coalesce(jf.wall_time/jf.requested_wall_time * 100, -1.0) <= cb.max)',
+                label: 'Wall Time Accuracy Value',
+                dimension_table: 'percentages_buckets'
             }]
         },
         requested_wall_time: {
