@@ -662,7 +662,7 @@ module.exports = {
                     sql: 'COALESCE((SUM(jf.wall_time)/SUM(jf.requested_wall_time))*100, 0)',
                     label: 'Wall Time Accuracy',
                     unit: '%',
-                    description: 'The ratio of total wall time used while jobs were excuting to total requested wall time for jobs during this duration.<br/>',
+                    description: 'The ratio of total job wall time to total requested wall time during the time period. The wall time and requested wall time contribution outside of the time period are not included in the calculation. The requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
                     decimals: 0
                 }, {
                     name: 'wall_time_per_job',
