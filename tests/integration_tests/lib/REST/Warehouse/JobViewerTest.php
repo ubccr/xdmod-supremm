@@ -43,7 +43,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             "queue",
             "resource",
             "shared",
-            "username"
+            "username",
+            "wall_time_accuracy_bucketid"
         );
     }
 

@@ -223,7 +223,13 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
         'netdrv_panasas_rx_bucket_id' => array(
             'defaultChartSettings' => '0',
             'label' => 'panasas bytes received'
+        ),
+
+        'wall_time_accuracy_bucketid' => array(
+            'defaultChartSettings' => '0',
+            'label' => 'Wall Time Accuracy Value'
         )
+
         );
         $statistics = array(
             'avg_percent_cpu_idle' => 'Avg CPU %: Idle: weighted by core-hour',
@@ -272,7 +278,8 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'wait_time' => 'Wait Hours: Total',
             'wall_time_per_job' => 'Wall Hours: Per Job',
             'requested_wall_time_per_job' => 'Wall Hours: Requested: Per Job',
-            'requested_wall_time' => 'Wall Hours: Requested: Total'
+            'requested_wall_time' => 'Wall Hours: Requested: Total',
+            'wall_time_accuracy' => 'Wall Time Accuracy',
         );
         $realmGroupBys = array();
         foreach($groupbys as $name => $settings){
