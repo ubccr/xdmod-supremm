@@ -683,7 +683,8 @@ module.exports = {
                 table: 'supremmfact',
                 sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(jf.wall_time/jf.requested_wall_time * 100, -1.0) > cb.min AND coalesce(jf.wall_time/jf.requested_wall_time * 100, -1.0) <= cb.max)',
                 label: 'Wall Time Accuracy Value',
-                dimension_table: 'percentages_buckets'
+                dimension_table: 'percentages_buckets',
+                show_all_dimension_values: true
             }]
         },
         requested_wall_time: {
@@ -930,7 +931,8 @@ module.exports = {
                 table: 'supremmfact',
                 sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * cpu_user, -1.0) > cb.min AND coalesce(100.0 * cpu_user, -1.0) <= cb.max)',
                 label: "CPU User Value",
-                dimension_table: "percentages_buckets"
+                dimension_table: "percentages_buckets",
+                show_all_dimension_values: true
             }, {
                     name: 'cpu_usage_weight',
                     table: 'supremmfact',
@@ -1404,7 +1406,8 @@ module.exports = {
                 table: 'supremmfact',
                 sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * max_memory, -1.0) > cb.min AND coalesce(100.0 * max_memory, -1.0) <= cb.max)',
                 label: "Peak Memory Usage (%)",
-                dimension_table: "percentages_buckets"
+                dimension_table: "percentages_buckets",
+                show_all_dimension_values: true
             }]
         },
 
@@ -2140,7 +2143,8 @@ module.exports = {
                 table: 'supremmfact',
                 sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * gpu_usage, -1.0) > cb.min AND coalesce(100.0 * gpu_usage, -1.0) <= cb.max)',
                 label: 'GPU Active Value',
-                dimension_table: 'percentages_buckets'
+                dimension_table: 'percentages_buckets',
+                show_all_dimension_values: true
             }, {
                 name: 'gpu_usage_weight',
                 table: 'supremmfact',

@@ -147,7 +147,8 @@
                 {
                     "id": "jobtime_id"
                 }
-            ]
+            ],
+            "show_all_dimension_values": true
         },
         "$ref-with-overwrite": "datawarehouse.d/ref/group-by-common.json#/jobwalltime"
     },
