@@ -453,7 +453,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             var color;
             if (reversed && (x < xAxisMax / 2 && y > yAxisMax / 2)) {
                 color = '#ff0000';
-            } else if (x > xAxisMax / 2 && y > yAxisMax / 2) {
+            } else if (!reversed && (x > xAxisMax / 2 && y > yAxisMax / 2)) {
                 color = '#ff0000';
             } else {
                 color = '#2f7ed8';
