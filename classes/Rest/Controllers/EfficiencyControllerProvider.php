@@ -172,7 +172,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
 
                 $dataset = new \DataWarehouse\Data\SimpleDataset($query);
                 $results = $dataset->getResults($limit, $start);
-                foreach ($results as &$val) {
+                foreach ($results as $key => &$val) {
                     $val['name'] = $val[$config->group_by . '_name'];
                     $val['id'] = $val[$config->group_by . '_id'];
                     $val['short_name'] = $val[$config->group_by . '_short_name'];
@@ -181,7 +181,13 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     unset($val[$config->group_by . '_name']);
                     unset($val[$config->group_by . '_short_name']);
                     unset($val[$config->group_by . '_order_id']);
+
+                    if ($val[$config->statistics[0]] == null || $val[$config->statistics[1]] == null){
+                        unset($results[$key]);
+                    }
                 }
+
+                $results = array_values($results);
                 //Dataset that shows detailed information that the user has access to
                 $datasets['results'] = $results;
                 $datasets['hiddenData'] = array();
@@ -216,14 +222,20 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     $dataset = new \DataWarehouse\Data\SimpleDataset($query);
                     $data = $dataset->getResults($limit, $start);
 
-                    foreach ($data as &$val) {
+                    foreach ($data as $key => &$val) {
                         $val['id'] = $val[$config->group_by . '_id'];
                         $val['order_id'] = $val[$config->group_by . '_order_id'];
                         unset($val[$config->group_by . '_id']);
                         unset($val[$config->group_by . '_name']);
                         unset($val[$config->group_by . '_short_name']);
                         unset($val[$config->group_by . '_order_id']);
+
+                        if ($val[$config->statistics[0]] == null || $val[$config->statistics[1]] == null){
+                            unset($data[$key]);
+                        }
                     }
+
+                    $data = array_values($data);
 
                     //Dataset that shows only data points and no identifying information
                     $datasets['hiddenData'] = $data;
@@ -393,6 +405,9 @@ class EfficiencyControllerProvider extends BaseControllerProvider
 
             switch($dimension){
                 case 'cpuuser':
+                case 'gpu_usage_bucketid':
+                case 'max_mem':
+                case 'wall_time_accuracy_bucketid':
                     foreach ($chartData as &$dataPoint) {
                         if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 2 || $dataPoint['drilldown']['id'] == 3) {
                             $dataPoint['color'] = '#FF0000';
@@ -412,8 +427,32 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     }, $chartData), SORT_ASC, $chartData);
 
                     //Move NA bucket to end of array
-                    $naBucket = array_shift($chartData);
-                    array_push($chartData, $naBucket);
+                    $key = array_search('gray', array_column($chartData, 'color'));
+                    if( $key === 0 ){
+                        $naBucket = array_shift($chartData);
+                        array_push($chartData, $naBucket);
+                    }
+
+                    $results['data'][0]['series'][0]['data'] = $chartData;
+                    break;
+                case 'homogeneity_bucket_id':
+                    foreach ($chartData as &$dataPoint) {
+                        if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 2) {
+                            $dataPoint['color'] = '#FF0000';
+                        } elseif ($dataPoint['drilldown']['id'] == 3 || $dataPoint['drilldown']['id'] == 4) {
+                            $dataPoint['color'] = '#FFB336';
+                        } elseif ($dataPoint['drilldown']['id'] == 5 || $dataPoint['drilldown']['id'] == 6) {
+                            $dataPoint['color'] = '#DDDF00';
+                        } elseif ($dataPoint['drilldown']['id'] == 7 || $dataPoint['drilldown']['id'] == 8) {
+                            $dataPoint['color'] = '#50B432';
+                        } else {
+                            $dataPoint['color'] = "gray";
+                        }
+                    }
+
+                    array_multisort(array_map(function ($element) {
+                        return $element['drilldown']['id'];
+                    }, $chartData), SORT_ASC, $chartData);
 
                     $results['data'][0]['series'][0]['data'] = $chartData;
                     break;
@@ -423,6 +462,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                             $dataPoint['color'] = '#FF0000';
                         }
                     }
+
                     array_multisort(array_map(function ($element) {
                         return $element['drilldown']['id'];
                     }, $chartData), SORT_ASC, $chartData);
@@ -460,6 +500,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         $searchText = $this->getStringParam($request, 'search_text');
 
         $realmParameter = $this->getStringParam($request, 'realm');
+        $realms = null;
         if ($realmParameter !== null) {
             $realms = preg_split('/,\s*/', trim($realmParameter), null, PREG_SPLIT_NO_EMPTY);
         }

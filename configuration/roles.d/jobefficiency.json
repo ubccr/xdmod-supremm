@@ -22,6 +22,17 @@
                     "realm": "JobEfficiency",
                     "group_by": "category"
                 }
+            ],
+            "+permitted_modules": [
+                {
+                    "name": "efficiency",
+                    "title": "Efficiency",
+                    "position": 350,
+                    "javascriptClass": "XDMoD.Module.Efficiency",
+                    "javascriptReference": "CCR.xdmod.ui.efficiency",
+                    "tooltip": "Displays job efficiency information.",
+                    "userManualSectionName": "Efficiency"
+                }
             ]
         }
     }

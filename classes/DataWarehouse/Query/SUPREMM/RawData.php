@@ -66,6 +66,9 @@ class RawData extends \DataWarehouse\Query\Query implements \DataWarehouse\Query
         $this->addField(new TableField($factTable, "start_time_ts"));
         $this->addField(new TableField($factTable, "end_time_ts"));
         $this->addField(new TableField($factTable, "cpu_user"));
+        $this->addField(new TableField($factTable, "gpu_usage"));
+        $this->addField(new TableField($factTable, "max_memory"));
+        $this->addField(new TableField($factTable, "catastrophe"));
         $this->addField(new FormulaField('COALESCE(LEAST(sj.wall_time / sj.requested_wall_time, 1), -1)', 'walltime_accuracy'));
 
         $this->addTable( $joblistTable );
