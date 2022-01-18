@@ -125,6 +125,11 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'label' => 'GPU0 Usage Value'
         ),
 
+        'gpu_usage_bucketid' => array(
+            'defaultChartSettings' => '0',
+            'label' => 'GPU Active Value'
+        ),
+
         'granted_pe' => array(
             'defaultChartSettings' => '2',
             'label' => 'Granted Processing Element'
@@ -218,12 +223,19 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
         'netdrv_panasas_rx_bucket_id' => array(
             'defaultChartSettings' => '0',
             'label' => 'panasas bytes received'
+        ),
+
+        'wall_time_accuracy_bucketid' => array(
+            'defaultChartSettings' => '0',
+            'label' => 'Wall Time Accuracy Value'
         )
+
         );
         $statistics = array(
             'avg_percent_cpu_idle' => 'Avg CPU %: Idle: weighted by core-hour',
             'avg_percent_cpu_system' => 'Avg CPU %: System: weighted by core-hour',
             'avg_percent_cpu_user' => 'Avg CPU %: User: weighted by core-hour',
+            'avg_percent_gpu_active' => 'Avg GPU active: weighted by gpu-hour',
             'avg_percent_gpu0_nv_utilization' => 'Avg GPU0 usage: weighted by node-hour',
             'avg_netdir_home_write' => 'Avg: /home write rate: Per Node weighted by node-hour',
             'avg_netdir_projects_write' => 'Avg: /projects write rate: Per Node weighted by node-hour',
@@ -255,6 +267,8 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'cpu_time_system' => 'CPU Hours: System: Total',
             'wall_time' => 'CPU Hours: Total',
             'cpu_time_user' => 'CPU Hours: User: Total',
+            'gpu_time_active' => 'GPU Hours Active: Total',
+            'gpu_time' => 'GPU Hours: Total',
             'gpu0_nv_utilization' => 'GPU0 Hours: Total',
             'job_count' => 'Number of Jobs Ended',
             'running_job_count' => 'Number of Jobs Running',
@@ -264,7 +278,8 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'wait_time' => 'Wait Hours: Total',
             'wall_time_per_job' => 'Wall Hours: Per Job',
             'requested_wall_time_per_job' => 'Wall Hours: Requested: Per Job',
-            'requested_wall_time' => 'Wall Hours: Requested: Total'
+            'requested_wall_time' => 'Wall Hours: Requested: Total',
+            'wall_time_accuracy' => 'Wall Time Accuracy',
         );
         $realmGroupBys = array();
         foreach($groupbys as $name => $settings){

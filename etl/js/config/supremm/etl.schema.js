@@ -658,6 +658,13 @@ module.exports = {
                             +	 '<i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.',
                     decimals: 0
                 }, {
+                    name: 'wall_time_accuracy',
+                    sql: 'COALESCE((SUM(jf.wall_time)/SUM(jf.requested_wall_time))*100, 0)',
+                    label: 'Wall Time Accuracy',
+                    unit: '%',
+                    description: 'The ratio of total job wall time to total requested wall time during the time period. The wall time and requested wall time contribution outside of the time period are not included in the calculation. The requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
+                    decimals: 0
+                }, {
                     name: 'wall_time_per_job',
                     aggregate_sql: 'COALESCE(SUM(jf.wall_time)/SUM(CASE ${DATE_TABLE_ID_FIELD} WHEN ${MIN_DATE_ID} THEN jf.running_job_count ELSE jf.started_job_count END),0)/3600.0',
                     timeseries_sql: 'COALESCE(SUM(jf.wall_time)/SUM(jf.running_job_count),0)/3600.0',
@@ -667,6 +674,16 @@ module.exports = {
                             +	 '<i>Wall Time:</i> Wall time is defined as the linear time between start and end time of execution for a particular job.',
                     decimals: 2
                 }]
+            }, {
+                name: 'wall_time_accuracy_bucketid',
+                type: 'int32',
+                roles: { disable: ['pub'] },
+                dimension: true,
+                category: 'Metrics',
+                table: 'supremmfact',
+                sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(jf.wall_time/jf.requested_wall_time * 100, -1.0) > cb.min AND coalesce(jf.wall_time/jf.requested_wall_time * 100, -1.0) <= cb.max)',
+                label: 'Wall Time Accuracy Value',
+                dimension_table: 'percentages_buckets'
             }]
         },
         requested_wall_time: {
@@ -2020,6 +2037,120 @@ module.exports = {
             table: "job"
         },
 
+        gpus: {
+            unit: null,
+            type: 'int32',
+            dtype: 'accounting',
+            group: 'Allocated resource',
+            nullable: false,
+            def: 0,
+            batchExport: true,
+            comments: 'The total number of GPUs assigned to the job.',
+            per: 'job',
+            table: 'job',
+            agg: [
+                {
+                    table: 'supremmfact',
+                    type: 'int32',
+                    alias: 'gpu_count',
+                    roles: { disable: ['pub'] },
+                    dimension: true,
+                    comments: 'Number of GPU devices assigned to the jobs.'
+                },
+                {
+                    name: 'gpu_bucket_id',
+                    type: 'int32',
+                    dimension: false, // don't need to group by this since we are grouping by cores.
+                    table: 'supremmfact',
+                    sql: '(select id from gpu_buckets gb where gpus between gb.min_gpus and gb.max_gpus)',
+                    comments: 'Binning of GPU count from the modw.gpu_buckets table.'
+                }
+            ]
+        },
+
+        gpu_time: {
+            unit: 'seconds',
+            type: 'int32',
+            dtype: 'accounting',
+            group: 'Allocated resource',
+            nullable: true,
+            def: null,
+            batchExport: true,
+            comments: 'Total GPU time. This value is calculated as number of assigned GPU devices multiplied by duration of the job.',
+            per: 'job',
+            table: 'job',
+            agg: [{
+                name: 'gpu_time',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: 'coalesce(sum(' + getDistributionSQLCaseStatement('gpu_time', ':seconds', 'start_time_ts', 'end_time_ts', ':period_start_ts', ':period_end_ts') + '), 0)',
+                comments: 'The amount of GPU time of the jobs pertaining to this period. If a job took more than one period, its GPU time is distributed linearly across the periods it spans. GPU time is defined as the number of GPUs assigned to the job multiplied by its duration.'
+            }]
+        },
+
+        gpu_usage: {
+            unit: '%',
+            type: 'double',
+            name: 'Average GPU utilization',
+            group: 'Accelerator Statistics',
+            nullable: true,
+            def: null,
+            batchExport: true,
+            comments: 'Average % utilization of the GPUs assigned to the job.',
+            per: 'gpu',
+            raw_per: 'gpu',
+            algorithm: '',
+            algorithm_description: '',
+            typical_usage: '',
+            table: 'job',
+            agg: [{
+                name: 'gpu_time_active',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: getSumMetric('gpu_usage*gpu_time'),
+                comments: 'The amount of gpu time that the GPUs were used for jobs pertaining to this period.',
+                stats: [{
+                    sql: 'SUM(jf.gpu_time_active) / 3600.0',
+                    label: 'GPU Hours Active: Total',
+                    requirenotnull: 'jf.gpu_time_active',
+                    unit: 'GPU Hour',
+                    description: 'The amount of time that the allocated GPU devices were active for jobs that were running during the time period. The time active is calculated by multiplying the average utilization reported by the GPU device(s) by the amount of GPU time that was allocated for the job.'
+                }, {
+                    sql: 'SUM(jf.gpu_time) / 3600.0',
+                    name: 'gpu_time',
+                    label: 'GPU Hours: Total',
+                    unit: 'GPU Hour',
+                    description: 'The total GPU time in hours for all jobs that were executing during the time period. The GPU time is calculated as the number of allocated GPU devices multiplied by the wall time of the job.'
+                }, {
+                    name: 'avg_percent_gpu_active',
+                    sql: 'sum(100.0 * jf.gpu_time_active / jf.gpu_time * jf.gpu_usage_weight)/sum(jf.gpu_usage_weight)',
+                    label: 'Avg GPU active: weighted by gpu-hour',
+                    requirenotnull: 'jf.gpu_time_active',
+                    unit: 'GPU %',
+                    description: 'The average GPU usage % weighted by gpu hours, over all jobs that were executing.'
+                }]
+            }, {
+                name: 'gpu_usage_bucketid',
+                type: 'int32',
+                roles: { disable: ['pub'] },
+                dimension: true,
+                category: 'Metrics',
+                table: 'supremmfact',
+                sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * gpu_usage, -1.0) > cb.min AND coalesce(100.0 * gpu_usage, -1.0) <= cb.max)',
+                label: 'GPU Active Value',
+                dimension_table: 'percentages_buckets'
+            }, {
+                name: 'gpu_usage_weight',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: getWeightMetric('gpu_usage', 'nodes'),
+                comments: 'The node weight for jobs with cpu user values that ran during the period'
+            }]
+        },
+
         gpu_energy: {
             unit: 'joules',
             type: 'double',
@@ -2127,7 +2258,7 @@ module.exports = {
             },
             table: 'modw.job_tasks jt, modw.job_records jr',
             // bind these using the same query format function just replace with attributes.:resource_id.value
-            where: 'jt.resource_id = :resource_id and jt.local_job_id_raw = :local_job_id and jt.job_record_id = jr.job_record_id',
+            where: 'jt.resource_id = :resource_id and jt.local_job_id_raw = :local_job_id and jt.end_time_ts = :end_time_ts AND jt.job_record_id = jr.job_record_id',
             cacheable: false
         },
         account: {

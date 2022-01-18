@@ -23,6 +23,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             "exit_status",
             "fieldofscience",
             "gpu0_nv_utilization_bucketid",
+            "gpu_usage_bucketid",
             "granted_pe",
             "ibrxbyterate_bucket_id",
             "institution",
@@ -42,7 +43,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             "queue",
             "resource",
             "shared",
-            "username"
+            "username",
+            "wall_time_accuracy_bucketid"
         );
     }
 

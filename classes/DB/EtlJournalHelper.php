@@ -43,6 +43,8 @@ class EtlJournalHelper
             array($this->schema . '.' . $this->table)
         );
 
+        $this->dwdb->disconnect();
+
         if (count($lastRunInfo) > 0) {
             $this->lastModified = $lastRunInfo[0]['last_modified'];
         }
@@ -69,5 +71,7 @@ class EtlJournalHelper
                 $process_end_time
             )
         );
+
+        $this->dwdb->disconnect();
     }
 }
