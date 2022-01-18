@@ -931,7 +931,7 @@ module.exports = {
                 table: 'supremmfact',
                 sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * cpu_user, -1.0) > cb.min AND coalesce(100.0 * cpu_user, -1.0) <= cb.max)',
                 label: "CPU User Value",
-                dimension_table: "percentages_buckets",
+                dimension_table: 'percentages_buckets',
                 show_all_dimension_values: true
             }, {
                     name: 'cpu_usage_weight',
@@ -1406,7 +1406,7 @@ module.exports = {
                 table: 'supremmfact',
                 sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * max_memory, -1.0) > cb.min AND coalesce(100.0 * max_memory, -1.0) <= cb.max)',
                 label: "Peak Memory Usage (%)",
-                dimension_table: "percentages_buckets",
+                dimension_table: 'percentages_buckets',
                 show_all_dimension_values: true
             }]
         },
