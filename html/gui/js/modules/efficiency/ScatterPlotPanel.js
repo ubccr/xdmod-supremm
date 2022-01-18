@@ -471,7 +471,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         for (var i = 0; i < record.length; i++) {
             if (parseFloat(record[i][property]) || parseFloat(record[i][property]) === 0) {
                 if (!max || parseFloat(record[i][property]) > max) {
-                    max = Math.ceil(parseFloat(record[i][property]));
+                    max = Math.ceil(parseFloat(record[i][property])) + 1;
                 }
             }
         }
@@ -974,12 +974,16 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             }),
             fields: [
                 { name: 'name', mapping: 'name', type: 'string' },
-                { name: 'resource', mapping: 'resource', type: 'string' },
+                { name: 'resource', mapping: 'resource', type: 'string'},
+                { name: 'jobid', mapping: 'jobid', type: 'int'},
                 { name: 'local_job_id', mapping: 'local_job_id', type: 'int' },
                 { name: 'start_time_ts', mapping: 'start_time_ts', type: 'int' },
                 { name: 'cpu_user', mapping: 'cpu_user', type: 'string' },
-                { name: 'gpu_usage', mapping: 'gpu_usage', type: 'int' },
-                { name: 'end_time_ts', mapping: 'end_time_ts', type: 'int' }
+                {name: 'gpu_usage', mapping: 'gpu_usage', type: 'int'},
+                {name: 'max_memory', mapping: 'max_memory', type: 'int'},
+                {name: 'catastrophe', mapping: 'catastrophe', type: 'int'},
+                { name: 'end_time_ts', mapping: 'end_time_ts', type: 'int' },
+                { name: 'wall_time_total', mapping: 'wall_time_total', type: 'int'}
             ]
         });
 
@@ -1005,6 +1009,27 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     }
                 };
                 break;
+            case 'Memory Headroom':
+                column = {
+                    id: 'max_memory',
+                    dataIndex: 'max_memory',
+                    header: 'Max Memory',
+                    renderer: function (value, p, r) {
+                        return (Number(r.json.max_memory) * 100).toFixed(2) + '%';
+                    }
+                }
+                break;
+            case 'Homogeneity':
+                column = {
+                    id: 'catastrophe',
+                    dataIndex: 'catastrophe',
+                    header: 'Catastrophe',
+                    renderer: function (value, p, r) {
+                        return (Number(r.json.catastrophe));
+                    }
+                }
+                break;
+            case 'Wall Time Accuracy':
             case 'Short Job Count':
                 column = {
                     id: 'job_wall_time',
@@ -1091,7 +1116,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             border: false,
             modal: true,
             // Update title when all statistics are in
-            title: 'Jobs with ' + drilldownLabel + ' CPU User Value for ' + person,
+            title: 'Jobs with ' + drilldownLabel + ' ' + self.config.histogram.groupByTitle + ' for ' + person,
             layout: 'fit',
             autoScroll: true,
             items: new Ext.Panel({
