@@ -427,8 +427,11 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     }, $chartData), SORT_ASC, $chartData);
 
                     //Move NA bucket to end of array
-                    $naBucket = array_shift($chartData);
-                    array_push($chartData, $naBucket);
+                    $key = array_search('gray', array_column($chartData, 'color'));
+                    if( $key === 0 ){
+                        $naBucket = array_shift($chartData);
+                        array_push($chartData, $naBucket);
+                    }
 
                     $results['data'][0]['series'][0]['data'] = $chartData;
                     break;
