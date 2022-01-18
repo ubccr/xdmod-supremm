@@ -974,16 +974,16 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             }),
             fields: [
                 { name: 'name', mapping: 'name', type: 'string' },
-                { name: 'resource', mapping: 'resource', type: 'string'},
-                { name: 'jobid', mapping: 'jobid', type: 'int'},
+                { name: 'resource', mapping: 'resource', type: 'string' },
+                { name: 'jobid', mapping: 'jobid', type: 'int' },
                 { name: 'local_job_id', mapping: 'local_job_id', type: 'int' },
                 { name: 'start_time_ts', mapping: 'start_time_ts', type: 'int' },
                 { name: 'cpu_user', mapping: 'cpu_user', type: 'string' },
-                {name: 'gpu_usage', mapping: 'gpu_usage', type: 'int'},
-                {name: 'max_memory', mapping: 'max_memory', type: 'int'},
-                {name: 'catastrophe', mapping: 'catastrophe', type: 'int'},
+                { name: 'gpu_usage', mapping: 'gpu_usage', type: 'int' },
+                { name: 'max_memory', mapping: 'max_memory', type: 'int' },
+                { name: 'catastrophe', mapping: 'catastrophe', type: 'int' },
                 { name: 'end_time_ts', mapping: 'end_time_ts', type: 'int' },
-                { name: 'wall_time_total', mapping: 'wall_time_total', type: 'int'}
+                { name: 'wall_time_total', mapping: 'wall_time_total', type: 'int' }
             ]
         });
 
@@ -1017,7 +1017,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     renderer: function (value, p, r) {
                         return (Number(r.json.max_memory) * 100).toFixed(2) + '%';
                     }
-                }
+                };
                 break;
             case 'Homogeneity':
                 column = {
@@ -1027,7 +1027,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     renderer: function (value, p, r) {
                         return (Number(r.json.catastrophe));
                     }
-                }
+                };
                 break;
             case 'Wall Time Accuracy':
             case 'Short Job Count':
