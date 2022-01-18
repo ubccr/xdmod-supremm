@@ -20,7 +20,8 @@ upgraded.
 
 This upgrade adds a new dimension to the SUPReMM realm to allow filtering on
 overall GPU usage and new statistics for GPU-hour weighted average GPU usage
-and GPU hours.
+and GPU hours. It also adds new statistics for the core-hour weighted average
+maximum memory usage and node-hour weighted homogeneity of jobs.
 
 The upgrade script `xdmod-upgrade` will modify the fact tables in the database
 to add columns to store the new GPU information. After the `xdmod-upgrade` script
@@ -31,12 +32,12 @@ an error message similar to the one below when trying to view SUPReMM realm data
 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'gpu_time_active' in 'where clause'
 ```
 
- Existing GPU jobs in the database will **not** automatically be re-ingested by the
-upgrade scripts. So jobs that were already loaded into XDMoD will show as no GPU
-information. You can force reingestion of all jobs by resetting the job
+ Existing jobs in the database will **not** automatically be re-ingested by the
+upgrade scripts. So jobs that were already loaded into XDMoD will not show information
+for the new statistics and GPU filters.  You can force reingestion of all jobs by resetting the job
 ingest status:
 ```
-$ /usr/lib64/xdmod/xdmod-supremm-admin --action reset --resource [RESOURCE] -d
+$ /usr/lib64/xdmod/xdmod-supremm-admin --action truncate --resource [RESOURCE] -d
 ```
 And then run the ingest and aggregation script:
 ```

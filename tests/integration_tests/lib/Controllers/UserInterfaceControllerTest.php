@@ -135,6 +135,11 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'label' => 'Granted Processing Element'
         ),
 
+        'homogeneity_bucket_id' => array(
+            'defaultChartSettings' => '0',
+            'label' => 'Homogeneity Rank'
+        ),
+
         'ibrxbyterate_bucket_id' => array(
             'defaultChartSettings' => '0',
             'label' => 'InfiniBand Receive rate'
@@ -245,7 +250,9 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'avg_cpuusercv_per_core' => 'Avg: CPU User CV: weighted by core-hour',
             'avg_cpuuserimb_per_core' => 'Avg: CPU User Imbalance: weighted by core-hour',
             'avg_flops_per_core' => 'Avg: FLOPS: Per Core weighted by core-hour',
+            'avg_homogeneity' => 'Avg: Homogeneity: weighted by node-hour',
             'avg_ib_rx_bytes' => 'Avg: InfiniBand rate: Per Node weighted by node-hour',
+            'avg_max_memory_per_core' => 'Avg: Max Memory: weighted by core-hour',
             'avg_mem_bw_per_core' => 'Avg: Memory Bandwidth: Per Core weighted by core-hour',
             'avg_memory_per_core' => 'Avg: Memory: Per Core weighted by core-hour',
             'avg_total_memory_per_core' => 'Avg: Total Memory: Per Core weighted by core-hour',
