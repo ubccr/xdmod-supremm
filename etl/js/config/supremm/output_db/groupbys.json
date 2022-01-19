@@ -339,6 +339,7 @@
                     "on": "rf.id = rs.resource_id"
                 }
             ],
+            "query_hint": "DISTINCT",
             "orderby": [
                 "rf.code",
                 "rf.name"
