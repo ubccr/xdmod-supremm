@@ -15,7 +15,7 @@
                 "filters" : {},
                 "statisticLabels": [
                     "Average CPU % Idle: Weighted by Core Hour",
-                    "Total CPU Hours"
+                    "CPU Hours: Total"
                 ],
                 "statisticDescription": [
                     "<ul><li><b>Average CPU % Idle: Weighted by Core Hour:</b> The average CPU idle % weighted by core hours, over all jobs that were executing.</li></ul><ul><li><b>CPU Hours: Total:</b> The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.</li></ul>"
@@ -97,7 +97,7 @@
                 ],
                 "statisticLabels": [
                     "Avg: Max Memory: weighted by core-hour",
-                    "Total CPU Hours"
+                    "CPU Hours: Total"
                 ],
                 "statisticDescription": [
                     "<ul><li><b>Avg: Max Memory: weighted by core-hour: </b>The average job max memory usage percentage weighted by core-hour. Max Memory usage is defined as memory used / total available for the largest memory usage measured during the execution of the job.</li></ul><ul><li><b>CPU Hours: Total:</b> The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.</li></ul>"
@@ -131,14 +131,14 @@
                 "analytic": "Homogeneity",
                 "description": "A measure of how uniform the L1D load rate is over the lifetime of the job.",
                 "title": "Homogeneity",
-                "field": "avg_percent_cpu_idle",
+                "field": "avg_homogeneity",
                 "statistics": [
-                    "avg_percent_cpu_idle",
+                    "avg_homogeneity",
                     "wall_time"
                 ],
                 "statisticLabels": [
-                    "Average CPU % Idle: Weighted by Core Hore",
-                    "Total CPU Hours"
+                    "Avg: Homogeneity: weighted by node-hour",
+                    "CPU Hours: Total"
                 ],
                 "statisticDescription": [
                     "<ul><li><b>Avg: Homogeneity: weighted by node-hour: </b>The average homogeneity value weighted by node hour. The homogeneity is a measure of the how uniform the L1D load rate is over the lifetime of a job. Jobs with low homogeneity value (near 0) should be investigated to check if an error has caused data processing to stop prematurely.</li></ul><ul><li><b>CPU Hours: Total:</b> The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.</li></ul>"
