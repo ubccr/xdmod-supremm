@@ -399,7 +399,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
 
             foreach ($buckets as $bucket) {
                 if (array_search($bucket['id'], array_column($drillDowns, 'id'), true) === false) {
-                    $chartData[] = ['y' => 0, 'drilldown' => array('id' => $bucket['id'], 'label' => $bucket['name'])];
+                    $chartData[] = ['y' => 0, 'drilldown' => array('id' => $bucket['id'], 'label' => $bucket['label'])];
                 }
             }
 
@@ -523,9 +523,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         // Change the name key for each dimension value to "long_name".
         $dimensionValuesData = $dimensionValues['data'];
         foreach ($dimensionValuesData as &$dimensionValue) {
-            $dimensionValue['long_name'] = html_entity_decode($dimensionValue['name']);
-            $dimensionValue['name'] = $dimensionValue['long_name'];
-            $dimensionValue['short_name'] = html_entity_decode($dimensionValue['short_name']);
+            $dimensionValue['label'] = $dimensionValue['short_name'];
         }
 
         // Return the found dimension values.
