@@ -978,7 +978,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 { name: 'jobid', mapping: 'jobid', type: 'int' },
                 { name: 'local_job_id', mapping: 'local_job_id', type: 'int' },
                 { name: 'start_time_ts', mapping: 'start_time_ts', type: 'int' },
-                { name: 'timezone', mapping: 'timezone', type: 'int' },
+                { name: 'timezone', mapping: 'timezone', type: 'string' },
                 { name: 'cpu_user', mapping: 'cpu_user', type: 'string' },
                 { name: 'gpu_usage', mapping: 'gpu_usage', type: 'int' },
                 { name: 'max_memory', mapping: 'max_memory', type: 'int' },
