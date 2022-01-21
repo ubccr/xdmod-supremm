@@ -39,6 +39,10 @@ jobs:
           command: |
             composer install --no-progress
       - run:
+          name: Install SUPREMM RPM build dependencies
+          command: |
+            ./tests/ci/scripts/install_dependencies.sh
+      - run:
           name: Install XDMoD Dependencies
           command: composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
