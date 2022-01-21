@@ -17,3 +17,8 @@ fi
 
 yum install -y https://rpm.nodesource.com/pub_16.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
 yum install -y nodejs
+
+# The UI tests need nodejs 6 so also install the software collections
+# when the UI tests run they will use the softweare collections version
+yum install -y centos-release-scl-rh
+yum install -y rh-nodejs6
