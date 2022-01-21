@@ -28,7 +28,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
                 title:
                 {
-                    x: 130,
+                    x: 100,
                     style: {
                         color: '#444b6e',
                         fontSize: 20
@@ -36,7 +36,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     text: self.config.analytic
                 },
                 subtitle: {
-                    x: 130
+                    x: 100
                 },
                 loading: {
                     style: {
@@ -768,7 +768,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             autoScroll: true,
             baseChartOptions: {
                 chart: {
-                    marginLeft: 200
+                    marginLeft: 175
                 },
                 plotOptions: {
                     series: {
