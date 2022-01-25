@@ -995,8 +995,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     id: 'cpu_user_value',
                     dataIndex: 'cpu_user',
                     header: 'CPU User Value',
-                    renderer: function (value) {
-                        return (Number(value) * 100).toFixed(2) + '%';
+                    renderer: function (value, p, r) {
+                        if (r.json.cpu_user) {
+                            return (r.json.cpu_user * 100).toFixed(2) + '%';
+                        } else {
+                            return String(r.json.cpu_user);
+                        }
                     }
                 };
                 break;
@@ -1006,7 +1010,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'gpu_usage',
                     header: 'GPU Usage Value',
                     renderer: function (value, p, r) {
-                        return (Number(r.json.gpu_usage) * 100).toFixed(2) + '%';
+                        if (r.json.gpu_usage) {
+                            return (r.json.gpu_usage * 100).toFixed(2) + '%';
+                        } else {
+                            return String(r.json.gpu_usage);
+                        }
                     }
                 };
                 break;
@@ -1016,7 +1024,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'max_memory',
                     header: 'Max Memory',
                     renderer: function (value, p, r) {
-                        return (Number(r.json.max_memory) * 100).toFixed(2) + '%';
+                        if (r.json.max_memory) {
+                            return (r.json.max_memory * 100).toFixed(2) + '%';
+                        } else {
+                            return String(r.json.max_memory);
+                        }
                     }
                 };
                 break;
@@ -1026,7 +1038,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'catastrophe',
                     header: 'Catastrophe',
                     renderer: function (value, p, r) {
-                        return (Number(r.json.catastrophe) * 100).toFixed(5);
+                        if (r.json.catastrophe){
+                            return (r.json.catastrophe * 100).toFixed(5);
+                        } else {
+                            return String(r.json.catastrophe);
+                        }
                     }
                 };
                 break;
