@@ -1,5 +1,5 @@
 ---
-title: Customizing Efficiency Tab Analytics
+title: Customizing Help Text for Efficiency Analytics
 ---
 
 This document describes how to customize the text displayed when viewing the analytics in the Efficiency Tab.
@@ -49,11 +49,11 @@ To customize text for an analytic you need to edit the `/etc/xdmod/efficiency_an
         ],
 ```
 
- For editing help text for other analytics, the process is the same, but you need to change the "documentation" that corresponds to that specific analytic. Below is a list of lines that need changed for each analytic. 
- **GPU Usage:** lines 71-78
- **CPU Usage:** lines 30-37
- **GPU Usage:** lines 71-78
- **Memory Headroom:** lines 112-119
- **Homogeneity:** lines 153-160
- **Wall Time Accuracy:** lines 200-207
- **Short Job Count:** lines 242-249
+ For editing help text for other analytics, the process is the same, but you need to change the "documentation" that corresponds to that specific analytic. Below is a list of lines that need changed for each analytic.  
+ **GPU Usage:** lines 71-78  
+ **CPU Usage:** lines 30-37  
+ **GPU Usage:** lines 71-78  
+ **Memory Headroom:** lines 112-119  
+ **Homogeneity:** lines 153-160  
+ **Wall Time Accuracy:** lines 200-207  
+ **Short Job Count:** lines 242-249  
