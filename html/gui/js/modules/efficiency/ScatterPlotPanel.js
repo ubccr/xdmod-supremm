@@ -996,11 +996,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'cpu_user',
                     header: 'CPU User Value',
                     renderer: function (value, p, r) {
-                        if (r.json.cpu_user) {
-                            return (r.json.cpu_user * 100).toFixed(2) + '%';
-                        } else {
+                        if (!r.json.cpu_user) {
                             return String(r.json.cpu_user);
                         }
+
+                        return (r.json.cpu_user * 100).toFixed(2) + '%';
                     }
                 };
                 break;
@@ -1010,11 +1010,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'gpu_usage',
                     header: 'GPU Usage Value',
                     renderer: function (value, p, r) {
-                        if (r.json.gpu_usage) {
-                            return (r.json.gpu_usage * 100).toFixed(2) + '%';
-                        } else {
+                        if (!r.json.gpu_usage) {
                             return String(r.json.gpu_usage);
                         }
+
+                        return (r.json.gpu_usage * 100).toFixed(2) + '%';
                     }
                 };
                 break;
@@ -1024,11 +1024,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'max_memory',
                     header: 'Max Memory',
                     renderer: function (value, p, r) {
-                        if (r.json.max_memory) {
-                            return (r.json.max_memory * 100).toFixed(2) + '%';
-                        } else {
+                        if (!r.json.max_memory) {
                             return String(r.json.max_memory);
                         }
+
+                        return (r.json.max_memory * 100).toFixed(2) + '%';
                     }
                 };
                 break;
@@ -1038,11 +1038,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'catastrophe',
                     header: 'Catastrophe',
                     renderer: function (value, p, r) {
-                        if (r.json.catastrophe){
-                            return (r.json.catastrophe * 100).toFixed(5);
-                        } else {
+                        if (!r.json.catastrophe) {
                             return String(r.json.catastrophe);
                         }
+
+                        return (r.json.catastrophe * 100).toFixed(5);
                     }
                 };
                 break;
