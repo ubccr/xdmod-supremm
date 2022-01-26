@@ -241,11 +241,11 @@
                 "documentation": [
                     "<div class='text'>",
                     "<h6> What is this analytic? </h6>",
-                    "<p>A count of the number of jobs that ended with a wall time of less than 30 seconds compared to the total number of jobs that ended.</p>",
+                    "<p>The analytic identifies users who are running a large proportion of short jobs. The plot shows the number of short (&lt; 30 s) jobs compared to the total number of jobs for each user.</p>",
                     "<h6> Why is this analytic important? </h6>",
-                    "<p> A large number of short jobs strains the scheduler. </p>",
+                    "<p>The load on the scheduler software increases with the total number of jobs that are tracked. There is also a fixed overhead for setup and teardown when jobs start and end, which is independent of the jobs wall time. Excessive short jobs can cause scheduler slowness for all users of the cluster and under extreme circumstances cause job failures.</p>",
                     "<h6> How do I improve future jobs? </h6>",
-                    "<p> Give actions here that users can follow to improve this behavior in future jobs. </p>",
+                    "<p>Try to minimize the number of short running jobs. This can be accomplished by aggregating multiple tasks into a smaller number of longer-running jobs.</p>",
                     "</div>"
                 ],
                 "histogram": {
