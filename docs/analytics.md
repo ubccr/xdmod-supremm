@@ -57,3 +57,55 @@ To customize text for an analytic you need to edit the `/etc/xdmod/efficiency_an
  **Homogeneity:** lines 153-160  
  **Wall Time Accuracy:** lines 200-207  
  **Short Job Count:** lines 242-249  
+
+In addition to editing the help text, you can also remove an analytic if it is not pertinent to your center. To do this, you need to remove the analytic from the `/etc/xdmod/efficiency_analytics.json` configuration file. For example, to remove GPU Usage from showing in the XDMoD interface, you would remove lines 48-88 from this file. The lines to remove are shown below. 
+```json
+48        {
+49              "analytic": "GPU Usage",
+50              "description": "Measure of overall average GPU Usage for a GPU job",
+51              "title": "GPU Usage",
+52              "field": "avg_percent_gpu_active",
+53              "statistics": [
+54                  "avg_percent_gpu_active",
+55                  "gpu_time"
+56              ],
+57              "statisticLabels": [
+58                  "Avg GPU active: weighted by gpu-hour",
+59                  "GPU Hours: Total"
+60              ],
+61              "statisticDescription":  [
+62                  "<ul><li><b>Avg GPU active: weighted by gpu-hour: </b> The average GPU usage % weighted by gpu hours, over all jobs that were executing.</li></ul><ul><li><b>GPU Hours: Total</b> The total GPU time in hours for all jobs that were executing during the time period. The GPU time is calculated as the number of allocated GPU devices multiplied by the wall time of the job.</li></ul>"
+63              ],
+64              "valueLabels": [
+65                  "%",
+66                  "GPU Hours"
+67              ],
+68              "reversed": true,
+69              "realm": "SUPREMM",
+70              "documentation": [
+71                  "<div class='text'>",
+72                  "<h6> What is this analytic? </h6>",
+73                  "<p> A measure of overall GPU Usage for GPU jobs.</p>",
+74                  "<h6> Why is this analytic important? </h6>",
+75                  "<p> Jobs not using the requested resources could be used by other jobs. </p>",
+76                  "<h6> How do I improve future jobs? </h6>",
+77                  "<p> Give actions here that users can follow to improve this behavior in future jobs. </p>",
+78                  "</div>"
+79              ],
+80              "histogram": {
+81                  "title": "GPU Usage",
+82                  "metric": "gpu_time",
+83                  "metricTitle": "GPU Hours Total",
+84                  "group_by" : "gpu_usage_bucketid",
+85                  "groupByTitle": "GPU Active Value",
+86                  "rotate": true
+87              }
+88      },
+```
+
+Figure 3 below shows an example of what the updated efficiency tab interface would look like if you were to remove GPU Usage. 
+
+<figure>
+<img src="{{ site.baseurl }}/assets/images/efficiency_tab_no_gpu.png" alt="Screenshot of the updated efficiency tab interface after removing the GPU Usage analytic." />
+<figcaption>Figure 2. Example of an updated efficiency tab interface after removing GPU Usage analytic.</figcaption>
+</figure>
