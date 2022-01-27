@@ -138,12 +138,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
             throw new AccessDeniedException('access denied to ' . json_encode($forbiddenStats));
         }
 
-        switch ($analytic) {
-            case 'CPU Usage':
-            case 'GPU Usage':
-            case 'Memory Headroom':
-            case 'Homogeneity':
-            case 'Wall Time Accuracy':
+        if ($analytic !== 'Short Job Count') {
                 $query = new \DataWarehouse\Query\AggregateQuery(
                     $config->realm,
                     $config->aggregation_unit,
@@ -248,7 +243,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                         'success' => true
                     )
                 );
-            case "Short Job Count":
+    } else {
                 $query = new \DataWarehouse\Query\AggregateQuery(
                     $config->realm,
                     $config->aggregation_unit,
