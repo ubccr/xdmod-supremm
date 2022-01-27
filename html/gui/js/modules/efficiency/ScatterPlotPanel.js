@@ -197,6 +197,8 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             };
 
             var chartOptions = jQuery.extend(true, {}, defaultChartSettings, self.chartSettings);
+            chartOptions.chart.width = Math.max(600, self.getWidth());
+            chartOptions.chart.height = Math.max(400, self.getHeight());
 
             self.chart = new Highcharts.Chart(chartOptions);
         };
@@ -412,7 +414,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             listeners: {
                 resize: function () {
                     if (self.chart) {
-                        self.chart.reflow();
+                        self.chart.setSize(Math.max(600, self.getWidth()), Math.max(400, self.getHeight()));
                         // Update arrow size based on new chart dimensions
                         self.chart.xAxis[1].update({
                             title: {
@@ -759,59 +761,65 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             }
         });
 
-        var personChart = new CCR.xdmod.ui.HighChartPanel({
-            id: 'hc-panel-' + self.config.analytic,
-            person: person,
-            personId: personId,
-            boxMinWidth: 800,
-            boxMinHeight: 600,
+        var drilldownChartContainer = new Ext.Panel({
+            layout: 'fit',
+            border: false,
             autoScroll: true,
-            baseChartOptions: {
-                chart: {
-                    marginLeft: 175
-                },
-                plotOptions: {
-                    series: {
-                        events: {
-                            click: function (e) {
-                                var dataPoint = e.point.index;
-                                var datasetId = e.point.series.userOptions.datasetId;
-                                var drilldownId = e.point.drilldown.id;
-                                var drilldownLabel = e.point.drilldown.label;
-                                var jobGrid = Ext.getCmp('cpu_user_job_information');
+            items: [
+                new CCR.xdmod.ui.HighChartPanel({
+                id: 'hc-panel-' + self.config.analytic,
+                person: person,
+                personId: personId,
+                boxMinWidth: 600,
+                boxMinHeight: 400,
+                baseChartOptions: {
+                    chart: {
+                        marginLeft: 175
+                    },
+                    plotOptions: {
+                        series: {
+                            events: {
+                                click: function (e) {
+                                    var dataPoint = e.point.index;
+                                    var datasetId = e.point.series.userOptions.datasetId;
+                                    var drilldownId = e.point.drilldown.id;
+                                    var drilldownLabel = e.point.drilldown.label;
+                                    var jobGrid = Ext.getCmp('cpu_user_job_information');
 
-                                if (jobGrid) {
-                                    jobGrid.destroy();
+                                    if (jobGrid) {
+                                        jobGrid.destroy();
+                                    }
+
+                                    self.getJobList(personId, person, dataPoint, datasetId, drilldownId, drilldownLabel);
                                 }
-
-                                self.getJobList(personId, person, dataPoint, datasetId, drilldownId, drilldownLabel);
                             }
                         }
                     }
-                }
-            },
-            store: chartStore,
-            listeners: {
-                resize: function () {
-                    if (personChart.chart.xAxis[1]) {
-                        // Update arrow size based on new chart dimensions
-                        personChart.chart.xAxis[1].update({
-                            title: {
-                                text: "<img src='gui/images/right_arrow.png' class='" + cls + "' style='width: " + (personChart.chart.plotWidth * (2 / 3)) + "px; height: 100px;' />"
-                            }
-                        });
-                        personChart.chart.yAxis[1].update({
-                            title: {
-                                text: "<img src='gui/images/right_arrow.png' style='width: " + (personChart.chart.plotHeight * (2 / 3)) + "px; height: 100px;' />"
-                            }
-                        });
+                },
+                store: chartStore,
+                listeners: {
+                    resize: function (t, adjWidth, adjHeight, rawWidth, rawHeight) {
+                        if (this.chart.xAxis[1]) {
+                            // Update arrow size based on new chart dimensions
+                            this.chart.xAxis[1].update({
+                                title: {
+                                    text: "<img src='gui/images/right_arrow.png' class='" + cls + "' style='width: " + (adjWidth* (2 / 3)) + "px; height: 100px;' />"
+                                }
+                            });
+                            this.chart.yAxis[1].update({
+                                title: {
+                                    text: "<img src='gui/images/right_arrow.png' style='width: " + (adjHeight * (2 / 3)) + "px; height: 100px;' />"
+                                }
+                            });
+                        }
                     }
                 }
-            }
+                })
+            ]
         });
 
         var analyticPanel = Ext.getCmp('detailed_analytic_panel_' + this.config.analytic);
-        analyticPanel.add(personChart);
+        analyticPanel.add(drilldownChartContainer);
         analyticPanel.layout.setActiveItem(1);
         analyticPanel.doLayout();
     },
