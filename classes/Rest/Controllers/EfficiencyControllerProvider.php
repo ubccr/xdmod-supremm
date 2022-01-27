@@ -243,7 +243,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     'success' => true
                 )
             );
-    } else {
+        } else {
             $query = new \DataWarehouse\Query\AggregateQuery(
                 $config->realm,
                 $config->aggregation_unit,
