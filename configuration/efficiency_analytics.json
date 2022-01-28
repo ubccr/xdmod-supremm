@@ -1,11 +1,11 @@
 [
     {
         "type": "Usage Analytics",
-        "typeDescription": "Analytics that demonstrate if jobs have used the resources that they requested.",
+        "typeDescription": "Comparison of the resources allocated for jobs to the measured usage. Each point in the plots corresponds to the jobs run by a particular user. Points higher on the y-axis correspond to users with more allocated usage. Points on the left hand side of the x-axis correspond to higher measured usage.",
         "analytics": [
             {
                 "analytic": "CPU Usage",
-                "description": "Ratio of idle core cycles to total cycles",
+                "description": "How busy were the CPU cores?",
                 "title": "CPU Usage",
                 "field": "avg_percent_cpu_idle",
                 "statistics": [
@@ -29,11 +29,11 @@
                 "documentation": [
                     "<div class='text'>",
                     "<h6> What is this analytic? </h6>",
-                    "<p>A measure of the ratio of idle core cycles to total cycles.</p>",
+                    "<p>The chart below shows the percentage of time that the CPU cores were idle compared to overall usage. Each point on the plot shows the data for the jobs for a particular user.</p>",
                     "<h6> Why is this analytic important? </h6>",
-                    "<p> The requested core cycles are not being used on the resource and could be used by other jobs.</p>",
+                    "<p>Making sure jobs use the right number of CPU cores helps ensure that the compute resources are used efficiently.</p>",
                     "<h6> How do I improve future jobs? </h6>",
-                    "<p> Give actions here that users can follow to improve this behavior in future jobs. </p>",
+                    "<p>For typical compute intensive jobs, the overall CPU usage should be &gt; 90 % (i.e. CPU core idle &lt; 10 %). Consider requesting fewer CPU cores for future jobs, or adjust the configuration settings of the software to make use of all the cores that have been requested.</p>",
                     "</div>"
                 ],
                 "histogram": {
@@ -47,7 +47,7 @@
             },
             {
                 "analytic": "GPU Usage",
-                "description": "Measure of overall average GPU Usage for a GPU job",
+                "description": "How busy were the GPU cores for GPU jobs?",
                 "title": "GPU Usage",
                 "field": "avg_percent_gpu_active",
                 "statistics": [
@@ -55,7 +55,7 @@
                     "gpu_time"
                 ],
                 "statisticLabels": [
-                    "Avg GPU active: weighted by gpu-hour",
+                    "Avg GPU % Active: Weighted by GPU Hour",
                     "GPU Hours: Total"
                 ],
                 "statisticDescription":  [
@@ -70,11 +70,11 @@
                 "documentation": [
                     "<div class='text'>",
                     "<h6> What is this analytic? </h6>",
-                    "<p> A measure of overall GPU Usage for GPU jobs.</p>",
+                    "<p>The chart below shows the percentage of time that the GPUs were busy compared to overall usage. Each point on the plot shows the GPU jobs for a particular user.</p>",
                     "<h6> Why is this analytic important? </h6>",
-                    "<p> Jobs not using the requested resources could be used by other jobs. </p>",
+                    "<p>Making sure jobs use the right number of GPUs helps ensure that the compute resources are used efficiently.</p>",
                     "<h6> How do I improve future jobs? </h6>",
-                    "<p> Give actions here that users can follow to improve this behavior in future jobs. </p>",
+                    "<p>Try to ensure that the number of GPUs requested matches the number required. If a code is not using all GPUs adjust the configuration settings of the software to make use of all the requested GPUs or consider requesting fewer GPUs in future jobs. If you have jobs with 0% GPU usage, double check that the code is compiled correctly to make use of the GPUs and is not defaulting to CPU-only calculations.</p>",
                     "</div>"
                 ],
                 "histogram": {
@@ -87,20 +87,20 @@
                 }
             },
             {
-                "analytic": "Memory Headroom",
-                "description": "Measure of the memory allocated for the job to the high-water mark memory usage",
-                "title": "Memory Headroom",
+                "analytic": "Memory Usage",
+                "description": "How much memory was used?",
+                "title": "Memory Usage",
                 "field": "avg_max_memory_per_core",
                 "statistics": [
                     "avg_max_memory_per_core",
                     "wall_time"
                 ],
                 "statisticLabels": [
-                    "Avg: Max Memory: weighted by core-hour",
+                    "Avg: Max % Memory: Weighted by Core Hour",
                     "CPU Hours: Total"
                 ],
                 "statisticDescription": [
-                    "<ul><li><b>Avg: Max Memory: weighted by core-hour: </b>The average job max memory usage percentage weighted by core-hour. Max Memory usage is defined as memory used / total available for the largest memory usage measured during the execution of the job.</li></ul><ul><li><b>CPU Hours: Total:</b> The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.</li></ul>"
+                    "<ul><li><b>Avg: Max % Memory: weighted by core-hour: </b>The average job max memory usage percentage weighted by core-hour. Max Memory usage is defined as memory used / total available for the largest memory usage measured during the execution of the job.</li></ul><ul><li><b>CPU Hours: Total:</b> The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.</li></ul>"
                 ],
                 "valueLabels": [
                     "%",
@@ -111,11 +111,11 @@
                 "documentation": [
                     "<div class='text'>",
                     "<h6> What is this analytic? </h6>",
-                    "<p> A measure of memory allocated for the hob to the high-water memory mark.</p>",
+                    "<p>The chart below compares the highest memory usage for jobs to overall usage. A value of 100% Max Memory indicates that a job used all of the allocated memory at some point during the job. Each point on the plot shows jobs for a particular user.</p>",
                     "<h6> Why is this analytic important? </h6>",
-                    "<p> Resources that are requested and not used could be used by other jobs. </p>",
+                    "<p>Matching the requested memory to the required memory helps to ensure that the compute resources are used efficiently.</p>",
                     "<h6> How do I improve future jobs? </h6>",
-                    "<p> Give actions here that users can follow to improve this behavior in future jobs. </p>",
+                    "<p>Try to aim to have the maximum memory for a job to be 60 - 80% of the total requested. If you have large memory requirements, consider submitting jobs in the large memory partition (if available). If your job has lower memory requirements, then specifying an accurate requested memory in the scheduler configuration parameters could reduce the wait time for jobs.</p>",
                     "</div>"
                 ],
                 "histogram": {
@@ -129,7 +129,7 @@
             },
             {
                 "analytic": "Homogeneity",
-                "description": "A measure of how uniform the L1D load rate is over the lifetime of the job.",
+                "description": "How does the work rate vary during the job?",
                 "title": "Homogeneity",
                 "field": "avg_homogeneity",
                 "statistics": [
@@ -141,7 +141,7 @@
                     "CPU Hours: Total"
                 ],
                 "statisticDescription": [
-                    "<ul><li><b>Avg: Homogeneity: weighted by node-hour: </b>The average homogeneity value weighted by node hour. The homogeneity is a measure of the how uniform the L1D load rate is over the lifetime of a job. Jobs with low homogeneity value (near 0) should be investigated to check if an error has caused data processing to stop prematurely.</li></ul><ul><li><b>CPU Hours: Total:</b> The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.</li></ul>"
+                    "<ul><li><b>Avg: Homogeneity: weighted by node-hour: </b>The average homogeneity value weighted by node hour. The homogeneity is a measure of how uniform the work rate is over the lifetime of a job. Jobs with low homogeneity value (near 0) should be investigated to check if an error has caused data processing to stop prematurely. The work-rate of the job is estimated using the L1D cache load rate of the CPU cores assigned to the job. The detection algorithm tries to fit a step function to the L1D cache load rate and the homogeneity score is low if a step occurs well before the end of the job.</li></ul><ul><li><b>CPU Hours: Total:</b> The total core time, in hours.<br/><i>Core Time:</i> defined as the time between start and end time of execution for a particular job times the number of allocated cores.</li></ul>"
                 ],
                 "valueLabels": [
                     "%",
@@ -152,11 +152,11 @@
                 "documentation": [
                     "<div class='text'>",
                     "<h6> What is this analytic? </h6>",
-                    "<p></p>",
+                    "<p>The chart below shows the homogeneity verses usage. The homogeneity measures how uniform the work rate is of the job. A value near 0 means that the work rate fell dramatically during the job and stayed low.</p>",
                     "<h6> Why is this analytic important? </h6>",
-                    "<p></p>",
+                    "<p>If the computational work of a job stops before the end, then the job will take longer to complete or take up resources that could be used by other jobs.</p>",
                     "<h6> How do I improve future jobs? </h6>",
-                    "<p> Give actions here that users can follow to improve this behavior in future jobs. </p>",
+                    "<p>If the job has an I/O stop at the end, check to see if it can be run in parallel. For compute jobs that have a serial step at the end consider using heterogeneous job steps (if the scheduler provides this feature).</p>",
                     "</div>"
                 ],
                 "histogram": {
@@ -172,11 +172,11 @@
     },
     {
         "type": "Design Analytics",
-        "typeDescription": "Analytics that demonstrate if a resource is being used as it is designed.",
+        "typeDescription": "Are jobs are using resources in an efficient manner consistent with their design? Each point in the plots corresponds to the jobs run by a particular user. Points higher on the y-axis correspond to users with more allocated usage. Points on the left hand side of the x-axis correspond to more efficient usage.",
         "analytics": [
             {
                 "analytic": "Wall Time Accuracy",
-                "description": "Ratio of wall time used to wall time allocated",
+                "description": "Did the jobs request the correct amount of time?",
                 "title": "Wall Time Accuracy",
                 "field": "wall_time_accuracy",
                 "statistics": [
@@ -201,9 +201,9 @@
                     "<h6> What is this analytic? </h6>",
                     "<p> A measure of wall time used compared to the wall time requested.</p>",
                     "<h6> Why is this analytic important? </h6>",
-                    "<p> Wall time that is not being used by your job could be used by jobs elsewhere. This in turn could improve overall wait time.</p>",
+                    "<p>The closer the requested wall time is to the actual wall time the better the scheduler efficiency. You will likely see shorter wait times for your job to run if you provide an accurate wall time request.</p>",
                     "<h6> How do I improve future jobs? </h6>",
-                    "<p> Give actions here that users can follow to improve this behavior in future jobs. </p>",
+                    "<p>Try to set the requested wall time for future jobs to be close to the amount of time that you expect it to run.</p>",
                     "</div>"
                 ],
                 "histogram": {
@@ -217,8 +217,8 @@
             },
             {
                 "analytic": "Short Job Count",
-                "description": "Count of all jobs that were running for less than a threshold (30s)",
-                "title": "Short Job Count",
+                "description": "What proportion of jobs are very short?",
+                "title": "Short Jobs",
                 "field": "job_count",
                 "statistics": [
                     "job_count",
@@ -226,11 +226,11 @@
                 ],
                 "mandatoryFilters" : {"jobwalltime" : "[0,1]"},
                 "statisticLabels": [
-                    "Number of Short Jobs (< 30s)",
+                    "Number of Short Jobs (&lt; 30s)",
                     "Total Number of Jobs Ended"
                 ],
                 "statisticDescription": [
-                    "<ul><li><b>Number of Short Jobs(<30s): </b>Total number of jobs ended within the time period selected with a wall time of less than 30 seconds.</li></ul><ul><li><b>Total Number of Jobs Ended:</b> Total number of jobs ended within the time period selected.</li></ul>"
+                    "<ul><li><b>Number of Short Jobs(&lt; 30s): </b>Total number of jobs ended within the time period selected with a wall time of less than 30 seconds.</li></ul><ul><li><b>Total Number of Jobs Ended:</b> Total number of jobs ended within the time period selected.</li></ul>"
                 ],
                 "valueLabels": [
                     "Jobs",
@@ -243,7 +243,7 @@
                     "<h6> What is this analytic? </h6>",
                     "<p>The analytic identifies users who are running a large proportion of short jobs. The plot shows the number of short (&lt; 30 s) jobs compared to the total number of jobs for each user.</p>",
                     "<h6> Why is this analytic important? </h6>",
-                    "<p>The load on the scheduler software increases with the total number of jobs that are tracked. There is also a fixed overhead for setup and teardown when jobs start and end, which is independent of the jobs wall time. Excessive short jobs can cause scheduler slowness for all users of the cluster and under extreme circumstances cause job failures.</p>",
+                    "<p>The load on the scheduler software increases with the total number of jobs that are tracked. There is also a fixed overhead for setup and teardown when jobs start and end, which is independent of the job's wall time. Excessive short jobs can cause scheduler slowness for all users of the cluster and under extreme circumstances cause job failures.</p>",
                     "<h6> How do I improve future jobs? </h6>",
                     "<p>Try to minimize the number of short running jobs. This can be accomplished by aggregating multiple tasks into a smaller number of longer-running jobs.</p>",
                     "</div>"

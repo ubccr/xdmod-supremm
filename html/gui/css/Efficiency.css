@@ -1,23 +1,23 @@
+div #efficiency {
+    font-family: arial, tahoma, helvetica, sans-serif;
+}
+
 .analyticTypeHeader{
-    font-family: arial,tahoma,verdana,sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     padding: 5px 15px;
 }
 
 .text{
-    font-family: arial,tahoma,verdana,sans-serif;
     font-size: 15px;
     padding: 15px;
 }
 
 .detailDescriptionText{
-    font-family: arial,tahoma,verdana,sans-serif;
     font-size: 13px;
     padding: 5px;
 }
 
 .statisticInfo{
-    font-family: arial,tahoma,verdana,sans-serif;
     font-size: 13px;
 }
 
@@ -31,7 +31,6 @@
 }
 
 .analyticCardContents{
-    font-family: arial,tahoma,verdana,sans-serif;
     width: 100%;
     background-color: #F8F7F7;
     height: 100%;
