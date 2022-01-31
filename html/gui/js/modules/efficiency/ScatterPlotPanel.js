@@ -32,7 +32,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         color: '#444b6e',
                         fontSize: 20
                     },
-                    text: self.config.analytic
+                    text: self.config.title
                 },
                 subtitle: {
                     x: 130
@@ -85,7 +85,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
                                         var btn = {
                                             xtype: 'button',
-                                            text: self.config.analytic + ' for ' + e.point.person,
+                                            text: self.config.title + ' for ' + e.point.person,
                                             disabled: true,
                                             iconCls: 'chart'
                                         };
