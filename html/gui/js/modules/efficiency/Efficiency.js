@@ -658,7 +658,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             if (key === dimensions[i].toLowerCase()) {
                                 var k;
                                 for (k = 0; k < values.length; k++) {
-                                    Ext.getCmp('checkbox_group' + dimensions[i]).setValue(values[k], true);
+                                    Ext.getCmp('checkbox_group' + dimensions[i]).setValue(values[k] + '_' + dimensions[i], true);
                                 }
                             }
                         }

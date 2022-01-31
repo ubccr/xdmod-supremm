@@ -51,7 +51,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                 // Add all filters that are checked in the fieldset for each dimension to a filter object
                                 for (var j = 0; j < fieldSet.length; j++) {
                                     // Add filter to filter list
-                                    filterValues.push(fieldSet[j].id);
+                                    filterValues.push(fieldSet[j].filterId);
 
                                     // Update the string that will be used for chart subtitle
                                     filterSubtitle += fieldSet[j].name;
@@ -62,9 +62,9 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                     // Create the ME filter object and add to ME filter array
                                     var filterME = {
                                         dimension_id: dimension,
-                                        id: dimension + '=' + fieldSet[j].id,
+                                        id: dimension + '=' + fieldSet[j].filterId,
                                         realms: ['SUPREMM'],
-                                        value_id: fieldSet[j].id,
+                                        value_id: fieldSet[j].filterId,
                                         value_name: fieldSet[j].name,
                                         checked: true
                                     };
@@ -299,7 +299,8 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                             }
 
                             var checkBox = {
-                                id: filters[i].data.id,
+                                id: filters[i].data.id + '_' + dimension,
+                                filterId: filters[i].data.id,
                                 name: filters[i].data.name,
                                 boxLabel: filters[i].data.name,
                                 listeners: {
@@ -413,7 +414,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
 
                     // Check filter if showing, if not showing show all filter checkboxes and check filter
                     if (checkbox_group.items.keys.includes(filter)) {
-                        checkbox_group.setValue(filter, true);
+                        checkbox_group.setValue(filter + '_' + dimension, true);
                     } else {
                         var filterList = Ext.getCmp('checkbox_group' + dimension).getValue();
 
@@ -428,7 +429,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                             Ext.each(filterList, function (f) {
                                 Ext.getCmp('checkbox_group' + dimension).setValue(f.id, true);
                             });
-                            Ext.getCmp('checkbox_group' + dimension).setValue(filter, true);
+                            Ext.getCmp('checkbox_group' + dimension).setValue(filter + '_' + dimension, true);
 
                             fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show Fewer ' + dimension + ' Filters');
                         }, this);
