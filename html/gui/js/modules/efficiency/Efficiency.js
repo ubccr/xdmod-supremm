@@ -12,7 +12,12 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     // Portal Module Toolbar Config
     usesToolbar: true,
     toolbarItems: {
-        durationSelector: true
+        durationSelector: {
+            enable: true,
+            config: {
+                defaultCannedDateIndex: 2
+            }
+        }
     },
 
     initComponent: function () {
