@@ -188,7 +188,7 @@
                     "Wall Time Allocated"
                 ],
                 "statisticDescription": [
-                    "<ul><li><b>Wall Time Accuracy: </b> The ratio of total job wall time to total requested wall time during the time period. The wall time and requested wall time contribution outside of the time period are not included in the calculation. The requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.'</li></ul><ul><li><b>Wall Hours: Requested: Total: </b>The total time, in hours, jobs requested for execution.</li></ul>"
+                    "<ul><li><b>Wall Time Accuracy: </b> The ratio of total job wall time to total requested wall time during the time period. The wall time and requested wall time contribution outside of the time period are not included in the calculation. The requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.</li></ul><ul><li><b>Wall Hours: Requested: Total: </b>The total time, in hours, jobs requested for execution.</li></ul>"
                 ],
                 "valueLabels": [
                     "%",
