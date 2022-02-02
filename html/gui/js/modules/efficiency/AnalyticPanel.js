@@ -78,7 +78,7 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
         var details = new Ext.Panel({
             region: 'north',
             border: false,
-            html: self.config.documentation
+            html: self.config.documentation.join('')
         });
 
         // South panel to show detailed information about the statistics being shown
