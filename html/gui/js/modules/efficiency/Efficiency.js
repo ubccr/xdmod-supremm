@@ -616,10 +616,10 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 }
                 breadcrumbMenu.doLayout();
 
-                //Update help text if alternative histogram text is available
-                if (chartConfig.histogram.histogramHelpText){
+                // Update help text if alternative histogram text is available
+                if (chartConfig.histogram.histogramHelpText) {
                     var helpText = Ext.getCmp('helpText');
-                    helpText.update(chartConfig.documentation.join(''))
+                    helpText.update(chartConfig.documentation.join(''));
                 }
 
                 // Update the description panel to match the chart being shown
