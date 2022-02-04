@@ -59,13 +59,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     positioner: function (labelWidth, labelHeight, point) {
                         var tooltipX;
                         var tooltipY;
-                        if (point.plotX < self.chart.plotWidth / 2) {
-                            tooltipX = point.plotX + 300;
-                        } else if (point.plotX > 50) {
-                            tooltipX = point.plotX - 50;
+                        if (point.plotX + labelWidth > self.chart.plotWidth) {
+                            tooltipX = (point.plotX + self.chart.plotLeft) - (labelWidth - 20);
+                        } else {
+                            tooltipX = point.plotX + self.chart.plotLeft + 20;
                         }
-
-                        tooltipY = point.plotY + 25;
+                        tooltipY = (point.plotY + self.chart.plotTop) - 20;
                         return {
                             x: tooltipX,
                             y: tooltipY
