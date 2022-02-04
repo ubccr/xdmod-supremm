@@ -409,12 +409,12 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
             }),
             listeners: {
                 select: function (e) {
-                    var filter = e.value;
+                    var filterId = e.value + '_' + dimension;
                     var checkbox_group = Ext.getCmp('checkbox_group' + dimension);
 
                     // Check filter if showing, if not showing show all filter checkboxes and check filter
-                    if (checkbox_group.items.keys.includes(filter)) {
-                        checkbox_group.setValue(filter + '_' + dimension, true);
+                    if (checkbox_group.items.keys.includes(filterId)) {
+                        checkbox_group.setValue(filterId, true);
                     } else {
                         var filterList = Ext.getCmp('checkbox_group' + dimension).getValue();
 
@@ -429,7 +429,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                             Ext.each(filterList, function (f) {
                                 Ext.getCmp('checkbox_group' + dimension).setValue(f.id, true);
                             });
-                            Ext.getCmp('checkbox_group' + dimension).setValue(filter + '_' + dimension, true);
+                            Ext.getCmp('checkbox_group' + dimension).setValue(filterId, true);
 
                             fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show Fewer ' + dimension + ' Filters');
                         }, this);
