@@ -42,7 +42,8 @@
                     "metricTitle": "CPU Hours",
                     "group_by" : "cpuuser",
                     "groupByTitle": "CPU User",
-                    "rotate": true
+                    "rotate": true,
+                    "arrowImg" : "right_arrow.png"
                 }
             },
             {
@@ -83,7 +84,8 @@
                     "metricTitle": "GPU Hours Total",
                     "group_by" : "gpu_usage_bucketid",
                     "groupByTitle": "GPU Active Value",
-                    "rotate": true
+                    "rotate": true,
+                    "arrowImg" : "right_arrow.png"
                 }
             },
             {
@@ -124,7 +126,8 @@
                     "metricTitle": "CPU Hours Total",
                     "group_by" : "max_mem",
                     "groupByTitle": "Peak Memory Usage (%)",
-                    "rotate": true
+                    "rotate": true,
+                    "arrowImg" : "double_headed_arrow.png"
                 }
             },
             {
@@ -165,7 +168,8 @@
                     "metricTitle": "CPU Hours",
                     "group_by" : "homogeneity_bucket_id",
                     "groupByTitle": "Homogeneity",
-                    "rotate": true
+                    "rotate": true,
+                    "arrowImg" : "right_arrow.png"
                 }
             }
         ]
@@ -212,7 +216,8 @@
                     "metricTitle": "Core Hours",
                     "group_by" : "wall_time_accuracy_bucketid",
                     "groupByTitle": "Wall Time Accuracy Value",
-                    "rotate": true
+                    "rotate": true,
+                    "arrowImg" : "right_arrow.png"
                 }
             },
             {
@@ -254,7 +259,8 @@
                     "metricTitle": "Number of Jobs Ended",
                     "group_by" : "jobwalltime",
                     "groupByTitle": "Job Wall Time",
-                    "rotate": true
+                    "rotate": true,
+                    "arrowImg" : "right_arrow.png"
                 }
             }
         ]

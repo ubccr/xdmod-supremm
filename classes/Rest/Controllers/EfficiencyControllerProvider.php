@@ -401,7 +401,6 @@ class EfficiencyControllerProvider extends BaseControllerProvider
             switch($dimension){
                 case 'cpuuser':
                 case 'gpu_usage_bucketid':
-                case 'max_mem':
                 case 'wall_time_accuracy_bucketid':
                     foreach ($chartData as &$dataPoint) {
                         if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 2 || $dataPoint['drilldown']['id'] == 3) {
@@ -424,6 +423,30 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     //Move NA bucket to end of array
                     $key = array_search('gray', array_column($chartData, 'color'));
                     if( $key === 0 ){
+                        $naBucket = array_shift($chartData);
+                        array_push($chartData, $naBucket);
+                    }
+
+                    $results['data'][0]['series'][0]['data'] = $chartData;
+                    break;
+                case 'max_mem':
+                    foreach ($chartData as &$dataPoint) {
+                        if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 10) {
+                            $dataPoint['color'] = '#FF0000';
+                        } elseif ($dataPoint['drilldown']['id'] == 0) {
+                            $dataPoint['color'] = 'gray';
+                        } else {
+                            $dataPoint['color'] = "#50B432";
+                        }
+                    }
+
+                    array_multisort(array_map(function ($element) {
+                        return $element['drilldown']['id'];
+                    }, $chartData), SORT_ASC, $chartData);
+
+                    //Move NA bucket to end of array
+                    $key = array_search('gray', array_column($chartData, 'color'));
+                    if ($key === 0) {
                         $naBucket = array_shift($chartData);
                         array_push($chartData, $naBucket);
                     }

@@ -690,7 +690,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 tickLength: 0,
                                 title: {
                                     useHTML: true,
-                                    text: "<img src='gui/images/right_arrow.png' class='" + cls + "' style='width: " + (chartWidth * (2 / 3)) + "px; height: 100px;' />",
+                                    text: "<img src='gui/images/" + self.config.histogram.arrowImg + "' class='" + cls + "' style='width: " + (chartWidth * (2 / 3)) + "px; height: 100px;' />",
                                     align: 'middle'
                                 }
                             },
@@ -802,7 +802,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             // Update arrow size based on new chart dimensions
                             this.chart.xAxis[1].update({
                                 title: {
-                                    text: "<img src='gui/images/right_arrow.png' class='" + cls + "' style='width: " + (adjWidth * (2 / 3)) + "px; height: 100px;' />"
+                                    text: "<img src='gui/images/" + self.config.histogram.arrowImg + "' class='" + cls + "' style='width: " + (adjWidth * (2 / 3)) + "px; height: 100px;' />"
                                 }
                             });
                             this.chart.yAxis[1].update({
