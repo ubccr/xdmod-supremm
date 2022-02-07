@@ -644,21 +644,27 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 var filters = Ext.getCmp('analytic_scatter_plot_' + chartConfig.analytic).aggFilters;
 
                 for (i = 0; i < dimensions.length; i++) {
-                    // Get all boxes that were checked in drilldown view and remove the checks
-                    var filterList = Ext.getCmp('checkbox_group' + dimensions[i]).getValue();
+                    // Remove all checks from drilldown view and reset filtersChecked object to be populated by what was previously applied in scatter plot view
+                    var checkboxGroup = Ext.getCmp('checkbox_group' + dimensions[i]).getValue();
                     var j;
-                    for (j = 0; j < filterList.length; j++) {
-                        Ext.getCmp('checkbox_group' + dimensions[i]).setValue(filterList[j].id, false);
+                    for (j = 0; j < checkboxGroup.length; j++) {
+                        checkboxGroup[j].setValue(false);
                     }
+
+                    var fieldSet = Ext.getCmp(dimensions[i] + '_field_set')
+                    fieldSet.filtersChecked = []
 
                     // Check all filters that were applied prior to navigating to the histogram - these are stored in the aggregate filter variable in the scatter plot panel
                     for (var key in filters) {
                         if (Object.prototype.hasOwnProperty.call(filters, key)) {
                             var values = filters[key];
                             if (key === dimensions[i].toLowerCase()) {
+                                var fieldSet = Ext.getCmp(dimensions[i] + '_field_set');
+                                fieldSet.filtersChecked = values;
+
                                 var k;
                                 for (k = 0; k < values.length; k++) {
-                                    Ext.getCmp('checkbox_group' + dimensions[i]).setValue(values[k] + '_' + dimensions[i], true);
+                                    Ext.getCmp('checkbox_group' + dimensions[i]).setValue(values[k].id, true);
                                 }
                             }
                         }
