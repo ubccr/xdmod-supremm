@@ -45,7 +45,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                         for (var i = 0; i < dimensionList.length; i++) {
                             var filterValues = [];
                             // Check each fieldset for filters that a user intends to apply
-                            var fieldSet = Ext.getCmp(dimension + '_field_set')
+                            var fieldSet = Ext.getCmp(dimensionList[i] + '_field_set');
                             var checkedFilters = fieldSet.filtersChecked;
                             if (checkedFilters.length > 0) {
                                 var dimension = dimensionList[i].toLowerCase();
@@ -159,8 +159,8 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                     handler: function () {
                         // Remove any boxes that are checked
                         for (var i = 0; i < dimensionList.length; i++) {
-                            var fieldSet = Ext.getCmp(dimensionList[i] + '_field_set')
-                            fieldSet.filtersChecked = []
+                            var fieldSet = Ext.getCmp(dimensionList[i] + '_field_set');
+                            fieldSet.filtersChecked = [];
 
                             var checkboxGroup = Ext.getCmp('checkbox_group' + dimensionList[i]).getValue();
                             for (var j = 0; j < checkboxGroup.length; j++) {
@@ -383,7 +383,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                             Ext.each(filtersChecked, function (f) {
                                 Ext.getCmp('checkbox_group' + dimension).setValue(f.id, true);
                             });
-                        }, this, { single : true });
+                        }, this, { single: true });
                     }
                 }
             ]
@@ -442,7 +442,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                             Ext.getCmp('checkbox_group' + dimension).setValue(filterId, true);
 
                             fieldSet.getComponent('show_filters_btn_' + dimension).setText('Show Fewer ' + dimension + ' Filters');
-                        }, this, { single : true });
+                        }, this, { single: true });
                     }
                 }
             }
@@ -455,16 +455,16 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
     },
 
     // Check handler for filter checkbox - handles enable/disable of apply filters btn
-    onCheck: function (checked) {
+    onCheck: function (checkbox, checked, dimension) {
         var applyFiltersBtn = this.getComponent('button_group').getComponent('apply_filters_btn');
         var fieldSet = Ext.getCmp(dimension + '_field_set');
-        var filtersChecked = Ext.getCmp(dimension + '_field_set').filtersChecked.slice();
+        var filtersChecked = fieldSet.filtersChecked.slice();
 
         if (checked) {
             applyFiltersBtn.enable();
 
             // Add filters that haven't already been added to teh filtersChecked object
-            var filter = filtersChecked.find(function(object) {
+            var filter = filtersChecked.find(function (object) {
                 return object.id === checkbox.id;
             });
 
@@ -473,8 +473,8 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                 fieldSet.filtersChecked = filtersChecked;
             }
         } else {
-            // Remove any filters that have been stored in the filtersChecked object 
-            var index = filtersChecked.findIndex(function(object) {
+            // Remove any filters that have been stored in the filtersChecked object
+            var index = filtersChecked.findIndex(function (object) {
                 return object.id === checkbox.id;
             });
 
@@ -484,8 +484,8 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
             var i;
             var filterCount = 0;
             for (i = 0; i < this.dimensions.length; i++) {
-                var fieldSet = Ext.getCmp('checkbox_group' + this.dimensions[i]).getValue();
-                filterCount += fieldSet.length;
+                fieldSet = Ext.getCmp(this.dimensions[i] + '_field_set');
+                filterCount += fieldSet.filtersChecked.length;
             }
 
             if (filterCount === 0) {

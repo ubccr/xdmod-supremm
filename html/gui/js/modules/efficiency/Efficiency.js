@@ -642,6 +642,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 // Update the filter check boxes to reflect what was checked previously prior to navigating to the histogram
                 var dimensions = ['Queue', 'Application', 'Resource', 'PI'];
                 var filters = Ext.getCmp('analytic_scatter_plot_' + chartConfig.analytic).aggFilters;
+                var fieldSet;
 
                 for (i = 0; i < dimensions.length; i++) {
                     // Remove all checks from drilldown view and reset filtersChecked object to be populated by what was previously applied in scatter plot view
@@ -651,15 +652,14 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         checkboxGroup[j].setValue(false);
                     }
 
-                    var fieldSet = Ext.getCmp(dimensions[i] + '_field_set')
-                    fieldSet.filtersChecked = []
+                    fieldSet = Ext.getCmp(dimensions[i] + '_field_set');
+                    fieldSet.filtersChecked = [];
 
                     // Check all filters that were applied prior to navigating to the histogram - these are stored in the aggregate filter variable in the scatter plot panel
                     for (var key in filters) {
                         if (Object.prototype.hasOwnProperty.call(filters, key)) {
                             var values = filters[key];
                             if (key === dimensions[i].toLowerCase()) {
-                                var fieldSet = Ext.getCmp(dimensions[i] + '_field_set');
                                 fieldSet.filtersChecked = values;
 
                                 var k;
