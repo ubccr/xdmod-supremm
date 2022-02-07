@@ -753,9 +753,10 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         ];
 
                         // Update help text if alternative histogram text is available
-                        if (self.config.histogram.histogramHelpText) {
+                        if (self.config.histogram.histogramHelpText){
                             var helpText = Ext.getCmp('helpText');
-                            helpText.update(self.config.histogram.histogramHelpText.join(''));
+                            helpText.update(self.config.histogram.histogramHelpText);
+                            helpText.ownerCt.doLayout();
                         }
 
                         self.updateDescription(chartStore);

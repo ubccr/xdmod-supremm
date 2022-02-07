@@ -94,6 +94,24 @@ class EfficiencyControllerProvider extends BaseControllerProvider
             null
         );
 
+        foreach ($efficiencyAnalytics as &$analyticType) {
+            foreach ($analyticType['analytics'] as &$analytic) {
+                if (is_array($analytic['documentation'])){
+                    $analytic['documentation'] = implode(' ', $analytic['documentation']);
+                }
+
+                if (is_array($analytic['statisticDescription'])){
+                    $analytic['statisticDescription'] = implode(' ', $analytic['statisticDescription']);
+                }
+
+                if (array_key_exists('histogramHelpText', $analytic['histogram'])){
+                    if (is_array($analytic['histogram']['histogramHelpText'])) {
+                        $analytic['histogram']['histogramHelpText'] = implode(' ', $analytic['histogram']['histogramHelpText']);
+                    }
+                }
+            }
+        }
+
         return $app->json(array(
             'success' => true,
             'total' => count($efficiencyAnalytics),
