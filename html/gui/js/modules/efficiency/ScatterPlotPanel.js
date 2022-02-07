@@ -989,6 +989,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 { name: 'jobid', mapping: 'jobid', type: 'int' },
                 { name: 'local_job_id', mapping: 'local_job_id', type: 'int' },
                 { name: 'start_time_ts', mapping: 'start_time_ts', type: 'int' },
+                { name: 'timezone', mapping: 'timezone', type: 'string' },
                 { name: 'cpu_user', mapping: 'cpu_user', type: 'string' },
                 { name: 'gpu_usage', mapping: 'gpu_usage', type: 'int' },
                 { name: 'max_memory', mapping: 'max_memory', type: 'int' },
@@ -1005,8 +1006,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     id: 'cpu_user_value',
                     dataIndex: 'cpu_user',
                     header: 'CPU User Value',
-                    renderer: function (value) {
-                        return (Number(value) * 100).toFixed(2) + '%';
+                    renderer: function (value, p, r) {
+                        if (!r.json.cpu_user) {
+                            return String(r.json.cpu_user);
+                        }
+
+                        return (r.json.cpu_user * 100).toFixed(2) + '%';
                     }
                 };
                 break;
@@ -1016,7 +1021,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'gpu_usage',
                     header: 'GPU Usage Value',
                     renderer: function (value, p, r) {
-                        return (Number(r.json.gpu_usage) * 100).toFixed(2) + '%';
+                        if (!r.json.gpu_usage) {
+                            return String(r.json.gpu_usage);
+                        }
+
+                        return (r.json.gpu_usage * 100).toFixed(2) + '%';
                     }
                 };
                 break;
@@ -1026,7 +1035,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'max_memory',
                     header: 'Max Memory',
                     renderer: function (value, p, r) {
-                        return (Number(r.json.max_memory) * 100).toFixed(2) + '%';
+                        if (!r.json.max_memory) {
+                            return String(r.json.max_memory);
+                        }
+
+                        return (r.json.max_memory * 100).toFixed(2) + '%';
                     }
                 };
                 break;
@@ -1036,7 +1049,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'catastrophe',
                     header: 'Catastrophe',
                     renderer: function (value, p, r) {
-                        return (Number(r.json.catastrophe));
+                        if (!r.json.catastrophe) {
+                            return String(r.json.catastrophe);
+                        }
+
+                        return (r.json.catastrophe * 100).toFixed(5);
                     }
                 };
                 break;
@@ -1068,12 +1085,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     menuDisabled: true
                 },
                 columns: [{
-                    width: 175,
                     id: 'start_time_ts',
                     dataIndex: 'start_time_ts',
                     header: 'Start Time',
-                    renderer: function (value) {
-                        return new Date(value * 1000);
+                    width: 140,
+                    renderer: function (value, p, r) {
+                        return moment.tz(value * 1000, r.json.timezone).format('Y-MM-DD HH:mm:ss z');
                     }
                 }, {
                     id: 'raw_data_username',
@@ -1122,7 +1139,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         var rawData = new Ext.Window({
             id: 'raw_data_window',
             height: 510,
-            width: 480,
+            width: 500,
             closable: true,
             border: false,
             modal: true,
