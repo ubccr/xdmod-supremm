@@ -647,23 +647,29 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 // Update the filter check boxes to reflect what was checked previously prior to navigating to the histogram
                 var dimensions = ['Queue', 'Application', 'Resource', 'PI'];
                 var filters = Ext.getCmp('analytic_scatter_plot_' + chartConfig.analytic).aggFilters;
+                var fieldSet;
 
                 for (i = 0; i < dimensions.length; i++) {
-                    // Get all boxes that were checked in drilldown view and remove the checks
-                    var filterList = Ext.getCmp('checkbox_group' + dimensions[i]).getValue();
+                    // Remove all checks from drilldown view and reset filtersChecked object to be populated by what was previously applied in scatter plot view
+                    var checkboxGroup = Ext.getCmp('checkbox_group' + dimensions[i]).getValue();
                     var j;
-                    for (j = 0; j < filterList.length; j++) {
-                        Ext.getCmp('checkbox_group' + dimensions[i]).setValue(filterList[j].id, false);
+                    for (j = 0; j < checkboxGroup.length; j++) {
+                        checkboxGroup[j].setValue(false);
                     }
+
+                    fieldSet = Ext.getCmp(dimensions[i] + '_field_set');
+                    fieldSet.filtersChecked = [];
 
                     // Check all filters that were applied prior to navigating to the histogram - these are stored in the aggregate filter variable in the scatter plot panel
                     for (var key in filters) {
                         if (Object.prototype.hasOwnProperty.call(filters, key)) {
                             var values = filters[key];
                             if (key === dimensions[i].toLowerCase()) {
+                                fieldSet.filtersChecked = values;
+
                                 var k;
                                 for (k = 0; k < values.length; k++) {
-                                    Ext.getCmp('checkbox_group' + dimensions[i]).setValue(values[k], true);
+                                    Ext.getCmp('checkbox_group' + dimensions[i]).setValue(values[k].id, true);
                                 }
                             }
                         }
