@@ -101,9 +101,16 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
             new Ext.Panel({
                 region: 'center',
                 layout: 'border',
-                items: [details, detailedAnalyticPanel,
-                    descriptionPanel]
-
+                items: [
+                    details,
+                    detailedAnalyticPanel,
+                    descriptionPanel
+                ],
+                listeners: {
+                    resize: function(){
+                        this.doLayout()
+                    }
+                }
             })
 
         ];
