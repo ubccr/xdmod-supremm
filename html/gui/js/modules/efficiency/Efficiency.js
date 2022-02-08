@@ -12,7 +12,12 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     // Portal Module Toolbar Config
     usesToolbar: true,
     toolbarItems: {
-        durationSelector: true
+        durationSelector: {
+            enable: true,
+            config: {
+                defaultCannedDateIndex: 2
+            }
+        }
     },
 
     initComponent: function () {
@@ -218,7 +223,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         // Template for creating cards for each analytic
         '<div class="analyticCardContents">',
         '<div class="analyticHeader">',
-        '<h1>{analytic}</h1>',
+        '<h1>{title}</h1>',
         '<p>{description}</p>',
         '</div>',
         '<div class="analyticScatterPlotThumbnail" id="{analytic}Chart"></div>',
@@ -596,7 +601,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         // Add new breadcrumb for the scatter plot
         var btn = {
             xtype: 'button',
-            text: chartConfig.analytic,
+            text: chartConfig.title,
             id: chartConfig.analytic + '_breadcrumb_btn',
             disabled: true,
             iconCls: 'scatter',

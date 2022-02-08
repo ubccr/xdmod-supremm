@@ -156,12 +156,59 @@ class EfficiencyControllerProvider extends BaseControllerProvider
             throw new AccessDeniedException('access denied to ' . json_encode($forbiddenStats));
         }
 
-        switch ($analytic) {
-            case 'CPU Usage':
-            case 'GPU Usage':
-            case 'Memory Headroom':
-            case 'Homogeneity':
-            case 'Wall Time Accuracy':
+        if ($analytic !== 'Short Job Count') {
+            $query = new \DataWarehouse\Query\AggregateQuery(
+                $config->realm,
+                $config->aggregation_unit,
+                $config->start_date,
+                $config->end_date,
+                $config->group_by
+            );
+
+            $allRoles = $user->getAllRoles();
+            $roles = $query->setMultipleRoleParameters($allRoles, $user);
+
+            foreach ($config->statistics as $stat) {
+                $query->addStat($stat);
+            }
+
+            if (property_exists($config, 'filters')) {
+                $query->setRoleParameters($config->filters);
+            }
+
+            if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
+                throw new BadRequestException('Malformed config property order_by');
+            }
+            $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
+
+            $query->addOrderBy($config->order_by->field, $dirn);
+
+            $dataset = new \DataWarehouse\Data\SimpleDataset($query);
+            $results = $dataset->getResults($limit, $start);
+            foreach ($results as $key => &$val) {
+                $val['name'] = $val[$config->group_by . '_name'];
+                $val['id'] = $val[$config->group_by . '_id'];
+                $val['short_name'] = $val[$config->group_by . '_short_name'];
+                $val['order_id'] = $val[$config->group_by . '_order_id'];
+                unset($val[$config->group_by . '_id']);
+                unset($val[$config->group_by . '_name']);
+                unset($val[$config->group_by . '_short_name']);
+                unset($val[$config->group_by . '_order_id']);
+
+                if ($val[$config->statistics[0]] == null || $val[$config->statistics[1]] == null){
+                    unset($results[$key]);
+                }
+            }
+
+            $results = array_values($results);
+            //Dataset that shows detailed information that the user has access to
+            $datasets['results'] = $results;
+            $datasets['hiddenData'] = array();
+            /*
+                If user is restricted from viewing data, get dataset that has all points without name attached
+                Runs the same query as above without role restrictions and returns data without name
+            */
+            if (count($roles) > 0) {
                 $query = new \DataWarehouse\Query\AggregateQuery(
                     $config->realm,
                     $config->aggregation_unit,
@@ -169,9 +216,6 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     $config->end_date,
                     $config->group_by
                 );
-
-                $allRoles = $user->getAllRoles();
-                $roles = $query->setMultipleRoleParameters($allRoles, $user);
 
                 foreach ($config->statistics as $stat) {
                     $query->addStat($stat);
@@ -189,11 +233,10 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                 $query->addOrderBy($config->order_by->field, $dirn);
 
                 $dataset = new \DataWarehouse\Data\SimpleDataset($query);
-                $results = $dataset->getResults($limit, $start);
-                foreach ($results as $key => &$val) {
-                    $val['name'] = $val[$config->group_by . '_name'];
+                $data = $dataset->getResults($limit, $start);
+
+                foreach ($data as $key => &$val) {
                     $val['id'] = $val[$config->group_by . '_id'];
-                    $val['short_name'] = $val[$config->group_by . '_short_name'];
                     $val['order_id'] = $val[$config->group_by . '_order_id'];
                     unset($val[$config->group_by . '_id']);
                     unset($val[$config->group_by . '_name']);
@@ -201,72 +244,86 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     unset($val[$config->group_by . '_order_id']);
 
                     if ($val[$config->statistics[0]] == null || $val[$config->statistics[1]] == null){
-                        unset($results[$key]);
+                        unset($data[$key]);
                     }
                 }
 
-                $results = array_values($results);
-                //Dataset that shows detailed information that the user has access to
-                $datasets['results'] = $results;
-                $datasets['hiddenData'] = array();
-                /*
-                    If user is restricted from viewing data, get dataset that has all points without name attached
-                    Runs the same query as above without role restrictions and returns data without name
-                */
-                if (count($roles) > 0) {
-                    $query = new \DataWarehouse\Query\AggregateQuery(
-                        $config->realm,
-                        $config->aggregation_unit,
-                        $config->start_date,
-                        $config->end_date,
-                        $config->group_by
-                    );
+                $data = array_values($data);
 
-                    foreach ($config->statistics as $stat) {
-                        $query->addStat($stat);
+                //Dataset that shows only data points and no identifying information
+                $datasets['hiddenData'] = $data;
+            }
+
+            return $app->json(
+                array(
+                    'results' => [$datasets],
+                    'total' => $dataset->getTotalPossibleCount(),
+                    'success' => true
+                )
+            );
+        } else {
+            $query = new \DataWarehouse\Query\AggregateQuery(
+                $config->realm,
+                $config->aggregation_unit,
+                $config->start_date,
+                $config->end_date,
+                $config->group_by
+            );
+
+            $allRoles = $user->getAllRoles();
+            $roles = $query->setMultipleRoleParameters($allRoles, $user);
+
+            $query->addStat($config->statistics[0]);
+
+            if (property_exists($config, 'filters')) {
+                $query->setRoleParameters($config->filters);
+            }
+
+            if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
+                throw new BadRequestException('Malformed config property order_by');
+            }
+
+            $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
+            $query->addOrderBy($config->order_by->field, $dirn);
+
+            $usageStatDataSet = new \DataWarehouse\Data\SimpleDataset($query);
+            $usageResults = $usageStatDataSet->getResults($limit, $start);
+
+            if (property_exists($config, 'mandatory_filters')) {
+                $query->setRoleParameters($config->mandatory_filters);
+            }
+
+            $efficiencyStatDataset = new \DataWarehouse\Data\SimpleDataset($query);
+            $efficiencyResults = $efficiencyStatDataset->getResults($limit, $start);
+
+            foreach($efficiencyResults as &$val){
+                $val['short_job_count'] = $val['job_count'];
+                $val['name'] = $val[$config->group_by . '_name'];
+                $val['id'] = $val[$config->group_by . '_id'];
+                $val['short_name'] = $val[$config->group_by . '_short_name'];
+                $val['order_id'] = $val[$config->group_by . '_order_id'];
+                unset($val['job_count']);
+                unset($val[$config->group_by . '_id']);
+                unset($val[$config->group_by . '_name']);
+                unset($val[$config->group_by . '_short_name']);
+                unset($val[$config->group_by . '_order_id']);
+
+                foreach($usageResults as $val2){
+                    if($val2[$config->group_by . '_id'] == $val['id']){
+                        $val['job_count'] = $val2['job_count'];
                     }
-
-                    if (property_exists($config, 'filters')) {
-                        $query->setRoleParameters($config->filters);
-                    }
-
-                    if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-                        throw new BadRequestException('Malformed config property order_by');
-                    }
-                    $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
-
-                    $query->addOrderBy($config->order_by->field, $dirn);
-
-                    $dataset = new \DataWarehouse\Data\SimpleDataset($query);
-                    $data = $dataset->getResults($limit, $start);
-
-                    foreach ($data as $key => &$val) {
-                        $val['id'] = $val[$config->group_by . '_id'];
-                        $val['order_id'] = $val[$config->group_by . '_order_id'];
-                        unset($val[$config->group_by . '_id']);
-                        unset($val[$config->group_by . '_name']);
-                        unset($val[$config->group_by . '_short_name']);
-                        unset($val[$config->group_by . '_order_id']);
-
-                        if ($val[$config->statistics[0]] == null || $val[$config->statistics[1]] == null){
-                            unset($data[$key]);
-                        }
-                    }
-
-                    $data = array_values($data);
-
-                    //Dataset that shows only data points and no identifying information
-                    $datasets['hiddenData'] = $data;
                 }
+            }
 
-                return $app->json(
-                    array(
-                        'results' => [$datasets],
-                        'total' => $dataset->getTotalPossibleCount(),
-                        'success' => true
-                    )
-                );
-            case "Short Job Count":
+            //Dataset that shows detailed information that the user has access to
+            $datasets['results'] = $efficiencyResults;
+            $datasets['hiddenData'] = array();
+
+            /*
+                If user is restricted from viewing data, get dataset that has all points without name attached
+                Runs the same query as above without role restrictions and returns data without name
+            */
+            if (count($roles) > 0) {
                 $query = new \DataWarehouse\Query\AggregateQuery(
                     $config->realm,
                     $config->aggregation_unit,
@@ -274,9 +331,6 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     $config->end_date,
                     $config->group_by
                 );
-
-                $allRoles = $user->getAllRoles();
-                $roles = $query->setMultipleRoleParameters($allRoles, $user);
 
                 $query->addStat($config->statistics[0]);
 
@@ -292,20 +346,18 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                 $query->addOrderBy($config->order_by->field, $dirn);
 
                 $usageStatDataSet = new \DataWarehouse\Data\SimpleDataset($query);
-                $usageResults = $usageStatDataSet->getResults($limit, $start);
+                $usageData = $usageStatDataSet->getResults($limit, $start);
 
                 if (property_exists($config, 'mandatory_filters')) {
                     $query->setRoleParameters($config->mandatory_filters);
                 }
 
                 $efficiencyStatDataset = new \DataWarehouse\Data\SimpleDataset($query);
-                $efficiencyResults = $efficiencyStatDataset->getResults($limit, $start);
+                $efficiencyData = $efficiencyStatDataset->getResults($limit, $start);
 
-                foreach($efficiencyResults as &$val){
+                foreach($efficiencyData as &$val){
                     $val['short_job_count'] = $val['job_count'];
-                    $val['name'] = $val[$config->group_by . '_name'];
                     $val['id'] = $val[$config->group_by . '_id'];
-                    $val['short_name'] = $val[$config->group_by . '_short_name'];
                     $val['order_id'] = $val[$config->group_by . '_order_id'];
                     unset($val['job_count']);
                     unset($val[$config->group_by . '_id']);
@@ -313,80 +365,23 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     unset($val[$config->group_by . '_short_name']);
                     unset($val[$config->group_by . '_order_id']);
 
-                    foreach($usageResults as $val2){
+                    foreach($usageData as $val2){
                         if($val2[$config->group_by . '_id'] == $val['id']){
                             $val['job_count'] = $val2['job_count'];
                         }
                     }
                 }
 
-                //Dataset that shows detailed information that the user has access to
-                $datasets['results'] = $efficiencyResults;
-                $datasets['hiddenData'] = array();
+                $datasets['hiddenData'] = $efficiencyData;
+            }
 
-                /*
-                    If user is restricted from viewing data, get dataset that has all points without name attached
-                    Runs the same query as above without role restrictions and returns data without name
-                */
-                if (count($roles) > 0) {
-                    $query = new \DataWarehouse\Query\AggregateQuery(
-                        $config->realm,
-                        $config->aggregation_unit,
-                        $config->start_date,
-                        $config->end_date,
-                        $config->group_by
-                    );
-
-                    $query->addStat($config->statistics[0]);
-
-                    if (property_exists($config, 'filters')) {
-                        $query->setRoleParameters($config->filters);
-                    }
-
-                    if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-                        throw new BadRequestException('Malformed config property order_by');
-                    }
-
-                    $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
-                    $query->addOrderBy($config->order_by->field, $dirn);
-
-                    $usageStatDataSet = new \DataWarehouse\Data\SimpleDataset($query);
-                    $usageData = $usageStatDataSet->getResults($limit, $start);
-
-                    if (property_exists($config, 'mandatory_filters')) {
-                        $query->setRoleParameters($config->mandatory_filters);
-                    }
-
-                    $efficiencyStatDataset = new \DataWarehouse\Data\SimpleDataset($query);
-                    $efficiencyData = $efficiencyStatDataset->getResults($limit, $start);
-
-                    foreach($efficiencyData as &$val){
-                        $val['short_job_count'] = $val['job_count'];
-                        $val['id'] = $val[$config->group_by . '_id'];
-                        $val['order_id'] = $val[$config->group_by . '_order_id'];
-                        unset($val['job_count']);
-                        unset($val[$config->group_by . '_id']);
-                        unset($val[$config->group_by . '_name']);
-                        unset($val[$config->group_by . '_short_name']);
-                        unset($val[$config->group_by . '_order_id']);
-
-                        foreach($usageData as $val2){
-                            if($val2[$config->group_by . '_id'] == $val['id']){
-                                $val['job_count'] = $val2['job_count'];
-                            }
-                        }
-                    }
-
-                    $datasets['hiddenData'] = $efficiencyData;
-                }
-
-                return $app->json(
-                    array(
-                        'results' => [$datasets],
-                        'total' => $efficiencyStatDataset->getTotalPossibleCount(),
-                        'success' => true
-                    )
-                );
+            return $app->json(
+                array(
+                    'results' => [$datasets],
+                    'total' => $efficiencyStatDataset->getTotalPossibleCount(),
+                    'success' => true
+                )
+            );
         }
     }
 
@@ -417,14 +412,13 @@ class EfficiencyControllerProvider extends BaseControllerProvider
 
             foreach ($buckets as $bucket) {
                 if (array_search($bucket['id'], array_column($drillDowns, 'id'), true) === false) {
-                    $chartData[] = ['y' => 0, 'drilldown' => array('id' => $bucket['id'], 'label' => $bucket['name'])];
+                    $chartData[] = ['y' => 0, 'drilldown' => array('id' => $bucket['id'], 'label' => $bucket['label'])];
                 }
             }
 
             switch($dimension){
                 case 'cpuuser':
                 case 'gpu_usage_bucketid':
-                case 'max_mem':
                 case 'wall_time_accuracy_bucketid':
                     foreach ($chartData as &$dataPoint) {
                         if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 2 || $dataPoint['drilldown']['id'] == 3) {
@@ -447,6 +441,30 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     //Move NA bucket to end of array
                     $key = array_search('gray', array_column($chartData, 'color'));
                     if( $key === 0 ){
+                        $naBucket = array_shift($chartData);
+                        array_push($chartData, $naBucket);
+                    }
+
+                    $results['data'][0]['series'][0]['data'] = $chartData;
+                    break;
+                case 'max_mem':
+                    foreach ($chartData as &$dataPoint) {
+                        if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 10) {
+                            $dataPoint['color'] = '#FF0000';
+                        } elseif ($dataPoint['drilldown']['id'] == 0) {
+                            $dataPoint['color'] = 'gray';
+                        } else {
+                            $dataPoint['color'] = "#50B432";
+                        }
+                    }
+
+                    array_multisort(array_map(function ($element) {
+                        return $element['drilldown']['id'];
+                    }, $chartData), SORT_ASC, $chartData);
+
+                    //Move NA bucket to end of array
+                    $key = array_search('gray', array_column($chartData, 'color'));
+                    if ($key === 0) {
                         $naBucket = array_shift($chartData);
                         array_push($chartData, $naBucket);
                     }
@@ -541,9 +559,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         // Change the name key for each dimension value to "long_name".
         $dimensionValuesData = $dimensionValues['data'];
         foreach ($dimensionValuesData as &$dimensionValue) {
-            $dimensionValue['long_name'] = html_entity_decode($dimensionValue['name']);
-            $dimensionValue['name'] = $dimensionValue['long_name'];
-            $dimensionValue['short_name'] = html_entity_decode($dimensionValue['short_name']);
+            $dimensionValue['label'] = $dimensionValue['short_name'];
         }
 
         // Return the found dimension values.

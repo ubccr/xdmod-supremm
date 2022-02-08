@@ -2186,7 +2186,7 @@ module.exports = {
                 dimension: true,
                 category: 'Metrics',
                 table: 'supremmfact',
-                sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * gpu_usage, -1.0) > cb.min AND coalesce(100.0 * gpu_usage, -1.0) <= cb.max)',
+                sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(100.0 * gpu_usage, -1.0) >= cb.min AND coalesce(100.0 * gpu_usage, -1.0) < cb.max)',
                 label: 'GPU Active Value',
                 dimension_table: 'percentages_buckets',
                 show_all_dimension_values: true

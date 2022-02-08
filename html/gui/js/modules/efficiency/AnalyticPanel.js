@@ -37,7 +37,6 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
             layout: 'card',
             activeItem: 0,
             split: true,
-            autoScroll: true,
             region: 'center',
             border: false,
             items: [
@@ -45,8 +44,6 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                     id: 'analytic_scatter_plot_' + self.config.analytic,
                     config: self.config,
                     border: false,
-                    boxMinWidth: 800,
-                    boxMinHeight: 600,
                     autoScroll: true,
                     panelSettings: {
                         url: XDMoD.REST.url + '/efficiency/scatterPlot/' + self.config.analytic,

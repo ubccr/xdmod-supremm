@@ -12,7 +12,8 @@ BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}__PRERELEASE__-%{relea
 BuildArch:     noarch
 BuildRequires: php-cli
 Requires:      xdmod >= 10.0.0, xdmod < 10.1.0
-Requires:      nodejs npm
+Requires:      nodejs >= 16.13.2
+BuildRequires: npm >= 8.1.2
 Requires:      php-pecl-mongo
 
 %description

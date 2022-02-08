@@ -59,6 +59,7 @@ class RawData extends \DataWarehouse\Query\Query implements \DataWarehouse\Query
 													new TableField($personTable,"id") ));
 
 		$this->addField(new TableField($resourcefactTable,"code", 'resource'));
+        $this->addField(new TableField($resourcefactTable, "timezone"));
 		$this->addField(new TableField($personTable, "long_name", "name"));
 
         $this->addField( new TableField($factTable, "_id", "jobid") );

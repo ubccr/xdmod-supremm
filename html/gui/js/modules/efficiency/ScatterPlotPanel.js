@@ -22,20 +22,21 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 chart: {
                     renderTo: self.id + 'ScatterPlot',
                     type: 'scatter',
-                    zoomType: 'xy'
+                    zoomType: 'xy',
+                    marginLeft: 200
                 },
                 colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
                 title:
                 {
-                    x: 130,
+                    x: 100,
                     style: {
                         color: '#444b6e',
                         fontSize: 20
                     },
-                    text: self.config.analytic
+                    text: self.config.title
                 },
                 subtitle: {
-                    x: 130
+                    x: 100
                 },
                 loading: {
                     style: {
@@ -58,13 +59,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     positioner: function (labelWidth, labelHeight, point) {
                         var tooltipX;
                         var tooltipY;
-                        if (point.plotX < self.chart.plotWidth / 2) {
-                            tooltipX = point.plotX + 300;
-                        } else if (point.plotX > 50) {
-                            tooltipX = point.plotX - 50;
+                        if (point.plotX + labelWidth > self.chart.plotWidth) {
+                            tooltipX = (point.plotX + self.chart.plotLeft) - (labelWidth - 20);
+                        } else {
+                            tooltipX = point.plotX + self.chart.plotLeft + 20;
                         }
-
-                        tooltipY = point.plotY + 25;
+                        tooltipY = (point.plotY + self.chart.plotTop) - 20;
                         return {
                             x: tooltipX,
                             y: tooltipY
@@ -85,7 +85,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
                                         var btn = {
                                             xtype: 'button',
-                                            text: self.config.analytic + ' for ' + e.point.person,
+                                            text: self.config.title + ' for ' + e.point.person,
                                             disabled: true,
                                             iconCls: 'chart'
                                         };
@@ -196,6 +196,8 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             };
 
             var chartOptions = jQuery.extend(true, {}, defaultChartSettings, self.chartSettings);
+            chartOptions.chart.width = Math.max(600, self.getWidth());
+            chartOptions.chart.height = Math.max(400, self.getHeight());
 
             self.chart = new Highcharts.Chart(chartOptions);
         };
@@ -411,7 +413,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             listeners: {
                 resize: function () {
                     if (self.chart) {
-                        self.chart.reflow();
+                        self.chart.setSize(Math.max(600, self.getWidth()), Math.max(400, self.getHeight()));
                         // Update arrow size based on new chart dimensions
                         self.chart.xAxis[1].update({
                             title: {
@@ -688,7 +690,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 tickLength: 0,
                                 title: {
                                     useHTML: true,
-                                    text: "<img src='gui/images/right_arrow.png' class='" + cls + "' style='width: " + (chartWidth * (2 / 3)) + "px; height: 100px;' />",
+                                    text: "<img src='gui/images/" + self.config.histogram.arrowImg + "' class='" + cls + "' style='width: " + (chartWidth * (2 / 3)) + "px; height: 100px;' />",
                                     align: 'middle'
                                 }
                             },
@@ -766,56 +768,65 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             }
         });
 
-        var personChart = new CCR.xdmod.ui.HighChartPanel({
-            id: 'hc-panel-' + self.config.analytic,
-            person: person,
-            personId: personId,
-            boxMinWidth: 800,
-            boxMinHeight: 600,
+        var drilldownChartContainer = new Ext.Panel({
+            layout: 'fit',
+            border: false,
             autoScroll: true,
-            baseChartOptions: {
-                plotOptions: {
-                    series: {
-                        events: {
-                            click: function (e) {
-                                var dataPoint = e.point.index;
-                                var datasetId = e.point.series.userOptions.datasetId;
-                                var drilldownId = e.point.drilldown.id;
-                                var drilldownLabel = e.point.drilldown.label;
-                                var jobGrid = Ext.getCmp('cpu_user_job_information');
+            items: [
+                new CCR.xdmod.ui.HighChartPanel({
+                id: 'hc-panel-' + self.config.analytic,
+                person: person,
+                personId: personId,
+                boxMinWidth: 600,
+                boxMinHeight: 400,
+                baseChartOptions: {
+                    chart: {
+                        marginLeft: 175
+                    },
+                    plotOptions: {
+                        series: {
+                            events: {
+                                click: function (e) {
+                                    var dataPoint = e.point.index;
+                                    var datasetId = e.point.series.userOptions.datasetId;
+                                    var drilldownId = e.point.drilldown.id;
+                                    var drilldownLabel = e.point.drilldown.label;
+                                    var jobGrid = Ext.getCmp('cpu_user_job_information');
 
-                                if (jobGrid) {
-                                    jobGrid.destroy();
+                                    if (jobGrid) {
+                                        jobGrid.destroy();
+                                    }
+
+                                    self.getJobList(personId, person, dataPoint, datasetId, drilldownId, drilldownLabel);
                                 }
-
-                                self.getJobList(personId, person, dataPoint, datasetId, drilldownId, drilldownLabel);
                             }
                         }
                     }
-                }
-            },
-            store: chartStore,
-            listeners: {
-                resize: function () {
-                    if (personChart.chart.xAxis[1]) {
-                        // Update arrow size based on new chart dimensions
-                        personChart.chart.xAxis[1].update({
-                            title: {
-                                text: "<img src='gui/images/right_arrow.png' class='" + cls + "' style='width: " + (personChart.chart.plotWidth * (2 / 3)) + "px; height: 100px;' />"
-                            }
-                        });
-                        personChart.chart.yAxis[1].update({
-                            title: {
-                                text: "<img src='gui/images/right_arrow.png' style='width: " + (personChart.chart.plotHeight * (2 / 3)) + "px; height: 100px;' />"
-                            }
-                        });
+                },
+                store: chartStore,
+                listeners: {
+                    resize: function (t, adjWidth, adjHeight, rawWidth, rawHeight) {
+                        if (this.chart.xAxis[1]) {
+                            // Update arrow size based on new chart dimensions
+                            this.chart.xAxis[1].update({
+                                title: {
+                                    text: "<img src='gui/images/" + self.config.histogram.arrowImg + "' class='" + cls + "' style='width: " + (adjWidth * (2 / 3)) + "px; height: 100px;' />"
+                                }
+                            });
+                            this.chart.yAxis[1].update({
+                                title: {
+                                    text: "<img src='gui/images/right_arrow.png' style='width: " + (adjHeight * (2 / 3)) + "px; height: 100px;' />"
+                                }
+                            });
+                        }
                     }
                 }
-            }
+                })
+            ]
         });
 
         var analyticPanel = Ext.getCmp('detailed_analytic_panel_' + this.config.analytic);
-        analyticPanel.add(personChart);
+        analyticPanel.add(drilldownChartContainer);
         analyticPanel.layout.setActiveItem(1);
         analyticPanel.doLayout();
     },
@@ -986,6 +997,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 { name: 'jobid', mapping: 'jobid', type: 'int' },
                 { name: 'local_job_id', mapping: 'local_job_id', type: 'int' },
                 { name: 'start_time_ts', mapping: 'start_time_ts', type: 'int' },
+                { name: 'timezone', mapping: 'timezone', type: 'string' },
                 { name: 'cpu_user', mapping: 'cpu_user', type: 'string' },
                 { name: 'gpu_usage', mapping: 'gpu_usage', type: 'int' },
                 { name: 'max_memory', mapping: 'max_memory', type: 'int' },
@@ -1002,8 +1014,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     id: 'cpu_user_value',
                     dataIndex: 'cpu_user',
                     header: 'CPU User Value',
-                    renderer: function (value) {
-                        return (Number(value) * 100).toFixed(2) + '%';
+                    renderer: function (value, p, r) {
+                        if (!r.json.cpu_user) {
+                            return String(r.json.cpu_user);
+                        }
+
+                        return (r.json.cpu_user * 100).toFixed(2) + '%';
                     }
                 };
                 break;
@@ -1013,7 +1029,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'gpu_usage',
                     header: 'GPU Usage Value',
                     renderer: function (value, p, r) {
-                        return (Number(r.json.gpu_usage) * 100).toFixed(2) + '%';
+                        if (!r.json.gpu_usage) {
+                            return String(r.json.gpu_usage);
+                        }
+
+                        return (r.json.gpu_usage * 100).toFixed(2) + '%';
                     }
                 };
                 break;
@@ -1023,7 +1043,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'max_memory',
                     header: 'Max Memory',
                     renderer: function (value, p, r) {
-                        return (Number(r.json.max_memory) * 100).toFixed(2) + '%';
+                        if (!r.json.max_memory) {
+                            return String(r.json.max_memory);
+                        }
+
+                        return (r.json.max_memory * 100).toFixed(2) + '%';
                     }
                 };
                 break;
@@ -1033,7 +1057,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     dataIndex: 'catastrophe',
                     header: 'Catastrophe',
                     renderer: function (value, p, r) {
-                        return (Number(r.json.catastrophe));
+                        if (!r.json.catastrophe) {
+                            return String(r.json.catastrophe);
+                        }
+
+                        return (r.json.catastrophe * 100).toFixed(5);
                     }
                 };
                 break;
@@ -1065,12 +1093,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     menuDisabled: true
                 },
                 columns: [{
-                    width: 175,
                     id: 'start_time_ts',
                     dataIndex: 'start_time_ts',
                     header: 'Start Time',
-                    renderer: function (value) {
-                        return new Date(value * 1000);
+                    width: 140,
+                    renderer: function (value, p, r) {
+                        return moment.tz(value * 1000, r.json.timezone).format('Y-MM-DD HH:mm:ss z');
                     }
                 }, {
                     id: 'raw_data_username',
@@ -1119,7 +1147,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         var rawData = new Ext.Window({
             id: 'raw_data_window',
             height: 510,
-            width: 480,
+            width: 500,
             closable: true,
             border: false,
             modal: true,

@@ -22,7 +22,7 @@ The Job Performance (SUPReMM) XDMoD module requires all of the software for XDMo
 the following additional packages:
 
 - [PHP MongoClient][]
-- [nodejs][] 6.14.4+
+- [nodejs][] 16.13.2
 
 [nodejs]:          https://nodejs.org
 [PHP MongoClient]:     http://php.net/manual/en/class.mongoclient.php
