@@ -43,7 +43,17 @@
                     "group_by" : "cpuuser",
                     "groupByTitle": "CPU User",
                     "rotate": true,
-                    "arrowImg" : "right_arrow.png"
+                    "arrowImg": "right_arrow.png",
+                    "histogramHelpText": [
+                        "<div class='text'>",
+                        "<h6> What is this analytic? </h6>",
+                        "<p>The chart below shows the percentage of time that the CPU cores were idle compared to overall usage.</p>",
+                        "<h6> Why is this analytic important? </h6>",
+                        "<p>Making sure jobs use the right number of CPU cores helps ensure that the compute resources are used efficiently.</p>",
+                        "<h6> How do I improve future jobs? </h6>",
+                        "<p>For typical compute intensive jobs, the overall CPU usage should be &gt; 90 % (i.e. CPU core idle &lt; 10 %). Consider requesting fewer CPU cores for future jobs, or adjust the configuration settings of the software to make use of all the cores that have been requested.</p>",
+                        "</div>"
+                    ]
                 }
             },
             {
@@ -85,7 +95,17 @@
                     "group_by" : "gpu_usage_bucketid",
                     "groupByTitle": "GPU Active Value",
                     "rotate": true,
-                    "arrowImg" : "right_arrow.png"
+                    "arrowImg": "right_arrow.png",
+                    "histogramHelpText": [
+                        "<div class='text'>",
+                        "<h6> What is this analytic? </h6>",
+                        "<p>The chart below shows the percentage of time that the GPUs were busy compared to overall usage.</p>",
+                        "<h6> Why is this analytic important? </h6>",
+                        "<p>Making sure jobs use the right number of GPUs helps ensure that the compute resources are used efficiently.</p>",
+                        "<h6> How do I improve future jobs? </h6>",
+                        "<p>Try to ensure that the number of GPUs requested matches the number required. If a code is not using all GPUs adjust the configuration settings of the software to make use of all the requested GPUs or consider requesting fewer GPUs in future jobs. If you have jobs with 0% GPU usage, double check that the code is compiled correctly to make use of the GPUs and is not defaulting to CPU-only calculations.</p>",
+                        "</div>"
+                    ]
                 }
             },
             {
@@ -127,7 +147,17 @@
                     "group_by" : "max_mem",
                     "groupByTitle": "Peak Memory Usage (%)",
                     "rotate": true,
-                    "arrowImg" : "double_headed_arrow.png"
+                    "arrowImg": "double_headed_arrow.png",
+                    "histogramHelpText": [
+                        "<div class='text'>",
+                        "<h6> What is this analytic? </h6>",
+                        "<p>The chart below compares the highest memory usage for jobs to overall usage. A value of 100% Max Memory indicates that a job used all of the allocated memory at some point during the job.</p>",
+                        "<h6> Why is this analytic important? </h6>",
+                        "<p>Matching the requested memory to the required memory helps to ensure that the compute resources are used efficiently.</p>",
+                        "<h6> How do I improve future jobs? </h6>",
+                        "<p>Try to aim to have the maximum memory for a job to be 60 - 80% of the total requested. If you have large memory requirements, consider submitting jobs in the large memory partition (if available). If your job has lower memory requirements, then specifying an accurate requested memory in the scheduler configuration parameters could reduce the wait time for jobs.</p>",
+                        "</div>"
+                    ]
                 }
             },
             {
@@ -169,7 +199,7 @@
                     "group_by" : "homogeneity_bucket_id",
                     "groupByTitle": "Homogeneity",
                     "rotate": true,
-                    "arrowImg" : "right_arrow.png"
+                    "arrowImg": "right_arrow.png"
                 }
             }
         ]
@@ -217,7 +247,17 @@
                     "group_by" : "wall_time_accuracy_bucketid",
                     "groupByTitle": "Wall Time Accuracy Value",
                     "rotate": true,
-                    "arrowImg" : "right_arrow.png"
+                    "arrowImg": "right_arrow.png",
+                    "histogramHelpText": [
+                        "<div class='text'>",
+                        "<h6> What is this analytic? </h6>",
+                        "<p> A measure of wall time used compared to the wall time requested.</p>",
+                        "<h6> Why is this analytic important? </h6>",
+                        "<p>The closer the requested wall time is to the actual wall time the better the scheduler efficiency. You will likely see shorter wait times for your job to run if you provide an accurate wall time request.</p>",
+                        "<h6> How do I improve future jobs? </h6>",
+                        "<p>Try to set the requested wall time for future jobs to be close to the amount of time that you expect it to run.</p>",
+                        "</div>"
+                    ]
                 }
             },
             {
@@ -260,7 +300,17 @@
                     "group_by" : "jobwalltime",
                     "groupByTitle": "Job Wall Time",
                     "rotate": true,
-                    "arrowImg" : "right_arrow.png"
+                    "arrowImg": "right_arrow.png",
+                    "histogramHelpText": [
+                        "<div class='text'>",
+                        "<h6> What is this analytic? </h6>",
+                        "<p>The analytic identifies users who are running a large proportion of short jobs.</p>",
+                        "<h6> Why is this analytic important? </h6>",
+                        "<p>The load on the scheduler software increases with the total number of jobs that are tracked. There is also a fixed overhead for setup and teardown when jobs start and end, which is independent of the job's wall time. Excessive short jobs can cause scheduler slowness for all users of the cluster and under extreme circumstances cause job failures.</p>",
+                        "<h6> How do I improve future jobs? </h6>",
+                        "<p>Try to minimize the number of short running jobs. This can be accomplished by aggregating multiple tasks into a smaller number of longer-running jobs.</p>",
+                        "</div>"
+                    ]
                 }
             }
         ]
