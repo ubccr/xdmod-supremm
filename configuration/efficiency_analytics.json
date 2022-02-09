@@ -151,7 +151,7 @@
                     "histogramHelpText": [
                         "<div class='text'>",
                         "<h6> What is this analytic? </h6>",
-                        "<p>The chart below compares the highest memory usage for jobs to overall usage. A value of 100% Max Memory indicates that a job used all of the allocated memory at some point during the job.</p>",
+                        "<p>The chart below shows core-hours binned by the peak memory usage. A value of 100% peak usage indicates that a job used all of the allocated memory at some point during the job.</p>",
                         "<h6> Why is this analytic important? </h6>",
                         "<p>Matching the requested memory to the required memory helps to ensure that the compute resources are used efficiently.</p>",
                         "<h6> How do I improve future jobs? </h6>",
