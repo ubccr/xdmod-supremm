@@ -82,7 +82,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
                 var scatterPlotPanel = Ext.getCmp('analytic_scatter_plot_' + analytic);
 
-                var filterObj;
+                var filterObj = {};
 
                 // Active item is scatter plot
                 if (activeItemIndex === 0) {
@@ -91,11 +91,18 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     var analyticConfig = analyticPanel.config;
 
                     // If filters have been applied, keep applied
-                    // Otherwise, only use filters that are needed for initial plot
                     if (scatterPlotPanel.aggFilters) {
-                        filterObj = scatterPlotPanel.aggFilters;
-                    } else {
-                        filterObj = analyticConfig.filters;
+                        var dimensionObj = {};
+                        for (dimension in scatterPlotPanel.aggFilters) {
+                            var filterValues = [];
+
+                            for (var i=0; i<scatterPlotPanel.aggFilters[dimension].length; i++) {
+                                filterValues.push(scatterPlotPanel.aggFilters[dimension][i].filterId);
+                            }
+
+                            dimensionObj[dimension] = filterValues;
+                            jQuery.extend(filterObj, dimensionObj);
+                        }
                     }
 
                     scatterPlotPanel.store.reload({
