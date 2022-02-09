@@ -12,7 +12,6 @@
                     "avg_percent_cpu_idle",
                     "wall_time"
                 ],
-                "filters" : {},
                 "statisticLabels": [
                     "Average CPU % Idle: Weighted by Core Hour",
                     "CPU Hours: Total"
@@ -251,8 +250,7 @@
                     "histogramHelpText": [
                         "<div class='text'>",
                         "<h6> What is this analytic? </h6>",
-                        "<p>The chart below shows core-hours binned by wall time accuracy. Wall time accuracy compares wall time used to requested. A value of 100% indicates that the
-job used all the requested time.</p>",
+                        "<p>The chart below shows core-hours binned by wall time accuracy. Wall time accuracy compares wall time used to requested. A value of 100% indicates that the job used all the requested time.</p>",
                         "<h6> Why is this analytic important? </h6>",
                         "<p>The closer the requested wall time is to the actual wall time the better the scheduler efficiency. You will likely see shorter wait times for your job to run if you provide an accurate wall time request.</p>",
                         "<h6> How do I improve future jobs? </h6>",
