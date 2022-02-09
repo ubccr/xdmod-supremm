@@ -95,7 +95,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         var dimensionObj = {};
                         var dimension;
                         for (dimension in scatterPlotPanel.aggFilters) {
-                            if (scatterPlotPanel.aggFilters.hasOwnProperty(dimension)){
+                            if (scatterPlotPanel.aggFilters.hasOwnProperty(dimension)) {
                                 var filterValues = [];
 
                                 for (var i = 0; i < scatterPlotPanel.aggFilters[dimension].length; i++) {
