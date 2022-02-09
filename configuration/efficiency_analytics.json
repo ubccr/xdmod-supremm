@@ -305,7 +305,7 @@ job used all the requested time.</p>",
                     "histogramHelpText": [
                         "<div class='text'>",
                         "<h6> What is this analytic? </h6>",
-                        "<p>The analytic identifies users who are running a large proportion of short jobs.</p>",
+                        "<p>The chart below shows the number of jobs binned by job wall time.</p>",
                         "<h6> Why is this analytic important? </h6>",
                         "<p>The load on the scheduler software increases with the total number of jobs that are tracked. There is also a fixed overhead for setup and teardown when jobs start and end, which is independent of the job's wall time. Excessive short jobs can cause scheduler slowness for all users of the cluster and under extreme circumstances cause job failures.</p>",
                         "<h6> How do I improve future jobs? </h6>",
