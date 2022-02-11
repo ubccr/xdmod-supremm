@@ -2,11 +2,7 @@
 title: Customizing Help Text for Efficiency Analytics
 ---
 
-This document describes how to customize the text displayed when viewing the analytics in the Efficiency Tab.
-
-**The automated upgade scripts do not have any support for preserving
-customizations. Any changes made to the underlying Open XDMoD source code
-will likely be overwitten when the software is upgraded.**
+This document describes how to customize the help text displayed when viewing the analytics in the Efficiency Tab and remove any analytics that are not pertinent to your center.
 
 ## Efficiency Analytics
 
@@ -30,77 +26,92 @@ Upon clicking on one of the analytic cards, a user will be shown a larger view o
 
 You may want to customize this text to provide more focused feedback for users at your center or provide links to help text as appropriate. To do so, please follow the directions provided below.
 
-**This customization will not be preserved if the Open XDMoD software is updated.**
+**These instructions only apply to Open XDMoD 10.0. For later versions please refer to the documentation for that release.**
 
-**These instructions only apply to Open XDMoD 10.0. This change will not work on earlier versions of Open XDMoD. For later
-versions please refer to the documentation for that release.**
-
-To customize text for an analytic you need to edit the `/etc/xdmod/efficiency_analytics.json` configuration file. For example, to edit the help text for the CPU Usage analytic you would edit the html that is under "documentation" in lines 30-37. The lines to edit are shown below.
+To customize text for an analytic you need to edit the `/etc/xdmod/efficiency_analytics.json` configuration file. For example, to edit the help text for the CPU Usage scatter plot you would edit the html that is under "documentation" in lines 28-37.  To edit the help text for the CPU Usage histogram, you would edit the html that is under "histogramHelpText" in lines 46-55. The lines to edit for each are shown below.
 ```json
-29      "documentation": [
-30          "<div class='text'>",
-31          "<h6> What is this analytic? </h6>",
-32          "<p>A measure of the ratio of idle core cycles to total cycles.</p>",
-33          "<h6> Why is this analytic important? </h6>",
-34          "<p> The requested core cycles are not being used on the resource and could be used by other jobs.</p>",
-35          "<h6> How do I improve future jobs? </h6>",
-36          "<p> Give actions here that users can follow to improve this behavior in future jobs. </p>",
-37          "</div>"
-        ],
+28      "documentation": [
+39              "<div class='text'>",
+30              "<h6> What is this analytic? </h6>",
+31              "<p>The chart below shows the percentage of time that the CPU cores were idle compared to overall usage. Each point on the plot shows the data for the jobs for a particular user.</p>",
+32              "<h6> Why is this analytic important? </h6>",
+33              "<p>Making sure jobs use the right number of CPU cores helps ensure that the compute resources are used efficiently.</p>",
+34              "<h6> How do I improve future jobs? </h6>",
+35              "<p>For typical compute intensive jobs, the overall CPU usage should be &gt; 90 % (i.e. CPU core idle &lt; 10 %). Consider requesting fewer CPU cores for future jobs, or adjust the configuration settings of the software to make use of all the cores that have been requested.</p>",
+36              "</div>"
+37      ],
 ```
 
- For editing help text for other analytics, the process is the same, but you need to change the "documentation" that corresponds to that specific analytic. Below is a list of lines that need changed for each analytic.  
- **GPU Usage:** lines 71-78  
- **CPU Usage:** lines 30-37  
- **GPU Usage:** lines 71-78  
- **Memory Headroom:** lines 112-119  
- **Homogeneity:** lines 153-160  
- **Wall Time Accuracy:** lines 200-207  
- **Short Job Count:** lines 242-249  
-
-In addition to editing the help text, you can also remove an analytic if it is not pertinent to your center. To do this, you need to remove the analytic from the `/etc/xdmod/efficiency_analytics.json` configuration file. For example, to remove GPU Usage from showing in the XDMoD interface, you would remove lines 48-88 from this file. The lines to remove are shown below. 
 ```json
-48        {
-49              "analytic": "GPU Usage",
-50              "description": "Measure of overall average GPU Usage for a GPU job",
-51              "title": "GPU Usage",
-52              "field": "avg_percent_gpu_active",
-53              "statistics": [
-54                  "avg_percent_gpu_active",
-55                  "gpu_time"
-56              ],
-57              "statisticLabels": [
-58                  "Avg GPU active: weighted by gpu-hour",
-59                  "GPU Hours: Total"
-60              ],
-61              "statisticDescription":  [
-62                  "<ul><li><b>Avg GPU active: weighted by gpu-hour: </b> The average GPU usage % weighted by gpu hours, over all jobs that were executing.</li></ul><ul><li><b>GPU Hours: Total</b> The total GPU time in hours for all jobs that were executing during the time period. The GPU time is calculated as the number of allocated GPU devices multiplied by the wall time of the job.</li></ul>"
-63              ],
-64              "valueLabels": [
-65                  "%",
-66                  "GPU Hours"
-67              ],
-68              "reversed": true,
-69              "realm": "SUPREMM",
-70              "documentation": [
-71                  "<div class='text'>",
-72                  "<h6> What is this analytic? </h6>",
-73                  "<p> A measure of overall GPU Usage for GPU jobs.</p>",
-74                  "<h6> Why is this analytic important? </h6>",
-75                  "<p> Jobs not using the requested resources could be used by other jobs. </p>",
-76                  "<h6> How do I improve future jobs? </h6>",
-77                  "<p> Give actions here that users can follow to improve this behavior in future jobs. </p>",
-78                  "</div>"
-79              ],
-80              "histogram": {
-81                  "title": "GPU Usage",
-82                  "metric": "gpu_time",
-83                  "metricTitle": "GPU Hours Total",
-84                  "group_by" : "gpu_usage_bucketid",
-85                  "groupByTitle": "GPU Active Value",
-86                  "rotate": true
-87              }
-88      },
+46      "histogramHelpText": [
+47              "<div class='text'>",
+48              "<h6> What is this analytic? </h6>",
+49              "<p>The chart below shows the percentage of time that the CPU cores were idle compared to overall usage.</p>",
+50              "<h6> Why is this analytic important? </h6>",
+51              "<p>Making sure jobs use the right number of CPU cores helps ensure that the compute resources are used efficiently.</p>",
+52              "<h6> How do I improve future jobs? </h6>",
+53              "<p>For typical compute intensive jobs, the overall CPU usage should be &gt; 90 % (i.e. CPU core idle &lt; 10 %). Consider requesting fewer CPU cores for future jobs, or adjust the configuration settings of the software to make use of all the cores that have been requested.</p>",
+54              "</div>"
+55      ]
+```
+
+For editing help text for other analytics, the process is the same, but you need to change the "documentation" that corresponds to that specific analytic. Not all analytics include alternative help text for the histogram view. If you want to include this text, add in the histogramHelpText section under the histogram json for the analytic that you are looking at. If you want to exclude this text, remove the histogramHelpText section from the histogram json for that specific analytic.
+
+In addition to editing the help text, you can also remove an analytic if it is not pertinent to your center. To do this, you need to remove the analytic from the `/etc/xdmod/efficiency_analytics.json` configuration file. For example, to remove GPU Usage from showing in the XDMoD interface, you would remove lines 58-109 from this file. The lines to remove are shown below.
+
+```json
+58      {
+59              "analytic": "GPU Usage",
+60              "description": "How busy were the GPU cores for GPU jobs?",
+61              "title": "GPU Usage",
+62              "field": "avg_percent_gpu_active",
+63              "statistics": [
+64                  "avg_percent_gpu_active",
+65                  "gpu_time"
+66              ],
+67              "statisticLabels": [
+68                  "Avg GPU % Active: Weighted by GPU Hour",
+69                  "GPU Hours: Total"
+70              ],
+71              "statisticDescription":  [
+72                  "<ul><li><b>Avg GPU active: weighted by gpu-hour: </b> The average GPU usage % weighted by gpu hours, over all jobs that were executing.</li></ul><ul><li><b>GPU Hours: Total</b> The total GPU time in hours for all jobs that were executing during the time period. The GPU time is calculated as the number of allocated GPU devices multiplied by the wall time of the job.</li></ul>"
+73              ],
+74              "valueLabels": [
+75                  "%",
+76                  "GPU Hours"
+77               ],
+78              "reversed": true,
+79              "realm": "SUPREMM",
+80              "documentation": [
+81                      "<div class='text'>",
+82                      "<h6> What is this analytic? </h6>",
+83                      "<p>The chart below shows the percentage of time that the GPUs were busy compared to overall usage. Each point on the plot shows the GPU jobs for a particular user.</p>"
+84                      "<h6> Why is this analytic important? </h6>",
+85                      "<p>Making sure jobs use the right number of GPUs helps ensure that the compute resources are used efficiently.</p>",
+86                      "<h6> How do I improve future jobs? </h6>",
+87                      "<p>Try to ensure that the number of GPUs requested matches the number required. If a code is not using all GPUs adjust the configuration settings of the software to make use of all the requested GPUs or consider requesting fewer GPUs in future jobs. If you have jobs with 0% GPU usage, double check that the code is compiled correctly to make use of the GPUs and is not defaulting to CPU-only calculations.</p>",
+88                      "</div>"
+89              ],
+90              "histogram": {
+91                      "title": "GPU Usage",
+92                      "metric": "gpu_time",
+93                      "metricTitle": "GPU Hours Total",
+94                      "group_by" : "gpu_usage_bucketid",
+95                      "groupByTitle": "GPU Active Value",
+96                      "rotate": true,
+97                      "arrowImg": "right_arrow.png",
+98                      "histogramHelpText": [
+99                              "<div class='text'>",
+100                             "<h6> What is this analytic? </h6>",
+101                             "<p>The chart below shows the percentage of time that the GPUs were busy compared to overall usage.</p>",
+102                             "<h6> Why is this analytic important? </h6>",
+103                             "<p>Making sure jobs use the right number of GPUs helps ensure that the compute resources are used efficiently.</p>",
+104                             "<h6> How do I improve future jobs? </h6>",
+105                             "<p>Try to ensure that the number of GPUs requested matches the number required. If a code is not using all GPUs adjust the configuration settings of the software to make use of all the requested GPUs or consider requesting fewer GPUs in future jobs. If you have jobs with 0% GPU usage, double check that the code is compiled correctly to make use of the GPUs and is not defaulting to CPU-only calculations.</p>",
+106                             "</div>"
+107                     ]
+108             }
+109     },
 ```
 
 Figure 3 below shows an example of what the updated efficiency tab interface would look like if you were to remove GPU Usage. 
