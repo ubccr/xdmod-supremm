@@ -8,16 +8,16 @@ This document describes how to customize the help text displayed when viewing th
 
 The efficiency analytics are shown when you first navigate to the efficiency tab. With each analytic,
 there is associated text explaining what the analytic is, what is considered inefficient in regards to the analytic, and
-supporting text giving suggestions of how to improve efficiency regarding a specfic analytic.
+supporting text giving suggestions of how to improve efficiency regarding a specific analytic.
 
 As of the 10.0 release, there are six analytics. These are CPU Usage, GPU Usage, Memory Headroom, Homogeneity, Wall Time Accuracy, and Short Job Count. When you first navigate to the efficiency tab, you will see cards each representing an analytic. Each card includes a brief description of the analytic as well as a scatter plot that allows you to visualize how users rank in each analytic (see Figure 1 below).
 
 <figure>
 <img src="{{ site.baseurl }}/assets/images/efficiency_tab.png" alt="Screenshot of the initial view when first navigating to the efficiency tab. The view shows six cards broken down into two categories - one for usage analytics which includes CPU Usage, GPU Usage, Memory Usage and Homogeneity and one for design analytics which includes Wall Time Accuracy and Short Jobs. Each card displays a short description of the analytic and a thumbnail view of the scatter plot related to that analytic. The scatter plot points represent a user's usage on the resource and efficiency of their jobs for the specific analytic." />
-<figcaption>Figure 1. Example screenshot of inital view when navigating to the efficiency tab.</figcaption>
+<figcaption>Figure 1. Example screenshot of initial view when navigating to the efficiency tab.</figcaption>
 </figure>
 
-Upon clicking on one of the analytic cards, a user will be shown a larger view of the scatter plot that they can interact with by filtering or drilling down. In this view, more text is presented to give more information about the specfic analytic and how efficiency may be improved for that analytic. Figure 2 below shows this view for CPU Usage. In this image, you can see the help text at the top of the image above the scatter plot. The associated help text shown in this view can be customized as needed for different centers.
+Upon clicking on one of the analytic cards, a user will be shown a larger view of the scatter plot that they can interact with by filtering or drilling down. In this view, more text is presented to give more information about the specific analytic and how efficiency may be improved for that analytic. Figure 2 below shows this view for CPU Usage. In this image, you can see the help text at the top of the image above the scatter plot. The associated help text shown in this view can be customized as needed for different centers.
 
 <figure>
 <img src="{{ site.baseurl }}/assets/images/cpu_usage.png" alt="Screenshot of the scatter plot view for CPU Usage in the efficiency tab. Each analytic from the initial efficiency tab page can be viewed in more detail by clicking on the analytic card. This view shows the same scatter plot from the analytic card, but the scatter plot can be filtered or drilled down to learn more information about the users and their respective jobs represented by the scatter plot points. In addition to the scatter plot, there is a side bar that allows filtering and above the scatter plot is the help text explaining the analytic in more detail and giving more information on how to improve efficiency in regard to this analytic." />
