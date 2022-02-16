@@ -73,8 +73,10 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
 
         // Panel above scatter plot/drill down histogram to show information about analytic and improving behavior
         var details = new Ext.Panel({
+            id: 'helpText',
             region: 'north',
             border: false,
+            autoHeight: true,
             html: self.config.documentation
         });
 
@@ -97,9 +99,16 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
             new Ext.Panel({
                 region: 'center',
                 layout: 'border',
-                items: [details, detailedAnalyticPanel,
-                    descriptionPanel]
-
+                items: [
+                    details,
+                    detailedAnalyticPanel,
+                    descriptionPanel
+                ],
+                listeners: {
+                    resize: function () {
+                        this.doLayout();
+                    }
+                }
             })
 
         ];
