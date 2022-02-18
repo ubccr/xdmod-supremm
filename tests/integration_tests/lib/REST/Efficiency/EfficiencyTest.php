@@ -46,19 +46,15 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
      */
     public function testAnalytics()
     {
-        $this->xdmodhelper->authenticate("cd");
-
-        $response = $this->xdmodhelper->get(self::ENDPOINT . 'analytics');
+        $response = self::$helpers['cd']->get(self::ENDPOINT . 'analytics');
 
         $this->assertEquals(200, $response[1]['http_code']);
 
-        $resdata = $response[0];
-
-        $this->assertArrayHasKey('success', $resdata);
-        $this->assertEquals(true, $resdata['success']);
+        $this->assertArrayHasKey('success', $response[0]);
+        $this->assertTrue($response[0]['success']);
 
         $analytics = array();
-        foreach ($resdata['data'] as $analyticType){
+        foreach ($response[0]['data'] as $analyticType){
             $analytic = $analyticType['analytics'];
             foreach($analytic as $key => $value){
                 $analytics[] = $value['analytic'];
