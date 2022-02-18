@@ -64,7 +64,6 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
         sort($analytics);
 
         $this->assertEquals(self::getAnalytics(), $analytics);
-        $this->xdmodhelper->logout();
     }
 
     /***
@@ -238,7 +237,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
             'legend_type' => 'off',
             'controller_module' => 'metric_explorer'
         );
-        
+
         $params = array_merge($params, $paramsOverrides);
 
         $params['global_filters'] = urlencode(json_encode($params['global_filters']));
@@ -257,7 +256,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
 
         return $inputs;
     }
-  
+
     /**
      * @dataProvider drilldownDataUsers
      */
@@ -265,7 +264,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
     {
         $response = self::$helpers[$usr]->get(self::ENDPOINT . 'histogram/cpuuser', $params);
         $this->assertEquals(200, $response[1]['http_code']);
-    
+
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
@@ -323,7 +322,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
     {
         $response = self::$helpers['cd']->get(self::ENDPOINT . 'histogram/cpuuser', $params);
         $this->assertEquals(400, $response[1]['http_code']);
- 
+
         $resdata = $response[0];
         $this->assertArrayHasKey('success', $resdata);
         $this->assertEquals(false, $resdata['success']);
