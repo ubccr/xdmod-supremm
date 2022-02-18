@@ -3,7 +3,7 @@
 namespace IntegrationTests\REST\Efficiency;
 
 class EfficiencyTest extends \PHPUnit_Framework_TestCase
-{   
+{
     const ENDPOINT = 'rest/v1/efficiency/';
 
     protected static $helpers = array();
@@ -40,7 +40,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /*** 
+    /***
      * This test intentionally checks the current analytics available for the efficiency tab.
      * If more analytics are added/modified, this test must be updated.
      */
@@ -60,7 +60,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
         $analytics = array();
         foreach ($resdata['data'] as $analyticType){
             $analytic = $analyticType['analytics'];
-            foreach($analytic as $key=>$value){
+            foreach($analytic as $key => $value){
                 $analytics[] = $value['analytic'];
             }
         }
@@ -139,12 +139,12 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
 
     public function testCPUUsageScatterPlotEndpointPub()
     {
-       $params = $this->getScatterPlotDataParameters();
-       $response = self::$helpers['pub']->get(self::ENDPOINT . 'scatterPlot/CPU%20Usage', $params);
+        $params = $this->getScatterPlotDataParameters();
+        $response = self::$helpers['pub']->get(self::ENDPOINT . 'scatterPlot/CPU%20Usage', $params);
 
-       $this->assertEquals(401, $response[1]['http_code']);
-       $this->assertArrayHasKey('success', $response[0]);
-       $this->assertFalse($response[0]['success']);
+        $this->assertEquals(401, $response[1]['http_code']);
+        $this->assertArrayHasKey('success', $response[0]);
+        $this->assertFalse($response[0]['success']);
     }
 
     public function scatterPlotDataMalformedRequest()
@@ -249,7 +249,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
         $params['data_series'] = urlencode(json_encode($params['data_series']));
 
         return $params;
-    } 
+    }
 
     public function drilldownDataUsers()
     {
@@ -267,7 +267,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
      */
     public function testCPUUsageDrilldownPlot($usr, $params, $seriesCount)
     {
-        $response = self::$helpers[$usr]->get(self::ENDPOINT . 'histogram/cpuuser', $params); 
+        $response = self::$helpers[$usr]->get(self::ENDPOINT . 'histogram/cpuuser', $params);
         $this->assertEquals(200, $response[1]['http_code']);
     
         $this->assertArrayHasKey('success', $response[0]);
@@ -319,7 +319,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
 
         return $inputs;
     }
- 
+
     /**
      * @dataProvider drilldownDataMalformedRequest
      */
