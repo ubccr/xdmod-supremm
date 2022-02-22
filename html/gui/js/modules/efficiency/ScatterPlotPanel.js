@@ -1040,7 +1040,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     }
                 };
                 break;
-            case 'Memory Headroom':
+            case 'Memory Usage':
                 column = {
                     id: 'max_memory',
                     dataIndex: 'max_memory',
@@ -1080,7 +1080,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 };
                 break;
             default:
-                break;
+                column = {
+                    renderer: function(){
+                        return null;
+                    }
+                };
         }
 
         var rawDataGrid = new Ext.grid.GridPanel({
