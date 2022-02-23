@@ -82,7 +82,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
                 var scatterPlotPanel = Ext.getCmp('analytic_scatter_plot_' + analytic);
 
-                var filterObj;
+                var filterObj = {};
 
                 // Active item is scatter plot
                 if (activeItemIndex === 0) {
@@ -91,11 +91,21 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     var analyticConfig = analyticPanel.config;
 
                     // If filters have been applied, keep applied
-                    // Otherwise, only use filters that are needed for initial plot
                     if (scatterPlotPanel.aggFilters) {
-                        filterObj = scatterPlotPanel.aggFilters;
-                    } else {
-                        filterObj = analyticConfig.filters;
+                        var dimensionObj = {};
+                        var dimension;
+                        for (dimension in scatterPlotPanel.aggFilters) {
+                            if (scatterPlotPanel.aggFilters.hasOwnProperty(dimension)) {
+                                var filterValues = [];
+
+                                for (var i = 0; i < scatterPlotPanel.aggFilters[dimension].length; i++) {
+                                    filterValues.push(scatterPlotPanel.aggFilters[dimension][i].filterId);
+                                }
+
+                                dimensionObj[dimension] = filterValues;
+                                jQuery.extend(filterObj, dimensionObj);
+                            }
+                        }
                     }
 
                     scatterPlotPanel.store.reload({
@@ -125,8 +135,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
                     // If filters have applied, keep applied
                     var filters;
-                    if (scatterPlotPanel.MEFilters) {
-                        filters = scatterPlotPanel.MEFilters.slice();
+                    if (scatterPlotPanel.jobListFilters) {
+                        filters = scatterPlotPanel.jobListFilters.slice();
                         filters.push({
                             dimension_id: 'person',
                             id: 'person=' + personId,
@@ -612,6 +622,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 scatterPlotPanel.doLayout();
                 scatterPlotPanel.remove(scatterPlotPanel.items.items[1], true);
 
+                // Remove any stored filters for drilldown plot
+                Ext.getCmp('analytic_scatter_plot_' + chartConfig.analytic).jobListFilters = null;
+
                 // Remove all other links in breadcrumb menu
                 var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
                 var length = breadcrumbMenu.items.length;
@@ -620,6 +633,13 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     breadcrumbMenu.remove(4);
                 }
                 breadcrumbMenu.doLayout();
+
+                // Update help text if alternative histogram text is available
+                if (chartConfig.histogram.histogramHelpText) {
+                    var helpText = Ext.getCmp('helpText');
+                    helpText.update(chartConfig.documentation);
+                    helpText.ownerCt.doLayout();
+                }
 
                 // Update the description panel to match the chart being shown
                 var descriptionPanel = Ext.getCmp('descriptionPanel');

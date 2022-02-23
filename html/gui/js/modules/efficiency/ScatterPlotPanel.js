@@ -100,6 +100,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
                                         // Load the drilldown on person chart
                                         self.getPersonChart(e.point.person, e.point.personId);
+
+                                        // Store filters applied to drilldown chart in job list filters object
+                                        self.jobListFilters = self.MEFilters;
                                     }
                                 }
                             }
@@ -753,6 +756,14 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 }
                             }
                         ];
+
+                        // Update help text if alternative histogram text is available
+                        if (self.config.histogram.histogramHelpText) {
+                            var helpText = Ext.getCmp('helpText');
+                            helpText.update(self.config.histogram.histogramHelpText);
+                            helpText.ownerCt.doLayout();
+                        }
+
                         self.updateDescription(chartStore);
                     }
                     self.unmask();
@@ -1029,7 +1040,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     }
                 };
                 break;
-            case 'Memory Headroom':
+            case 'Memory Usage':
                 column = {
                     id: 'max_memory',
                     dataIndex: 'max_memory',
@@ -1069,7 +1080,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 };
                 break;
             default:
-                break;
+                column = {
+                    hidden: true
+                };
         }
 
         var rawDataGrid = new Ext.grid.GridPanel({
