@@ -40,30 +40,33 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+
     /***
      * This test intentionally checks the current analytics available for the efficiency tab.
      * If more analytics are added/modified, this test must be updated.
      */
     public function testAnalytics()
     {
-        $response = self::$helpers['cd']->get(self::ENDPOINT . 'analytics');
+        foreach (array('pub', 'cd', 'usr') as $role) {
+            $response = self::$helpers[$role]->get(self::ENDPOINT . 'analytics');
 
-        $this->assertEquals(200, $response[1]['http_code']);
+            $this->assertEquals(200, $response[1]['http_code']);
 
-        $this->assertArrayHasKey('success', $response[0]);
-        $this->assertTrue($response[0]['success']);
+            $this->assertArrayHasKey('success', $response[0]);
+            $this->assertTrue($response[0]['success']);
 
-        $analytics = array();
-        foreach ($response[0]['data'] as $analyticType){
-            $analytic = $analyticType['analytics'];
-            foreach($analytic as $key => $value){
-                $analytics[] = $value['analytic'];
+            $analytics = array();
+            foreach ($response[0]['data'] as $analyticType){
+                $analytic = $analyticType['analytics'];
+                foreach($analytic as $key => $value){
+                    $analytics[] = $value['analytic'];
+                }
             }
+
+            sort($analytics);
+
+            $this->assertEquals(self::getAnalytics(), $analytics);
         }
-
-        sort($analytics);
-
-        $this->assertEquals(self::getAnalytics(), $analytics);
     }
 
     /***
@@ -310,7 +313,62 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
     {
         $inputs = array();
 
-        $inputs[] = array('cd', array(''));
+        $inputs[] = array('cd', 400, array(''));
+        $inputs[] = array('cd', 400, array('not json data'));
+        $inputs[] = array('cd', 400, array('{"realm": "SUPREMM"}'));
+
+        $params = $this->getDrillDownDataParameters(array(
+            'global_filters' => array(
+                'data' => array(
+                    array(
+                        'dimension_id' => 'person',
+                        'id' => 'person=14',
+                        'realms' => array('SUPREMM'),
+                        'value_id' =>  '14',
+                        'value_name' =>  'Dunlin',
+                        'checked' => true
+                    )
+                ),
+                'total' => 1)
+            )
+        );
+        $inputs[] = array('usr', 200, $params);
+
+        $params = $this->getDrillDownDataParameters(array('data_series' => array('metric' => 'wall_time')));
+        $inputs[] = array('cd', 500, $params);
+
+        $params = $this->getDrillDownDataParameters(array('data_series' => array(
+            array(
+                'id' => 0.41070416068466,
+                'metric' => '',
+                'category' => 'SUPREMM',
+                'realm' => 'SUPREMM',
+                'group_by' => 'cpuuser',
+                'x_axis' => true,
+                'log_scale' => false,
+                'has_std_err' => false,
+                'std_err' => false,
+                'value_labels' => false,
+                'display_type' => 'column',
+                'line_type' => 'Solid',
+                'line_width' => 2,
+                'combine_type' => 'side',
+                'sort_type' => 'none',
+                'filters' => array (
+                    'data' => array (),
+                    'total' => 0,
+                ),
+                'ignore_global' => false,
+                'long_legend' => false,
+                'trend_line' => false,
+                'color' => 'auto',
+                'shadow' => false,
+                'visibility' => null,
+                'z_index' => 0,
+                'enabled' => true,
+            )
+        )));
+        $inputs[] = array('cd', 200, $params);
 
         return $inputs;
     }
@@ -318,13 +376,19 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider drilldownDataMalformedRequest
      */
-    public function testCPUUsageDrillownEndpointMalformedRequest($usr, $params)
+    public function testCPUUsageDrillownEndpointMalformedRequest($usr, $http_code, $params)
     {
-        $response = self::$helpers['cd']->get(self::ENDPOINT . 'histogram/cpuuser', $params);
-        $this->assertEquals(400, $response[1]['http_code']);
-
+        $response = self::$helpers[$usr]->get(self::ENDPOINT . 'histogram/cpuuser', $params);
+        $this->assertEquals($http_code, $response[1]['http_code']);
         $resdata = $response[0];
-        $this->assertArrayHasKey('success', $resdata);
-        $this->assertEquals(false, $resdata['success']);
+
+        if ($http_code == 200) {
+            $this->assertArrayHasKey('success', $resdata);
+            $this->assertTrue($resdata['success']);
+            $this->assertCount(0, $response[0]['data'][0]['series']);
+        } else {
+            $this->assertArrayHasKey('success', $resdata);
+            $this->assertFalse($resdata['success']);
+        }
     }
 }
