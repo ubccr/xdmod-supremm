@@ -474,8 +474,8 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     getMax: function (record, property) {
         var max;
         for (var i = 0; i < record.length; i++) {
-            if (parseFloat(record[i][property]) || parseFloat(record[i][property]) === 0) {
-                if (!max || parseFloat(record[i][property]) > max) {
+            if (record[i][property]) {
+                if (max == null || parseFloat(record[i][property]) > max) {
                     max = Math.ceil(parseFloat(record[i][property])) + 1;
                 }
             }
