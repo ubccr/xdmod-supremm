@@ -1081,9 +1081,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 break;
             default:
                 column = {
-                    renderer: function(){
-                        return null;
-                    }
+                    hidden: true
                 };
         }
 
