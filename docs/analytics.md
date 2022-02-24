@@ -3,7 +3,7 @@ title: Customizing Help Text for Efficiency Analytics
 ---
 
 This document describes how to customize the help text displayed when viewing the analytics in the Efficiency Tab and remove any analytics that are not pertinent to your center.
-
+These instructions are intended for a system administrator of an Open XDMoD instance. Information about the use of the efficiency tab can be found in the user manual which is available from the "Help" menu on the top right of the XDMoD portal.
 ## Efficiency Analytics
 
 The efficiency analytics are shown when you first navigate to the efficiency tab. With each analytic,
