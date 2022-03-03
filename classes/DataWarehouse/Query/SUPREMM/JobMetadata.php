@@ -124,10 +124,9 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
         }
         $jobdata = $this->getjobdata($job['resource_id'], $job['local_job_id'], $job['end_time_ts']);
         $jversion = isset($jobdata['summary_version']) ? $jobdata['summary_version'] : $jobdata['summarization']['version'];
-
         $schema = $this->getsummaryschema($job['resource_id'], $jversion);
         if ($schema !== null) {
-            return $this->arrayMergeRecursiveWildcard($jobdata, $schema['definitions']);
+            return $this->arrayMergeRecursiveWildcard(json_decode(json_encode($jobdata),true), json_decode(json_encode($schema['definitions']), true));
         } else {
             return $jobdata;
         }
@@ -339,9 +338,9 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
         if ($resconf === null) {
             return null;
         }
-
-        $collection = $resconf['handle']->selectCollection('timeseries-'.$resconf['collection']);
-        $query = array( "_id" => new \MongoRegex("/^$jobid-.*$end_time_ts/") );
+        $timeseriesCollection = 'timeseries-'.$resconf['collection'];
+        $collection = $resconf['handle']->$timeseriesCollection;
+        $query = array( "_id" => new \MongoDB\BSON\Regex("^$jobid-.*$end_time_ts") );
 
         if ($filter === null) {
             $doc = $collection->findOne($query);
@@ -377,18 +376,17 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
     private function getjobdata($resource_id, $jobid, $end_time_ts)
     {
         $resourceConfig = $this->supremmDbInterface->getResourceConfig($resource_id);
-        $resconf =& $resourceConfig;
+        $resconf = $resourceConfig;
 
         if ($resconf === null) {
             return null;
         }
+        $collectionName = $resconf['collection'];
+        $collection = $resconf['handle']->$collectionName;
 
-        $collection = $resconf['handle']->selectCollection($resconf['collection']);
-
-        $query = array( "_id" => new \MongoRegex("/^$jobid-.*$end_time_ts/") );
+        $query = array( "_id" => new \MongoDB\BSON\Regex("^$jobid-.*$end_time_ts") );
 
         $res = $collection->findOne($query);
-
         if ($res !== null) {
             ksort($res);
         }
