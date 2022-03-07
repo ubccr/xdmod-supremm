@@ -7,10 +7,10 @@ These instructions are intended for a system administrator of an Open XDMoD inst
 ## Efficiency Analytics
 
 The efficiency analytics are shown when you first navigate to the efficiency tab. With each analytic,
-there is associated text explaining what the analytic is, what is considered inefficient in regards to the analytic, and
+there is associated text explaining what the analytic is, what is considered inefficient in regard to the analytic, and
 supporting text giving suggestions of how to improve efficiency regarding a specific analytic.
 
-As of the 10.0 release, there are six analytics. These are CPU Usage, GPU Usage, Memory Headroom, Homogeneity, Wall Time Accuracy, and Short Job Count. When you first navigate to the efficiency tab, you will see cards each representing an analytic. Each card includes a brief description of the analytic as well as a scatter plot that allows you to visualize how users rank in each analytic (see Figure 1 below).
+As of the 10.0 release, there are six analytics. These are CPU Usage, GPU Usage, Memory Usage, Homogeneity, Wall Time Accuracy, and Short Jobs. When you first navigate to the efficiency tab, you will see cards each representing an analytic. Each card includes a brief description of the analytic as well as a scatter plot that allows you to visualize how users rank in each analytic (see Figure 1 below).
 
 <figure>
 <img src="{{ site.baseurl }}/assets/images/efficiency_tab.png" alt="Screenshot of the initial view when first navigating to the efficiency tab. The view shows six cards broken down into two categories - one for usage analytics which includes CPU Usage, GPU Usage, Memory Usage and Homogeneity and one for design analytics which includes Wall Time Accuracy and Short Jobs. Each card displays a short description of the analytic and a thumbnail view of the scatter plot related to that analytic. The scatter plot points represent a user's usage on the resource and efficiency of their jobs for the specific analytic." />
@@ -21,7 +21,7 @@ Upon clicking on one of the analytic cards, a user will be shown a larger view o
 
 <figure>
 <img src="{{ site.baseurl }}/assets/images/cpu_usage.png" alt="Screenshot of the scatter plot view for CPU Usage in the efficiency tab. Each analytic from the initial efficiency tab page can be viewed in more detail by clicking on the analytic card. This view shows the same scatter plot from the analytic card, but the scatter plot can be filtered or drilled down to learn more information about the users and their respective jobs represented by the scatter plot points. In addition to the scatter plot, there is a side bar that allows filtering and above the scatter plot is the help text explaining the analytic in more detail and giving more information on how to improve efficiency in regard to this analytic." />
-<figcaption>Figure 2. Example of CPU Usage scatter plot and corresponding help text.</figcaption>
+<figcaption>Figure 2. Example of CPU Usage scatter plot view and corresponding help text.</figcaption>
 </figure>
 
 You may want to customize this text to provide more focused feedback for users at your center or provide links to help text as appropriate. To do so, please follow the directions provided below.
@@ -55,7 +55,7 @@ To customize text for an analytic you need to edit the `/etc/xdmod/efficiency_an
 55      ]
 ```
 
-For editing help text for other analytics, the process is the same, but you need to change the "documentation" that corresponds to that specific analytic. Not all analytics include alternative help text for the histogram view. If you want to include this text, add in the histogramHelpText section under the histogram json for the analytic that you are looking at. If you want to exclude this text, remove the histogramHelpText section from the histogram json for that specific analytic.
+For editing help text for other analytics, the process is the same, but you need to change the "documentation" that corresponds to that specific analytic. Not all analytics include alternative help text for the histogram view. If you want to include this text, add in the histogramHelpText section under the histogram json for the analytic that you are interested in changing. If you want to exclude this text, remove the histogramHelpText section from the histogram json for that specific analytic.
 
 In addition to editing the help text, you can also remove an analytic if it is not pertinent to your center. To do this, you need to remove the analytic from the `/etc/xdmod/efficiency_analytics.json` configuration file. For example, to remove GPU Usage from showing in the XDMoD interface, you would remove lines 58-109 from this file. The lines to remove are shown below.
 
