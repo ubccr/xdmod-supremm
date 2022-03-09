@@ -26,12 +26,23 @@ url: "http://supremm.xdmod.org" # the base hostname & protocol for your site
 github_username: ubccr
 github_url: https://github.com/ubccr/xdmod-supremm
 xdmod_module_name: Job Performance (SUPReMM)
-latest_version: "9.5"
+latest_version: "10.0"
 version_list:
-  - "9.0"
   - "9.5"
+  - "10.0"
 
 defaults:
+  -
+    scope:
+      path: "10.0"
+      type: "pages"
+    values:
+      layout: "page"
+      version: "10.0"
+      sw_version: "10.0.0"
+      summ_sw_version: "1.4.1"
+      style: "effervescence"
+      tocversion: "v10_0toc"
   -
     scope:
       path: "9.5"
@@ -43,17 +54,6 @@ defaults:
       summ_sw_version: "1.4.0"
       style: "effervescence"
       tocversion: "v9_5toc"
-  -
-    scope:
-      path: "9.0"
-      type: "pages"
-    values:
-      layout: "page"
-      version: "9.0"
-      sw_version: "9.0.0"
-      summ_sw_version: "1.4.0"
-      style: "effervescence"
-      tocversion: "v9_0toc"
 
 # Build settings
 markdown: kramdown

@@ -1,3 +1,3 @@
 ---
-redirect_to: /9.5/supremm-install-overview.html
+redirect_to: /10.0/supremm-install-overview.html
 ---

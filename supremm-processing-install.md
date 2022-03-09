@@ -1,3 +1,3 @@
 ---
-redirect_to: /9.5/supremm-processing-install.html
+redirect_to: /10.0/supremm-processing-install.html
 ---

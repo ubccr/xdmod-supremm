@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="37cm" height="27cm" viewBox="140 -121 721 537" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="211" y="71">
+    <tspan x="211" y="71"></tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="382.5" y1="416" x2="598.389" y2="416"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="382.5" y1="340" x2="598.389" y2="340"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="490.444" y="374.8">
+      <tspan x="490.444" y="374.8">Aggregate tables in </tspan>
+      <tspan x="490.444" y="390.8">Open XDMoD datawarehouse</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="490.656" y1="301.919" x2="490.499" y2="330.264"/>
+    <polygon style="fill: #000000" points="490.457,337.764 485.513,327.736 490.499,330.264 495.512,327.792 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="490.457,337.764 485.513,327.736 490.499,330.264 495.512,327.792 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="398.028" y1="-22" x2="583.972" y2="-22"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="398.028" y1="-98" x2="583.972" y2="-98"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="491" y="-63.2">
+      <tspan x="491" y="-63.2">Job summary documents</tspan>
+      <tspan x="491" y="-47.2">in mongoDb instance</tspan>
+    </text>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="491" cy="50" rx="91.0911" ry="30"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="491" cy="50" rx="91.0911" ry="30"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="491" y="54.85">
+      <tspan x="491" y="54.85">node etl.cluster.js </tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="491,-22 491,-8 491,-8 491,10.2639 "/>
+    <polygon style="fill: #000000" points="491,17.7639 486,7.76393 491,10.2639 496,7.76393 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="491,17.7639 486,7.76393 491,10.2639 496,7.76393 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="383" y1="199" x2="598.889" y2="199"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="383" y1="123" x2="598.889" y2="123"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="490.944" y="157.8">
+      <tspan x="490.944" y="157.8">Fact tables in </tspan>
+      <tspan x="490.944" y="173.8">Open XDMoD datawarehouse</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="491" y1="80" x2="490.957" y2="113.264"/>
+    <polygon style="fill: #000000" points="490.947,120.764 485.96,110.757 490.957,113.264 495.96,110.77 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="490.947,120.764 485.96,110.757 490.957,113.264 495.96,110.77 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="490.944,199 490.944,219.808 490.656,219.808 490.656,230.88 "/>
+    <polygon style="fill: #000000" points="490.656,238.38 485.656,228.38 490.656,230.88 495.656,228.38 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="490.656,238.38 485.656,228.38 490.656,230.88 495.656,228.38 "/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="490.656" cy="271.268" rx="122.606" ry="30.6516"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="490.656" cy="271.268" rx="122.606" ry="30.6516"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="490.656" y="276.118">
+      <tspan x="490.656" y="276.118">php aggregate_supremm.php </tspan>
+    </text>
+  </g>
+  <text font-size="12.7998" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="697" y="-83">
+    <tspan x="697" y="-83">data are written</tspan>
+    <tspan x="697" y="-67">into MongoDB by the</tspan>
+    <tspan x="697" y="-51">Job Summarization</tspan>
+    <tspan x="697" y="-35">Software</tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" d="M 690,-89 A 114.656,114.656 0 0 0 569.871,-111.465"/>
+    <polygon style="fill: #0000ff" points="563.006,-108.489 569.816,-117.356 569.752,-111.766 574.185,-108.361 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" points="563.006,-108.489 569.816,-117.356 569.752,-111.766 574.185,-108.361 "/>
+  </g>
+  <text font-size="12.7998" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="727" y="-76">
+    <tspan x="727" y="-76"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="148" y="1">
+    <tspan x="148" y="1">The etl.cluster process</tspan>
+    <tspan x="148" y="17">uses the dataset mapping</tspan>
+    <tspan x="148" y="33">file to determine how to </tspan>
+    <tspan x="148" y="49">translate eachjob summary</tspan>
+    <tspan x="148" y="65">document into the metrics</tspan>
+    <tspan x="148" y="81">required for XDMoD.</tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" d="M 392.581,14.3581 A 71.7511,71.7511 0 0 0 314,-4"/>
+    <polygon style="fill: #0000ff" points="397.346,20.093 387.443,14.9043 392.961,14.0088 395.555,9.05707 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" points="397.346,20.093 387.443,14.9043 392.961,14.0088 395.555,9.05707 "/>
+  </g>
+  <text font-size="12.7998" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="702" y="117">
+    <tspan x="702" y="117">These two processes are</tspan>
+    <tspan x="702" y="133">run by the </tspan>
+    <tspan x="702" y="149">aggregate_supremm.sh</tspan>
+    <tspan x="702" y="165">shell script.</tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" d="M 690,119 A 87.7313,87.7313 0 0 0 612.576,48.4321"/>
+    <polygon style="fill: #0000ff" points="605.118,48.0015 615.125,43.0153 612.618,48.0119 615.111,53.0153 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" points="605.118,48.0015 615.125,43.0153 612.618,48.0119 615.111,53.0153 "/>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" d="M 630.45,260.294 A 192.483,192.483 0 0 0 689,154"/>
+    <polygon style="fill: #0000ff" points="624.854,265.278 629.262,255.003 630.581,260.436 635.718,262.64 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" points="624.854,265.278 629.262,255.003 630.581,260.436 635.718,262.64 "/>
+  </g>
+  <text font-size="12.7998" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="140" y="296">
+    <tspan x="140" y="296">The charts in the Usage</tspan>
+    <tspan x="140" y="312">and Metric Explorer tabs</tspan>
+    <tspan x="140" y="328">in XDMoD use the data</tspan>
+    <tspan x="140" y="344">from the aggregate tables</tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" d="M 266,356 A 82.3125,82.3125 0 0 0 360.99,390.084"/>
+    <polygon style="fill: #0000ff" points="367.979,387.456 360.884,396.097 361.13,390.512 356.809,386.964 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" points="367.979,387.456 360.884,396.097 361.13,390.512 356.809,386.964 "/>
+  </g>
+</svg>
