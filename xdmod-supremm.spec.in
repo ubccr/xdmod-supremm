@@ -60,6 +60,8 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/efficiency_analytics.json
 
 %changelog
+* Thu Mar 10 2022 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 10.0.0-1.0
+- Release 10.0.0
 * Fri May 21 2021 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 9.5.0-1.0
 - Release 9.5.0
 * Thu Aug 13 2020 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 9.0.0-1.0
