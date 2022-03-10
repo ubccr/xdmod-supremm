@@ -1,7 +1,25 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-## XXXX-XX-XX v 10.0.0
+## 2022-03-10 v 10.0.0
+
+- Features
+   - Added new "Efficiency" tab that provides reporting and analysis of HPC job
+     efficiency.
+   - Added new statistics to the Usage and Metric Explorer. These are  wall
+     time accuracy, total GPU usage, Homogeneity and Averge max memory. See the online
+     help in XDMoD for full details about these new statistics.
+   - Added new dimensions to the Usage and Metric Explorer. These are homogeneity
+     rank, total GPU usage and wall time accuracy value See the online
+     help in XDMoD for full details about these new dimensions.
+
+- Miscellaneous
+   - Updated nodejs dependency version to nodejs >= 16.13
+
+- Bug Fixes
+   - Fix database timeout exception that could occur when running the aggregation
+     for a large number of jobs (such as reaggregating the whole datawarehouse or
+     using an I/O bound database server).
 
 ## 2021-05-21 v 9.5.0
 
