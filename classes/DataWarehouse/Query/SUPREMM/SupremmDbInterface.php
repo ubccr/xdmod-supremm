@@ -140,7 +140,7 @@ class SupremmDbInterface {
         }
         $db = $resconf['handle'];
         $stats = $db->command( array("collStats" => $resconf['collection'] ) );
-        $results = $stats->toArray();
+        $data = $stats->toArray();
         $tmp = array();
         $tmp["total"] = $stats["count"];
         $tmp["avgObjSize"] = $this->formatDataSize($data["avgObjSize"]);
