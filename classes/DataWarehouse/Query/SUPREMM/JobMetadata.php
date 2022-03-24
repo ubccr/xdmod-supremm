@@ -126,7 +126,7 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
         $jversion = isset($jobdata['summary_version']) ? $jobdata['summary_version'] : $jobdata['summarization']['version'];
         $schema = $this->getsummaryschema($job['resource_id'], $jversion);
         if ($schema !== null) {
-            return $this->arrayMergeRecursiveWildcard(json_decode(json_encode($jobdata),true), json_decode(json_encode($schema['definitions']), true));
+            return $this->arrayMergeRecursiveWildcard(json_decode(json_encode($jobdata), true), json_decode(json_encode($schema['definitions']), true));
         } else {
             return $jobdata;
         }
