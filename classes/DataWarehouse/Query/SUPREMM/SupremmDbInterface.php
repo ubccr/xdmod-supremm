@@ -47,7 +47,7 @@ class SupremmDbInterface {
      */
     public function updateEtlVersion($resource_id, $new_etl_version) {
         $resourceConfig = $this->getResourceConfig($resource_id);
-        $resconf =& $resourceConfig;
+        $resconf = $resourceConfig;
 
         if( $resconf === null) {
             return null;
@@ -77,7 +77,7 @@ class SupremmDbInterface {
             return null;
         }
 
-        $resconf =& $this->resource_rmap[$resource_id];
+        $resconf = $this->resource_rmap[$resource_id];
 
         if( !isset($resconf['handle']) ) {
             $this->getMongoConnection($resconf);
@@ -122,7 +122,7 @@ class SupremmDbInterface {
 
     public function getsummaryschema($resource_id, $summary_version) {
         $resourceConfig = $this->getResourceConfig($resource_id);
-        $resconf =& $resourceConfig;
+        $resconf = $resourceConfig;
 
         if( $resconf === null) {
             return null;
