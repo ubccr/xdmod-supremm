@@ -321,8 +321,7 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
     private function getsummaryschema($resource_id, $summary_version)
     {
         $resourceConfig = $this->supremmDbInterface->getResourceConfig($resource_id);
-        $resconf =& $resourceConfig;
-
+        $resconf = $resourceConfig;
         if ($resconf === null) {
             return null;
         }
@@ -333,7 +332,7 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
     private function gettimeseries($resource_id, $jobid, $end_time_ts, $filter = null)
     {
         $resourceConfig = $this->supremmDbInterface->getResourceConfig($resource_id);
-        $resconf =& $resourceConfig;
+        $resconf = $resourceConfig;
 
         if ($resconf === null) {
             return null;
