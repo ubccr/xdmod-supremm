@@ -44,6 +44,9 @@ jobs:
       #- setup_remote_docker:
       #    docker_layer_caching: true
       # Download and cache dependencies
+      -run:
+          name: temporarily toast composer.lock
+          command: rm -f composer.lock
       - run:
           name: Install SUPREMM Dependencies
           command: |
