@@ -142,7 +142,7 @@ class SupremmDbInterface {
         $stats = $db->command( array("collStats" => $resconf['collection'] ) );
         $data = $stats->toArray();
         $tmp = array();
-        $tmp["total"] = $stats["count"];
+        $tmp["total"] = $data["count"];
         $tmp["avgObjSize"] = $this->formatDataSize($data["avgObjSize"]);
         $tmp["storageSize"] = $this->formatDataSize($data["storageSize"]);
         $tmp["size"] = $this->formatDataSize($data["size"]);
@@ -152,7 +152,7 @@ class SupremmDbInterface {
 
         $processed = $collection->count( array( "processed." . $this->getEtlUid() . ".version" => $this->etl_version ) );
         $tmp["processed"] = $processed;
-        $tmp["pending"] = $stats["count"] - $processed;
+        $tmp["pending"] = $data["count"] - $processed;
 
         $res = array();
         $res['data'] = $tmp;
