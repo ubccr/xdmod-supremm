@@ -34,12 +34,10 @@ jobs:
       - checkout
       - run:
           name: Checkout XDMoD
-          command: |
-            git clone --depth=1 --branch=xdmod10.0 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
+          command: git clone --depth=1 --branch=xdmod10.0 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
       - run:
           name: Link the SUPREMM module into the XDMoD Source Directory
-          command: |
-              ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
+          command: ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
       # We need to update our acct before we can enable docker layer caching.
       #- setup_remote_docker:
       #    docker_layer_caching: true
@@ -49,27 +47,21 @@ jobs:
           command: rm -f composer.lock
       - run:
           name: Install SUPREMM Dependencies
-          command: |
-            composer install --no-progress
+          command: composer install --no-progress
+
       - run:
           name: Install SUPREMM RPM build dependencies
-          command: |
-            ./tests/ci/scripts/install_dependencies.sh
+          command: ./tests/ci/scripts/install_dependencies.sh
+
       - run:
           name: Install XDMoD Dependencies
-          command: |
-            composer config -g cache-files-ttl 315360000
-            composer install -d $XDMOD_SRC_DIR --no-progress
+          command: composer config -g cache-files-ttl 315360000 && composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Create Test Artifact Directories
-          command: |
-            mkdir ~/phpunit
-            mkdir /tmp/screenshots
+          command: mkdir ~/phpunit && mkdir /tmp/screenshots
       - run:
           name: Setup Environment Variables
-          command: |
-            echo "export XDMOD_SOURCE_DIR=${CIRCLE_WORKING_DIRECTORY}/${XDMOD_SRC_DIR}" >> $BASH_ENV
-            echo "export SHIPPABLE_BUILD_DIR=${CIRCLE_WORKING_DIRECTORY}" >> $BASH_ENV
+          command: echo "export XDMOD_SOURCE_DIR=${CIRCLE_WORKING_DIRECTORY}/${XDMOD_SRC_DIR}" >> $BASH_ENV && echo "export SHIPPABLE_BUILD_DIR=${CIRCLE_WORKING_DIRECTORY}" >> $BASH_ENV
       - run:
           name: Build RPMS
           command: |
