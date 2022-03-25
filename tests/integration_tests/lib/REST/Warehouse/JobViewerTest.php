@@ -387,17 +387,42 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             'tsid' =>  'cpuuser'
         );
 
+        $osInfo = self::getOsInfo();
+        $el8 = isset($osInfo['VERSION_ID']) && in_array($osInfo['VERSION_ID'], array('8', '8.5'));
+
         $ret = array();
         $ret[] = array($xdmodhelper, $searchparams, 'application/json', null);
         $searchparams['format'] = 'pdf';
         $ret[] = array($xdmodhelper, $searchparams, 'application/pdf', 'application/pdf; charset=binary');
         $searchparams['format'] = 'csv';
-        $ret[] = array($xdmodhelper, $searchparams, 'text/csv', 'text/plain; charset=us-ascii');
+        if (!$el8) {
+            $ret[] = array($xdmodhelper, $searchparams, 'text/csv', 'text/plain; charset=us-ascii');
+        } else {
+            $ret[] = array($xdmodhelper, $searchparams, 'text/csv;charset=UTF-8', 'text/plain; charset=us-ascii');
+        }
+
         $searchparams['format'] = 'png';
         $ret[] = array($xdmodhelper, $searchparams, 'image/png', 'image/png; charset=binary');
+
         $searchparams['format'] = 'svg';
-        $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'text/plain; charset=us-ascii');
+        if (!$el8) {
+            $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'text/plain; charset=us-ascii');
+        } else {
+            $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'image/svg; charset=us-ascii');
+        }
+
 
         return $ret;
+    }
+
+    public function getOsInfo()
+    {
+        try {
+            $osInfo = parse_ini_file('/etc/os-release');
+            return $osInfo;
+        } catch (\Exception $e) {
+            // if we don't have access to OS related info then that's fine, we'll just use the default expected.json
+            return array();
+        }
     }
 }
