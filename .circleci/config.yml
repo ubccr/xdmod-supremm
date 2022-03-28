@@ -61,6 +61,13 @@ jobs:
             - run:
                name: Add composer
                command: composer require -d "$XDMOD_SRC_DIR" mongodb/mongodb
+            - run:
+               name: Install XDMoD UI Test Dependencices
+               command: |
+                 pushd "$XDMOD_SRC_DIR/tests/ui" || exit
+                 npm install
+                 popd || exit
+
       # We need to update our acct before we can enable docker layer caching.
       #- setup_remote_docker:
       #    docker_layer_caching: true
