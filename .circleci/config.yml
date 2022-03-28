@@ -75,11 +75,11 @@ jobs:
       - when:
           condition:
               equal: [ *centos7-executor, << parameters.os >> ]
-                  steps:
-                      - run:
-                          name: Install SUPREMM RPM build dependencies
-                          command: |
-                            ./tests/ci/scripts/install_dependencies.sh
+          steps:
+            - run:
+                name: Install SUPREMM RPM build dependencies
+                command: |
+                  ./tests/ci/scripts/install_dependencies.sh
       - run:
           name: Install XDMoD Dependencies
           command: |
