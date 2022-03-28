@@ -53,7 +53,7 @@ jobs:
             - run:
                name: Add in the allow-plugins section to XDMoDs composer.json
                command:  |
-               jq '.config += {"allow-plugins": {"composer/installers": true, "simplesamlphp/composer-module-installer": true}}' "$XDMOD_SRC_DIR/composer.json.orig" > "$XDMOD_SRC_DIR/composer.json"
+                 jq '.config += {"allow-plugins": {"composer/installers": true, "simplesamlphp/composer-module-installer": true}}' "$XDMOD_SRC_DIR/composer.json.orig" > "$XDMOD_SRC_DIR/composer.json"
             - run:
                name: update XDMoD's required php version.
                command: |
