@@ -52,7 +52,8 @@ jobs:
                command: |
                  sed -i 's/"php": "5.4"/"php": "7.2"/' "$XDMOD_SRC_DIR/composer.json"
             - run:
-               name: Add composer require -d "$XDMOD_SOURCE_DIR" mongodb/mongodb
+               name: Add composer
+               command: require -d "$XDMOD_SOURCE_DIR" mongodb/mongodb
       # We need to update our acct before we can enable docker layer caching.
       #- setup_remote_docker:
       #    docker_layer_caching: true
