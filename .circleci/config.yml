@@ -43,12 +43,14 @@ jobs:
       - when:
         condition:
           or:
-            - equal: [ *centos8-executor, << parameters.os >> ]
             - equal: [ *rocky8-executor, << parameters.os >> ]
           steps:
            - run: rm -f "$XDMOD_SOURCE_DIR/composer.lock" && rm -f composer.lock
-           - run: sed -i 's/"php": "5.4"/"php": "7.2"/' "$XDMOD_SRC_DIR/composer.json"
-           - composer require -d "$XDMOD_SOURCE_DIR" mongodb/mongodb
+           - run:
+               name: update XDMoD's required php version.
+               command: |
+                 sed -i 's/"php": "5.4"/"php": "7.2"/' "$XDMOD_SRC_DIR/composer.json"
+           - run: composer require -d "$XDMOD_SOURCE_DIR" mongodb/mongodb
       # We need to update our acct before we can enable docker layer caching.
       #- setup_remote_docker:
       #    docker_layer_caching: true
@@ -136,18 +138,8 @@ workflows:
       - build:
           matrix:
             parameters:
-<<<<<<< Updated upstream
               os: [centos7, rocky8]
               install-type: ["fresh_install", "upgrade"]
             exclude:
-#               - os: centos8
-#                 install-type: "upgrade"
-=======
-              os: [centos7, centos8, rocky8]
-              install-type: ["fresh_install", "upgrade"]
-            exclude:
-              - os: centos8
-                install-type: "upgrade"
->>>>>>> Stashed changes
               - os: rocky8
                 install-type: "upgrade"
