@@ -72,10 +72,14 @@ jobs:
           name: Install SUPREMM Dependencies
           command: |
             composer install --no-progress
-      - run:
-          name: Install SUPREMM RPM build dependencies
-          command: |
-            ./tests/ci/scripts/install_dependencies.sh
+      - when:
+          condition:
+              equal: [ *centos7-executor, << parameters.os >> ]
+                  steps:
+                      - run:
+                          name: Install SUPREMM RPM build dependencies
+                          command: |
+                            ./tests/ci/scripts/install_dependencies.sh
       - run:
           name: Install XDMoD Dependencies
           command: |
