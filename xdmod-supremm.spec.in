@@ -14,7 +14,7 @@ BuildRequires: php-cli
 %{?el8:Requires:      xdmod >= 10.5.0, xdmod < 11.0.0}
 %{?el8:Requires:      nodejs >= 16.13.2}
 %{?el8:BuildRequires: npm >= 8.1.2}
-%{?el7:Requires: xdmod >= 10.0.0 < 10.5.0}
+%{?el7:Requires: xdmod >= 10.0.0, xdmod < 10.5.0}
 %{?el7:Requires: nodejs npm}
 %{?el7:Requires: php-pecl-mongo}
 
