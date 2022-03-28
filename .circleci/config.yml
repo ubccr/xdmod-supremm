@@ -52,6 +52,9 @@ jobs:
           command: |
             composer install --no-progress
       - run:
+          name: Install MongoDB for XDMoD
+          command: composer require -d $XDMOD_SRC_DIR mongodb/mongodb
+      - run:
           name: Install SUPREMM RPM build dependencies
           command: |
             ./tests/ci/scripts/install_dependencies.sh
