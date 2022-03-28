@@ -130,9 +130,22 @@ jobs:
       - run:
           name: Run Integration Tests
           command: ./tests/integration_tests/runtests.sh --log-junit ~/phpunit
-      - run:
-          name: Run UI Tests
-          command: scl enable rh-nodejs6 "$XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
+      - when:
+          condition:
+              equal: [ *centos7-executor, << parameters.os >> ]
+          steps:
+              - run:
+                name: Run UI Tests
+                command: |
+                  scl enable rh-nodejs6 "$XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
+      - when:
+          condition:
+              equal: [ *centos8-executor, << parameters.os >> ]
+          steps:
+              - run:
+                name: Run UI Tests
+                command: |
+                  "$XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
       - run:
           name: Run Regression Tests
           command: ./tests/regression_tests/runtests.sh --log-junit ~/phpunit
