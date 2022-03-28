@@ -46,7 +46,13 @@ jobs:
           steps:
             - run:
                name: Remove composer lock files
-               command: rm -f "$XDMOD_SOURCE_DIR/composer.lock" && rm -f composer.lock
+               command: rm -f "$XDMOD_SRC_DIR/composer.lock" && rm -f composer.lock
+            - run:
+               name: Move composer file so that we can modify it w/ jq
+               command: mv "$XDMOD_SRC_DIR/composer.json" "$XDMOD_SRC_DIR/composer.json.orig"
+            - run:
+               name: Add in the allow-plugins section to XDMoDs composer.json
+               command:  jq '.config += {"allow-plugins": {"composer/installers": true, "simplesamlphp/composer-module-installer": true}}' "$XDMOD_SRC_DIR/composer.json.orig" > "$XDMOD_SRC_DIR/composer.json"
             - run:
                name: update XDMoD's required php version.
                command: |
