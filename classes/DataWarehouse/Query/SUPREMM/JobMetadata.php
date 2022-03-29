@@ -338,8 +338,8 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
             return null;
         }
         $timeseriesCollection = 'timeseries-'.$resconf['collection'];
-        $collection = $resconf['handle']->$timeseriesCollection;
-        $query = array( "_id" => new \MongoDB\BSON\Regex("^$jobid-.*$end_time_ts") );
+        $collection = $this->supremmDbInterface->getCollection($resconf['handle'], $timeseriesCollection);
+        $query = array( "_id" => $this->supremmDbInterface->getRegex("^$jobid-.*$end_time_ts"));
 
         if ($filter === null) {
             $doc = $collection->findOne($query);
@@ -380,10 +380,9 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
         if ($resconf === null) {
             return null;
         }
-        $collectionName = $resconf['collection'];
-        $collection = $resconf['handle']->$collectionName;
+        $collection = $this->supremmDbInterface->getCollection($resconf['handle'], $resconf['collection']);
 
-        $query = array( "_id" => new \MongoDB\BSON\Regex("^$jobid-.*$end_time_ts") );
+        $query = array( "_id" => $this->supremmDbInterface->getRegex("^$jobid-.*$end_time_ts"));
 
         $res = $collection->findOne($query);
         if ($res !== null) {

@@ -8,6 +8,8 @@ class SupremmDbInterface {
     private $etl_version = null;
     private $resource_rmap = null;
 
+    private $mongoDriver;
+
     public function __construct() {
         $sconf = XdmodConfiguration::assocArrayFactory('supremmconfig.json', CONFIG_DIR);
         $this->etl_version = $sconf['etlversion'];
@@ -39,6 +41,11 @@ class SupremmDbInterface {
             $this->resource_rmap[$sresource['resource_id']] = $sresource;
         }
 
+        if (class_exists('\MongoClient')) {
+            $this->mongoDriver = 'mongo';
+        } elseif (class_exists('\MongoDB\Client')) {
+            $this->mongoDriver = 'mongodb';
+        }
     }
 
     /**
@@ -53,9 +60,9 @@ class SupremmDbInterface {
             return null;
         }
 
-        $collection = $resconf['handle']->$resconf['collection'];
+        $collection = $this->getCollection($resconf['handle'], $resconf['collection']);
 
-        $result = $collection->updateOne(
+        $result = $this->update($collection,
             array('processed.' . $this->getEtlUid() . '.version' => $this->etl_version),
             array('$set' => array('processed.' . $this->getEtlUid() . '.version' => $new_etl_version)),
             array('multiple' => true, 'socketTimeoutMS' => -1, 'wTimeoutMS' => -1)
@@ -100,10 +107,7 @@ class SupremmDbInterface {
             $mongouri = "mongodb://" . $dbSettings['host'] . ":" . $dbSettings['port'];
         }
 
-        $client = new \MongoDB\Client($mongouri);
-        $dbName = $dbSettings['db'];
-        $db = $client->$dbName;
-        $resconf['handle'] = $db;
+        $resconf['handle'] = $this->getDB($mongouri, $dbSettings['db']);
 
         return $resconf;
     }
@@ -139,20 +143,18 @@ class SupremmDbInterface {
             return null;
         }
         $db = $resconf['handle'];
-        $stats = $db->command( array("collStats" => $resconf['collection'] ) );
-        $data = $stats->toArray();
+        $stats = $this->getColumnStats($db, $resconf['collection']);
         $tmp = array();
-        $tmp["total"] = $data["count"];
-        $tmp["avgObjSize"] = $this->formatDataSize($data["avgObjSize"]);
-        $tmp["storageSize"] = $this->formatDataSize($data["storageSize"]);
-        $tmp["size"] = $this->formatDataSize($data["size"]);
+        $tmp["total"] = $stats["count"];
+        $tmp["avgObjSize"] = $this->formatDataSize($stats["avgObjSize"]);
+        $tmp["storageSize"] = $this->formatDataSize($stats["storageSize"]);
+        $tmp["size"] = $this->formatDataSize($stats["size"]);
 
-        $collectionName = $resconf['collection'];
-        $collection = $db->$collectionName;
+        $collection = $this->getCollection($db, $resconf['collection']);
 
         $processed = $collection->count( array( "processed." . $this->getEtlUid() . ".version" => $this->etl_version ) );
         $tmp["processed"] = $processed;
-        $tmp["pending"] = $data["count"] - $processed;
+        $tmp["pending"] = $stats["count"] - $processed;
 
         $res = array();
         $res['data'] = $tmp;
@@ -165,6 +167,78 @@ class SupremmDbInterface {
         $pdo = \CCR\DB::factory('database');
         $res = $pdo->query("SELECT uuid FROM modw_supremm.etl_uid WHERE NOW() BETWEEN valid_from AND valid_to ORDER BY valid_from DESC LIMIT 1");
         return $res[0]['uuid'];
+    }
+
+    public function getRegex($regex)
+    {
+        switch ($this->mongoDriver) {
+            case 'mongo':
+                return new \MongoRegex($regex);
+            case 'mongodb':
+            default:
+                return new \MongoDB\BSON\Regex($regex);
+        }
+    }
+
+    /**
+     * @param $handle
+     * @param $collectionName
+     * @return mixed
+     */
+    public function getCollection($handle, $collectionName) {
+        switch ($this->mongoDriver) {
+            case 'mongo':
+                return $handle->selectCollection($collectionName);
+            case 'mongodb':
+            default:
+                return $handle->$collectionName;
+        }
+    }
+
+    public function update($collection, $filter, $data, $options)
+    {
+        switch ($this->mongoDriver) {
+            case 'mongo':
+                return $collection->update(
+                    $filter,
+                    $data,
+                    $options
+                );
+            case 'mongodb':
+            default:
+                return $collection->updateOne(
+                    $filter,
+                    $data,
+                    $options
+                );
+        }
+    }
+
+    private function getDB($uri, $dbName)
+    {
+        switch ($this->mongoDriver) {
+            case 'mongo':
+                $client = new \MongoClient($uri);
+                return $client->selectDB($dbName);
+            case 'mongodb':
+            default:
+                $client = new \MongoDB\Client($uri);
+                return $client->$dbName;
+        }
+    }
+
+    private function getColumnStats($db, $collectionName)
+    {
+        $command = array('collStats' => $collectionName);
+
+        switch ($this->mongoDriver) {
+            case 'mongo':
+                return $db->command($command);
+            case 'mongodb':
+            default:
+                $results = $db->command($command);
+                return $results->toArray();
+        }
     }
 }
 ?>
