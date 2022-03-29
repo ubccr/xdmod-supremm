@@ -1,5 +1,6 @@
 {
     "require": {
+        "php": "^5.4 || ^7.2",
         "sporritt/jsplumb-jquery-min-file": "^1.6.3"
     },
     "repositories": [
@@ -33,9 +34,6 @@
         }
     },
     "config": {
-        "platform": {
-            "php": "^5.4 || ^7.2"
-        },
         "allow-plugins": {
             "composer/installers": true,
             "simplesamlphp/composer-module-installer": true
