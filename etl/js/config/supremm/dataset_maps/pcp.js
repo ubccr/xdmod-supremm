@@ -514,22 +514,22 @@ module.exports = function(config) {
                     return this.getmax(job, 'ipmi.power.max');
                 }
             },
-            "rapl_energy_pkg": {
+            rapl_energy_pkg: {
                 ref: 'rapl.energy.pkg.avg'
-            }, 
-            "rapl_energy_cores": {
+            },
+            rapl_energy_cores: {
                 ref: 'rapl.energy.cores.avg'
-            }, 
-            "rapl_energy_dram": {
+            },
+            rapl_energy_dram: {
                 ref: 'rapl.energy.dram.avg'
             },
-            "rapl_power_pkg": {
+            rapl_power_pkg: {
                 ref: 'rapl.power.pkg'
-            }, 
-            "rapl_power_cores": {
+            },
+            rapl_power_cores: {
                 ref: 'rapl.power.cores'
-            }, 
-            "rapl_power_dram": {
+            },
+            rapl_power_dram: {
                 ref: 'rapl.power.dram'
             },
             "memory_used": {
