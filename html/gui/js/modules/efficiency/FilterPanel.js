@@ -406,14 +406,14 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                     method: 'GET'
                 }),
                 baseParams: {
-                    realm: 'SUPREMM',
+                    realm: 'SUPREMM'
                 },
                 fields: ['checked', 'name', 'id'],
                 root: 'results',
                 totalProperty: 'totalCount',
                 autoLoad: true,
                 idProperty: 'name',
-                messageProperty: 'message',
+                messageProperty: 'message'
             }),
             listeners: {
                 select: function (e) {
