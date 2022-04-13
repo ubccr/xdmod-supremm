@@ -73,7 +73,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 },
                 plotOptions: {
                     series: {
-                        turboThreshold: 3000,
+                        turboThreshold: 0,
                         animation: false,
                         point: {
                             events: {
