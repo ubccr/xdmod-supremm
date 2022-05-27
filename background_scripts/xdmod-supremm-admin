@@ -204,15 +204,16 @@ function truncateAction($config, $deleteSqlData)
         }
 
         $multiDel = <<<EOF
-DELETE FROM `modw_supremm` . `job_name` , `modw_supremm` . `job_peers`
+DELETE FROM `modw_supremm` . `job_name` , `modw_supremm` . `job_peers`, `modw_supremm` . `job_array_peers`
 USING `modw_supremm`.`job`
         LEFT JOIN `modw_supremm`.`job_name` ON `modw_supremm`.`job`.jobname_id = `modw_supremm`.`job_name`.id
         LEFT JOIN `modw_supremm`.`job_peers` ON `modw_supremm`.`job`._id = `modw_supremm`.`job_peers`.job_id 
+        LEFT JOIN `modw_supremm`.`job_array_peers` ON `modw_supremm`.`job`._id = `modw_supremm`.`job_array_peers`.job_id
 WHERE
     `modw_supremm`.`job`.resource_id = :resource_id
 EOF;
         $rows = $db->execute($multiDel, array('resource_id' => $resource_id));
-        $logger->notice('Deleted ' . $rows . ' rows from job_name and job_peers tables.');
+        $logger->notice('Deleted ' . $rows . ' rows from job_name, job array peers and job_peers tables.');
     }
 }
 
