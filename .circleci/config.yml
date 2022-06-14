@@ -51,15 +51,7 @@ jobs:
                name: Move composer file so that we can modify it w/ jq
                command: mv "$XDMOD_SRC_DIR/composer.json" "$XDMOD_SRC_DIR/composer.json.orig"
             - run:
-               name: Add in the allow-plugins section to XDMoDs composer.json
-               command:  |
-                 jq '.config += {"allow-plugins": {"composer/installers": true, "simplesamlphp/composer-module-installer": true}}' "$XDMOD_SRC_DIR/composer.json.orig" > "$XDMOD_SRC_DIR/composer.json"
-            - run:
-               name: update XDMoD's required php version.
-               command: |
-                 sed -i 's/"php": "5.4"/"php": "7.2"/' "$XDMOD_SRC_DIR/composer.json"
-            - run:
-               name: Add composer
+               name: Add mongodb/mongodb to XDMoD via composer
                command: composer require -d "$XDMOD_SRC_DIR" mongodb/mongodb
             - run:
                name: Install XDMoD UI Test Dependencices
@@ -95,8 +87,8 @@ jobs:
       - run:
           name: Create Test Artifact Directories
           command: |
-            mkdir ~/phpunit
-            mkdir /tmp/screenshots
+            mkdir -p /tmp/phpunit
+            mkdir -p /tmp/screenshots
       - run:
           name: Setup Environment Variables
           command: |
@@ -105,16 +97,12 @@ jobs:
       - run:
           name: Build RPMS
           command: |
-            pwd
             pushd $XDMOD_SRC_DIR
-            pwd
             ~/bin/buildrpm xdmod supremm
             popd
-            pwd
       - run:
           name: Install / Upgrade XDMoD from RPM
           command: |
-              echo `pwd`
               ./tests/integration_tests/scripts/bootstrap.sh
       - run:
           name: Validate the newly installed / Upgraded XDMoD
@@ -159,7 +147,7 @@ jobs:
       - store_artifacts:
           path: /var/log/xdmod
       - store_test_results:
-          path: ~/phpunit
+          path: /tmp/phpunit
 
 workflows:
   full-build:
