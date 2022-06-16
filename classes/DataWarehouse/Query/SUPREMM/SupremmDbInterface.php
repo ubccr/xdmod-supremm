@@ -174,11 +174,35 @@ class SupremmDbInterface {
     {
         switch ($this->mongoDriver) {
             case 'mongo':
-                return new \MongoRegex($regex);
+                return new \MongoRegex($this->slashifyRegex($regex));
             case 'mongodb':
             default:
                 return new \MongoDB\BSON\Regex($regex);
         }
+    }
+
+    /**
+     * Inspect the provided $regex argument and add a leading or trailing slash if one is not
+     * already present, returning the possibly more slashified regex. This is specfically to be
+     * used w/ the \MongoRegex class and should be removed when we've dropped CentOS7.
+     *
+     * @param string $regex
+     * @return string
+     */
+    protected function slashifyRegex($regex)
+    {
+        $leading = substr($regex, 0, 1) === '/';
+        $trailing = substr($regex, count($regex) - 1, 1) === '/';
+
+        if (!$leading) {
+            $regex = "/$regex";
+        }
+
+        if (!$trailing) {
+            $regex = "$regex/";
+        }
+
+        return $regex;
     }
 
     /**
