@@ -1,3 +1,14 @@
+
+This section gives example configuration settings for PCP running on the compute nodes
+of an HPC cluster. These configuration guidelines are based on the PCP data collection setup
+at CCR buffalo, which uses PCP version 4.2 that is supplied with Centos 7.
+
+## Prerequisites
+
+PCP should be installed on every compute node as described in the [install section](supremm-install-pcp.md).
+
+## Configuration
+
 After the PCP software has been installed on each compute node it should be configured so that
 data are collected:
 
@@ -9,7 +20,8 @@ data are collected:
 The archive data for each node should be stored on a shared filesystem for
 subsequent processing by the job summarization software.
 
-It is recommended to store the archives in a directory structure
+In order to constrain the number of files in a given directory,
+we recommend storing the archives in a directory structure
 that includes the hostname and the date in different subdirectories. The recommended
 directory path is:
 
@@ -27,17 +39,13 @@ directories are scanned.
 In previous versions of the summarization software the recommended path
 was:
 
-   [HOSTNAME]/[YYYY]/[MM]/[DD]
+    [HOSTNAME]/[YYYY]/[MM]/[DD]
 
 this directory structure is still supported by the indexing script and may
 still be used. The reason for changing the recommendation is that the new directory
 structure limits the total number of files under a given directory. This
 helps reduce the runtime of backup software. If the filesystem I/O performance with
  the existing directory stucture is not an issue then do not change to the new one.
-
-## Prerequisites
-
-The PCP collection software should have been installed on the compute nodes.
 
 Configuration Templates
 -----------------------
@@ -59,10 +67,19 @@ where the PCP archives are to be saved.
 The path `PCP_LOG_DIR/pmlogger` should be changed to the path  where the PCP archives are to be saved.
 
 The edited template should be saved in the `/etc/pcp/pmlogger` directory and  any existing files under
-`/etc/pcp/pmlogger/control.d` should be removed.
+`/etc/pcp/pmlogger/control.d` must be removed to ensure that there is only one primary logger
+configured.
 
 Note that the string `LOCALHOSTNAME` in the file is expanded by the pcp logger software to the hostname
 of the compute node running the logger.
+
+It is also recommended to disable the compression behavior so that the
+archive files do not get compressed while the summarization software is
+processing them:
+
+```
+$PCP_COMPRESSAFTER=never
+```
 
 #### /usr/share/supremm/templates/pmlogger/pmlogger-supremm.config
 * Moved to /etc/pcp/pmlogger
@@ -93,9 +110,14 @@ significant resources.  This will reduce disk usage by the pcp archives.
 
 Enable logging modules (PMDAs)
 -----------------------------
-* By default, in order to be lightweight, PCP does not enable all logging modules (PMDAs)
-* They may be enabled by creating a ".NeedInstall" file which instructs the PCP framework
-to enable the PMDA on next restart.
+By default, in order to be lightweight, PCP does not enable all logging modules (PMDAs)
+They may be enabled by creating a ".NeedInstall" file in the PMDA directory. The presence
+of this file causes the PCP framework
+to enable the PMDA on next restart (`systemctl restart pmcd`).
+
+The PMDAs that should be enabled will depend on the architecture of your cluster. For
+example, if you have a Lustre filesystem then enable the Lustre PMDA, if you mount
+filesystems over NFS then enable the nfsclient PMDA.
 
 <!-- Empty Comment to fix broken markdown parsing -->
 
@@ -113,27 +135,25 @@ Configure Global Process Capture
 By default, PCP does not allow the capture of process information for all users. XDMoD
 can display process information only if the pcp user is permitted to log this
 information from each compute host. See the relevant documentation in `man pmdaproc`.
-To enable this, you must add the `-A` flag to the `pmdaproc` line 
+To enable this, you must add the `-A` flag to the `pmdaproc` line
 in `/etc/pcp/pmcd/pmcd.conf` like so:
 
     proc	3	pipe	binary 		/var/lib/pcp/pmdas/proc/pmdaproc  -A
-    
+
 Disable daily archive rollup
 --------------------------------
 
-The daily housekeeping processes that run from cron for PCP
-will attempt to do some cleanup that is not necessary when ingesting
-the PCP archives into XDMoD. You should add the `-M` flag to pmlogger_daily
-line in the `/etc/cron.d/pcp-pmlogger` file.  This will disable the process
-that runs daily to combine multiple archives into one file.  XDMoD can
-handle these files with no problem, and this process uses unnecessary resources.
-You may also wish to adjust the retention period for old archives
-with the `-k` parameter. See `man pmlogger_daily` for more information. The
-following line will disable the daily rollup and keep archives forever.
+PCP supports automatically compressing archives after they are created
+to save disk space. The summarization software can read both compressed
+and uncompressed archives. However there is a potential race
+condition with the archive compression running at the same time as the
+job summarization software runs. At CCR we disable the compression with
+the following directive set in the pmlogger control file `/etc/pmlogger/control.d/[FILENAME]`
 
-    10     0  *  *  *  pcp  /usr/libexec/pcp/bin/pmlogger_daily -M -k forever
+```
+$PCP_COMPRESSAFTER=never
+```
 
-Adjust the retention policy to suit your needs of reprocessing old data.
 
 Restart PMCD
 --------------------------------
