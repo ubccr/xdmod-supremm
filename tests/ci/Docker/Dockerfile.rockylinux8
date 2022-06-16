@@ -1,14 +1,12 @@
 FROM tools-ext-01.ccr.xdmod.org/rockylinux8:xdmod-supremm-base
-ENV REL=9.5.0
+ENV REL=10.0.0
 ENV BUILD=1.0
 ENV BRANCH=xdmod10.0
 ENV IS_JOB_PERFORMANCE=1
 
-LABEL authors="Joseph P. White <jpwhite4@buffalo.edu>, Benjamin D. Plessinger <bpless@buffalo.edu>, Ryan A. Rathsam <ryanrath@buffalo.edu>"
+LABEL authors="Ryan A. Rathsam <ryanrath@buffalo.edu>"
 
-#RUN yum install -y https://github.com/ubccr/xdmod-supremm/releases/download/v$REL/xdmod-supremm-$REL-$BUILD.el7.noarch.rpm
-COPY assets/xdmod-supremm-10.0.0-1.0.el8.noarch.rpm /root
-RUN yum install -y /root/xdmod-supremm-10.0.0-1.0.el8.noarch.rpm
+RUN yum install -y https://github.com/ubccr/xdmod-supremm/releases/download/v$REL/xdmod-supremm-$REL-$BUILD.beta1.el8.noarch.rpm
 
 RUN yum clean all
 RUN rm -rf /var/cache/yum
