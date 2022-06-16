@@ -49,7 +49,7 @@ jobs:
                command: rm -f "$XDMOD_SRC_DIR/composer.lock" && rm -f composer.lock
             - run:
                name: Update XDMoD's composer config.platform
-               command: | 
+               command: |
                    sed -i 's/"php": "5.4"/"php": "7.2"/' $XDMOD_SRC_DIR/composer.json
             - run:
                name: Move composer.json so we can modify it
