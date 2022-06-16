@@ -54,7 +54,7 @@ jobs:
             - run:
                name: Move composer.json so we can modify it
                command: |
-                   mv "${XDMOD_SOURCE_DIR}/composer.json" "${XDMOD_SRC_DIR}/composer.json.orig"
+                   mv "${XDMOD_SRC_DIR}/composer.json" "${XDMOD_SRC_DIR}/composer.json.orig"
             - run:
                name: Update XDMoD's config to trust addons
                command: |
