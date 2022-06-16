@@ -50,15 +50,15 @@ jobs:
             - run:
                name: Update XDMoD's composer config.platform
                command: | 
-                   sed -i 's/"php": "5.4"/"php": "7.2"/' $XDMOD_SOURCE_DIR/composer.json
+                   sed -i 's/"php": "5.4"/"php": "7.2"/' $XDMOD_SRC_DIR/composer.json
             - run:
                name: Move composer.json so we can modify it
                command: |
-                   mv "${XDMOD_SOURCE_DIR}/composer.json" "${XDMOD_SOURCE_DIR}/composer.json.orig"
+                   mv "${XDMOD_SOURCE_DIR}/composer.json" "${XDMOD_SRC_DIR}/composer.json.orig"
             - run:
                name: Update XDMoD's config to trust addons
                command: |
-                   jq '.config += {"allow-plugins": {"composer/installers": true, "simplesamlphp/composer-module-installer": true}}' "$XDMOD_SOURCE_DIR/composer.json.orig" > "$XDMOD_SOURCE_DIR/composer.json"
+                   jq '.config += {"allow-plugins": {"composer/installers": true, "simplesamlphp/composer-module-installer": true}}' "$XDMOD_SRC_DIR/composer.json.orig" > "$XDMOD_SRC_DIR/composer.json"
             - run:
                name: Add mongodb/mongodb to XDMoD via composer
                command: composer require -d "$XDMOD_SRC_DIR" mongodb/mongodb
