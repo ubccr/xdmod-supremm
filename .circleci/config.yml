@@ -48,9 +48,6 @@ jobs:
                name: Remove composer lock files
                command: rm -f "$XDMOD_SRC_DIR/composer.lock" && rm -f composer.lock
             - run:
-               name: Move composer file so that we can modify it w/ jq
-               command: mv "$XDMOD_SRC_DIR/composer.json" "$XDMOD_SRC_DIR/composer.json.orig"
-            - run:
                name: Add mongodb/mongodb to XDMoD via composer
                command: composer require -d "$XDMOD_SRC_DIR" mongodb/mongodb
             - run:
