@@ -405,7 +405,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
 
         $searchparams['format'] = 'png';
         $ret[] = array($xdmodhelper, $searchparams, 'image/png', 'image/png; charset=binary');
-        // blah
+
         $searchparams['format'] = 'svg';
         if (!$el8) {
             $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'text/plain; charset=us-ascii');
