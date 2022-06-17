@@ -7,9 +7,9 @@ executors:
   centos7: &centos7-executor
     docker:
       - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-9.5.0:centos7.9-0.1
-#   centos8: &centos8-executor
-#     docker:
-#       - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:centos8.4-0.1
+  centos8: &centos8-executor
+    docker:
+      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:centos8.4-0.1
   rocky8: &rocky8-executor
     docker:
       - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:rockylinux8-0.1
@@ -42,7 +42,9 @@ jobs:
               ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
       - when:
           condition:
-            equal: [ *rocky8-executor, << parameters.os >> ]
+              or:
+                  - equal: [ *rocky8-executor, << parameters.os >> ]
+                  - equal: [ *centos8-executor, << parameters.os >> ]
           steps:
             - run:
                name: Remove composer lock files
@@ -117,13 +119,13 @@ jobs:
           name: Validate the newly installed / Upgraded XDMoD
           command: ./tests/integration_tests/scripts/validate.sh
       - run:
-          name: Make sure that the Composer Test Depedencies are installed
+          name: Make sure that the Composer Test Dependencies are installed
           command: composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Setup & Run QA Tests
           command: ./tests/ci/scripts/qa-test-setup.sh
       - run:
-          name: Make sure that the Composer Test Depedencies are installed
+          name: Make sure that the Composer Test Dependencies are installed
           command: composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Updating XDMOD_INSTALL_DIR env variable
@@ -143,7 +145,9 @@ jobs:
                   command: scl enable rh-nodejs6 "$XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
       - when:
           condition:
-              equal: [ *rocky8-executor, << parameters.os >> ]
+              or:
+                - equal: [ *rocky8-executor, << parameters.os >> ]
+                - equal: [ *centos8-executor, << parameters.os >> ]
           steps:
               - run:
                   name: Run UI Tests
@@ -164,8 +168,10 @@ workflows:
       - build:
           matrix:
             parameters:
-              os: [centos7, rocky8]
+              os: [centos7, rocky8, centos8]
               install-type: ["fresh_install", "upgrade"]
             exclude:
               - os: rocky8
+                install-type: "upgrade"
+              - os: centos8
                 install-type: "upgrade"
