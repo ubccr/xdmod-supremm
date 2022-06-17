@@ -4,7 +4,7 @@ ENV BUILD=1.0
 ENV BRANCH=xdmod10.0
 ENV IS_JOB_PERFORMANCE=1
 
-LABEL authors="Joseph P. White <jpwhite4@buffalo.edu>, Benjamin D. Plessinger <bpless@buffalo.edu>, Ryan A. Rathsam <ryanrath@buffalo.edu>"
+LABEL authors="Ryan A. Rathsam <ryanrath@buffalo.edu>"
 
 COPY assets/mongodb-org-3.4.repo /etc/yum.repos.d
 
