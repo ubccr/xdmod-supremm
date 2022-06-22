@@ -1,15 +1,11 @@
-# PHP CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-php/ for more details
-#
 version: 2.1
 executors:
   centos7: &centos7-executor
     docker:
       - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-9.5.0:centos7.9-0.1
-#  centos8: &centos8-executor
-#    docker:
-#      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:centos8.4-0.1
+  centos8: &centos8-executor
+    docker:
+      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:centos8.4-0.1
   rocky8: &rocky8-executor
     docker:
       - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:rockylinux8-0.1
@@ -44,7 +40,7 @@ jobs:
           condition:
               or:
                   - equal: [ *rocky8-executor, << parameters.os >> ]
-#                  - equal: [ *centos8-executor, << parameters.os >> ]
+                  - equal: [ *centos8-executor, << parameters.os >> ]
           steps:
             - run:
                name: Remove composer lock files
@@ -147,7 +143,7 @@ jobs:
           condition:
               or:
                 - equal: [ *rocky8-executor, << parameters.os >> ]
-#                - equal: [ *centos8-executor, << parameters.os >> ]
+                - equal: [ *centos8-executor, << parameters.os >> ]
           steps:
               - run:
                   name: Run UI Tests
@@ -173,5 +169,5 @@ workflows:
             exclude:
               - os: rocky8
                 install-type: "upgrade"
-#              - os: centos8
-#                install-type: "upgrade"
+              - os: centos8
+                install-type: "upgrade"
