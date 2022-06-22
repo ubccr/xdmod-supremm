@@ -105,6 +105,42 @@
         "description_html": "How many cores within one node.",
         "name": "Granted Processing Element"
     },
+    "homogeneity_bucket_id": {
+        "attribute_table_schema": "modw_supremm",
+        "attribute_to_aggregate_table_key_map": [
+            {
+                "id": "catastrophe_bucket_id"
+            }
+        ],
+        "attribute_values_query": {
+            "joins": [
+                {
+                    "name": "catastrophe_buckets"
+                }
+            ],
+            "orderby": [
+                "id"
+            ],
+            "records": {
+                "id": "id",
+                "name": "h_description",
+                "order_id": "id",
+                "short_name": "h_description"
+            }
+        },
+        "category": "Metrics",
+        "chart_options": {
+            "combine_method": "stack",
+            "dataset_display_type": {
+                "aggregate": "bar"
+            },
+            "dataset_type": "aggregate"
+        },
+        "data_sort_order": null,
+        "description_html": "The homogeneity is a measure of the how uniform the L1D load rate is over the lifetime of a job. Jobs with low homogeneity value (near 0) should be investigated to check if an error has caused data processing to stop prematurely.",
+        "name": "Homogeneity Rank",
+        "show_all_dimension_values": true
+    },
     "institution": {
         "attribute_table_schema": "modw",
         "attribute_to_aggregate_table_key_map": [
@@ -147,7 +183,8 @@
                 {
                     "id": "jobtime_id"
                 }
-            ]
+            ],
+            "show_all_dimension_values": true
         },
         "$ref-with-overwrite": "datawarehouse.d/ref/group-by-common.json#/jobwalltime"
     },
@@ -302,6 +339,7 @@
                     "on": "rf.id = rs.resource_id"
                 }
             ],
+            "query_hint": "DISTINCT",
             "orderby": [
                 "rf.code",
                 "rf.name"

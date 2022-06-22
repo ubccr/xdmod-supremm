@@ -11,5 +11,5 @@ page](https://open.xdmod.org/upgrade.html).  The ingestion and aggregation
 script `aggregate_supremm.sh` **must** be run after the XDMoD software has been
 upgraded.
 
-9.0.0 to 9.5.0 Upgrade Notes
+10.0.0 to 10.5.0 Upgrade Notes
 ----------------------------

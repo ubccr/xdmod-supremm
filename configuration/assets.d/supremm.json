@@ -3,10 +3,15 @@
         "+portal": {
             "+js": [
                 "gui/js/modules/dashboard/JobEfficiencyComponent.js",
-                "gui/js/modules/dashboard/UserJobEfficiencyComponent.js"
+                "gui/js/modules/dashboard/UserJobEfficiencyComponent.js",
+                "gui/js/modules/efficiency/Efficiency.js",
+                "gui/js/modules/efficiency/AnalyticPanel.js",
+                "gui/js/modules/efficiency/FilterPanel.js",
+                "gui/js/modules/efficiency/ScatterPlotPanel.js"
             ],
             "+css": [
-                "gui/css/UserEfficiencyComponent.css"
+                "gui/css/UserEfficiencyComponent.css",
+                "gui/css/Efficiency.css"
             ]
         }
     }

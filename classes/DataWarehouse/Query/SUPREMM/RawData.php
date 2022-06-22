@@ -3,6 +3,7 @@ namespace DataWarehouse\Query\SUPREMM;
 
 use \DataWarehouse\Query\Model\Table;
 use \DataWarehouse\Query\Model\TableField;
+use \DataWarehouse\Query\Model\FormulaField;
 use \DataWarehouse\Query\Model\WhereCondition;
 use \DataWarehouse\Query\Model\Schema;
 use \DataWarehouse\Query\Model\OrderBy;
@@ -58,6 +59,7 @@ class RawData extends \DataWarehouse\Query\Query implements \DataWarehouse\Query
 													new TableField($personTable,"id") ));
 
 		$this->addField(new TableField($resourcefactTable,"code", 'resource'));
+        $this->addField(new TableField($resourcefactTable, "timezone"));
 		$this->addField(new TableField($personTable, "long_name", "name"));
 
         $this->addField( new TableField($factTable, "_id", "jobid") );
@@ -65,6 +67,10 @@ class RawData extends \DataWarehouse\Query\Query implements \DataWarehouse\Query
         $this->addField(new TableField($factTable, "start_time_ts"));
         $this->addField(new TableField($factTable, "end_time_ts"));
         $this->addField(new TableField($factTable, "cpu_user"));
+        $this->addField(new TableField($factTable, "gpu_usage"));
+        $this->addField(new TableField($factTable, "max_memory"));
+        $this->addField(new TableField($factTable, "catastrophe"));
+        $this->addField(new FormulaField('COALESCE(LEAST(sj.wall_time / sj.requested_wall_time, 1), -1)', 'walltime_accuracy'));
 
         $this->addTable( $joblistTable );
         $this->addTable( $factTable );

@@ -10,13 +10,14 @@ jobs:
         type: string
     docker:
       # The first image entry here will be used as the image for the parent container.
-      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-9.0.0:centos7.8-0.1
+      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:centos7.9-0.1
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
-      XDMOD_REALMS: 'jobs,storage,cloud'
+      XDMOD_REALMS: 'jobs,storage,cloud,supremm,jobefficiency'
       XDMOD_IS_CORE: 'yes'
       XDMOD_INSTALL_DIR: /xdmod
       XDMOD_TEST_MODE: << parameters.install-type >>
+      TRAVIS_COMMIT_RANGE: << pipeline.git.base_revision >>..<<pipeline.git.revision>>
       XDMOD_SRC_DIR:  ./../xdmod
       REG_TEST_BASE: /../../../../../project/tests/artifacts/regression/current
     steps:
@@ -24,15 +25,11 @@ jobs:
       - run:
           name: Checkout XDMoD
           command: |
-            git clone --depth=1 --branch=xdmod9.5 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
+            git clone --depth=1 --branch=xdmod10.5 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
       - run:
           name: Link the SUPREMM module into the XDMoD Source Directory
           command: |
               ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
-      - run:
-          name: Add Upstream Git repo to facilitate QA tests
-          command: |
-            git remote add upstream https://github.com/ubccr/xdmod-supremm.git
       # We need to update our acct before we can enable docker layer caching.
       #- setup_remote_docker:
       #    docker_layer_caching: true
@@ -43,7 +40,9 @@ jobs:
             composer install --no-progress
       - run:
           name: Install XDMoD Dependencies
-          command: composer install -d $XDMOD_SRC_DIR --no-progress
+          command: |
+            composer config -g cache-files-ttl 315360000
+            composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Create Test Artifact Directories
           command: |
@@ -76,7 +75,7 @@ jobs:
           command: composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Setup & Run QA Tests
-          command: $XDMOD_SRC_DIR/tests/ci/scripts/qa-test-setup.sh
+          command: ./tests/ci/scripts/qa-test-setup.sh
       - run:
           name: Make sure that the Composer Test Depedencies are installed
           command: composer install -d $XDMOD_SRC_DIR --no-progress
@@ -91,7 +90,7 @@ jobs:
           command: ./tests/integration_tests/runtests.sh --log-junit ~/phpunit
       - run:
           name: Run UI Tests
-          command: $XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit
+          command: scl enable rh-nodejs6 "$XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
       - run:
           name: Run Regression Tests
           command: ./tests/regression_tests/runtests.sh --log-junit ~/phpunit
