@@ -14,7 +14,7 @@ BuildRequires: php-cli
 Requires:      xdmod >= 10.0.0, xdmod < 10.1.0
 Requires:      nodejs >= 16.13.2
 BuildRequires: npm >= 8.1.2
-Requires:      php-pecl-mongo
+%{?el7:Requires: php-pecl-mongo}
 
 %description
 Open XDMoD SUPReMM package.
