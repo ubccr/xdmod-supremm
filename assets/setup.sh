@@ -9,4 +9,4 @@ xdmod_dir="$module_dir/../../.."
 
 echo Installing Composer dependencies
 cd "$module_dir"
-composer install --no-dev
+COMPOSER=composer.json composer install --no-dev
