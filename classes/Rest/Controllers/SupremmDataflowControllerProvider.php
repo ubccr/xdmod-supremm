@@ -4,7 +4,6 @@ namespace Rest\Controllers;
 
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use DataWarehouse\Query\Exceptions\BadRequestException;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Silex\ControllerCollection;
@@ -114,11 +113,11 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
 
         $ymd = "/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/"; // regex for yyyy-mm-dd
         if (!(preg_match($ymd, $start) && preg_match($ymd, $end))) {
-                throw new BadRequestException("Please provide dates in YYYY-MM-DD format.");
+                throw new BadRequestHttpException("Please provide dates in YYYY-MM-DD format.");
         }
 
         if ($start >= $end) {
-            throw new BadRequestException("Invalid date range.");
+            throw new BadRequestHttpException("Invalid date range.");
         }
 
         $params = array(':start' => $start, ':end' => $end);
@@ -161,7 +160,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
                 break;
 
             default:
-                throw new BadRequestException("Unsupported information type. Valid types are: gpu, hardware, cpu, script, or realms.");
+                throw new BadRequestHttpException("Unsupported information type. Valid types are: gpu, hardware, cpu, script, or realms.");
                 break;
         }
         
