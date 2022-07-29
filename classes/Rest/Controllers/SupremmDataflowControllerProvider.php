@@ -437,7 +437,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
 
             return date('F Y', $ts);
         }
-    } // function time2str()
+    } // function time2str
 
     /**
      * Format and label data sizes appropriately for report output (as GB, MB, kB, or B).
