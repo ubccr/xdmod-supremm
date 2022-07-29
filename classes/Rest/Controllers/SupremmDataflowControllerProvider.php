@@ -105,7 +105,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
 
     public function getQuality(Request $request, Application $app)
     {
-        $user = $this->authorize($request, array('mgr'));
+        $this->authorize($request, array('mgr'));
 
         $start = $this->getStringParam($request, 'start');
         $end = $this->getStringParam($request, 'end');
