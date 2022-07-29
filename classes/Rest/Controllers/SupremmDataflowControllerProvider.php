@@ -103,7 +103,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         return $app->json($payload);
     } // function getDbstats
 
-    public function getQuality(Request $request, Application $app) 
+    public function getQuality(Request $request, Application $app)
     {
         $user = $this->authorize($request, array('mgr'));
 
@@ -163,7 +163,6 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
                 throw new BadRequestHttpException("Unsupported information type. Valid types are: gpu, hardware, cpu, script, or realms.");
                 break;
         }
-        
         return null;
 
     } // function getQuality
