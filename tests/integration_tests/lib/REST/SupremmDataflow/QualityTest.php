@@ -3,7 +3,7 @@
 namespace IntegrationTests\REST\SupremmDataflow;
 
 class QualityTest extends \PHPUnit_Framework_TestCase
-{   
+{
 
     protected static $helpers = array();
 
