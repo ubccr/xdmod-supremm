@@ -35,6 +35,9 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         $controller
             ->get("$root/dbstats", "$base::getDbstats");
 
+        $controller
+            ->get("$root/quality", "$base::getQuality");
+
     } // function setupRoutes
 
     /**
@@ -99,6 +102,70 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
 
         return $app->json($payload);
     } // function getDbstats
+
+    public function getQuality(Request $request, Application $app)
+    {
+        $this->authorize($request, array('mgr'));
+
+        $start = $this->getStringParam($request, 'start');
+        $end = $this->getStringParam($request, 'end');
+        $type = $this->getStringParam($request, 'type');
+
+        $ymd = "/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/"; // regex for yyyy-mm-dd
+        if (!(preg_match($ymd, $start) && preg_match($ymd, $end))) {
+                throw new BadRequestHttpException("Please provide dates in YYYY-MM-DD format.");
+        }
+
+        if ($start >= $end) {
+            throw new BadRequestHttpException("Invalid date range.");
+        }
+
+        $params = array(':start' => $start, ':end' => $end);
+
+        $payload = array(
+                'success' => true
+                );
+        $reslist = $this->getreslist($start);
+
+        switch ($type) {
+
+            case "gpu":
+                $querystr = $this->gpuqueuequery();
+                $payload['result'] = $this->runquery($querystr, $params);
+                return $app->json($payload);
+                break;
+
+            case "hardware":
+                $querystr = $this->getjobsquery('supremm', 'sf.cpibucket_id != 1', $reslist);
+                $payload['result'] = $this->runquery($querystr, $params);
+                return $app->json($payload);
+                break;
+
+            case "cpu":
+                $querystr = $this->getjobsquery('supremm', true, $reslist);
+                $payload['result'] = $this->runquery($querystr, $params);
+                return $app->json($payload);
+                break;
+
+            case "script":
+                $querystr = $this->getjobscriptquery();
+                $payload['result'] = $this->runquery($querystr, $params);
+                return $app->json($payload);
+                break;
+
+            case "realms":
+                $querystr = $this->getjobsquery('job', false, $reslist);
+                $payload['result'] = $this->runquery($querystr, $params);
+                return $app->json($payload);
+                break;
+
+            default:
+                throw new BadRequestHttpException("Unsupported information type. Valid types are: gpu, hardware, cpu, script, or realms.");
+                break;
+        }
+        return null;
+
+    } // function getQuality
 
     /**
      * Query supremm database for most recent data flow information.
@@ -370,7 +437,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
 
             return date('F Y', $ts);
         }
-    } // function time2str()
+    } // function time2str
 
     /**
      * Format and label data sizes appropriately for report output (as GB, MB, kB, or B).
@@ -390,4 +457,165 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
             return sprintf("%.2f B", $d);
         }
     } // function formatDataSize
+
+    private function gpuqueuequery()
+    {
+        return "
+        SELECT
+            DATE(d.day_start) AS day,
+            rf.code as resource,
+            ROUND(SUM(CASE sf.gpu0_nv_utilization_bucketid
+            WHEN 0 THEN 0
+            ELSE sf.node_time
+            END) / SUM(sf.node_time) * 100.0) AS percent
+        FROM
+            modw_aggregates.supremmfact_by_day sf,
+            modw.days d,
+            modw.resourcefact rf
+        WHERE
+            sf.queue_id IN ('viz' , 'gpu', 'wjzheng')
+            AND sf.day_id = d.id
+            AND rf.id = sf.resource_id
+            AND d.day_start >= :start
+            AND d.day_start <= :end
+        GROUP BY 1, 2
+        ORDER BY 1, 2
+        ";
+    } // function gpuqueuequery
+
+    private function getjobscriptquery()
+    {
+        return "
+        SELECT
+            DATE(FROM_UNIXTIME(jt.end_time_ts)) as day,
+            rf.code as resource,
+            COALESCE(ROUND(SUM(CASE WHEN js.tg_job_id IS NULL THEN 0 ELSE 1 END) / SUM(1) * 100.0), 'N/A') as percent
+        FROM
+            modw.job_tasks jt
+            JOIN modw.resourcefact rf ON rf.id = jt.resource_id
+            LEFT JOIN modw_supremm.job_scripts js ON jt.job_id = js.tg_job_id
+        WHERE
+            jt.end_time_ts >= UNIX_TIMESTAMP(:start) AND
+            jt.end_time_ts <= UNIX_TIMESTAMP(:end)
+            AND jt.local_job_array_index = -1
+        GROUP BY 1,2 ORDER BY 1,2;
+        ";
+    } // function getjobscriptquery
+
+    private function getjobsquery($reftable, $cpudatarestriction, $reslist)
+    {
+        if (is_string($cpudatarestriction)) {
+                $extraWhere = "AND " . $cpudatarestriction;
+        } elseif ($cpudatarestriction === true) {
+                $extraWhere = "AND sf.cpu_user_bucketid != 0";
+        } else {
+                $extraWhere = "";
+        }
+        if ($reftable === 'supremm') {
+                $jobCountColumn = 'job_count';
+                $resIdColumn = 'resource_id';
+                $jobBucketColumn = 'jobtime_id';
+        } else {
+                $jobCountColumn = 'ended_job_count';
+                $resIdColumn = 'task_resource_id';
+                $jobBucketColumn = 'job_time_bucket_id';
+        }
+        return "
+        SELECT
+            alljobs.day,
+            alljobs.resource,
+            COALESCE(ROUND(100.0 * COALESCE(withcpu.jobs_ended_with_cpudata, 0.0) / alljobs.jobs_ended,0), 'N/A') as percent,
+            alljobs.jobs_ended,
+            COALESCE(withcpu.jobs_ended_with_cpudata, 0)
+        FROM
+            (SELECT
+                resdays.day,
+                resdays.resource,
+                SUM(sf.$jobCountColumn) AS jobs_ended
+            FROM
+                (SELECT
+                DATE(d.day_start) AS day,
+                d.id AS day_id,
+                rf.code AS resource,
+                rf.id AS resource_id
+                FROM
+                    modw.resourcefact rf, modw.days d
+                WHERE
+                    rf.id IN ($reslist)
+                    AND COALESCE(rf.end_date, '9998-12-31') > DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+                    AND d.day_start >= :start
+                    AND d.day_start <= :end) AS resdays
+        LEFT JOIN
+            modw_aggregates.{$reftable}fact_by_day sf ON resdays.day_id = sf.day_id
+            AND resdays.resource_id = sf.$resIdColumn
+            AND sf.$jobBucketColumn > 1
+        GROUP BY 1 , 2
+        ) AS alljobs
+        LEFT JOIN
+        (SELECT
+            resdays.day,
+            resdays.resource,
+            SUM(sf.job_count) AS jobs_ended_with_cpudata
+        FROM
+            (SELECT
+                DATE(d.day_start) AS day,
+                d.id AS day_id,
+                rf.code AS resource,
+                rf.id AS resource_id
+            FROM
+                modw.resourcefact rf, modw.days d
+            WHERE
+                rf.id IN ($reslist)
+                AND COALESCE(rf.end_date, '9998-12-31') > DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+                AND d.day_start >= :start
+                AND d.day_start <= :end) AS resdays
+            LEFT JOIN
+                modw_aggregates.supremmfact_by_day sf ON resdays.day_id = sf.day_id
+                AND resdays.resource_id = sf.resource_id
+                AND sf.jobtime_id > 1
+            $extraWhere
+        GROUP BY 1 , 2) AS withcpu ON withcpu.day = alljobs.day
+        AND withcpu.resource = alljobs.resource
+        ORDER BY 2, 1";
+    } // function getjobsquery
+
+    private function runquery($querystr, $params)
+    {
+        $db = DB::factory('datawarehouse');
+
+        $stmt = $db->prepare($querystr, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
+        $stmt->execute($params);
+
+        $tabular = array();
+
+        while ($result = $stmt->fetch()) {
+            if (!isset($tabular[$result['resource']])) {
+                    $tabular[$result['resource']] = array();
+            }
+            $tabular[$result['resource']][$result['day']] = $result['percent'];
+        }
+
+        return $tabular;
+
+    } // function runquery
+
+    private function getreslist($start)
+    {
+        $config = \Configuration\XdmodConfiguration::assocArrayFactory('supremm_resources.json', CONFIG_DIR);
+
+        $resids = array();
+        foreach ($config['resources'] as $sresource) {
+                $resids[] = $sresource['resource_id'];
+        }
+
+        $db = DB::factory('datawarehouse');
+        $query = "SELECT resource_id FROM modw.resourcespecs WHERE COALESCE(end_date_ts, '2038-01-01') >= :start AND resource_id IN (" . join(",", $resids) . ")";
+
+        $stmt = $db->prepare($query, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
+        $stmt->execute(array(':start' => $start));
+
+        $resources = $stmt->fetchAll(\PDO::FETCH_COLUMN, 0);
+
+        return join(",", $resources);
+    } // function getreslist
 } // class SupremmDataflowControllerProvider
