@@ -49,7 +49,7 @@ class QualityTest extends \PHPUnit_Framework_TestCase
         }
 
         return $inputs;
-     }
+    }
 
      /**
      * @dataProvider qualityParams
