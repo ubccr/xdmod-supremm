@@ -35,7 +35,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         $controller
             ->get("$root/dbstats", "$base::getDbstats");
 
-	$controller
+        $controller
             ->get("$root/quality", "$base::getQuality");
 
     } // function setupRoutes
@@ -136,7 +136,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
                 break;
 
             case "hardware":
-                $querystr = $this->getjobsquery('supremm', 'sf.cpibucket_id != 1' , $reslist);
+                $querystr = $this->getjobsquery('supremm', 'sf.cpibucket_id != 1', $reslist);
                 $payload['result'] = $this->runquery($querystr, $params);
                 return $app->json($payload);
                 break;
@@ -506,7 +506,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
     {
         if (is_string($cpudatarestriction)) {
                 $extraWhere = "AND " . $cpudatarestriction;
-        } else if ($cpudatarestriction === true) {
+        } elseif ($cpudatarestriction === true) {
                 $extraWhere = "AND sf.cpu_user_bucketid != 0";
         } else {
                 $extraWhere = "";
@@ -589,10 +589,10 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         $tabular = array();
 
         while ($result = $stmt->fetch()) {
-                if (!isset($tabular[$result['resource']])) {
+            if (!isset($tabular[$result['resource']])) {
                     $tabular[$result['resource']] = array();
                 }
-                $tabular[$result['resource']][$result['day']] = $result['percent'];
+            $tabular[$result['resource']][$result['day']] = $result['percent'];
         }
 
         return $tabular;
@@ -618,5 +618,4 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
 
         return join(",", $resources);
     } // function getreslist
-
 } // class SupremmDataflowControllerProvider
