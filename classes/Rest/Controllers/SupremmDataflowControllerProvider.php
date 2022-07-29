@@ -591,7 +591,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         while ($result = $stmt->fetch()) {
             if (!isset($tabular[$result['resource']])) {
                     $tabular[$result['resource']] = array();
-                }
+            }
             $tabular[$result['resource']][$result['day']] = $result['percent'];
         }
 
