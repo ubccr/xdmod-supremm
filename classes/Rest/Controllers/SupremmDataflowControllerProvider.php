@@ -465,7 +465,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         SELECT
             DATE(d.day_start) AS day,
             rf.code as resource,
-            SUM(CASE sf.gpu0_nv_utilization_bucketid
+            SUM(CASE sf.gpu_usage_bucketid
             WHEN 0 THEN 0
             ELSE sf.node_time
             END) AS time_with_data, SUM(sf.node_time) AS total_time
@@ -474,8 +474,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
             modw.days d,
             modw.resourcefact rf
         WHERE
-            sf.queue_id IN ('viz' , 'gpu', 'wjzheng')
-            AND sf.day_id = d.id
+            sf.day_id = d.id
             AND rf.id = sf.resource_id
             AND d.day_start >= :start
             AND d.day_start <= :end
