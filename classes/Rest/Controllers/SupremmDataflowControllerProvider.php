@@ -592,7 +592,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
             if (!isset($tabular[$result['resource']])) {
                     $tabular[$result['resource']] = array();
             }
-            $tabular[$result['resource']][$result['day']] = array('available' => $result['time_with_data'], 'total' => $result['total_time'];
+            $tabular[$result['resource']][$result['day']] = array('available' => $result['time_with_data'], 'total' => $result['total_time']);
         }
 
         return $tabular;
