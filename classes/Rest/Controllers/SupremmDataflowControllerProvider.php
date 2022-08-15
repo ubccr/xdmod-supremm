@@ -123,7 +123,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         $params = array(':start' => $start, ':end' => $end);
 
         $payload = array(
-                'success' => true
+                'success' => true,
                 'type' => $type
                 );
         $reslist = $this->getreslist($start);
