@@ -123,7 +123,8 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         $params = array(':start' => $start, ':end' => $end);
 
         $payload = array(
-                'success' => true
+                'success' => true,
+                'type' => $type
                 );
         $reslist = $this->getreslist($start);
 
@@ -464,17 +465,16 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         SELECT
             DATE(d.day_start) AS day,
             rf.code as resource,
-            ROUND(SUM(CASE sf.gpu0_nv_utilization_bucketid
+            SUM(CASE sf.gpu_usage_bucketid
             WHEN 0 THEN 0
             ELSE sf.node_time
-            END) / SUM(sf.node_time) * 100.0) AS percent
+            END) AS time_with_data, SUM(sf.node_time) AS total_time
         FROM
             modw_aggregates.supremmfact_by_day sf,
             modw.days d,
             modw.resourcefact rf
         WHERE
-            sf.queue_id IN ('viz' , 'gpu', 'wjzheng')
-            AND sf.day_id = d.id
+            sf.day_id = d.id
             AND rf.id = sf.resource_id
             AND d.day_start >= :start
             AND d.day_start <= :end
@@ -489,7 +489,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         SELECT
             DATE(FROM_UNIXTIME(jt.end_time_ts)) as day,
             rf.code as resource,
-            COALESCE(ROUND(SUM(CASE WHEN js.tg_job_id IS NULL THEN 0 ELSE 1 END) / SUM(1) * 100.0), 'N/A') as percent
+            SUM(CASE WHEN js.tg_job_id IS NULL THEN 0 ELSE 1 END) AS time_with_data, SUM(1) AS total_time
         FROM
             modw.job_tasks jt
             JOIN modw.resourcefact rf ON rf.id = jt.resource_id
@@ -524,7 +524,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         SELECT
             alljobs.day,
             alljobs.resource,
-            COALESCE(ROUND(100.0 * COALESCE(withcpu.jobs_ended_with_cpudata, 0.0) / alljobs.jobs_ended,0), 'N/A') as percent,
+            COALESCE(withcpu.jobs_ended_with_cpudata, 0.0) AS time_with_data, alljobs.jobs_ended AS total_time,
             alljobs.jobs_ended,
             COALESCE(withcpu.jobs_ended_with_cpudata, 0)
         FROM
@@ -592,7 +592,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
             if (!isset($tabular[$result['resource']])) {
                     $tabular[$result['resource']] = array();
             }
-            $tabular[$result['resource']][$result['day']] = $result['percent'];
+            $tabular[$result['resource']][$result['day']] = array('available' => $result['time_with_data'], 'total' => $result['total_time']);
         }
 
         return $tabular;
