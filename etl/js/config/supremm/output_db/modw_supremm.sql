@@ -306,6 +306,7 @@ CREATE TABLE `executable` (
   `exec_md5` char(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `binary` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `application_id` int(11) DEFAULT '-1',
+  `real_application_id` int(11) DEFAULT '-1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique` (`exec_md5`,`resource_id`),
   KEY `exec_md5` (`exec_md5`,`resource_id`,`id`)
