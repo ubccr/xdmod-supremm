@@ -90,7 +90,7 @@ jobs:
           name: Install XDMoD Dependencies
           command: |
             composer config -g cache-files-ttl 315360000
-            composer install -d $XDMOD_SRC_DIR --no-progress
+            COMPOSER=composer-el8.json composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Create Test Artifact Directories
           command: |
