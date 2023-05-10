@@ -1,22 +1,16 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
 version: 2.1
-executors:
-  centos7: &centos7-executor
-    docker:
-      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-9.5.0:centos7.9-0.1
-  centos8: &centos8-executor
-    docker:
-      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:centos8.4-0.1
-  rocky8: &rocky8-executor
-    docker:
-      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:rockylinux8-0.1
 jobs:
   build:
     parameters:
-      os:
-        type: executor
       install-type:
         type: string
-    executor: << parameters.os >>
+    docker:
+      # The first image entry here will be used as the image for the parent container.
+      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:centos7.9-0.1
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
       XDMOD_REALMS: 'jobs,storage,cloud,supremm,jobefficiency'
@@ -31,61 +25,20 @@ jobs:
       - run:
           name: Checkout XDMoD
           command: |
-            git clone --depth=1 --branch=xdmod10.0 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
+            git clone --depth=1 --branch=xdmod10.5 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
+            cp $XDMOD_SRC_DIR/composer-el7.json $XDMOD_SRC_DIR/composer.json
       - run:
           name: Link the SUPREMM module into the XDMoD Source Directory
           command: |
               ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
-      - when:
-          condition:
-              or:
-                  - equal: [ *rocky8-executor, << parameters.os >> ]
-                  - equal: [ *centos8-executor, << parameters.os >> ]
-          steps:
-            - run:
-               name: Remove composer lock files
-               command: rm -f "$XDMOD_SRC_DIR/composer.lock" && rm -f composer.lock
-            - run:
-               name: Update XDMoD's composer config.platform
-               command: |
-                   sed -i 's/"php": "5.4"/"php": "7.2"/' $XDMOD_SRC_DIR/composer.json
-            - run:
-               name: Move composer.json so we can modify it
-               command: |
-                   mv "${XDMOD_SRC_DIR}/composer.json" "${XDMOD_SRC_DIR}/composer.json.orig"
-            - run:
-               name: Update XDMoD's config to trust addons
-               command: |
-                   jq '.config += {"allow-plugins": {"composer/installers": true, "simplesamlphp/composer-module-installer": true}}' "$XDMOD_SRC_DIR/composer.json.orig" > "$XDMOD_SRC_DIR/composer.json"
-            - run:
-               name: Add mongodb/mongodb to XDMoD via composer
-               command: composer require -d "$XDMOD_SRC_DIR" mongodb/mongodb
-            - run:
-               name: Install XDMoD UI Test Dependencices
-               command: |
-                 pushd "$XDMOD_SRC_DIR/tests/ui" || exit
-                 npm install
-                 popd || exit
-
       # We need to update our acct before we can enable docker layer caching.
       #- setup_remote_docker:
       #    docker_layer_caching: true
       # Download and cache dependencies
       - run:
-          name: temporarily toast composer.lock
-          command: rm -f composer.lock
-      - run:
           name: Install SUPREMM Dependencies
           command: |
             composer install --no-progress
-      - when:
-          condition:
-              equal: [ *centos7-executor, << parameters.os >> ]
-          steps:
-            - run:
-                name: Install SUPREMM RPM build dependencies
-                command: |
-                  ./tests/ci/scripts/install_dependencies.sh
       - run:
           name: Install XDMoD Dependencies
           command: |
@@ -94,8 +47,8 @@ jobs:
       - run:
           name: Create Test Artifact Directories
           command: |
-            mkdir -p /tmp/phpunit
-            mkdir -p /tmp/screenshots
+            mkdir ~/phpunit
+            mkdir /tmp/screenshots
       - run:
           name: Setup Environment Variables
           command: |
@@ -104,24 +57,28 @@ jobs:
       - run:
           name: Build RPMS
           command: |
+            pwd
             pushd $XDMOD_SRC_DIR
+            pwd
             ~/bin/buildrpm xdmod supremm
             popd
+            pwd
       - run:
           name: Install / Upgrade XDMoD from RPM
           command: |
+              echo `pwd`
               ./tests/integration_tests/scripts/bootstrap.sh
       - run:
           name: Validate the newly installed / Upgraded XDMoD
           command: ./tests/integration_tests/scripts/validate.sh
       - run:
-          name: Make sure that the Composer Test Dependencies are installed
+          name: Make sure that the Composer Test Depedencies are installed
           command: composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Setup & Run QA Tests
           command: ./tests/ci/scripts/qa-test-setup.sh
       - run:
-          name: Make sure that the Composer Test Dependencies are installed
+          name: Make sure that the Composer Test Depedencies are installed
           command: composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Updating XDMOD_INSTALL_DIR env variable
@@ -132,22 +89,9 @@ jobs:
       - run:
           name: Run Integration Tests
           command: ./tests/integration_tests/runtests.sh --log-junit ~/phpunit
-      - when:
-          condition:
-              equal: [ *centos7-executor, << parameters.os >> ]
-          steps:
-              - run:
-                  name: Run UI Tests
-                  command: scl enable rh-nodejs6 "$XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
-      - when:
-          condition:
-              or:
-                - equal: [ *rocky8-executor, << parameters.os >> ]
-                - equal: [ *centos8-executor, << parameters.os >> ]
-          steps:
-              - run:
-                  name: Run UI Tests
-                  command: "$XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
+      - run:
+          name: Run UI Tests
+          command: scl enable rh-nodejs6 "$XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
       - run:
           name: Run Regression Tests
           command: ./tests/regression_tests/runtests.sh --log-junit ~/phpunit
@@ -156,7 +100,7 @@ jobs:
       - store_artifacts:
           path: /var/log/xdmod
       - store_test_results:
-          path: /tmp/phpunit
+          path: ~/phpunit
 
 workflows:
   full-build:
@@ -164,10 +108,4 @@ workflows:
       - build:
           matrix:
             parameters:
-              os: [centos7, rocky8, centos8]
               install-type: ["fresh_install", "upgrade"]
-            exclude:
-              - os: rocky8
-                install-type: "upgrade"
-              - os: centos8
-                install-type: "upgrade"
