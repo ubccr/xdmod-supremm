@@ -1,0 +1,44 @@
+{
+    "require": {
+        "php": "^7.2",
+        "sporritt/jsplumb-jquery-min-file": "^1.6.3"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "sporritt/jsplumb-jquery-min-file",
+                "type": "vanilla-plugin",
+                "version": "1.6.3",
+                "license": "MIT",
+                "homepage": "https://jsplumbtoolkit.com",
+                "dist": {
+                    "url": "https://github.com/sporritt/jsPlumb/raw/1.6.3/dist/js/jquery.jsPlumb-1.6.3-min.js",
+                    "type": "file",
+                    "shasum": "e0e8532482245b20a5521be256d7f0bafc8e7211"
+                },
+                "require": {
+                    "composer/installers": "~1.0"
+                },
+                "extra": {
+                    "installer-name": "jsPlumb"
+                }
+            }
+        }
+    ],
+    "extra": {
+        "installer-paths": {
+            "html/gui/lib/{$name}": [
+                "sporritt/jsplumb-jquery-min-file"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "simplesamlphp/composer-module-installer": true
+        }
+    },
+    "require-dev": {
+    }
+}
