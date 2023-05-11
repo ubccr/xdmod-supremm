@@ -1,6 +1,11 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
+## 2023-05-11 v 10.0.1
+
+- Bug Fixes
+   - Fix bug in Efficiency Tab drilldown. This bug is only seen when using php 7.2 (Rocky 8).
+
 ## 2022-03-10 v 10.0.0
 
 - Features
