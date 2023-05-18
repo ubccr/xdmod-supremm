@@ -124,10 +124,9 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
         }
         $jobdata = $this->getjobdata($job['resource_id'], $job['local_job_id'], $job['end_time_ts']);
         $jversion = isset($jobdata['summary_version']) ? $jobdata['summary_version'] : $jobdata['summarization']['version'];
-
         $schema = $this->getsummaryschema($job['resource_id'], $jversion);
         if ($schema !== null) {
-            return $this->arrayMergeRecursiveWildcard($jobdata, $schema['definitions']);
+            return $this->arrayMergeRecursiveWildcard(json_decode(json_encode($jobdata), true), json_decode(json_encode($schema['definitions']), true));
         } else {
             return $jobdata;
         }
@@ -321,9 +320,8 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
 
     private function getsummaryschema($resource_id, $summary_version)
     {
-
-        $resconf =& $this->supremmDbInterface->getResourceConfig($resource_id);
-
+        $resourceConfig = $this->supremmDbInterface->getResourceConfig($resource_id);
+        $resconf = $resourceConfig;
         if ($resconf === null) {
             return null;
         }
@@ -333,15 +331,15 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
 
     private function gettimeseries($resource_id, $jobid, $end_time_ts, $filter = null)
     {
- 
-        $resconf =& $this->supremmDbInterface->getResourceConfig($resource_id);
+        $resourceConfig = $this->supremmDbInterface->getResourceConfig($resource_id);
+        $resconf = $resourceConfig;
 
         if ($resconf === null) {
             return null;
         }
-
-        $collection = $resconf['handle']->selectCollection('timeseries-'.$resconf['collection']);
-        $query = array( "_id" => new \MongoRegex("/^$jobid-.*$end_time_ts/") );
+        $timeseriesCollection = 'timeseries-'.$resconf['collection'];
+        $collection = $this->supremmDbInterface->getCollection($resconf['handle'], $timeseriesCollection);
+        $query = array( "_id" => $this->supremmDbInterface->getRegex("^$jobid-.*$end_time_ts"));
 
         if ($filter === null) {
             $doc = $collection->findOne($query);
@@ -376,19 +374,17 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
 
     private function getjobdata($resource_id, $jobid, $end_time_ts)
     {
-
-        $resconf =& $this->supremmDbInterface->getResourceConfig($resource_id);
+        $resourceConfig = $this->supremmDbInterface->getResourceConfig($resource_id);
+        $resconf = $resourceConfig;
 
         if ($resconf === null) {
             return null;
         }
+        $collection = $this->supremmDbInterface->getCollection($resconf['handle'], $resconf['collection']);
 
-        $collection = $resconf['handle']->selectCollection($resconf['collection']);
-
-        $query = array( "_id" => new \MongoRegex("/^$jobid-.*$end_time_ts/") );
+        $query = array( "_id" => $this->supremmDbInterface->getRegex("^$jobid-.*$end_time_ts"));
 
         $res = $collection->findOne($query);
-
         if ($res !== null) {
             ksort($res);
         }

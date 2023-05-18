@@ -563,7 +563,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             timeframe_label: 'Previous month',
             operation: 'get_data',
             data_series: [{
-                id: Math.random(),
+                id: self.randomInt(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
                 metric: self.config.histogram.metric,
                 category: self.config.realm,
                 realm: self.config.realm,
@@ -1182,5 +1182,10 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 this.chart = null;
             }
         }
+    },
+
+    randomInt: function (min, max) {
+        // eslint-disable-next-line no-mixed-operators
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 });
