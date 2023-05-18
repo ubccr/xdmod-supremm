@@ -1,3 +1,5 @@
+/* eslint no-template-curly-in-string: "off" */
+
 /*node.js javascript document
  *
  * @authors: Amin Ghadersohi
@@ -2400,12 +2402,12 @@ module.exports = {
         },
         fos_id: {
             type: "int32",
-            name: "config://hierarchy.json:bottom_level_label",
+            name: '${HIERARCHY_BOTTOM_LEVEL_LABEL}',
             nullable: false,
             group: "Administration",
             def: -1,
             batchExport: true,
-            comments: "config://hierarchy.json:bottom_level_info",
+            comments: '${HIERARCHY_BOTTOM_LEVEL_INFO}',
             per: "job",
             table: "job",
             queries: ["jobfact"],
