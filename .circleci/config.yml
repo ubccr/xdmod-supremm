@@ -121,6 +121,9 @@ jobs:
             - run:
                 name: Run UI Tests
                 command: scl enable rh-nodejs6 "$XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
+            - run:
+                name: Ensure that no unexpected Apache errors were generated
+                command: test `fgrep -v ' [ssl:warn] ' /var/log/xdmod/apache-error.log | wc -l` = 0
       - when:
           condition:
             equal: [ *rocky8-executor, << parameters.os >> ]
@@ -135,6 +138,9 @@ jobs:
             - run:
                 name: Run UI Tests
                 command: "PATH=/usr/local/node-v10.24.1-linux-x64/bin:$PATH $XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
+            - run:
+                name: Ensure that no unexpected Apache errors were generated
+                command: test ! -e /var/log/php-fpm/www-error.log
       - run:
           name: Run Regression Tests
           command: ./tests/regression_tests/runtests.sh --log-junit ~/phpunit
@@ -142,6 +148,8 @@ jobs:
           path: /tmp/screenshots
       - store_artifacts:
           path: /var/log/xdmod
+      - store_artifacts:
+          path: /var/log/php-fpm
       - store_test_results:
           path: /tmp/phpunit
 
