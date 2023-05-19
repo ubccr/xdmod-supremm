@@ -53,8 +53,7 @@ class SupremmDbInterface {
      * resource.
      */
     public function updateEtlVersion($resource_id, $new_etl_version) {
-        $resourceConfig = $this->getResourceConfig($resource_id);
-        $resconf = $resourceConfig;
+        $resconf = $this->getResourceConfig($resource_id);
 
         if( $resconf === null) {
             return null;
@@ -79,7 +78,7 @@ class SupremmDbInterface {
         return array_keys($this->resource_rmap);
     }
 
-    public function getResourceConfig($resource_id) {
+    private function getResourceConfig($resource_id) {
 
         if( ! array_key_exists($resource_id, $this->resource_rmap) ) {
             return null;
@@ -125,17 +124,6 @@ class SupremmDbInterface {
         }
     }
 
-    public function getsummaryschema($resource_id, $summary_version) {
-        $resourceConfig = $this->getResourceConfig($resource_id);
-        $resconf = $resourceConfig;
-
-        if( $resconf === null) {
-            return null;
-        }
-
-        return $resconf['handle']->schema->findOne( array( "_id" => "summary-" . $summary_version ) );
-    }
-
     public function getdbstats($resource_id) {
         $resourceConfig = $this->getResourceConfig($resource_id);
         $resconf = $resourceConfig;
@@ -163,6 +151,47 @@ class SupremmDbInterface {
         return $res;
     }
 
+    /** Retrive a document from mongo (or null if not found);
+     * @param $resource_id The resource identifier
+     * @param $docType string one of job, timeseries, schema
+     * @param $queryStr string the identifier to use to find the document
+     * @param $filter array optional filters to apply to the lookup
+     * @return mixed
+     */
+    public function getDocument($resource_id, $docType, $queryStr, $filter = null) {
+        $resconf = $this->getResourceConfig($resource_id);
+
+        if ($resconf === null) {
+            return null;
+        }
+
+        $query = null;
+
+        switch ($docType) {
+            case 'timeseries':
+                $collectionName = 'timeseries-'.$resconf['collection'];
+                $query = array('_id' => $this->getRegex($queryStr));
+                break;
+            case 'schema':
+                $collectionName = 'schema';
+                $query = array('_id' => $queryStr);
+                break;
+            default:
+                $collectionName = $resconf['collection'];
+                $query = array('_id' => $this->getRegex($queryStr));
+        }
+
+        $collection = $this->getCollection($resconf['handle'], $collectionName);
+
+        if ($filter === null) {
+            $doc = $collection->findOne($query);
+        } else {
+            $doc = $collection->findOne($query, $filter);
+        }
+
+        return $doc;
+    }
+
     private function getEtlUid()
     {
         $pdo = \CCR\DB::factory('database');
@@ -170,7 +199,7 @@ class SupremmDbInterface {
         return $res[0]['uuid'];
     }
 
-    public function getRegex($regex)
+    private function getRegex($regex)
     {
         switch ($this->mongoDriver) {
             case 'mongo':
@@ -186,13 +215,14 @@ class SupremmDbInterface {
      * @param $collectionName
      * @return mixed
      */
-    public function getCollection($handle, $collectionName) {
+    private function getCollection($handle, $collectionName) {
         switch ($this->mongoDriver) {
             case 'mongo':
                 return $handle->selectCollection($collectionName);
             case 'mongodb':
             default:
-                return $handle->$collectionName;
+                $options = array('typeMap' => array('root' => 'array', 'document' => 'array'));
+                return $handle->selectCollection($collectionName, $options);
         }
     }
 
@@ -238,8 +268,7 @@ class SupremmDbInterface {
             case 'mongodb':
             default:
                 $results = $db->command($command);
-                return $results->toArray();
+                return $results->toArray()[0];
         }
     }
 }
-?>

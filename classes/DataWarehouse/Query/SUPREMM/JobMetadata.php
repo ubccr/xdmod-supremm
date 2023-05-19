@@ -124,9 +124,11 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
         }
         $jobdata = $this->getjobdata($job['resource_id'], $job['local_job_id'], $job['end_time_ts']);
         $jversion = isset($jobdata['summary_version']) ? $jobdata['summary_version'] : $jobdata['summarization']['version'];
-        $schema = $this->getsummaryschema($job['resource_id'], $jversion);
+
+        $schema = $this->supremmDbInterface->getDocument($job['resource_id'], 'schema', 'summary-' . $jversion);
+
         if ($schema !== null) {
-            return $this->arrayMergeRecursiveWildcard(json_decode(json_encode($jobdata), true), json_decode(json_encode($schema['definitions']), true));
+            return $this->arrayMergeRecursiveWildcard($jobdata, $schema['definitions']);
         } else {
             return $jobdata;
         }
@@ -318,40 +320,15 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
         return $job[0];
     }
 
-    private function getsummaryschema($resource_id, $summary_version)
-    {
-        $resourceConfig = $this->supremmDbInterface->getResourceConfig($resource_id);
-        $resconf = $resourceConfig;
-        if ($resconf === null) {
-            return null;
-        }
-
-        return $resconf['handle']->schema->findOne(array( "_id" => "summary-" . $summary_version ));
-    }
-
     private function gettimeseries($resource_id, $jobid, $end_time_ts, $filter = null)
     {
-        $resourceConfig = $this->supremmDbInterface->getResourceConfig($resource_id);
-        $resconf = $resourceConfig;
+        $doc = $this->supremmDbInterface->getDocument($resource_id, 'timeseries', "^$jobid-.*$end_time_ts", $filter);
 
-        if ($resconf === null) {
-            return null;
-        }
-        $timeseriesCollection = 'timeseries-'.$resconf['collection'];
-        $collection = $this->supremmDbInterface->getCollection($resconf['handle'], $timeseriesCollection);
-        $query = array( "_id" => $this->supremmDbInterface->getRegex("^$jobid-.*$end_time_ts"));
-
-        if ($filter === null) {
-            $doc = $collection->findOne($query);
-        } else {
-            $doc = $collection->findOne($query, $filter);
-        }
         if ($doc == null) {
             return null;
         }
-        $schema = $resconf['handle']->schema->findOne(array( "_id" => "timeseries-" . $doc['version'] ));
 
-        $doc['schema'] = $schema;
+        $doc['schema'] = $this->supremmDbInterface->getDocument($resource_id, 'schema', 'timeseries-' . $doc['version']);
 
         return $doc;
     }
@@ -374,17 +351,8 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
 
     private function getjobdata($resource_id, $jobid, $end_time_ts)
     {
-        $resourceConfig = $this->supremmDbInterface->getResourceConfig($resource_id);
-        $resconf = $resourceConfig;
+        $res = $this->supremmDbInterface->getDocument($resource_id, 'job', "^$jobid-.*$end_time_ts");
 
-        if ($resconf === null) {
-            return null;
-        }
-        $collection = $this->supremmDbInterface->getCollection($resconf['handle'], $resconf['collection']);
-
-        $query = array( "_id" => $this->supremmDbInterface->getRegex("^$jobid-.*$end_time_ts"));
-
-        $res = $collection->findOne($query);
         if ($res !== null) {
             ksort($res);
         }
