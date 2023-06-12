@@ -320,7 +320,7 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
         return $job[0];
     }
 
-    private function gettimeseries($resource_id, $jobid, $end_time_ts, $filter = null)
+    private function gettimeseries($resource_id, $jobid, $end_time_ts, $filter = array())
     {
         $doc = $this->supremmDbInterface->getDocument($resource_id, 'timeseries', "^$jobid-.*$end_time_ts", $filter);
 

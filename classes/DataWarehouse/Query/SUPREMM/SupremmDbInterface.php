@@ -158,7 +158,7 @@ class SupremmDbInterface {
      * @param $filter array optional filters to apply to the lookup
      * @return mixed
      */
-    public function getDocument($resource_id, $docType, $queryStr, $filter = null) {
+    public function getDocument($resource_id, $docType, $queryStr, $filter = array()) {
         $resconf = $this->getResourceConfig($resource_id);
 
         if ($resconf === null) {
@@ -183,10 +183,14 @@ class SupremmDbInterface {
 
         $collection = $this->getCollection($resconf['handle'], $collectionName);
 
-        if ($filter === null) {
-            $doc = $collection->findOne($query);
-        } else {
-            $doc = $collection->findOne($query, $filter);
+        switch ($this->mongoDriver) {
+            case 'mongo':
+                $doc = $collection->findOne($query, $filter);
+                break;
+            case 'mongodb':
+            default:
+                $doc = $collection->findOne($query, array('projection' => $filter));
+                break;
         }
 
         return $doc;
