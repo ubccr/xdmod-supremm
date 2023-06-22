@@ -165,8 +165,6 @@ class SupremmDbInterface {
             return null;
         }
 
-        $query = null;
-
         switch ($docType) {
             case 'timeseries':
                 $collectionName = 'timeseries-'.$resconf['collection'];

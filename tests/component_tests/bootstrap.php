@@ -17,23 +17,7 @@ spl_autoload_register(
             }
         }
 
-        if (strpos($className, 'TestHarness') !== false) {
-            $classPath = implode(
-                DIRECTORY_SEPARATOR,
-                array(
-                    $dir,
-                    '../integration',
-                    'lib',
-                    str_replace('\\', '/', $className) . '.php'
-                )
-            );
-        } else {
-            $classPath
-                = $dir
-                . '/lib/'
-                . str_replace('\\', '/', $className)
-                . '.php';
-        }
+        $classPath = $dir . '/lib/' . str_replace('\\', '/', $className) . '.php';
 
         if (is_readable($classPath)) {
             return require_once $classPath;
