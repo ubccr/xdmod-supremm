@@ -18,7 +18,7 @@ for other distributions (and earlier CentOS versions) are available from the
 [official PCP dowload page](https://pcp.io/download.html),
 
 The CentOS RPM packages of the summarization software are tested against the version of PCP
-that is provided with CentOS (This is PCP version 4.3.2 as of CentOS 7.8).
+that is provided with CentOS 7 (This is PCP version 4.3.2 as of CentOS 7.8).
 
 For an RPM based install on CentOS 7 the following command will install PCP with
 all of the associated PMDAS (monitoring plugins) that have been tested with the
@@ -49,6 +49,6 @@ Compatibility notes
 -------------------
 
 The summarization software is tested on CentOS 7 with the package versions of PCP that
-are supplied with CentOS 7. In general any version of PCP will work as long as the
+are supplied with CentOS 7 (PCP version 4.3.2). In general any version of PCP will work as long as the
 summarization software is built against the same or newer version of PCP as the version
 installed on the compute nodes.
