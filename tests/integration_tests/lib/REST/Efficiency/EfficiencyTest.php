@@ -335,7 +335,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
         $inputs[] = array('usr', 200, $params);
 
         $params = $this->getDrillDownDataParameters(array('data_series' => array('metric' => 'wall_time')));
-        $inputs[] = array('cd', 500, $params);
+        $inputs[] = array('cd', 400, $params);
 
         $params = $this->getDrillDownDataParameters(array('data_series' => array(
             array(
