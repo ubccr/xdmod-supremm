@@ -514,6 +514,24 @@ module.exports = function(config) {
                     return this.getmax(job, 'ipmi.power.max');
                 }
             },
+            rapl_energy_pkg: {
+                ref: 'rapl.energy.pkg.avg'
+            },
+            rapl_energy_cores: {
+                ref: 'rapl.energy.cores.avg'
+            },
+            rapl_energy_dram: {
+                ref: 'rapl.energy.dram.avg'
+            },
+            rapl_power_pkg: {
+                ref: 'rapl.power.pkg'
+            },
+            rapl_power_cores: {
+                ref: 'rapl.power.cores'
+            },
+            rapl_power_dram: {
+                ref: 'rapl.power.dram'
+            },
             "memory_used": {
                 formula: function(job) {
                     var mem = this.ref(job, "memory.used_minus_cache.avg");

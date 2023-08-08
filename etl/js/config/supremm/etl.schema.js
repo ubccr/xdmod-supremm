@@ -1219,6 +1219,84 @@ module.exports = {
             table: 'job'
         },
 
+        rapl_energy_pkg: {
+            unit: 'joules',
+            type: 'double',
+            name: 'RAPL Energy Pkg',
+            nullable: true,
+            group: 'Energy Usage Statistics',
+            def: null,
+            batchExport: true,
+            comments: 'An estimate of the energy consumption of all cores + LLC cache during the job.',
+            per: 'node',
+            table: 'job'
+        },
+
+        rapl_energy_cores: {
+            unit: 'joules',
+            type: 'double',
+            name: 'RAPL Energy Cores',
+            nullable: true,
+            group: 'Energy Usage Statistics',
+            def: null,
+            batchExport: true,
+            comments: 'An estimate of the energy consumption of all cores on socket during the job.',
+            per: 'node',
+            table: 'job'
+        },
+
+        rapl_energy_dram: {
+            unit: 'joules',
+            type: 'double',
+            name: 'RAPL Energy Cores',
+            nullable: true,
+            group: 'Energy Usage Statistics',
+            def: null,
+            batchExport: true,
+            comments: 'An estimate of the energy consumption of DRAM during the job.',
+            per: 'node',
+            table: 'job'
+        },
+
+        rapl_power_pkg: {
+            unit: 'watts',
+            type: 'double',
+            name: 'RAPL Energy Cores',
+            nullable: true,
+            group: 'Energy Usage Statistics',
+            def: null,
+            batchExport: true,
+            comments: 'An estimate of the power consumption of all cores + LLC cache during the job.',
+            per: 'node',
+            table: 'job'
+        },
+
+        rapl_power_cores: {
+            unit: 'watts',
+            type: 'double',
+            name: 'RAPL Energy Cores',
+            nullable: true,
+            group: 'Energy Usage Statistics',
+            def: null,
+            batchExport: true,
+            comments: 'An estimate of the power consumption of all cores on socket during the job.',
+            per: 'node',
+            table: 'job'
+        },
+
+        rapl_power_dram: {
+            unit: 'watts',
+            type: 'double',
+            name: 'RAPL Energy Cores',
+            nullable: true,
+            group: 'Energy Usage Statistics',
+            def: null,
+            batchExport: true,
+            comments: 'An estimate of the power consumption of DRAM during the job.',
+            per: 'node',
+            table: 'job'
+        },
+
         mem_transferred: {
             unit: "bytes",
             type: "double",
