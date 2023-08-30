@@ -91,11 +91,11 @@ class JobViewer {
                 chart: {
                     titleByContainer: function (container) {
                         // tsid_cpuuser_57874_chart
-                        return '//div[@id="' + container + '"]//*[local-name() = "svg"]//*[name()="text" and @class="undefinedtitle"]/*[name()="tspan"]';
+                        return '//div[@id="' + container + '"]//*[local-name() = "svg"]//*[@class = "infolayer"]//*[name()="text" and @class = "gtitle"]';
                     },
                     title: function (container, title) {
                         // tsid_cpuuser_57874_chart
-                        return '//div[@id="' + container + '"]//*[local-name() = "svg"]//*[name()="text" and @class="undefinedtitle"]/*[name()="tspan" and contains(text(),"' + title + '")]';
+                        return '//div[@id="' + container + '"]//*[local-name() = "svg"]//*[@class = "infolayer"]//*[name()="text" and @class = "gtitle"][contains(text(), "' + title + '")]';
                     }
                 }
             },
