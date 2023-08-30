@@ -209,7 +209,7 @@ module.exports = function(config) {
                     if (job.hasOwnProperty("summarization.datasource")) {
                         return this.ref(job, "summarization.datasource");
                     } else {
-                        return { value: "pcp" };
+                        return { value: 'pcp' };
                     }
                 }
             },
