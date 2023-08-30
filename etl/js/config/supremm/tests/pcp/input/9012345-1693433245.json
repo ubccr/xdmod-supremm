@@ -5,7 +5,7 @@
 		"complete" : true,
 		"mergetime" : 0.0,
 		"created" : 16934173010,
-		"srcdir" : None,
+		"srcdir" : null,
 		"elapsed" : 0.12180685997009277
 		"datasource": "prometheus"
 	},

@@ -205,7 +205,7 @@ module.exports = function(config) {
                 }
             },
             "datasource": {
-                value: "pcp";
+            	value: 'prometheus'
             },
             "granted_pe": {
                 ref: "acct.ncpus"
