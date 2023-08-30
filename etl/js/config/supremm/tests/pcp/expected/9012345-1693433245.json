@@ -1,0 +1,393 @@
+{
+    "local_job_id": {
+        "value": "9012345",
+        "error": 0
+    },
+    "name": {
+        "value": "jobname",
+        "error": 0
+    },
+    "resource_name": {
+        "value": "pcp",
+        "error": 0
+    },
+    "resource_id": {
+        "value": 1,
+        "error": 0
+    },
+    "organization_id": {
+        "value": 1,
+        "error": 0
+    },
+    "account": {
+        "value": "accountname",
+        "error": 0
+    },
+    "username": {
+        "value": "username",
+        "error": 0
+    },
+    "cwd": {
+        "value": "NA",
+        "error": 2
+    },
+    "executable": {
+        "value": "/util/academic/R/R-3.4.1/lib64/R/bin/R.bin",
+        "error": 0
+    },
+    "application": {
+        "value": "r",
+        "error": 0
+    },
+    "exit_status": {
+        "value": "COMPLETED",
+        "error": 0
+    },
+    "datasource": {
+        "value": "prometheus",
+        "error": 0
+    },
+    "granted_pe": {
+        "value": 16,
+        "error": 0
+    },
+    "queue": {
+        "value": "default",
+        "error": 0
+    },
+    "requested_nodes": {
+        "value": 2,
+        "error": 0
+    },
+    "hosts": {
+        "value": [
+            "cpn-d14-09",
+            "cpn-d14-13"
+        ],
+        "error": 0
+    },
+    "nodes": {
+        "value": 2,
+        "error": 0
+    },
+    "shared": {
+        "value": 0,
+        "error": 0
+    },
+    "cores": {
+        "value": 16,
+        "error": 0
+    },
+    "cores_avail": {
+        "value": 16,
+        "error": 0
+    },
+    "submit_time_ts": {
+        "value": 1693429645,
+        "error": 0
+    },
+    "eligible_time_ts": {
+        "value": 1693429645,
+        "error": 0
+    },
+    "start_time_ts": {
+        "value": 1693429645,
+        "error": 0
+    },
+    "end_time_ts": {
+        "value": 1693433245,
+        "error": 0
+    },
+    "wall_time": {
+        "value": 3600,
+        "error": 0
+    },
+    "requested_wall_time": {
+        "value": 3600,
+        "error": 0
+    },
+    "wait_time": {
+        "value": 0,
+        "error": 0
+    },
+    "cpu_time": {
+        "value": 960,
+        "error": 0
+    },
+    "node_time": {
+        "value": 120,
+        "error": 0
+    },
+    "cpu_idle": {
+        "value": 0.8177831850273243,
+        "error": 0
+    },
+    "cpu_system": {
+        "value": 0.02067214769357539,
+        "error": 0
+    },
+    "cpu_user": {
+        "value": 0.14045664018280427,
+        "error": 0
+    },
+    "error": {
+        "value": null,
+        "error": 2
+    },
+    "flops": {
+        "value": 890738418.25,
+        "error": 0
+    },
+    "flops_cov": {
+        "value": 0.03402449178502819,
+        "error": 0
+    },
+    "cpiref": {
+        "value": 0.9530380301740745,
+        "error": 0
+    },
+    "cpiref_cov": {
+        "value": 0.12314717705164689,
+        "error": 0
+    },
+    "catastrophe": {
+        "value": 0.7260626302138242,
+        "error": 0
+    },
+    "cpldref": {
+        "value": 3.2092210389595257,
+        "error": 0
+    },
+    "cpldref_cov": {
+        "value": 0.1286780833653582,
+        "error": 0
+    },
+    "mem_transferred": {
+        "value": 24540746752,
+        "error": 0
+    },
+    "mem_transferred_cov": {
+        "value": 0.05504550837617463,
+        "error": 0
+    },
+    "cpu_user_imbalance": {
+        "value": 31.25359188743257,
+        "error": 0
+    },
+    "cpu_user_cv": {
+        "value": 0.11329737970913212,
+        "error": 0
+    },
+    "node_cpu_idle": {
+        "value": 0.8177831850273243,
+        "error": 0
+    },
+    "energy": {
+        "value": null,
+        "error": 8
+    },
+    "max_power": {
+        "value": null,
+        "error": 8
+    },
+    "memory_used": {
+        "value": 349418188.8,
+        "error": 0
+    },
+    "memory_used_cov": {
+        "value": 0.04532189822055114,
+        "error": 0
+    },
+    "max_memory": {
+        "value": null,
+        "error": 5
+    },
+    "mem_used_including_os_caches": {
+        "value": 2348749670.3999996,
+        "error": 0
+    },
+    "mem_used_including_os_caches_cov": {
+        "value": 0.06797831735050536,
+        "error": 0
+    },
+    "ib_rx_bytes": {
+        "value": 10224,
+        "error": 0
+    },
+    "block_sda_wr_ios": {
+        "value": 282.5,
+        "error": 0
+    },
+    "block_sda_wr_bytes": {
+        "value": 4222.5,
+        "error": 0
+    },
+    "block_sda_wr_bytes_cov": {
+        "value": 0.2804982494937755,
+        "error": 0
+    },
+    "block_sda_rd_ios": {
+        "value": 173.5,
+        "error": 0
+    },
+    "block_sda_rd_bytes": {
+        "value": 6654,
+        "error": 0
+    },
+    "block_sda_rd_bytes_cov": {
+        "value": 0.02507923059212883,
+        "error": 0
+    },
+    "netdrv_gpfs_rx": {
+        "value": 0,
+        "error": 0
+    },
+    "netdrv_gpfs_rx_cov": {
+        "value": 0,
+        "error": 0
+    },
+    "netdrv_gpfs_rx_msgs": {
+        "value": 0,
+        "error": 0
+    },
+    "netdrv_gpfs_tx": {
+        "value": 219668.5,
+        "error": 0
+    },
+    "netdrv_gpfs_tx_cov": {
+        "value": 0.6470938741240811,
+        "error": 0
+    },
+    "netdrv_gpfs_tx_msgs": {
+        "value": 19,
+        "error": 0
+    },
+    "netdrv_isilon_rx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_rx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_rx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_tx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_tx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_isilon_tx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_rx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_rx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_rx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_tx": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_tx_cov": {
+        "value": null,
+        "error": 2
+    },
+    "netdrv_panasas_tx_msgs": {
+        "value": null,
+        "error": 2
+    },
+    "netdir_home_read": {
+        "value": 237383,
+        "error": 0
+    },
+    "netdir_home_write": {
+        "value": 6656,
+        "error": 0
+    },
+    "netdir_projects_read": {
+        "value": 0,
+        "error": 0
+    },
+    "netdir_projects_write": {
+        "value": 0,
+        "error": 0
+    },
+    "netdir_util_read": {
+        "value": 136192137,
+        "error": 0
+    },
+    "netdir_util_write": {
+        "value": 0,
+        "error": 0
+    },
+    "net_eth0_rx": {
+        "value": null,
+        "error": 8
+    },
+    "net_eth0_rx_cov": {
+        "value": null,
+        "error": 8
+    },
+    "net_eth0_rx_packets": {
+        "value": null,
+        "error": 8
+    },
+    "net_eth0_tx": {
+        "value": null,
+        "error": 8
+    },
+    "net_eth0_tx_cov": {
+        "value": null,
+        "error": 8
+    },
+    "net_eth0_tx_packets": {
+        "value": null,
+        "error": 8
+    },
+    "net_ib0_rx": {
+        "value": 0,
+        "error": 0
+    },
+    "net_ib0_rx_packets": {
+        "value": null,
+        "error": 8
+    },
+    "net_ib0_tx": {
+        "value": 0,
+        "error": 0
+    },
+    "net_ib0_tx_packets": {
+        "value": null,
+        "error": 8
+    },
+    "gpu_energy": {
+        "value": null,
+        "error": 2
+    },
+    "gpu_max_power": {
+        "value": null,
+        "error": 2
+    },
+    "gpu0_nv_mem_used": {
+        "value": null,
+        "error": 8
+    },
+    "gpu0_nv_utilization": {
+        "value": null,
+        "error": 8
+    }
+}
