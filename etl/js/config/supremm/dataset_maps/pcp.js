@@ -205,7 +205,13 @@ module.exports = function(config) {
                 }
             },
             "datasource": {
-                value: "pcp"
+                formula: function(job) {
+                    if (job.hasOwnProperty("summarization.datasource")) {
+                        return this.ref(job, "summarization.datasource");
+                    } else {
+                        return "pcp";
+                    }
+                }
             },
             "granted_pe": {
                 ref: "acct.ncpus"
