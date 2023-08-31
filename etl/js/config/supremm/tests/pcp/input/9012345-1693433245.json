@@ -7,7 +7,7 @@
 		"created" : 16934173010,
 		"srcdir" : null,
 		"elapsed" : 0.12180685997009277,
-                "datasource": "prometheus"
+		"datasource": "prometheus"
 	},
 	"procDump" : {
 		"unconstrained" : [],
@@ -665,7 +665,7 @@
 		"reqmem" : "2800Mc",
 		"eligible" : 1518721453,
 		"exit_code" : "0:0",
-                "submit" : 1518721453,
+		"submit" : 1518721453,
 		"gid" : 16038,
 		"reqcpus" : 16,
 		"nodes" : 2,
@@ -675,7 +675,7 @@
 		"account" : "accountname",
 		"partition" : "default",
 		"timelimit" : 3600,
-                "end_time" : 1518721536
+		"end_time" : 1518721536
 	},
 	"catastrophe" : {
 		"value" : 0.7260626302138242
