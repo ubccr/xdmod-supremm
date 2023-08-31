@@ -207,9 +207,9 @@ module.exports = function(config) {
             "datasource": {
                 formula: function (job) {
                     if (job.summarization.hasOwnProperty('datasource')) {
-                        return this.ref(job, 'summarization.datasource');
+                        return { value: this.ref(job, 'summarization.datasource'), error: 0 };
                     } else {
-                        return { value: 'prometheus' };
+                        return { value: 'prometheus', error: 0 };
                     }
                 }
             },
