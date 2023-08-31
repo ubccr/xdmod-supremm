@@ -12,7 +12,8 @@
         ],
         "exclude_patterns": [
             "#/\\.#",
-            "#/open_xdmod/modules/supremm/tests#"
+            "#/open_xdmod/modules/supremm/tests#",
+            "#/open_xdmod/modules/supremm/etl/js/config/supremm/tests#"
         ]
     },
     "commands": {
