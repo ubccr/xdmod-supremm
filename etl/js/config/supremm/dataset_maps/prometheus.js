@@ -205,7 +205,13 @@ module.exports = function(config) {
                 }
             },
             "datasource": {
-                ref: "summarization.datasource"
+                formula: function(job) {
+                    if (job.summarization.hasOwnProperty("datasource")) {
+                        return this.ref(job, "summarization.datasource");
+                    } else {
+                        return { value: 'prometheus' };
+                    }
+                }
             },
             "granted_pe": {
                 ref: "acct.ncpus"

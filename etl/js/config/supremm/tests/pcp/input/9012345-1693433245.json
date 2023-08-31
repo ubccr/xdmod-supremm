@@ -1,12 +1,12 @@
 {
 	"_id" : "8291026-1518721536",
 	"summarization" : {
-		"version" : "2.0.0",
+		"version" : "1.0.6",
 		"complete" : true,
 		"mergetime" : 0.0,
 		"created" : 16934173010,
 		"srcdir" : null,
-		"elapsed" : 0.12180685997009277
+		"elapsed" : 0.12180685997009277,
 		"datasource": "prometheus"
 	},
 	"procDump" : {
