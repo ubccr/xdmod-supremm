@@ -3,6 +3,10 @@ This section gives example configuration settings for Performance Co-Pilot (PCP)
 of an HPC cluster. These configuration guidelines are based on the PCP data collection setup
 at CCR buffalo, which uses PCP version 4.3.2 that is supplied with Centos 7.
 
+Note that the PCP version 5.3.7 supplied with Rocky 8 does not support using date
+variables in the pmlogger output path. The template pmlogger control file
+is not suitable for use with PCP 5.
+
 ## Prerequisites
 
 PCP should be installed on every compute node as described in the [install section](supremm-install-pcp.md).
@@ -48,11 +52,24 @@ structure limits the total number of files under a given directory. This
 helps reduce the runtime of backup software. If the filesystem I/O performance with
  the existing directory structure is not an issue then there is no need to change to the new one.
 
+The archive indexing also supports the path structure where all the
+PCP archives for a host are under the hostname directory:
+
+    [HOSTNAME]
+
+The disadvantage of this directory structure is that the number of files in the
+hostname directory can become very large. If you do use this structure it is
+recommended to create a script that is run periodically to remove or otherwise
+archive older PCP files to limit the number of files in each hostname
+directory. Large numbers of files in the log output directory will likely cause
+poor performance of the PCP logging software and the summarization software.
+
+
 Configuration Templates
 -----------------------
 
 The [Job Summarization software][] includes template files that can be used to
-configure PCP collection on the compute nodes.  The package itself should not
+configure PCP collection on the compute nodes (if using PCP version 4).  The package itself should not
 be installed on the compute nodes, however you may wish to install it
 on a test node in order to obtain the PCP configuration file templates.
 Alternatively, the scripts may be extracted directly from the source tar file or
@@ -60,7 +77,10 @@ from the [github repository][].
 
 The PCP configuration templates are applicable to PCP version 4.3.2 that is
 supplied with Centos 7 and may need to be modified to work with more recent versions
-of the PCP software.
+of the PCP software. The template logger control files should not
+be used with PCP version 5 because this version does not support using
+date substitutions in the logger pathname.
+
 
 The template files must be edited before use.
 
