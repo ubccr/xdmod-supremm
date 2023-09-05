@@ -10,9 +10,8 @@ The job-level summary records are stored in a MongoDB document database.
 
 The Job Performance (SUPReMM) module in XDMoD may be extended to support multiple
 different data collection packages. The XDMoD team recommends
-using the open-source Performance Co-Pilot (PCP)
-software as the data source for new software installs. This document assumes that
-PCP is used as the data source. For more information about other data
+using either Performance Co-Pilot (PCP) or Prometheus as the data source for new software installs. This document assumes that either
+PCP or Prometheus is used as the data source. For more information about other data
 sources please contact the development team via the mailing list or email
 (contact details on the [main overview page](http://open.xdmod.org)).
 
@@ -29,13 +28,18 @@ metric data every 30 seconds and at the start and end of each HPC Job (via
 hooks in the job prolog and epilog scripts). The PCP data are logged to a
 shared filesystem.
 
+Prometheus exporters run on every compute node and expose various metrics for each node.
+A centralized Prometheus server is configured to scrape metrics exposed by the exporters every
+30 seconds. Prometheus data are stored in Prometheus's internal timeseries database and is queried
+directly by the summarization software.
+
 The accounting logs from the resource manager are ingested into the XDMoD datawarehouse.
 These accounting logs include information about the start and end times of each HPC job
 as well as the compute nodes that were assigned to the job.
 
 The summarization software runs periodically via cron. The software uses the
-accounting information from the XDMoD datawarehouse and the information in the
-PCP archives to generate a job-level summary for each HPC job. These job-level
+accounting information from the XDMoD datawarehouse and the information from either PCP or Prometheus
+to generate a job-level summary for each HPC job. These job-level
 summaries are stored in a MongoDB document database.
 
 The summarized job data is then ingested into the XDMoD datawarehouse for display
