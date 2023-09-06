@@ -255,4 +255,4 @@ An example output of this script for a job that has all data present and correct
     Summary in mongo: _id, summarization, procDump, process_memory, infiniband, cpuperf, gpfs, cpu, network, cores, nfs, uncperf, memory, load1, acct, catastrophe, block, nodememory, processed
     Summary in mongo: _id, lnet, memused, cpuuser, ib_lnet, version, nfs, simdins, process_mem_usage, hosts, membw, memused_minus_diskcache, block
     
-**Note Resources configured with Prometheus do not have archives associated with them.**{:.note}
+**Note: Resources configured with Prometheus do not have archives associated with them.**{:.note}

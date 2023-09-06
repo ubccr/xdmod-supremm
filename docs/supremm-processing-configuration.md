@@ -185,7 +185,19 @@ nodes that result in only the hostname information begin recorded in the PCP ach
 This setting is ignored if the <code>hostname_mode</code> is set to <code>hostname</code> and may be omitted in this case.</td>
 </tr>
 <tr>
+<td><code>datasource</code></td><td>[pcp or prometheus]</td><td>Data collection software used to monitor the resource.</td>
+</tr>
+<tr>
 <td><code>pcp_log_dir</code></td><td>[filesystem path]</td><td>Path to the PCP log files for the resource.</td>
+</tr>
+<tr>
+<td><code>prom_host</code></td><td>[hostname]</td><td>Hostname for the Prometheus server monitoring the resource.</td>
+</tr>
+<tr>
+<td><code>prom_user</code></td><td>[username]</td><td>Username for basic authentication to the Prometheus server.</td>
+</tr>
+<tr>
+<td><code>prom_password</code></td><td>[password]</td><td>Password for basic authentication to the Prometheus server.</td>
 </tr>
 <tr>
 <td><code>batchscript.path</code></td><td>[filesystem path]</td><td>Path to the batch script files. The batch scripts must be stored following
@@ -309,12 +321,12 @@ the Open XDMoD SUPReMM module was installed.  The database creation script is
 located in the `/usr/share/supremm/setup` directory and should be run on the
 XDMoD datawarehouse DB instance.
 
-    $ mysql -u root -p < /usr/lib64/python2.7/site-packages/supremm/assets/modw_supremm.sql
+    $ mysql -u root -p < /usr/local/lib64/python3.6/site-packages/supremm/assets/modw_supremm.sql
 
 
 Setup MongoDB
 -----------
 
-    $ mongo [MONGO CONNECTION URI] /usr/lib64/python2.7/site-packages/supremm/assets/mongo_setup.js
+    $ mongo [MONGO CONNECTION URI] /usr/local/lib64/python3.6/site-packages/supremm/assets/mongo_setup.js
 
 where [MONGO CONNECTION URI] is the uri of the MongoDB database.
