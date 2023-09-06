@@ -32,13 +32,15 @@ module.exports = function(config) {
                 if (job.procDump.constrained.length > 0) {
                     return {
                         executable: job.procDump.constrained[0],
-                        name: 'uncategorized'
+                        name: 'uncategorized',
+                        realname: 'uncategorized'
                     };
                 }
                 if (job.procDump.unconstrained.length > 0) {
                     return {
                         executable: job.procDump.unconstrained[0],
-                        name: 'uncategorized'
+                        name: 'uncategorized',
+                        realname: 'uncategorized'
                     };
                 }
             }
@@ -186,6 +188,21 @@ module.exports = function(config) {
                     if (app) {
                         return {
                             value: app.name,
+                            error: 0
+                        };
+                    }
+                    return {
+                        value: null,
+                        error: this.metricErrors.codes.metricMissingUnknownReason.value
+                    };
+                }
+            },
+            real_application: {
+                formula: function (job) {
+                    var app = getProcInfo(job);
+                    if (app) {
+                        return {
+                            value: app.realname,
                             error: 0
                         };
                     }

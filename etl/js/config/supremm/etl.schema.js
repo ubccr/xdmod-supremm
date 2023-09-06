@@ -329,9 +329,14 @@ module.exports = {
             per: "job",
             dim_insert: function(attributes) {
                 return {
-                    query: "INSERT IGNORE INTO modw_supremm.executable (`resource_id`, `exec`, `binary`, `exec_md5`, `application_id`) " +
-                           "VALUES (:resource_id, :exec, substring_index(:exec,'/',-1), MD5(:exec), COALESCE((SELECT id FROM modw_supremm.application WHERE `name` = :appname), -1) )",
-                    values: {resource_id: attributes.resource_id.value, exec: attributes.executable.value, appname: attributes.application.value}
+                    query: 'INSERT IGNORE INTO modw_supremm.executable (`resource_id`, `exec`, `binary`, `exec_md5`, `application_id`, `real_application_id`) ' +
+                           'VALUES (:resource_id, :exec, substring_index(:exec,\'/\',-1), MD5(:exec), COALESCE((SELECT id FROM modw_supremm.application WHERE `name` = :appname), -1), COALESCE((SELECT id FROM modw_supremm.application WHERE `name` = :real_appname), -1) )',
+                    values: {
+                        resource_id: attributes.resource_id.value,
+                        exec: attributes.executable.value,
+                        appname: attributes.application.value,
+                        real_appname: attributes.real_application.value
+                    }
                 };
             }
         },
@@ -344,6 +349,16 @@ module.exports = {
             def: "NA",
             comments: "The name of the application that ran",
             per: "job",
+        },
+        real_application: {
+            unit: null,
+            type: 'string',
+            dtype: 'accounting',
+            group: 'Executable',
+            nullable: false,
+            def: 'NA',
+            comments: 'The actual name of the application that ran.',
+            per: 'job'
         },
         exit_status: {
             unit: null,
@@ -2337,6 +2352,11 @@ module.exports = {
             table: "modw_supremm.application",
             where: "name = :application"
         },
+        real_application: {
+            mapping: { real_application_id: 'id' },
+            table: 'modw_supremm.application',
+            where: 'name = :real_application'
+        },
         cwd: {
             mapping: {cwd_id: "id"},
             table: "modw_supremm.cwd",
@@ -2600,6 +2620,20 @@ module.exports = {
                 schema: 'modw_supremm',
                 table: 'application'
             }
+        },
+        real_application_id: {
+            type: 'int32',
+            nullable: false,
+            def: null,
+            group: 'Executable',
+            comments: 'The actual application.',
+            per: 'job',
+            table: 'job',
+            queries: ['real_application'],
+            agg: [{
+                table: 'supremmfact',
+                dimension: true
+            }]
         },
         nodecount_id: {
             type: "int32",

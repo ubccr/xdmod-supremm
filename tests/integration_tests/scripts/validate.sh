@@ -51,11 +51,19 @@ checkForColumn netdir_util_write
 checkForColumn gpus
 checkForColumn gpu_time
 checkForColumn gpu_usage
+checkForColumn real_application_id
 
 # Check that the catastrophe buckets table has the extra column
 if [ -z "$(echo "show columns from modw_supremm.catastrophe_buckets LIKE 'h_description'" | mysql -N modw_supremm)" ];
 then
     echo "Missing h_description column from catastrophe_buckets table"
+    exitcode=1
+fi
+
+# Check that the executable table has the extra column
+if [ -z "$(echo "show columns from modw_supremm.executable LIKE 'real_application_id'" | mysql -N modw_supremm)" ];
+then
+    echo "Missing real_application_id column from modw_supremm.executable table"
     exitcode=1
 fi
 
