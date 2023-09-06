@@ -205,11 +205,11 @@ module.exports = function(config) {
                 }
             },
             "datasource": {
-                formula: function (job) {
+                formula: function(job) {
                     if (job.summarization.hasOwnProperty('datasource')) {
                         return this.ref(job, 'summarization.datasource');
                     } else {
-                        return { value: 'prometheus', error: 0 };
+                        return { value: 'pcp', error: 0 };
                     }
                 }
             },
