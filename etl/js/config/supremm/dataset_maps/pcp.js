@@ -1,1 +1,1 @@
-etl/js/config/supremm/dataset_maps/supremm.js
+supremm.js
