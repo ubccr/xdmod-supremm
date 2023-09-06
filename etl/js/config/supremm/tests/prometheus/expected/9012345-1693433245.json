@@ -8,11 +8,11 @@
         "error": 0
     },
     "resource_name": {
-        "value": "pcp",
+        "value": "prometheus",
         "error": 0
     },
     "resource_id": {
-        "value": 1,
+        "value": 2,
         "error": 0
     },
     "organization_id": {
