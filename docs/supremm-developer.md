@@ -20,7 +20,7 @@ The Open XDMoD core software and the Open XDMoD SUPReMM module source code are h
 
 ### Summarization Software
 
-The job-level summarization software that processes PCP data is available on github.
+The job-level summarization software is available on GitHub.
 - [Job Summarization](https://github.com/ubccr/supremm)
 
 ### PCP Software

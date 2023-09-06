@@ -2,7 +2,7 @@
 Job performance data in XDMoD is obtained from collection software running on
 the compute nodes of the HPC resource.  The software architecture comprises three major components.
 
-* Metric collection software that runs directly on HPC compute nodes and periodically collects performance information.
+* Software that runs directly on HPC compute nodes and periodically collects performance information.
 * Job summarization software that uses the node-level performance data to generate job-level data.
 * An XDMoD module that enables the job-level information to be viewed and analysed in XDMoD.
 
@@ -38,8 +38,8 @@ These accounting logs include information about the start and end times of each 
 as well as the compute nodes that were assigned to the job.
 
 The summarization software runs periodically via cron. The software uses the
-accounting information from the XDMoD datawarehouse and the information from either PCP or Prometheus
-to generate a job-level summary for each HPC job. These job-level
+accounting information from the XDMoD datawarehouse and the information from the data
+collection software to generate a job-level summary for each HPC job. These job-level
 summaries are stored in a MongoDB document database.
 
 The summarized job data is then ingested into the XDMoD datawarehouse for display

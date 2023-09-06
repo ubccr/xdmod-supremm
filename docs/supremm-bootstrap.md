@@ -14,7 +14,7 @@ files.
 
 The following software components should have been installed and configured:
 
-1. Metric collection software running on compute nodes (PCP or Prometheus)
+1. Performance collection software running on compute nodes (PCP or Prometheus)
 1. XDMoD with the Job Performance (SUPReMM) module
 1. MongoDB
 1. Job Summarization software
@@ -22,9 +22,11 @@ The following software components should have been installed and configured:
 The following data should be present:
 
 1. XDMoD should have accounting data in the Jobs realm
-1. PCP archives that contain metrics collected from compute nodes that ran jobs that are present in XDMoD
-OR
-   A Prometheus server that scrapes metrics from the compute nodes that ran jobs present in XDMoD
+1. PCP archives that contain metrics collected from compute nodes that ran jobs present in XDMoD
+
+    **OR**
+
+   A Prometheus server that scrapes metrics from compute nodes that ran jobs present in XDMoD
 
 ## Manual run
 
@@ -41,11 +43,11 @@ The following steps should be performed in order:
 
 Ensure that there is job accounting data in XDMoD that covers the time period of the data collection software.
 For example you can check the 'Number of Jobs Ended' metric in the Usage tab of the XDMoD UI
-and confirm that there are jobs for the same time period as the PCP or Prometheus data.
+and confirm that there are jobs for the same time period as the performance data.
 
-### 2. Run the PCP archive indexer script
+### 2. Run the PCP archive indexer script (PCP resources)
 
-Note: If a resource is configured for Prometheus, then continue to the next step. Running the
+**Note: If a resource is configured for Prometheus, then continue to the next step.** Running the
 archive indexer script on a Prometheus configured resource will not produce any output and will not
 affect the dataflow for a resource configured with Prometheus.
 
@@ -184,7 +186,7 @@ role may be added to the admin user account via the Internal Dashboard.
 The administrator internal dashboard has a 'SUPReMM Dataflow' tab that shows the data flow information
 for each configured resource. The internal dashboard is available using the "Dashboard"
 button on the top toolbar in the XDMoD UI for user accounts that have the 'Manager' role.
-An example of the dataflow diagram is shown in Figure 1. below. **Note The admin dashboard currently only
+An example of the dataflow diagram is shown in Figure 1. below. **Note: The admin dashboard currently only
 displays information for resources configured with PCP.**{:.note}
 
 <img src="{{ site.baseurl }}/assets/images/internal_dashboard.png" width="623" height="360" alt="Example screenshot of the dataflow diagram in XDMoD internal dashboard" />

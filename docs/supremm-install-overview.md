@@ -18,7 +18,10 @@ Overview
 
 The steps to install and configure the software are as follows:
 
-1. Install the [PCP Data collection](supremm-install-pcp.html) software on the HPC compute nodes OR
+1. Install the [PCP Data collection](supremm-install-pcp.html) software on the HPC compute nodes
+
+    **OR**
+
    [Prometheus](supremm-install-prometheus.html) and the various exporters.
 1. Install [MongoDB document database](supremm-mongo.html) to store job-level performance data.
 1. Install and configure the [Job Performance module](supremm-install.html) on an existing XDMoD instance.
@@ -74,7 +77,7 @@ The XDMoD Job Performance (SUPReMM) module must be installed on an existing, fun
 
 For PCP, the data collection software must be installed on the existing HPC compute nodes. For Prometheus,
 the exporters must be installed on the existing compute nodes with a Prometheus instance scraping
-those exporters.
+those endpoints.
 
 The Job summarization software and Mongo database may be installed on the same server as the XDMoD instance.  However, for
 best performance, it is recommended that a dedicated server is used to host
@@ -100,21 +103,21 @@ creation and which metrics are collected.
 
 ### Typical install locations
 
-For PCP:
+**PCP:**
 * **HPC Compute Nodes** have the PCP data collection software installed on
   them. The collection software is configured to collect metrics from the nodes
   periodically and whenever an HPC job starts or ends. The
   data are logged to shared storage such as a parallel filesystem or a network attached storage device.
 
-For Prometheus:
-* **HPC Computer Nodes** have the Prometheus exporters installed on them. These exporters expose
+**Prometheus:**
+* **HPC Compute Nodes** have the Prometheus exporters installed on them. These exporters expose
   information about the compute nodes that are scraped by Prometheus.
 * **Dedicated Prometheus server** scrapes the exporters running on the compute nodes. The Prometheus
   instance is configured to scrape metrics from these exporters on a configured interval. The data
   are logged to Prometheus's internal timeseries database.
 
-For Both:
-* **Dedicated web server** has the XDMoD software and Job performance (SUPReMM) XDMoD module installed.
+**Both:**
+* **Dedicated web server** has the XDMoD software and Job Performance (SUPReMM) XDMoD module installed.
 * **Dedicated MySQL server** hosts a MySQL instance containing the XDMoD datawarehouse.
 * **Dedicated SUPReMM server** has the SUPReMM job summarization
   software and  MongoDB document database installed. This server requires either read

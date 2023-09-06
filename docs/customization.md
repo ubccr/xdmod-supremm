@@ -44,8 +44,8 @@ hardware support), then the Open XDMoD instance can be customized to never show 
 **These instructions only apply to Open XDMoD 9.5. This change will not work on earlier versions of Open XDMoD. For later
 versions please refer to the documentation for that release.**
 
-To remove an analytic you need to edit `/usr/share/xdmod/classes/DataWarehouse/Query/SUPREMM/JobDataset.php`
-and remove the code associated with the analytic. For example to remove the homogeneity
+To remove an analytic, you need to edit `/usr/share/xdmod/classes/DataWarehouse/Query/SUPREMM/JobDataset.php`
+and remove the code associated with the analytic. For example, to remove the homogeneity
 analytic you would remove (or comment out) lines 330-346. I.e. the function call to `addFieldWithError` and the
 update to the documentation object. The lines to remove are shown below.
 ```php

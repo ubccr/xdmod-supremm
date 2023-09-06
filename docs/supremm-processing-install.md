@@ -14,29 +14,31 @@ A MongoDB database instance must be installed and running. See the [MongoDB inst
 ## RPM Installation
 
 The RPM package has dependencies that are available in the [EPEL](http://fedoraproject.org/wiki/EPEL)
-repository. This repository can be added with this command for CentOS:
+repository. This repository can be added with this command for Rocky 8:
 
-    # yum install epel-release
+    # dnf install epel-release
 
-It also requires the PCP python libraries, which are included in CentOS (since version 7.6).
+It also requires the PCP python libraries, which are included in Rocky 8.
 
-An RPM package for Centos 7 is [available for download](https://github.com/ubccr/supremm/releases/latest)
+An RPM package for Rocky 8 is [available for download](https://github.com/ubccr/supremm/releases/latest).
 
-    # yum install supremm-{{ page.summ_sw_version }}-1.x86_64.rpm
+**Rocky 8**
+
+    # dnf install supremm-{{ page.summ_sw_version }}-1.el8.x86_64.rpm
 
 ## Source Installation
 
-The Job summarization software is written in python 2.7 and uses [python setuptools](https://setuptools.readthedocs.io/en/latest/) 
+The Job summarization software is written in python 3.6 and uses [python setuptools](https://setuptools.readthedocs.io/en/latest/)
 for package creation. Source code installs are tested in a [conda environment](https://conda.io/docs/user-guide/install/download.html)
 and setup as follows.
 
-    $ conda create -n supremm python=2.7 cython numpy scipy
+    $ conda create -n supremm python=3.6 cython numpy scipy
     $ source activate supremm
 
 The software is installed as follows:
 
-    $ tar xf {{ page.summ_sw_version }}.tar.gz
-    $ cd {{ page.summ_sw_version }}
+    $ tar xf supremm-{{ page.summ_sw_version }}.tar.gz
+    $ cd supremm-{{ page.summ_sw_version }}
     $ python setup.py install
 
 

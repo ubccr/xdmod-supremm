@@ -11,9 +11,9 @@ in the [supremm_resources.json documentation.](supremm-configuration.html#suprem
 If a custom dataset mapping file is used then it must be maintained and
 may need to be modified when the XDMoD software is upgraded.
 
-This document only describes instructions for the PCP-based datasources. However,
+This document only describes instructions for PCP and Prometheus-based datasources. However,
 the same techniques describe here can be used to generate data mappings for
-non-PCP-based data such as is used in the [XSEDE version of XDMoD](https://xdmod.ccr.buffalo.edu).
+unofficially supported data such as is used in the [XSEDE version of XDMoD](https://xdmod.ccr.buffalo.edu).
 
 ## Background
 
@@ -32,6 +32,7 @@ the XDMoD MySQL-based datawarehouse.  The `etl.cluster.js` loads
 a dataset mapping module that defines how
 data are copied from the summary statistics document to the datawarehouse.
 The default dataset mapping module file for PCP data is `/usr/share/xdmod/etl/js/config/supremm/dataset_maps/pcp.js`.
+The default dataset mapping module file for Prometheus data is `/usr/share/xdmod/etl/js/config/supremm/dataset_maps/prometheus.js`.
 
 XDMoD supports using a different dataset mapping file for each
 HPC resource. The dataset mapping file to use for a given resource is configured

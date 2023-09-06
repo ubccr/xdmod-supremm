@@ -22,7 +22,7 @@ to the XDMoD interactive setup software. Run the script as follows:
 
     # xdmod-setup
 
-and select the 'SUPReMM' option in the main menu. The `xdmod-setup` script usage is described below. 
+and select the 'SUPReMM' option in the main menu. The `xdmod-setup` script usage is described below.
 
 The next step after configuring in the XDMoD module is to install and configure the [job summarization software](supremm-processing-install.md).
 
@@ -72,7 +72,7 @@ resource" option for each resource that you wish to configure to appear in the
 SUPReMM realm and follow the prompt to enable the resource and set the correct
 options. The "Dataset mapping" should be set to 'pcp' if processing job summaries
 generated from PCP data and 'prometheus' if processing job summaries generated
-from Prometheus data. 
+from Prometheus data.
 
 SUPReMM configuration files
 ---------------------------

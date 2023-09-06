@@ -11,9 +11,11 @@ follow the instructions in the [Upgrade Guide](supremm-upgrade.html).
 RPM Installation
 ----------------
 
-An RPM package for Centos 7 is [available for download](https://github.com/ubccr/xdmod-supremm/releases/latest).
+An RPM package for Rocky 8 is [available for download](https://github.com/ubccr/xdmod-supremm/releases/latest).
 
-    # yum install xdmod-supremm-{{ page.sw_version }}-1.0.noarch.rpm
+**Rocky 8**
+
+    # dnf install xdmod-supremm-{{ page.sw_version }}-1.0.el8.noarch.rpm
 
 Source Installation
 -------------------

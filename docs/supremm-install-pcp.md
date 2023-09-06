@@ -1,3 +1,4 @@
+**These instructions only apply to resources that will use PCP software. Installation instructions for Prometheus can be found [here](supremm-install-prometheus.html).**
 
 The PCP software should be installed on each compute node and configured so
 that data are collected:
@@ -17,12 +18,12 @@ The PCP software has been included in the official CentOS packages since CentOS 
 for other distributions (and earlier versions) are available from the
 [official PCP dowload page](https://pcp.io/download.html),
 
-The CentOS RPM packages of the summarization software are tested against the version of PCP
+The CentOS RPM packages of the summarization software (versions <= 1.4.1) are tested against the version of PCP
 that is provided with CentOS 7 (This is PCP version 4.3.2 as of CentOS 7.8). The Rocky RPM packages
-of the summarization software are tested against the version of PCP that is provided with
+of the summarization software (versions >= 2.0.0) are tested against the version of PCP that is provided with
 Rocky 8 (PCP version 5.3.7).
 
-For an RPM based install on CentOS 7 the following command will install PCP with
+For an RPM based install on CentOS 7, the following command will install PCP with
 all of the associated PMDAS (monitoring plugins) that have been tested with the
 summarization software:
 
@@ -46,10 +47,9 @@ For an RPM based install on Rocky 8, the following command will install PCP with
 all of the associated PMDAs that have been tested with the summarization software:
 
     # dnf install pcp \
-                  pcp-manager \
                   pcp-conf \
                   pcp-libs \
-                  python-pcp \
+                  python3-pcp \
                   perl-PCP-PMDA \
                   pcp-system-tools \
                   pcp-pmda-gpfs \
