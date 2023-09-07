@@ -3,19 +3,14 @@
 	"summarization" : {
 		"version" : "1.0.6",
 		"complete" : true,
-		"mergetime" : 1.9094269275665283,
-		"created" : 1518787144.385729,
-		"srcdir" : "/dev/shm/8291026",
+		"mergetime" : 0.0,
+		"created" : 16934173010,
+		"srcdir" : null,
 		"elapsed" : 0.12180685997009277,
-                "datasource": "pcp"
+		"datasource": "prometheus"
 	},
 	"procDump" : {
-		"unconstrained" : [
-			"/bin/bash",
-			"/util/academic/R/R-3.4.1/lib64/R/bin/R.bin",
-			"/usr/bin/lua",
-			"sshd:"
-		],
+		"unconstrained" : [],
 		"constrained" : [
 			"sh",
 			"ssh",
@@ -664,8 +659,8 @@
 			"cpn-d14-09",
 			"cpn-d14-13"
 		],
-		"id" : "8291026",
-		"local_job_id" : 8291026,
+		"id" : "9012345",
+		"local_job_id" : 9012345,
 		"group" : "groupname",
 		"reqmem" : "2800Mc",
 		"eligible" : 1518721453,
