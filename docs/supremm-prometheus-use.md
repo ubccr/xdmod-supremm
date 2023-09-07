@@ -84,4 +84,3 @@ Depending on the number of nodes being scraped, this query may produce a lot of 
         ]
       }
     }
-

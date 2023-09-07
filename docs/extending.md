@@ -13,7 +13,7 @@ may need to be modified when the XDMoD software is upgraded.
 
 This document only describes instructions for PCP and Prometheus-based datasources. However,
 the same techniques describe here can be used to generate data mappings for
-unofficially supported data such as is used in the [XSEDE version of XDMoD](https://xdmod.ccr.buffalo.edu).
+unofficially supported data such as is used in the [ACCESS version of XDMoD](https://xdmod.access-ci.org).
 
 ## Background
 
