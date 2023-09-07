@@ -70,7 +70,7 @@ example, the new mapping file will be called `custom.js`. The file name should f
 module naming convention. The source of the new mapping file is shown below:
 ```js
 // load the default mapping module
-var pcp = require('./pcp.js');
+var supremm = require('./supremm.js');
 
 // load the library that contains helper functions
 var map_helpers = require('../map_helpers.js');
@@ -78,22 +78,22 @@ var map_helpers = require('../map_helpers.js');
 module.exports = function (config) {
 
     // create a new copy of the default map
-    var pcp_map = new pcp(config);
+    var supremm_map = new supremm(config);
 
     // override the mapping attributes for netdir home and util:
 
     //           The second argument should be set to the name of the
     //           filesystem as it appears in the job level summary    ----┐
     //                                                                    ▾
-    pcp_map.attributes.netdir_home_read = map_helpers.device('lustre', '/home', 'read_bytes-total');
-    pcp_map.attributes.netdir_home_write = map_helpers.device('lustre', '/home', 'write_bytes-total');
+    supremm_map.attributes.netdir_home_read = map_helpers.device('lustre', '/home', 'read_bytes-total');
+    supremm_map.attributes.netdir_home_write = map_helpers.device('lustre', '/home', 'write_bytes-total');
 
-    pcp_map.attributes.netdir_util_read = map_helpers.device('lustre', '/util', 'read_bytes-total');
-    pcp_map.attributes.netdir_util_write = map_helpers.device('lustre', '/util', 'write_bytes-total');
+    supremm_map.attributes.netdir_util_read = map_helpers.device('lustre', '/util', 'read_bytes-total');
+    supremm_map.attributes.netdir_util_write = map_helpers.device('lustre', '/util', 'write_bytes-total');
 
     // can add more overrides here....
 
-    return pcp_map;
+    return supremm_map;
 }
 ```
 This loads the default mapping and selectively overrides fields.
