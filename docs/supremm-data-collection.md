@@ -1,8 +1,11 @@
-The summarization software requires performance data
-collection software to run on compute nodes. This software
-should be installed on every compute node that runs jobs.
+The performance data realm in XDMoD relies on performance
+data collected from the compute nodes on a computational
+resource.  The performance data collection software
+should typically beinstalled on every compute node on a
+resource.
 
-The supported data collectors are PCP and Prometheus.
+The data collectors that can currently be used with Open XDMoD are Performance Co-Pilot (PCP) and Prometheus.
+Only **one** data collector should be installed on the compute nodes.
 
 PCP Installation
 ----------------
