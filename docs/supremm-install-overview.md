@@ -18,11 +18,14 @@ Overview
 
 The steps to install and configure the software are as follows:
 
-1. Install the [PCP Data collection](supremm-install-pcp.html) software on the HPC compute nodes
+1. Install performance data collection software on the compute nodes. Choose
+   either Performance Co-Pilot (PCP) or Prometheus.
+
+   [Instructions for Performance Co-Pilot](supremm-install-pcp.html)
 
     **OR**
 
-   [Prometheus](supremm-install-prometheus.html) and the various exporters.
+   [Instuctions for Prometheus](supremm-install-prometheus.html)
 1. Install [MongoDB document database](supremm-mongo.html) to store job-level performance data.
 1. Install and configure the [Job Performance module](supremm-install.html) on an existing XDMoD instance.
 1. Install and configure the [Job Summarization](supremm-processing-install.html) software.
@@ -42,6 +45,8 @@ below.
 
 ### Open XDMoD {{ page.sw_version }}
 
+Centos 7 Operating System
+
 <table>
 <thead>
 <tr>
@@ -50,10 +55,29 @@ below.
 </thead>
 <tbody>
 <tr>
-<td> Job Summarization </td><td align="right"> {{ page.summ_sw_version }} </td><td align="right"> 2.x.x, 1.4.1, 1.2.x, 1.1.x </td>
+<td> Job Summarization </td><td align="right"> 1.4.1 </td><td align="right"> 1.4.1, 1.2.x, 1.1.x </td>
 </tr>
 <tr>
-<td> PCP               </td><td align="right"> 5.3.7             </td><td align="right"> 5.x </td>
+<td> PCP               </td><td align="right"> 4.1.0 or 4.3.2 </td><td align="right"> 4.x </td>
+</tr>
+</tbody>
+</table>
+<br />
+
+Rocky 8 Operating System
+
+<table>
+<thead>
+<tr>
+<th>Package</th> <th>Recommended Version</th> <th>Compatible Version(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Job Summarization </td><td align="right"> {{ page.summ_sw_version }} </td><td align="right"> 2.0.0 </td>
+</tr>
+<tr>
+<td> PCP               </td><td align="right"> 5.3.7             </td><td align="right"> 5.3.x </td>
 </tr>
 </tbody>
 </table>
