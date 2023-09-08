@@ -1,4 +1,4 @@
-**These instructions only apply to resources that will use PCP software. Installation instructions for Prometheus can be found [here](supremm-install-prometheus.html).**
+**These instructions only apply to resources that will use PCP software. Installation instructions for Prometheus can be found [here](supremm-install-prometheus.md).**
 
 The PCP software should be installed on each compute node and configured so
 that data are collected:
