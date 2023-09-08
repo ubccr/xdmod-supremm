@@ -24,7 +24,7 @@ Open XDMoD are not shown.
 *Figure 1. SUPReMM data flow diagram*
 
 The data collection software running on the compute nodes provides the node-level
-performance mmetrics. This guide provides instructions for using either
+performance metrics. This guide provides instructions for using either
 Performance Co-Pilot (PCP) or Prometheus as the data collection software. Metric
 data is configured to be logged every 30 seconds (and optionally also at the
 start and end of each compute job via hooks in the job prolog and epilog scripts).

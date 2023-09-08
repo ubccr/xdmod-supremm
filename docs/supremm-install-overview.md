@@ -101,7 +101,7 @@ The XDMoD Job Performance (SUPReMM) module must be installed on an existing, fun
 
 Compute node data collection software must be installed on the existing HPC compute nodes:
 - If using PCP then the Performance Metrics Collector Daemon (pmcd) and various Performance Metrics Domain Agents (PMDAs)
-should be installed on the compute nodes. 
+should be installed on the compute nodes.
 - If using Prometheus then Prometheus exporters should be installed on the compute nodes.
 
 If using Prometheus as the data collection software then a main Prometheus server must be setup.
