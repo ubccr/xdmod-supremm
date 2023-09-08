@@ -1,4 +1,4 @@
-**These instructions only apply to resources that will use Prometheus software. Configuration instructions for PCP can be found [here](supremm-compute-pcp.html).**
+**These instructions only apply to resources that will use Prometheus software. Configuration instructions for PCP are [here](supremm-compute-pcp.html).**
 
 This section gives example configuration settings for Prometheus
 running on the compute nodes of an HPC cluster. These configuration

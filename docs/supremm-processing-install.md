@@ -1,7 +1,7 @@
 
 The Job Summarization software should be installed on a server that has
-access to the MySQL server for the XDMoD Datawarehouse, the PCP archives
-and the MongoDB instance.
+access to the MySQL server for the XDMoD Datawarehouse, either the PCP archives
+on disk OR the Prometheus server, and the MongoDB instance.
 
 ## Prerequisites
 

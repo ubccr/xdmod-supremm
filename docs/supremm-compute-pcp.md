@@ -1,4 +1,4 @@
-**These instructions only apply to resources that will use PCP software. Configuration instructions for Prometheus can be found [here](supremm-compute-prometheus.html).**
+**These instructions only apply to resources that will use PCP software. Configuration instructions for Prometheus are [here](supremm-compute-prometheus.html).**
 
 This section gives example configuration settings for Performance Co-Pilot (PCP) running on the compute nodes
 of an HPC cluster. These configuration guidelines are based on the PCP data collection setup

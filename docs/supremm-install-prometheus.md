@@ -1,4 +1,4 @@
-**These instructions only apply to resources that will use Prometheus. Installation instructions for PCP software can be found [here](supremm-install-pcp.html).**
+**These instructions only apply to resources that will use Prometheus. Installation instructions for PCP software are [here](supremm-install-pcp.html).**
 
 Prometheus exporters should be installed on each compute node and configured so
 that metrics are scraped periodically during the job (recommended 30 seconds)

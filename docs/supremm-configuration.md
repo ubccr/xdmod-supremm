@@ -95,7 +95,7 @@ the `resources.json` and `resource_specs.json` main configuration files
             "resource": "resource1",
             "resource_id": 1,
             "enabled": true,
-            "datasetmap": "pcp",
+            "datasetmap": "supremm",
             "hardware": {
                 "gpfs": "gpfs0",
                 "network": [
