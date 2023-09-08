@@ -23,18 +23,19 @@ Open XDMoD are not shown.
 ![Dataflow diagram for SUPReMM]({{ site.baseurl }}/assets/images/SUPReMM_DFD.svg "SUPReMM data flow diagram")
 *Figure 1. SUPReMM data flow diagram*
 
-Performance Co-Pilot (PCP) runs on every compute node and is configured to log
-metric data every 30 seconds and at the start and end of each HPC Job (via
-hooks in the job prolog and epilog scripts). The PCP data are logged to a
-shared filesystem.
+The data collection software running on the compute nodes provides the node-level
+performance mmetrics. This guide provides instructions for using either
+Performance Co-Pilot (PCP) or Prometheus as the data collection software. Metric
+data is configured to be logged every 30 seconds (and optionally also at the
+start and end of each compute job via hooks in the job prolog and epilog scripts).
 
-Prometheus exporters run on every compute node and expose various metrics for each node.
-A centralized Prometheus server is configured to scrape metrics exposed by the exporters every
-30 seconds. Prometheus data are stored in Prometheus's internal timeseries database and is queried
-directly by the summarization software.
+The node-level performance data is stored in a central location for subsequent
+processing by the summarization software. For PCP, the data are stored as
+PCP archive files on a shared filesystem. For Prometheus, the data are
+are stored in Prometheus's timeseries database.
 
-The accounting logs from the resource manager are ingested into the XDMoD datawarehouse.
-These accounting logs include information about the start and end times of each HPC job
+The accounting logs from the resource manager (such as Slurm SGE, PBS, LSF, etc) are ingested into the XDMoD datawarehouse.
+These accounting logs include information about the start and end times of each compute job
 as well as the compute nodes that were assigned to the job.
 
 The summarization software runs periodically via cron. The software uses the
@@ -43,4 +44,4 @@ collection software to generate a job-level summary for each HPC job. These job-
 summaries are stored in a MongoDB document database.
 
 The summarized job data is then ingested into the XDMoD datawarehouse for display
-in the web-based user interface.
+in the web-based user interface and analysis using XDMoD's Data analytic tools.
