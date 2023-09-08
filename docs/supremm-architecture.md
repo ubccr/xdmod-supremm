@@ -20,7 +20,7 @@ below.  This diagram shows the principal features of the collection and
 processing architecture. The data aggregation and display components present in
 Open XDMoD are not shown.
 
-![Dataflow diagram for SUPReMM]({{ site.baseurl }}/assets/images/SUPReMM_DFD.svg "SUPReMM data flow diagram")
+![Dataflow diagram for SUPReMM]({{ site.baseurl }}/assets/images/SUPReMM_DFD_generic.svg "SUPReMM data flow diagram")
 *Figure 1. SUPReMM data flow diagram*
 
 The data collection software running on the compute nodes provides the node-level

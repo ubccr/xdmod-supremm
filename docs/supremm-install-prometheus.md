@@ -65,6 +65,9 @@ the exporter can read everything under procfs:
 
 The summarization software will still function without these flags enabled, however some plugins will not run without it set.
 
+Verify Exporter Installation
+----------------------------
+
 Metrics are exposed under the `/metrics` endpoint for each exporter. Ensure each exporter is properly exporting metrics with `curl`
 like the following example for the Node Exporter:
 
