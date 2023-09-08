@@ -99,9 +99,14 @@ respective system requirements pages.
 
 The XDMoD Job Performance (SUPReMM) module must be installed on an existing, functional XDMoD instance.
 
-For PCP, the data collection software must be installed on the existing HPC compute nodes. For Prometheus,
-the exporters must be installed on the existing compute nodes with a Prometheus instance scraping
-those endpoints.
+Compute node data collection software must be installed on the existing HPC compute nodes:
+- If using PCP then the Performance Metrics Collector Daemon (pmcd) and various Performance Metrics Domain Agents (PMDAs)
+should be installed on the compute nodes. 
+- If using Prometheus then Prometheus exporters should be installed on the compute nodes.
+
+If using Prometheus as the data collection software then a main Prometheus server must be setup.
+For small installations this may be installed on the same server as the XDMoD instance.  However, for
+best performance, it is recommended that a dedicated server is used to store the Prometheus time series data.
 
 The Job summarization software and Mongo database may be installed on the same server as the XDMoD instance.  However, for
 best performance, it is recommended that a dedicated server is used to host
@@ -135,7 +140,7 @@ creation and which metrics are collected.
 
 **Prometheus:**
 * **HPC Compute Nodes** have the Prometheus exporters installed on them. These exporters expose
-  information about the compute nodes that are scraped by Prometheus.
+  information about the compute nodes that are scraped by Prometheus over the network.
 * **Dedicated Prometheus server** scrapes the exporters running on the compute nodes. The Prometheus
   instance is configured to scrape metrics from these exporters on a configured interval. The data
   are logged to Prometheus's internal timeseries database.
