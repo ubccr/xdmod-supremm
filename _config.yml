@@ -26,7 +26,7 @@ url: "http://supremm.xdmod.org" # the base hostname & protocol for your site
 github_username: ubccr
 github_url: https://github.com/ubccr/xdmod-supremm
 xdmod_module_name: Job Performance (SUPReMM)
-latest_version: "10.0"
+latest_version: "10.5"
 version_list:
   - "10.5"
   - "10.0"
