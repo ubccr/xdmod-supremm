@@ -1,3 +1,3 @@
 ---
-redirect_to: /10.0/supremm-compute-pcp.html
+redirect_to: /10.5/supremm-compute-pcp.html
 ---
