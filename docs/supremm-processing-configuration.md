@@ -321,12 +321,15 @@ the Open XDMoD SUPReMM module was installed.  The database creation script is
 located in the `/usr/share/supremm/setup` directory and should be run on the
 XDMoD datawarehouse DB instance.
 
-    $ mysql -u root -p < /usr/local/lib64/python3.6/site-packages/supremm/assets/modw_supremm.sql
+    $ mysql -u root -p < [PATH TO PYTHON SITE PACKAGES]/supremm/assets/modw_supremm.sql
 
+Where `[PATH TO PYTHON SITE PACKAGES]` is the path to the python site packages install directory
+(`/usr/lib64/python2.7` for a Centos 7 RPM install and `/usr/lib64/python3.6/site-packages`
+for Rocky 8 RPM install).
 
 Setup MongoDB
 -----------
 
-    $ mongo [MONGO CONNECTION URI] /usr/local/lib64/python3.6/site-packages/supremm/assets/mongo_setup.js
+    $ mongo [MONGO CONNECTION URI] [PATH TO PYTHON SITE PACKAGES]/supremm/assets/mongo_setup.js
 
 where [MONGO CONNECTION URI] is the uri of the MongoDB database.

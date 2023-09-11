@@ -13,8 +13,23 @@ A MongoDB database instance must be installed and running. See the [MongoDB inst
 
 ## RPM Installation
 
+** Centos 7 **
+
 The RPM package has dependencies that are available in the [EPEL](http://fedoraproject.org/wiki/EPEL)
-repository. This repository can be added with this command for Rocky 8:
+repository. This repository can be added with this command:
+
+    # yum install epel-release
+
+It also requires the PCP python libraries, which are included in CentOS (since version 7.6).
+
+An RPM package for Centos 7 is [available for download](https://github.com/ubccr/supremm/releases/latest)
+
+    # yum install supremm-1.4.1-1.el7.x86_64.rpm
+
+**Rocky 8**
+
+The RPM package has dependencies that are available in the [EPEL](http://fedoraproject.org/wiki/EPEL)
+repository. This repository can be added with this command:
 
     # dnf install epel-release
 
@@ -22,18 +37,19 @@ It also requires the PCP python libraries, which are included in Rocky 8.
 
 An RPM package for Rocky 8 is [available for download](https://github.com/ubccr/supremm/releases/latest).
 
-**Rocky 8**
-
     # dnf install supremm-{{ page.summ_sw_version }}-1.el8.x86_64.rpm
 
 ## Source Installation
 
-The Job summarization software is written in python 3.6 and uses [python setuptools](https://setuptools.readthedocs.io/en/latest/)
-for package creation. Source code installs are tested in a [conda environment](https://conda.io/docs/user-guide/install/download.html)
+The Job summarization software is written in python and uses [python setuptools](https://setuptools.readthedocs.io/en/latest/)
+for package creation. The 1.4 release depends on python 2.7 and the 2.0 release
+uses python 3.6. Source code installs are tested in a [conda environment](https://conda.io/docs/user-guide/install/download.html)
 and setup as follows.
 
-    $ conda create -n supremm python=3.6 cython numpy scipy
+    $ conda create -n supremm python=[PYTHON VERSION] cython numpy scipy
     $ source activate supremm
+
+where `[PYTHON VERSION]` should be set to 2.7 if using the 1.4 release or 3.6 if using the 2.0 release.
 
 The software is installed as follows:
 
