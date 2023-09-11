@@ -1,7 +1,14 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-## XXXX-XX-XX v10.5.0
+## 2023-09-11 v10.5.0
+
+- Bug Fixes
+   - Updates to mitigate php warning seen using php 7.2 (Rocky 8)
+
+- Features
+   - Updated default dataset mapping filename to remove the datasource name. The same
+     mapping file can be used with both PCP and Prometheus data sources.
 
 ## 2023-05-11 v 10.0.1
 
