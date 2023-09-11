@@ -15,7 +15,7 @@ coded plots across the top of the job tab in the Job Viewer. The value of
 each metric in the panel is normalized so a value near 1 means a favourable
 value and a value near 0 indicates an unfavourable value.
 
-As of the 9.5 release there are five default analytics. These are the CPU usage,
+There are five default analytics. These are the CPU usage,
 CPU Balance, Walltime Accuracy, Memory Efficiency and Homogeneity, see Figure 1
 below. If the CPU usage metric is unavailable then the analytics toolbar is not displayed.
 If any of the other metrics are unavailable then an error message is displayed.
@@ -41,11 +41,11 @@ hardware support), then the Open XDMoD instance can be customized to never show 
 
 **This customization will not be preserved if the Open XDMoD software is updated.**
 
-**These instructions only apply to Open XDMoD 9.5. This change will not work on earlier versions of Open XDMoD. For later
+**These instructions only apply to Open XDMoD {{ page.sw_version }}. For other
 versions please refer to the documentation for that release.**
 
-To remove an analytic you need to edit `/usr/share/xdmod/classes/DataWarehouse/Query/SUPREMM/JobDataset.php`
-and remove the code associated with the analytic. For example to remove the homogeneity
+To remove an analytic, you need to edit `/usr/share/xdmod/classes/DataWarehouse/Query/SUPREMM/JobDataset.php`
+and remove the code associated with the analytic. For example, to remove the homogeneity
 analytic you would remove (or comment out) lines 330-346. I.e. the function call to `addFieldWithError` and the
 update to the documentation object. The lines to remove are shown below.
 ```php
