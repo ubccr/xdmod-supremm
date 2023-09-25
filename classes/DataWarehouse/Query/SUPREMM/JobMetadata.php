@@ -330,7 +330,14 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
 
         $doc['schema'] = $this->supremmDbInterface->getDocument($resource_id, 'schema', 'timeseries-' . $doc['version']);
 
-        $doc = self::sanitize($doc);
+        array_walk_recursive(
+            $doc,
+            function (&$val) {
+                if (is_numeric($val) && is_nan($val)) {
+                    $val = 0;
+                }  
+            }
+        );
 
         return $doc;
     }
@@ -359,30 +366,5 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
             ksort($res);
         }
         return $res;
-    }
-
-    /**
-     * Makes a copy of the mongo document returned in $this->gettimeseries()
-     * with NAN values replaced with the value 0.
-     *
-     * @param array $doc Mongo document return from query
-     *
-     * @return array $ret Mongo document sanitized of NAN values
-     */
-    private static function sanitize($doc)
-    {
-        if (is_array($doc)) {
-            foreach ($doc as $key => $val) {
-                if (is_array($val)) {
-                    $doc[$key] = self::sanitize($doc[$key]);
-                }
-                else {
-                    if (is_numeric($val) && is_nan($doc[$key])) {
-                        $doc[$key] = 0;
-                    }
-                }
-            }
-        }
-        return $doc;
     }
 }
