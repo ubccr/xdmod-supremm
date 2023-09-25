@@ -371,20 +371,18 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
      */
     private static function sanitize($doc)
     {
-        $ret = $doc;
-
-        if (is_array($ret)) {
-            foreach ($ret as $key => $val) {
+        if (is_array($doc)) {
+            foreach ($doc as $key => $val) {
                 if (is_array($val)) {
-                    $ret[$key] = self::sanitize($ret[$key]);
+                    $doc[$key] = self::sanitize($doc[$key]);
                 }
                 else {
-                    if (is_numeric($val) && is_nan($ret[$key])) {
-                        $ret[$key] = 0;
+                    if (is_numeric($val) && is_nan($doc[$key])) {
+                        $doc[$key] = 0;
                     }
                 }
             }
         }
-        return $ret;
+        return $doc;
     }
 }
