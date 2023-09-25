@@ -366,7 +366,7 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
      * with NAN values replaced with the value 0.
      *
      * @param array $doc Mongo document return from query
-     * 
+     *
      * @return array $ret Mongo document sanitized of NAN values
      */
     private static function sanitize($doc)
@@ -380,7 +380,7 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
                 }
                 else {
                     if (is_numeric($val) && is_nan($ret[$key])) {
-                       $ret[$key] = 0;
+                        $ret[$key] = 0;
                     }
                 }
             }
