@@ -330,6 +330,8 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
 
         $doc['schema'] = $this->supremmDbInterface->getDocument($resource_id, 'schema', 'timeseries-' . $doc['version']);
 
+        $this->sanitize($doc);
+
         return $doc;
     }
 
@@ -357,5 +359,21 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
             ksort($res);
         }
         return $res;
+    }
+
+    private static function sanitize(&$doc)
+    {
+        foreach ($doc as $key => $val) {
+            if (is_array($val)) {
+                self::sanitize($doc[$key]);
+            }
+            else {
+                if (is_numeric($val)) {
+                    if (is_nan($val)) {
+                        $doc[$key] = 0;
+                    }
+                }
+            }
+        }
     }
 }
