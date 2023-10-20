@@ -1,6 +1,8 @@
 <?php
 
-namespace DataWarehouse\Query\SUPREMM;
+namespace UnitTests\DataWarehouse\Query\SUPREMM;
+
+use DataWarehouse\Query\SUPREMM\JobTimeseries;
 
 class JobTimeseriesTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +13,7 @@ class JobTimeseriesTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMainData($inputdoc) {
 
-        $timeseries = new \DataWarehouse\Query\SUPREMM\JobTimeseries($inputdoc);
+        $timeseries = new JobTimeseries($inputdoc);
 
         $cpuuser = $timeseries->get('cpuuser', null, null);
 
@@ -25,7 +27,7 @@ class JobTimeseriesTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNodeData($inputdoc) {
 
-        $timeseries = new \DataWarehouse\Query\SUPREMM\JobTimeseries($inputdoc);
+        $timeseries = new JobTimeseries($inputdoc);
 
         $cpuuser = $timeseries->get('cpuuser', 0, null);
 
@@ -39,7 +41,7 @@ class JobTimeseriesTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcessMissing($inputdoc) {
 
-        $timeseries = new \DataWarehouse\Query\SUPREMM\JobTimeseries($inputdoc);
+        $timeseries = new JobTimeseries($inputdoc);
 
         $cpuuser = $timeseries->get('cpuuser', null, null);
 

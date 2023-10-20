@@ -1,6 +1,9 @@
 <?php
 
-namespace DataWarehouse\Query\SUPREMM;
+namespace UnitTests\DataWarehouse\Query\SUPREMM;
+
+use UnitTests\TestHelpers\mock\JobMetadataWorkaround;
+use UnitTests\TestHelpers\TestHelper;
 
 class JobMetadataTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,9 +14,9 @@ class JobMetadataTest extends \PHPUnit_Framework_TestCase
      */
     public function testArrayMerge($left, $right, $expected)
     {
-        $jobmd = new \TestHelpers\mock\JobMetadataWorkaround();
+        $jobmd = new JobMetadataWorkaround();
 
-        $arrayMergeFn = \TestHelpers\TestHelper::unlockMethod($jobmd, 'arrayMergeRecursiveWildcard');
+        $arrayMergeFn = TestHelper::unlockMethod($jobmd, 'arrayMergeRecursiveWildcard');
         $result = $arrayMergeFn->invoke($jobmd, $left, $right);
 
         $this->assertEquals($expected, $result);
