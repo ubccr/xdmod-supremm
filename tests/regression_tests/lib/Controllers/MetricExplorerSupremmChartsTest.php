@@ -2,9 +2,11 @@
 
 namespace RegressionTests\Controllers;
 
-use TestHarness\Utilities;
+use IntegrationTests\TestHarness\Utilities;
+use IntegrationTests\TestHarness\XdmodTestHelper;
+use RegressionTests\Controllers\MetricExplorerChartsTest;
 
-class MetricExplorerSupremmChartsTest extends \RegressionTests\Controllers\MetricExplorerChartsTest
+class MetricExplorerSupremmChartsTest extends MetricExplorerChartsTest
 {
     public function filterTestsProvider()
     {
@@ -22,7 +24,7 @@ class MetricExplorerSupremmChartsTest extends \RegressionTests\Controllers\Metri
             $inputs = $this->generateFilterTests($baseConfig);
         }
 
-        $helper = new \TestHarness\XdmodTestHelper();
+        $helper = new XdmodTestHelper();
         $helper->authenticate('cd');
 
         $enabledRealms = Utilities::getRealmsToTest();
