@@ -5,11 +5,13 @@
 
 namespace ComponentTests\DataWarehouse\Query\SUPREMM;
 
+use DataWarehouse\Query\SUPREMM\SupremmDbInterface;
+
 class SupremmDbInterfaceTest extends \PHPUnit_Framework_TestCase
 {
     public function testTimeseriesFilter()
     {
-        $dbif = new \DataWarehouse\Query\SUPREMM\SupremmDbInterface();
+        $dbif = new SupremmDbInterface();
 
         $filter = array('cpuuser' => 1);
         $query = "^6117153-.*";
@@ -45,7 +47,7 @@ class SupremmDbInterfaceTest extends \PHPUnit_Framework_TestCase
 
     public function testSchema()
     {
-        $dbif = new \DataWarehouse\Query\SUPREMM\SupremmDbInterface();
+        $dbif = new SupremmDbInterface();
 
         $data = $dbif->getDocument(5, 'schema', 'timeseries-4');
 
