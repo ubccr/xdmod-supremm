@@ -2,6 +2,8 @@
 
 namespace IntegrationTests\Controllers;
 
+use IntegrationTests\TestHarness\XdmodTestHelper;
+
 class MetricExplorerControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -10,7 +12,7 @@ class MetricExplorerControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDwDescripter()
     {
-        $helper = new \TestHarness\XdmodTestHelper();
+        $helper = new XdmodTestHelper();
         $helper->authenticate('cd');
 
         $response = $helper->post('/controllers/metric_explorer.php', null, array('operation' => 'get_dw_descripter'));

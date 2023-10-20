@@ -2,6 +2,8 @@
 
 namespace IntegrationTests\Controllers;
 
+use IntegrationTests\TestHarness\XdmodTestHelper;
+
 class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -10,7 +12,7 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMenus()
     {
-        $helper = new \TestHarness\XdmodTestHelper();
+        $helper = new XdmodTestHelper();
         $helper->authenticate('cd');
 
         $params = array(

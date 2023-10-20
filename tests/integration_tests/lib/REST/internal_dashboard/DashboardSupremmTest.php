@@ -2,12 +2,14 @@
 
 namespace IntegrationTests\REST\internal_dashboard;
 
+use IntegrationTests\TestHarness\XdmodTestHelper;
+
 class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
 {
     public function __construct()
     {
         $xdmodConfig = array( "decodetextasjson" => true );
-        $this->xdmodhelper = new \TestHarness\XdmodTestHelper($xdmodConfig);
+        $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
 
         $this->endpoint = 'rest/v0.1/supremm_dataflow/';
 

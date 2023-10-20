@@ -2,6 +2,8 @@
 
 namespace IntegrationTests\REST\Efficiency;
 
+use IntegrationTests\TestHarness\XdmodTestHelper;
+
 class EfficiencyTest extends \PHPUnit_Framework_TestCase
 {
     const ENDPOINT = 'rest/v1/efficiency/';
@@ -11,7 +13,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         foreach (array('pub', 'cd', 'usr') as $user) {
-            self::$helpers[$user] = new \TestHarness\XdmodTestHelper();
+            self::$helpers[$user] = new XdmodTestHelper();
             if ($user != 'pub') {
                 self::$helpers[$user]->authenticate($user);
             }

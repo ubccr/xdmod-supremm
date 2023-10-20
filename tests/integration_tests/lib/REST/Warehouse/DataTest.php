@@ -2,6 +2,8 @@
 
 namespace IntegrationTests\REST\Warehouse;
 
+use IntegrationTests\TestHarness\XdmodTestHelper;
+
 class DataTest extends \PHPUnit_Framework_TestCase
 {
     protected static $xdmodhelper;
@@ -10,7 +12,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        self::$xdmodhelper = new \TestHarness\XdmodTestHelper();
+        self::$xdmodhelper = new XdmodTestHelper();
         self::$xdmodhelper->authenticate('cd');
     }
 

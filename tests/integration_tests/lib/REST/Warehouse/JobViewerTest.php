@@ -2,7 +2,8 @@
 
 namespace IntegrationTests\REST\Warehouse;
 
-use TestHarness\Utilities;
+use IntegrationTests\TestHarness\Utilities;
+use IntegrationTests\TestHarness\XdmodTestHelper;
 
 class JobViewerTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +12,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $xdmodConfig = array( "decodetextasjson" => true );
-        $this->xdmodhelper = new \TestHarness\XdmodTestHelper($xdmodConfig);
+        $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
     }
 
     private static function getDimensions() {
@@ -85,7 +86,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
 
     public function dimensionsProvider()
     {
-        $xdmodhelper = new \TestHarness\XdmodTestHelper(array('decodetextasjson' => true));
+        $xdmodhelper = new XdmodTestHelper(array('decodetextasjson' => true));
         $xdmodhelper->authenticate("cd");
 
         $testCases = array();
@@ -367,7 +368,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
     }
 
     public function jobTimeseriesProvider() {
-        $xdmodhelper = new \TestHarness\XdmodTestHelper();
+        $xdmodhelper = new XdmodTestHelper();
         $xdmodhelper->authenticate('cd');
 
         $queryparams = array(
