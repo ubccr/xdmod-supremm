@@ -86,6 +86,9 @@ jobs:
           command: |
             echo "export COMPOSER=composer.json" >> $BASH_ENV
       - run:
+          name: Downgrade composer for the qa tests
+          command: composer self-update --1
+      - run:
           name: Setup & Run QA Tests
           command: ./tests/ci/scripts/qa-test-setup.sh
       - run:
