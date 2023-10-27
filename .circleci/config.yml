@@ -24,6 +24,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Update ndoejs
+          command: |
+            dnf module -y reset nodejs
+            dnf module -y install nodejs:16
+      - run:
           name: Checkout XDMoD
           command: |
             git clone --depth=1 --branch=xdmod11.0 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
