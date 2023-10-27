@@ -1,12 +1,9 @@
 ---
 version: 2.1
 executors:
-  centos7: &centos7-executor
-    docker:
-      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:centos7.9-0.1
   rocky8: &rocky8-executor
     docker:
-      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:rockylinux8-0.1
+      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.5.0:rockylinux8-0.1
 jobs:
   build:
     parameters:
