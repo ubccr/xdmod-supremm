@@ -25,7 +25,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Update ndoejs
+          name: Update nodejs
           command: |
             dnf module -y reset nodejs
             dnf module -y install nodejs:16
