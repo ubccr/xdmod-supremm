@@ -83,10 +83,6 @@ jobs:
               composer install -d $XDMOD_SRC_DIR --no-progress
               composer install --no-progress
       - run:
-          name: Make sure that we reset COMPOSER when upgrading.
-          command: |
-            echo "export COMPOSER=composer.json" >> $BASH_ENV
-      - run:
           name: Setup & Run QA Tests
           command: ./tests/ci/scripts/qa-test-setup.sh
       - run:
@@ -98,6 +94,10 @@ jobs:
       - run:
           name: Run Component Tests
           command: ./tests/component_tests/runtests.sh --log-junit ~/phpunit
+      - run:
+          name: Make sure that the Composer Test Dependencies are installed
+          command: |
+            composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Run Integration Tests
           command: ./tests/integration_tests/runtests.sh --log-junit ~/phpunit
