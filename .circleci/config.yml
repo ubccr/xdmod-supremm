@@ -21,6 +21,7 @@ jobs:
       TRAVIS_COMMIT_RANGE: << pipeline.git.base_revision >>..<<pipeline.git.revision>>
       XDMOD_SRC_DIR: ./../xdmod
       REG_TEST_BASE: /../../../../../project/tests/artifacts/regression/current
+      QA_BRANCH: 'v2'
     steps:
       - checkout
       - run:
@@ -85,9 +86,6 @@ jobs:
           name: Make sure that we reset COMPOSER when upgrading.
           command: |
             echo "export COMPOSER=composer.json" >> $BASH_ENV
-      - run:
-          name: Downgrade composer for the qa tests
-          command: composer self-update --1
       - run:
           name: Setup & Run QA Tests
           command: ./tests/ci/scripts/qa-test-setup.sh
