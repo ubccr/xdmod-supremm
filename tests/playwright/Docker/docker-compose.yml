@@ -2,12 +2,9 @@ version: '3'
 
 services:
   xdmod:
-    image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:rockylinux8-0.1
+    image: tools-int-01.ccr.xmdod.org/xdmod-job_performance-x86_64:v10.5.0-1.0
     hostname: xdmod
     container_name: xdmod
-    volumes:
-      - /Users/ryanrath/scratch/cache/rocky8/xdmod/dnf.conf:/etc/dnf/dnf.conf
-      - /Users/ryanrath/scratch/cache/rocky8/xdmod/dnf:/var/cache/dnf
     networks:
       - testing
     shm_size: 2g
