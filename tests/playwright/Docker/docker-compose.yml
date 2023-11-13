@@ -3,6 +3,7 @@ version: '3'
 services:
   xdmod:
     image: tools-int-01.ccr.xmdod.org/xdmod-job_performance-x86_64:v10.5.0-1.0
+    build: ./xdmod
     hostname: xdmod
     container_name: xdmod
     networks:
@@ -13,6 +14,10 @@ services:
       - '7000:7000'
     environment:
       XDMOD_REALMS: 'jobs,storage,cloud,supremm,jobefficiency'
+      XDMOD_INSTALL_DIR: '/usr/share/xdmod'
+      XDMOD_ETC_DIR: '/etc/xdmod'
+    stdin_open: true
+    tty: true
     command: sleep infinity
   playwright:
     image: mcr.microsoft.com/playwright:v1.39.0-focal
@@ -27,7 +32,9 @@ services:
     environment:
       BASE_URL: 'https://xdmod'
       XDMOD_REALMS: 'jobs,storage,cloud,supremm,jobefficiency'
-    command: sleep infinity
+    stdin_open: true
+    tty: true
+    command: tail -f /dev/null
 
 networks:
   testing:
