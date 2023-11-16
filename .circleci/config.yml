@@ -38,8 +38,11 @@ jobs:
           command: |
               ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
       - run:
-          name: Add mongodb/mongodb to XDMoD via composer
-          command: composer require -d "$XDMOD_SRC_DIR" mongodb/mongodb
+          name: Add mongodb
+          command: |
+              dnf install -y php-devel
+              pecl install mongodb
+              echo "extension=mongodb.so" > /etc/php.d/40-mongodb.ini
 
       # We need to update our acct before we can enable docker layer caching.
       # - setup_remote_docker:
