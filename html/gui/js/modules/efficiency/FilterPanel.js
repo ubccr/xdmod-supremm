@@ -401,21 +401,19 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
             lazyRender: true,
             hideTrigger: true,
             store: new Ext.data.JsonStore({
-                url: 'controllers/metric_explorer.php',
+                proxy: new Ext.data.HttpProxy({
+                    url: XDMoD.REST.url + '/warehouse/dimensions/' + dimension.toLowerCase(),
+                    method: 'GET'
+                }),
+                baseParams: {
+                    realm: 'SUPREMM'
+                },
                 fields: ['checked', 'name', 'id'],
-                root: 'data',
+                root: 'results',
                 totalProperty: 'totalCount',
                 autoLoad: true,
                 idProperty: 'name',
-                messageProperty: 'message',
-                baseParams: {
-                    operation: 'get_dimension',
-                    dimension_id: dimension.toLowerCase(),
-                    realm: 'SUPREMM',
-                    start: 0,
-                    limit: 1000,
-                    public_user: CCR.xdmod.publicUser
-                }
+                messageProperty: 'message'
             }),
             listeners: {
                 select: function (e) {
