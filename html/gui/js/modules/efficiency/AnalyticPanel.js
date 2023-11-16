@@ -57,8 +57,8 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                                 start_date: Ext.getCmp('efficiency').getDurationSelector().getStartDate(),
                                 end_date: Ext.getCmp('efficiency').getDurationSelector().getEndDate(),
                                 order_by: {
-                                    field: self.config.field,
-                                    dirn: 'asc'
+                                    field: self.config.statistics[1],
+                                    dirn: 'desc'
                                 },
                                 filters: [],
                                 mandatory_filters: self.config.mandatoryFilters,
