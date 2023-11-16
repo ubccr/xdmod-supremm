@@ -1,6 +1,6 @@
 {
     "name": "xdmod-supremm",
-    "version": "10.0.0",
+    "version": "10.5.0",
     "release": "1.0",
     "files": {
         "include_paths": [
@@ -12,7 +12,8 @@
         ],
         "exclude_patterns": [
             "#/\\.#",
-            "#/open_xdmod/modules/supremm/tests#"
+            "#/open_xdmod/modules/supremm/tests#",
+            "#/open_xdmod/modules/supremm/etl/js/config/supremm/tests#"
         ]
     },
     "commands": {

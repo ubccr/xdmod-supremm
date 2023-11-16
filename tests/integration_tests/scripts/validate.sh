@@ -53,9 +53,9 @@ checkForColumn gpu_time
 checkForColumn gpu_usage
 
 # Check that the catastrophe buckets table has the extra column
-if [ -z $(echo "show columns from modw_supremm.catastrophe_buckets LIKE 'h_description'"  | mysql -N modw_supremm) ];
+if [ -z "$(echo "show columns from modw_supremm.catastrophe_buckets LIKE 'h_description'" | mysql -N modw_supremm)" ];
 then
-    echo "Misssing h_description column from catastrophe_buckets table"
+    echo "Missing h_description column from catastrophe_buckets table"
     exitcode=1
 fi
 

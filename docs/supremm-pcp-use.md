@@ -1,3 +1,5 @@
+**These instructions only apply to resources that will use PCP software. Usage instructions for Prometheus are [here](supremm-prometheus-use.html).**
+
 The following describes how to check the PCP data collection.
 
 ## Prerequisites

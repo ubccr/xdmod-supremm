@@ -374,6 +374,18 @@
         "value": null,
         "error": 8
     },
+    "gpus": {
+        "value": 0,
+        "error": 8
+    },
+    "gpu_time": {
+        "value": null,
+        "error": 8
+    },
+    "gpu_usage": {
+        "value": null,
+        "error": 8
+    },
     "gpu_energy": {
         "value": 657403.674388661,
         "error": 0
