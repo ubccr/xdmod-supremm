@@ -14,7 +14,7 @@ files.
 
 The following software components should have been installed and configured:
 
-1. PCP running on compute nodes
+1. Performance collection software running on compute nodes (PCP or Prometheus)
 1. XDMoD with the Job Performance (SUPReMM) module
 1. MongoDB
 1. Job Summarization software
@@ -22,14 +22,18 @@ The following software components should have been installed and configured:
 The following data should be present:
 
 1. XDMoD should have accounting data in the Jobs realm
-1. PCP archives that contain metrics collected from compute nodes that ran jobs that are present in XDMoD
+1. PCP archives that contain metrics collected from compute nodes that ran jobs present in XDMoD
+
+    **OR**
+
+   A Prometheus server that scrapes metrics from compute nodes that ran jobs present in XDMoD
 
 ## Manual run
 
 The following steps should be performed in order:
 
 1. Ingest job accounting data into XDMoD
-1. Run the PCP archive indexer script
+1. Run the PCP archive indexer script (For resources configured with PCP)
 1. Run the job summarization script
 1. [Optional] Ingest the job batch scripts
 1. Run the XDMoD ingest and aggregation script
@@ -37,11 +41,15 @@ The following steps should be performed in order:
 
 ### 1. Ingest job accounting data into XDMoD
 
-Ensure that there is job accounting data in XDMoD that covers the time period of the PCP archives.
+Ensure that there is job accounting data in XDMoD that covers the time period of the data collection software.
 For example you can check the 'Number of Jobs Ended' metric in the Usage tab of the XDMoD UI
-and confirm that there are jobs for the same time period as the PCP archive data.
+and confirm that there are jobs for the same time period as the performance data.
 
-### 2. Run the PCP archive indexer script
+### 2. Run the PCP archive indexer script (PCP resources)
+
+**Note: If a resource is configured for Prometheus, then continue to the next step.** Running the
+archive indexer script on a Prometheus configured resource will not produce any output and will not
+affect the dataflow for a resource configured with Prometheus.
 
 The archive indexer script scans the PCP archive directory, parses each PCP
 archive and stores the archive metadata in the XDMoD datawarehouse. This index
@@ -82,9 +90,9 @@ into XDMoD. Go back ingest the job data and then rerun the `indexarchives.py -a`
 
 The summarization script is responsible for generating the job level summary records
 and inserting them in the MongoDB instance. The script reads the job information
-from the XDMoD datawarehouse and processes the PCP archives. The default
+from the XDMoD datawarehouse and processes it according to the configured data source. The default
 behavior of the script is to process all jobs in the XDMoD datawarehouse that
-have not previously been summarized. If there are no PCP archive data for
+have not previously been summarized. If there are no data for
 a job then a summary record is still created, but, of course, there will
 be no performance metric information in the record.
 
@@ -178,7 +186,8 @@ role may be added to the admin user account via the Internal Dashboard.
 The administrator internal dashboard has a 'SUPReMM Dataflow' tab that shows the data flow information
 for each configured resource. The internal dashboard is available using the "Dashboard"
 button on the top toolbar in the XDMoD UI for user accounts that have the 'Manager' role.
-An example of the dataflow diagram is shown in Figure 1. below.
+An example of the dataflow diagram is shown in Figure 1. below. **Note: The admin dashboard currently only
+displays information for resources configured with PCP.**{:.note}
 
 <img src="{{ site.baseurl }}/assets/images/internal_dashboard.png" width="623" height="360" alt="Example screenshot of the dataflow diagram in XDMoD internal dashboard" />
 
@@ -219,7 +228,7 @@ in [Step 5.](supremm-bootstrap.md#5-run-the-xdmod-ingest-and-aggregation-script)
 
 The recommended strategy for advanced troubleshooting is to identify an HPC job that
 - Has accounting data present in the XDMoD datawarehouse
-- Has PCP archive data for the compute nodes on which the job ran
+- Has raw performance data for the compute nodes on which the job ran
 - Had a wall time long enough for multiple data points to be recorded. For example if you have setup a 30 second collection period, then choose a job that ran for at least ten minutes.
 
 The information about this job should be manually traced though each step in the dataflow. The
@@ -246,4 +255,4 @@ An example output of this script for a job that has all data present and correct
     Summary in mongo: _id, summarization, procDump, process_memory, infiniband, cpuperf, gpfs, cpu, network, cores, nfs, uncperf, memory, load1, acct, catastrophe, block, nodememory, processed
     Summary in mongo: _id, lnet, memused, cpuuser, ib_lnet, version, nfs, simdins, process_mem_usage, hosts, membw, memused_minus_diskcache, block
     
-
+**Note: Resources configured with Prometheus do not have archives associated with them.**{:.note}

@@ -1,0 +1,18 @@
+FROM tools-ext-01.ccr.xdmod.org/xdmod10.0.0:rockylinux8-0.1
+ENV REL=9.5.0
+ENV BUILD=1.0
+ENV BRANCH=xdmod10.0
+ENV IS_JOB_PERFORMANCE=1
+
+LABEL authors="Ryan A. Rathsam <ryanrath@buffalo.edu>"
+
+COPY assets/mongodb-org-3.4.repo /etc/yum.repos.d
+
+RUN yum install -y \
+    mongodb-org \
+    php-devel \
+    libcurl-devel \
+    openssl-devel
+
+RUN pecl install mongodb
+RUN echo "extension=mongodb.so" > /etc/php.d/40-mongodb.ini

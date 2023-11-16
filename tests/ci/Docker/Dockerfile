@@ -1,7 +1,7 @@
-FROM tools-ext-01.ccr.xdmod.org/xdmod-9.5.0:centos7.9-1.0
-ENV REL=9.5.0
+FROM tools-ext-01.ccr.xdmod.org/xdmod-10.0.0:centos7.9-0.6
+ENV REL=10.0.0
 ENV BUILD=1.0
-ENV BRANCH=xdmod9.5
+ENV BRANCH=xdmod10.0
 ENV IS_JOB_PERFORMANCE=1
 
 LABEL authors="Joseph P. White <jpwhite4@buffalo.edu>, Benjamin D. Plessinger <bpless@buffalo.edu>"
