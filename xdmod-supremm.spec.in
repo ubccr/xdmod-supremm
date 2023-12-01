@@ -11,10 +11,9 @@ Source:        %{name}-%{version}__PRERELEASE__.tar.gz
 BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}__PRERELEASE__-%{release}-XXXXXX)
 BuildArch:     noarch
 BuildRequires: php-cli
-Requires:      xdmod >= 10.5.0, xdmod < 10.6.0
+Requires:      xdmod >= 11.0.0, xdmod < 11.1.0
 Requires:      nodejs >= 16.13.2
 BuildRequires: npm >= 8.1.2
-%{?el7:Requires: php-pecl-mongo}
 
 %description
 Open XDMoD SUPReMM package.
