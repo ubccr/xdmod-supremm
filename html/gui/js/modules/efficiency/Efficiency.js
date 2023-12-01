@@ -117,8 +117,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                 start_date: Ext.getCmp('efficiency').getDurationSelector().getStartDate(),
                                 end_date: Ext.getCmp('efficiency').getDurationSelector().getEndDate(),
                                 order_by: {
-                                    field: analyticConfig.field,
-                                    dirn: 'asc'
+                                    field: analyticConfig.statistics[1],
+                                    dirn: 'desc'
                                 },
                                 filters: filterObj,
                                 mandatory_filters: analyticConfig.mandatoryFilters,
@@ -331,7 +331,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             tooltip: { enabled: false },
             plotOptions: {
                 series: {
-                    turboThreshold: 3000,
+                    turboThreshold: 0,
                     allowPointSelect: false,
                     states: { hover: { enabled: false } }
                 }
@@ -389,8 +389,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     start_date: Ext.getCmp('efficiency').getDurationSelector().getStartDate(),
                     end_date: Ext.getCmp('efficiency').getDurationSelector().getEndDate(),
                     order_by: {
-                        field: config.field,
-                        dirn: 'asc'
+                        field: config.statistics[1],
+                        dirn: 'desc'
                     },
                     filters: [],
                     mandatory_filters: config.mandatoryFilters,
@@ -588,8 +588,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             start_date: Ext.getCmp('efficiency').getDurationSelector().getStartDate(),
                             end_date: Ext.getCmp('efficiency').getDurationSelector().getEndDate(),
                             order_by: {
-                                field: analytics[j].field,
-                                dirn: 'asc'
+                                field: analytics[j].statistics[1],
+                                dirn: 'desc'
                             },
                             filters: [],
                             mandatory_filters: analytics[j].mandatoryFilters,
