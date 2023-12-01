@@ -16,7 +16,7 @@ spl_autoload_register(
         // integration tests lib directory.
         $classPath = preg_replace(
             '/IntegrationTests\\\\?/',
-            "$dir/../integration_tests/lib/",
+            "$dir/../integration/lib/",
             $classPath
         );
         // Replace namespace separators with directory separators.

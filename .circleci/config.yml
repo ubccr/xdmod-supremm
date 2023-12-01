@@ -73,10 +73,10 @@ jobs:
       - run:
           name: Install / Upgrade XDMoD from RPM
           command: |
-              ./tests/integration_tests/scripts/bootstrap.sh
+              ./tests/integration/scripts/bootstrap.sh
       - run:
           name: Validate the newly installed / Upgraded XDMoD
-          command: ./tests/integration_tests/scripts/validate.sh
+          command: ./tests/integration/scripts/validate.sh
       - run:
           name: Make sure that the Composer Test Dependencies are installed
           command: |
@@ -93,14 +93,14 @@ jobs:
           command: ./tests/ci/scripts/post-install-test.sh
       - run:
           name: Run Component Tests
-          command: ./tests/component_tests/runtests.sh --log-junit ~/phpunit/component.xml
+          command: ./tests/component/runtests.sh --log-junit ~/phpunit/component.xml
       - run:
           name: Make sure that the Composer Test Dependencies are installed
           command: |
             composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Run Integration Tests
-          command: ./tests/integration_tests/runtests.sh --log-junit ~/phpunit/integration.xml
+          command: ./tests/integration/runtests.sh --log-junit ~/phpunit/integration.xml
       - run: pushd $HOME && rm -f chromedriver_linux64.zip && wget https://chromedriver.storage.googleapis.com/98.0.4758.80/chromedriver_linux64.zip && popd
       - run:
           name: 'Bodge the nodejs version to run an older one for the webdriver tests'
@@ -116,7 +116,7 @@ jobs:
           command: test ! -e /var/log/php-fpm/www-error.log
       - run:
           name: Run Regression Tests
-          command: ./tests/regression_tests/runtests.sh --junit-output-dir ~/phpunit
+          command: ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
       - store_artifacts:
           path: /tmp/screenshots
       - store_artifacts:

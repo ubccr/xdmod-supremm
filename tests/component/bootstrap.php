@@ -5,10 +5,10 @@ $dir = __DIR__;
 // Autoloader for test classes.
 spl_autoload_register(
     function ($className) use ($dir) {
-        // Replace the RegressionTests namespace prefix with the path to the
-        // regression tests lib directory.
+        // Replace the ComponentTests namespace prefix with the path to the
+        // component tests lib directory.
         $classPath = preg_replace(
-            '/RegressionTests\\\\?/',
+            '/ComponentTests\\\\?/',
             "$dir/lib/",
             $className
         );
@@ -16,7 +16,7 @@ spl_autoload_register(
         // integration tests lib directory.
         $classPath = preg_replace(
             '/IntegrationTests\\\\?/',
-            "$dir/../integration_tests/lib/",
+            "$dir/../integration/lib/",
             $classPath
         );
         // Replace namespace separators with directory separators.
@@ -24,11 +24,11 @@ spl_autoload_register(
         if (is_readable($classPath)) {
             return require_once $classPath;
         }
-        // Replace the RegressionTests namespace prefix with the path to the
-        // main regression tests lib directory.
+        // Replace the ComponentTests namespace prefix with the path to the
+        // main component tests lib directory.
         $classPath = preg_replace(
-            '/RegressionTests\\\\?/',
-            "$dir/../../../xdmod/tests/regression/lib/",
+            '/ComponentTests\\\\?/',
+            "$dir/../../../xdmod/tests/component/lib/",
             $className
         );
         // Replace the IntegrationTests namespace prefix with the path to
@@ -57,4 +57,4 @@ spl_autoload_register(
 );
 
 // Autoloader for XDMoD classes.
-require_once __DIR__ . '/../../../xdmod/configuration/linker.php';
+require_once '/usr/share/xdmod/configuration/linker.php';
