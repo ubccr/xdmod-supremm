@@ -23,7 +23,7 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
         // if wrong user authenticated: expect to receive a 403
         $result = $this->xdmodhelper->get($this->endpoint . 'resources', $params);
 
-        // expect success=false
+        // expect success to be false
         $this->assertArrayHasKey('success', $result[0]);
         $this->assertEquals($result[0]['success'], false);
 

@@ -60,7 +60,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
             $analytics = array();
             foreach ($response[0]['data'] as $analyticType){
                 $analytic = $analyticType['analytics'];
-                foreach($analytic as $key => $value){
+                foreach($analytic as $value){
                     $analytics[] = $value['analytic'];
                 }
             }
