@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Create Test Artifact Directories
           command: |
-            mkdir -p /tmp/phpunit
+            mkdir -p ~/phpunit
             mkdir -p /tmp/screenshots
       - run:
           name: Setup Environment Variables
@@ -93,14 +93,14 @@ jobs:
           command: ./tests/ci/scripts/post-install-test.sh
       - run:
           name: Run Component Tests
-          command: ./tests/component_tests/runtests.sh --log-junit ~/phpunit
+          command: ./tests/component_tests/runtests.sh --log-junit ~/phpunit/component.xml
       - run:
           name: Make sure that the Composer Test Dependencies are installed
           command: |
             composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Run Integration Tests
-          command: ./tests/integration_tests/runtests.sh --log-junit ~/phpunit
+          command: ./tests/integration_tests/runtests.sh --log-junit ~/phpunit/integration.xml
       - run: pushd $HOME && rm -f chromedriver_linux64.zip && wget https://chromedriver.storage.googleapis.com/98.0.4758.80/chromedriver_linux64.zip && popd
       - run:
           name: 'Bodge the nodejs version to run an older one for the webdriver tests'
@@ -116,7 +116,7 @@ jobs:
           command: test ! -e /var/log/php-fpm/www-error.log
       - run:
           name: Run Regression Tests
-          command: ./tests/regression_tests/runtests.sh --log-junit ~/phpunit
+          command: ./tests/regression_tests/runtests.sh --junit-output-dir ~/phpunit
       - store_artifacts:
           path: /tmp/screenshots
       - store_artifacts:
@@ -124,7 +124,7 @@ jobs:
       - store_artifacts:
           path: /var/log/php-fpm
       - store_test_results:
-          path: /tmp/phpunit
+          path: ~/phpunit
 
 workflows:
   full-build:
