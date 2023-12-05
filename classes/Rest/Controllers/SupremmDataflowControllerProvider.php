@@ -137,14 +137,22 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
                 break;
 
             case "hardware":
-                $querystr = $this->getjobsquery('supremm', 'sf.cpibucket_id != 1', $reslist);
-                $payload['result'] = $this->runquery($querystr, $params);
+                if (empty($reslist)) {
+                    $payload['result'] = [];
+                } else {
+                    $querystr = $this->getjobsquery('supremm', 'sf.cpibucket_id != 1', $reslist);
+                    $payload['result'] = $this->runquery($querystr, $params);
+                }
                 return $app->json($payload);
                 break;
 
             case "cpu":
-                $querystr = $this->getjobsquery('supremm', true, $reslist);
-                $payload['result'] = $this->runquery($querystr, $params);
+                if (empty($reslist)) {
+                    $payload['result'] = [];
+                } else {
+                    $querystr = $this->getjobsquery('supremm', true, $reslist);
+                    $payload['result'] = $this->runquery($querystr, $params);
+                }
                 return $app->json($payload);
                 break;
 
@@ -155,8 +163,12 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
                 break;
 
             case "realms":
-                $querystr = $this->getjobsquery('job', false, $reslist);
-                $payload['result'] = $this->runquery($querystr, $params);
+                if (empty($reslist)) {
+                    $payload['result'] = [];
+                } else {
+                    $querystr = $this->getjobsquery('job', false, $reslist);
+                    $payload['result'] = $this->runquery($querystr, $params);
+                }
                 return $app->json($payload);
                 break;
 
@@ -609,7 +621,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
         }
 
         $db = DB::factory('datawarehouse');
-        $query = "SELECT resource_id FROM modw.resourcespecs WHERE COALESCE(end_date_ts, '2038-01-01') >= :start AND resource_id IN (" . join(",", $resids) . ")";
+        $query = "SELECT resource_id FROM modw.resourcespecs WHERE COALESCE(DATE_FORMAT(FROM_UNIXTIME(end_date_ts), '%Y-%m-%d'), '2038-01-01') >= :start AND resource_id IN (" . join(",", $resids) . ")";
 
         $stmt = $db->prepare($query, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
         $stmt->execute(array(':start' => $start));
