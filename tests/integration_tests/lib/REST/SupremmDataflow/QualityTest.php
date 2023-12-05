@@ -42,6 +42,7 @@ class QualityTest extends \PHPUnit_Framework_TestCase
         // test types
         foreach (array('gpu', 'hardware', 'cpu', 'script', 'realms') as $type) {
                 $inputs[] = array('mgr', array('start' => '2022-05-01', 'end' => '2022-05-08', 'type' => $type), 200);
+                $inputs[] = array('mgr', array('start' => '9999-01-01', 'end' => '9999-01-02', 'type' => $type), 200);
         }
 
         foreach (array('', 'ahhhhhh') as $type) {
