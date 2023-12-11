@@ -124,8 +124,42 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             $this->addField(new TableField($rf, 'timezone'));
             $this->addField(new TableField($rf, 'code', 'resource'));
 
+            $jt = new Table(new Schema('modw'), 'job_tasks', 'jt');
+            $this->addTable($jt);
+            $this->addWhereCondition(new WhereCondition(new TableField($dataTable, 'tg_job_id'), '=', new TableField($jt, 'job_id')));
+            $this->addField(new TableField($jt, 'local_job_array_index', 'local_job_array_index'));
+
         } elseif ($stat == "peers") {
             $jp = new Table(new Schema("modw_supremm"), "job_peers", "jp");
+            $this->joinTo($jp, "_id", "other_job_id", "jobid", "job_id");
+
+            $jf = new Table(new Schema("modw_supremm"), "job", "jf1");
+            $this->addTable($jf);
+            $this->addWhereCondition(new WhereCondition(new TableField($jp, "other_job_id"), '=', new TableField($jf, "_id")));
+            $this->addField(new TableField($jf, "local_job_id"));
+            $this->addField(new TableField($jf, "start_time_ts"));
+            $this->addField(new TableField($jf, "end_time_ts"));
+
+            $rt = new Table(new Schema("modw"), "resourcefact", "rf");
+            $this->addTable($rt);
+            $this->addWhereCondition(new WhereCondition(new TableField($jf, "resource_id"), '=', new TableField($rt, "id")));
+            $this->addField(new TableField($rt, "code", "resource"));
+
+            $pt = new Table(new Schema('modw'), 'person', 'p');
+            $this->addTable($pt);
+            $this->addWhereCondition(new WhereCondition(new TableField($jf, "person_id"), '=', new TableField($pt, "id")));
+            $this->addField(new TableField($pt, "long_name", "name"));
+
+            $this->addOrder(
+                new \DataWarehouse\Query\Model\OrderBy(
+                    new TableField($jf, 'start_time_ts'),
+                    'asc',
+                    'start_time_ts'
+                )
+            );
+        } elseif ($stat == "array") {
+
+            $jp = new Table(new Schema("modw_supremm"), "job_array_peers", "jp");
             $this->joinTo($jp, "_id", "other_job_id", "jobid", "job_id");
 
             $jf = new Table(new Schema("modw_supremm"), "job", "jf1");
