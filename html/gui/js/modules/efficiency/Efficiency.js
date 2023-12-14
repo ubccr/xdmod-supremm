@@ -3,6 +3,100 @@
  * @author Hannah Taylor
  *
  */
+
+XDMoD.utils.efficiency = {
+    textPosition: function (x, y, limit, reversed) {
+        loc_a = (y > limit[1] / 2) ? 'bottom' : 'top';
+        loc_b = (x > limit[0] / 2) ^ reversed ? 'left' : 'right';
+
+        return `${loc_a} ${loc_b}`;
+    },
+    markerColor: function (x, y, limit, reversed) {
+        let color = '#2f7ed8';
+        if (reversed && (x < limit[0] / 2 && y > limit[1] / 2)) {
+            color = '#ff0000';
+        } else if (!reversed && (x > limit[0] / 2 && y > limit[1] / 2)) {
+            color = '#ff0000';
+        }
+        return color;
+    },
+    parseStore: function (input, xStatistic, yStatistic, reversed, includeLabels, config) {
+        const x = input[xStatistic];
+        const y = input[yStatistic];
+
+        const xAxisMax = Math.max(100.0, input.max[xStatistic]);
+        const yAxisMax = input.max[yStatistic];
+
+        const limit = [xAxisMax, yAxisMax];
+
+        const markerColors = [];
+        const textPosition = [];
+        for (let i = 0; i < input.data[xStatistic].length; i++) {
+            const color = XDMoD.utils.efficiency.markerColor(input.data[xStatistic][i], input.data[yStatistic][i], limit, reversed);
+            markerColors.push(color);
+            const posn = XDMoD.utils.efficiency.textPosition(input.data[xStatistic][i], input.data[yStatistic][i], limit, reversed);
+            textPosition.push(posn);
+        }
+
+        const anonMarkerColors = [];
+        for (let i = 0; i < input.anon_data[xStatistic].length; i++) {
+            const color = XDMoD.utils.efficiency.markerColor(input.anon_data[xStatistic][i], input.anon_data[yStatistic][i], limit, reversed);
+            anonMarkerColors.push(color);
+        }
+
+        // Add cross hairs to start so they are below the scatter markers
+        const data = [{
+            x: [Math.ceil(xAxisMax / 2), Math.ceil(xAxisMax / 2)],
+            y: [0, yAxisMax],
+            mode: 'lines',
+            hoverinfo: 'skip',
+            line: {
+                color: 'black',
+                width: 1
+            }
+        }, {
+            x: [0, xAxisMax],
+            y: [Math.ceil(yAxisMax / 2), Math.ceil(yAxisMax / 2)],
+            mode: 'lines',
+            hoverinfo: 'skip',
+            line: {
+                color: 'black',
+                width: 1
+            }
+        },{
+            x: input.anon_data[xStatistic],
+            y: input.anon_data[yStatistic],
+            type: 'scatter',
+            mode: 'markers',
+            hovertemplate: ` User (Access denied to view name)<br /> ${config.statisticLabels[0]}: <b>%{x:.0f} %</b> <br /> ${config.statisticLabels[1]}: <b>%{y:.0f} ${config.valueLabels[1]}</b><extra></extra>`,
+            marker: {
+                opacity:0.75,
+                size: 8,
+                color: anonMarkerColors
+            }
+        }, {
+            x: input.data[xStatistic],
+            y: input.data[yStatistic],
+            text: input.data.person_name,
+            type: 'scatter',
+            mode: includeLabels ? 'markers+text' : 'markers',
+            hovertemplate: `<b> %{text}</b><br /> ${config.statisticLabels[0]}: <b>%{x:.0f} %</b> <br /> ${config.statisticLabels[1]}: <b>%{y:.0f} ${config.valueLabels[1]}</b><extra></extra>`,
+            textposition: textPosition,
+            customdata: input.data.person_id,
+            marker: {
+                size: 11,
+                color: markerColors,
+                line: {
+                    color: 'black',
+                    width: 2
+                }
+            }
+        }];
+
+        return [data, xAxisMax, yAxisMax];
+    }
+};
+
 XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     // Portal Module Properties
     title: 'Efficiency',
@@ -278,6 +372,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             el.on('click', function () {
                                 self.showAnalyticPanel(component.initialConfig.data);
                             });
+
+                            el.mask('Loading');
                         }
                     }
                 });
@@ -299,86 +395,19 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         if (config.analytic === 'Short Job Count') {
             xStatistic = 'short_' + config.statistics[0];
             yStatistic = config.statistics[1];
+            document.getElementById(config.analytic + 'Chart').innerHTML = "<div class='analyticInfoError'> No data available during this time frame for this analytic.";
+            return;
         } else {
             xStatistic = config.statistics[0];
             yStatistic = config.statistics[1];
         }
 
-        // Chart settings
-        var chartConfig = {
-            chart: {
-                renderTo: config.analytic + 'Chart',
-                type: 'scatter',
-                backgroundColor: '#F8F7F7'
-            },
-            title: {
-                text: null
-            },
-            navigation: {
-                buttonOptions: {
-                    enabled: false
-                }
-            },
-            loading: {
-                style: {
-                    opacity: 0.7
-                }
-            },
-            credits: { enabled: false },
-            legend: {
-                enabled: false
-            },
-            tooltip: { enabled: false },
-            plotOptions: {
-                series: {
-                    turboThreshold: 0,
-                    allowPointSelect: false,
-                    states: { hover: { enabled: false } }
-                }
-            },
-            xAxis: {
-                title: {
-                    text: config.statisticLabels[0]
-                },
-                reversed: config.reversed,
-                min: 0,
-                gridLineWidth: 1,
-                showLastLabel: true,
-                showFirstLabel: true,
-                lineColor: '#ccc',
-                lineWidth: 1,
-                plotLines: [{
-                    color: 'black',
-                    dashStyle: 'solid',
-                    width: 2
-                }]
-            },
-            yAxis: {
-                title: {
-                    text: config.statisticLabels[1]
-                },
-                min: 0,
-                gridLineWidth: 1,
-                showLastLabel: true,
-                showFirstLabel: true,
-                lineColor: '#ccc',
-                lineWidth: 1,
-                plotLines: [{
-                    color: 'black',
-                    dashStyle: 'solid',
-                    width: 2
-                }]
-            },
-            series: []
-        };
-
         var analyticStore = new Ext.data.JsonStore({
             storeId: 'analytic_store_' + config.analytic,
             restful: true,
-            url: XDMoD.REST.url + '/efficiency/scatterPlot/' + config.analytic,
+            url: XDMoD.REST.url + '/efficiency/groupedData',
             root: 'results',
             autoLoad: true,
-            chartInst: null,
             baseParams: {
                 start: 0,
                 limit: 3000,
@@ -400,131 +429,83 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
             fields: [xStatistic, yStatistic],
             listeners: {
                 exception: function (proxy, type, action, exception, response) {
-                    if (this.chartInst) {
-                        this.chartInst.destroy();
-                        this.chartInst = null;
-                    }
+                    const card = Ext.get(`analytic_card_${config.analytic}`);
+                    card.unmask();
+
                     var details = Ext.decode(response.responseText);
                     document.getElementById(config.analytic + 'Chart').innerHTML = '<div class="analyticInfoError">Error: ' + response.status + ' (' + response.statusText + ')<br>Details: ' + details.message + '</div>';
                 },
-                beforeLoad: function () {
-                    if (this.chartInst) {
-                        this.chartInst.destroy();
-                        this.chartInst = null;
-                    }
-                    this.chartInst = new Highcharts.Chart(chartConfig);
-                    // /Add loading message
-                    this.chartInst.showLoading();
-                },
                 load: function () {
-                    /*
-                        Result dataset is what a user has access to and is allowed to drilldown on
-                        General dataset is all data without identifying information(name) attached
-                        Both datasets are included on scatterplot as separate series and depending on user access
-                    */
-                    var store = analyticStore;
-                    var resultData = store.data.items[0].json.results;
-                    var generalData = store.data.items[0].json.hiddenData;
+                    const card = Ext.get(`analytic_card_${config.analytic}`);
+                    card.unmask();
 
-                    var dataset;
-                    var generalSeriesData;
-                    var generalXMax;
-                    var generalYMax;
-                    var resultSeriesData;
-                    var resultXMax;
-                    var resultYMax;
-                    var xAxisMax;
-                    var yAxisMax;
-                    var reversed = config.reversed;
+                    const result = analyticStore.data.items[0].json;
 
-                    // Check if any data is available
-                    if (resultData.length > 0 || generalData.length > 0) {
-                        // Users with both specific and general data
-                        if (resultData.length > 0 && generalData.length > 0) {
-                            // Get the general data series without name information
-                            dataset = self.formatData(generalData, xStatistic, yStatistic, reversed);
-                            generalSeriesData = dataset[0];
-                            generalXMax = dataset[1];
-                            generalYMax = dataset[2];
+                    if (result.count > 0) {
 
-                            // Get the result data series with name information
-                            dataset = self.formatData(resultData, xStatistic, yStatistic, reversed);
-                            resultSeriesData = dataset[0];
-                            resultXMax = dataset[1];
-                            resultYMax = dataset[2];
+                        const [data, xAxisMax, yAxisMax] = XDMoD.utils.efficiency.parseStore(result, xStatistic, yStatistic, config.reversed, false, config);
 
-                            // Get axis max values for scatter plot
-                            xAxisMax = Math.max(generalXMax, resultXMax);
-                            yAxisMax = Math.max(generalYMax, resultYMax);
+                        console.log(xAxisMax, yAxisMax);
 
-                            this.chartInst.addSeries({
-                                data: generalSeriesData
-                            });
+                        const overlapRatio = 0.03;
+                        let xrange = [-1.0 * xAxisMax * overlapRatio, xAxisMax * (1.0 + overlapRatio)];
+                        if (config.reversed) {
+                            xrange = [xrange[1], xrange[0]];
+                        }
 
-                            this.chartInst.addSeries({
-                                data: resultSeriesData,
-                                marker: {
-                                    fillColor: 'transparent',
-                                    symbol: 'circle',
-                                    radius: 10,
-                                    lineWidth: 2,
-                                    lineColor: 'black'
+                        const layout = {
+                            font: {
+                                family: '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif'
+                            },
+                            paper_bgcolor: '#f8f7f7',
+                            plot_bgcolor: '#f8f7f7',
+                            cliponaxis: false,
+                            xaxis: {
+                                title: config.statisticLabels[0],
+                                color: '#707070',
+                                titlefont: {
+                                    size: 12
+                                },
+                                zerolinecolor: '#d8d8d8',
+                                dtick: Math.ceil(xAxisMax / 4),
+                                tick0: 0,
+                                gridcolor: '#d8d8d8',
+                                range: xrange,
+                                tickfont: {
+                                    size: 11
                                 }
-                            });
-                        } else if (generalData.length > 0) {
-                            dataset = self.formatData(generalData, xStatistic, yStatistic, reversed);
-                            generalSeriesData = dataset[0];
-                            xAxisMax = dataset[1];
-                            yAxisMax = dataset[2];
+                            },
+                            yaxis: {
+                                title: config.statisticLabels[1],
+                                color: '#707070',
+                                titlefont: {
+                                    size: 12
+                                },
+                                zerolinecolor: '#d8d8d8',
+                                dtick: Math.ceil(yAxisMax / 4),
+                                tick0: 0,
+                                gridcolor: '#d8d8d8',
+                                range: [-1.0 * overlapRatio * yAxisMax, yAxisMax * (1.0 + overlapRatio)],
+                                tickfont: {
+                                    size: 11
+                                }
+                            },
+                            showlegend: false,
+                            margin: {
+                                t: 0,
+                                b: 55,
+                                l: 65,
+                                r: 10
+                            }
+                        };
 
-                            this.chartInst.addSeries({
-                                data: generalSeriesData
-                            });
-                        } else if (resultData.length > 0) {
-                            // If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency)
-                            // Get the general data series with name information and x and y axis max
-                            dataset = self.formatData(resultData, xStatistic, yStatistic, reversed);
-                            resultSeriesData = dataset[0];
-                            xAxisMax = dataset[1];
-                            yAxisMax = dataset[2];
+                        const pconf = {
+                            displayModeBar: false,
+                            staticPlot: true
+                        };
 
-                            this.chartInst.addSeries({
-                                data: resultSeriesData
-                            });
-                        }
-
-                        // Update x and y axis to reflect the max and min
-                        this.chartInst.yAxis[0].update({
-                            min: 0,
-                            max: yAxisMax,
-                            tickInterval: Math.ceil(yAxisMax / 4),
-                            plotLines: [{
-                                color: 'black',
-                                dashStyle: 'solid',
-                                value: Math.ceil(yAxisMax / 2),
-                                width: 2
-                            }]
-                        });
-
-                        this.chartInst.xAxis[0].update({
-                            min: 0,
-                            max: xAxisMax,
-                            tickInterval: Math.ceil(xAxisMax / 4),
-                            plotLines: [{
-                                color: 'black',
-                                dashStyle: 'solid',
-                                value: Math.ceil(xAxisMax / 2),
-                                width: 2
-                            }]
-                        });
-
-                        this.chartInst.redraw();
-                        this.chartInst.hideLoading();
+                        Plotly.newPlot(`${config.analytic}Chart`, data, layout, pconf);
                     } else {
-                        if (this.chartInst) {
-                            this.chartInst.destroy();
-                            this.chartInst = null;
-                        }
                         document.getElementById(config.analytic + 'Chart').innerHTML = "<div class='analyticInfoError'> No data available during this time frame for this analytic.";
                     }
                 }
@@ -532,52 +513,13 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         });
     },
 
-    formatData: function (dataset, xStatistic, yStatistic, reversed) {
-        var data = [];
-
-        // Get x and y axis max to use for scatter plot plot lines
-        var xAxisMax = this.getMax(dataset, xStatistic);
-        if (xAxisMax < 100) {
-            xAxisMax = 100;
-        }
-        var yAxisMax = this.getMax(dataset, yStatistic);
-
-        for (var i = 0; i < dataset.length; i++) {
-            var x = parseFloat(dataset[i][xStatistic]);
-            var y = parseFloat(dataset[i][yStatistic]);
-            var color;
-            if (reversed && (x < xAxisMax / 2 && y > yAxisMax / 2)) {
-                color = '#ff0000';
-            } else if (!reversed && (x > xAxisMax / 2 && y > yAxisMax / 2)) {
-                color = '#ff0000';
-            } else {
-                color = '#2f7ed8';
-            }
-
-            var dataPt = { x: x, y: y, color: color };
-            data.push(dataPt);
-        }
-
-        return [data, xAxisMax, yAxisMax];
-    },
-
-    getMax: function (record, property) {
-        var max;
-        for (var i = 0; i < record.length; i++) {
-            if (record[i][property]) {
-                if (max == null || parseFloat(record[i][property]) > max) {
-                    max = Math.ceil(parseFloat(record[i][property]));
-                }
-            }
-        }
-        return max;
-    },
-
     reloadCharts: function (data) {
         // Reload each chart with new start and end date
         for (var i = 0; i < data.data.length; i++) {
             var analytics = data.data[i].analytics;
             for (var j = 0; j < analytics.length; j++) {
+                const card = Ext.get('analytic_card_' + analytics[j].analytic);
+                card.mask('Loading');
                 var analyticStore = Ext.StoreMgr.lookup('analytic_store_' + analytics[j].analytic);
                 analyticStore.reload({
                     params: {

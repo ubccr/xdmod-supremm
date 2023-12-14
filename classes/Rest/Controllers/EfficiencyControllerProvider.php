@@ -50,7 +50,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         $controller->get("$root/analytics", "$base::getAnalytics");
         /**
         * @OA\Get(
-        *   path="/scatterPlot/{analytic}",
+        *   path="/groupedData"
         *   summary="scatter plot data",
         *   @OA\Response(
         *     response=200,
@@ -62,7 +62,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         *   )
         * )
         */
-        $controller->get("$root/scatterPlot/{analytic}", "$base::getScatterPlotData");
+        $controller->get("$root/groupedData", "$base::getMultiStatisticData");
          /**
         * @OA\Get(
         *   path="/histogram/{dimension}",
@@ -117,272 +117,6 @@ class EfficiencyControllerProvider extends BaseControllerProvider
             'total' => count($efficiencyAnalytics),
             'data' => array_values($efficiencyAnalytics)
         ));
-    }
-
-    /**
-     * Retrieve scatter plot data
-     *
-     * @param Request $request
-     * @param Application $app
-     * @return JsonResponse
-     */
-    public function getScatterPlotData(Request $request, Application $app, $analytic)
-    {
-        //Datasets array to be returned - includes user data dataset and restricted data dataset.
-        $datasets = array();
-        $user = $this->authorize($request);
-
-        $json_config = $this->getStringParam($request, 'config', true);
-        $start = $this->getIntParam($request, 'start', true);
-        $limit = $this->getIntParam($request, 'limit', true);
-
-        $config = json_decode($json_config);
-
-        if ($config === null) {
-            throw new BadRequestHttpException('syntax error in config parameter');
-        }
-
-        $mandatory = array('realm', 'group_by', 'statistics', 'aggregation_unit', 'start_date', 'end_date', 'order_by');
-        foreach ($mandatory as $required_property) {
-            if (!property_exists($config, $required_property)) {
-                throw new BadRequestHttpException('Missing mandatory config property ' . $required_property);
-            }
-        }
-
-        $permittedStats = Acls::getPermittedStatistics($user, $config->realm, $config->group_by);
-        $forbiddenStats = array_diff($config->statistics, $permittedStats);
-
-        if (!empty($forbiddenStats)) {
-            throw new AccessDeniedException('access denied to ' . json_encode($forbiddenStats));
-        }
-
-        if ($analytic !== 'Short Job Count') {
-            $query = new \DataWarehouse\Query\AggregateQuery(
-                $config->realm,
-                $config->aggregation_unit,
-                $config->start_date,
-                $config->end_date,
-                $config->group_by
-            );
-
-            $allRoles = $user->getAllRoles();
-            $roles = $query->setMultipleRoleParameters($allRoles, $user);
-
-            foreach ($config->statistics as $stat) {
-                $query->addStat($stat);
-            }
-
-            if (property_exists($config, 'filters')) {
-                $query->setRoleParameters($config->filters);
-            }
-
-            if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-                throw new BadRequestHttpException('Malformed config property order_by');
-            }
-            $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
-
-            $query->addOrderBy($config->order_by->field, $dirn);
-
-            $dataset = new \DataWarehouse\Data\SimpleDataset($query);
-            $results = $dataset->getResults($limit, $start);
-            foreach ($results as $key => &$val) {
-                $val['name'] = $val[$config->group_by . '_name'];
-                $val['id'] = $val[$config->group_by . '_id'];
-                $val['short_name'] = $val[$config->group_by . '_short_name'];
-                $val['order_id'] = $val[$config->group_by . '_order_id'];
-                unset($val[$config->group_by . '_id']);
-                unset($val[$config->group_by . '_name']);
-                unset($val[$config->group_by . '_short_name']);
-                unset($val[$config->group_by . '_order_id']);
-
-                if ($val[$config->statistics[0]] == null || $val[$config->statistics[1]] == null){
-                    unset($results[$key]);
-                }
-            }
-
-            $results = array_values($results);
-            //Dataset that shows detailed information that the user has access to
-            $datasets['results'] = $results;
-            $datasets['hiddenData'] = array();
-            /*
-                If user is restricted from viewing data, get dataset that has all points without name attached
-                Runs the same query as above without role restrictions and returns data without name
-            */
-            if (count($roles) > 0) {
-                $query = new \DataWarehouse\Query\AggregateQuery(
-                    $config->realm,
-                    $config->aggregation_unit,
-                    $config->start_date,
-                    $config->end_date,
-                    $config->group_by
-                );
-
-                foreach ($config->statistics as $stat) {
-                    $query->addStat($stat);
-                }
-
-                if (property_exists($config, 'filters')) {
-                    $query->setRoleParameters($config->filters);
-                }
-
-                if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-                    throw new BadRequestHttpException('Malformed config property order_by');
-                }
-                $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
-
-                $query->addOrderBy($config->order_by->field, $dirn);
-
-                $dataset = new \DataWarehouse\Data\SimpleDataset($query);
-                $data = $dataset->getResults($limit, $start);
-
-                foreach ($data as $key => &$val) {
-                    $val['id'] = $val[$config->group_by . '_id'];
-                    $val['order_id'] = $val[$config->group_by . '_order_id'];
-                    unset($val[$config->group_by . '_id']);
-                    unset($val[$config->group_by . '_name']);
-                    unset($val[$config->group_by . '_short_name']);
-                    unset($val[$config->group_by . '_order_id']);
-
-                    if ($val[$config->statistics[0]] == null || $val[$config->statistics[1]] == null){
-                        unset($data[$key]);
-                    }
-                }
-
-                $data = array_values($data);
-
-                //Dataset that shows only data points and no identifying information
-                $datasets['hiddenData'] = $data;
-            }
-
-            return $app->json(
-                array(
-                    'results' => [$datasets],
-                    'total' => $dataset->getTotalPossibleCount(),
-                    'success' => true
-                )
-            );
-        } else {
-            $query = new \DataWarehouse\Query\AggregateQuery(
-                $config->realm,
-                $config->aggregation_unit,
-                $config->start_date,
-                $config->end_date,
-                $config->group_by
-            );
-
-            $allRoles = $user->getAllRoles();
-            $roles = $query->setMultipleRoleParameters($allRoles, $user);
-
-            $query->addStat($config->statistics[0]);
-
-            if (property_exists($config, 'filters')) {
-                $query->setRoleParameters($config->filters);
-            }
-
-            if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-                throw new BadRequestHttpException('Malformed config property order_by');
-            }
-
-            $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
-            $query->addOrderBy($config->order_by->field, $dirn);
-
-            $usageStatDataSet = new \DataWarehouse\Data\SimpleDataset($query);
-            $usageResults = $usageStatDataSet->getResults($limit, $start);
-
-            if (property_exists($config, 'mandatory_filters')) {
-                $query->setRoleParameters($config->mandatory_filters);
-            }
-
-            $efficiencyStatDataset = new \DataWarehouse\Data\SimpleDataset($query);
-            $efficiencyResults = $efficiencyStatDataset->getResults($limit, $start);
-
-            foreach($efficiencyResults as &$val){
-                $val['short_job_count'] = $val['job_count'];
-                $val['name'] = $val[$config->group_by . '_name'];
-                $val['id'] = $val[$config->group_by . '_id'];
-                $val['short_name'] = $val[$config->group_by . '_short_name'];
-                $val['order_id'] = $val[$config->group_by . '_order_id'];
-                unset($val['job_count']);
-                unset($val[$config->group_by . '_id']);
-                unset($val[$config->group_by . '_name']);
-                unset($val[$config->group_by . '_short_name']);
-                unset($val[$config->group_by . '_order_id']);
-
-                foreach($usageResults as $val2){
-                    if($val2[$config->group_by . '_id'] == $val['id']){
-                        $val['job_count'] = $val2['job_count'];
-                    }
-                }
-            }
-
-            //Dataset that shows detailed information that the user has access to
-            $datasets['results'] = $efficiencyResults;
-            $datasets['hiddenData'] = array();
-
-            /*
-                If user is restricted from viewing data, get dataset that has all points without name attached
-                Runs the same query as above without role restrictions and returns data without name
-            */
-            if (count($roles) > 0) {
-                $query = new \DataWarehouse\Query\AggregateQuery(
-                    $config->realm,
-                    $config->aggregation_unit,
-                    $config->start_date,
-                    $config->end_date,
-                    $config->group_by
-                );
-
-                $query->addStat($config->statistics[0]);
-
-                if (property_exists($config, 'filters')) {
-                    $query->setRoleParameters($config->filters);
-                }
-
-                if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-                    throw new BadRequestHttpException('Malformed config property order_by');
-                }
-
-                $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
-                $query->addOrderBy($config->order_by->field, $dirn);
-
-                $usageStatDataSet = new \DataWarehouse\Data\SimpleDataset($query);
-                $usageData = $usageStatDataSet->getResults($limit, $start);
-
-                if (property_exists($config, 'mandatory_filters')) {
-                    $query->setRoleParameters($config->mandatory_filters);
-                }
-
-                $efficiencyStatDataset = new \DataWarehouse\Data\SimpleDataset($query);
-                $efficiencyData = $efficiencyStatDataset->getResults($limit, $start);
-
-                foreach($efficiencyData as &$val){
-                    $val['short_job_count'] = $val['job_count'];
-                    $val['id'] = $val[$config->group_by . '_id'];
-                    $val['order_id'] = $val[$config->group_by . '_order_id'];
-                    unset($val['job_count']);
-                    unset($val[$config->group_by . '_id']);
-                    unset($val[$config->group_by . '_name']);
-                    unset($val[$config->group_by . '_short_name']);
-                    unset($val[$config->group_by . '_order_id']);
-
-                    foreach($usageData as $val2){
-                        if($val2[$config->group_by . '_id'] == $val['id']){
-                            $val['job_count'] = $val2['job_count'];
-                        }
-                    }
-                }
-
-                $datasets['hiddenData'] = $efficiencyData;
-            }
-
-            return $app->json(
-                array(
-                    'results' => [$datasets],
-                    'total' => $efficiencyStatDataset->getTotalPossibleCount(),
-                    'success' => true
-                )
-            );
-        }
     }
 
     /**
@@ -517,6 +251,126 @@ class EfficiencyControllerProvider extends BaseControllerProvider
             "data" => array($results['data'][0]),
             "totalCount" => 1
         ));
+    }
+
+    /**
+     * Retrieve scatter plot data
+     *
+     * @param Request $request
+     * @param Application $app
+     * @return JsonResponse
+     */
+    public function getMultiStatisticData(Request $request, Application $app)
+    {
+        $user = $this->authorize($request);
+
+        $json_config = $this->getStringParam($request, 'config', true);
+
+        $config = json_decode($json_config);
+
+        if ($config === null) {
+            throw new BadRequestException('syntax error in config parameter');
+        }
+
+        $mandatory = array('realm', 'group_by', 'statistics', 'aggregation_unit', 'start_date', 'end_date', 'order_by');
+        foreach ($mandatory as $required_property) {
+            if (!property_exists($config, $required_property)) {
+                throw new BadRequestException('Missing mandatory config property ' . $required_property);
+            }
+        }
+
+        $permittedStats = Acls::getPermittedStatistics($user, $config->realm, $config->group_by);
+        $forbiddenStats = array_diff($config->statistics, $permittedStats);
+
+        if (!empty($forbiddenStats)) {
+            throw new AccessDeniedException('access denied to ' . json_encode($forbiddenStats));
+        }
+
+        $query = new \DataWarehouse\Query\AggregateQuery(
+            $config->realm,
+            $config->aggregation_unit,
+            $config->start_date,
+            $config->end_date,
+            $config->group_by
+        );
+
+        $group_id = $config->group_by . '_id';
+        $group_name = $config->group_by . '_name';
+
+        $output = array(
+            'count' => 0,
+            'max' => array(),
+            'anon_data' => array(
+                $group_id => array(),
+                $group_name => array()
+            ),
+            'data' => array(
+                $group_id => array(),
+                $group_name => array()
+            )
+        );
+
+        foreach ($config->statistics as $stat) {
+            $query->addStat($stat);
+            $output['anon_data'][$stat] = array();
+            $output['data'][$stat] = array();
+            $output['max'][$stat] = 0;
+        }
+
+        if (property_exists($config, 'filters')) {
+            $query->setRoleParameters($config->filters);
+        }
+
+        if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
+            throw new BadRequestException('Malformed config property order_by');
+        }
+
+        $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
+
+        $query->addOrderBy($config->order_by->field, $dirn);
+
+        // always add the group by order field to guarantee that the priv data and non-priv data
+        // order is the same - this similfies the join algorithm since you can step though both
+        // at the same time.
+        $query->addOrderBy($config-group_by, 'ASC');
+
+        $dataset = new \DataWarehouse\Data\SimpleDataset($query);
+        $results = $dataset->getResults();
+
+        // Now get priv query
+        $privResults = null;
+        $allRoles = $user->getAllRoles();
+        $roles = $query->setMultipleRoleParameters($allRoles, $user);
+        if (count($roles) > 0 ) {
+            $privDataset = new \DataWarehouse\Data\SimpleDataset($query);
+            $privResults = $privDataset->getResults();
+        }
+
+        $privIdx = 0;
+        foreach ($results as $val) {
+            $destination = 'anon_data';
+            if ($privResults === null || $privResults[$privIdx][$group_id] == $val[$group_id]) {
+                $privIdx += 1;
+                $destination = 'data';
+            }
+
+            foreach($config->statistics as $stat) {
+                $output[$destination][$stat][] = $val[$stat];
+                $output['max'][$stat] = max($output['max'][$stat], $val[$stat]);
+            }
+            $output[$destination][$group_id][] = $val[$group_id];
+            $output[$destination][$group_name][] = $val[$group_name];
+            $output['count'] += 1;
+        }
+
+        sleep(0.5);
+        return $app->json(
+            array(
+                'results' => [$output],
+                'total' => 1,
+                'success' => true
+            )
+        );
     }
 
     /**

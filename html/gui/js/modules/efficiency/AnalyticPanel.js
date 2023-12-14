@@ -46,7 +46,7 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                     border: false,
                     autoScroll: true,
                     panelSettings: {
-                        url: XDMoD.REST.url + '/efficiency/scatterPlot/' + self.config.analytic,
+                        url: XDMoD.REST.url + '/efficiency/groupedData',
                         baseParams: {
                             start: 0,
                             limit: 3000,

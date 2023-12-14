@@ -5,10 +5,7 @@ Ext.namespace('XDMoD', 'XDMoD.Module', 'XDMoD.Module.Efficiency');
  */
 
 XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
-    chart: null,
     store: null,
-    img: null,
-    aggFilters: null,
     MEFilters: null,
     jobListFilters: null,
     subtitle: 'No filters applied.',
@@ -16,194 +13,102 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     initComponent: function () {
         var self = this;
 
-        // Create new scatter plot chart
-        var createChart = function () {
-            var defaultChartSettings = {
-                chart: {
-                    renderTo: self.id + 'ScatterPlot',
-                    type: 'scatter',
-                    zoomType: 'xy',
-                    marginLeft: 200
+        const getPlotAnnotationConfig = function () {
+            const marginLeft = 120;
+            const marginRight = 70;
+            const marginTop = 70;
+            const marginBottom = 100;
+
+            const axWidth = self.getWidth() - marginLeft - marginRight;
+            const axHeight = self.getHeight() - marginBottom - marginTop + 17; // for good luck;
+
+            return {
+                images: [{
+                    x: 0.8,
+                    sizex: 0.6,
+                    xanchor: 'left',
+                    xref: 'domain',
+                    y: -100 / axHeight,
+                    x: 0.22,
+                    sizey: 0.1 * self.getHeight() / axHeight,
+                    yref: 'paper',
+                    yanchor: 'bottom',
+                    source: 'gui/images/right_arrow.png',
+                    sizing: 'stretch'
+                }, {
+                    xref: "paper",
+                    yref: "paper",
+                    x: -90  / axWidth,
+                    y: 0.1,
+                    sizex: 1 * self.getWidth() / axWidth,
+                    sizey: 0.8,
+                    opacity: 1,
+                    xanchor: "left",
+                    yanchor: "bottom",
+                    source: 'gui/images/up_arrow.png'
+                }],
+                margin: {
+                    b: marginBottom,
+                    t: marginTop,
+                    l: marginLeft,
+                    r: marginRight
                 },
-                colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
-                title:
-                {
-                    x: 100,
-                    style: {
-                        color: '#444b6e',
-                        fontSize: 20
+                annotations: [{
+                    text: self.subtitle,
+                    font: {
+                        size: 13,
+                        color: 'rgb(116, 101, 130)',
                     },
-                    text: self.config.title
-                },
-                subtitle: {
-                    x: 100
-                },
-                loading: {
-                    style: {
-                        opacity: 0.7
-                    }
-                },
-                legend: {
-                    enabled: false
-                },
-                exporting: {
-                    enabled: false
-                },
-                tooltip: {
-                    formatter: function () {
-                        if (this.point.person) {
-                            return '<b>' + this.point.person + '</b><br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x.toFixed(0) + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y.toFixed(0) + ' ' + self.config.valueLabels[1] + '</b>';
-                        }
-                        return 'User (Access denied to view name) <br>' + self.config.statisticLabels[0] + ': <b>' + this.point.x.toFixed(0) + ' ' + self.config.valueLabels[0] + '</b><br>' + self.config.statisticLabels[1] + ': <b>' + this.point.y.toFixed(0) + ' ' + self.config.valueLabels[1] + '</b>';
+                    showarrow: false,
+                    xalign: 'center',
+                    yalign: 'top',
+                    x: 0.5,
+                    y: 1,
+                    yshift: 25,
+                    xref: 'paper',
+                    yref: 'paper',
+                }, {
+                    text: Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d') + ' to ' + Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d') + ' Powered by XDMoD/Plotly',
+                    showarrow: false,
+                    font: {
+                        size: 9,
+                        color: '#959595'
                     },
-                    positioner: function (labelWidth, labelHeight, point) {
-                        var tooltipX;
-                        var tooltipY;
-                        if (point.plotX + labelWidth > self.chart.plotWidth) {
-                            tooltipX = (point.plotX + self.chart.plotLeft) - (labelWidth - 20);
-                        } else {
-                            tooltipX = point.plotX + self.chart.plotLeft + 20;
-                        }
-                        tooltipY = (point.plotY + self.chart.plotTop) - 20;
-                        return {
-                            x: tooltipX,
-                            y: tooltipY
-                        };
-                    }
-                },
-                plotOptions: {
-                    series: {
-                        turboThreshold: 0,
-                        animation: false,
-                        point: {
-                            events: {
-                                click: function (e) {
-                                    // Show drilldown histogram when user clicks on point
-                                    if (e.point.series.options.clickable) {
-                                        // Add new breadcrumb for drilldown view
-                                        var breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
-
-                                        var btn = {
-                                            xtype: 'button',
-                                            text: self.config.title + ' for ' + e.point.person,
-                                            disabled: true,
-                                            iconCls: 'chart'
-                                        };
-
-                                        breadcrumbMenu.add({ xtype: 'tbtext', text: '&#10142' });
-                                        breadcrumbMenu.add(btn);
-                                        breadcrumbMenu.doLayout();
-
-                                        // Enable scatter plot breadcrumb for navigation
-                                        var analyticBtn = Ext.getCmp(self.config.analytic + '_breadcrumb_btn');
-                                        analyticBtn.enable();
-
-                                        // Load the drilldown on person chart
-                                        self.getPersonChart(e.point.person, e.point.personId);
-
-                                        // Store filters applied to drilldown chart in job list filters object
-                                        self.jobListFilters = self.MEFilters;
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-                },
-                xAxis: [
-                    {
-                        title: {
-                            text: self.config.statisticLabels[0]
-                        },
-                        reversed: self.config.reversed,
-                        min: 0,
-                        max: 100,
-                        tickInterval: 100 / 4,
-                        tickLength: 0,
-                        gridLineWidth: 1,
-                        showLastLabel: true,
-                        showFirstLabel: true,
-                        lineColor: '#ccc',
-                        lineWidth: 1,
-                        plotLines: [{
-                            color: 'black',
-                            dashStyle: 'solid',
-                            value: 100 / 2,
-                            width: 2
-                        }]
+                    yalign: 'bottom',
+                    x: 1,
+                    y: 0,
+                    yshift: -1 * marginBottom,
+                    xshift: marginRight,
+                    xref: 'paper',
+                    yref: 'paper',
+                }, {
+                    x: 0.5,
+                    y: -100 / axHeight,
+                    yshift: -5,
+                    xref: 'paper',
+                    yref: 'paper',
+                    text: 'LESS EFFICIENT',
+                    font: {
+                        size: 22 * axHeight / self.getHeight(),
+                        color: '#707070'
                     },
-                    {
-                        lineWidth: 0,
-                        minorGridLineWidth: 0,
-                        labels: {
-                            enabled: false
-                        },
-                        minorTickLength: 0,
-                        tickLength: 0,
-                        title: {
-                            useHTML: true,
-                            text: "<img src='gui/images/right_arrow.png' style='width: " + 0 + "px; height: 100px;' />",
-                            align: 'middle'
-                        }
+                    showarrow: false
+                }, {
+                    x: -90  / axWidth,
+                    y: 0.5,
+                    xshift: -20,
+                    xref: 'paper',
+                    yref: 'paper',
+                    text: 'MORE USAGE',
+                    font: {
+                        size: 22 * axWidth / self.getWidth(),
+                        color: '#707070'
                     },
-                    {
-                        lineWidth: 0,
-                        minorGridLineWidth: 0,
-                        labels: {
-                            enabled: false
-                        },
-                        minorTickLength: 0,
-                        tickLength: 0,
-                        title: {
-                            text: 'LESS EFFICIENT',
-                            align: 'middle',
-                            offset: -25,
-                            style: {
-                                fontSize: 20
-                            }
-                        }
-                    }],
-                yAxis: [
-                    {
-                        title: {
-                            text: self.config.statisticLabels[1]
-                        },
-                        labels: {
-                            format: '{value:.0f}'
-                        }
-                    },
-                    {
-                        title: {
-                            useHTML: true,
-                            text: "<img src='gui/images/right_arrow.png' style='height: 100px; width: " + 0 + "px;'/>",
-                            align: 'middle',
-                            offset: 75
-                        }
-                    },
-                    {
-                        title: {
-                            text: 'MORE USAGE',
-                            align: 'middle',
-                            offset: -100,
-                            style: {
-                                fontSize: 20
-                            }
-                        }
-                    }
-                ],
-                credits: {
-                    text: Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d') + ' to ' + Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d') + ' Powered by XDMoD/Highcharts',
-                    href: ''
-                }
-
-            };
-
-            var chartOptions = jQuery.extend(true, {}, defaultChartSettings, self.chartSettings);
-            chartOptions.chart.width = Math.max(600, self.getWidth());
-            chartOptions.chart.height = Math.max(400, self.getHeight());
-
-            self.chart = new Highcharts.Chart(chartOptions);
-        };
+                    textangle: '-90',
+                    showarrow: false
+                }]
+            }
+        }
 
         var storeSettings = {
             proxy: new Ext.data.HttpProxy({
@@ -211,6 +116,8 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 url: this.panelSettings.url,
                 listeners: {
                     exception: function (proxy, type, action, options, response) {
+                        self.el.unmask();
+                        /*
                         while (self.chart.series.length > 0) {
                             self.chart.series[0].remove(true);
                         }
@@ -219,6 +126,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         self.chart.renderer.image('/gui/images/about_16.png', box.x - 23, box.y - 1, 16, 16).add();
                         self.chart.hideLoading();
                         self.chart.redraw();
+                        */
                     }
                 }
             }),
@@ -232,17 +140,13 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             ],
             listeners: {
                 beforeload: function () {
-                    self.chart.showLoading();
+                    self.el.mask('Loading');
                 },
-                load: function (inst) {
-                    if (self.chart) {
-                        self.chart.destroy();
-                    }
-                    createChart();
+                load: function (inst, records) {
+                    self.el.unmask();
 
-                    self.chart.setTitle(null, { text: self.subtitle });
-                    var xStatistic;
-                    var yStatistic;
+                    let xStatistic;
+                    let yStatistic;
                     // Get the statistics that will be shown in the scatter plot - since scatter plot uses job_count statistic for both, need to specify short_job_count for x axis
                     if (self.config.analytic === 'Short Job Count') {
                         xStatistic = 'short_' + self.config.statistics[0];
@@ -252,132 +156,158 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         yStatistic = self.config.statistics[1];
                     }
 
-                    var resultData = this.data.items[0].json.results;
-                    var generalData = this.data.items[0].json.hiddenData;
+                    const result = records[0].json;
 
-                    if (resultData.length > 0 || generalData.length > 0) {
-                        // Remove no data available image
-                        if (self.img) {
-                            self.img.destroy();
-                            self.img = null;
+                    if (result.count > 0) {
+
+                        const [data, xAxisMax, yAxisMax] = XDMoD.utils.efficiency.parseStore(result, xStatistic, yStatistic, self.config.reversed, true, self.config);
+
+                        const overlapRatio = 0.01;
+                        let xrange = [-1.0 * xAxisMax * overlapRatio, xAxisMax * (1.0 + overlapRatio)];
+                        if (self.config.reversed) {
+                            xrange = [xrange[1], xrange[0]];
                         }
 
-                        var dataset;
-                        var generalSeriesData;
-                        var generalXMax;
-                        var generalYMax;
-                        var resultSeriesData;
-                        var resultXMax;
-                        var resultYMax;
-                        var xAxisMax;
-                        var yAxisMax;
-                        var reversed = self.config.reversed;
+                        const annotationConfig = getPlotAnnotationConfig();
 
-                        if (resultData.length > 0 && generalData.length > 0) {
-                            // Get the general data series without name information and the x and y axis max from this dataset
-                            dataset = self.formatData(generalData, xStatistic, yStatistic, reversed);
-                            generalSeriesData = dataset[0];
-                            generalXMax = dataset[1];
-                            generalYMax = dataset[2];
-
-                            // Get the result data series with name information
-                            dataset = self.formatData(resultData, xStatistic, yStatistic, reversed);
-                            resultSeriesData = dataset[0];
-                            resultXMax = dataset[1];
-                            resultYMax = dataset[2];
-
-                            xAxisMax = Math.max(generalXMax, resultXMax);
-                            yAxisMax = Math.max(generalYMax, resultYMax);
-
-                            self.chart.addSeries({
-                                data: generalSeriesData
-                            });
-
-                            self.chart.addSeries({
-                                data: resultSeriesData,
-                                clickable: true,
-                                dataLabels: {
-                                    enabled: true,
-                                    align: 'left',
-                                    format: '{point.person}',
-                                    y: -10
-                                },
-                                marker: {
-                                    fillColor: 'transparent',
-                                    symbol: 'circle',
-                                    radius: 10,
-                                    lineWidth: 2,
-                                    lineColor: 'black'
+                        const layout = {
+                            hoverlabel: {
+                                bgcolor: '#ffffff',
+                                align: 'left',
+                                font: {
+                                    family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif',
                                 }
-                            });
-                        } else if (generalData.length > 0) {
-                            dataset = self.formatData(generalData, xStatistic, yStatistic, reversed);
-                            generalSeriesData = dataset[0];
-                            xAxisMax = dataset[1];
-                            yAxisMax = dataset[2];
-
-                            self.chart.addSeries({
-                                data: generalSeriesData
-                            });
-                        } else if (resultData.length > 0) {
-                            // If no restrictions in place, get data with general data set formatting (blue and red points indicating efficiency)
-                            // Get the general data series with name information and x and y axis max
-                            dataset = self.formatData(resultData, xStatistic, yStatistic, reversed);
-                            resultSeriesData = dataset[0];
-                            xAxisMax = dataset[1];
-                            yAxisMax = dataset[2];
-
-                            self.chart.addSeries({
-                                data: resultSeriesData,
-                                clickable: true
-                            });
-                        }
-
-                        // Update x and y axis to reflect the max and min
-                        self.chart.yAxis[0].update({
-                            min: 0,
-                            max: yAxisMax,
-                            tickInterval: Math.ceil(yAxisMax) / 4,
-                            plotLines: [{
-                                color: 'black',
-                                dashStyle: 'solid',
-                                value: Math.ceil(yAxisMax) / 2,
-                                width: 2
-                            }]
-                        });
-
-                        self.chart.xAxis[0].update({
-                            min: 0,
-                            max: xAxisMax,
-                            tickInterval: Math.ceil(xAxisMax) / 4,
-                            plotLines: [{
-                                color: 'black',
-                                dashStyle: 'solid',
-                                value: Math.ceil(xAxisMax) / 2,
-                                width: 2
-                            }]
-                        });
-
-                        // Update arrow size based on chart size
-                        self.chart.xAxis[1].update({
+                            },
+                            font: {
+                                family: '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif'
+                            },
                             title: {
-                                text: "<img src='gui/images/right_arrow.png' style='width: " + (self.chart.chartWidth * (2 / 3)) + "px; height: 100px;' />"
-                            }
-                        });
+                                text: self.config.title,
+                                font: {
+                                    color: '#444b6e',
+                                    size: 20
+                                }
+                            },
+                            xaxis: {
+                                title: self.config.statisticLabels[0],
+                                color: '#707070',
+                                titlefont: {
+                                    size: 12
+                                },
+                                zerolinecolor: '#d8d8d8',
+                                dtick: Math.ceil(xAxisMax / 4),
+                                tick0: 0,
+                                gridcolor: '#d8d8d8',
+                                range: xrange,
+                                tickfont: {
+                                    size: 11
+                                }
+                            },
+                            yaxis: {
+                                title: self.config.statisticLabels[1],
+                                color: '#707070',
+                                titlefont: {
+                                    size: 12
+                                },
+                                zerolinecolor: '#d8d8d8',
+                                dtick: Math.ceil(yAxisMax / 4),
+                                tick0: 0,
+                                gridcolor: '#d8d8d8',
+                                range: [-1.0 * overlapRatio * yAxisMax, yAxisMax * (1.0 + overlapRatio)],
+                                tickfont: {
+                                    size: 11
+                                }
+                            },
+                            annotations: annotationConfig.annotations,
+                            images: annotationConfig.images,
+                            margin: annotationConfig.margin,
+                            cliponaxis: false,
+                            showlegend: false
+                        };
 
-                        self.chart.yAxis[1].update({
-                            title: {
-                                text: "<img src='gui/images/right_arrow.png' style='width: " + (self.chart.chartHeight * (2 / 3)) + "px; height: 100px;' />"
-                            }
-                        });
+                        const pconf = {
+                            displayModeBar: false
+                        };
 
-                        self.chart.redraw();
-                        self.chart.hideLoading();
+                        Plotly.newPlot(`${self.id}ScatterPlot`, data, layout, pconf);
+                        let plotDiv = document.getElementById(`${self.id}ScatterPlot`);
+                        plotDiv.on('plotly_click', function (data) {
+                            if (!data.points[0].customdata) {
+                                return
+                            }
+
+                            // Add new breadcrumb for drilldown view
+                            const breadcrumbMenu = Ext.getCmp('breadcrumb_btns');
+
+                            const btn = {
+                                xtype: 'button',
+                                text: self.config.title + ' for ' + data.points[0].text,
+                                disabled: true,
+                                iconCls: 'chart'
+                            };
+
+                            breadcrumbMenu.add({ xtype: 'tbtext', text: '&#10142' });
+                            breadcrumbMenu.add(btn);
+                            breadcrumbMenu.doLayout();
+
+                            // Enable scatter plot breadcrumb for navigation
+                            const analyticBtn = Ext.getCmp(self.config.analytic + '_breadcrumb_btn');
+                            analyticBtn.enable();
+
+                            // Load the drilldown on person chart
+                            self.getPersonChart(data.points[0].text, data.points[0].customdata);
+
+                            // Store filters applied to drilldown chart in job list filters object
+                            self.jobListFilters = self.MEFilters;
+                        });
                     } else {
-                        self.chart.destroy();
-                        createChart();
-                        self.chart.setTitle(null, { text: self.subtitle });
-                        self.img = self.chart.renderer.image('gui/images/report_thumbnail_no_data.png', (self.chart.chartWidth - 400) * (2 / 3), (self.chart.chartHeight - 300) / 2, 400, 300).add();
+                        const layout = {
+                            font: {
+                                family: '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif'
+                            },
+                            title: {
+                                text: self.config.title,
+                                font: {
+                                    color: '#444b6e',
+                                    size: 20
+                                }
+                            },
+                            annotations: [{
+                                text: self.subtitle,
+                                font: {
+                                    size: 13,
+                                    color: 'rgb(116, 101, 130)',
+                                },
+                                showarrow: false,
+                                align: 'center',
+                                x: 0.5,
+                                y: 1.1,
+                                xref: 'paper',
+                                yref: 'paper',
+                            }],
+                            xaxis: {
+                                visible: false
+                            },
+                            yaxis: {
+                                visible: false
+                            },
+                            images: [{
+                                xref: 'paper',
+                                yref: 'paper',
+                                x: 0.5,
+                                xanchor: 'center',
+                                sizex: 1,
+                                y: 1,
+                                sizey: 1,
+                                source: 'gui/images/report_thumbnail_no_data.png'
+                            }]
+                        };
+                        const pconf = {
+                            displayModeBar: false,
+                            staticPlot: true
+                        };
+
+                        Plotly.newPlot(`${self.id}ScatterPlot`, [], layout, pconf);
                     }
 
                     // Update the description panel to reflect the current statistics
@@ -415,72 +345,26 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             id: this.id + 'ScatterPlot',
             listeners: {
                 resize: function () {
-                    if (self.chart) {
-                        self.chart.setSize(Math.max(600, self.getWidth()), Math.max(400, self.getHeight()));
-                        // Update arrow size based on new chart dimensions
-                        self.chart.xAxis[1].update({
-                            title: {
-                                text: "<img src='gui/images/right_arrow.png' style='width: " + (self.chart.chartWidth * (2 / 3)) + "px; height: 100px;' />"
-                            }
-                        });
-                        self.chart.yAxis[1].update({
-                            title: {
-                                text: "<img src='gui/images/right_arrow.png' style='width: " + (self.chart.chartHeight * (2 / 3)) + "px; height: 100px;' />"
-                            }
-                        });
+                    // If plot is empty then you just update with new sizes. If the plot has data
+                    // then the annotations need to be recalculated based on the plot size.
+
+                    let plotConf = {};
+                    if (self.store.data && self.store.data.items[0].json.count > 0) {
+                        plotConf = getPlotAnnotationConfig();
                     }
+
+                    plotConf.width = self.getWidth();
+                    plotConf.height = self.getHeight();
+
+                    Plotly.relayout(`${self.id}ScatterPlot`, plotConf);
                 },
                 render: function () {
-                    createChart();
                     self.store.load();
                 }
             }
         }];
 
         XDMoD.Module.Efficiency.ScatterPlotPanel.superclass.initComponent.call(this, arguments);
-    },
-
-    formatData: function (dataset, xStatistic, yStatistic, reversed) {
-        var data = [];
-
-        var xAxisMax = this.getMax(dataset, xStatistic);
-        if (xAxisMax < 100) {
-            xAxisMax = 100;
-        }
-        var yAxisMax = this.getMax(dataset, yStatistic);
-
-        for (var i = 0; i < dataset.length; i++) {
-            var x = parseFloat(dataset[i][xStatistic]);
-            var y = parseFloat(dataset[i][yStatistic]);
-            var person = dataset[i].name || null;
-            var personId = dataset[i].id || null;
-
-            var color;
-            if (reversed && (x < xAxisMax / 2 && y > yAxisMax / 2)) {
-                color = '#ff0000';
-            } else if (!reversed && (x > xAxisMax / 2 && y > yAxisMax / 2)) {
-                color = '#ff0000';
-            } else {
-                color = '#2f7ed8';
-            }
-
-            var dataPt = { x: x, y: y, person: person, personId: personId, color: color };
-            data.push(dataPt);
-        }
-
-        return [data, xAxisMax, yAxisMax];
-    },
-
-    getMax: function (record, property) {
-        var max;
-        for (var i = 0; i < record.length; i++) {
-            if (record[i][property]) {
-                if (max == null || parseFloat(record[i][property]) > max) {
-                    max = Math.ceil(parseFloat(record[i][property])) + 1;
-                }
-            }
-        }
-        return max;
     },
 
     mask: function (message) {
@@ -646,7 +530,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 url: XDMoD.REST.url + '/efficiency/histogram/' + self.config.histogram.group_by,
                 listeners: {
                     exception: function (proxy, type, action, options, response) {
-                        self.unmask();
+                        self.el.unmask();
 
                         var responseMessage = CCR.xdmod.ui.extractErrorMessageFromResponse(response);
                         if (responseMessage === null) {
@@ -661,9 +545,10 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             }),
             listeners: {
                 beforeload: function (e) {
-                    self.mask('Loading...');
+                    self.el.mask('Loading...');
                 },
                 load: function (e) {
+                    self.el.unmask();
                     var chartWidth = Ext.getCmp('hc-panel-' + self.config.analytic).chart.plotWidth;
                     var chartHeight = Ext.getCmp('hc-panel-' + self.config.analytic).chart.plotHeight;
 
