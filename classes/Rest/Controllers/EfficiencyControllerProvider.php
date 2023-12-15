@@ -332,7 +332,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         // always add the group by order field to guarantee that the priv data and non-priv data
         // order is the same - this similfies the join algorithm since you can step though both
         // at the same time.
-        $query->addOrderBy($config-group_by, 'ASC');
+        $query->addOrderBy($config->group_by, 'ASC');
 
         $dataset = new \DataWarehouse\Data\SimpleDataset($query);
         $results = $dataset->getResults();
@@ -349,7 +349,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         $privIdx = 0;
         foreach ($results as $val) {
             $destination = 'anon_data';
-            if ($privResults === null || $privResults[$privIdx][$group_id] == $val[$group_id]) {
+            if ($privResults === null || (count($privResults) > $privIdx && $privResults[$privIdx][$group_id] == $val[$group_id]) {
                 $privIdx += 1;
                 $destination = 'data';
             }

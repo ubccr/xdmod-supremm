@@ -104,7 +104,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
         $inputs = array();
 
         $inputs[] = array('cd', $params, 4, 0);
-        $inputs[] = array('usr', $params, 1, 4);
+        $inputs[] = array('usr', $params, 4, 3);
 
         return $inputs;
     }
@@ -112,35 +112,37 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider scatterPlotDataAccessUsers
      */
-    public function testCPUUsageScatterPlotEndpoint($usr, $params, $result_count, $hidden_data_count)
+    public function testCPUUsageScatterPlotEndpoint($usr, $params, $person_count, $anon_person_count)
     {
-        $response = self::$helpers[$usr]->get(self::ENDPOINT . 'scatterPlot/CPU%20Usage', $params);
+        $response = self::$helpers[$usr]->get(self::ENDPOINT . 'groupedData', $params);
 
         $this->assertEquals(200, $response[1]['http_code']);
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $this->assertCount($result_count, $response[0]['results'][0]['results']);
-        $this->assertCount($hidden_data_count, $response[0]['results'][0]['hiddenData']);
+        $data = $response[0];
+
+        $this->assertEquals($person_count, $data['results'][0]['count']);
+        $this->assertCount($anon_person_count, $data['results'][0]['anon_data']['person_id']);
     }
 
     public function testCPUUsageScatterPlotEndpointWithFilter()
     {
         $params = $this->getScatterPlotDataParameters(array('filters' => array('queue' => array("chapti"))));
-        $response = self::$helpers['cd']->get(self::ENDPOINT . 'scatterPlot/CPU%20Usage', $params);
+        $response = self::$helpers['cd']->get(self::ENDPOINT . 'groupedData', $params);
 
         $this->assertEquals(200, $response[1]['http_code']);
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $this->assertCount(3, $response[0]['results'][0]['results']);
-        $this->assertCount(0, $response[0]['results'][0]['hiddenData']);
+        $this->assertEquals(3, $response[0]['results'][0]['count']);
+        $this->assertCount(0, $response[0]['results'][0]['anon_data']['person_id']);
     }
 
     public function testCPUUsageScatterPlotEndpointPub()
     {
         $params = $this->getScatterPlotDataParameters();
-        $response = self::$helpers['pub']->get(self::ENDPOINT . 'scatterPlot/CPU%20Usage', $params);
+        $response = self::$helpers['pub']->get(self::ENDPOINT . 'groupedData', $params);
 
         $this->assertEquals(401, $response[1]['http_code']);
         $this->assertArrayHasKey('success', $response[0]);
@@ -165,7 +167,7 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
      */
     public function testCPUUsageScatterPlotEndpointMalformedRequest($usr, $params)
     {
-        $response = self::$helpers[$usr]->get(self::ENDPOINT . 'scatterPlot/CPU%20Usage', $params);
+        $response = self::$helpers[$usr]->get(self::ENDPOINT . 'groupedData', $params);
         $this->assertEquals(400, $response[1]['http_code']);
         $this->assertFalse($response[0]['success']);
     }
