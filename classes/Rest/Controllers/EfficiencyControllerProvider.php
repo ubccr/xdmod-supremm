@@ -349,7 +349,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         $privIdx = 0;
         foreach ($results as $val) {
             $destination = 'anon_data';
-            if ($privResults === null || (count($privResults) > $privIdx && $privResults[$privIdx][$group_id] == $val[$group_id]) {
+            if ($privResults === null || (count($privResults) > $privIdx && $privResults[$privIdx][$group_id] == $val[$group_id])) {
                 $privIdx += 1;
                 $destination = 'data';
             }
