@@ -269,13 +269,13 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         $config = json_decode($json_config);
 
         if ($config === null) {
-            throw new BadRequestException('syntax error in config parameter');
+            throw new BadRequestHttpException('syntax error in config parameter');
         }
 
         $mandatory = array('realm', 'group_by', 'statistics', 'aggregation_unit', 'start_date', 'end_date', 'order_by');
         foreach ($mandatory as $required_property) {
             if (!property_exists($config, $required_property)) {
-                throw new BadRequestException('Missing mandatory config property ' . $required_property);
+                throw new BadRequestHttpException('Missing mandatory config property ' . $required_property);
             }
         }
 
@@ -322,7 +322,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         }
 
         if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-            throw new BadRequestException('Malformed config property order_by');
+            throw new BadRequestHttpException('Malformed config property order_by');
         }
 
         $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
