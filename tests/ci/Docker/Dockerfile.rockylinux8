@@ -22,12 +22,12 @@ RUN sed -i 's/^#nojournal = true/nojournal = true/; s/^#noprealloc = true/noprea
 RUN ~/bin/services start && \
     mongod -f /etc/mongod.conf && \
     ~/bin/importmongo.sh && \
-    wget -nv https://raw.githubusercontent.com/ubccr/xdmod-supremm/$BRANCH/tests/integration_tests/scripts/mongo_auth.mongojs && \
+    wget -nv https://raw.githubusercontent.com/ubccr/xdmod-supremm/$BRANCH/tests/integration/scripts/mongo_auth.mongojs && \
     mongo mongo_auth.mongojs && \
     rm -rf mongo_auth.mongojs && \
     mongod -f /etc/mongod.conf --shutdown && \
     mongod -f /etc/mongod.conf --auth && \
-    wget -nv https://raw.githubusercontent.com/ubccr/xdmod-supremm/$BRANCH/tests/integration_tests/scripts/xdmod-setup.tcl && \
+    wget -nv https://raw.githubusercontent.com/ubccr/xdmod-supremm/$BRANCH/tests/integration/scripts/xdmod-setup.tcl && \
     expect xdmod-setup.tcl | col -b && \
     rm -rf xdmod-setup.tcl && \
     aggregate_supremm.sh && \
