@@ -117,12 +117,20 @@ jobs:
       - run:
           name: Run Regression Tests
           command: ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
+      - run:
+          name: Ensure that no PHP command-line errors were generated
+          command: >
+              if [ -e /var/log/php_errors.log ]; then
+                  test `fgrep -v 'vendor/phpunit/phpunit/src' /var/log/php_errors.log | wc -l` = 0;
+              fi
       - store_artifacts:
           path: /tmp/screenshots
       - store_artifacts:
           path: /var/log/xdmod
       - store_artifacts:
           path: /var/log/php-fpm
+      - store_artifacts:
+          path: /var/log/php_errors.log
       - store_test_results:
           path: ~/phpunit
 

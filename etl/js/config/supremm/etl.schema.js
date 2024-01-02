@@ -1080,7 +1080,7 @@ module.exports = {
         catastrophe: {
             unit: "ratio",
             type: "double",
-            dtype: "analysis",
+            dtype: 'ignore',
             nullable: true,
             def: null,
             batchExport: true,
@@ -1323,7 +1323,7 @@ module.exports = {
         cpu_user_imbalance: {
             unit: "%",
             type: "double",
-            dtype: "analysis",
+            dtype: 'ignore',
             nullable: true,
             def: null,
             batchExport: true,
@@ -2587,6 +2587,7 @@ module.exports = {
             nullable: false,
             def: null,
             group: "Executable",
+            batchExport: true,
             comments: "The application that the job ran. This value is autodetected based on the job executable path. A value of uncategorized indicates that the executable path was not recognized as a community application. A value of PROPRIETARY is shown for any application that has a non-open licence agreement that may restrict publishing of performance data. NA means not available.",
             per: "job",
             table: "job",
@@ -2681,6 +2682,19 @@ module.exports = {
         // Include columns from this table in the raw statistics configuration.
         table: 'modw_supremm.job',
 
+        tables: [
+            {
+                schema: 'modw_supremm',
+                name: 'job_errors',
+                alias: 'je',
+                join: {
+                    primaryKey: '_id',
+                    foreignTableAlias: 'jf',
+                    foreignKey: '_id'
+                }
+            }
+        ],
+
         // Fields not already defined as part of the ETL schema.
         fields: {
             timezone: {
@@ -2698,6 +2712,81 @@ module.exports = {
                     foreignKey: 'resource_id',
                     column: 'timezone'
                 }
+            },
+            // Note that the code below is referenced in docs/customization.md.
+            homogeneity: {
+                name: 'Homogeneity',
+                formula: '(1.0 - (1.0 / (1.0 + 1000.0 * jf.catastrophe)))',
+                withError: {
+                    name: 'homogeneity_error',
+                    column: 'catastrophe',
+                    tableAlias: 'je'
+                },
+                unit: 'ratio',
+                per: 'job',
+                visibility: 'public',
+                comments: 'A measure of how uniform the L1D load rate is over the lifetime of the job. '
+                    + 'Jobs with a low homogeneity value (~0) should be investigated to check if there '
+                    + 'has been a catastrophic failure during the job',
+                batchExport: true,
+                dtype: 'analysis',
+                group: 'Other'
+            },
+            cpu_user_balance: {
+                name: 'CPU User Balance',
+                formula: '(1.0 - (jf.cpu_user_imbalance/100.0))',
+                withError: {
+                    name: 'cpu_user_balance_error',
+                    column: 'cpu_user_imbalance',
+                    tableAlias: 'je'
+                },
+                unit: 'ratio',
+                per: 'job',
+                visibility: 'public',
+                comments: 'A measure of how uniform the CPU usage is between the cores that the job was '
+                    + 'assigned. A value of CPU User Balance near 1 corresponds to a job with evenly '
+                    + 'loaded CPUs. A value near 0 corresponds to a job with one or more CPU cores '
+                    + 'with much lower utilization that the others.',
+                batchExport: true,
+                dtype: 'analysis',
+                group: 'Other'
+            },
+            mem_coefficient: {
+                name: 'Memory Headroom',
+                formula: '(1.0 - 1.0/POW(2-jf.max_memory, 5))',
+                withError: {
+                    name: 'mem_coefficient_error',
+                    column: 'max_memory',
+                    tableAlias: 'je'
+                },
+                unit: 'ratio',
+                per: 'job',
+                visibility: 'public',
+                comments: 'A measure of the peak compute-node memory usage for the job. A value of 0 corresponds '
+                    + 'to a job which used all of the available memory and 1 corresponds to a job with low memory usage. '
+                    + 'The value is computed as 1 - 1 / (2 - m)^5, where m is the ratio of memory used to memory available for '
+                    + 'the compute node that had the highest memory usage.',
+                batchExport: true,
+                dtype: 'analysis',
+                group: 'Other'
+            },
+            wall_accuracy: {
+                name: 'Walltime Accuracy',
+                formula: 'LEAST(jf.wall_time / jf.requested_wall_time, 1)',
+                withError: {
+                    name: 'requested_wall_time_error',
+                    column: 'requested_wall_time',
+                    tableAlias: 'je'
+                },
+                unit: 'ratio',
+                per: 'job',
+                visibility: 'public',
+                comments: 'The ratio of actual wall time to requested wall time. A value near 1 indicates that '
+                    + 'the requested wall time close to the actual wall time. A good wall time accuracy improves '
+                    + 'system wide scheduling.',
+                batchExport: true,
+                dtype: 'analysis',
+                group: 'Other'
             }
         }
     }
