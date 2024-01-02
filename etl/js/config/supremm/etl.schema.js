@@ -2587,6 +2587,7 @@ module.exports = {
             nullable: false,
             def: null,
             group: "Executable",
+            batchExport: true,
             comments: "The application that the job ran. This value is autodetected based on the job executable path. A value of uncategorized indicates that the executable path was not recognized as a community application. A value of PROPRIETARY is shown for any application that has a non-open licence agreement that may restrict publishing of performance data. NA means not available.",
             per: "job",
             table: "job",
