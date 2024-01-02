@@ -45,7 +45,7 @@ class WarehouseRawDataSupremmTest extends BaseTest
                 ],
                 'fields_and_filters' => [
                     'fields' => 'local_job_id,Resource,PI Group,Exit Status',
-                    'filters[exit_status]' => '2,3',
+                    'filters[application]' => '12,33',
                     'filters[fieldofscience]' => '49'
                 ]
             ]
