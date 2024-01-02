@@ -1,10 +1,11 @@
 <?php
 
-namespace IntegrationTests\REST\Efficiency;
+namespace IntegrationTests\REST;
 
+use IntegrationTests\BaseTest;
 use IntegrationTests\TestHarness\XdmodTestHelper;
 
-class EfficiencyTest extends \PHPUnit_Framework_TestCase
+class EfficiencyTest extends BaseTest
 {
     const ENDPOINT = 'rest/v1/efficiency/';
 
@@ -147,27 +148,108 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response[0]['success']);
     }
 
-    public function scatterPlotDataMalformedRequest()
-    {
-        $inputs = array();
-
-        $inputs[] = array('cd', array('start' => 0, 'limit' => 10));
-        $inputs[] = array('cd', array('start' => 0, 'limit' => 10, 'config' => ''));
-        $inputs[] = array('cd', array('start' => 0, 'limit' => 10, 'config' => '{"realm": "SUPREMM"}'));
-        $inputs[] = array('cd', array('start' => 0, 'limit' => 10, 'config' => 'not json data'));
-        $inputs[] = array('cd', array('start' => 'smart', 'limit' => 'asdf', 'config' => '{"realm": "SUPREMM"}'));
-
-        return $inputs;
+    /**
+     * @dataProvider provideCPUUsageScatterPlotEndpointMalformedRequest
+     */
+    public function testCPUUsageScatterPlotEndpointMalformedRequest(
+        $id,
+        $role,
+        $input,
+        $output
+    ) {
+        parent::requestAndValidateJson(
+            self::$helpers[$role],
+            $input,
+            $output
+        );
     }
 
-    /**
-     * @dataProvider scatterPlotDataMalformedRequest
-     */
-    public function testCPUUsageScatterPlotEndpointMalformedRequest($usr, $params)
+    public function provideCPUUsageScatterPlotEndpointMalformedRequest()
     {
-        $response = self::$helpers[$usr]->get(self::ENDPOINT . 'scatterPlot/CPU%20Usage', $params);
-        $this->assertEquals(400, $response[1]['http_code']);
-        $this->assertFalse($response[0]['success']);
+        $validInput = [
+            'path' => self::ENDPOINT . 'scatterPlot/CPU%20Usage',
+            'method' => 'get',
+            'params' => $this->getScatterPlotDataParameters(),
+            'data' => null
+        ];
+        // Run some standard endpoint tests.
+        $tests = parent::provideRestEndpointTests(
+            $validInput,
+            [
+                'authentication' => true,
+                'int_params' => ['start', 'limit'],
+                'string_params' => ['config']
+            ]
+        );
+        // Test bad request parameters.
+        $tests[] = [
+            'invalid_config',
+            'cd',
+            parent::mergeParams(
+                $validInput,
+                'params',
+                ['config' => 'foo']
+            ),
+            parent::validateBadRequestResponse(
+                'syntax error in config parameter'
+            )
+        ];
+        $config = json_decode($validInput['params']['config'], true);
+        $tests = $this->getCPUUsageScatterPlotEndpointMalformedParamTests(
+            $tests,
+            $validInput,
+            $config,
+            null,
+            'missing_config_',
+            function ($param) {
+                return "Missing mandatory config property $param";
+            }
+        );
+        $tests = $this->getCPUUsageScatterPlotEndpointMalformedParamTests(
+            $tests,
+            $validInput,
+            $config,
+            'order_by',
+            'missing_config_order_by_',
+            function () {
+                return 'Malformed config property order_by';
+            }
+        );
+        return $tests;
+    }
+
+    private function getCPUUsageScatterPlotEndpointMalformedParamTests(
+        array $tests,
+        array $validInput,
+        array $config,
+        $key,
+        $idPrefix,
+        $getMessage
+    ) {
+        if (is_null($key)) {
+            $params = $config;
+        } else {
+            $params = $config[$key];
+        }
+        foreach (array_keys($params) as $param) {
+            $newConfig = $config;
+            if (is_null($key)) {
+                unset($newConfig[$param]);
+            } else {
+                unset($newConfig[$key][$param]);
+            }
+            $tests[] = [
+                $idPrefix . $param,
+                'cd',
+                parent::mergeParams(
+                    $validInput,
+                    'params',
+                    ['config' => json_encode($newConfig)]
+                ),
+                parent::validateBadRequestResponse($getMessage($param))
+            ];
+        }
+        return $tests;
     }
 
     /***
@@ -315,10 +397,6 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
     {
         $inputs = array();
 
-        $inputs[] = array('cd', 400, array(''));
-        $inputs[] = array('cd', 400, array('not json data'));
-        $inputs[] = array('cd', 400, array('{"realm": "SUPREMM"}'));
-
         $params = $this->getDrillDownDataParameters(array(
             'global_filters' => array(
                 'data' => array(
@@ -392,5 +470,44 @@ class EfficiencyTest extends \PHPUnit_Framework_TestCase
             $this->assertArrayHasKey('success', $resdata);
             $this->assertFalse($resdata['success']);
         }
+    }
+
+    /**
+     * @dataProvider provideGetHistogramDataParamValidation
+     */
+    public function testGetHistogramDataParamValidation(
+        $id,
+        $role,
+        $input,
+        $output
+    ) {
+        parent::requestAndValidateJson(
+            self::$helpers[$role],
+            $input,
+            $output
+        );
+    }
+
+    public function provideGetHistogramDataParamValidation()
+    {
+        $validInput = [
+            'path' => self::ENDPOINT . 'histogram/cpuuser',
+            'method' => 'get',
+            'params' => [],
+            'data' => null
+        ];
+        // Run some standard endpoint tests.
+        return parent::provideRestEndpointTests(
+            $validInput,
+            [
+                'run_as' => 'cd',
+                'additional_params' => $this->getDrillDownDataParameters(),
+                // note that 'limit' is not included in the int_params because
+                // the path to getIntParam('limit') via getDimensionValues()
+                // is not taken if 'limit' is an invalid integer.
+                'int_params' => ['offset'],
+                'string_params' => ['search_text', 'realm']
+            ]
+        );
     }
 }
