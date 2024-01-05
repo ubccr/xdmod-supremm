@@ -5,13 +5,13 @@
  */
 
 XDMoD.utils.efficiency = {
-    textPosition: function (x, y, limit, reversed) {
+    textPosition(x, y, limit, reversed) {
         const loc_a = (y > limit[1] / 2) ? 'bottom' : 'top';
-        const loc_b = (x > limit[0] / 2) ^ reversed ? 'left' : 'right';
+        const loc_b = (x > limit[0] / 2) && !reversed ? 'left' : 'right';
 
         return `${loc_a} ${loc_b}`;
     },
-    markerColor: function (x, y, limit, reversed) {
+    markerColor(x, y, limit, reversed) {
         let color = '#2f7ed8';
         if (reversed && (x < limit[0] / 2 && y > limit[1] / 2)) {
             color = '#ff0000';
@@ -20,7 +20,7 @@ XDMoD.utils.efficiency = {
         }
         return color;
     },
-    parseStore: function (input, xStatistic, yStatistic, reversed, includeLabels, config) {
+    parseStore(input, xStatistic, yStatistic, reversed, includeLabels, config) {
         const xAxisMax = Math.max(100.0, input.max[xStatistic]);
         const yAxisMax = input.max[yStatistic];
 
@@ -499,7 +499,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         for (var i = 0; i < data.data.length; i++) {
             var analytics = data.data[i].analytics;
             for (var j = 0; j < analytics.length; j++) {
-                const card = Ext.get('analytic_card_' + analytics[j].analytic);
+                const card = Ext.get(`analytic_card_${analytics[j].analytic}`);
                 card.mask('Loading');
                 var analyticStore = Ext.StoreMgr.lookup('analytic_store_' + analytics[j].analytic);
                 analyticStore.reload({

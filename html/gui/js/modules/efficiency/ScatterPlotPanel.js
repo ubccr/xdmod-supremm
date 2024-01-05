@@ -141,7 +141,6 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     const result = records[0].json;
 
                     if (result.count > 0) {
-
                         const [data, xAxisMax, yAxisMax] = XDMoD.utils.efficiency.parseStore(result, xStatistic, yStatistic, self.config.reversed, true, self.config);
 
                         const overlapRatio = 0.01;
@@ -157,7 +156,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 bgcolor: '#ffffff',
                                 align: 'left',
                                 font: {
-                                    family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif',
+                                    family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif'
                                 }
                             },
                             font: {
