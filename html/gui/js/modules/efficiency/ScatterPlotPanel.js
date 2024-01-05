@@ -114,18 +114,10 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 method: 'GET',
                 url: this.panelSettings.url,
                 listeners: {
-                    exception: function (proxy, type, action, options, response) {
+                    exception: (proxy, type, action, options, response) => {
                         self.el.unmask();
-                        /*
-                        while (self.chart.series.length > 0) {
-                            self.chart.series[0].remove(true);
-                        }
-                        var text = self.chart.renderer.text('ERROR ' + response.status + ' ' + response.statusText, self.chart.plotLeft + 23, self.chart.plotTop + 10).add();
-                        var box = text.getBBox();
-                        self.chart.renderer.image('/gui/images/about_16.png', box.x - 23, box.y - 1, 16, 16).add();
-                        self.chart.hideLoading();
-                        self.chart.redraw();
-                        */
+                        var details = Ext.decode(response.responseText);
+                        document.getElementById(`${self.id}ScatterPlot`).innerHTML = '<div class="analyticInfoError">Error: ' + response.status + ' (' + response.statusText + ')<br>Details: ' + details.message + '</div>';
                     }
                 }
             }),
@@ -335,18 +327,19 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             id: this.id + 'ScatterPlot',
             listeners: {
                 resize: function () {
-                    // If plot is empty then you just update with new sizes. If the plot has data
-                    // then the annotations need to be recalculated based on the plot size.
+                    if (self.store.getCount() > 0) {
+                        let plotConf = {};
+                        if (self.store.data.items[0].json.count > 0) {
+                            // If plot is empty then you just update with new sizes. If the plot has data
+                            // then the annotations need to be recalculated based on the plot size.
+                            plotConf = getPlotAnnotationConfig();
+                        }
 
-                    let plotConf = {};
-                    if (self.store.data && self.store.data.items[0].json.count > 0) {
-                        plotConf = getPlotAnnotationConfig();
+                        plotConf.width = self.getWidth();
+                        plotConf.height = self.getHeight();
+
+                        Plotly.relayout(`${self.id}ScatterPlot`, plotConf);
                     }
-
-                    plotConf.width = self.getWidth();
-                    plotConf.height = self.getHeight();
-
-                    Plotly.relayout(`${self.id}ScatterPlot`, plotConf);
                 },
                 render: function () {
                     self.store.load();
