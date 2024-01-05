@@ -61,7 +61,6 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                                     dirn: 'desc'
                                 },
                                 filters: [],
-                                mandatory_filters: self.config.mandatoryFilters,
                                 statistics: self.config.statistics
                             })
                         }

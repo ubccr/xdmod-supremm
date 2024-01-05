@@ -112,7 +112,6 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                             dirn: 'asc'
                                         },
                                         filters: filterObj,
-                                        mandatory_filters: self.config.mandatoryFilters,
                                         statistics: self.config.statistics
                                     })
                                 }
@@ -193,7 +192,6 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                             dirn: 'asc'
                                         },
                                         filters: [],
-                                        mandatory_filters: self.config.mandatoryFilters,
                                         statistics: self.config.statistics
                                     })
                                 }

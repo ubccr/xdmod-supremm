@@ -145,17 +145,8 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 load: function (inst, records) {
                     self.el.unmask();
 
-                    let xStatistic;
-                    let yStatistic;
-                    // Get the statistics that will be shown in the scatter plot - since scatter plot uses job_count statistic for both, need to specify short_job_count for x axis
-                    if (self.config.analytic === 'Short Job Count') {
-                        xStatistic = 'short_' + self.config.statistics[0];
-                        yStatistic = self.config.statistics[1];
-                    } else {
-                        xStatistic = self.config.statistics[0];
-                        yStatistic = self.config.statistics[1];
-                    }
-
+                    const xStatistic = self.config.statistics[0];
+                    const yStatistic = self.config.statistics[1];
                     const result = records[0].json;
 
                     if (result.count > 0) {

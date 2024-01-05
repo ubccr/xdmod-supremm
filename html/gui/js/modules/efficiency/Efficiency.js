@@ -215,7 +215,6 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                     dirn: 'desc'
                                 },
                                 filters: filterObj,
-                                mandatory_filters: analyticConfig.mandatoryFilters,
                                 statistics: analyticConfig.statistics
                             })
                         }
@@ -389,18 +388,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
     getAnalyticPlots: function (config) {
         var self = this;
 
-        // Get the statistics that will be shown in the scatter plot - since scatter plot uses job_count statistic for both, need to specify short_job_count for x axis
-        var xStatistic;
-        var yStatistic;
-        if (config.analytic === 'Short Job Count') {
-            xStatistic = 'short_' + config.statistics[0];
-            yStatistic = config.statistics[1];
-            document.getElementById(config.analytic + 'Chart').innerHTML = "<div class='analyticInfoError'> No data available during this time frame for this analytic.";
-            return;
-        } else {
-            xStatistic = config.statistics[0];
-            yStatistic = config.statistics[1];
-        }
+        // Get the statistics that will be shown in the scatter plot
+        const xStatistic = config.statistics[0];
+        const yStatistic = config.statistics[1];
 
         var analyticStore = new Ext.data.JsonStore({
             storeId: 'analytic_store_' + config.analytic,
@@ -422,7 +412,6 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         dirn: 'desc'
                     },
                     filters: [],
-                    mandatory_filters: config.mandatoryFilters,
                     statistics: config.statistics
                 })
             },
@@ -534,7 +523,6 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                 dirn: 'desc'
                             },
                             filters: [],
-                            mandatory_filters: analytics[j].mandatoryFilters,
                             statistics: analytics[j].statistics
                         })
                     }
