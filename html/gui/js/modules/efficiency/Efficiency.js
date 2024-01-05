@@ -6,8 +6,8 @@
 
 XDMoD.utils.efficiency = {
     textPosition: function (x, y, limit, reversed) {
-        loc_a = (y > limit[1] / 2) ? 'bottom' : 'top';
-        loc_b = (x > limit[0] / 2) ^ reversed ? 'left' : 'right';
+        const loc_a = (y > limit[1] / 2) ? 'bottom' : 'top';
+        const loc_b = (x > limit[0] / 2) ^ reversed ? 'left' : 'right';
 
         return `${loc_a} ${loc_b}`;
     },
@@ -21,9 +21,6 @@ XDMoD.utils.efficiency = {
         return color;
     },
     parseStore: function (input, xStatistic, yStatistic, reversed, includeLabels, config) {
-        const x = input[xStatistic];
-        const y = input[yStatistic];
-
         const xAxisMax = Math.max(100.0, input.max[xStatistic]);
         const yAxisMax = input.max[yStatistic];
 
@@ -63,14 +60,14 @@ XDMoD.utils.efficiency = {
                 color: 'black',
                 width: 1
             }
-        },{
+        }, {
             x: input.anon_data[xStatistic],
             y: input.anon_data[yStatistic],
             type: 'scatter',
             mode: 'markers',
             hovertemplate: ` User (Access denied to view name)<br /> ${config.statisticLabels[0]}: <b>%{x:.0f} %</b> <br /> ${config.statisticLabels[1]}: <b>%{y:.0f} ${config.valueLabels[1]}</b><extra></extra>`,
             marker: {
-                opacity:0.75,
+                opacity: 0.75,
                 size: 8,
                 color: anonMarkerColors
             }
@@ -386,8 +383,6 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
     // Config parameter is the analytic and associated information needed to populate scatter plot and drilldown chart
     getAnalyticPlots: function (config) {
-        var self = this;
-
         // Get the statistics that will be shown in the scatter plot
         const xStatistic = config.statistics[0];
         const yStatistic = config.statistics[1];
@@ -431,10 +426,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     const result = analyticStore.data.items[0].json;
 
                     if (result.count > 0) {
-
                         const [data, xAxisMax, yAxisMax] = XDMoD.utils.efficiency.parseStore(result, xStatistic, yStatistic, config.reversed, false, config);
-
-                        console.log(xAxisMax, yAxisMax);
 
                         const overlapRatio = 0.03;
                         let xrange = [-1.0 * xAxisMax * overlapRatio, xAxisMax * (1.0 + overlapRatio)];

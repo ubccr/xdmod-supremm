@@ -24,27 +24,26 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
             return {
                 images: [{
-                    x: 0.8,
                     sizex: 0.6,
                     xanchor: 'left',
                     xref: 'domain',
                     y: -100 / axHeight,
                     x: 0.22,
-                    sizey: 0.1 * self.getHeight() / axHeight,
+                    sizey: (0.1 * self.getHeight()) / axHeight,
                     yref: 'paper',
                     yanchor: 'bottom',
                     source: 'gui/images/right_arrow.png',
                     sizing: 'stretch'
                 }, {
-                    xref: "paper",
-                    yref: "paper",
-                    x: -90  / axWidth,
+                    xref: 'paper',
+                    yref: 'paper',
+                    x: -90 / axWidth,
                     y: 0.1,
-                    sizex: 1 * self.getWidth() / axWidth,
+                    sizex: self.getWidth() / axWidth,
                     sizey: 0.8,
                     opacity: 1,
-                    xanchor: "left",
-                    yanchor: "bottom",
+                    xanchor: 'left',
+                    yanchor: 'bottom',
                     source: 'gui/images/up_arrow.png'
                 }],
                 margin: {
@@ -57,7 +56,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     text: self.subtitle,
                     font: {
                         size: 13,
-                        color: 'rgb(116, 101, 130)',
+                        color: 'rgb(116, 101, 130)'
                     },
                     showarrow: false,
                     xalign: 'center',
@@ -66,9 +65,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     y: 1,
                     yshift: 25,
                     xref: 'paper',
-                    yref: 'paper',
+                    yref: 'paper'
                 }, {
-                    text: Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d') + ' to ' + Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d') + ' Powered by XDMoD/Plotly',
+                    text: `${Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d')} to ${Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d')} Powered by XDMoD/Plotly`,
                     showarrow: false,
                     font: {
                         size: 9,
@@ -80,7 +79,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     yshift: -1 * marginBottom,
                     xshift: marginRight,
                     xref: 'paper',
-                    yref: 'paper',
+                    yref: 'paper'
                 }, {
                     x: 0.5,
                     y: -100 / axHeight,
@@ -89,26 +88,26 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     yref: 'paper',
                     text: 'LESS EFFICIENT',
                     font: {
-                        size: 22 * axHeight / self.getHeight(),
+                        size: (22 * axHeight) / self.getHeight(),
                         color: '#707070'
                     },
                     showarrow: false
                 }, {
-                    x: -90  / axWidth,
+                    x: -90 / axWidth,
                     y: 0.5,
                     xshift: -20,
                     xref: 'paper',
                     yref: 'paper',
                     text: 'MORE USAGE',
                     font: {
-                        size: 22 * axWidth / self.getWidth(),
+                        size: (22 * axWidth) / self.getWidth(),
                         color: '#707070'
                     },
                     textangle: '-90',
                     showarrow: false
                 }]
-            }
-        }
+            };
+        };
 
         var storeSettings = {
             proxy: new Ext.data.HttpProxy({
@@ -221,10 +220,10 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         };
 
                         Plotly.newPlot(`${self.id}ScatterPlot`, data, layout, pconf);
-                        let plotDiv = document.getElementById(`${self.id}ScatterPlot`);
-                        plotDiv.on('plotly_click', function (data) {
-                            if (!data.points[0].customdata) {
-                                return
+                        const plotDiv = document.getElementById(`${self.id}ScatterPlot`);
+                        plotDiv.on('plotly_click', (evt) => {
+                            if (!evt.points[0].customdata) {
+                                return;
                             }
 
                             // Add new breadcrumb for drilldown view
@@ -232,7 +231,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
                             const btn = {
                                 xtype: 'button',
-                                text: self.config.title + ' for ' + data.points[0].text,
+                                text: `${self.config.title} for ${evt.points[0].text}`,
                                 disabled: true,
                                 iconCls: 'chart'
                             };
@@ -242,11 +241,11 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             breadcrumbMenu.doLayout();
 
                             // Enable scatter plot breadcrumb for navigation
-                            const analyticBtn = Ext.getCmp(self.config.analytic + '_breadcrumb_btn');
+                            const analyticBtn = Ext.getCmp(`${self.config.analytic}_breadcrumb_btn`);
                             analyticBtn.enable();
 
                             // Load the drilldown on person chart
-                            self.getPersonChart(data.points[0].text, data.points[0].customdata);
+                            self.getPersonChart(evt.points[0].text, evt.points[0].customdata);
 
                             // Store filters applied to drilldown chart in job list filters object
                             self.jobListFilters = self.MEFilters;
@@ -267,14 +266,14 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 text: self.subtitle,
                                 font: {
                                     size: 13,
-                                    color: 'rgb(116, 101, 130)',
+                                    color: 'rgb(116, 101, 130)'
                                 },
                                 showarrow: false,
                                 align: 'center',
                                 x: 0.5,
                                 y: 1.1,
                                 xref: 'paper',
-                                yref: 'paper',
+                                yref: 'paper'
                             }],
                             xaxis: {
                                 visible: false

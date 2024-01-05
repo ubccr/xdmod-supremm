@@ -621,7 +621,7 @@ module.exports = {
                     description: 'The total number of jobs that ended within the selected duration.<br/>'
                                 + '<i>Job: </i>A scheduled process for a computer resource in a batch processing environment.',
                     decimals: 0
-                },{
+                }, {
                     name: 'short_job_count',
                     sql: 'SUM(CASE WHEN jf.jobtime_id IN (0,1) THEN jf.job_count ELSE 0 END)',
                     label: 'Number of Short Jobs Ended',
