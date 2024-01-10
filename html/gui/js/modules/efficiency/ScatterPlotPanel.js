@@ -153,9 +153,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
                         const layout = {
                             hoverlabel: {
-                                bgcolor: '#ffffff',
+                                bgcolor: '#fafafa',
+                                bordercolor: '#2f7ed8',
                                 align: 'left',
+                                namelength: -1,
                                 font: {
+                                    color: '#333333',
                                     family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif'
                                 }
                             },
@@ -207,7 +210,8 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         };
 
                         const pconf = {
-                            displayModeBar: false
+                            displayModeBar: false,
+                            staticPlot: false
                         };
 
                         Plotly.newPlot(`${self.id}ScatterPlot`, data, layout, pconf);

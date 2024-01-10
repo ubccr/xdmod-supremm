@@ -67,7 +67,6 @@ XDMoD.utils.efficiency = {
             mode: 'markers',
             hovertemplate: ` User (Access denied to view name)<br /> ${config.statisticLabels[0]}: <b>%{x:.0f} %</b> <br /> ${config.statisticLabels[1]}: <b>%{y:.0f} ${config.valueLabels[1]}</b><extra></extra>`,
             marker: {
-                opacity: 0.75,
                 size: 8,
                 color: anonMarkerColors
             }
@@ -76,19 +75,40 @@ XDMoD.utils.efficiency = {
             y: input.data[yStatistic],
             text: input.data.person_name,
             type: 'scatter',
-            mode: includeLabels ? 'markers+text' : 'markers',
+            mode: 'markers',
             hovertemplate: `<b> %{text}</b><br /> ${config.statisticLabels[0]}: <b>%{x:.0f} %</b> <br /> ${config.statisticLabels[1]}: <b>%{y:.0f} ${config.valueLabels[1]}</b><extra></extra>`,
             textposition: textPosition,
             customdata: input.data.person_id,
             marker: {
-                size: 11,
-                color: markerColors,
+                size: 8,
+                color: markerColors
+            }
+        }];
+
+        if (anonMarkerColors.length > 0) {
+            // i.e. the user has restricted access to the data
+            // in this case the data they can see has a circle around it (and optionally text label)
+            data[3].mode = includeLabels ? 'markers+text' : 'markers';
+            data[3].marker = {
+                size: 20,
+                symbol: "circle-open",
+                color: 'black',
                 line: {
-                    color: 'black',
                     width: 2
                 }
             }
-        }];
+            data.push({
+                x: input.data[xStatistic],
+                y: input.data[yStatistic],
+                type: 'scatter',
+                mode: 'markers',
+                hoverinfo: 'skip',
+                marker: {
+                    size: 8,
+                    color: markerColors
+                }
+            });
+        }
 
         return [data, xAxisMax, yAxisMax];
     }
