@@ -13,17 +13,36 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     initComponent: function () {
         var self = this;
 
-        const getPlotAnnotationConfig = function () {
+        const getPlotAnnotationConfig = function (isEmpty) {
+            const lineSplit = (s, wrapWidth) => s.match(
+                new RegExp(`([^\\n]{1,${wrapWidth}})(?=\\s|$)`, 'g')
+            );
+
             const marginLeft = 120;
             const marginRight = 70;
-            const marginTop = 70;
+            const axWidth = self.getWidth() - marginLeft - marginRight;
+
+            const subtitle_lines = lineSplit(self.subtitle, Math.trunc(axWidth / 6));
+
+            const marginTop = 35 + (subtitle_lines.length * 18);
             const marginBottom = 100;
 
-            const axWidth = self.getWidth() - marginLeft - marginRight;
             const axHeight = self.getHeight() - marginBottom - marginTop + 17; // for good luck;
 
-            return {
-                images: [{
+            let images;
+            if (isEmpty) {
+                images = [{
+                    xref: 'paper',
+                    yref: 'paper',
+                    x: 0.5,
+                    xanchor: 'center',
+                    sizex: 1,
+                    y: 1,
+                    sizey: 1,
+                    source: 'gui/images/report_thumbnail_no_data.png'
+                }];
+            } else {
+                images = [{
                     sizex: 0.6,
                     xanchor: 'left',
                     xref: 'domain',
@@ -45,42 +64,55 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     xanchor: 'left',
                     yanchor: 'bottom',
                     source: 'gui/images/up_arrow.png'
-                }],
-                margin: {
-                    b: marginBottom,
-                    t: marginTop,
-                    l: marginLeft,
-                    r: marginRight
+                }];
+            }
+
+            const annotations = [{
+                text: self.config.title,
+                font: {
+                    color: '#444b6e',
+                    size: 20
                 },
-                annotations: [{
-                    text: self.subtitle,
-                    font: {
-                        size: 13,
-                        color: 'rgb(116, 101, 130)'
-                    },
-                    showarrow: false,
-                    xalign: 'center',
-                    yalign: 'top',
-                    x: 0.5,
-                    y: 1,
-                    yshift: 25,
-                    xref: 'paper',
-                    yref: 'paper'
-                }, {
-                    text: `${Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d')} to ${Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d')} Powered by XDMoD/Plotly`,
-                    showarrow: false,
-                    font: {
-                        size: 9,
-                        color: '#959595'
-                    },
-                    yalign: 'bottom',
-                    x: 1,
-                    y: 0,
-                    yshift: -1 * marginBottom,
-                    xshift: marginRight,
-                    xref: 'paper',
-                    yref: 'paper'
-                }, {
+                showarrow: false,
+                xalign: 'center',
+                yalign: 'top',
+                x: 0.5,
+                y: 1,
+                yshift: marginTop,
+                xref: 'paper',
+                yref: 'paper'
+            }, {
+                text: subtitle_lines.join('<br />'),
+                font: {
+                    size: 13,
+                    color: '#555555'
+                },
+                showarrow: false,
+                xalign: 'center',
+                yalign: 'top',
+                x: 0.5,
+                y: 1,
+                yshift: (18 * subtitle_lines.length) + 5,
+                xref: 'paper',
+                yref: 'paper'
+            }, {
+                text: `${Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d')} to ${Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d')} Powered by XDMoD/Plotly`,
+                showarrow: false,
+                font: {
+                    size: 9,
+                    color: '#959595'
+                },
+                yalign: 'bottom',
+                x: 1,
+                y: 0,
+                yshift: -1 * marginBottom,
+                xshift: marginRight,
+                xref: 'paper',
+                yref: 'paper'
+            }];
+
+            if (!isEmpty) {
+                annotations.push({
                     x: 0.5,
                     y: -100 / axHeight,
                     yshift: -5,
@@ -92,7 +124,8 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         color: '#707070'
                     },
                     showarrow: false
-                }, {
+                });
+                annotations.push({
                     x: -90 / axWidth,
                     y: 0.5,
                     xshift: -20,
@@ -105,7 +138,18 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     },
                     textangle: '-90',
                     showarrow: false
-                }]
+                });
+            }
+
+            return {
+                margin: {
+                    b: marginBottom,
+                    t: marginTop,
+                    l: marginLeft,
+                    r: marginRight
+                },
+                images,
+                annotations
             };
         };
 
@@ -149,7 +193,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             xrange = [xrange[1], xrange[0]];
                         }
 
-                        const annotationConfig = getPlotAnnotationConfig();
+                        const annotationConfig = getPlotAnnotationConfig(false);
 
                         const layout = {
                             hoverlabel: {
@@ -164,13 +208,6 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             },
                             font: {
                                 family: '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif'
-                            },
-                            title: {
-                                text: self.config.title,
-                                font: {
-                                    color: '#444b6e',
-                                    size: 20
-                                }
                             },
                             xaxis: {
                                 title: self.config.statisticLabels[0],
@@ -246,46 +283,15 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             self.jobListFilters = self.MEFilters;
                         });
                     } else {
-                        const layout = {
-                            font: {
-                                family: '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif'
-                            },
-                            title: {
-                                text: self.config.title,
-                                font: {
-                                    color: '#444b6e',
-                                    size: 20
-                                }
-                            },
-                            annotations: [{
-                                text: self.subtitle,
-                                font: {
-                                    size: 13,
-                                    color: 'rgb(116, 101, 130)'
-                                },
-                                showarrow: false,
-                                align: 'center',
-                                x: 0.5,
-                                y: 1.1,
-                                xref: 'paper',
-                                yref: 'paper'
-                            }],
-                            xaxis: {
-                                visible: false
-                            },
-                            yaxis: {
-                                visible: false
-                            },
-                            images: [{
-                                xref: 'paper',
-                                yref: 'paper',
-                                x: 0.5,
-                                xanchor: 'center',
-                                sizex: 1,
-                                y: 1,
-                                sizey: 1,
-                                source: 'gui/images/report_thumbnail_no_data.png'
-                            }]
+                        const layout = getPlotAnnotationConfig(true);
+                        layout.font = {
+                            family: '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif'
+                        };
+                        layout.xaxis = {
+                            visible: false
+                        };
+                        layout.yaxis = {
+                            visible: false
                         };
                         const pconf = {
                             displayModeBar: false,
@@ -329,14 +335,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             xtype: 'container',
             id: this.id + 'ScatterPlot',
             listeners: {
-                resize: function () {
+                resize: () => {
                     if (self.store.getCount() > 0) {
-                        let plotConf = {};
-                        if (self.store.data.items[0].json.count > 0) {
-                            // If plot is empty then you just update with new sizes. If the plot has data
-                            // then the annotations need to be recalculated based on the plot size.
-                            plotConf = getPlotAnnotationConfig();
-                        }
+                        const plotConf = getPlotAnnotationConfig(self.store.data.items[0].json.count === 0);
 
                         plotConf.width = self.getWidth();
                         plotConf.height = self.getHeight();

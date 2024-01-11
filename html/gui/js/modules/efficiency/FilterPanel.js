@@ -83,7 +83,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                 aggDimensionObj[dimension] = checkedFilters;
                                 jQuery.extend(aggFilters, aggDimensionObj);
 
-                                subtitle += dimensionList[i] + ': ' + filterSubtitle + ' <br> ';
+                                subtitle += `${dimensionList[i]}: ${filterSubtitle}; `;
                             }
                         }
 
