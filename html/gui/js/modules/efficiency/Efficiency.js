@@ -91,12 +91,12 @@ XDMoD.utils.efficiency = {
             data[3].mode = includeLabels ? 'markers+text' : 'markers';
             data[3].marker = {
                 size: 20,
-                symbol: "circle-open",
+                symbol: 'circle-open',
                 color: 'black',
                 line: {
                     width: 2
                 }
-            }
+            };
             data.push({
                 x: input.data[xStatistic],
                 y: input.data[yStatistic],
