@@ -97,7 +97,7 @@ XDMoD.utils.efficiency = {
                     width: 2
                 }
             };
-            data.push({
+            data.splice(3, 0, {
                 x: input.data[xStatistic],
                 y: input.data[yStatistic],
                 type: 'scatter',
