@@ -22,12 +22,36 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             const marginRight = 70;
             const axWidth = self.getWidth() - marginLeft - marginRight;
 
+            if (axWidth < 6) {
+                // if the browser is resized so the plot area is tiny then the
+                // plot is basically unusable - just switch off the annotations
+                // to mitigate against errors being thrown by plotly cos they don't
+                // fit
+                return {
+                    annotations: [],
+                    images: [],
+                    margin: {}
+                };
+            }
+
             const subtitle_lines = lineSplit(self.subtitle, Math.trunc(axWidth / 6));
 
             const marginTop = 35 + (subtitle_lines.length * 18);
             const marginBottom = 100;
 
             const axHeight = self.getHeight() - marginBottom - marginTop + 17; // for good luck;
+
+            if (axHeight < 20) {
+                // if the browser is resized so the plot area is tiny then the
+                // plot is basically unusable - just switch off the annotations
+                // to mitigate against errors being thrown by plotly cos they don't
+                // fit
+                return {
+                    annotations: [],
+                    images: [],
+                    margin: {}
+                };
+            }
 
             let images;
             if (isEmpty) {
