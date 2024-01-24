@@ -27,13 +27,13 @@ github_username: ubccr
 github_url: https://github.com/ubccr/xdmod-supremm
 xdmod_module_name: Job Performance (SUPReMM)
 latest_version: "10.5"
+latest_sw_version: "10.5.0"
 version_list:
   - "10.5"
-  - "10.0"
 unsupported_version_list:
+  - "10.0"
   - "9.5"
   - "9.0"
-  - "8.5"
 
 defaults:
   -
@@ -120,6 +120,7 @@ defaults:
     values:
       layout: "page"
       version: "7.5"
+      style: "effervescence"
       menu_markdown: "7.5/menu.md"
   -
     scope:
@@ -128,6 +129,7 @@ defaults:
     values:
       layout: "page"
       version: "7.0"
+      style: "effervescence"
       menu_markdown: "7.0/menu.md"
 
 # Build settings
