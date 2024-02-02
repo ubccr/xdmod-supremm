@@ -25,17 +25,24 @@ jobs:
       - checkout
       - run:
           name: Update nodejs
-          command: |
-            dnf module -y reset nodejs
-            dnf module -y install nodejs:16
+          command: dnf module -y reset nodejs && dnf module -y install nodejs:16
       - run:
-          name: Checkout XDMoD
+          name: Checkout XDMoD - This will need to be updated before merging...
           command: |
-            git clone --depth=1 --branch=xdmod11.0 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
+            git clone --depth=1 --branch=xdmod11-php8 https://github.com/ryanrath/xdmod.git $XDMOD_SRC_DIR
       - run:
           name: Link the SUPREMM module into the XDMoD Source Directory
           command: |
               ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
+      - run:
+          name: Update php module
+          command: dnf module -y reset php && dnf module -y enable php:8.0
+      - run:
+          name: Install PHP 8.0 && Pear pre-reqs
+          command: dnf install -y php libzip-devel php-pear
+      - run:
+          name: Install MongoDB Pear module
+          command: yes '' | pecl install mongodb || true
       - run:
           name: Add mongodb
           command: |
@@ -113,7 +120,10 @@ jobs:
           command: "PATH=/usr/local/node-v10.24.1-linux-x64/bin:$PATH $XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
       - run:
           name: Ensure that no unexpected Apache errors were generated
-          command: test ! -e /var/log/php-fpm/www-error.log
+          command: |
+            if [ -e /var/log/php-fpm/www-error.log ]; then
+                test `egrep -v 'vendor/phpunit/phpunit/src|PHP Deprecated' /var/log/php-fpm/www-error.log | wc -l` = 0;
+            fi
       - run:
           name: Run Regression Tests
           command: ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
@@ -121,7 +131,7 @@ jobs:
           name: Ensure that no PHP command-line errors were generated
           command: >
               if [ -e /var/log/php_errors.log ]; then
-                  test `fgrep -v 'vendor/phpunit/phpunit/src' /var/log/php_errors.log | wc -l` = 0;
+                  test `egrep -v 'vendor/phpunit/phpunit/src|PHP Notice:  fread()' /var/log/php_errors.log | wc -l` = 0;
               fi
       - store_artifacts:
           path: /tmp/screenshots

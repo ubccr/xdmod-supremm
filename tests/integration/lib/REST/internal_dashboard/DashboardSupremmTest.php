@@ -3,10 +3,11 @@
 namespace IntegrationTests\REST\internal_dashboard;
 
 use IntegrationTests\TestHarness\XdmodTestHelper;
+use PHPUnit\Framework\TestCase;
 
-class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
+class DashboardSupremmTest extends TestCase
 {
-    public function __construct()
+    public function __construct($name, $data, $dataName)
     {
         $xdmodConfig = array( "decodetextasjson" => true );
         $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
@@ -15,6 +16,7 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
 
         // validate as manager, for dashboard access
         $this->validateAsUser = 'mgr';
+        parent::__construct($name, $data, $dataName);
     }
 
     private function invalidSupremmResourceEntries($params)
@@ -25,11 +27,11 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
 
         // expect success to be false
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
+        $this->assertFalse($result[0]['success']);
 
         // expect no data returned
         $data = $result[0]['data'];
-        $this->assertEquals(sizeof($data), 0);
+        $this->assertEquals(0, sizeof($data));
 
         return $result;
     }
@@ -42,7 +44,7 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $result[1]['http_code']);
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], true);
+        $this->assertTrue($result[0]['success']);
 
         $data = $result[0]['data'];
 
@@ -77,7 +79,7 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
         $result = $this->xdmodhelper->get($this->endpoint . 'dbstats', $params);
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
+        $this->assertFalse($result[0]['success']);
 
         // expect 401
         $this->assertEquals(401, $result[1]['http_code']);
@@ -93,7 +95,7 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(400, $result[1]['http_code']);
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
+        $this->assertFalse($result[0]['success']);
     }
 
     private function invalidResParamsNotFoundSupremmDbstatsEntries()
@@ -113,7 +115,7 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
+        $this->assertFalse($result[0]['success']);
 
         // should return a 404
         $this->assertEquals(404, $result[1]['http_code']);
@@ -136,7 +138,7 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
+        $this->assertFalse($result[0]['success']);
 
         // should return a 404
         $this->assertEquals(404, $result[1]['http_code']);
@@ -159,7 +161,7 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
+        $this->assertFalse($result[0]['success']);
 
         // expect 403
         $this->assertEquals(403, $result[1]['http_code']);
@@ -178,7 +180,7 @@ class DashboardSupremmTest extends \PHPUnit_Framework_TestCase
 
         // result has success='true'
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], true);
+        $this->assertTrue($result[0]['success']);
 
         // result set has at least one element
         $this->assertGreaterThanOrEqual(1, sizeof($result[0]['data']));

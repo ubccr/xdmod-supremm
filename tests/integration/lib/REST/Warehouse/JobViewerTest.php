@@ -2,14 +2,14 @@
 
 namespace IntegrationTests\REST\Warehouse;
 
-use IntegrationTests\TestHarness\Utilities;
 use IntegrationTests\TestHarness\XdmodTestHelper;
+use PHPUnit\Framework\TestCase;
 
-class JobViewerTest extends \PHPUnit_Framework_TestCase
+class JobViewerTest extends TestCase
 {
     const ENDPOINT = 'rest/v0.1/warehouse/';
 
-    public function setUp()
+    public function setUp(): void
     {
         $xdmodConfig = array( "decodetextasjson" => true );
         $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
@@ -71,7 +71,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $resdata = $response[0];
 
         $this->assertArrayHasKey('success', $resdata);
-        $this->assertEquals(true, $resdata['success']);
+        $this->assertTrue($resdata['success']);
 
         $dimids = array();
         foreach ($resdata['results'] as $dimension) {
@@ -113,8 +113,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $resdata = $response[0];
 
         $this->assertArrayHasKey('success', $resdata);
-        $this->assertEquals(true, $resdata['success']);
-        $this->assertEquals(true, count($resdata['results']) > 0);
+        $this->assertTrue($resdata['success']);
+        $this->assertNotEmpty($resdata['results']);
     }
 
     public function testResourceEndPoint()
@@ -132,7 +132,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $resdata = $response[0];
 
         $this->assertArrayHasKey('success', $resdata);
-        $this->assertEquals(true, $resdata['success']);
+        $this->assertTrue($resdata['success']);
 
         foreach($resdata['results'] as $resource)
         {
@@ -163,7 +163,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], true);
+        $this->assertTrue($result[0]['success']);
         $this->assertArrayHasKey('results', $result[0]);
         $this->assertCount(1, $result[0]['results']);
 
@@ -208,7 +208,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             $response = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
             $this->assertEquals(403, $response[1]['http_code']);
             $this->assertArrayHasKey('success', $response[0]);
-            $this->assertEquals(false, $response[0]['success']);
+            $this->assertFalse($response[0]['success']);
             $this->xdmodhelper->logout();
         }
     }
@@ -219,8 +219,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', array() );
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
-        $this->assertEquals($result[1]['http_code'], 400);
+        $this->assertFalse($result[0]['success']);
+        $this->assertEquals(400, $result[1]['http_code']);
 
         $this->xdmodhelper->logout();
     }
@@ -236,14 +236,14 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
-        $this->assertEquals($result[1]['http_code'], 400);
+        $this->assertFalse($result[0]['success']);
+        $this->assertEquals(400, $result[1]['http_code']);
 
         $this->xdmodhelper->logout();
     }
 
     public function testInvalidJobSearchMissingParams() {
- 
+
         $searchparams = array(
             "realm" => "SUPREMM",
             "params" => json_encode(array("resource_id" => "2801"))
@@ -253,8 +253,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
-        $this->assertEquals($result[1]['http_code'], 400);
+        $this->assertFalse($result[0]['success']);
+        $this->assertEquals(400, $result[1]['http_code']);
 
         $this->xdmodhelper->logout();
     }
@@ -274,8 +274,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
 
         $this->xdmodhelper->authenticate("cd");
         $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
-        $this->assertEquals($result[0]['success'], false);
-        $this->assertEquals($result[1]['http_code'], 400);
+        $this->assertFalse($result[0]['success']);
+        $this->assertEquals(400, $result[1]['http_code']);
 
         $this->xdmodhelper->logout();
     }
@@ -317,7 +317,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $response = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs/accounting', $searchparams);
 
         $this->assertEquals(200, $response[1]['http_code']);
-        $this->assertEquals(true, $response[0]['success']);
+        $this->assertTrue($response[0]['success']);
         $this->assertNotEmpty($response[0]['success']);
 
     }
@@ -338,7 +338,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             $this->assertArrayHasKey('text', $datum);
             $types[] = $datum['text'];
         }
-        
+
         $expectedTypes = array(
             'Accounting data',
             'Executable information',
@@ -401,7 +401,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         if (!$el8) {
             $ret[] = array($xdmodhelper, $searchparams, 'text/csv', 'text/plain; charset=us-ascii');
         } else {
-            $ret[] = array($xdmodhelper, $searchparams, 'text/csv;charset=UTF-8', 'text/plain; charset=us-ascii');
+            $ret[] = array($xdmodhelper, $searchparams, 'text/csv;charset=UTF-8', 'application/csv; charset=us-ascii');
         }
 
         $searchparams['format'] = 'png';
@@ -411,7 +411,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         if (!$el8) {
             $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'text/plain; charset=us-ascii');
         } else {
-            $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'image/svg; charset=us-ascii');
+            $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'image/svg+xml; charset=us-ascii');
         }
 
 

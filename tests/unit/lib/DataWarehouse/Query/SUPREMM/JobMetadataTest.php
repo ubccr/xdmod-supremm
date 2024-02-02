@@ -2,10 +2,11 @@
 
 namespace UnitTests\DataWarehouse\Query\SUPREMM;
 
+use PHPUnit\Framework\TestCase;
 use UnitTests\TestHelpers\mock\JobMetadataWorkaround;
 use UnitTests\TestHelpers\TestHelper;
 
-class JobMetadataTest extends \PHPUnit_Framework_TestCase
+class JobMetadataTest extends TestCase
 {
     const TEST_ARTIFACT_PATH = "../artifacts/xdmod-test-artifacts/xdmod-supremm/summaries/";
 

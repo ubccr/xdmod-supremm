@@ -3,8 +3,9 @@
 namespace IntegrationTests\Controllers;
 
 use IntegrationTests\TestHarness\XdmodTestHelper;
+use PHPUnit\Framework\TestCase;
 
-class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
+class UserInterfaceControllerTest extends TestCase
 {
     /**
      * Check that the SUPREMM realm shows in the usage tab

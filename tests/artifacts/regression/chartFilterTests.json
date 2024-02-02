@@ -12,7 +12,7 @@
         },
         "expected": {
             "subtitle": "Application = ( amber,  enzo )",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -28,7 +28,7 @@
         },
         "expected": {
             "subtitle": "CPI Value = ( NA,  0.6 - 0.7 )",
-            "yvalue": 392.30568202611
+            "yvalue": 392.30568202611215
         }
     },
     {
@@ -60,7 +60,7 @@
         },
         "expected": {
             "subtitle": "CPU User Value = ( &lt; 10,  30 - 40 )",
-            "yvalue": 98.593333333333
+            "yvalue": 98.59333333333333
         }
     },
     {
@@ -91,7 +91,7 @@
         },
         "expected": {
             "subtitle": "Datasource =  pcp",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -107,7 +107,7 @@
         },
         "expected": {
             "subtitle": "Decanal Unit = ( Biological Sciences,  Engineering )",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -123,7 +123,7 @@
         },
         "expected": {
             "subtitle": "Department = ( Astronomical Sciences,  Electrical and Communication Systems )",
-            "yvalue": 2303.990284548
+            "yvalue": 2303.990284548046
         }
     },
     {
@@ -154,7 +154,7 @@
         },
         "expected": {
             "subtitle": "GPU0 Usage Value =  NA",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -186,7 +186,7 @@
         },
         "expected": {
             "subtitle": "InfiniBand Receive rate = ( &lt; 100,  100 - 1k )",
-            "yvalue": 160.70666666667
+            "yvalue": 160.70666666666668
         }
     },
     {
@@ -218,7 +218,7 @@
         },
         "expected": {
             "subtitle": "Job Wall Time = ( 30s - 30min,  30 - 60min )",
-            "yvalue": 54.593333333333
+            "yvalue": 54.593333333333334
         }
     },
     {
@@ -250,7 +250,7 @@
         },
         "expected": {
             "subtitle": "PI = ( Dunlin,  Fieldfare )",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -266,7 +266,7 @@
         },
         "expected": {
             "subtitle": "PI Group = ( Quantum Electronics, Waves, and Beams,  Stellar Astronomy and Astrophysics )",
-            "yvalue": 2303.990284548
+            "yvalue": 2303.990284548046
         }
     },
     {
@@ -281,7 +281,7 @@
         },
         "expected": {
             "subtitle": "PI Institution =  screw - Screwdriver",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -297,7 +297,7 @@
         },
         "expected": {
             "subtitle": "Peak Memory Usage (%) = ( NA,  &lt; 10 )",
-            "yvalue": 151.23333333333
+            "yvalue": 151.23333333333335
         }
     },
     {
@@ -313,7 +313,7 @@
         },
         "expected": {
             "subtitle": "Queue = ( chapti,  crumpet )",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -329,7 +329,7 @@
         },
         "expected": {
             "subtitle": "Resource = ( frearson,  robertson )",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -344,7 +344,7 @@
         },
         "expected": {
             "subtitle": "Service Provider =  screw",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -359,7 +359,7 @@
         },
         "expected": {
             "subtitle": "Share Mode =  Exclusive",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -375,7 +375,7 @@
         },
         "expected": {
             "subtitle": "System Username = ( dunli,  egygo )",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -391,7 +391,7 @@
         },
         "expected": {
             "subtitle": "User = ( Dunlin,  Goose, Egyptian )",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -406,7 +406,7 @@
         },
         "expected": {
             "subtitle": "User Institution =  screw - Screwdriver",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -437,7 +437,7 @@
         },
         "expected": {
             "subtitle": "isilon bytes received =  NA",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     },
     {
@@ -452,7 +452,7 @@
         },
         "expected": {
             "subtitle": "panasas bytes received =  NA",
-            "yvalue": 162.66
+            "yvalue": 162.66000000000003
         }
     }
 ]
