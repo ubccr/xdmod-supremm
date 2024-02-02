@@ -78,7 +78,7 @@ class SupremmDbInterface {
         return array_keys($this->resource_rmap);
     }
 
-    private function getResourceConfig($resource_id) {
+    public function getResourceConfig($resource_id) {
 
         if( ! array_key_exists($resource_id, $this->resource_rmap) ) {
             return null;

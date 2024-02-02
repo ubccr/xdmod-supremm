@@ -366,7 +366,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
     /**
      * Format and label timestamp appropriately for report output (minutes, hours, weeks, or months).
      *
-     * @param timestamp $ts
+     * @param int $ts
      * @return mixed
      */
     private function time2str($ts)
@@ -455,7 +455,7 @@ class SupremmDataflowControllerProvider extends BaseControllerProvider
     /**
      * Format and label data sizes appropriately for report output (as GB, MB, kB, or B).
      *
-     * @param numeric $d
+     * @param int $d
      * @return mixed
      */
     private function formatDataSize($d)
