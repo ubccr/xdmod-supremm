@@ -265,10 +265,9 @@
                 "title": "Short Jobs",
                 "field": "job_count",
                 "statistics": [
-                    "job_count",
+                    "short_job_count",
                     "job_count"
                 ],
-                "mandatoryFilters" : {"jobwalltime" : "[0,1]"},
                 "statisticLabels": [
                     "Number of Short Jobs (&lt; 30s)",
                     "Total Number of Jobs Ended"

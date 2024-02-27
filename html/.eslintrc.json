@@ -16,6 +16,7 @@
     "truncateText": false,
     "token": false,
     "XDMoD": false,
-    "moment": false
+    "moment": false,
+    "Plotly": false
   }
 }
