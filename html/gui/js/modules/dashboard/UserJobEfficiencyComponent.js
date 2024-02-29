@@ -121,96 +121,102 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                 enabled: false
                             },
                             credits: '',
-                            chart: {
-                                plotBackgroundColor: null,
-                                plotBorderWidth: 0,
-                                plotShadow: false,
-                                margin: [0, 0, 0, 0],
-                                spacing: [0, 0, 0, 0],
+                            layout: {
                                 width: 315,
-                                height: 175
-                            },
-                            title: {
-                                align: 'center',
-                                verticalAlign: 'middle',
-                                y: 30
-                            },
-                            tooltip: {
-                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                            },
-                            plotOptions: {
-                                pie: {
-                                    startAngle: -90,
-                                    endAngle: 90,
-                                    center: ['50%', '100%'],
-                                    size: '200%',
-                                    sliceOffset: 0,
-                                    events: {
-                                        click: function (evt) {
-                                            var title = 'Jobs categorized as ' + evt.point.name;
-                                            var searchParams = {
-                                                person: CCR.xdmod.ui.mappedPID,
-                                                category: 2
-                                            };
-                                            if (evt.point.name === 'Efficient') {
-                                                searchParams.category = [-1, 1];
-                                            }
-                                            var rawdataWindow = new Ext.Window({
-                                                height: 530,
-                                                width: 480,
-                                                closable: true,
-                                                modal: true,
-                                                title: title,
-                                                layout: 'fit',
-                                                autoScroll: true,
-                                                items: [{
-                                                    xtype: 'xdmod-jobgrid',
-                                                    height: 500,
-                                                    config: {
-                                                        realm: 'JobEfficiency',
-                                                        job_viewer_realm: 'SUPREMM',
-                                                        start_date: date.start.format('Y-m-d'),
-                                                        end_date: date.end.format('Y-m-d'),
-                                                        params: searchParams,
-                                                        multiuser: false,
-                                                        page_size: 15,
-                                                        row_click_callback: function () {
-                                                            rawdataWindow.destroy();
-                                                        }
-                                                    }
-                                                }]
-                                            });
-                                            rawdataWindow.show();
-                                        }
-                                    },
-                                    dataLabels: {
-                                        enabled: false
-                                    }
-                                }
-                            },
-                            series: [{
-                                type: 'pie',
-                                innerSize: '60%',
-                                data: [{
-                                    name: 'Efficient',
-                                    color: 'green'
+                                height: 175,
+                                margin: {
+                                    t: 0,
+                                    b: 0,
+                                    l: 0,
+                                    r: 0
                                 },
-                                {
-                                    name: 'Inefficient',
-                                    color: 'red'
-                                }]
-                            }]
+                                annotations : [{
+                                    name: 'title',
+                                    text: '',
+                                    xref: 'paper',
+                                    yref: 'paper',
+                                    xanchor: 'center',
+                                    yanchor: 'bottom',
+                                    x: 0.5,
+                                    y: 1.0,
+                                    font: {
+                                        color: '#000000',
+                                        family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif',
+                                    },
+                                    showarrow: false,
+                                    captureevents: false
+                                }],
+                                hovermode: 'closest',
+                            },
+                            data: [{
+                                automargin: true,
+                                type: 'pie',
+                                marker: {
+                                    colors: ['green', 'red']
+                                },
+                                line: {
+                                    width: 0
+                                },
+                                textposition: 'outside',
+                                textfont: {
+                                    color: '#000000',
+                                    family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif'
+                                },
+                                sort: false,
+                                direction: 'clockwise',
+                                labels: ['Efficient', 'Inefficient'],
+                                values: [null, null]
+                            }],
                         };
 
                         chartsToMake.forEach(function (value, index) {
-                            chart_details.chart.renderTo = value.renderToDivId;
-                            chart_details.title.text = value.chartTitle;
-                            chart_details.series[0].name = value.seriesLabel;
-                            chart_details.series[0].data[0].y = value.numberGoodDataValue;
-                            chart_details.series[0].data[1].y = value.numberBadDataValue;
+                            chart_details.renderTo = value.renderToDivId;
+                            chart_details.annotations[0].text = value.chartTitle;
+                            chart_details.data[0].name = value.seriesLabel;
+                            chart_details.data[0].values[0] = value.numberGoodDataValue;
+                            chart_details.data[0].values[1] = value.numberBadDataValue;
 
-                            this.charts[index] = new Highcharts.Chart(chart_details);
+                            this.charts[index] = XDMoD.utils.createChart(chart_details);
+
+                            const chartDiv = document.getElementById(chart_details.renderTo);
+                            chartDiv.on('plotly_click', (evt) => {
+                                var title = 'Jobs categorized as ' + evt.points[0].label;
+                                var searchParams = {
+                                    person: CCR.xdmod.ui.mappedPID,
+                                    category: 2
+                                };
+                                if (evt.points[0].label === 'Efficient') {
+                                    searchParams.category = [-1, 1];
+                                }
+                                var rawdataWindow = new Ext.Window({
+                                    height: 530,
+                                    width: 480,
+                                    closable: true,
+                                    modal: true,
+                                    title: title,
+                                    layout: 'fit',
+                                    autoScroll: true,
+                                    items: [{
+                                        xtype: 'xdmod-jobgrid',
+                                        height: 500,
+                                        config: {
+                                            realm: 'JobEfficiency',
+                                            job_viewer_realm: 'SUPREMM',
+                                            start_date: date.start.format('Y-m-d'),
+                                            end_date: date.end.format('Y-m-d'),
+                                            params: searchParams,
+                                            multiuser: false,
+                                            page_size: 15,
+                                            row_click_callback: function () {
+                                                rawdataWindow.destroy();
+                                            }
+                                        }
+                                    }]
+                                });
+                                rawdataWindow.show();
+                            });
                         }, this);
+
                     } else {
                         var emptyTpl = new Ext.XTemplate('<div class="x-grid-empty"><div class="no-data-alert">No Job Efficiency Data Found</div><div class="no-data-info">Job information only shows in XDMoD once the job has finished and there is a short delay between a job finishing and the job&apos;s data being available in XDMoD.</div></div>');
                         this.tpl = emptyTpl;
