@@ -130,7 +130,7 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                     l: 0,
                                     r: 0
                                 },
-                                annotations : [{
+                                annotations: [{
                                     name: 'title',
                                     text: '',
                                     xref: 'paper',
@@ -141,11 +141,11 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                     y: 1.0,
                                     font: {
                                         color: '#000000',
-                                        family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif',
+                                        family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif'
                                     },
                                     showarrow: false,
                                     captureevents: false
-                                }],
+                                }]
                                 hovermode: 'closest',
                             },
                             data: [{
@@ -166,7 +166,7 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                 direction: 'clockwise',
                                 labels: ['Efficient', 'Inefficient'],
                                 values: [null, null]
-                            }],
+                            }]
                         };
 
                         chartsToMake.forEach(function (value, index) {
@@ -216,7 +216,6 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                 rawdataWindow.show();
                             });
                         }, this);
-
                     } else {
                         var emptyTpl = new Ext.XTemplate('<div class="x-grid-empty"><div class="no-data-alert">No Job Efficiency Data Found</div><div class="no-data-info">Job information only shows in XDMoD once the job has finished and there is a short delay between a job finishing and the job&apos;s data being available in XDMoD.</div></div>');
                         this.tpl = emptyTpl;
