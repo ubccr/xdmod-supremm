@@ -146,7 +146,6 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                     showarrow: false,
                                     captureevents: false
                                 }]
-                                hovermode: 'closest',
                             },
                             data: [{
                                 automargin: true,
