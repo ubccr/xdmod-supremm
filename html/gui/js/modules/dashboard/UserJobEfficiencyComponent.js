@@ -181,7 +181,7 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                 hole: 0.35,
                                 rotation: -90,
                                 labels: ['Efficient', 'Inefficient', 'hidden'],
-                                values: [null, null]
+                                values: [null, null, null]
                             }]
                         };
 
