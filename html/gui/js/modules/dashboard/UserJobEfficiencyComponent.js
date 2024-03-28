@@ -152,9 +152,9 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                     font: {
                                         size: 12.8,
                                         color: '#333333',
-                                        family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif',
+                                        family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif'
                                     },
-                                    namelength: -1,
+                                    namelength: -1
                                 },
                                 domain: {
                                     x: [0, 4.0]
