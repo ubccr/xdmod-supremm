@@ -125,7 +125,7 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                 width: 315,
                                 height: 175,
                                 margin: {
-                                    t: 0,
+                                    t: 5,
                                     b: 0,
                                     l: 0,
                                     r: 0
@@ -138,47 +138,71 @@ XDMoD.Module.Dashboard.UserJobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Port
                                     xanchor: 'center',
                                     yanchor: 'bottom',
                                     x: 0.5,
-                                    y: 1.0,
+                                    y: 0.25,
                                     font: {
                                         color: '#000000',
                                         family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif'
                                     },
                                     showarrow: false,
                                     captureevents: false
-                                }]
+                                }],
+                                hoverlabel: {
+                                    align: 'left',
+                                    bgcolor: 'rgba(255, 255, 255, 0.8)',
+                                    font: {
+                                        size: 12.8,
+                                        color: '#333333',
+                                        family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif',
+                                    },
+                                    namelength: -1,
+                                },
+                                domain: {
+                                    x: [0, 4.0]
+                                }
                             },
                             data: [{
-                                automargin: true,
+                                showlegend: false,
                                 type: 'pie',
                                 marker: {
-                                    colors: ['green', 'red']
+                                    colors: ['green', 'red', 'white']
                                 },
                                 line: {
                                     width: 0
                                 },
-                                textposition: 'outside',
+                                textposition: 'none',
                                 textfont: {
                                     color: '#000000',
                                     family: 'Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif'
                                 },
+                                text: null,
+                                hovertemplate: '%{label} <br> %{text}: %{value} <extra></extra>',
                                 sort: false,
                                 direction: 'clockwise',
-                                labels: ['Efficient', 'Inefficient'],
+                                hole: 0.35,
+                                rotation: -90,
+                                labels: ['Efficient', 'Inefficient', 'hidden'],
                                 values: [null, null]
                             }]
                         };
 
                         chartsToMake.forEach(function (value, index) {
                             chart_details.renderTo = value.renderToDivId;
-                            chart_details.annotations[0].text = value.chartTitle;
+                            chart_details.layout.annotations[0].text = value.chartTitle;
                             chart_details.data[0].name = value.seriesLabel;
                             chart_details.data[0].values[0] = value.numberGoodDataValue;
                             chart_details.data[0].values[1] = value.numberBadDataValue;
-
+                            const sum = value.numberGoodDataValue + value.numberBadDataValue;
+                            chart_details.data[0].values[2] = sum;
+                            chart_details.data[0].hovertemplate = [`Efficient<br>${value.seriesLabel}: <b>${Number.parseFloat((value.numberGoodDataValue / sum) * 100).toFixed(2)}%</b><extra></extra>`,
+                                                                   `Inefficient<br>${value.seriesLabel}: <b>${Number.parseFloat((value.numberBadDataValue / sum) * 100).toFixed(2)}%</b><extra></extra>`,
+                                                                   '<extra></extra>'];
                             this.charts[index] = XDMoD.utils.createChart(chart_details);
 
                             const chartDiv = document.getElementById(chart_details.renderTo);
                             chartDiv.on('plotly_click', (evt) => {
+                                if (evt.points[0].label === 'hidden') {
+                                    return;
+                                }
                                 var title = 'Jobs categorized as ' + evt.points[0].label;
                                 var searchParams = {
                                     person: CCR.xdmod.ui.mappedPID,
