@@ -139,14 +139,19 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         $chartData = array();
         $results = json_decode($meResponse['results'], true);
 
-        if (isset($results['data'][0]['series'][0])) {
-            $chartData = $results['data'][0]['series'][0]['data'];
+        if (isset($results['data'][0]['data'][0])) {
+            $chartData = $results['data'][0]['data'][0];
+            $results['data'][0]['layout']['xaxis']['tickmode'] = 'auto';
+            $results['data'][0]['layout']['xaxis']['categoryorder'] = 'trace';
             $buckets = $this->getDimensionValues($request, $dimension);
-            $drillDowns = array_column($chartData, 'drilldown');
+            $drillDowns = array_column($chartData['drilldown'], 'id');
+            $colors = array();
 
             foreach ($buckets as $bucket) {
-                if (array_search($bucket['id'], array_column($drillDowns, 'id'), true) === false) {
-                    $chartData[] = ['y' => 0, 'drilldown' => array('id' => $bucket['id'], 'label' => $bucket['label'])];
+                if (array_search($bucket['id'], $drillDowns, true) === false) {
+                    $chartData['x'][] = $bucket['label'];
+                    $chartData['y'][] = 0;
+                    $chartData['drilldown'][] = array('id' => $bucket['id'], 'label' => $bucket['label']);
                 }
             }
 
@@ -154,93 +159,139 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                 case 'cpuuser':
                 case 'gpu_usage_bucketid':
                 case 'wall_time_accuracy_bucketid':
-                    foreach ($chartData as &$dataPoint) {
-                        if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 2 || $dataPoint['drilldown']['id'] == 3) {
-                            $dataPoint['color'] = '#FF0000';
-                        } elseif ($dataPoint['drilldown']['id'] == 4 || $dataPoint['drilldown']['id'] == 5) {
-                            $dataPoint['color'] = '#FFB336';
-                        } elseif ($dataPoint['drilldown']['id'] == 6 || $dataPoint['drilldown']['id'] == 7 || $dataPoint['drilldown']['id'] == 8) {
-                            $dataPoint['color'] = '#DDDF00';
-                        } elseif ($dataPoint['drilldown']['id'] == 9 || $dataPoint['drilldown']['id'] == 10) {
-                            $dataPoint['color'] = '#50B432';
+                    foreach ($chartData['drilldown'] as $drilldown) {
+                        if ($drilldown['id'] == 1 || $drilldown['id'] == 2 || $drilldown['id'] == 3) {
+                            $colors[] = '#FF0000';
+                        } elseif ($drilldown['id'] == 4 || $drilldown['id'] == 5) {
+                            $colors[] = '#FFB336';
+                        } elseif ($drilldown['id'] == 6 || $drilldown['id'] == 7 || $drilldown['id'] == 8) {
+                            $colors[] = '#DDDF00';
+                        } elseif ($drilldown['id'] == 9 || $drilldown['id'] == 10) {
+                            $colors[] = '#50B432';
                         } else {
-                            $dataPoint['color'] = "gray";
+                            $colors[] = "gray";
                         }
                     }
+                    // Sort data due to missing buckets added
+                    array_multisort($chartData['x'], SORT_ASC, $chartData['y'], $colors);
+                    // Also sort drilldowns to match trace order
+                    array_multisort($chartData['drilldown']['id'], SORT_ASC);
+                    $naBucket = array_shift($chartData['drilldown']);
+                    array_push($chartData['drilldown'], $naBucket);
+                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array 
+                    // We want to maintain 'N/A' being the last element.
+                    $gtninetyXBucket = array_shift($chartData['x']);
+                    $gtninetyYBucket = array_shift($chartData['y']);
+                    $endIdx = count($chartData['x']) - 1;
+                    array_splice($chartData['x'], -1, 1, array($gtninetyXBucket, $chartData['x'][$endIdx]));
+                    array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
+                    // Same for colors
+                    $gtninetyColorBucket = array_shift($colors);
+                    $colorEndIdx = count($colors) - 1;
+                    array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
+                
+                    $chartData['marker']['color'] = $colors;
 
-                    array_multisort(array_map(function ($element) {
-                        return $element['drilldown']['id'];
-                    }, $chartData), SORT_ASC, $chartData);
-
-                    //Move NA bucket to end of array
-                    $key = array_search('gray', array_column($chartData, 'color'));
-                    if( $key === 0 ){
-                        $naBucket = array_shift($chartData);
-                        array_push($chartData, $naBucket);
-                    }
-
-                    $results['data'][0]['series'][0]['data'] = $chartData;
+                    $results['data'][0]['data'] = array($chartData);
                     break;
                 case 'max_mem':
-                    foreach ($chartData as &$dataPoint) {
-                        if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 10) {
-                            $dataPoint['color'] = '#FF0000';
-                        } elseif ($dataPoint['drilldown']['id'] == 0) {
-                            $dataPoint['color'] = 'gray';
+                    foreach ($chartData['drilldown'] as $drilldown) {
+                        if ($drilldown['id'] == 1 || $drilldown['id'] == 10) {
+                            $colors[] = '#FF0000';
+                        } elseif ($drilldown['id'] == 0) {
+                            $colors[] = 'gray';
                         } else {
-                            $dataPoint['color'] = "#50B432";
+                            $colors[] = "#50B432";
                         }
                     }
+                    // Sort data due to missing buckets added
+                    array_multisort($chartData['x'], SORT_ASC, $chartData['y'], $colors);
+                    // Also sort drilldowns to match trace order
+                    array_multisort($chartData['drilldown']['id'], SORT_ASC);
+                    $naBucket = array_shift($chartData['drilldown']);
+                    array_push($chartData['drilldown'], $naBucket);
+                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array 
+                    // We want to maintain 'N/A' being the last element.
+                    $gtninetyXBucket = array_shift($chartData['x']);
+                    $gtninetyYBucket = array_shift($chartData['y']);
+                    $endIdx = count($chartData['x']) - 1;
+                    array_splice($chartData['x'], -1, 1, array($gtninetyXBucket, $chartData['x'][$endIdx]));
+                    array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
+                    // Same for colors
+                    $gtninetyColorBucket = array_shift($colors);
+                    $colorEndIdx = count($colors) - 1;
+                    array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
+                
+                    $chartData['marker']['color'] = $colors;
 
-                    array_multisort(array_map(function ($element) {
-                        return $element['drilldown']['id'];
-                    }, $chartData), SORT_ASC, $chartData);
-
-                    //Move NA bucket to end of array
-                    $key = array_search('gray', array_column($chartData, 'color'));
-                    if ($key === 0) {
-                        $naBucket = array_shift($chartData);
-                        array_push($chartData, $naBucket);
-                    }
-
-                    $results['data'][0]['series'][0]['data'] = $chartData;
+                    $results['data'][0]['data'] = array($chartData);
                     break;
                 case 'homogeneity_bucket_id':
-                    foreach ($chartData as &$dataPoint) {
-                        if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 2) {
-                            $dataPoint['color'] = '#FF0000';
-                        } elseif ($dataPoint['drilldown']['id'] == 3 || $dataPoint['drilldown']['id'] == 4) {
-                            $dataPoint['color'] = '#FFB336';
-                        } elseif ($dataPoint['drilldown']['id'] == 5 || $dataPoint['drilldown']['id'] == 6) {
-                            $dataPoint['color'] = '#DDDF00';
-                        } elseif ($dataPoint['drilldown']['id'] == 7 || $dataPoint['drilldown']['id'] == 8) {
-                            $dataPoint['color'] = '#50B432';
+                    foreach ($chartData['drilldown'] as $drilldown) {
+                        if ($drilldown['id'] == 1 || $drilldown['id'] == 2) {
+                            $colors[] = '#FF0000';
+                        } elseif ($drilldown['id'] == 3 || $drilldown['id'] == 4) {
+                            $colors[] = '#FFB336';
+                        } elseif ($drilldown['id'] == 5 || $drilldown['id'] == 6) {
+                            $colors = '#DDDF00';
+                        } elseif ($drilldown['id'] == 7 || $drilldown['id'] == 8) {
+                            $colors = '#50B432';
                         } else {
-                            $dataPoint['color'] = "gray";
+                            $colors = "gray";
                         }
                     }
+                    // Sort data due to missing buckets added
+                    array_multisort($chartData['x'], SORT_ASC, $chartData['y'], $colors);
+                    // Also sort drilldowns to match trace order
+                    array_multisort($chartData['drilldown']['id'], SORT_ASC);
+                    $naBucket = array_shift($chartData['drilldown']);
+                    array_push($chartData['drilldown'], $naBucket);
+                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array 
+                    // We want to maintain 'N/A' being the last element.
+                    $gtninetyXBucket = array_shift($chartData['x']);
+                    $gtninetyYBucket = array_shift($chartData['y']);
+                    $endIdx = count($chartData['x']) - 1;
+                    array_splice($chartData['x'], -1, 1, array($gtninetyXBucket, $chartData['x'][$endIdx]));
+                    array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
+                    // Same for colors
+                    $gtninetyColorBucket = array_shift($colors);
+                    $colorEndIdx = count($colors) - 1;
+                    array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
+                
+                    $chartData['marker']['color'] = $colors;
 
-                    array_multisort(array_map(function ($element) {
-                        return $element['drilldown']['id'];
-                    }, $chartData), SORT_ASC, $chartData);
-
-                    $results['data'][0]['series'][0]['data'] = $chartData;
+                    $results['data'][0]['data'] = array($chartData);
                     break;
                 case 'jobwalltime':
-                    foreach ($chartData as &$dataPoint) {
-                        if ($dataPoint['drilldown']['id'] == 0 || $dataPoint['drilldown']['id'] == 1) {
-                            $dataPoint['color'] = '#FF0000';
+                    foreach ($chartData['drilldown'] as $drilldown) {
+                        if ($drilldown['id'] == 0 || $drilldown['id'] == 1) {
+                            $colors[] = '#FF0000';
                         }
                     }
+                    // Sort data due to missing buckets added
+                    array_multisort($chartData['x'], SORT_ASC, $chartData['y'], $colors);
+                    // Also sort drilldowns to match trace order
+                    array_multisort($chartData['drilldown']['id'], SORT_ASC);
+                    $naBucket = array_shift($chartData['drilldown']);
+                    array_push($chartData['drilldown'], $naBucket);
+                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array 
+                    // We want to maintain 'N/A' being the last element.
+                    $gtninetyXBucket = array_shift($chartData['x']);
+                    $gtninetyYBucket = array_shift($chartData['y']);
+                    $endIdx = count($chartData['x']) - 1;
+                    array_splice($chartData['x'], -1, 1, array($gtninetyXBucket, $chartData['x'][$endIdx]));
+                    array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
+                    // Same for colors
+                    $gtninetyColorBucket = array_shift($colors);
+                    $colorEndIdx = count($colors) - 1;
+                    array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
+                
+                    $chartData['marker']['color'] = $colors;
 
-                    array_multisort(array_map(function ($element) {
-                        return $element['drilldown']['id'];
-                    }, $chartData), SORT_ASC, $chartData);
-
-                    $results['data'][0]['series'][0]['data'] = $chartData;
+                    $results['data'][0]['data'] = array($chartData);
                     break;
                 default:
-                    $results['data'][0]['series'][0]['data'] = $chartData;
+                    $results['data'][0]['data'] = array($chartData);
                     break;
             }
         }

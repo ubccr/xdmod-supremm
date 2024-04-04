@@ -9,173 +9,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     MEFilters: null,
     jobListFilters: null,
     subtitle: 'No filters applied.',
-
+    
     initComponent: function () {
         var self = this;
-
-        const getPlotAnnotationConfig = function (isEmpty) {
-            const lineSplit = (s, wrapWidth) => s.match(
-                new RegExp(`([^\\n]{1,${wrapWidth}})(?=\\s|$)`, 'g')
-            );
-
-            const marginLeft = 120;
-            const marginRight = 70;
-            const axWidth = self.getWidth() - marginLeft - marginRight;
-
-            if (axWidth < 6) {
-                // if the browser is resized so the plot area is tiny then the
-                // plot is basically unusable - just switch off the annotations
-                // to mitigate against errors being thrown by plotly cos they don't
-                // fit
-                return {
-                    annotations: [],
-                    images: [],
-                    margin: {}
-                };
-            }
-
-            const subtitle_lines = lineSplit(self.subtitle, Math.trunc(axWidth / 6));
-
-            const marginTop = 35 + (subtitle_lines.length * 18);
-            const marginBottom = 100;
-
-            const axHeight = self.getHeight() - marginBottom - marginTop + 17; // for good luck;
-
-            if (axHeight < 20) {
-                // if the browser is resized so the plot area is tiny then the
-                // plot is basically unusable - just switch off the annotations
-                // to mitigate against errors being thrown by plotly cos they don't
-                // fit
-                return {
-                    annotations: [],
-                    images: [],
-                    margin: {}
-                };
-            }
-
-            let images;
-            if (isEmpty) {
-                images = [{
-                    xref: 'paper',
-                    yref: 'paper',
-                    x: 0.5,
-                    xanchor: 'center',
-                    sizex: 1,
-                    y: 1,
-                    sizey: 1,
-                    source: 'gui/images/report_thumbnail_no_data.png'
-                }];
-            } else {
-                images = [{
-                    sizex: 0.6,
-                    xanchor: 'left',
-                    xref: 'domain',
-                    y: -100 / axHeight,
-                    x: 0.22,
-                    sizey: (0.1 * self.getHeight()) / axHeight,
-                    yref: 'paper',
-                    yanchor: 'bottom',
-                    source: 'gui/images/right_arrow.png',
-                    sizing: 'stretch'
-                }, {
-                    xref: 'paper',
-                    yref: 'paper',
-                    x: -90 / axWidth,
-                    y: 0.1,
-                    sizex: self.getWidth() / axWidth,
-                    sizey: 0.8,
-                    opacity: 1,
-                    xanchor: 'left',
-                    yanchor: 'bottom',
-                    source: 'gui/images/up_arrow.png'
-                }];
-            }
-
-            const annotations = [{
-                text: self.config.title,
-                font: {
-                    color: '#444b6e',
-                    size: 20
-                },
-                showarrow: false,
-                xalign: 'center',
-                yalign: 'top',
-                x: 0.5,
-                y: 1,
-                yshift: marginTop,
-                xref: 'paper',
-                yref: 'paper'
-            }, {
-                text: subtitle_lines.join('<br />'),
-                font: {
-                    size: 13,
-                    color: '#555555'
-                },
-                showarrow: false,
-                xalign: 'center',
-                yalign: 'top',
-                x: 0.5,
-                y: 1,
-                yshift: (18 * subtitle_lines.length) + 5,
-                xref: 'paper',
-                yref: 'paper'
-            }, {
-                text: `${Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d')} to ${Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d')} Powered by XDMoD/Plotly`,
-                showarrow: false,
-                font: {
-                    size: 9,
-                    color: '#959595'
-                },
-                yalign: 'bottom',
-                x: 1,
-                y: 0,
-                yshift: -1 * marginBottom,
-                xshift: marginRight,
-                xref: 'paper',
-                yref: 'paper'
-            }];
-
-            if (!isEmpty) {
-                annotations.push({
-                    x: 0.5,
-                    y: -100 / axHeight,
-                    yshift: -5,
-                    xref: 'paper',
-                    yref: 'paper',
-                    text: 'LESS EFFICIENT',
-                    font: {
-                        size: (22 * axHeight) / self.getHeight(),
-                        color: '#707070'
-                    },
-                    showarrow: false
-                });
-                annotations.push({
-                    x: -90 / axWidth,
-                    y: 0.5,
-                    xshift: -20,
-                    xref: 'paper',
-                    yref: 'paper',
-                    text: 'MORE USAGE',
-                    font: {
-                        size: (22 * axWidth) / self.getWidth(),
-                        color: '#707070'
-                    },
-                    textangle: '-90',
-                    showarrow: false
-                });
-            }
-
-            return {
-                margin: {
-                    b: marginBottom,
-                    t: marginTop,
-                    l: marginLeft,
-                    r: marginRight
-                },
-                images,
-                annotations
-            };
-        };
 
         var storeSettings = {
             proxy: new Ext.data.HttpProxy({
@@ -217,7 +53,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             xrange = [xrange[1], xrange[0]];
                         }
 
-                        const annotationConfig = getPlotAnnotationConfig(false);
+                        const annotationConfig = XDMoD.utils.efficiency.getPlotAnnotationConfig(false, self.config.title, self.subtitle, self.getWidth(), self.getHeight());
 
                         const layout = {
                             hoverlabel: {
@@ -234,6 +70,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 family: '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif'
                             },
                             xaxis: {
+                                layer: 'below traces',
                                 title: self.config.statisticLabels[0],
                                 color: '#707070',
                                 titlefont: {
@@ -249,6 +86,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 }
                             },
                             yaxis: {
+                                layer: 'below traces',
                                 title: self.config.statisticLabels[1],
                                 color: '#707070',
                                 titlefont: {
@@ -307,7 +145,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                             self.jobListFilters = self.MEFilters;
                         });
                     } else {
-                        const layout = getPlotAnnotationConfig(true);
+                        const layout = XDMoD.utils.efficiency.getPlotAnnotationConfig(true, self.config.title, self.subtitle, self.getWidth(), self.getHeight());
                         layout.font = {
                             family: '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif'
                         };
@@ -361,7 +199,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             listeners: {
                 resize: () => {
                     if (self.store.getCount() > 0) {
-                        const plotConf = getPlotAnnotationConfig(self.store.data.items[0].json.count === 0);
+                        const plotConf = XDMoD.utils.efficiency.getPlotAnnotationConfig(self.store.data.items[0].json.count === 0, self.config.title, self.subtitle, self.getWidth(), self.getHeight());
 
                         plotConf.width = self.getWidth();
                         plotConf.height = self.getHeight();
@@ -508,7 +346,6 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         } else {
             cls = '';
         }
-
         var chartStore = new CCR.xdmod.CustomJsonStore({
             id: 'histogram_chart_store_' + self.config.analytic,
             autoDestroy: false,
@@ -519,6 +356,8 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             messageProperty: 'message',
             fields: [
                 'chart',
+                'layout',
+                'data',
                 'credits',
                 'title',
                 'subtitle',
@@ -560,98 +399,24 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 },
                 load: function (e) {
                     self.el.unmask();
-                    var chartWidth = Ext.getCmp('hc-panel-' + self.config.analytic).chart.plotWidth;
-                    var chartHeight = Ext.getCmp('hc-panel-' + self.config.analytic).chart.plotHeight;
-
-                    var chartObj = e.data.items[0].data;
-                    if (chartObj.series.length > 0) {
-                        var series = chartObj.series[0].data;
-                        var categories = [];
-                        for (var i = 0; i < series.length; i++) {
-                            var label = series[i].drilldown.label;
-                            categories.push(label);
-                        }
-
-                        chartObj.xAxis = [
-                            {
-                                categories: categories,
-                                title: {
-                                    text: self.config.histogram.groupByTitle
-                                }
-                            },
-                            {
-                                lineWidth: 0,
-                                minorGridLineWidth: 0,
-                                labels: {
-                                    enabled: false
-                                },
-                                minorTickLength: 0,
-                                tickLength: 0,
-                                title: {
-                                    useHTML: true,
-                                    text: "<img src='gui/images/" + self.config.histogram.arrowImg + "' class='" + cls + "' style='width: " + (chartWidth * (2 / 3)) + "px; height: 100px;' />",
-                                    align: 'middle'
-                                }
-                            },
-                            {
-                                lineWidth: 0,
-                                minorGridLineWidth: 0,
-                                labels: {
-                                    enabled: false
-                                },
-                                minorTickLength: 0,
-                                tickLength: 0,
-                                title: {
-                                    text: 'LESS EFFICIENT',
-                                    align: 'middle',
-                                    offset: -25,
-                                    style: {
-                                        fontSize: 20
-                                    }
-                                }
-                            }
-                        ];
-
-                        chartObj.yAxis = [
-                            {
-                                allowDecimals: false,
-                                dtitle: 'yAxis0',
-                                endOnTick: true,
-                                gridLineWidth: 1,
-                                labels: {
-                                    style: { fontWeight: 'normal', fontSize: '11px' }
-                                },
-                                lineWidth: 2,
-                                max: null,
-                                maxPadding: 0.05,
-                                min: 0,
-                                opposite: false,
-                                otitle: self.config.histogram.metricTitle,
-                                showLastLabel: true,
-                                startOnTick: true,
-                                tickInterval: null,
-                                title: { text: self.config.histogram.metricTitle, style: { color: '#1199ff', fontWeight: 'bold', fontSize: '12px' } },
-                                type: 'linear'
-                            },
-                            {
-                                title: {
-                                    useHTML: true,
-                                    text: "<img src='gui/images/right_arrow.png' style='width: " + (chartHeight * (2 / 3)) + "px; height: 100px;' />",
-                                    align: 'middle',
-                                    offset: 75
-                                }
-                            },
-                            {
-                                title: {
-                                    text: 'MORE USAGE',
-                                    align: 'middle',
-                                    offset: -100,
-                                    style: {
-                                        fontSize: 20
-                                    }
-                                }
-                            }
-                        ];
+                    let chartConfig = e.data.items[0].data;
+                    if (chartConfig.data.length > 0) {
+                        var chartWidth = Ext.getCmp('hc-panel-' + self.config.analytic).baseChartOptions.layout.width;
+                        var chartHeight = Ext.getCmp('hc-panel-' + self.config.analytic).baseChartOptions.layout.height;
+                        // Format data for histogram
+                        let data = chartConfig.data[0];
+                        data.hovertemplate = `${data.name}: <b>%{y:,.0f}</b><extra></extra>`
+                        // Format layout for histogram
+                        const plotConf = XDMoD.utils.efficiency.getPlotAnnotationConfig(self.store.data.items[0].json.count === 0, self.config.title, self.subtitle, chartWidth, chartHeight, true);
+                        plotConf.images[0].source = `gui/images/${self.config.histogram.arrowImg}`;
+                        let layout = chartConfig.layout;
+                        layout.xaxis.title = self.config.histogram.groupByTitle;
+                        layout.yaxis.title = self.config.histogram.metricTitle;
+                        layout.yaxis.exponentformat = 'SI';
+                        layout.hovermode = 'x unified';
+                        layout.annotations = [layout.annotations[0], layout.annotations[1], ...plotConf.annotations];
+                        layout.images = plotConf.images;
+                        layout.margin = plotConf.margin;
 
                         // Update help text if alternative histogram text is available
                         if (self.config.histogram.histogramHelpText) {
@@ -670,27 +435,47 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         var drilldownChartContainer = new Ext.Panel({
             layout: 'fit',
             border: false,
-            autoScroll: true,
+            autoScroll: false,
             items: [
-                new CCR.xdmod.ui.HighChartPanel({
+                new CCR.xdmod.ui.PlotlyPanel({
                 id: 'hc-panel-' + self.config.analytic,
                 person: person,
                 personId: personId,
                 boxMinWidth: 600,
                 boxMinHeight: 400,
                 baseChartOptions: {
-                    chart: {
-                        marginLeft: 175
+                    efficiency: true
+                },
+                store: chartStore,
+                listeners: {
+                    resize: (t, adjWidth, adjHeight, rawWidth, rawHeight) => {
+                        if (self.store.getCount() > 0) {
+                            const chartDiv = document.getElementById(`hc-panel-${self.config.analytic}`);
+                            const width = Math.max(600, adjWidth);
+                            const height = Math.max(400, adjHeight);
+                            const plotConf = XDMoD.utils.efficiency.getPlotAnnotationConfig(self.store.data.items[0].json.count === 0, self.config.title, self.subtitle, width, height, true);
+                            plotConf.images[0].source = `gui/images/${self.config.histogram.arrowImg}`;
+                            const annotations = chartDiv._fullLayout.annotations;
+                            if (annotations.length > 1) {
+                                plotConf.annotations = [annotations[0], annotations[1], ...plotConf.annotations];
+                            }
+                            plotConf.width = width;
+                            plotConf.height = height;
+
+                            Plotly.relayout(`hc-panel-${self.config.analytic}`, plotConf);
+                        }
                     },
-                    plotOptions: {
-                        series: {
-                            events: {
-                                click: function (e) {
-                                    var dataPoint = e.point.index;
-                                    var datasetId = e.point.series.userOptions.datasetId;
-                                    var drilldownId = e.point.drilldown.id;
-                                    var drilldownLabel = e.point.drilldown.label;
-                                    var jobGrid = Ext.getCmp('cpu_user_job_information');
+                    afterrender: () => {
+                        const chartDiv = document.getElementById('hc-panel-' + self.config.analytic);
+                        if (chartDiv) {
+                            chartDiv.on('plotly_click', (evt) => {
+                                if (evt.points.length > 0) {
+                                    const pointIndex = evt.points[0].pointIndex;
+                                    const dataPoint = pointIndex
+                                    const datasetId = evt.points[0].data.datasetId;
+                                    const drilldownId = evt.points[0].data.drilldown[pointIndex].id;
+                                    const drilldownLabel = evt.points[0].data.drilldown[pointIndex].label;
+                                    let jobGrid = Ext.getCmp('cpu_user_job_information');
 
                                     if (jobGrid) {
                                         jobGrid.destroy();
@@ -698,27 +483,9 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
                                     self.getJobList(personId, person, dataPoint, datasetId, drilldownId, drilldownLabel);
                                 }
-                            }
-                        }
-                    }
-                },
-                store: chartStore,
-                listeners: {
-                    resize: function (t, adjWidth, adjHeight, rawWidth, rawHeight) {
-                        if (this.chart.xAxis[1]) {
-                            // Update arrow size based on new chart dimensions
-                            this.chart.xAxis[1].update({
-                                title: {
-                                    text: "<img src='gui/images/" + self.config.histogram.arrowImg + "' class='" + cls + "' style='width: " + (adjWidth * (2 / 3)) + "px; height: 100px;' />"
-                                }
                             });
-                            this.chart.yAxis[1].update({
-                                title: {
-                                    text: "<img src='gui/images/right_arrow.png' style='width: " + (adjHeight * (2 / 3)) + "px; height: 100px;' />"
-                                }
-                            });
-                        }
-                    }
+                       }
+                   }
                 }
                 })
             ]

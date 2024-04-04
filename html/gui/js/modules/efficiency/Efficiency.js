@@ -5,6 +5,170 @@
  */
 
 XDMoD.utils.efficiency = {
+    getPlotAnnotationConfig(isEmpty, title, subtitle, width, height, isHistogram = false) {
+        const marginLeft = 120;
+        const marginRight = 70;
+        const axWidth = width - marginLeft - marginRight;
+
+        if (axWidth < 6) {
+            // if the browser is resized so the plot area is tiny then the
+            // plot is basically unusable - just switch off the annotations
+            // to mitigate against errors being thrown by plotly cos they don't
+            // fit
+            return {
+                annotations: [],
+                images: [],
+                margin: {}
+            };
+        }
+
+        const subtitle_lines = CCR.xdmod.ui.lineSplit(subtitle, Math.trunc(axWidth / 6));
+
+        const marginTop = isHistogram ? 55 + (subtitle_lines.length * 18) : 35 + (subtitle_lines.length * 18);
+        const marginBottom = isHistogram ? 150 : 100;
+
+        const axHeight = height - marginBottom - marginTop + 17; // for good luck;
+
+        if (axHeight < 20) {
+            // if the browser is resized so the plot area is tiny then the
+            // plot is basically unusable - just switch off the annotations
+            // to mitigate against errors being thrown by plotly cos they don't
+            // fit
+            return {
+                annotations: [],
+                images: [],
+                margin: {}
+            };
+        }
+
+        let images;
+        if (isEmpty) {
+            images = [{
+                xref: 'paper',
+                yref: 'paper',
+                x: 0.5,
+                xanchor: 'center',
+                sizex: 1,
+                y: 1,
+                sizey: 1,
+                source: 'gui/images/report_thumbnail_no_data.png'
+            }];
+        } else {
+            images = [{
+                sizex: 0.6,
+                xanchor: 'left',
+                xref: 'domain',
+                y: isHistogram ? -130 / axHeight : -100 / axHeight,
+                x: 0.22,
+                sizey: (0.1 * height) / axHeight,
+                yref: 'paper',
+                yanchor: 'bottom',
+                source: 'gui/images/right_arrow.png',
+                sizing: 'stretch'
+            }, {
+                xref: 'paper',
+                yref: 'paper',
+                x: -90 / axWidth,
+                y: 0.1,
+                sizex: width / axWidth,
+                sizey: 0.8,
+                opacity: 1,
+                xanchor: 'left',
+                yanchor: 'bottom',
+                source: 'gui/images/up_arrow.png'
+            }];
+        }
+
+        const annotations = [{
+            text: `${Ext.getCmp('efficiency').getDurationSelector().getStartDate().format('Y-m-d')} to ${Ext.getCmp('efficiency').getDurationSelector().getEndDate().format('Y-m-d')} Powered by XDMoD/Plotly JS`,
+            showarrow: false,
+            font: {
+                size: 9,
+                color: '#959595'
+            },
+            yalign: 'bottom',
+            x: 1,
+            y: 0,
+            yshift: -1 * marginBottom,
+            xshift: marginRight,
+            xref: 'paper',
+            yref: 'paper'
+        }];
+
+        if (!isHistogram) {
+            annotations.push({
+                text: title,
+                font: {
+                    color: '#444b6e',
+                    size: 20
+                },
+                showarrow: false,
+                xalign: 'center',
+                yalign: 'top',
+                x: 0.5,
+                y: 1,
+                yshift: marginTop,
+                xref: 'paper',
+                yref: 'paper'
+            });
+            annotations.push({
+                text: subtitle_lines.join('<br />'),
+                font: {
+                    size: 13,
+                    color: '#555555'
+                },
+                showarrow: false,
+                xalign: 'center',
+                yalign: 'top',
+                x: 0.5,
+                y: 1,
+                yshift: (18 * subtitle_lines.length) + 5,
+                xref: 'paper',
+                yref: 'paper'
+            });
+        }
+
+        if (!isEmpty) {
+            annotations.push({
+                x: 0.5,
+                y: isHistogram ? -130 / axHeight : -100 / axHeight,
+                yshift: -5,
+                xref: 'paper',
+                yref: 'paper',
+                text: 'LESS EFFICIENT',
+                font: {
+                    size: (22 * axHeight) / height,
+                    color: '#707070'
+                },
+                showarrow: false
+            });
+            annotations.push({
+                x: -90 / axWidth,
+                y: 0.5,
+                xshift: -20,
+                xref: 'paper',
+                yref: 'paper',
+                text: 'MORE USAGE',
+                font: {
+                    size: (22 * axWidth) / width,
+                    color: '#707070'
+                },
+                textangle: '-90',
+                showarrow: false
+            });
+        }
+
+        return {
+            margin: {
+                b: marginBottom,
+                t: marginTop,
+                l: marginLeft,
+                r: marginRight
+            },
+            images,
+            annotations
+        };
+    },
     textPosition(x, y, limit, reversed) {
         const loc_a = (y > limit[1] / 2) ? 'bottom' : 'top';
         const loc_b = (x > limit[0] / 2) && !reversed ? 'left' : 'right';
@@ -43,6 +207,7 @@ XDMoD.utils.efficiency = {
 
         // Add cross hairs to start so they are below the scatter markers
         const data = [{
+            cliponaxis: false,
             x: [Math.ceil(xAxisMax / 2), Math.ceil(xAxisMax / 2)],
             y: [0, yAxisMax],
             mode: 'lines',
@@ -462,6 +627,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                             plot_bgcolor: '#f8f7f7',
                             cliponaxis: false,
                             xaxis: {
+                                layer: 'below traces',
                                 title: config.statisticLabels[0],
                                 color: '#707070',
                                 titlefont: {
@@ -477,6 +643,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                 }
                             },
                             yaxis: {
+                                layer: 'below traces',
                                 title: config.statisticLabels[1],
                                 color: '#707070',
                                 titlefont: {
