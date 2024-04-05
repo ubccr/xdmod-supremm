@@ -244,7 +244,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     array_multisort($chartData['drilldown']['id'], SORT_ASC);
                     $naBucket = array_shift($chartData['drilldown']);
                     array_push($chartData['drilldown'], $naBucket);
-                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array 
+                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array
                     // We want to maintain 'N/A' being the last element.
                     $gtninetyXBucket = array_shift($chartData['x']);
                     $gtninetyYBucket = array_shift($chartData['y']);
