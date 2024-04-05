@@ -337,15 +337,6 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
         baseParams.global_filters = encodeURIComponent(Ext.util.JSON.encode(baseParams.global_filters));
         baseParams.data_series = encodeURIComponent(Ext.util.JSON.encode(baseParams.data_series));
 
-
-        // Add rotate class to arrow image if specified by histogram config
-        var rotate = self.config.histogram.rotate;
-        var cls;
-        if (rotate) {
-            cls = 'rotate90';
-        } else {
-            cls = '';
-        }
         var chartStore = new CCR.xdmod.CustomJsonStore({
             id: 'histogram_chart_store_' + self.config.analytic,
             autoDestroy: false,
@@ -472,7 +463,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                                 if (evt.points.length > 0) {
                                     const { pointIndex } = evt.points[0];
                                     const dataPoint = pointIndex;
-                                    const { datasetId }  = evt.points[0].data.datasetId;
+                                    const { datasetId } = evt.points[0].data.datasetId;
                                     const drilldownId = evt.points[0].data.drilldown[pointIndex].id;
                                     const drilldownLabel = evt.points[0].data.drilldown[pointIndex].label;
                                     const jobGrid = Ext.getCmp('cpu_user_job_information');
