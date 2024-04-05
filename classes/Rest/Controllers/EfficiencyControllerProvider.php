@@ -178,7 +178,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     array_multisort($chartData['drilldown']['id'], SORT_ASC);
                     $naBucket = array_shift($chartData['drilldown']);
                     array_push($chartData['drilldown'], $naBucket);
-                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array 
+                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array
                     // We want to maintain 'N/A' being the last element.
                     $gtninetyXBucket = array_shift($chartData['x']);
                     $gtninetyYBucket = array_shift($chartData['y']);
@@ -187,9 +187,8 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
                     // Same for colors
                     $gtninetyColorBucket = array_shift($colors);
-                    $colorEndIdx = count($colors) - 1;
                     array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
-                
+
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
@@ -210,7 +209,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     array_multisort($chartData['drilldown']['id'], SORT_ASC);
                     $naBucket = array_shift($chartData['drilldown']);
                     array_push($chartData['drilldown'], $naBucket);
-                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array 
+                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array
                     // We want to maintain 'N/A' being the last element.
                     $gtninetyXBucket = array_shift($chartData['x']);
                     $gtninetyYBucket = array_shift($chartData['y']);
@@ -219,9 +218,8 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
                     // Same for colors
                     $gtninetyColorBucket = array_shift($colors);
-                    $colorEndIdx = count($colors) - 1;
                     array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
-                
+
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
@@ -255,9 +253,8 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
                     // Same for colors
                     $gtninetyColorBucket = array_shift($colors);
-                    $colorEndIdx = count($colors) - 1;
                     array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
-                
+
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
@@ -274,7 +271,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     array_multisort($chartData['drilldown']['id'], SORT_ASC);
                     $naBucket = array_shift($chartData['drilldown']);
                     array_push($chartData['drilldown'], $naBucket);
-                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array 
+                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array
                     // We want to maintain 'N/A' being the last element.
                     $gtninetyXBucket = array_shift($chartData['x']);
                     $gtninetyYBucket = array_shift($chartData['y']);
@@ -283,9 +280,8 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
                     // Same for colors
                     $gtninetyColorBucket = array_shift($colors);
-                    $colorEndIdx = count($colors) - 1;
                     array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
-                
+
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);

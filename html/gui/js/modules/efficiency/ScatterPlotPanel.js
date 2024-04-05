@@ -9,7 +9,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
     MEFilters: null,
     jobListFilters: null,
     subtitle: 'No filters applied.',
-    
+
     initComponent: function () {
         var self = this;
 
@@ -399,17 +399,17 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                 },
                 load: function (e) {
                     self.el.unmask();
-                    let chartConfig = e.data.items[0].data;
+                    const chartConfig = e.data.items[0].data;
                     if (chartConfig.data.length > 0) {
                         var chartWidth = Ext.getCmp('hc-panel-' + self.config.analytic).baseChartOptions.layout.width;
                         var chartHeight = Ext.getCmp('hc-panel-' + self.config.analytic).baseChartOptions.layout.height;
                         // Format data for histogram
-                        let data = chartConfig.data[0];
-                        data.hovertemplate = `${data.name}: <b>%{y:,.0f}</b><extra></extra>`
+                        const data = chartConfig.data[0];
+                        data.hovertemplate = `${data.name}: <b>%{y:,.0f}</b><extra></extra>`;
                         // Format layout for histogram
                         const plotConf = XDMoD.utils.efficiency.getPlotAnnotationConfig(self.store.data.items[0].json.count === 0, self.config.title, self.subtitle, chartWidth, chartHeight, true);
                         plotConf.images[0].source = `gui/images/${self.config.histogram.arrowImg}`;
-                        let layout = chartConfig.layout;
+                        const layout = chartConfig.layout;
                         layout.xaxis.title = self.config.histogram.groupByTitle;
                         layout.yaxis.title = self.config.histogram.metricTitle;
                         layout.yaxis.exponentformat = 'SI';
@@ -470,12 +470,12 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                         if (chartDiv) {
                             chartDiv.on('plotly_click', (evt) => {
                                 if (evt.points.length > 0) {
-                                    const pointIndex = evt.points[0].pointIndex;
-                                    const dataPoint = pointIndex
-                                    const datasetId = evt.points[0].data.datasetId;
+                                    const { pointIndex } = evt.points[0];
+                                    const dataPoint = pointIndex;
+                                    const { datasetId }  = evt.points[0].data.datasetId;
                                     const drilldownId = evt.points[0].data.drilldown[pointIndex].id;
                                     const drilldownLabel = evt.points[0].data.drilldown[pointIndex].label;
-                                    let jobGrid = Ext.getCmp('cpu_user_job_information');
+                                    const jobGrid = Ext.getCmp('cpu_user_job_information');
 
                                     if (jobGrid) {
                                         jobGrid.destroy();
