@@ -354,7 +354,8 @@ class EfficiencyTest extends BaseTest
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $actualCount = count($response[0]['data'][0]['data']['y']);
+        $print_r($response);
+        $actualCount = count($response[0]['data'][0]['data'][0]['y']);
         $this->assertCount($seriesCount, $actualCount);
     }
 
@@ -390,7 +391,7 @@ class EfficiencyTest extends BaseTest
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $actualCount = count($response[0]['data'][0]['data']['y']);
+        $actualCount = count($response[0]['data'][0]['data'][0]['y']);
         $this->assertCount(4, $actualCount);
     }
 
@@ -466,7 +467,7 @@ class EfficiencyTest extends BaseTest
         if ($http_code == 200) {
             $this->assertArrayHasKey('success', $resdata);
             $this->assertTrue($resdata['success']);
-            $this->assertCount(0, $response[0]['data'][0]['series']);
+            $this->assertCount(0, $response[0]['data'][0]['data'][0]['y']);
         } else {
             $this->assertArrayHasKey('success', $resdata);
             $this->assertFalse($resdata['success']);
