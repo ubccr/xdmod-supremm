@@ -17,6 +17,15 @@
     "token": false,
     "XDMoD": false,
     "moment": false,
-    "Plotly": false
+    "Plotly": false,
+    "generateChartOptions": false,
+    "getNoDataErrorConfig": false,
+    "getMultiAxisObjects": false,
+    "getClickedPoint": false,
+    "topLegend": false,
+    "adjustTitles": false,
+    "relayoutChart": false,
+    "overrideLegendEvent": false,
+    "lineSplit": false
   }
 }
