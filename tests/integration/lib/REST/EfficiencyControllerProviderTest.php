@@ -354,7 +354,7 @@ class EfficiencyTest extends BaseTest
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $print_r($response);
+        print_r($response);
         $actualCount = count($response[0]['data'][0]['data'][0]['y']);
         $this->assertCount($seriesCount, $actualCount);
     }
