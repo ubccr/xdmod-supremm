@@ -22,7 +22,7 @@ XDMoD.utils.efficiency = {
             };
         }
 
-        const subtitle_lines = CCR.xdmod.ui.lineSplit(subtitle, Math.trunc(axWidth / 6));
+        const subtitle_lines = lineSplit(subtitle, Math.trunc(axWidth / 6));
 
         const marginTop = isHistogram ? 55 + (subtitle_lines.length * 18) : 35 + (subtitle_lines.length * 18);
         const marginBottom = isHistogram ? 150 : 100;
