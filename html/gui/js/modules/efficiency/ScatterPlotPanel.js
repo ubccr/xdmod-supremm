@@ -386,10 +386,10 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             }),
             listeners: {
                 beforeload: function (e) {
-                    self.el.mask('Loading...');
+                    self.mask('Loading...');
                 },
                 load: function (e) {
-                    self.el.unmask();
+                    self.unmask();
                     const chartConfig = e.data.items[0].data;
                     if (chartConfig.data.length > 0) {
                         var chartWidth = Ext.getCmp('hc-panel-' + self.config.analytic).baseChartOptions.layout.width;
@@ -418,7 +418,6 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
 
                         self.updateDescription(chartStore);
                     }
-                    self.unmask();
                 }
             }
         });
@@ -442,18 +441,20 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
                     resize: (t, adjWidth, adjHeight, rawWidth, rawHeight) => {
                         if (self.store.getCount() > 0) {
                             const chartDiv = document.getElementById(`hc-panel-${self.config.analytic}`);
-                            const width = Math.max(600, adjWidth);
-                            const height = Math.max(400, adjHeight);
-                            const plotConf = XDMoD.utils.efficiency.getPlotAnnotationConfig(self.store.data.items[0].json.count === 0, self.config.title, self.subtitle, width, height, true);
-                            plotConf.images[0].source = `gui/images/${self.config.histogram.arrowImg}`;
-                            const annotations = chartDiv._fullLayout.annotations;
-                            if (annotations.length > 1) {
-                                plotConf.annotations = [annotations[0], annotations[1], ...plotConf.annotations];
-                            }
-                            plotConf.width = width;
-                            plotConf.height = height;
+                            if (chartDiv._fullData.length > 0) {
+                                const width = Math.max(600, adjWidth);
+                                const height = Math.max(400, adjHeight);
+                                const plotConf = XDMoD.utils.efficiency.getPlotAnnotationConfig(self.store.data.items[0].json.count === 0, self.config.title, self.subtitle, width, height, true);
+                                plotConf.images[0].source = `gui/images/${self.config.histogram.arrowImg}`;
+                                const annotations = chartDiv._fullLayout.annotations;
+                                if (annotations.length > 1) {
+                                    plotConf.annotations = [annotations[0], annotations[1], ...plotConf.annotations];
+                                }
+                                plotConf.width = width;
+                                plotConf.height = height;
 
-                            Plotly.relayout(`hc-panel-${self.config.analytic}`, plotConf);
+                                Plotly.relayout(`hc-panel-${self.config.analytic}`, plotConf);
+                            }
                         }
                     },
                     afterrender: () => {

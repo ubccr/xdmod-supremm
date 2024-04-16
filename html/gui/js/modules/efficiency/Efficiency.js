@@ -6,7 +6,7 @@
 
 XDMoD.utils.efficiency = {
     getPlotAnnotationConfig(isEmpty, title, subtitle, width, height, isHistogram = false) {
-        const marginLeft = 120;
+        const marginLeft = isHistogram ? 150 : 120;
         const marginRight = 70;
         const axWidth = width - marginLeft - marginRight;
 
@@ -68,7 +68,7 @@ XDMoD.utils.efficiency = {
             }, {
                 xref: 'paper',
                 yref: 'paper',
-                x: -90 / axWidth,
+                x: isHistogram ? -110 / axWidth : -90 / axWidth,
                 y: 0.1,
                 sizex: width / axWidth,
                 sizey: 0.8,
@@ -143,7 +143,7 @@ XDMoD.utils.efficiency = {
                 showarrow: false
             });
             annotations.push({
-                x: -90 / axWidth,
+                x: isHistogram ? -110 / axWidth : -90 / axWidth,
                 y: 0.5,
                 xshift: -20,
                 xref: 'paper',

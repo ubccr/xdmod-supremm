@@ -173,21 +173,21 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                         }
                     }
                     // Sort data due to missing buckets added
-                    array_multisort($chartData['x'], SORT_ASC, $chartData['y'], $colors);
-                    // Also sort drilldowns to match trace order
-                    array_multisort($chartData['drilldown']['id'], SORT_ASC);
-                    $naBucket = array_shift($chartData['drilldown']);
-                    array_push($chartData['drilldown'], $naBucket);
-                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array
-                    // We want to maintain 'N/A' being the last element.
-                    $gtninetyXBucket = array_shift($chartData['x']);
-                    $gtninetyYBucket = array_shift($chartData['y']);
-                    $endIdx = count($chartData['x']) - 1;
-                    array_splice($chartData['x'], -1, 1, array($gtninetyXBucket, $chartData['x'][$endIdx]));
-                    array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
-                    // Same for colors
-                    $gtninetyColorBucket = array_shift($colors);
-                    array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
+                    $drilldowns = array_column($chartData['drilldown'], 'id');
+                    array_multisort($drilldowns, SORT_ASC, $chartData['x'], $chartData['y'], $chartData['drilldown'], $colors);
+                    // Shift NA category to end
+                    if (in_array('gray', $colors)) {
+                        $naBucket = array_shift($chartData['drilldown']);
+                        $chartData['drilldown'][] = $naBucket;
+
+                        $gtninetyXBucket = array_shift($chartData['x']);
+                        $gtninetyYBucket = array_shift($chartData['y']);
+                        $chartData['x'][] = $gtninetyXBucket;
+                        $chartData['y'][] = $gtninetyYBucket;
+
+                        $gtninetyColorBucket = array_shift($colors);
+                        $colors[] = $gtninetyColorBucket;
+                    }
 
                     $chartData['marker']['color'] = $colors;
 
@@ -204,22 +204,22 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                         }
                     }
                     // Sort data due to missing buckets added
-                    array_multisort($chartData['x'], SORT_ASC, $chartData['y'], $colors);
-                    // Also sort drilldowns to match trace order
-                    array_multisort($chartData['drilldown']['id'], SORT_ASC);
-                    $naBucket = array_shift($chartData['drilldown']);
-                    array_push($chartData['drilldown'], $naBucket);
-                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array
-                    // We want to maintain 'N/A' being the last element.
-                    $gtninetyXBucket = array_shift($chartData['x']);
-                    $gtninetyYBucket = array_shift($chartData['y']);
-                    $endIdx = count($chartData['x']) - 1;
-                    array_splice($chartData['x'], -1, 1, array($gtninetyXBucket, $chartData['x'][$endIdx]));
-                    array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
-                    // Same for colors
-                    $gtninetyColorBucket = array_shift($colors);
-                    array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
+                    $drilldowns = array_column($chartData['drilldown'], 'id');
+                    array_multisort($drilldowns, SORT_ASC, $chartData['x'], $chartData['y'], $chartData['drilldown'], $colors);
+                    // Shift NA category to end
+                    if (in_array('gray', $colors)) {
+                        $naBucket = array_shift($chartData['drilldown']);
+                        $chartData['drilldown'][] = $naBucket;
 
+                        $gtninetyXBucket = array_shift($chartData['x']);
+                        $gtninetyYBucket = array_shift($chartData['y']);
+                        $chartData['x'][] = $gtninetyXBucket;
+                        $chartData['y'][] = $gtninetyYBucket;
+
+                        $gtninetyColorBucket = array_shift($colors);
+                        $colors[] = $gtninetyColorBucket;
+                    }
+                     
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
@@ -239,22 +239,22 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                         }
                     }
                     // Sort data due to missing buckets added
-                    array_multisort($chartData['x'], SORT_ASC, $chartData['y'], $colors);
-                    // Also sort drilldowns to match trace order
-                    array_multisort($chartData['drilldown']['id'], SORT_ASC);
-                    $naBucket = array_shift($chartData['drilldown']);
-                    array_push($chartData['drilldown'], $naBucket);
-                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array
-                    // We want to maintain 'N/A' being the last element.
-                    $gtninetyXBucket = array_shift($chartData['x']);
-                    $gtninetyYBucket = array_shift($chartData['y']);
-                    $endIdx = count($chartData['x']) - 1;
-                    array_splice($chartData['x'], -1, 1, array($gtninetyXBucket, $chartData['x'][$endIdx]));
-                    array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
-                    // Same for colors
-                    $gtninetyColorBucket = array_shift($colors);
-                    array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
+                    $drilldowns = array_column($chartData['drilldown'], 'id');
+                    array_multisort($drilldowns, SORT_ASC, $chartData['x'], $chartData['y'], $chartData['drilldown'], $colors);
+                    // Shift NA category to end
+                    if (in_array('gray', $colors)) {
+                        $naBucket = array_shift($chartData['drilldown']);
+                        $chartData['drilldown'][] = $naBucket;
 
+                        $gtninetyXBucket = array_shift($chartData['x']);
+                        $gtninetyYBucket = array_shift($chartData['y']);
+                        $chartData['x'][] = $gtninetyXBucket;
+                        $chartData['y'][] = $gtninetyYBucket;
+
+                        $gtninetyColorBucket = array_shift($colors);
+                        $colors[] = $gtninetyColorBucket;
+                    }
+ 
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
@@ -266,22 +266,22 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                         }
                     }
                     // Sort data due to missing buckets added
-                    array_multisort($chartData['x'], SORT_ASC, $chartData['y'], $colors);
-                    // Also sort drilldowns to match trace order
-                    array_multisort($chartData['drilldown']['id'], SORT_ASC);
-                    $naBucket = array_shift($chartData['drilldown']);
-                    array_push($chartData['drilldown'], $naBucket);
-                    // 'gt; 90' appears in front because of 'g' so we need to splice it into the 2nd last element of the array
-                    // We want to maintain 'N/A' being the last element.
-                    $gtninetyXBucket = array_shift($chartData['x']);
-                    $gtninetyYBucket = array_shift($chartData['y']);
-                    $endIdx = count($chartData['x']) - 1;
-                    array_splice($chartData['x'], -1, 1, array($gtninetyXBucket, $chartData['x'][$endIdx]));
-                    array_splice($chartData['y'], -1, 1, array($gtninetyYBucket, $chartData['y'][$endIdx]));
-                    // Same for colors
-                    $gtninetyColorBucket = array_shift($colors);
-                    array_splice($colors, -1, 1, array($gtninetyColorBucket, $colors[$endIdx]));
+                    $drilldowns = array_column($chartData['drilldown'], 'id');
+                    array_multisort($drilldowns, SORT_ASC, $chartData['x'], $chartData['y'], $chartData['drilldown'], $colors);
+                    // Shift NA category to end
+                    if (in_array('gray', $colors)) {
+                        $naBucket = array_shift($chartData['drilldown']);
+                        $chartData['drilldown'][] = $naBucket;
 
+                        $gtninetyXBucket = array_shift($chartData['x']);
+                        $gtninetyYBucket = array_shift($chartData['y']);
+                        $chartData['x'][] = $gtninetyXBucket;
+                        $chartData['y'][] = $gtninetyYBucket;
+
+                        $gtninetyColorBucket = array_shift($colors);
+                        $colors[] = $gtninetyColorBucket;
+                    }
+ 
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
