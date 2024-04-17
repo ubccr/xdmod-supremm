@@ -354,8 +354,7 @@ class EfficiencyTest extends BaseTest
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $actualCount = count($response[0]['data'][0]['data'][0]['y']);
-        $this->assertCount($seriesCount, $actualCount);
+        $this->assertCount($seriesCount, $response[0]['data'][0]['data'][0]['y']);
     }
 
     public function testCPUUsageDrilldownPlotWithFilter()
@@ -390,8 +389,7 @@ class EfficiencyTest extends BaseTest
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $actualCount = count($response[0]['data'][0]['data'][0]['y']);
-        $this->assertCount(4, $actualCount);
+        $this->assertCount(4, $response[0]['data'][0]['data'][0]['y']);
     }
 
     public function drilldownDataMalformedRequest()
