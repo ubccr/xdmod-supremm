@@ -219,7 +219,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                         $gtninetyColorBucket = array_shift($colors);
                         $colors[] = $gtninetyColorBucket;
                     }
-                     
+
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
@@ -254,7 +254,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                         $gtninetyColorBucket = array_shift($colors);
                         $colors[] = $gtninetyColorBucket;
                     }
- 
+
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
@@ -281,7 +281,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                         $gtninetyColorBucket = array_shift($colors);
                         $colors[] = $gtninetyColorBucket;
                     }
- 
+
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
