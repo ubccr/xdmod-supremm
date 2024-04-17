@@ -464,7 +464,7 @@ class EfficiencyTest extends BaseTest
         if ($http_code == 200) {
             $this->assertArrayHasKey('success', $resdata);
             $this->assertTrue($resdata['success']);
-            $this->assertCount(0, $response[0]['data'][0]['data'][0]['y']);
+            $this->assertCount(0, $response[0]['data'][0]['data']);
         } else {
             $this->assertArrayHasKey('success', $resdata);
             $this->assertFalse($resdata['success']);
