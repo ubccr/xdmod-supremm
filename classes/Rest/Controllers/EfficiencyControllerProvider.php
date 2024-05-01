@@ -241,20 +241,6 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     // Sort data due to missing buckets added
                     $drilldowns = array_column($chartData['drilldown'], 'id');
                     array_multisort($drilldowns, SORT_ASC, $chartData['x'], $chartData['y'], $chartData['drilldown'], $colors);
-                    // Shift NA category to end
-                    if (in_array('gray', $colors)) {
-                        $naBucket = array_shift($chartData['drilldown']);
-                        $chartData['drilldown'][] = $naBucket;
-
-                        $gtninetyXBucket = array_shift($chartData['x']);
-                        $gtninetyYBucket = array_shift($chartData['y']);
-                        $chartData['x'][] = $gtninetyXBucket;
-                        $chartData['y'][] = $gtninetyYBucket;
-
-                        $gtninetyColorBucket = array_shift($colors);
-                        $colors[] = $gtninetyColorBucket;
-                    }
-
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
@@ -268,20 +254,6 @@ class EfficiencyControllerProvider extends BaseControllerProvider
                     // Sort data due to missing buckets added
                     $drilldowns = array_column($chartData['drilldown'], 'id');
                     array_multisort($drilldowns, SORT_ASC, $chartData['x'], $chartData['y'], $chartData['drilldown'], $colors);
-                    // Shift NA category to end
-                    if (in_array('gray', $colors)) {
-                        $naBucket = array_shift($chartData['drilldown']);
-                        $chartData['drilldown'][] = $naBucket;
-
-                        $gtninetyXBucket = array_shift($chartData['x']);
-                        $gtninetyYBucket = array_shift($chartData['y']);
-                        $chartData['x'][] = $gtninetyXBucket;
-                        $chartData['y'][] = $gtninetyYBucket;
-
-                        $gtninetyColorBucket = array_shift($colors);
-                        $colors[] = $gtninetyColorBucket;
-                    }
-
                     $chartData['marker']['color'] = $colors;
 
                     $results['data'][0]['data'] = array($chartData);
