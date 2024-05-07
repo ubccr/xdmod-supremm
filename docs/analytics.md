@@ -59,6 +59,8 @@ For editing help text for other analytics, the process is the same, but you need
 
 In addition to editing the help text, you can also remove an analytic if it is not pertinent to your center. To do this, you need to remove the analytic from the `/etc/xdmod/efficiency_analytics.json` configuration file. For example, to remove GPU Usage from showing in the XDMoD interface, you would remove lines 58-109 from this file. The lines to remove are shown below.
 
+**As of Open XDMoD 11.0, the histogram configuration setting `rotate` is deprecated. Please update any custom analytic configurations you may have.**
+
 ```json
 58      {
 59              "analytic": "GPU Usage",
@@ -98,8 +100,7 @@ In addition to editing the help text, you can also remove an analytic if it is n
 93                      "metricTitle": "GPU Hours Total",
 94                      "group_by" : "gpu_usage_bucketid",
 95                      "groupByTitle": "GPU Active Value",
-96                      "rotate": true,
-97                      "arrowImg": "right_arrow.png",
+97                      "arrowImg": "left_arrow.png",
 98                      "histogramHelpText": [
 99                              "<div class='text'>",
 100                             "<h6> What is this analytic? </h6>",
