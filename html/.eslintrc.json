@@ -16,6 +16,16 @@
     "truncateText": false,
     "token": false,
     "XDMoD": false,
-    "moment": false
+    "moment": false,
+    "Plotly": false,
+    "generateChartOptions": false,
+    "getNoDataErrorConfig": false,
+    "getMultiAxisObjects": false,
+    "getClickedPoint": false,
+    "topLegend": false,
+    "adjustTitles": false,
+    "relayoutChart": false,
+    "overrideLegendEvent": false,
+    "lineSplit": false
   }
 }

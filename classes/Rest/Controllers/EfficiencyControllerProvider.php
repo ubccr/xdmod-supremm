@@ -50,7 +50,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         $controller->get("$root/analytics", "$base::getAnalytics");
         /**
         * @OA\Get(
-        *   path="/scatterPlot/{analytic}",
+        *   path="/groupedData"
         *   summary="scatter plot data",
         *   @OA\Response(
         *     response=200,
@@ -62,7 +62,7 @@ class EfficiencyControllerProvider extends BaseControllerProvider
         *   )
         * )
         */
-        $controller->get("$root/scatterPlot/{analytic}", "$base::getScatterPlotData");
+        $controller->get("$root/groupedData", "$base::getMultiStatisticData");
          /**
         * @OA\Get(
         *   path="/histogram/{dimension}",
@@ -120,21 +120,170 @@ class EfficiencyControllerProvider extends BaseControllerProvider
     }
 
     /**
+     * Get histogram chart object
+     *
+     * @param Request $request
+     * @param Application $app
+     * @param $dimension
+     * @return JsonResponse
+     */
+    public function getHistogramData(Request $request, Application $app, $dimension)
+    {
+        $user = $this->getUserFromRequest($request);
+
+        $params = $request->query->all();
+
+        $metricExplorer = new MetricExplorer($params);
+
+        $meResponse = $metricExplorer->get_data($user);
+        $chartData = array();
+        $results = json_decode($meResponse['results'], true);
+
+        if (isset($results['data'][0]['data'][0])) {
+            $chartData = $results['data'][0]['data'][0];
+            $results['data'][0]['layout']['xaxis']['tickmode'] = 'auto';
+            $results['data'][0]['layout']['xaxis']['categoryorder'] = 'trace';
+            $buckets = $this->getDimensionValues($request, $dimension);
+            $drillDowns = array_column($chartData['drilldown'], 'id');
+            $colors = array();
+
+            foreach ($buckets as $bucket) {
+                if (array_search($bucket['id'], $drillDowns, true) === false) {
+                    $chartData['x'][] = $bucket['label'];
+                    $chartData['y'][] = 0;
+                    $chartData['drilldown'][] = array('id' => $bucket['id'], 'label' => $bucket['label']);
+                }
+            }
+
+            switch($dimension){
+                case 'cpuuser':
+                case 'gpu_usage_bucketid':
+                case 'wall_time_accuracy_bucketid':
+                    foreach ($chartData['drilldown'] as $drilldown) {
+                        if ($drilldown['id'] == 1 || $drilldown['id'] == 2 || $drilldown['id'] == 3) {
+                            $colors[] = '#FF0000';
+                        } elseif ($drilldown['id'] == 4 || $drilldown['id'] == 5) {
+                            $colors[] = '#FFB336';
+                        } elseif ($drilldown['id'] == 6 || $drilldown['id'] == 7 || $drilldown['id'] == 8) {
+                            $colors[] = '#DDDF00';
+                        } elseif ($drilldown['id'] == 9 || $drilldown['id'] == 10) {
+                            $colors[] = '#50B432';
+                        } else {
+                            $colors[] = "gray";
+                        }
+                    }
+                    // Sort data due to missing buckets added
+                    $drilldowns = array_column($chartData['drilldown'], 'id');
+                    array_multisort($drilldowns, SORT_ASC, $chartData['x'], $chartData['y'], $chartData['drilldown'], $colors);
+                    // Shift NA category to end
+                    if (in_array('gray', $colors)) {
+                        $naBucket = array_shift($chartData['drilldown']);
+                        $chartData['drilldown'][] = $naBucket;
+
+                        $gtninetyXBucket = array_shift($chartData['x']);
+                        $gtninetyYBucket = array_shift($chartData['y']);
+                        $chartData['x'][] = $gtninetyXBucket;
+                        $chartData['y'][] = $gtninetyYBucket;
+
+                        $gtninetyColorBucket = array_shift($colors);
+                        $colors[] = $gtninetyColorBucket;
+                    }
+
+                    $chartData['marker']['color'] = $colors;
+
+                    $results['data'][0]['data'] = array($chartData);
+                    break;
+                case 'max_mem':
+                    foreach ($chartData['drilldown'] as $drilldown) {
+                        if ($drilldown['id'] == 1 || $drilldown['id'] == 10) {
+                            $colors[] = '#FF0000';
+                        } elseif ($drilldown['id'] == 0) {
+                            $colors[] = 'gray';
+                        } else {
+                            $colors[] = "#50B432";
+                        }
+                    }
+                    // Sort data due to missing buckets added
+                    $drilldowns = array_column($chartData['drilldown'], 'id');
+                    array_multisort($drilldowns, SORT_ASC, $chartData['x'], $chartData['y'], $chartData['drilldown'], $colors);
+                    // Shift NA category to end
+                    if (in_array('gray', $colors)) {
+                        $naBucket = array_shift($chartData['drilldown']);
+                        $chartData['drilldown'][] = $naBucket;
+
+                        $gtninetyXBucket = array_shift($chartData['x']);
+                        $gtninetyYBucket = array_shift($chartData['y']);
+                        $chartData['x'][] = $gtninetyXBucket;
+                        $chartData['y'][] = $gtninetyYBucket;
+
+                        $gtninetyColorBucket = array_shift($colors);
+                        $colors[] = $gtninetyColorBucket;
+                    }
+
+                    $chartData['marker']['color'] = $colors;
+
+                    $results['data'][0]['data'] = array($chartData);
+                    break;
+                case 'homogeneity_bucket_id':
+                    foreach ($chartData['drilldown'] as $drilldown) {
+                        if ($drilldown['id'] == 1 || $drilldown['id'] == 2) {
+                            $colors[] = '#FF0000';
+                        } elseif ($drilldown['id'] == 3 || $drilldown['id'] == 4) {
+                            $colors[] = '#FFB336';
+                        } elseif ($drilldown['id'] == 5 || $drilldown['id'] == 6) {
+                            $colors = '#DDDF00';
+                        } elseif ($drilldown['id'] == 7 || $drilldown['id'] == 8) {
+                            $colors = '#50B432';
+                        } else {
+                            $colors = "gray";
+                        }
+                    }
+                    // Sort data due to missing buckets added
+                    $drilldowns = array_column($chartData['drilldown'], 'id');
+                    array_multisort($drilldowns, SORT_ASC, $chartData['x'], $chartData['y'], $chartData['drilldown'], $colors);
+                    $chartData['marker']['color'] = $colors;
+
+                    $results['data'][0]['data'] = array($chartData);
+                    break;
+                case 'jobwalltime':
+                    foreach ($chartData['drilldown'] as $drilldown) {
+                        if ($drilldown['id'] == 0 || $drilldown['id'] == 1) {
+                            $colors[] = '#FF0000';
+                        }
+                    }
+                    // Sort data due to missing buckets added
+                    $drilldowns = array_column($chartData['drilldown'], 'id');
+                    array_multisort($drilldowns, SORT_ASC, $chartData['x'], $chartData['y'], $chartData['drilldown'], $colors);
+                    $chartData['marker']['color'] = $colors;
+
+                    $results['data'][0]['data'] = array($chartData);
+                    break;
+                default:
+                    $results['data'][0]['data'] = array($chartData);
+                    break;
+            }
+        }
+
+        return $app->json(array(
+            'success' => true,
+            'message' => "",
+            "data" => array($results['data'][0]),
+            "totalCount" => 1
+        ));
+    }
+
+    /**
      * Retrieve scatter plot data
      *
      * @param Request $request
      * @param Application $app
      * @return JsonResponse
      */
-    public function getScatterPlotData(Request $request, Application $app, $analytic)
+    public function getMultiStatisticData(Request $request, Application $app)
     {
-        //Datasets array to be returned - includes user data dataset and restricted data dataset.
-        $datasets = array();
         $user = $this->authorize($request);
 
         $json_config = $this->getStringParam($request, 'config', true);
-        $start = $this->getIntParam($request, 'start', true);
-        $limit = $this->getIntParam($request, 'limit', true);
 
         $config = json_decode($json_config);
 
@@ -156,367 +305,91 @@ class EfficiencyControllerProvider extends BaseControllerProvider
             throw new AccessDeniedException('access denied to ' . json_encode($forbiddenStats));
         }
 
-        if ($analytic !== 'Short Job Count') {
-            $query = new \DataWarehouse\Query\AggregateQuery(
-                $config->realm,
-                $config->aggregation_unit,
-                $config->start_date,
-                $config->end_date,
-                $config->group_by
-            );
+        $query = new \DataWarehouse\Query\AggregateQuery(
+            $config->realm,
+            $config->aggregation_unit,
+            $config->start_date,
+            $config->end_date,
+            $config->group_by
+        );
 
-            $allRoles = $user->getAllRoles();
-            $roles = $query->setMultipleRoleParameters($allRoles, $user);
+        $group_id = $config->group_by . '_id';
+        $group_name = $config->group_by . '_name';
 
-            foreach ($config->statistics as $stat) {
-                $query->addStat($stat);
-            }
+        $output = array(
+            'count' => 0,
+            'max' => array(),
+            'anon_data' => array(
+                $group_id => array(),
+                $group_name => array()
+            ),
+            'data' => array(
+                $group_id => array(),
+                $group_name => array()
+            )
+        );
 
-            if (property_exists($config, 'filters')) {
-                $query->setRoleParameters($config->filters);
-            }
-
-            if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-                throw new BadRequestHttpException('Malformed config property order_by');
-            }
-            $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
-
-            $query->addOrderBy($config->order_by->field, $dirn);
-
-            $dataset = new \DataWarehouse\Data\SimpleDataset($query);
-            $results = $dataset->getResults($limit, $start);
-            foreach ($results as $key => &$val) {
-                $val['name'] = $val[$config->group_by . '_name'];
-                $val['id'] = $val[$config->group_by . '_id'];
-                $val['short_name'] = $val[$config->group_by . '_short_name'];
-                $val['order_id'] = $val[$config->group_by . '_order_id'];
-                unset($val[$config->group_by . '_id']);
-                unset($val[$config->group_by . '_name']);
-                unset($val[$config->group_by . '_short_name']);
-                unset($val[$config->group_by . '_order_id']);
-
-                if ($val[$config->statistics[0]] == null || $val[$config->statistics[1]] == null){
-                    unset($results[$key]);
-                }
-            }
-
-            $results = array_values($results);
-            //Dataset that shows detailed information that the user has access to
-            $datasets['results'] = $results;
-            $datasets['hiddenData'] = array();
-            /*
-                If user is restricted from viewing data, get dataset that has all points without name attached
-                Runs the same query as above without role restrictions and returns data without name
-            */
-            if (count($roles) > 0) {
-                $query = new \DataWarehouse\Query\AggregateQuery(
-                    $config->realm,
-                    $config->aggregation_unit,
-                    $config->start_date,
-                    $config->end_date,
-                    $config->group_by
-                );
-
-                foreach ($config->statistics as $stat) {
-                    $query->addStat($stat);
-                }
-
-                if (property_exists($config, 'filters')) {
-                    $query->setRoleParameters($config->filters);
-                }
-
-                if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-                    throw new BadRequestHttpException('Malformed config property order_by');
-                }
-                $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
-
-                $query->addOrderBy($config->order_by->field, $dirn);
-
-                $dataset = new \DataWarehouse\Data\SimpleDataset($query);
-                $data = $dataset->getResults($limit, $start);
-
-                foreach ($data as $key => &$val) {
-                    $val['id'] = $val[$config->group_by . '_id'];
-                    $val['order_id'] = $val[$config->group_by . '_order_id'];
-                    unset($val[$config->group_by . '_id']);
-                    unset($val[$config->group_by . '_name']);
-                    unset($val[$config->group_by . '_short_name']);
-                    unset($val[$config->group_by . '_order_id']);
-
-                    if ($val[$config->statistics[0]] == null || $val[$config->statistics[1]] == null){
-                        unset($data[$key]);
-                    }
-                }
-
-                $data = array_values($data);
-
-                //Dataset that shows only data points and no identifying information
-                $datasets['hiddenData'] = $data;
-            }
-
-            return $app->json(
-                array(
-                    'results' => [$datasets],
-                    'total' => $dataset->getTotalPossibleCount(),
-                    'success' => true
-                )
-            );
-        } else {
-            $query = new \DataWarehouse\Query\AggregateQuery(
-                $config->realm,
-                $config->aggregation_unit,
-                $config->start_date,
-                $config->end_date,
-                $config->group_by
-            );
-
-            $allRoles = $user->getAllRoles();
-            $roles = $query->setMultipleRoleParameters($allRoles, $user);
-
-            $query->addStat($config->statistics[0]);
-
-            if (property_exists($config, 'filters')) {
-                $query->setRoleParameters($config->filters);
-            }
-
-            if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-                throw new BadRequestHttpException('Malformed config property order_by');
-            }
-
-            $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
-            $query->addOrderBy($config->order_by->field, $dirn);
-
-            $usageStatDataSet = new \DataWarehouse\Data\SimpleDataset($query);
-            $usageResults = $usageStatDataSet->getResults($limit, $start);
-
-            if (property_exists($config, 'mandatory_filters')) {
-                $query->setRoleParameters($config->mandatory_filters);
-            }
-
-            $efficiencyStatDataset = new \DataWarehouse\Data\SimpleDataset($query);
-            $efficiencyResults = $efficiencyStatDataset->getResults($limit, $start);
-
-            foreach($efficiencyResults as &$val){
-                $val['short_job_count'] = $val['job_count'];
-                $val['name'] = $val[$config->group_by . '_name'];
-                $val['id'] = $val[$config->group_by . '_id'];
-                $val['short_name'] = $val[$config->group_by . '_short_name'];
-                $val['order_id'] = $val[$config->group_by . '_order_id'];
-                unset($val['job_count']);
-                unset($val[$config->group_by . '_id']);
-                unset($val[$config->group_by . '_name']);
-                unset($val[$config->group_by . '_short_name']);
-                unset($val[$config->group_by . '_order_id']);
-
-                foreach($usageResults as $val2){
-                    if($val2[$config->group_by . '_id'] == $val['id']){
-                        $val['job_count'] = $val2['job_count'];
-                    }
-                }
-            }
-
-            //Dataset that shows detailed information that the user has access to
-            $datasets['results'] = $efficiencyResults;
-            $datasets['hiddenData'] = array();
-
-            /*
-                If user is restricted from viewing data, get dataset that has all points without name attached
-                Runs the same query as above without role restrictions and returns data without name
-            */
-            if (count($roles) > 0) {
-                $query = new \DataWarehouse\Query\AggregateQuery(
-                    $config->realm,
-                    $config->aggregation_unit,
-                    $config->start_date,
-                    $config->end_date,
-                    $config->group_by
-                );
-
-                $query->addStat($config->statistics[0]);
-
-                if (property_exists($config, 'filters')) {
-                    $query->setRoleParameters($config->filters);
-                }
-
-                if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
-                    throw new BadRequestHttpException('Malformed config property order_by');
-                }
-
-                $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
-                $query->addOrderBy($config->order_by->field, $dirn);
-
-                $usageStatDataSet = new \DataWarehouse\Data\SimpleDataset($query);
-                $usageData = $usageStatDataSet->getResults($limit, $start);
-
-                if (property_exists($config, 'mandatory_filters')) {
-                    $query->setRoleParameters($config->mandatory_filters);
-                }
-
-                $efficiencyStatDataset = new \DataWarehouse\Data\SimpleDataset($query);
-                $efficiencyData = $efficiencyStatDataset->getResults($limit, $start);
-
-                foreach($efficiencyData as &$val){
-                    $val['short_job_count'] = $val['job_count'];
-                    $val['id'] = $val[$config->group_by . '_id'];
-                    $val['order_id'] = $val[$config->group_by . '_order_id'];
-                    unset($val['job_count']);
-                    unset($val[$config->group_by . '_id']);
-                    unset($val[$config->group_by . '_name']);
-                    unset($val[$config->group_by . '_short_name']);
-                    unset($val[$config->group_by . '_order_id']);
-
-                    foreach($usageData as $val2){
-                        if($val2[$config->group_by . '_id'] == $val['id']){
-                            $val['job_count'] = $val2['job_count'];
-                        }
-                    }
-                }
-
-                $datasets['hiddenData'] = $efficiencyData;
-            }
-
-            return $app->json(
-                array(
-                    'results' => [$datasets],
-                    'total' => $efficiencyStatDataset->getTotalPossibleCount(),
-                    'success' => true
-                )
-            );
-        }
-    }
-
-    /**
-     * Get histogram chart object
-     *
-     * @param Request $request
-     * @param Application $app
-     * @param $dimension
-     * @return JsonResponse
-     */
-    public function getHistogramData(Request $request, Application $app, $dimension)
-    {
-        $user = $this->getUserFromRequest($request);
-
-        $params = $request->query->all();
-
-        $metricExplorer = new MetricExplorer($params);
-
-        $meResponse = $metricExplorer->get_data($user);
-        $chartData = array();
-        $results = json_decode($meResponse['results'], true);
-
-        if (isset($results['data'][0]['series'][0])) {
-            $chartData = $results['data'][0]['series'][0]['data'];
-            $buckets = $this->getDimensionValues($request, $dimension);
-            $drillDowns = array_column($chartData, 'drilldown');
-
-            foreach ($buckets as $bucket) {
-                if (array_search($bucket['id'], array_column($drillDowns, 'id'), true) === false) {
-                    $chartData[] = ['y' => 0, 'drilldown' => array('id' => $bucket['id'], 'label' => $bucket['label'])];
-                }
-            }
-
-            switch($dimension){
-                case 'cpuuser':
-                case 'gpu_usage_bucketid':
-                case 'wall_time_accuracy_bucketid':
-                    foreach ($chartData as &$dataPoint) {
-                        if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 2 || $dataPoint['drilldown']['id'] == 3) {
-                            $dataPoint['color'] = '#FF0000';
-                        } elseif ($dataPoint['drilldown']['id'] == 4 || $dataPoint['drilldown']['id'] == 5) {
-                            $dataPoint['color'] = '#FFB336';
-                        } elseif ($dataPoint['drilldown']['id'] == 6 || $dataPoint['drilldown']['id'] == 7 || $dataPoint['drilldown']['id'] == 8) {
-                            $dataPoint['color'] = '#DDDF00';
-                        } elseif ($dataPoint['drilldown']['id'] == 9 || $dataPoint['drilldown']['id'] == 10) {
-                            $dataPoint['color'] = '#50B432';
-                        } else {
-                            $dataPoint['color'] = "gray";
-                        }
-                    }
-
-                    array_multisort(array_map(function ($element) {
-                        return $element['drilldown']['id'];
-                    }, $chartData), SORT_ASC, $chartData);
-
-                    //Move NA bucket to end of array
-                    $key = array_search('gray', array_column($chartData, 'color'));
-                    if( $key === 0 ){
-                        $naBucket = array_shift($chartData);
-                        array_push($chartData, $naBucket);
-                    }
-
-                    $results['data'][0]['series'][0]['data'] = $chartData;
-                    break;
-                case 'max_mem':
-                    foreach ($chartData as &$dataPoint) {
-                        if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 10) {
-                            $dataPoint['color'] = '#FF0000';
-                        } elseif ($dataPoint['drilldown']['id'] == 0) {
-                            $dataPoint['color'] = 'gray';
-                        } else {
-                            $dataPoint['color'] = "#50B432";
-                        }
-                    }
-
-                    array_multisort(array_map(function ($element) {
-                        return $element['drilldown']['id'];
-                    }, $chartData), SORT_ASC, $chartData);
-
-                    //Move NA bucket to end of array
-                    $key = array_search('gray', array_column($chartData, 'color'));
-                    if ($key === 0) {
-                        $naBucket = array_shift($chartData);
-                        array_push($chartData, $naBucket);
-                    }
-
-                    $results['data'][0]['series'][0]['data'] = $chartData;
-                    break;
-                case 'homogeneity_bucket_id':
-                    foreach ($chartData as &$dataPoint) {
-                        if ($dataPoint['drilldown']['id'] == 1 || $dataPoint['drilldown']['id'] == 2) {
-                            $dataPoint['color'] = '#FF0000';
-                        } elseif ($dataPoint['drilldown']['id'] == 3 || $dataPoint['drilldown']['id'] == 4) {
-                            $dataPoint['color'] = '#FFB336';
-                        } elseif ($dataPoint['drilldown']['id'] == 5 || $dataPoint['drilldown']['id'] == 6) {
-                            $dataPoint['color'] = '#DDDF00';
-                        } elseif ($dataPoint['drilldown']['id'] == 7 || $dataPoint['drilldown']['id'] == 8) {
-                            $dataPoint['color'] = '#50B432';
-                        } else {
-                            $dataPoint['color'] = "gray";
-                        }
-                    }
-
-                    array_multisort(array_map(function ($element) {
-                        return $element['drilldown']['id'];
-                    }, $chartData), SORT_ASC, $chartData);
-
-                    $results['data'][0]['series'][0]['data'] = $chartData;
-                    break;
-                case 'jobwalltime':
-                    foreach ($chartData as &$dataPoint) {
-                        if ($dataPoint['drilldown']['id'] == 0 || $dataPoint['drilldown']['id'] == 1) {
-                            $dataPoint['color'] = '#FF0000';
-                        }
-                    }
-
-                    array_multisort(array_map(function ($element) {
-                        return $element['drilldown']['id'];
-                    }, $chartData), SORT_ASC, $chartData);
-
-                    $results['data'][0]['series'][0]['data'] = $chartData;
-                    break;
-                default:
-                    $results['data'][0]['series'][0]['data'] = $chartData;
-                    break;
-            }
+        foreach ($config->statistics as $stat) {
+            $query->addStat($stat);
+            $output['anon_data'][$stat] = array();
+            $output['data'][$stat] = array();
+            $output['max'][$stat] = 0;
         }
 
-        return $app->json(array(
-            'success' => true,
-            'message' => "",
-            "data" => array($results['data'][0]),
-            "totalCount" => 1
-        ));
+        if (property_exists($config, 'filters')) {
+            $query->setRoleParameters($config->filters);
+        }
+
+        if (!property_exists($config->order_by, 'field') || !property_exists($config->order_by, 'dirn')) {
+            throw new BadRequestHttpException('Malformed config property order_by');
+        }
+
+        $dirn = $config->order_by->dirn === 'asc' ? 'ASC' : 'DESC';
+
+        $query->addOrderBy($config->order_by->field, $dirn);
+
+        // always add the group by order field to guarantee that the priv data and non-priv data
+        // order is the same - this similfies the join algorithm since you can step though both
+        // at the same time.
+        $query->addOrderBy($config->group_by, 'ASC');
+
+        $dataset = new \DataWarehouse\Data\SimpleDataset($query);
+        $results = $dataset->getResults();
+
+        // Now get priv query
+        $privResults = null;
+        $allRoles = $user->getAllRoles();
+        $roles = $query->setMultipleRoleParameters($allRoles, $user);
+        if (count($roles) > 0 ) {
+            $privDataset = new \DataWarehouse\Data\SimpleDataset($query);
+            $privResults = $privDataset->getResults();
+        }
+
+        $privIdx = 0;
+        foreach ($results as $val) {
+            $destination = 'anon_data';
+            if ($privResults === null || (count($privResults) > $privIdx && $privResults[$privIdx][$group_id] == $val[$group_id])) {
+                $privIdx += 1;
+                $destination = 'data';
+            }
+
+            foreach($config->statistics as $stat) {
+                $output[$destination][$stat][] = $val[$stat];
+                $output['max'][$stat] = max($output['max'][$stat], $val[$stat]);
+            }
+            $output[$destination][$group_id][] = $val[$group_id];
+            $output[$destination][$group_name][] = $val[$group_name];
+            $output['count'] += 1;
+        }
+
+        sleep(0.5);
+        return $app->json(
+            array(
+                'results' => [$output],
+                'total' => 1,
+                'success' => true
+            )
+        );
     }
 
     /**

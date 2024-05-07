@@ -283,6 +283,7 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'running_job_count' => 'Number of Jobs Running',
             'started_job_count' => 'Number of Jobs Started',
             'submitted_job_count' => 'Number of Jobs Submitted',
+            'short_job_count' => 'Number of Short Jobs Ended',
             'wait_time_per_job' => 'Wait Hours: Per Job',
             'wait_time' => 'Wait Hours: Total',
             'wall_time_per_job' => 'Wall Hours: Per Job',

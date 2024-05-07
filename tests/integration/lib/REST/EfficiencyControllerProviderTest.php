@@ -93,8 +93,6 @@ class EfficiencyTest extends BaseTest
         $config = array_merge($config, $configOverrides);
 
         return array(
-            'start' => 0,
-            'limit' => 10,
             'config' => json_encode($config)
         );
     }
@@ -105,7 +103,7 @@ class EfficiencyTest extends BaseTest
         $inputs = array();
 
         $inputs[] = array('cd', $params, 4, 0);
-        $inputs[] = array('usr', $params, 1, 4);
+        $inputs[] = array('usr', $params, 4, 3);
 
         return $inputs;
     }
@@ -113,35 +111,37 @@ class EfficiencyTest extends BaseTest
     /**
      * @dataProvider scatterPlotDataAccessUsers
      */
-    public function testCPUUsageScatterPlotEndpoint($usr, $params, $result_count, $hidden_data_count)
+    public function testCPUUsageScatterPlotEndpoint($usr, $params, $person_count, $anon_person_count)
     {
-        $response = self::$helpers[$usr]->get(self::ENDPOINT . 'scatterPlot/CPU%20Usage', $params);
+        $response = self::$helpers[$usr]->get(self::ENDPOINT . 'groupedData', $params);
 
         $this->assertEquals(200, $response[1]['http_code']);
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $this->assertCount($result_count, $response[0]['results'][0]['results']);
-        $this->assertCount($hidden_data_count, $response[0]['results'][0]['hiddenData']);
+        $data = $response[0];
+
+        $this->assertEquals($person_count, $data['results'][0]['count']);
+        $this->assertCount($anon_person_count, $data['results'][0]['anon_data']['person_id']);
     }
 
     public function testCPUUsageScatterPlotEndpointWithFilter()
     {
         $params = $this->getScatterPlotDataParameters(array('filters' => array('queue' => array("chapti"))));
-        $response = self::$helpers['cd']->get(self::ENDPOINT . 'scatterPlot/CPU%20Usage', $params);
+        $response = self::$helpers['cd']->get(self::ENDPOINT . 'groupedData', $params);
 
         $this->assertEquals(200, $response[1]['http_code']);
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $this->assertCount(3, $response[0]['results'][0]['results']);
-        $this->assertCount(0, $response[0]['results'][0]['hiddenData']);
+        $this->assertEquals(3, $response[0]['results'][0]['count']);
+        $this->assertCount(0, $response[0]['results'][0]['anon_data']['person_id']);
     }
 
     public function testCPUUsageScatterPlotEndpointPub()
     {
         $params = $this->getScatterPlotDataParameters();
-        $response = self::$helpers['pub']->get(self::ENDPOINT . 'scatterPlot/CPU%20Usage', $params);
+        $response = self::$helpers['pub']->get(self::ENDPOINT . 'groupedData', $params);
 
         $this->assertEquals(401, $response[1]['http_code']);
         $this->assertArrayHasKey('success', $response[0]);
@@ -167,7 +167,7 @@ class EfficiencyTest extends BaseTest
     public function provideCPUUsageScatterPlotEndpointMalformedRequest()
     {
         $validInput = [
-            'path' => self::ENDPOINT . 'scatterPlot/CPU%20Usage',
+            'path' => self::ENDPOINT . 'groupedData',
             'method' => 'get',
             'params' => $this->getScatterPlotDataParameters(),
             'data' => null
@@ -177,7 +177,6 @@ class EfficiencyTest extends BaseTest
             $validInput,
             [
                 'authentication' => true,
-                'int_params' => ['start', 'limit'],
                 'string_params' => ['config']
             ]
         );
@@ -355,7 +354,7 @@ class EfficiencyTest extends BaseTest
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $this->assertCount($seriesCount, $response[0]['data'][0]['series'][0]['data']);
+        $this->assertCount($seriesCount, $response[0]['data'][0]['data'][0]['y']);
     }
 
     public function testCPUUsageDrilldownPlotWithFilter()
@@ -390,7 +389,7 @@ class EfficiencyTest extends BaseTest
         $this->assertArrayHasKey('success', $response[0]);
         $this->assertTrue($response[0]['success']);
 
-        $this->assertCount(4, $response[0]['data'][0]['series'][0]['data']);
+        $this->assertCount(4, $response[0]['data'][0]['data'][0]['y']);
     }
 
     public function drilldownDataMalformedRequest()
@@ -465,7 +464,7 @@ class EfficiencyTest extends BaseTest
         if ($http_code == 200) {
             $this->assertArrayHasKey('success', $resdata);
             $this->assertTrue($resdata['success']);
-            $this->assertCount(0, $response[0]['data'][0]['series']);
+            $this->assertCount(0, $response[0]['data'][0]['data']);
         } else {
             $this->assertArrayHasKey('success', $resdata);
             $this->assertFalse($resdata['success']);
