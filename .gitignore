@@ -257,12 +257,12 @@ xdmod-*.rpm
 /.sonar/
 external_libraries/
 
-/html/gui/lib/highcharts
 /html/gui/lib/jquery
 /html/gui/lib/jquery-plugins
 /html/gui/lib/moment
 /html/gui/lib/moment-timezone
 /html/gui/lib/rsvp
+/html/gui/lib/plotly
 
 # Custom PHPUnit configuration files.
 /open_xdmod/modules/*/tests/phpunit.xml
@@ -311,6 +311,10 @@ configuratuon/datawarehouse.d/ref/supremm-statistics.json
 
 # External dependencies
 /html/gui/lib/*
+
+# Include NPM configuration files.
+!/html/gui/lib/package.json
+!/html/gui/lib/package-lock.json
 
 # External QA assets
 /.qa/

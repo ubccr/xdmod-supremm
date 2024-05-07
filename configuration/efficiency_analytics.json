@@ -41,8 +41,7 @@
                     "metricTitle": "CPU Hours",
                     "group_by" : "cpuuser",
                     "groupByTitle": "CPU User",
-                    "rotate": true,
-                    "arrowImg": "right_arrow.png",
+                    "arrowImg": "left_arrow.png",
                     "histogramHelpText": [
                         "<div class='text'>",
                         "<h6> What is this analytic? </h6>",
@@ -93,8 +92,7 @@
                     "metricTitle": "GPU Hours Total",
                     "group_by" : "gpu_usage_bucketid",
                     "groupByTitle": "GPU Active Value",
-                    "rotate": true,
-                    "arrowImg": "right_arrow.png",
+                    "arrowImg": "left_arrow.png",
                     "histogramHelpText": [
                         "<div class='text'>",
                         "<h6> What is this analytic? </h6>",
@@ -145,7 +143,6 @@
                     "metricTitle": "CPU Hours Total",
                     "group_by" : "max_mem",
                     "groupByTitle": "Peak Memory Usage (%)",
-                    "rotate": true,
                     "arrowImg": "double_headed_arrow.png",
                     "histogramHelpText": [
                         "<div class='text'>",
@@ -197,8 +194,7 @@
                     "metricTitle": "CPU Hours",
                     "group_by" : "homogeneity_bucket_id",
                     "groupByTitle": "Homogeneity",
-                    "rotate": true,
-                    "arrowImg": "right_arrow.png"
+                    "arrowImg": "left_arrow.png"
                 }
             }
         ]
@@ -245,8 +241,7 @@
                     "metricTitle": "Core Hours",
                     "group_by" : "wall_time_accuracy_bucketid",
                     "groupByTitle": "Wall Time Accuracy Value",
-                    "rotate": true,
-                    "arrowImg": "right_arrow.png",
+                    "arrowImg": "left_arrow.png",
                     "histogramHelpText": [
                         "<div class='text'>",
                         "<h6> What is this analytic? </h6>",
@@ -265,10 +260,9 @@
                 "title": "Short Jobs",
                 "field": "job_count",
                 "statistics": [
-                    "job_count",
+                    "short_job_count",
                     "job_count"
                 ],
-                "mandatoryFilters" : {"jobwalltime" : "[0,1]"},
                 "statisticLabels": [
                     "Number of Short Jobs (&lt; 30s)",
                     "Total Number of Jobs Ended"
@@ -298,8 +292,7 @@
                     "metricTitle": "Number of Jobs Ended",
                     "group_by" : "jobwalltime",
                     "groupByTitle": "Job Wall Time",
-                    "rotate": true,
-                    "arrowImg": "right_arrow.png",
+                    "arrowImg": "left_arrow.png",
                     "histogramHelpText": [
                         "<div class='text'>",
                         "<h6> What is this analytic? </h6>",

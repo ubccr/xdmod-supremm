@@ -34,8 +34,8 @@ defaults:
       type: "pages"
     values:
       layout: "page"
-      version: "10.5"
-      sw_version: "10.5.0"
+      version: "11.0"
+      sw_version: "11.0.0"
       summ_sw_version: "2.0.0"
       style: "effervescence"
       tocversion: "toc"

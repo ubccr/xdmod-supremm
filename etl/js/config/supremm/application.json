@@ -2239,5 +2239,24 @@
             "^gr-co-[0-9]{4}$",
             "^gr-[0-9]{4}-[23]d-co$"
         ]
+    },
+    {
+        "name": "MOM6",
+        "license_type": "permissive",
+        "science_area": "Climate and Weather",
+        "url": "https://www.gfdl.noaa.gov/mom-ocean-model/",
+        "execmatch": [
+            "^MOM6$"
+        ]
+    },
+    {
+        "name": "ROMS",
+        "license_type": "permissive",
+        "science_area": "Climate and Weather",
+        "url": "https://www.myroms.org/",
+        "execmatch": [
+            "^oceanM$",
+            "^oceanM\\."
+        ]
     }
 ]

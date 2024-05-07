@@ -46,7 +46,7 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                     border: false,
                     autoScroll: true,
                     panelSettings: {
-                        url: XDMoD.REST.url + '/efficiency/scatterPlot/' + self.config.analytic,
+                        url: XDMoD.REST.url + '/efficiency/groupedData',
                         baseParams: {
                             start: 0,
                             limit: 3000,
@@ -57,11 +57,10 @@ XDMoD.Module.Efficiency.AnalyticPanel = Ext.extend(Ext.Panel, {
                                 start_date: Ext.getCmp('efficiency').getDurationSelector().getStartDate(),
                                 end_date: Ext.getCmp('efficiency').getDurationSelector().getEndDate(),
                                 order_by: {
-                                    field: self.config.field,
-                                    dirn: 'asc'
+                                    field: self.config.statistics[1],
+                                    dirn: 'desc'
                                 },
                                 filters: [],
-                                mandatory_filters: self.config.mandatoryFilters,
                                 statistics: self.config.statistics
                             })
                         }
