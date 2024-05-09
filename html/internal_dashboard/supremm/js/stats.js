@@ -4,40 +4,36 @@ Ext.ns('XDMoD', 'XDMoD.SupremmDataFlow');
 XDMoD.SupremmDataFlow = {
     resource_map: {},
     loadData: function (selector, endPoint, resourceId) {
-        $(selector).html('<img src="/gui/images/loading.gif"></img>Loading');
+        const el = document.querySelector(selector);
+        el.innerHTML = '<img src="/gui/images/loading.gif"></img>Loading';
 
-        $.getJSON(XDMoD.REST.url + '/supremm_dataflow/dbstats',
-            {
-                token: XDMoD.REST.token,
-                resource_id: resourceId,
-                db_id: endPoint
-            },
-            function (data) {
-                var html = '<ul>';
-                var d = data.data.data;
-                for (var k in d) {
-                    if (d.hasOwnProperty(k)) {
-                        html += '<li>' + k + ': ' + d[k] + '</li>';
-                    }
-                }
-                html += '</ul>';
-                $(selector).html(html);
-            }
-        ).fail(function (jqXHR, textStatus, errorThrown) {
-            var html = '<b>Error<b>';
-            if (jqXHR.responseJSON) {
-                if (jqXHR.responseJSON.message) {
-                    html += '<br />' + jqXHR.responseJSON.message;
-                }
+        const response = fetch(`${XDMoD.REST.url}/supremm_dataflow/dbstats?token=${XDMoD.REST.token}&resource_id=${resourceId}&db_id=${endPoint}`, {
+            method: 'GET',
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`[<b>Error<b> ${response.status}]: ${response.statusText}`);
             } else {
-                html += textStatus + ' ' + errorThrown;
+                return response.json();
             }
-            $(selector).html(html);
-        });
+        })
+        .then((data) => {
+            let html = '<ul>';
+            let d = data.data.data;
+            for (let k in d) {
+                if (d.hasOwnProperty(k)) {
+                    html += '<li>' + k + ': ' + d[k] + '</li>';
+                }
+            }
+            html += '</ul>';
+            el.innerHTML = html;
+            el.display = 'none';
+        })
+        .catch((errorText) => document.querySelector('#loading').innerHTML = errorText);
     },
     loadAllStats: function (resourceId) {
-        $('#pagetitle').text('Data flow information for ' + XDMoD.SupremmDataFlow.resource_map[resourceId]);
-        $('#flowchart').show(500);
+        document.querySelector('#pagetitle').textContent = 'Data flow information for ' + XDMoD.SupremmDataFlow.resource_map[resourceId];
+        document.querySelector('#flowchart').classList.replace('hide', 'show');
 
         XDMoD.SupremmDataFlow.loadData('#local_mirror_content', 'nodearchives', resourceId);
         XDMoD.SupremmDataFlow.loadData('#accountfact_content', 'accountfact', resourceId);
@@ -115,18 +111,33 @@ jsPlumb.ready(function () {
     }, common);
 });
 
-$(document).ready(function () {
-    $('#resourceform').hide();
-    $('#flowchart').hide();
-    $('#resourceform').submit(function (evt) {
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector('#resourceform').display = 'none';
+    document.querySelector('#flowchart').display = 'none';
+
+    document.querySelector('#resourceform').addEventListener('submit', (evt) => {
         evt.preventDefault();
-        $('#flowchart').hide();
-        XDMoD.SupremmDataFlow.loadAllStats($('#resourceselect').val());
-    });
+        document.querySelector('#flowchart').display = 'none';
+        XDMoD.SupremmDataFlow.loadAllStats(document.querySelector('#resourceselect').value);
+    })
 
-    $.getJSON(XDMoD.REST.url + '/supremm_dataflow/resources', { token: XDMoD.REST.token }, function (data) {
-        var select = document.getElementById('resourceselect');
-
+    const response = fetch(`${XDMoD.REST.url}/supremm_dataflow/resources?token=${XDMoD.REST.token}`, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`[<b>Error<b> ${response.status}]: ${response.statusText}`);
+        } else {
+            return response.json();
+        }
+    })
+    .then((data) => {
+        let select = document.getElementById('resourceselect');
+        const form = document.querySelector('#resourceform');
         for (var i = 0; i < data.data.length; i++) {
             var element = data.data[i];
             var tmp = document.createElement('option');
@@ -135,18 +146,9 @@ $(document).ready(function () {
             select.appendChild(tmp);
             XDMoD.SupremmDataFlow.resource_map[element.id] = element.name;
         }
-        $('#loading').hide();
-        $('#resourceform').show(500);
-        $('#resourceform').submit();
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        var html = '<b>Error</b><br />';
-        if (jqXHR.responseJSON) {
-            if (jqXHR.responseJSON.message) {
-                html += jqXHR.responseJSON.message;
-            }
-        } else {
-            html += textStatus + ' ' + errorThrown;
-        }
-        $('#loading').html(html);
-    });
+        document.querySelector('#loading').display = 'none';
+        document.querySelector('#resourceform').classList.replace('hide', 'show');
+        //form.submit();
+    })
+    .catch((errorText) => document.querySelector('#loading').innerHTML = errorText);
 });

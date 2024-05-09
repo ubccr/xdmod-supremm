@@ -76,12 +76,12 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                 // Add filters for each dimension to the filterObj to be applied to the scatter plot
                                 var dimensionObj = {};
                                 dimensionObj[dimension] = filterValues;
-                                jQuery.extend(filterObj, dimensionObj);
+                                filterObj ={  ...filterObj, ...dimensionObj };
 
                                 // Add filters for each dimension to the aggFilters object for keeping track of filtering on breadcrumb navigation
                                 var aggDimensionObj = {};
                                 aggDimensionObj[dimension] = checkedFilters;
-                                jQuery.extend(aggFilters, aggDimensionObj);
+                                aggFilters = { ...aggFilters, ...aggDimensionObj };
 
                                 subtitle += `${dimensionList[i]}: ${filterSubtitle}; `;
                             }
