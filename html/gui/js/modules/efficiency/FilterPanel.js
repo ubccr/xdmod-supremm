@@ -76,7 +76,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
                                 // Add filters for each dimension to the filterObj to be applied to the scatter plot
                                 var dimensionObj = {};
                                 dimensionObj[dimension] = filterValues;
-                                filterObj ={  ...filterObj, ...dimensionObj };
+                                filterObj = {  ...filterObj, ...dimensionObj };
 
                                 // Add filters for each dimension to the aggFilters object for keeping track of filtering on breadcrumb navigation
                                 var aggDimensionObj = {};
