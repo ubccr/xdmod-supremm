@@ -7,9 +7,7 @@ XDMoD.SupremmDataFlow = {
         const el = document.querySelector(selector);
         el.innerHTML = '<img src="/gui/images/loading.gif"></img>Loading';
 
-        const response = fetch(`${XDMoD.REST.url}/supremm_dataflow/dbstats?token=${XDMoD.REST.token}&resource_id=${resourceId}&db_id=${endPoint}`, {
-            method: 'GET',
-        })
+        const response = fetch(`${XDMoD.REST.url}/supremm_dataflow/dbstats?token=${XDMoD.REST.token}&resource_id=${resourceId}&db_id=${endPoint}`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(`[<b>Error<b> ${response.status}]: ${response.statusText}`);
@@ -29,11 +27,21 @@ XDMoD.SupremmDataFlow = {
             el.innerHTML = html;
             el.display = 'none';
         })
-        .catch((errorText) => document.querySelector('#loading').innerHTML = errorText);
+        .catch((errorText) => {
+            document.querySelector('#loading').style.display = '';
+            document.querySelector('#loading').innerHTML = errorText;
+        });
     },
     loadAllStats: function (resourceId) {
         document.querySelector('#pagetitle').textContent = 'Data flow information for ' + XDMoD.SupremmDataFlow.resource_map[resourceId];
-        document.querySelector('#flowchart').classList.replace('hide', 'show');
+        // Need timeout for when going from 'none' display to '' for transition to work.
+        setTimeout(() => {
+            document.querySelector('#flowchart').style.display = '';
+        }, 50);
+        document.querySelector('#flowchart').classList.add('hide');
+        setTimeout(() => {
+            document.querySelector('#flowchart').classList.replace('hide', 'show');
+        }, 100);
 
         XDMoD.SupremmDataFlow.loadData('#local_mirror_content', 'nodearchives', resourceId);
         XDMoD.SupremmDataFlow.loadData('#accountfact_content', 'accountfact', resourceId);
@@ -112,22 +120,16 @@ jsPlumb.ready(function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector('#resourceform').display = 'none';
-    document.querySelector('#flowchart').display = 'none';
+    document.querySelector('#resourceform').style.display = 'none';
+    document.querySelector('#flowchart').style.display = 'none';
 
     document.querySelector('#resourceform').addEventListener('submit', (evt) => {
         evt.preventDefault();
-        document.querySelector('#flowchart').display = 'none';
+        document.querySelector('#flowchart').style.display = 'none';
         XDMoD.SupremmDataFlow.loadAllStats(document.querySelector('#resourceselect').value);
     })
 
-    const response = fetch(`${XDMoD.REST.url}/supremm_dataflow/resources?token=${XDMoD.REST.token}`, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-            "Content-Type": "application/json",
-        }
-    })
+    const response = fetch(`${XDMoD.REST.url}/supremm_dataflow/resources?token=${XDMoD.REST.token}`)
     .then((response) => {
         if (!response.ok) {
             throw new Error(`[<b>Error<b> ${response.status}]: ${response.statusText}`);
@@ -146,9 +148,16 @@ document.addEventListener("DOMContentLoaded", function () {
             select.appendChild(tmp);
             XDMoD.SupremmDataFlow.resource_map[element.id] = element.name;
         }
-        document.querySelector('#loading').display = 'none';
-        document.querySelector('#resourceform').classList.replace('hide', 'show');
-        //form.submit();
+        document.querySelector('#loading').style.display = 'none';
+        document.querySelector('#resourceform').style.display = '';
+        document.querySelector('#resourceform').classList.add('hide');
+        setTimeout(() => {
+            document.querySelector('#resourceform').classList.replace('hide', 'show');
+        }, 100);
+        XDMoD.SupremmDataFlow.loadAllStats(select.value);
     })
-    .catch((errorText) => document.querySelector('#loading').innerHTML = errorText);
+    .catch((errorText) => {
+        document.querySelector('#loading').style.display = '';
+        document.querySelector('#loading').innerHTML = errorText;
+    });
 });
