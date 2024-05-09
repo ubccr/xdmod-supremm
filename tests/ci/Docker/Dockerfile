@@ -1,7 +1,7 @@
-FROM tools-ext-01.ccr.xdmod.org/xdmod-9.5.0:centos7.9-1.0
-ENV REL=9.5.0
+FROM tools-ext-01.ccr.xdmod.org/xdmod-10.0.0:centos7.9-0.6
+ENV REL=10.0.0
 ENV BUILD=1.0
-ENV BRANCH=xdmod9.5
+ENV BRANCH=xdmod10.0
 ENV IS_JOB_PERFORMANCE=1
 
 LABEL authors="Joseph P. White <jpwhite4@buffalo.edu>, Benjamin D. Plessinger <bpless@buffalo.edu>"
@@ -25,12 +25,12 @@ RUN sed -i 's/^#nojournal = true/nojournal = true/; s/^#noprealloc = true/noprea
 RUN ~/bin/services start && \
     mongod -f /etc/mongod.conf && \
     ~/bin/importmongo.sh && \
-    wget -nv https://raw.githubusercontent.com/ubccr/xdmod-supremm/$BRANCH/tests/integration_tests/scripts/mongo_auth.mongojs && \
+    wget -nv https://raw.githubusercontent.com/ubccr/xdmod-supremm/$BRANCH/tests/integration/scripts/mongo_auth.mongojs && \
     mongo mongo_auth.mongojs && \
     rm -rf mongo_auth.mongojs && \
     mongod -f /etc/mongod.conf --shutdown && \
     mongod -f /etc/mongod.conf --auth && \
-    wget -nv https://raw.githubusercontent.com/ubccr/xdmod-supremm/$BRANCH/tests/integration_tests/scripts/xdmod-setup.tcl && \
+    wget -nv https://raw.githubusercontent.com/ubccr/xdmod-supremm/$BRANCH/tests/integration/scripts/xdmod-setup.tcl && \
     expect xdmod-setup.tcl | col -b && \
     rm -rf xdmod-setup.tcl && \
     aggregate_supremm.sh && \

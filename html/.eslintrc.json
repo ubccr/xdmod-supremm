@@ -1,6 +1,7 @@
 {
   "env": {
     "browser": true,
+    "es6": true,
     "jquery": true
   },
   "globals": {
@@ -14,6 +15,17 @@
     "Highcharts": false,
     "truncateText": false,
     "token": false,
-    "XDMoD": false
+    "XDMoD": false,
+    "moment": false,
+    "Plotly": false,
+    "generateChartOptions": false,
+    "getNoDataErrorConfig": false,
+    "getMultiAxisObjects": false,
+    "getClickedPoint": false,
+    "topLegend": false,
+    "adjustTitles": false,
+    "relayoutChart": false,
+    "overrideLegendEvent": false,
+    "lineSplit": false
   }
 }

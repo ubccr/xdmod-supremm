@@ -15,12 +15,19 @@ toc:
         url: https://github.com/ubccr/supremm/releases/latest
       - page: PCP software
         url: http://pcp.io
+      - page: Prometheus
+        url: https://prometheus.io
   - title: Install
     subfolderitems:
       - page: Overview
         url: /supremm-install-overview.html
-      - page: PCP Data collection
-        url: /supremm-install-pcp.html
+      - page: Data Collection
+        url: /supremm-data-collection.html
+        subsubfolderitems:
+          - page: PCP
+            url: /supremm-install-pcp.html
+          - page: Prometheus
+            url: /supremm-install-prometheus.html
       - page: MongoDB
         url: /supremm-mongo.html
       - page: Job Performance module
@@ -29,8 +36,13 @@ toc:
         url: /supremm-processing-install.html
   - title: Configure
     subfolderitems:
-      - page: PCP Data collection
-        url: /supremm-compute-pcp.html
+      - page: Data Collection
+        url: /supremm-data-config.html
+        subsubfolderitems:
+          - page: PCP
+            url: /supremm-compute-pcp.html
+          - page: Prometheus
+            url: /supremm-compute-prometheus.html
       - page: Job Batch Script collection
         url: /supremm-jobscript.html
       - page: Job Performance module
@@ -39,12 +51,17 @@ toc:
         url: /supremm-processing-configuration.html
   - title: Use
     subfolderitems:
-       - page: PCP Data collection
-         url: /supremm-pcp-use.html
-       - page: Inital Ingest Setup
-         url: /supremm-bootstrap.html
-       - page: Automate dataflow
-         url: /supremm-ingestor.html
+      - page: Data Collection
+        url: /supremm-data-use.html
+        subsubfolderitems:
+          - page: PCP
+            url: /supremm-pcp-use.html
+          - page: Prometheus
+            url: /supremm-prometheus-use.html
+      - page: Inital Ingest Setup
+        url: /supremm-bootstrap.html
+      - page: Automate dataflow
+        url: /supremm-ingestor.html
   - title: Upgrade
     subfolderitems:
        - page: Overview
@@ -59,6 +76,8 @@ toc:
          url: /extending.html
        - page: Job Efficiency Algorithm
          url: /jobefficiency.html
+       - page: Job Efficiency Tab
+         url: /analytics.html
        - page: Customization
          url: /customization.html
   - title: Developing

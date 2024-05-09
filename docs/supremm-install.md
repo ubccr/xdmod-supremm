@@ -11,9 +11,15 @@ follow the instructions in the [Upgrade Guide](supremm-upgrade.html).
 RPM Installation
 ----------------
 
-An RPM package for Centos 7 is [available for download](https://github.com/ubccr/xdmod-supremm/releases/latest).
+RPM packages for CentOS 7 and Rocky 8 are [available for download](https://github.com/ubccr/xdmod-supremm/releases/latest).
 
-    # yum install xdmod-supremm-{{ page.sw_version }}-1.0.noarch.rpm
+**CentOS 7**
+
+    # yum install xdmod-supremm-{{ page.sw_version }}-1.0.el7.noarch.rpm
+
+**Rocky 8**
+
+    # dnf install xdmod-supremm-{{ page.sw_version }}-1.0.el8.noarch.rpm
 
 Source Installation
 -------------------
@@ -22,7 +28,7 @@ The Job Performance (SUPReMM) XDMoD module requires all of the software for XDMo
 the following additional packages:
 
 - [PHP MongoClient][]
-- [nodejs][] 6.14.4+
+- [nodejs][] 16.13.2
 
 [nodejs]:          https://nodejs.org
 [PHP MongoClient]:     http://php.net/manual/en/class.mongoclient.php

@@ -109,7 +109,7 @@ EOF
             'resource_id' => $id,
             'resource' => '',
             'enabled' => false,
-            'datasetmap' => 'pcp',
+            'datasetmap' => 'supremm',
             'hardware' => array(
                 'gpfs' => ''
             )

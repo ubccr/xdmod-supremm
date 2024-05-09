@@ -22,7 +22,7 @@ to the XDMoD interactive setup software. Run the script as follows:
 
     # xdmod-setup
 
-and select the 'SUPReMM' option in the main menu. The `xdmod-setup` script usage is described below. 
+and select the 'SUPReMM' option in the main menu. The `xdmod-setup` script usage is described below.
 
 The next step after configuring in the XDMoD module is to install and configure the [job summarization software](supremm-processing-install.md).
 
@@ -71,7 +71,8 @@ By default all the resources are disabled. You must select the "Edit
 resource" option for each resource that you wish to configure to appear in the
 SUPReMM realm and follow the prompt to enable the resource and set the correct
 options. The "Dataset mapping" should be set to 'pcp' if processing job summaries
-generated from PCP data. 
+generated from PCP data and 'prometheus' if processing job summaries generated
+from Prometheus data.
 
 SUPReMM configuration files
 ---------------------------
@@ -94,7 +95,7 @@ the `resources.json` and `resource_specs.json` main configuration files
             "resource": "resource1",
             "resource_id": 1,
             "enabled": true,
-            "datasetmap": "pcp",
+            "datasetmap": "supremm",
             "hardware": {
                 "gpfs": "gpfs0",
                 "network": [
@@ -127,9 +128,9 @@ where `%resource%` should be replaced with the `resource` parameter from the
 `resources.json` main configuration file.
 
 The `datasetmap` option allows the ingestion of Job Performance data from different
-data sources. Currently PCP is the only supported data source.
+data sources. Currently PCP and Prometheus are the only supported data sources.
 
-The `hardware` property is used by the dataset mapping code to process PCP
+The `hardware` property is used by the dataset mapping code to process
 metrics that have device-specific names. There are configurable mappings
 for Ethernet network devices, GPFS devices and mounted NFS filesystems.
 The XDMoD statistics for each mapping setting is displayed in the table below.

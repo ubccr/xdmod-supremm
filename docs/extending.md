@@ -11,9 +11,9 @@ in the [supremm_resources.json documentation.](supremm-configuration.html#suprem
 If a custom dataset mapping file is used then it must be maintained and
 may need to be modified when the XDMoD software is upgraded.
 
-This document only describes instructions for the PCP-based datasources. However,
+This document only describes instructions for PCP and Prometheus-based datasources. However,
 the same techniques describe here can be used to generate data mappings for
-non-PCP-based data such as is used in the [XSEDE version of XDMoD](https://xdmod.ccr.buffalo.edu).
+other datasources such as [tacc_stats](https://github.com/TACC/tacc_stats) that is used in the [ACCESS version of XDMoD](https://xdmod.access-ci.org).
 
 ## Background
 
@@ -30,8 +30,9 @@ The summary statistics document
 is read at ingest time by the `etl.cluster.js` script (which is executed in the `aggregate_supremm.sh` script) to load data into
 the XDMoD MySQL-based datawarehouse.  The `etl.cluster.js` loads
 a dataset mapping module that defines how
-data are copied from the summary statistics document to the datawarehouse.
-The default dataset mapping module file for PCP data is `/usr/share/xdmod/etl/js/config/supremm/dataset_maps/pcp.js`.
+data are copied from the summary statistics document to the datawarehouse. The default dataset mapping module file is
+`supremm.js`. The previous default mapping `pcp.js` has been deprecated, however resources already configured with the 'pcp'
+dataset mapping will still function normally.
 
 XDMoD supports using a different dataset mapping file for each
 HPC resource. The dataset mapping file to use for a given resource is configured
@@ -69,7 +70,7 @@ example, the new mapping file will be called `custom.js`. The file name should f
 module naming convention. The source of the new mapping file is shown below:
 ```js
 // load the default mapping module
-var pcp = require('./pcp.js');
+var supremm = require('./supremm.js');
 
 // load the library that contains helper functions
 var map_helpers = require('../map_helpers.js');
@@ -77,22 +78,22 @@ var map_helpers = require('../map_helpers.js');
 module.exports = function (config) {
 
     // create a new copy of the default map
-    var pcp_map = new pcp(config);
+    var supremm_map = new supremm(config);
 
     // override the mapping attributes for netdir home and util:
 
     //           The second argument should be set to the name of the
     //           filesystem as it appears in the job level summary    ----┐
     //                                                                    ▾
-    pcp_map.attributes.netdir_home_read = map_helpers.device('lustre', '/home', 'read_bytes-total');
-    pcp_map.attributes.netdir_home_write = map_helpers.device('lustre', '/home', 'write_bytes-total');
+    supremm_map.attributes.netdir_home_read = map_helpers.device('lustre', '/home', 'read_bytes-total');
+    supremm_map.attributes.netdir_home_write = map_helpers.device('lustre', '/home', 'write_bytes-total');
 
-    pcp_map.attributes.netdir_util_read = map_helpers.device('lustre', '/util', 'read_bytes-total');
-    pcp_map.attributes.netdir_util_write = map_helpers.device('lustre', '/util', 'write_bytes-total');
+    supremm_map.attributes.netdir_util_read = map_helpers.device('lustre', '/util', 'read_bytes-total');
+    supremm_map.attributes.netdir_util_write = map_helpers.device('lustre', '/util', 'write_bytes-total');
 
     // can add more overrides here....
 
-    return pcp_map;
+    return supremm_map;
 }
 ```
 This loads the default mapping and selectively overrides fields.

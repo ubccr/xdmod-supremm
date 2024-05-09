@@ -3,7 +3,24 @@
         {
             "resource": "pcp",
             "resource_id": 1,
-            "datasetmap": "pcp",
+            "datasetmap": "supremm",
+            "hardware": {
+                "gpfs": "gpfs0",
+                "network": [
+                    "em1",
+                    "eno1"
+                ],
+                "mounts": {
+                   "projects": "/projects",
+                   "home": "/user",
+                   "util": "/util"
+                }
+            }
+        },
+        {
+            "resource": "prometheus",
+            "resource_id": 2,
+            "datasetmap": "supremm",
             "hardware": {
                 "gpfs": "gpfs0",
                 "network": [
