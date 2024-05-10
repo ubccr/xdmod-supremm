@@ -140,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .then((data) => {
         const select = document.getElementById('resourceselect');
-        const form = document.getElementById('resourceform');
         for (var i = 0; i < data.data.length; i++) {
             var element = data.data[i];
             var tmp = document.createElement('option');
@@ -150,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
             XDMoD.SupremmDataFlow.resource_map[element.id] = element.name;
         }
         document.querySelector('#loading').style.display = 'none';
+        const form = document.getElementById('resourceform');
         form.style.display = '';
         form.classList.add('hide');
         setTimeout(() => {
