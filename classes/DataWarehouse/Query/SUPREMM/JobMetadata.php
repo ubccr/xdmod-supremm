@@ -334,7 +334,7 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
             $doc,
             function (&$val) {
                 if (is_numeric($val) && is_nan($val)) {
-                    $val = 0;
+                    $val = null;
                 }
             }
         );
