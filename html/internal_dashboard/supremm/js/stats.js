@@ -7,7 +7,7 @@ XDMoD.SupremmDataFlow = {
         const el = document.querySelector(selector);
         el.innerHTML = '<img src="/gui/images/loading.gif"></img>Loading';
 
-        const response = fetch(`${XDMoD.REST.url}/supremm_dataflow/dbstats?token=${XDMoD.REST.token}&resource_id=${resourceId}&db_id=${endPoint}`)
+        fetch(`${XDMoD.REST.url}/supremm_dataflow/dbstats?token=${XDMoD.REST.token}&resource_id=${resourceId}&db_id=${endPoint}`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(`[<b>Error<b> ${response.status}]: ${response.statusText}`);
@@ -17,8 +17,8 @@ XDMoD.SupremmDataFlow = {
         })
         .then((data) => {
             let html = '<ul>';
-            let d = data.data.data;
-            for (let k in d) {
+            const d = data.data.data;
+            for (const k in d) {
                 if (d.hasOwnProperty(k)) {
                     html += '<li>' + k + ': ' + d[k] + '</li>';
                 }
@@ -28,19 +28,20 @@ XDMoD.SupremmDataFlow = {
             el.display = 'none';
         })
         .catch((errorText) => {
-            document.querySelector('#loading').style.display = '';
-            document.querySelector('#loading').innerHTML = errorText;
+            document.getElementById('loading').style.display = '';
+            document.getElementById('loading').innerHTML = errorText;
         });
     },
     loadAllStats: function (resourceId) {
-        document.querySelector('#pagetitle').textContent = 'Data flow information for ' + XDMoD.SupremmDataFlow.resource_map[resourceId];
+        document.getElementById('pagetitle').textContent = 'Data flow information for ' + XDMoD.SupremmDataFlow.resource_map[resourceId];
+        const flowchart = document.getElementById('flowchart');
         // Need timeout for when going from 'none' display to '' for transition to work.
         setTimeout(() => {
-            document.querySelector('#flowchart').style.display = '';
+            flowchart.style.display = '';
         }, 50);
-        document.querySelector('#flowchart').classList.add('hide');
+        flowchart.classList.add('hide');
         setTimeout(() => {
-            document.querySelector('#flowchart').classList.replace('hide', 'show');
+            flowchart.classList.replace('hide', 'show');
         }, 100);
 
         XDMoD.SupremmDataFlow.loadData('#local_mirror_content', 'nodearchives', resourceId);
@@ -119,17 +120,17 @@ jsPlumb.ready(function () {
     }, common);
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector('#resourceform').style.display = 'none';
-    document.querySelector('#flowchart').style.display = 'none';
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('resourceform').style.display = 'none';
+    document.getElementById('flowchart').style.display = 'none';
 
-    document.querySelector('#resourceform').addEventListener('submit', (evt) => {
+    document.getElementById('resourceform').addEventListener('submit', (evt) => {
         evt.preventDefault();
-        document.querySelector('#flowchart').style.display = 'none';
+        document.getElementById('flowchart').style.display = 'none';
         XDMoD.SupremmDataFlow.loadAllStats(document.querySelector('#resourceselect').value);
-    })
+    });
 
-    const response = fetch(`${XDMoD.REST.url}/supremm_dataflow/resources?token=${XDMoD.REST.token}`)
+    fetch(`${XDMoD.REST.url}/supremm_dataflow/resources?token=${XDMoD.REST.token}`)
     .then((response) => {
         if (!response.ok) {
             throw new Error(`[<b>Error<b> ${response.status}]: ${response.statusText}`);
@@ -138,8 +139,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     })
     .then((data) => {
-        let select = document.getElementById('resourceselect');
-        const form = document.querySelector('#resourceform');
+        const select = document.getElementById('resourceselect');
+        const form = document.getElementById('resourceform');
         for (var i = 0; i < data.data.length; i++) {
             var element = data.data[i];
             var tmp = document.createElement('option');
@@ -149,15 +150,15 @@ document.addEventListener("DOMContentLoaded", function () {
             XDMoD.SupremmDataFlow.resource_map[element.id] = element.name;
         }
         document.querySelector('#loading').style.display = 'none';
-        document.querySelector('#resourceform').style.display = '';
-        document.querySelector('#resourceform').classList.add('hide');
+        form.style.display = '';
+        form.classList.add('hide');
         setTimeout(() => {
-            document.querySelector('#resourceform').classList.replace('hide', 'show');
+            form.classList.replace('hide', 'show');
         }, 100);
         XDMoD.SupremmDataFlow.loadAllStats(select.value);
     })
     .catch((errorText) => {
-        document.querySelector('#loading').style.display = '';
-        document.querySelector('#loading').innerHTML = errorText;
+        document.getElementById('loading').style.display = '';
+        document.getElementById('loading').innerHTML = errorText;
     });
 });
