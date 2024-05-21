@@ -122,7 +122,7 @@ jobs:
           name: Ensure that no unexpected Apache errors were generated
           command: |
             if [ -e /var/log/php-fpm/www-error.log ]; then
-                test `egrep -v 'vendor/phpunit/phpunit/src|PHP Deprecated' /var/log/php-fpm/www-error.log | wc -l` = 0;
+                test `egrep -v "PHP Deprecated.*vendor\/.*" /var/log/php-fpm/www-error.log | wc -l` = 0;
             fi
       - run:
           name: Run Regression Tests
