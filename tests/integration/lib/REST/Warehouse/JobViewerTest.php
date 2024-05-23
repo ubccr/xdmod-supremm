@@ -418,5 +418,4 @@ class JobViewerTest extends TestCase
 
         return $ret;
     }
-
 }
