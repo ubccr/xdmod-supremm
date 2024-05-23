@@ -1,7 +1,6 @@
 {
     "require": {
-        "php": "^8.0",
-        "monolog/monolog": "^1.27"
+        "php": "^8.0"
     },
     "config": {
         "allow-plugins": {
