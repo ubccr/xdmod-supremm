@@ -379,7 +379,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                                 }
 
                                 dimensionObj[dimension] = filterValues;
-                                jQuery.extend(filterObj, dimensionObj);
+                                filterObj = { ...filterObj, ...dimensionObj };
                             }
                         }
                     }

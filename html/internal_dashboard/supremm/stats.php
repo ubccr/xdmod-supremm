@@ -7,13 +7,9 @@ require_once 'user_check.php';
     <head>
         <meta charset="utf-8">
         <title>Job timeseries demo</title>
-        <script type="text/javascript" src="/gui/lib/jquery/jquery-1.12.4.min.js"></script>
         <script type="text/javascript" src="/gui/lib/node_modules/@jsplumb/browser-ui/js/jsplumb.browser-ui.umd.js"></script>
-
-        <!-- Ext and Jquery adapter -->
-        <script type="text/javascript" src="/gui/lib/extjs/adapter/jquery/ext-jquery-adapter.js"></script>
+        <script type="text/javascript" src="/gui/lib/extjs/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="/gui/lib/extjs/ext-all-debug.js"></script>
-
         <script type="text/javascript">
             <?php \xd_rest\printJavascriptVariables(); ?>
         </script>

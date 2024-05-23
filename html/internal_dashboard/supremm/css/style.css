@@ -143,7 +143,7 @@ td.zeroer
 }
 
 #flowchart li {
-     list-style-type: none;
+    list-style-type: none;
 }
 
 .intpart {
@@ -164,9 +164,9 @@ td.zeroer
 }
 
 span.centered {
-  text-align: center;
+    text-align: center;
 	vertical-align: middle;
-  display: table-cell;
+    display: table-cell;
 }
 .filekey {
     border: thin solid black;
@@ -179,4 +179,10 @@ span.centered {
 .mongokey {
     border: thin solid black;
     background-color: #deb0c4;
+}
+.show {
+    transition: opacity 500ms ease-in;
+}
+.hide {
+    opacity: 0;
 }
