@@ -79,15 +79,15 @@ To change the order in which the analytics appear in the toolbar, edit the
 
 The Application dimension in the SUPREMM realm allows filtering and grouping
 by the community software application that was run by each job. In the default
-configuation, the software application is inferred at job ingest time by
+configuration, the software application is inferred at job ingest time by
 comparing the paths to the executables with a list of known community applications.
 
 This list of applications is maintained in `/usr/share/xdmod/etl/js/config/supremm/application.json`
 The `application.json` file contains an ordered list of community applications and
 a corresponding set of regular expressions that are tested against the
-executable pathes. If an exectuable matches then the job is assigned the corresponding
+executable paths. If an executable matches then the job is assigned the corresponding
 application. The applications are processed in order and the match with the highest
-prioity is used. If no match is found then the application is assigned
+priority is used. If no match is found then the application is assigned
 to 'uncategorized'. If no executable path information is available then the
 application is assigned 'NA'.
 
@@ -115,7 +115,7 @@ directory components removed).
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | name  | [String] | The name of the application - this must be unique |
-| license_type | permissive \| propretary | Information about the software license. If the software has a license that restricts publishing of performance data then set this field to <code>proprietary</code> otherwise <code>permissive</code> should be used. The application names for <code>proprietary</code> licenced code do not appear in the XDMoD portal. |
+| license_type | permissive \| proprietary | Information about the software license. If the software has a license that restricts publishing of performance data then set this field to <code>proprietary</code> otherwise <code>permissive</code> should be used. The application names for <code>proprietary</code> licensed code do not appear in the XDMoD portal. |
 | science_area | [String] | The science area of the application. This information is stored in the XDMoD datawarehouse, but is not displayed in the portal |
 | url  | [String] | The website of the application. This information is not stored in the XDMoD datawarehouse, but is not displayed in the portal. It is intended to assist developers in disambugating software applications that have similar names |
 | execmatch | OPTIONAL LIST | Optional list of regular expressions that will be checked against the executable name. I.e. the executable path with the leading directory components removed |
@@ -140,12 +140,12 @@ New application definitions should be added at the end of the file. Once
 the new definition has been added then the database dimension tables
 must be updated as follows:
 
-First update the definition file for the application tables:
+First update the SQL definition file for the application tables:
 ```
 cd /usr/share/xdmod/etl/js
 node etl.cli.js -o > /etc/xdmod/etl/etl_sql.d/supremm/application.sql
 ```
-Then use the mysql commandline client to update the database with the new table contents
+Then use the `mysql` commandline client to update the database with the new table contents
 ```
 mysql < /etc/xdmod/etl/etl_sql.d/supremm/application.sql
 ```
@@ -185,8 +185,8 @@ WHERE j.executable_id = e.id AND e.`application_id` = 0
 
 UNLOCK TABLES;
 ```
-If you have an application regext that matches the exectuable path (`pathmatch`), then
-the sql where condition should use the `e.exec` column.
+If you have an application regex that matches the executable path (`pathmatch`), then
+the SQL where condition should use the `e.exec` column.
 
 After updating the tables run the
 ```
@@ -194,13 +194,13 @@ aggregate_supremm.sh -d
 ```
 script to reaggregate the data. The script will automatically detect which time periods need to be
 re-aggregated. The amount of time the script will take to run depends on the number of time periods
-that need to be reaggregated. It is recommended to run the script in a screen or tmux session and
+that need to be reaggregated. It is recommended to run the script in a `screen` or `tmux` session and
 to include the `-d` debug flag so that you can monitor the progress.
 
 ### Notes
 
 Don't remove any existing entries from `application.json` - it will cause the database primary
-keys to change and would neccessitate a complete deletion and reingest of
+keys to change and would necessitate a complete deletion and reingestion of
 all data. If there is an existing job entry that you don't want to match
 at your site, then remove the regular expression definitions that cause
 the false positive matches (if no regular expressions are defined
@@ -214,5 +214,5 @@ rerun the `etl.cli.js -o` command _after_ installing the new version of XDMoD
 If you have added any new applications then they should be added in the same
 relative location in the file.  If the relative order of applications changes
 then it will cause the database primary
-keys to change and would neccessitate a complete deletion and reingest of
+keys to change and would necessitate a complete deletion and reingestion of
 all data.
