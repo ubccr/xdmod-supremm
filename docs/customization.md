@@ -205,7 +205,7 @@ at your site, then remove the regular expression definitions that cause
 the false positive matches (if no regular expressions are defined
 then the application will never be matched).
 
-If you do edit `application.json` you will need to re-apply those edits every time
+If you do edit `application.json`, you will need to re-apply those edits every time
 you upgrade the XDMoD software. Make sure to re-apply the edits to the file and
 rerun the `etl.cli.js -o` command _after_ installing the new version of XDMoD
  but  _before_ running the `xdmod-upgrade` command.
