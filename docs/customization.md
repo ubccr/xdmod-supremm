@@ -150,13 +150,11 @@ Then use the `mysql` command line client to update the database with the new tab
 ```
 The new application definitions will impact jobs that are ingested after the file
 is changed and will not change the data for jobs that are already loaded into XDMoD.
-If you want to back-populate the data for older jobs then you can reset the database
-and re-ingest all jobs or you can run an SQL update statement to update
-the application for existing jobs.
 
-To update historical jobs you need to run and SQL update statement to update
-the fact tables in the datawarehouse then run the aggregation script to update
-the aggregate tables.
+#### Updating applications of older jobs
+
+If you want to back-populate the data for older jobs, then you can reset the database
+and re-ingest all jobs, or you can run an SQL update statement to update the application for existing jobs.
 
 For example, if you had updated the `application.json` with the following 'new'
 application
