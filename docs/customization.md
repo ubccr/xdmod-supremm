@@ -128,7 +128,7 @@ that are tested against the executable.
 
 The `execmatch` and/or `pathmatch` fields in the application mapping are
 read and processed at ingest time (when the job data is loaded from mongodb
-into the XDMoD datawarehouse).  The application lookup regular expressions
+into the XDMoD data warehouse).  The application lookup regular expressions
 can be edited to suit your environment. Edits to the regular expressions
 will impact jobs that are ingested after the file is changed and will
 not change the data for jobs that are already loaded into XDMoD.
