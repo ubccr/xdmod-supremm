@@ -109,8 +109,7 @@ An example entry in the file is shown below:
 ```
 
 In this example the 'gransim' application has four different regular expressions
-that are tested against the executable (i.e the executable path with the leading
-directory components removed).
+that are tested against the executable.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
