@@ -187,14 +187,13 @@ UNLOCK TABLES;
 If you have an application regex that matches the executable path (`pathmatch`), then
 the SQL where condition should use the `e.exec` column.
 
-After updating the tables run the
-```
-aggregate_supremm.sh -d
-```
-script to reaggregate the data. The script will automatically detect which time periods need to be
-re-aggregated. The amount of time the script will take to run depends on the number of time periods
+After updating the tables, run the `aggregate_supremm.sh` script to reaggregate the data. The script will automatically detect which time periods need to be
+reaggregated. The amount of time the script will take to run depends on the number of time periods
 that need to be reaggregated. It is recommended to run the script in a `screen` or `tmux` session and
-to include the `-d` debug flag so that you can monitor the progress.
+to include the `-d` debug flag so that you can monitor the progress:
+```
+# aggregate_supremm.sh -d
+```
 
 ### Notes
 
