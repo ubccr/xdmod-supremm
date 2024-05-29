@@ -157,7 +157,7 @@ If you want to back-populate the data for older jobs, then you can reset the dat
 and re-ingest all jobs, or you can run an SQL update statement to update the application for existing jobs.
 
 For example, if you had updated the `application.json` with the following 'new'
-application
+application:
 ```json
     {
         "name": "NEXMD",
