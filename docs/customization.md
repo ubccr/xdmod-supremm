@@ -136,7 +136,7 @@ not change the data for jobs that are already loaded into XDMoD.
 #### Adding new applications
 
 New application definitions should be added at the end of the file. Once
-the new definition has been added then the database dimension tables
+the new definition has been added, then the database dimension tables
 must be updated as follows:
 
 First update the SQL definition file for the application tables:
