@@ -146,7 +146,7 @@ First update the SQL definition file for the application tables:
 ```
 Then use the `mysql` command line client to update the database with the new table contents:
 ```
-mysql < /etc/xdmod/etl/etl_sql.d/supremm/application.sql
+# mysql < /etc/xdmod/etl/etl_sql.d/supremm/application.sql
 ```
 The new application definitions will impact jobs that are ingested after the file
 is changed and will not change the data for jobs that are already loaded into XDMoD.
