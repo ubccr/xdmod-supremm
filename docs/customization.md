@@ -144,7 +144,7 @@ First update the SQL definition file for the application tables:
 # cd /usr/share/xdmod/etl/js
 # node etl.cli.js -o > /etc/xdmod/etl/etl_sql.d/supremm/application.sql
 ```
-Then use the `mysql` commandline client to update the database with the new table contents
+Then use the `mysql` command line client to update the database with the new table contents:
 ```
 mysql < /etc/xdmod/etl/etl_sql.d/supremm/application.sql
 ```
