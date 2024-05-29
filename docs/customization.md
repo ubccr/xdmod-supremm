@@ -151,10 +151,18 @@ Then use the `mysql` command line client to update the database with the new tab
 The new application definitions will impact jobs that are ingested after the file
 is changed and will not change the data for jobs that are already loaded into XDMoD.
 
-#### Updating applications of older jobs
+#### Updating application category for existing jobs
 
-If you want to back-populate the data for older jobs, then you can reset the database
-and re-ingest all jobs, or you can run an SQL update statement to update the application for existing jobs.
+If you want to back-populate the data for jobs that were previously ingested into
+XDMoD then you can either (1) reset the database and re-ingest all jobs, or (2) you can
+ run an SQL update statement to update the application for existing jobs.
+Running an SQL update statement will typically be faster.
+
+Instructions for reseting and re-ingesting data are in [extending.md#4-re-ingest-data-into-xdmod](Section 4 of the data
+mapping extending guide).
+
+Instructions for running the SQL update statement are below.  **Always make sure to create a backup of the SQL database before running
+SQL updates.**
 
 For example, if you had updated the `application.json` with the following 'new'
 application:
@@ -208,7 +216,7 @@ rerun the `etl.cli.js -o` command _after_ installing the new version of XDMoD
  but  _before_ running the `xdmod-upgrade` command.
 
 If you have added any new applications then they should be added in the same
-relative location in the file.  If the relative order of applications changes
+relative location in the file. If the relative order of applications changes
 then it will cause the database primary
 keys to change and would necessitate a complete deletion and reingestion of
 all data.
