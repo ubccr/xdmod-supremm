@@ -113,13 +113,13 @@ that are tested against the executable.
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| name  | [String] | The name of the application - this must be unique |
-| license_type | permissive \| proprietary | Information about the software license. If the software has a license that restricts publishing of performance data then set this field to <code>proprietary</code> otherwise <code>permissive</code> should be used. The application names for <code>proprietary</code> licensed code do not appear in the XDMoD portal. |
-| science_area | [String] | The science area of the application. This information is stored in the XDMoD datawarehouse, but is not displayed in the portal |
-| url  | [String] | The website of the application. This information is not stored in the XDMoD datawarehouse, but is not displayed in the portal. It is intended to assist developers in disambugating software applications that have similar names |
-| execmatch | OPTIONAL LIST | Optional list of regular expressions that will be checked against the executable name. I.e. the executable path with the leading directory components removed |
-| pathmatch | OPTIONAL LIST | Optional list of regular expressions that will be checked against the executable path |
-| hints     | deprecated | Deprecated do not use |
+| `name`  | [String] | The name of the application &mdash; this must be unique. |
+| `license_type` | `permissive` \| `proprietary` | Information about the software license. If the software has a license that restricts publishing of performance data, then set this field to <code>proprietary</code>; otherwise, <code>permissive</code> should be used. The application names for <code>proprietary</code> licensed code do not appear in the XDMoD portal. |
+| `science_area` | [String] | The science area of the application. This information is stored in the XDMoD data warehouse, but is not displayed in the portal. |
+| `url`  | [String] | The website of the application. This information is stored in the XDMoD data warehouse, but is not displayed in the portal. It is intended to assist developers in disambiguating software applications that have similar names. |
+| `execmatch` | OPTIONAL LIST | Optional list of regular expressions that will be checked against the executable (i.e., the executable path with the leading directory components removed). |
+| `pathmatch` | OPTIONAL LIST | Optional list of regular expressions that will be checked against the executable path. |
+| `hints`     | deprecated | Deprecated, do not use. |
 
 
 ### Customizing the application lookup
