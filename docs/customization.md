@@ -86,7 +86,7 @@ This list of applications is maintained in `/usr/share/xdmod/etl/js/config/supre
 The `application.json` file contains an ordered list of community applications and
 a corresponding set of regular expressions that are tested against the
 executable paths. If an executable matches then the job is assigned the corresponding
-application. The applications are processed in order and the match with the highest
+application. The applications are processed in the order they appear in the file, and the match with the highest
 priority is used. If no match is found then the application is assigned
 to 'uncategorized'. If no executable path information is available then the
 application is assigned 'NA'.
