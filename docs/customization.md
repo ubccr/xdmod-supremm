@@ -141,8 +141,8 @@ must be updated as follows (Note: depending on how you installed XDMoD, `/usr/sh
 
 First update the SQL definition file for the application tables:
 ```
-cd /usr/share/xdmod/etl/js
-node etl.cli.js -o > /etc/xdmod/etl/etl_sql.d/supremm/application.sql
+# cd /usr/share/xdmod/etl/js
+# node etl.cli.js -o > /etc/xdmod/etl/etl_sql.d/supremm/application.sql
 ```
 Then use the `mysql` commandline client to update the database with the new table contents
 ```
