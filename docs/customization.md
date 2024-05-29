@@ -183,7 +183,7 @@ WHERE j.`executable_id` = e.`id` AND e.`application_id` = 0
 UNLOCK TABLES;
 ```
 If you have an application regex that matches the executable path (`pathmatch`), then
-the SQL where condition should use the `e.exec` column.
+the SQL `WHERE` condition should use the `e.exec` column.
 
 After updating the tables, run the `aggregate_supremm.sh` script to reaggregate the data. The script will automatically detect which time periods need to be
 reaggregated. The amount of time the script will take to run depends on the number of time periods
