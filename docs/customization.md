@@ -137,7 +137,7 @@ not change the data for jobs that are already loaded into XDMoD.
 
 New application definitions should be added at the end of the file. Once
 the new definition has been added, then the database dimension tables
-must be updated as follows:
+must be updated as follows (Note: depending on how you installed XDMoD, `/usr/share/xdmod` should be replaced with `/opt/xdmod/share` or the correct path to the `share` directory, and `/etc/xdmod` should be replaced with `/opt/xdmod/etc` or the correct path to the `etc` directory).
 
 First update the SQL definition file for the application tables:
 ```
