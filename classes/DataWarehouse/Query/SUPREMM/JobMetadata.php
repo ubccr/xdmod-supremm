@@ -330,6 +330,15 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
 
         $doc['schema'] = $this->supremmDbInterface->getDocument($resource_id, 'schema', 'timeseries-' . $doc['version']);
 
+        array_walk_recursive(
+            $doc,
+            function (&$val) {
+                if (is_numeric($val) && is_nan($val)) {
+                    $val = null;
+                }
+            }
+        );
+
         return $doc;
     }
 
