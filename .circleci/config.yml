@@ -35,10 +35,10 @@ jobs:
           command: |
               ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
       - run:
-          name: Update php module
-          command: dnf module -y reset php && dnf module -y enable php:8.0
+          name: Update php module to 7.4
+          command: dnf module -y reset php && dnf module -y enable php:7.4
       - run:
-          name: Install PHP 8.0 && Pear pre-reqs
+          name: Install PHP 7.4 && Pear pre-reqs
           command: dnf install -y php libzip-devel php-pear
       - run:
           name: Install MongoDB Pear module
