@@ -73,6 +73,16 @@
     "fieldofscience": {
         "$ref": "datawarehouse.d/ref/group-by-hierarchy.json#/fieldofscience"
     },
+    "gpucount": {
+        "$overwrite": {
+            "attribute_to_aggregate_table_key_map": [
+                {
+                    "id": "gpu_bucket_id"
+                }
+            ]
+        },
+        "$ref-with-overwrite": "datawarehouse.d/ref/group-by-common.json#/gpucount"
+    },
     "granted_pe": {
         "attribute_table_schema": "modw_supremm",
         "attribute_to_aggregate_table_key_map": [
