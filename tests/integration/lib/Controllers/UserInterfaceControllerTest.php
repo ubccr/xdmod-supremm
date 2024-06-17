@@ -132,6 +132,11 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
             'label' => 'GPU Active Value'
         ),
 
+        'gpucount' => array(
+            'defaultChartSettings' => '0',
+            'label' => 'GPU Count'
+        ),
+
         'granted_pe' => array(
             'defaultChartSettings' => '2',
             'label' => 'Granted Processing Element'
