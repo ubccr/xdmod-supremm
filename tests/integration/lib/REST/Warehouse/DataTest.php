@@ -3,20 +3,21 @@
 namespace IntegrationTests\REST\Warehouse;
 
 use IntegrationTests\TestHarness\XdmodTestHelper;
+use PHPUnit\Framework\TestCase;
 
-class DataTest extends \PHPUnit_Framework_TestCase
+class DataTest extends TestCase
 {
     protected static $xdmodhelper;
 
     const ENDPOINT = 'rest/v0.1/warehouse/';
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$xdmodhelper = new XdmodTestHelper();
         self::$xdmodhelper->authenticate('cd');
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::$xdmodhelper->logout();
     }
@@ -59,6 +60,6 @@ class DataTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('total', $data);
 
         $this->assertTrue($data['success']);
-        $this->assertEquals(min($data['total'], $params['limit']), count($data['results']));
+        $this->assertCount(min($data['total'], $params['limit']), $data['results']);
     }
 }

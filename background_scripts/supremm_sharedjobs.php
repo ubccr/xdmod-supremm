@@ -180,7 +180,7 @@ function shared_jobs($resource_id, $start, $end)
                     foreach($activejobs as $currentjob => $state_transition_timestamp) {
                         if($currentjob != $row['jobid'] && $state_transition_timestamp != $row['state_transition_timestamp']) {
                             $npeers += 1;
-                            $record = "${row['jobid']} $currentjob\n$currentjob ${row['jobid']}\n";
+                            $record = "{$row['jobid']} $currentjob\n$currentjob {$row['jobid']}\n";
                             $written = fwrite($jobpeersfile, $record);
                             if ($written !== strlen($record)) {
                                 fclose($jobpeersfile);

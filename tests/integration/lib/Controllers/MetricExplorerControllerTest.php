@@ -3,8 +3,9 @@
 namespace IntegrationTests\Controllers;
 
 use IntegrationTests\TestHarness\XdmodTestHelper;
+use PHPUnit\Framework\TestCase;
 
-class MetricExplorerControllerTest extends \PHPUnit_Framework_TestCase
+class MetricExplorerControllerTest extends TestCase
 {
     /**
      * Check that the SUPREMM realm shows in the metric explorer

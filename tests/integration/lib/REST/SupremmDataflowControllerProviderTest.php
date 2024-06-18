@@ -10,7 +10,7 @@ class SupremmDataflowControllerProviderTest extends BaseTest
 
     protected static $helper;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$helper = new XdmodTestHelper();
     }
@@ -153,7 +153,7 @@ class SupremmDataflowControllerProviderTest extends BaseTest
                     parent::validateSuccessResponse(
                         function ($body, $assertMessage) use ($type) {
                             $this->assertSame($type, $body['type']);
-                            $this->assertInternalType('array', $body['result']);
+                            $this->assertIsArray($body['result']);
                         }
                     )
                 ];
