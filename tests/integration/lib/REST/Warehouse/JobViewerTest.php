@@ -28,6 +28,7 @@ class JobViewerTest extends TestCase
             "fieldofscience",
             "gpu0_nv_utilization_bucketid",
             "gpu_usage_bucketid",
+            "gpucount",
             "granted_pe",
             "homogeneity_bucket_id",
             "ibrxbyterate_bucket_id",

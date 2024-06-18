@@ -2109,7 +2109,7 @@ module.exports = {
                 {
                     table: 'supremmfact',
                     type: 'int32',
-                    alias: 'gpu_count',
+                    alias: 'gpucount',
                     roles: { disable: ['pub'] },
                     dimension: true,
                     comments: 'Number of GPU devices assigned to the jobs.'
