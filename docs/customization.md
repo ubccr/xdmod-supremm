@@ -205,8 +205,8 @@ to include the `-d` debug flag so that you can monitor the progress:
 
 Don't remove any existing entries from `application.json` &mdash; it will cause the database primary
 keys to change and necessitate a complete deletion and reingestion of
-all data. If there is an existing job entry that you don't want to match
-at your site, then remove the regular expression definitions that cause
+all data. If there is an existing job entry that you don't want to match,
+then remove the regular expression definitions that cause
 the false positive matches (if no regular expressions are defined
 then the application will never be matched).
 
