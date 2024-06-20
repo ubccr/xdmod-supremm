@@ -158,8 +158,8 @@ XDMoD then you can either (1) reset the database and re-ingest all jobs, or (2) 
  run an SQL update statement to update the application for existing jobs.
 Running an SQL update statement will typically be faster.
 
-Instructions for reseting and re-ingesting data are in [extending.md#4-re-ingest-data-into-xdmod](Section 4 of the data
-mapping extending guide).
+Instructions for resetting and re-ingesting data are in [Section 4 of the data
+mapping extending guide](extending.md#4-re-ingest-data-into-xdmod).
 
 Instructions for running the SQL update statement are below.  **Always make sure to create a backup of the SQL database before running
 SQL updates.**
