@@ -211,12 +211,9 @@ the false positive matches (if no regular expressions are defined
 then the application will never be matched).
 
 If you do edit `application.json`, you will need to re-apply those edits every time
-you upgrade the XDMoD software. Make sure to re-apply the edits to the file and
-rerun the `etl.cli.js -o` command _after_ installing the new version of XDMoD
- but  _before_ running the `xdmod-upgrade` command.
-
-If you have added any new applications then they should be added in the same
-relative location in the file. If the relative order of applications changes
-then it will cause the database primary
-keys to change and would necessitate a complete deletion and reingestion of
-all data.
+you upgrade the XDMoD software. When it comes time to upgrade:
+1. Back up your edits to `application.json`.
+1. Install the new version of XDMoD but don't run `xdmod-upgrade` yet.
+1. Re-apply your edits to `application.json`, but make sure any applications you previously added appear *before* any new applications that were added by the installation. Otherwise, if the relative order of applications is different, then it would cause the database primary keys to change and would necessitate a complete deletion and reingestion of all data.
+1. After you have re-applied your edits, run the `etl.cli.js -o` command mentioned earlier.
+1. Finally, run the `xdmod-upgrade` command.
