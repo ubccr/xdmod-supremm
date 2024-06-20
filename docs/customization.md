@@ -178,7 +178,7 @@ application:
     }
 ```
 You could use the following SQL statements to update historical jobs
-that were previously uncategorized and had a executable of 'nexmd.exe':
+that were previously uncategorized and had an executable of `nexmd.exe`:
 
 ```sql
 LOCK TABLES `modw_supremm`.`application` AS a READ, `modw_supremm`.`job` AS j WRITE, `modw_supremm`.`executable` AS e WRITE;
