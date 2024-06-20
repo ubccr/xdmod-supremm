@@ -2258,5 +2258,42 @@
             "^oceanM$",
             "^oceanM\\."
         ]
+    },
+    {
+        "name": "NEXMD",
+        "license_type": "permissive",
+        "science_area": "Molecular Dynamics",
+        "url": "https://github.com/lanl/NEXMD",
+        "execmatch": [
+            "^nexmd.exe$"
+        ]
+    },
+    {
+        "name": "Libra",
+        "license_type": "permissive",
+        "science_area": "Quantum Chemistry",
+        "url": "https://quantum-dynamics-hub.github.io/libra/index.html",
+        "execmatch": [
+            "^libra$"
+        ]
+    },
+    {
+        "name": "DFTB+",
+        "license_type": "permissive",
+        "science_area": "Quantum Chemistry",
+        "url": "https://dftbplus.org",
+        "execmatch": [
+            "^dftbp$",
+            "^dftbplus$"
+        ]
+    },
+    {
+        "name": "CDO",
+        "license_type": "permissive",
+        "science_area": "Climate Science",
+        "url": "https://code.mpimet.mpg.de/projects/cdo",
+        "execmatch": [
+            "^cdo$"
+        ]
     }
 ]
