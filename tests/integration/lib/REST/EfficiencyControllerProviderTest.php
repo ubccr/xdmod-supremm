@@ -11,7 +11,7 @@ class EfficiencyTest extends BaseTest
 
     protected static $helpers = array();
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         foreach (array('pub', 'cd', 'usr') as $user) {
             self::$helpers[$user] = new XdmodTestHelper();
@@ -21,7 +21,7 @@ class EfficiencyTest extends BaseTest
         }
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         foreach (self::$helpers as $helper) {
             $helper->logout();
