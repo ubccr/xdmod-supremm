@@ -6,8 +6,9 @@
 namespace ComponentTests\DataWarehouse\Query\SUPREMM;
 
 use DataWarehouse\Query\SUPREMM\SupremmDbInterface;
+use PHPUnit\Framework\TestCase;
 
-class SupremmDbInterfaceTest extends \PHPUnit_Framework_TestCase
+class SupremmDbInterfaceTest extends TestCase
 {
     public function testTimeseriesFilter()
     {

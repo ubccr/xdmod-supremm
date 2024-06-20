@@ -24,7 +24,7 @@ done
 
 # Check that the application table exists and has the correct content
 appcount=$(echo 'SELECT COUNT(*) FROM modw_supremm.application' | mysql -N modw_supremm)
-if [ $appcount -ne 229 ];
+if [ $appcount -ne 233 ];
 then
     echo "Mismatch rows in modw_supremm.application ($appcount)"
     exitcode=1

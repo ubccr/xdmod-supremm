@@ -21,6 +21,10 @@
             "class": "ExecuteSql",
             "sql_file_list": [
                 {
+                    "sql_file": "supremm/applications.sql",
+                    "delimiter": ";"
+                },
+                {
                     "sql_file": "supremm/migration-10_5_0-11_0_0.sql"
                 }
             ]

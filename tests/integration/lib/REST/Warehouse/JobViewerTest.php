@@ -2,20 +2,21 @@
 
 namespace IntegrationTests\REST\Warehouse;
 
-use IntegrationTests\TestHarness\Utilities;
 use IntegrationTests\TestHarness\XdmodTestHelper;
+use PHPUnit\Framework\TestCase;
 
-class JobViewerTest extends \PHPUnit_Framework_TestCase
+class JobViewerTest extends TestCase
 {
     const ENDPOINT = 'rest/v0.1/warehouse/';
 
-    public function setUp()
+    public function setUp(): void
     {
-        $xdmodConfig = array( "decodetextasjson" => true );
+        $xdmodConfig = array("decodetextasjson" => true);
         $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
     }
 
-    private static function getDimensions() {
+    private static function getDimensions()
+    {
         return array(
             "application",
             "catastrophe_bucket_id",
@@ -27,6 +28,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             "fieldofscience",
             "gpu0_nv_utilization_bucketid",
             "gpu_usage_bucketid",
+            "gpucount",
             "granted_pe",
             "homogeneity_bucket_id",
             "ibrxbyterate_bucket_id",
@@ -71,7 +73,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $resdata = $response[0];
 
         $this->assertArrayHasKey('success', $resdata);
-        $this->assertEquals(true, $resdata['success']);
+        $this->assertTrue($resdata['success']);
 
         $dimids = array();
         foreach ($resdata['results'] as $dimension) {
@@ -113,8 +115,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $resdata = $response[0];
 
         $this->assertArrayHasKey('success', $resdata);
-        $this->assertEquals(true, $resdata['success']);
-        $this->assertEquals(true, count($resdata['results']) > 0);
+        $this->assertTrue($resdata['success']);
+        $this->assertNotEmpty($resdata['results']);
     }
 
     public function testResourceEndPoint()
@@ -132,10 +134,9 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $resdata = $response[0];
 
         $this->assertArrayHasKey('success', $resdata);
-        $this->assertEquals(true, $resdata['success']);
+        $this->assertTrue($resdata['success']);
 
-        foreach($resdata['results'] as $resource)
-        {
+        foreach ($resdata['results'] as $resource) {
             $this->assertArrayHasKey('id', $resource);
             $this->assertArrayHasKey('name', $resource);
             $this->assertArrayHasKey('short_name', $resource);
@@ -163,7 +164,7 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], true);
+        $this->assertTrue($result[0]['success']);
         $this->assertArrayHasKey('results', $result[0]);
         $this->assertCount(1, $result[0]['results']);
 
@@ -179,7 +180,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         return $jobdata;
     }
 
-    public function testBasicJobSearch() {
+    public function testBasicJobSearch()
+    {
         $queryparams = array(
             'realm' => 'SUPREMM',
             'params' => json_encode(
@@ -192,7 +194,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $this->validateSingleJobSearch($queryparams);
     }
 
-    public function testBasicJobSearchNoAuth() {
+    public function testBasicJobSearchNoAuth()
+    {
         $searchparams = array(
             'realm' => 'SUPREMM',
             'params' => json_encode(
@@ -208,24 +211,26 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             $response = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
             $this->assertEquals(403, $response[1]['http_code']);
             $this->assertArrayHasKey('success', $response[0]);
-            $this->assertEquals(false, $response[0]['success']);
+            $this->assertFalse($response[0]['success']);
             $this->xdmodhelper->logout();
         }
     }
 
-    public function testInvalidJobSearch() {
+    public function testInvalidJobSearch()
+    {
 
         $this->xdmodhelper->authenticate("cd");
-        $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', array() );
+        $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', array());
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
-        $this->assertEquals($result[1]['http_code'], 400);
+        $this->assertFalse($result[0]['success']);
+        $this->assertEquals(400, $result[1]['http_code']);
 
         $this->xdmodhelper->logout();
     }
 
-    public function testInvalidJobSearchJson() {
+    public function testInvalidJobSearchJson()
+    {
 
         $searchparams = array(
             "realm" => "SUPREMM",
@@ -236,14 +241,15 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
-        $this->assertEquals($result[1]['http_code'], 400);
+        $this->assertFalse($result[0]['success']);
+        $this->assertEquals(400, $result[1]['http_code']);
 
         $this->xdmodhelper->logout();
     }
 
-    public function testInvalidJobSearchMissingParams() {
- 
+    public function testInvalidJobSearchMissingParams()
+    {
+
         $searchparams = array(
             "realm" => "SUPREMM",
             "params" => json_encode(array("resource_id" => "2801"))
@@ -253,20 +259,21 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
 
         $this->assertArrayHasKey('success', $result[0]);
-        $this->assertEquals($result[0]['success'], false);
-        $this->assertEquals($result[1]['http_code'], 400);
+        $this->assertFalse($result[0]['success']);
+        $this->assertEquals(400, $result[1]['http_code']);
 
         $this->xdmodhelper->logout();
     }
 
-    public function testAdvancedSearchInvalid() {
+    public function testAdvancedSearchInvalid()
+    {
         $searchparams = array(
             "start_date" => "2015-01-01",
             "end_date" => "2015-01-01",
             "realm" => "SUPREMM",
             "params" => json_encode(
-                array( "non existent dimension 1" => array(0),
-                "another invalid dimension" => array(1) )
+                array("non existent dimension 1" => array(0),
+                    "another invalid dimension" => array(1))
             ),
             "limit" => 10,
             "start" => 0
@@ -274,13 +281,14 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
 
         $this->xdmodhelper->authenticate("cd");
         $result = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs', $searchparams);
-        $this->assertEquals($result[0]['success'], false);
-        $this->assertEquals($result[1]['http_code'], 400);
+        $this->assertFalse($result[0]['success']);
+        $this->assertEquals(400, $result[1]['http_code']);
 
         $this->xdmodhelper->logout();
     }
 
-    public function getJobPrimaryIdentifier($resource_id, $local_job_id) {
+    public function getJobPrimaryIdentifier($resource_id, $local_job_id)
+    {
         $queryparams = array(
             'realm' => 'SUPREMM',
             'params' => json_encode(
@@ -300,7 +308,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testJobDatasetAccessControls() {
+    public function testJobDatasetAccessControls()
+    {
 
         $searchparams = $this->getJobPrimaryIdentifier(5, 6117006);
 
@@ -317,12 +326,13 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         $response = $this->xdmodhelper->get(self::ENDPOINT . 'search/jobs/accounting', $searchparams);
 
         $this->assertEquals(200, $response[1]['http_code']);
-        $this->assertEquals(true, $response[0]['success']);
+        $this->assertTrue($response[0]['success']);
         $this->assertNotEmpty($response[0]['success']);
 
     }
 
-    public function testJobMetadata() {
+    public function testJobMetadata()
+    {
 
         $searchparams = $this->getJobPrimaryIdentifier(5, 6112282);
 
@@ -332,13 +342,13 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
 
         $types = array();
 
-        foreach($result[0]['results'] as $datum) {
+        foreach ($result[0]['results'] as $datum) {
             $this->assertArrayHasKey('dtype', $datum);
             $this->assertArrayHasKey($datum['dtype'], $datum);
             $this->assertArrayHasKey('text', $datum);
             $types[] = $datum['text'];
         }
-        
+
         $expectedTypes = array(
             'Accounting data',
             'Executable information',
@@ -354,7 +364,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider jobTimeseriesProvider
      */
-    public function testJobTimeseries($xdmodhelper, $params, $expectedContentType, $expectedFinfo) {
+    public function testJobTimeseries($xdmodhelper, $params, $expectedContentType, $expectedFinfo)
+    {
         $response = $xdmodhelper->get(self::ENDPOINT . 'search/jobs/timeseries', $params);
 
         $this->assertEquals(200, $response[1]['http_code']);
@@ -367,7 +378,8 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function jobTimeseriesProvider() {
+    public function jobTimeseriesProvider()
+    {
         $xdmodhelper = new XdmodTestHelper();
         $xdmodhelper->authenticate('cd');
 
@@ -387,45 +399,24 @@ class JobViewerTest extends \PHPUnit_Framework_TestCase
             'realm' => 'SUPREMM',
             $jobparams['dtype'] => $jobparams[$jobparams['dtype']],
             'infoid' => 6,
-            'tsid' =>  'cpuuser'
+            'tsid' => 'cpuuser'
         );
-
-        $osInfo = self::getOsInfo();
-        $el8 = isset($osInfo['VERSION_ID']) && in_array($osInfo['VERSION_ID'], array('8', '8.5'));
 
         $ret = array();
         $ret[] = array($xdmodhelper, $searchparams, 'application/json', null);
         $searchparams['format'] = 'pdf';
         $ret[] = array($xdmodhelper, $searchparams, 'application/pdf', 'application/pdf; charset=binary');
         $searchparams['format'] = 'csv';
-        if (!$el8) {
-            $ret[] = array($xdmodhelper, $searchparams, 'text/csv', 'text/plain; charset=us-ascii');
-        } else {
-            $ret[] = array($xdmodhelper, $searchparams, 'text/csv;charset=UTF-8', 'text/plain; charset=us-ascii');
-        }
+
+        $ret[] = array($xdmodhelper, $searchparams, 'text/csv;charset=UTF-8', 'application/csv; charset=us-ascii');
 
         $searchparams['format'] = 'png';
         $ret[] = array($xdmodhelper, $searchparams, 'image/png', 'image/png; charset=binary');
 
         $searchparams['format'] = 'svg';
-        if (!$el8) {
-            $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'text/plain; charset=us-ascii');
-        } else {
-            $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'image/svg; charset=us-ascii');
-        }
+        $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'image/svg+xml; charset=us-ascii');
 
 
         return $ret;
-    }
-
-    public function getOsInfo()
-    {
-        try {
-            $osInfo = parse_ini_file('/etc/os-release');
-            return $osInfo;
-        } catch (\Exception $e) {
-            // if we don't have access to OS related info then that's fine, we'll just use the default expected.json
-            return array();
-        }
     }
 }

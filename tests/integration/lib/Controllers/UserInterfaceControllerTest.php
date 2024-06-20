@@ -3,8 +3,9 @@
 namespace IntegrationTests\Controllers;
 
 use IntegrationTests\TestHarness\XdmodTestHelper;
+use PHPUnit\Framework\TestCase;
 
-class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
+class UserInterfaceControllerTest extends TestCase
 {
     /**
      * Check that the SUPREMM realm shows in the usage tab
@@ -130,6 +131,11 @@ class UserInterfaceControllerTest extends \PHPUnit_Framework_TestCase
         'gpu_usage_bucketid' => array(
             'defaultChartSettings' => '0',
             'label' => 'GPU Active Value'
+        ),
+
+        'gpucount' => array(
+            'defaultChartSettings' => '0',
+            'label' => 'GPU Count'
         ),
 
         'granted_pe' => array(

@@ -3,8 +3,9 @@
 namespace UnitTests\DataWarehouse\Query\SUPREMM;
 
 use DataWarehouse\Query\SUPREMM\JobTimeseries;
+use PHPUnit\Framework\TestCase;
 
-class JobTimeseriesTest extends \PHPUnit_Framework_TestCase
+class JobTimeseriesTest extends TestCase
 {
     const TEST_ARTIFACT_PATH = "../artifacts/xdmod-test-artifacts/xdmod-supremm/summaries/";
 
@@ -19,7 +20,7 @@ class JobTimeseriesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('schema', $cpuuser);
         $this->assertArrayHasKey('series', $cpuuser);
-        
+
     }
 
     /**
@@ -33,7 +34,7 @@ class JobTimeseriesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('schema', $cpuuser);
         $this->assertArrayHasKey('series', $cpuuser);
-        
+
     }
 
     /**
