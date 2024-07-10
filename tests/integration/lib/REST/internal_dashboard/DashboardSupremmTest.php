@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class DashboardSupremmTest extends TestCase
 {
-    public function __construct($name, $data, $dataName)
+    public function __construct()
     {
         $xdmodConfig = array( "decodetextasjson" => true );
         $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
@@ -16,7 +16,6 @@ class DashboardSupremmTest extends TestCase
 
         // validate as manager, for dashboard access
         $this->validateAsUser = 'mgr';
-        parent::__construct($name, $data, $dataName);
     }
 
     private function invalidSupremmResourceEntries($params)
