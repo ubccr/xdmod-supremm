@@ -2,12 +2,13 @@
 
 cd root/xdmod-job-performance
 
-if { ! which phpunit >/dev/null 2>&1; } then
-    echo phpunit not found 1>&2
+cd $(dirname $0)
+phpunit="$(readlink -f ../../vendor/bin/phpunit)"
+
+if [ ! -x "$phpunit" ]; then
+    echo phpunit not found, run \"composer install\" 1>&2
     exit 127
 fi
-
-cd $(dirname $0)
 
 ../artifacts/update-artifacts.sh
 
