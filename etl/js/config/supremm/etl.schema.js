@@ -719,7 +719,7 @@ module.exports = {
                     label: 'Wall Hours: Requested: Total',
                     unit: 'Hour',
                     description: 'The total time, in hours, jobs requested for execution.<br/>'
-                            +	 '<i>Requested Wall Time:</i> Requsted wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
+                            +	 '<i>Requested Wall Time:</i> Requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
                     decimals: 0
                 }, {
                     name: 'requested_wall_time_per_job',
@@ -728,7 +728,7 @@ module.exports = {
                     label: 'Wall Hours: Requested: Per Job',
                     unit: 'Hour',
                     description: 'The average time, in hours, a job requested for execution.<br/>'
-                            +	 '<i>Requested Wall Time:</i> Requsted wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
+                            +	 '<i>Requested Wall Time:</i> Requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
                     decimals: 2
                 }]
             }]
@@ -1108,7 +1108,7 @@ module.exports = {
                     requirenotnull: 'jf.homogeneity_weighted_by_node_hour',
                     label: 'Avg: Homogeneity: weighted by node-hour',
                     unit: '%',
-                    description: 'The average homogeneity value weighted by node hour. The homogeneity is a measure of the how uniform the L1D load rate is over the lifetime of a job. Jobs with low homogeneity value (near 0) should be investigated to check if an error has caused data processing to stop prematurely.'
+                    description: 'The average homogeneity value weighted by node hour. The homogeneity is a measure of how uniform the L1D load rate is over the lifetime of a job. Jobs with low homogeneity value (near 0) should be investigated to check if an error has caused data processing to stop prematurely.'
                 }]
             }, {
                     name: 'homogeneity_weight',
