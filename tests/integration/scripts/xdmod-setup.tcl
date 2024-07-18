@@ -66,7 +66,6 @@ selectMenuOption 9
 selectMenuOption d
 answerQuestion {DB Admin Username:} root
 providePassword {DB Admin Password:} {}
-answerQuestion {XDMoD Server name:} xdmod.xdmod_default
 provideInput {MongoDB uri*} {mongodb://xdmod:uvVA6bIC9DMts30ZiLRaH@mongodb:27017/supremm?authSource=auth}
 provideInput {database name*} {supremm}
 confirmFileWrite yes
