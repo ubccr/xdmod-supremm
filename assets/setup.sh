@@ -10,3 +10,6 @@ xdmod_dir="$module_dir/../../.."
 echo Installing Composer dependencies
 cd "$module_dir"
 composer install --no-dev
+
+echo Installing npm managed dependencies
+npm install --production --prefix html/gui/lib

@@ -312,5 +312,9 @@ configuratuon/datawarehouse.d/ref/supremm-statistics.json
 # External dependencies
 /html/gui/lib/*
 
+# Include NPM configuration files.
+!/html/gui/lib/package.json
+!/html/gui/lib/package-lock.json
+
 # External QA assets
 /.qa/
