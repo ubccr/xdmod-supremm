@@ -31,7 +31,7 @@
                 "aggregate": "h_bar"
             }
         },
-        "description_html": "The classication of the job as common scientific application.",
+        "description_html": "The classification of the job as a common scientific application.",
         "name": "Application"
     },
     "day": {
