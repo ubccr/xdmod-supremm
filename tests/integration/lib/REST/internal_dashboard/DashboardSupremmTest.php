@@ -9,13 +9,13 @@ class DashboardSupremmTest extends TestCase
 {
     const ENDPOINT = 'rest/v0.1/supremm_dataflow/';
 
-    protected static $helper;
+    protected static $xdmodhelper;
     protected static $validateAsUser;
 
     public static function setUpBeforeClass(): void
     {
         $xdmodConfig = array( "decodetextasjson" => true );
-        self::$helper = new XdmodTestHelper($xdmodConfig);
+        self::$xdmodhelper = new XdmodTestHelper($xdmodConfig);
 
         // validate as manager, for dashboard access
         self::$validateAsUser = 'mgr';
@@ -25,7 +25,7 @@ class DashboardSupremmTest extends TestCase
     {
         // without performing validation: expect to receive a 401;
         // if wrong user authenticated: expect to receive a 403
-        $result = self::$helper->get(self::ENDPOINT . 'resources', $params);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'resources', $params);
 
         // expect success to be false
         $this->assertArrayHasKey('success', $result[0]);
@@ -40,9 +40,9 @@ class DashboardSupremmTest extends TestCase
 
     private function validateSupremmResourceEntries()
     {
-        self::$helper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::$validateAsUser);
 
-        $result = self::$helper->get(self::ENDPOINT . 'resources', null);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'resources', null);
         $this->assertEquals(200, $result[1]['http_code']);
 
         $this->assertArrayHasKey('success', $result[0]);
@@ -73,14 +73,14 @@ class DashboardSupremmTest extends TestCase
     {
         // without performing validation : expect to receive a 401
         // ensure user is logged out
-        self::$helper->logoutDashboard();
+        self::$xdmodhelper->logoutDashboard();
 
         // hardcode the params for resource id
         $params = array(
             'resource_id' => 2791,
             'db_id' => $db
         );
-        $result = self::$helper->get(self::ENDPOINT . 'dbstats', $params);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'dbstats', $params);
 
         $this->assertArrayHasKey('success', $result[0]);
         $this->assertFalse($result[0]['success']);
@@ -92,10 +92,10 @@ class DashboardSupremmTest extends TestCase
     private function invalidParamsSupremmDbstatsEntries()
     {
         // validate properly
-        self::$helper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::$validateAsUser);
 
         // send null params, expect 400
-        $result = self::$helper->get(self::ENDPOINT . 'dbstats', null);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'dbstats', null);
         $this->assertEquals(400, $result[1]['http_code']);
 
         $this->assertArrayHasKey('success', $result[0]);
@@ -105,14 +105,14 @@ class DashboardSupremmTest extends TestCase
     private function invalidResParamsNotFoundSupremmDbstatsEntries()
     {
         // validate properly
-        self::$helper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::$validateAsUser);
 
         // hardcode and send bogus resource_id param
         $params = array(
             'resource_id' => 99999,
             'db_id' => 'summarydb'
         );
-        $result = self::$helper->get(self::ENDPOINT . 'dbstats', $params);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'dbstats', $params);
 
         // Message will contain "no result found"
         $this->assertStringContainsString("no result found for the given database", $result[0]['message']);
@@ -128,14 +128,14 @@ class DashboardSupremmTest extends TestCase
     private function invalidParamsNotFoundSupremmDbstatsEntries()
     {
         // validate properly
-        self::$helper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::$validateAsUser);
 
         // hardcode and send bogus db_id param
         $params = array(
             'resource_id' => $this->fetchResourceId(),
             'db_id' => 'db_does_not_exist'
         );
-        $result = self::$helper->get(self::ENDPOINT . 'dbstats', $params);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'dbstats', $params);
 
         // Message will contain "no result found"
         $this->assertStringContainsString("no result found for the given database", $result[0]['message']);
@@ -160,8 +160,8 @@ class DashboardSupremmTest extends TestCase
         );
 
         // reauthenticate as some (invalid) user role, not a 'mgr' role
-        self::$helper->authenticate($userRole);
-        $result = self::$helper->get(self::ENDPOINT . 'dbstats', $params);
+        self::$xdmodhelper->authenticate($userRole);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'dbstats', $params);
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
@@ -173,13 +173,13 @@ class DashboardSupremmTest extends TestCase
 
     private function validateSupremmDbstatsEntries($db)
     {
-        self::$helper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::$validateAsUser);
 
         $params = array(
             'resource_id' => $this->fetchResourceId(),
             'db_id' => $db
         );
-        $result = self::$helper->get(self::ENDPOINT . 'dbstats', $params);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'dbstats', $params);
         $this->assertEquals(200, $result[1]['http_code']);
 
         // result has success='true'
@@ -197,7 +197,7 @@ class DashboardSupremmTest extends TestCase
     {
         // with wrong user authenticated: expect to receive a 403
         $user = 'cd';
-        self::$helper->authenticate($user);
+        self::$xdmodhelper->authenticate($user);
 
         $result = $this->invalidSupremmResourceEntries(null);
         $this->assertEquals(403, $result[1]['http_code']);
@@ -205,7 +205,7 @@ class DashboardSupremmTest extends TestCase
 
     public function testInvalidUserSupremmResourceEntries()
     {
-        self::$helper->logoutDashboard();
+        self::$xdmodhelper->logoutDashboard();
         // with no user authenticated: expect to receive a 401
         $result = $this->invalidSupremmResourceEntries(null);
         $this->assertEquals(401, $result[1]['http_code']);
@@ -298,19 +298,19 @@ class DashboardSupremmTest extends TestCase
 
     public function testResourceEnableDisable() {
 
-        self::$helper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::$validateAsUser);
 
-        $result = self::$helper->get(self::ENDPOINT . 'resources', null);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'resources', null);
         $this->assertEquals(5, sizeof($result[0]['data']));
 
         shell_exec('mv /etc/xdmod/supremm_resources.json /etc/xdmod/supremm_resources.json.bak && jq \'.resources |= map(if .resource == "frearson" then .enabled |= false else . end)\' /etc/xdmod/supremm_resources.json.bak > /etc/xdmod/supremm_resources.json');
 
-        $result = self::$helper->get(self::ENDPOINT . 'resources', null);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'resources', null);
         $this->assertEquals(4, sizeof($result[0]['data']));
 
         shell_exec('mv /etc/xdmod/supremm_resources.json.bak /etc/xdmod/supremm_resources.json');
 
-        $result = self::$helper->get(self::ENDPOINT . 'resources', null);
+        $result = self::$xdmodhelper->get(self::ENDPOINT . 'resources', null);
         $this->assertEquals(5, sizeof($result[0]['data']));
     }
 }
