@@ -142,7 +142,7 @@ jobs:
       - store_artifacts:
           path: /var/log/php_errors.log
       - store_artifacts:
-          path: /root/xdmod/log/exceptions.log
+          path: /root/xdmod/logs/exceptions.log
       - store_test_results:
           path: ~/phpunit
 
