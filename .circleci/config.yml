@@ -132,7 +132,7 @@ jobs:
               fi
       - run:
           name: Ensure that no XDMoD exceptions were logged
-          command: test ! -f /xdmod/logs/exceptions.log
+          command: test ! -f /root/xdmod/logs/exceptions.log
       - store_artifacts:
           path: /tmp/screenshots
       - store_artifacts:
@@ -142,7 +142,7 @@ jobs:
       - store_artifacts:
           path: /var/log/php_errors.log
       - store_artifacts:
-          path: /xdmod/log/exceptions.log
+          path: /root/xdmod/log/exceptions.log
       - store_test_results:
           path: ~/phpunit
 
