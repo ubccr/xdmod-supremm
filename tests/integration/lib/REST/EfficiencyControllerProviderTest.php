@@ -5,7 +5,7 @@ namespace IntegrationTests\REST;
 use IntegrationTests\BaseTest;
 use IntegrationTests\TestHarness\XdmodTestHelper;
 
-class EfficiencyTest extends BaseTest
+class EfficiencyControllerProviderTest extends BaseTest
 {
     const ENDPOINT = 'rest/v1/efficiency/';
 
