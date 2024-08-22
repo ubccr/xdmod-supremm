@@ -99,12 +99,18 @@ jobs:
           name: Run Component Tests
           command: ./tests/component/runtests.sh --log-junit ~/phpunit/component.xml
       - run:
+          name: Ensure that no XDMoD exceptions were logged
+          command: test ! -f /var/log/xdmod/exceptions.log
+      - run:
           name: Make sure that the Composer Test Dependencies are installed
           command: |
             composer install -d $XDMOD_SRC_DIR --no-progress
       - run:
           name: Run Integration Tests
           command: ./tests/integration/runtests.sh --log-junit ~/phpunit/integration.xml
+      - run:
+          name: Ensure that no XDMoD exceptions were logged
+          command: test ! -f /root/xdmod/logs/exceptions.log
       - run: pushd $HOME && rm -f chromedriver_linux64.zip && wget https://chromedriver.storage.googleapis.com/98.0.4758.80/chromedriver_linux64.zip && popd
       - run:
           name: 'Bodge the nodejs version to run an older one for the webdriver tests'
@@ -125,14 +131,14 @@ jobs:
           name: Run Regression Tests
           command: ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
       - run:
+          name: Ensure that no XDMoD exceptions were logged
+          command: test ! -f /root/xdmod/logs/exceptions.log
+      - run:
           name: Ensure that no PHP command-line errors were generated
           command: >
               if [ -e /var/log/php_errors.log ]; then
                   test `egrep -v 'vendor/phpunit/phpunit/src|PHP Notice:  fread()' /var/log/php_errors.log | wc -l` = 0;
               fi
-      - run:
-          name: Ensure that no XDMoD exceptions were logged
-          command: test ! -f /root/xdmod/logs/exceptions.log
       - store_artifacts:
           path: /tmp/screenshots
       - store_artifacts:
@@ -142,7 +148,7 @@ jobs:
       - store_artifacts:
           path: /var/log/php_errors.log
       - store_artifacts:
-          path: /root/xdmod/logs/exceptions.log
+          path: /root/xdmod/logs
       - store_test_results:
           path: ~/phpunit
 
