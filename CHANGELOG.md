@@ -13,18 +13,19 @@ Open XDMoD SUPReMM Change Log
 
 - Bug Fixes
     - Order scatter plot data by usage instead of efficiency statistic.  ([\#323](https://github.com/ubccr/xdmod-supremm/pull/323))
-    - Add LEAST() function to SQL that gets the `wall_time_accuracy` value. ([\#324](https://github.com/ubccr/xdmod-supremm/pull/324))
+    - Add `LEAST()` function to SQL that gets the `wall_time_accuracy` value. ([\#324](https://github.com/ubccr/xdmod-supremm/pull/324))
     - Use different endpoint for filter values on efficiency tab filter store freeform search.  ([\#325](https://github.com/ubccr/xdmod-supremm/pull/325))
     - Fix bugs in resource specification queries for the internal dashboard. ([\#366](https://github.com/ubccr/xdmod-supremm/pull/366))
     - Sanitize NAN values from timeseries data ([\#353](https://github.com/ubccr/xdmod-supremm/pull/353))
 
 - Maintenance
     - Updates to Support PHP7.4 ([\#373](https://github.com/ubccr/xdmod-supremm/pull/373))
-    - Refactor test namespaces and replace redundant exception classes with ones provided by Symfony. ([\#355](https://github.com/ubccr/xdmod-supremm/pull/355))
+    - Replace redundant exception classes with ones provided by Symfony. ([\#355](https://github.com/ubccr/xdmod-supremm/pull/355))
     - Remove jQuery as a dependency ([\#380](https://github.com/ubccr/xdmod-supremm/pull/380), [\#377](https://github.com/ubccr/xdmod-supremm/pull/377))
     - Update jsPlumb dependency. ([\#372](https://github.com/ubccr/xdmod-supremm/pull/372))
+    - Refactor job data set analysis fields ([\#256](https://github.com/ubccr/xdmod-supremm/pull/256))
 
-- Misc
+- Miscellaneous
     - Use the portal's time zone for raw data query dates instead of UTC. ([\#356](https://github.com/ubccr/xdmod-supremm/pull/356))
     - Various CI test updates ([\#369](https://github.com/ubccr/xdmod-supremm/pull/369), [\#381](https://github.com/ubccr/xdmod-supremm/pull/381), [\#350](https://github.com/ubccr/xdmod-supremm/pull/350), [\#367](https://github.com/ubccr/xdmod-supremm/pull/367), [\#354](https://github.com/ubccr/xdmod-supremm/pull/354))
 
