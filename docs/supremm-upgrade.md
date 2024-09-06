@@ -23,9 +23,8 @@ The upgrade script will update the following configuration files:
 
 - `application.json` to add the MOM6, ROMS, NEXMD, Libra, DFTB+, and CDO
   applications.
-- `efficiency_analytics.json` to remove the
-  deprecated `rotate` setting and to update the Short Job Count analytic to use
-  a new `short_job_count` statistic.
+- `efficiency_analytics.json` to remove the deprecated `rotate` setting and to
+  update the Short Job Count analytic to use a new `short_job_count` statistic.
 
 ### Database Changes
 
