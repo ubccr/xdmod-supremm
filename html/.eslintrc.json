@@ -10,6 +10,7 @@
     "Ext": false,
     "ga": false,
     "_gaq": false,
+    "jQuery": false,
     "jsPlumb": false,
     "Highcharts": false,
     "truncateText": false,
