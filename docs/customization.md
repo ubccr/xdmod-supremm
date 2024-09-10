@@ -74,3 +74,146 @@ After editing the file, run:
 
 To change the order in which the analytics appear in the toolbar, edit the
 `metricOrder` variable in `/usr/share/xdmod/html/gui/js/modules/job_viewer/JobPanel.js`.
+
+## Application Identification
+
+The Application dimension in the SUPREMM realm allows filtering and grouping
+by the community software application that was run by each job. In the default
+configuration, the software application is inferred at job ingest time by
+comparing the paths to the executables with a list of known community applications.
+
+This list of applications is maintained in the `share` directory (whose location depends on how you installed XDMoD, e.g., `/usr/share/xdmod`, `/opt/xdmod/share`) under `etl/js/config/supremm/application.json`.
+The `application.json` file contains an ordered list of community applications and
+a corresponding set of regular expressions that are tested against the
+executable (i.e., the executable path with the leading directory components removed). If an executable matches, then the job is assigned the corresponding
+application. The applications are processed in the order they appear in the file, and the match with the highest
+priority (i.e., that appears first in the file) is used. If no match is found, then the application is assigned
+to 'uncategorized'. If no executable path information is available, then the
+application is assigned 'NA'.
+
+An example entry in the file is shown below:
+
+```json
+    {
+        "name": "gransim",
+        "license_type": "permissive",
+        "science_area": "Biology",
+        "url": "http://malthus.micro.med.umich.edu/lab/",
+        "execmatch": [
+            "^gr$",
+            "^gr-co$",
+            "^gr-co-[0-9]{4}$",
+            "^gr-[0-9]{4}-[23]d-co$"
+        ]
+    }
+```
+
+In this example the 'gransim' application has four different regular expressions
+that are tested against the executable.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name`  | [String] | The name of the application &mdash; this must be unique. |
+| `license_type` | `permissive` \| `proprietary` | Information about the software license. If the software has a license that restricts publishing of performance data, then set this field to <code>proprietary</code>; otherwise, <code>permissive</code> should be used. The application names for <code>proprietary</code> licensed code do not appear in the XDMoD portal. |
+| `science_area` | [String] | The science area of the application. This information is stored in the XDMoD data warehouse, but is not displayed in the portal. |
+| `url`  | [String] | The website of the application. This information is stored in the XDMoD data warehouse, but is not displayed in the portal. It is intended to assist developers in disambiguating software applications that have similar names. |
+| `execmatch` | OPTIONAL LIST | Optional list of regular expressions that will be checked against the executable (i.e., the executable path with the leading directory components removed). |
+| `pathmatch` | OPTIONAL LIST | Optional list of regular expressions that will be checked against the executable path. |
+| `hints`     | deprecated | Deprecated, do not use. |
+
+
+### Customizing the application lookup
+
+#### Modifying regular expressions
+
+The `execmatch` and/or `pathmatch` fields in the application mapping are
+read and processed at ingest time (when the job data is loaded from mongodb
+into the XDMoD data warehouse).  The application lookup regular expressions
+can be edited to suit your environment. Edits to the regular expressions
+will impact jobs that are ingested after the file is changed and will
+not change the data for jobs that are already loaded into XDMoD.
+
+#### Adding new applications
+
+New application definitions should be added at the end of the file. Once
+the new definition has been added, then the database dimension tables
+must be updated as follows (Note: depending on how you installed XDMoD, `/usr/share/xdmod` should be replaced with `/opt/xdmod/share` or the correct path to the `share` directory, and `/etc/xdmod` should be replaced with `/opt/xdmod/etc` or the correct path to the `etc` directory).
+
+First update the SQL definition file for the application tables:
+```
+# cd /usr/share/xdmod/etl/js
+# node etl.cli.js -o > /etc/xdmod/etl/etl_sql.d/supremm/application.sql
+```
+Then use the `mysql` command line client to update the database with the new table contents:
+```
+# mysql < /etc/xdmod/etl/etl_sql.d/supremm/application.sql
+```
+The new application definitions will impact jobs that are ingested after the file
+is changed and will not change the data for jobs that are already loaded into XDMoD.
+
+#### Updating application category for existing jobs
+
+If you want to back-populate the data for jobs that were previously ingested into
+XDMoD then you can either (1) reset the database and re-ingest all jobs, or (2) you can
+ run an SQL update statement to update the application for existing jobs.
+Running an SQL update statement will typically be faster.
+
+Instructions for resetting and re-ingesting data are in [Section 4 of the data
+mapping extending guide](extending.md#4-re-ingest-data-into-xdmod).
+
+Instructions for running the SQL update statement are below.  **Always make sure to create a backup of the SQL database before running
+SQL updates.**
+
+For example, if you had updated the `application.json` with the following 'new'
+application:
+```json
+    {
+        "name": "NEXMD",
+        "license_type": "permissive",
+        "science_area": "Molecular Dynamics",
+        "url": "https://github.com/lanl/NEXMD",
+        "execmatch": [
+            "^nexmd.exe$"
+        ]
+    }
+```
+You could use the following SQL statements to update historical jobs
+that were previously uncategorized and had an executable of `nexmd.exe`:
+
+```sql
+LOCK TABLES `modw_supremm`.`application` AS a READ, `modw_supremm`.`job` AS j WRITE, `modw_supremm`.`executable` AS e WRITE;
+
+UPDATE `modw_supremm`.`job` j, `modw_supremm`.`executable` e, `modw_supremm`.`application` a
+SET j.`application_id` = a.`id`, e.`application_id` = a.`id`
+WHERE j.`executable_id` = e.`id` AND e.`application_id` = 0
+   AND e.`binary` = 'nexmd.exe' AND a.`name` = 'NEXMD';
+
+UNLOCK TABLES;
+```
+If you have an application regex that matches the executable path (`pathmatch`), then
+the SQL `WHERE` condition should use the `e.exec` column.
+
+After updating the tables, run the `aggregate_supremm.sh` script to reaggregate the data. The script will automatically detect which time periods need to be
+reaggregated. The amount of time the script will take to run depends on the number of time periods
+that need to be reaggregated. It is recommended to run the script in a `screen` or `tmux` session and
+to include the `-d` debug flag so that you can monitor the progress:
+```
+# aggregate_supremm.sh -d
+```
+
+### Notes
+
+Don't remove any existing entries from `application.json` &mdash; it will cause the database primary
+keys to change and necessitate a complete deletion and reingestion of
+all data. If there is an existing job entry that you don't want to match,
+then remove the regular expression definitions that cause
+the false positive matches (if no regular expressions are defined
+then the application will never be matched).
+
+If you do edit `application.json`, you will need to re-apply those edits every time
+you upgrade the XDMoD software. When it comes time to upgrade:
+1. Back up your edits to `application.json`.
+1. Install the new version of XDMoD but don't run `xdmod-upgrade` yet.
+1. Re-apply your edits to `application.json`, but make sure any applications you previously added appear *before* any new applications that were added by the installation. Otherwise, if the relative order of applications is different, then it would cause the database primary keys to change and would necessitate a complete deletion and reingestion of all data.
+1. After you have re-applied your edits, run the `etl.cli.js -o` command mentioned earlier.
+1. Finally, run the `xdmod-upgrade` command.
