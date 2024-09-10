@@ -1,7 +1,7 @@
 {
     "name": "xdmod-supremm",
     "version": "11.0.0",
-    "release": "rc.1",
+    "release": "rc.2",
     "files": {
         "include_paths": [
         ],
