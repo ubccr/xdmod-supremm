@@ -1,7 +1,7 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-## 2024-09-11 v11.0.0
+## 2024-XX-XX v11.0.0
 
 - Features
     - Add GPU Count group by ([\#379](https://github.com/ubccr/xdmod-supremm/pull/379))
