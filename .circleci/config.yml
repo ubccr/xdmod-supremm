@@ -41,9 +41,6 @@ jobs:
           name: Install PHP 7.4 && Pear pre-reqs
           command: dnf install -y php libzip-devel php-pear
       - run:
-          name: Install MongoDB Pear module
-          command: yes '' | pecl install mongodb || true
-      - run:
           name: Add mongodb
           command: |
               ./tests/ci/scripts/install_mongo.sh
