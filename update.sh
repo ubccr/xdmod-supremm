@@ -4,7 +4,7 @@
 set -e
 
 branches="xdmod11.0 xdmod10.5 xdmod10.0"
-latest="xdmod10.5"
+latest="xdmod11.0"
 
 SED=sed
 if command -v gsed > /dev/null;
