@@ -1,3 +1,3 @@
 ---
-redirect_to: /10.5/supremm-prometheus-use.html
+redirect_to: /11.0/supremm-prometheus-use.html
 ---
