@@ -7,7 +7,7 @@
 # Helper functions
 
 proc selectMenuOption { option } {
-	
+
 	expect {
 		-re "\nSelect an option .*: "
 	}
@@ -35,6 +35,7 @@ proc providePassword { prompt password } {
 	provideInput "(confirm) $prompt" $password
 
 }
+
 
 proc enterToContinue { } {
 	expect {
@@ -65,7 +66,8 @@ selectMenuOption 9
 selectMenuOption d
 answerQuestion {DB Admin Username:} root
 providePassword {DB Admin Password:} {}
-provideInput {MongoDB uri*} {mongodb://xdmod:uvVA6bIC9DMts30ZiLRaH@localhost:27017/supremm?authSource=auth}
+answerQuestion {XDMoD Server name:} xdmod.xdmod_default
+provideInput {MongoDB uri*} {mongodb://xdmod:uvVA6bIC9DMts30ZiLRaH@mongodb:27017/supremm?authSource=auth}
 provideInput {database name*} {supremm}
 confirmFileWrite yes
 enterToContinue

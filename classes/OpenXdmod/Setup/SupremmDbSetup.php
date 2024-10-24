@@ -55,6 +55,11 @@ EOT
             'DB Admin Password:'
         );
 
+        $xdmod_host = $this->console->prompt(
+            'XDMoD Server name:',
+            'xdmod.xdmod_default'
+        );
+
         try {
 
             // The SUPReMM databases reuse configuration sections from
@@ -73,6 +78,7 @@ EOT
                     'db_port' => $settings[$section . '_port'],
                     'db_user' => $settings[$section . '_user'],
                     'db_pass' => $settings[$section . '_pass'],
+                    'xdmod_host' => $xdmod_host
                 );
 
                 $this->createDatabases(
@@ -130,7 +136,7 @@ EOT
         $section = 'jobsummarydb';
         $defaults = array(
             'db_engine' => 'MongoDB',
-            'uri' => 'mongodb://localhost:27017/supremm',
+            'uri' => 'mongodb://mongodb:27017/supremm',
             'db' => 'supremm'
         );
         $prompts = array(
