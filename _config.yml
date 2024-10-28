@@ -46,7 +46,7 @@ defaults:
       sw_version: "11.0.0"
       summ_sw_version: "2.0.0"
       style: "effervescence"
-      tocversion: "v10_5toc"
+      tocversion: "v11_0toc"
   -
     scope:
       path: "10.5"
