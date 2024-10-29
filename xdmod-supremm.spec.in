@@ -87,7 +87,7 @@ rm -rf $RPM_BUILD_ROOT
 * Thu May 11 2017 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 6.6.0-1.0
     - Release 6.6.0.
 * Tue Jan 10 2017 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 6.5.0-1.0
-    - Release 8.5.0.
+    - Release 6.5.0.
 * Wed Sep 21 2016 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 6.0.0-1.0
     - Release 6.0.0.
 * Tue May 24 2016 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 5.6.0-1.0
