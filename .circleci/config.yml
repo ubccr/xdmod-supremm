@@ -34,11 +34,6 @@ jobs:
           name: Link the SUPREMM module into the XDMoD Source Directory
           command: |
               ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
-      - run:
-          name: Add mongodb
-          command: |
-              ./tests/ci/scripts/install_mongo.sh
-
       # We need to update our acct before we can enable docker layer caching.
       # - setup_remote_docker:
       #    docker_layer_caching: true
