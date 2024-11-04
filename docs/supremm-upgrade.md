@@ -33,4 +33,7 @@ The upgrade script will update the following configuration files:
 The upgrade script will add rows to the `modw_supremm.application` table for
 the MOM6, ROMS, NEXMD, Libra, DFTB+, and CDO applications.
 
+11.0.1 Upgrade Notes
+--------------------
+
 [github-latest-release]: https://github.com/ubccr/xdmod-supremm/releases/latest
