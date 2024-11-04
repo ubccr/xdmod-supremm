@@ -3,7 +3,7 @@ version: 2.1
 executors:
   rocky8: &rocky8-executor
     docker:
-      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.5.0:rockylinux8-0.1
+      - image: tools-ext-01.ccr.xdmod.org/xdmod-job-performance:x86_64-rockylinux8.9.20231119-v11.0.0-1.0-02
 jobs:
   build:
     parameters:
@@ -14,7 +14,7 @@ jobs:
     executor: << parameters.os >>
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
-      XDMOD_REALMS: 'jobs,storage,cloud,supremm,jobefficiency'
+      XDMOD_REALMS: 'jobs,storage,cloud,resourcespecifications,supremm,jobefficiency'
       XDMOD_IS_CORE: 'yes'
       XDMOD_INSTALL_DIR: /xdmod
       XDMOD_TEST_MODE: << parameters.install-type >>
@@ -34,15 +34,6 @@ jobs:
           name: Link the SUPREMM module into the XDMoD Source Directory
           command: |
               ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
-      - run:
-          name: Update php module to 7.4
-          command: dnf module -y reset php && dnf module -y enable php:7.4
-      - run:
-          name: Install PHP 7.4 && Pear pre-reqs
-          command: dnf install -y php libzip-devel php-pear
-      - run:
-          name: Install MongoDB Pear module
-          command: yes '' | pecl install mongodb || true
       - run:
           name: Add mongodb
           command: |
