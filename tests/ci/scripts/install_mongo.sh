@@ -13,6 +13,6 @@ EOF
 
 dnf install -y mongodb-org php-devel
 
-pecl install mongodb-1.16.2
+pecl install mongodb-1.18.1
 
 echo "extension=mongodb.so" > /etc/php.d/40-mongodb.ini
