@@ -94,7 +94,15 @@ jobs:
       - run:
           name: Run Integration Tests
           command: ./tests/integration/runtests.sh --log-junit ~/phpunit/integration.xml
-      - run: pushd $HOME && rm -f chromedriver_linux64.zip && wget https://chromedriver.storage.googleapis.com/98.0.4758.80/chromedriver_linux64.zip && popd
+      - run:
+          name: 'Install Chromium 99'
+          command: |
+            pushd $HOME && \
+            rm -rf chrome-linux && \
+            wget -O chrome-linux.zip "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F961656%2Fchrome-linux.zip?generation=1642723767466615&alt=media" && \
+            unzip chrome-linux.zip && \
+            ln -s /root/chrome-linux/chrome /usr/local/bin/google-chrome && \
+            popd
       - run:
           name: 'Bodge the nodejs version to run an older one for the webdriver tests'
           command: |
