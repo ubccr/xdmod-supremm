@@ -17,7 +17,6 @@ then
     ~/bin/importmongo.sh
     mongo $BASEDIR/mongo_auth.mongojs
     mongod -f /etc/mongod.conf --shutdown
-    mongod -f /etc/mongod.conf --auth --fork
     $XDMOD_BOOTSTRAP
     expect $BASEDIR/xdmod-setup.tcl | col -b
     aggregate_supremm.sh
@@ -25,7 +24,6 @@ fi
 
 if [ "$XDMOD_TEST_MODE" = "upgrade" ];
 then
-    mongod -f /etc/mongod.conf --auth --fork
     $XDMOD_BOOTSTRAP
     aggregate_supremm.sh
 fi
