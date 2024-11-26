@@ -1,12 +1,12 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-## 2025-03-17 v11.0.1
+## XXXX-XX-XX v11.5.0
 
 - Miscellaneous
     - Updated for compatibility with Open XDMoD 11.0.1.
 
-## 2024-09-16 v11.0.0
+## 2025-03-17 v11.0.1
 
 - Features
     - Add GPU Count group by ([\#379](https://github.com/ubccr/xdmod-supremm/pull/379))
