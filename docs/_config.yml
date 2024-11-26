@@ -34,11 +34,11 @@ defaults:
       type: "pages"
     values:
       layout: "page"
-      version: "11.0"
-      sw_version: "11.0.0"
+      version: "11.5"
+      sw_version: "11.5.0"
       summ_sw_version: "2.0.0"
       style: "effervescence"
-      tocversion: "toc"
+      tocversion: "v11_5toc"
 
 # Build settings
 markdown: kramdown
