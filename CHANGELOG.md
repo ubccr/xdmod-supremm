@@ -1,6 +1,8 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
+## XXXX-XX-XX v11.5.0
+
 ## 2024-09-16 v11.0.0
 
 - Features
