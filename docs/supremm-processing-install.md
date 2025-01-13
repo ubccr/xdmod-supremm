@@ -13,19 +13,6 @@ A MongoDB database instance must be installed and running. See the [MongoDB inst
 
 ## RPM Installation
 
-**Centos 7**
-
-The RPM package has dependencies that are available in the [EPEL](http://fedoraproject.org/wiki/EPEL)
-repository. This repository can be added with this command:
-
-    # yum install epel-release
-
-It also requires the PCP python libraries, which are included in CentOS (since version 7.6).
-
-An RPM package for Centos 7 is [available for download](https://github.com/ubccr/supremm/releases/latest)
-
-    # yum install supremm-1.4.1-1.el7.x86_64.rpm
-
 **Rocky 8**
 
 The RPM package has dependencies that are available in the [EPEL](http://fedoraproject.org/wiki/EPEL) and
