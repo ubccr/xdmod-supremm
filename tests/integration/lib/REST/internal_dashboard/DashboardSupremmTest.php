@@ -202,8 +202,8 @@ class DashboardSupremmTest extends TestCase
         // with wrong user authenticated: expect to receive a 403
         $user = 'cd';
         self::$xdmodhelper->authenticate($user);
-
         $result = $this->invalidSupremmResourceEntries(null);
+        self::$xdmodhelper->logout();
         $this->assertEquals(403, $result[1]['http_code']);
     }
 
