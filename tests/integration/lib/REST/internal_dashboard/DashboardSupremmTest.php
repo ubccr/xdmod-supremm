@@ -8,17 +8,15 @@ use PHPUnit\Framework\TestCase;
 class DashboardSupremmTest extends TestCase
 {
     const ENDPOINT = 'rest/v0.1/supremm_dataflow/';
+    // validate as manager, for dashboard access
+    const VALIDATE_AS_USER = 'mgr';
 
     protected static $xdmodhelper;
-    protected static $validateAsUser;
 
     public static function setUpBeforeClass(): void
     {
         $xdmodConfig = array( "decodetextasjson" => true );
         self::$xdmodhelper = new XdmodTestHelper($xdmodConfig);
-
-        // validate as manager, for dashboard access
-        self::$validateAsUser = 'mgr';
     }
 
     private function invalidSupremmResourceEntries($params)
@@ -40,7 +38,7 @@ class DashboardSupremmTest extends TestCase
 
     private function validateSupremmResourceEntries()
     {
-        self::$xdmodhelper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::VALIDATE_AS_USER);
         $result = self::$xdmodhelper->get(self::ENDPOINT . 'resources', null);
         self::$xdmodhelper->logout();
 
@@ -91,7 +89,7 @@ class DashboardSupremmTest extends TestCase
     private function invalidParamsSupremmDbstatsEntries()
     {
         // validate properly
-        self::$xdmodhelper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::VALIDATE_AS_USER);
 
         // send null params, expect 400
         $result = self::$xdmodhelper->get(self::ENDPOINT . 'dbstats', null);
@@ -106,7 +104,7 @@ class DashboardSupremmTest extends TestCase
     private function invalidResParamsNotFoundSupremmDbstatsEntries()
     {
         // validate properly
-        self::$xdmodhelper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::VALIDATE_AS_USER);
 
         // hardcode and send bogus resource_id param
         $params = array(
@@ -117,7 +115,7 @@ class DashboardSupremmTest extends TestCase
         self::$xdmodhelper->logout();
 
         // Message will contain "no result found"
-        $this->assertContains("no result found for the given database", $result[0]['message']);
+        $this->assertStringContainsString("no result found for the given database", $result[0]['message']);
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
@@ -130,7 +128,7 @@ class DashboardSupremmTest extends TestCase
     private function invalidParamsNotFoundSupremmDbstatsEntries()
     {
         // validate properly
-        self::$xdmodhelper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::VALIDATE_AS_USER);
 
         // hardcode and send bogus db_id param
         $params = array(
@@ -141,7 +139,7 @@ class DashboardSupremmTest extends TestCase
         self::$xdmodhelper->logout();
 
         // Message will contain "no result found"
-        $this->assertContains("no result found for the given database", $result[0]['message']);
+        $this->assertStringContainsString("no result found for the given database", $result[0]['message']);
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
@@ -177,12 +175,11 @@ class DashboardSupremmTest extends TestCase
 
     private function validateSupremmDbstatsEntries($db)
     {
-        self::$xdmodhelper->authenticate(self::$validateAsUser);
-
         $params = array(
             'resource_id' => $this->fetchResourceId(),
             'db_id' => $db
         );
+        self::$xdmodhelper->authenticate(self::VALIDATE_AS_USER);
         $result = self::$xdmodhelper->get(self::ENDPOINT . 'dbstats', $params);
         self::$xdmodhelper->logout();
         $this->assertEquals(200, $result[1]['http_code']);
@@ -302,7 +299,7 @@ class DashboardSupremmTest extends TestCase
 
     public function testResourceEnableDisable() {
 
-        self::$xdmodhelper->authenticate(self::$validateAsUser);
+        self::$xdmodhelper->authenticate(self::VALIDATE_AS_USER);
 
         $result = self::$xdmodhelper->get(self::ENDPOINT . 'resources', null);
         $this->assertEquals(5, sizeof($result[0]['data']));
