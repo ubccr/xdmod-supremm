@@ -127,14 +127,12 @@ class DashboardSupremmTest extends TestCase
 
     private function invalidParamsNotFoundSupremmDbstatsEntries()
     {
-        // validate properly
-        self::$xdmodhelper->authenticate(self::VALIDATE_AS_USER);
-
         // hardcode and send bogus db_id param
         $params = array(
             'resource_id' => $this->fetchResourceId(),
             'db_id' => 'db_does_not_exist'
         );
+        self::$xdmodhelper->authenticate(self::VALIDATE_AS_USER);
         $result = self::$xdmodhelper->get(self::ENDPOINT . 'dbstats', $params);
         self::$xdmodhelper->logout();
 
