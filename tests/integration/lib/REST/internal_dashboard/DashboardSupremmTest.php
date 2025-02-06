@@ -15,6 +15,7 @@ class DashboardSupremmTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         $xdmodConfig = array( "decodetextasjson" => true );
+        self::$xdmodhelper = new XdmodTestHelper($xdmodConfig);
 
         // validate as manager, for dashboard access
         self::$validateAsUser = 'mgr';
