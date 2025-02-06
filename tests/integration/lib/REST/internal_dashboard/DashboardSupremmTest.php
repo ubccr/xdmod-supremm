@@ -264,7 +264,7 @@ class DashboardSupremmTest extends TestCase
     // fetch accountdb stats
     public function testFetchDbstatsAccount($db = 'accountdb') {
 
-        $this->markTestIncomplete('This enpoint only works on the XSEDE version of XDMoD.');
+        $this->markTestIncomplete('This endpoint only works on the XSEDE version of XDMoD.');
 
         $item = $this->validateSupremmDbstatsEntries($db);
 
