@@ -59,8 +59,6 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/efficiency_analytics.json
 
 %changelog
-* XXX XXX XX XXXX XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 11.0.1-1.0
-    - Release 11.0.1
 * Mon Sep 16 2024 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 11.0.0-1.0
     - Release 11.0.0
     - Remove `php-pecl-mongo` from required dependencies
