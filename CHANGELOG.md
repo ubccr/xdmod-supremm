@@ -3,6 +3,12 @@ Open XDMoD SUPReMM Change Log
 
 ## XXXX-XX-XX v11.5.0
 
+## XXXX-XX-XX v11.0.1
+
+- Documentation
+    - Add link to GitHub downloads page in upgrade docs
+      ([\#398](https://github.com/ubccr/xdmod-supremm/pull/398)).
+
 ## 2024-09-16 v11.0.0
 
 - Features
