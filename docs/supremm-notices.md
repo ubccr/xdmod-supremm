@@ -11,7 +11,7 @@ The following libraries are included with the SUPReMM modules.
 
 - [composer/installers](https://composer.github.io/installers), which is
   available under the [MIT License][mit].
-- [jsPlumb](https://jsplumbtoolkit.com), which is available under the
+- [jsPlumb Community edition](https://github.com/jsplumb/community-edition), which is available under the
   [MIT License][mit].
 
 [osi]:       http://opensource.org/licenses

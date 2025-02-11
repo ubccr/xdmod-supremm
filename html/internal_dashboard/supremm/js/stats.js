@@ -50,64 +50,66 @@ XDMoD.SupremmDataFlow = {
 jsPlumb.ready(function () {
     var common = {
         endpoints: ['Blank', 'Blank'],
-        overlays: [['PlainArrow', { location: 1.0 }]],
+        overlays: [{ type: 'PlainArrow', options: { location: 1.0 } }],
         connector: 'Flowchart',
-        paintStyle: { strokeStyle: '#216477', lineWidth: 5 }
+        paintStyle: { stroke: '#216477', strokeWidth: 5 }
     };
 
-    jsPlumb.setContainer($('#flowchart'));
+    const jsPlumbInstance = jsPlumb.newInstance({
+        container: document.getElementById('flowchart')
+    });
 
-    jsPlumb.connect({
-        source: $('#pcpdatasource'),
-        target: $('#local_mirror'),
+    jsPlumbInstance.connect({
+        source: document.getElementById('pcpdatasource'),
+        target: document.getElementById('local_mirror'),
         anchors: ['Right', 'Left']
     }, common);
 
-    jsPlumb.connect({
-        source: $('#local_mirror'),
-        target: $('#summarization_scripts'),
+    jsPlumbInstance.connect({
+        source: document.getElementById('local_mirror'),
+        target: document.getElementById('summarization_scripts'),
         anchors: ['Right', 'Top']
     }, common);
 
-    jsPlumb.connect({
-        source: $('#accountfact'),
-        target: $('#summarization_scripts'),
+    jsPlumbInstance.connect({
+        source: document.getElementById('accountfact'),
+        target: document.getElementById('summarization_scripts'),
         anchors: ['Right', 'Left']
     }, common);
 
-    jsPlumb.connect({
-        source: $('#summarization_scripts'),
-        target: $('#mongo'),
+    jsPlumbInstance.connect({
+        source: document.getElementById('summarization_scripts'),
+        target: document.getElementById('mongo'),
         anchors: ['Bottom', 'Top']
     }, common);
 
-    jsPlumb.connect({
-        source: $('#accountfact'),
-        target: $('#etl_process'),
-        anchors: ['Right', 'TopCenter']
+    jsPlumbInstance.connect({
+        source: document.getElementById('accountfact'),
+        target: document.getElementById('etl_process'),
+        anchors: ['Right', 'Top']
     }, common);
 
-    jsPlumb.connect({
-        source: $('#mongo'),
-        target: $('#etl_process'),
+    jsPlumbInstance.connect({
+        source: document.getElementById('mongo'),
+        target: document.getElementById('etl_process'),
         anchor: ['Right', 'Right']
     }, common);
 
-    jsPlumb.connect({
-        source: $('#etl_process'),
-        target: $('#jobfact'),
+    jsPlumbInstance.connect({
+        source: document.getElementById('etl_process'),
+        target: document.getElementById('jobfact'),
         anchor: ['Left', 'Right']
     }, common);
 
-    jsPlumb.connect({
-        source: $('#resdatasource'),
-        target: $('#accountfact'),
+    jsPlumbInstance.connect({
+        source: document.getElementById('resdatasource'),
+        target: document.getElementById('accountfact'),
         anchor: ['Right', 'Left']
     }, common);
 
-    jsPlumb.connect({
-        source: $('#jobfact'),
-        target: $('#aggregates'),
+    jsPlumbInstance.connect({
+        source: document.getElementById('jobfact'),
+        target: document.getElementById('aggregates'),
         connector: 'Straight',
         anchor: 'AutoDefault'
     }, common);
