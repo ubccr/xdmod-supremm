@@ -1,9 +1,6 @@
 ---
 version: 2.1
 executors:
-  centos7: &centos7-executor
-    docker:
-      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:centos7.9-0.1
   rocky8: &rocky8-executor
     docker:
       - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.0.0:rockylinux8-0.1
@@ -34,14 +31,6 @@ jobs:
           name: Link the SUPREMM module into the XDMoD Source Directory
           command: |
               ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
-      - when:
-          condition:
-            equal: [ *centos7-executor, << parameters.os >> ]
-          steps:
-            - run:
-                name: Setup Environment Variables for centos7
-                command: |
-                  echo "export COMPOSER=composer-el7.json" >> $BASH_ENV
       - when:
           condition:
             equal: [ *rocky8-executor, << parameters.os >> ]
@@ -119,16 +108,6 @@ jobs:
       - run:
           name: Run Integration Tests
           command: ./tests/integration_tests/runtests.sh --log-junit ~/phpunit
-      - when:
-          condition:
-            equal: [ *centos7-executor, << parameters.os >> ]
-          steps:
-            - run:
-                name: Run UI Tests
-                command: scl enable rh-nodejs6 "$XDMOD_SRC_DIR/tests/ui/runtests.sh --headless --log-junit ~/phpunit"
-            - run:
-                name: Ensure that no unexpected Apache errors were generated
-                command: test `fgrep -v ' [ssl:warn] ' /var/log/xdmod/apache-error.log | wc -l` = 0
       - when:
           condition:
             equal: [ *rocky8-executor, << parameters.os >> ]
