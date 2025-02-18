@@ -1,6 +1,16 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
+## XXXX-XX-XX v10.5.1
+
+- Security
+    - Update jQuery to version 3.7.1 to address CVE-2020-11023
+      ([\#411](https://github.com/ubccr/xdmod-supremm/pull/411)).
+
+- Miscellaneous
+    - Update jsPlumb dependency
+      ([\#411](https://github.com/ubccr/xdmod-supremm/pull/411)).
+
 ## 2023-09-11 v10.5.0
 
 - Bug Fixes
