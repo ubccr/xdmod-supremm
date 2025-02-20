@@ -12,7 +12,7 @@
             }
         }
     },
-    "migration-10_5_0-11_0_0": [
+    "migration-10_5_1-11_0_0": [
         {
             "name": "update-table-contents",
             "description": "Update contents for non-etlv2-managed tables",
@@ -25,7 +25,7 @@
                     "delimiter": ";"
                 },
                 {
-                    "sql_file": "supremm/migration-10_5_0-11_0_0.sql"
+                    "sql_file": "supremm/migration-10_5_1-11_0_0.sql"
                 }
             ]
         }
