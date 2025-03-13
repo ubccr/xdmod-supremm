@@ -53,10 +53,10 @@ class SupremmDbInterface {
 
         $collection = $this->getCollection($resconf['handle'], $resconf['collection']);
 
-        $result = $collection->updateOne(
+        $result = $collection->updateMany(
             array('processed.' . $this->getEtlUid() . '.version' => $this->etl_version),
             array('$set' => array('processed.' . $this->getEtlUid() . '.version' => $new_etl_version)),
-            array('multiple' => true, 'socketTimeoutMS' => -1, 'wTimeoutMS' => -1)
+            array('socketTimeoutMS' => -1, 'wTimeoutMS' => -1)
         );
 
         return $result;
