@@ -14,7 +14,7 @@ jobs:
     executor: << parameters.os >>
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
-      XDMOD_REALMS: 'jobs,storage,cloud,supremm,jobefficiency'
+      XDMOD_REALMS: 'jobs,storage,cloud,resourcespecifications,supremm,jobefficiency'
       XDMOD_IS_CORE: 'yes'
       XDMOD_INSTALL_DIR: /xdmod
       XDMOD_TEST_MODE: << parameters.install-type >>
