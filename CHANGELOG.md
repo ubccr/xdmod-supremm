@@ -1,7 +1,7 @@
 Open XDMoD SUPReMM Change Log
 =============================
 
-## XXXX-XX-XX v11.0.1
+## 2025-03-17 v11.0.1
 
 - Documentation
     - Add link to GitHub downloads page in upgrade docs
