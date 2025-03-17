@@ -43,26 +43,7 @@ identical to the version of the base XDMoD install. The versions of the
 summarization software and PCP software for a given XDMoD version are listed
 below.
 
-### Open XDMoD {{ page.sw_version }}
-
-Centos 7 Operating System
-
-<table>
-<thead>
-<tr>
-<th>Package</th> <th>Recommended Version</th> <th>Compatible Version(s)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> Job Summarization </td><td align="right"> 1.4.1 </td><td align="right"> 1.4.1, 1.2.x, 1.1.x </td>
-</tr>
-<tr>
-<td> PCP               </td><td align="right"> 4.1.0 or 4.3.2 </td><td align="right"> 4.x </td>
-</tr>
-</tbody>
-</table>
-<br />
+### Open XDMoD {{ page.version }}
 
 Rocky 8 Operating System
 
@@ -86,8 +67,8 @@ Rocky 8 Operating System
 The SUPReMM software has been tested with MongoDB versions 3.4.15, 4.4, and 6.0. We expect
 that the software is compatible with any supported release version of MongoDB.
 
-The summarization software is tested against the PCP versions shipped with Centos
-7.6, Centos 7.7, and Rocky 8.
+The summarization software is tested against the PCP version shipped with Rocky
+8.
 
 System Requirements
 ---------------------
