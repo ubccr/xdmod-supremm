@@ -324,8 +324,7 @@ XDMoD datawarehouse DB instance.
     $ mysql -u root -p < [PATH TO PYTHON SITE PACKAGES]/supremm/assets/modw_supremm.sql
 
 Where `[PATH TO PYTHON SITE PACKAGES]` is the path to the python site packages install directory
-(`/usr/lib64/python2.7` for a Centos 7 RPM install and `/usr/lib64/python3.6/site-packages`
-for Rocky 8 RPM install).
+(`/usr/lib64/python3.6/site-packages` for Rocky 8 RPM install).
 
 Setup MongoDB
 -----------
