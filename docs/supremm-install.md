@@ -11,15 +11,9 @@ follow the instructions in the [Upgrade Guide](supremm-upgrade.html).
 RPM Installation
 ----------------
 
-RPM packages for CentOS 7 and Rocky 8 are [available for download](https://github.com/ubccr/xdmod-supremm/releases/latest).
+An RPM package for Rocky 8 is [available for download](https://github.com/ubccr/xdmod-supremm/releases/latest).
 
-**CentOS 7**
-
-    # yum install xdmod-supremm-{{ page.sw_version }}-1.0.el7.noarch.rpm
-
-**Rocky 8**
-
-    # dnf install xdmod-supremm-{{ page.sw_version }}-1.0.el8.noarch.rpm
+    # dnf install xdmod-supremm-{{ page.sw_version }}-1.el8.noarch.rpm
 
 Source Installation
 -------------------
@@ -47,7 +41,7 @@ Additional Notes
 ### SELinux
 
 **NOTE**: The webserver is not able to communicate with MongoDB with the
-default CentOS SELinux security policy. The following command allows the
+default Rocky Linux SELinux security policy. The following command allows the
 webserver to communicate over network:
 
     # setsebool -P httpd_can_network_connect 1
