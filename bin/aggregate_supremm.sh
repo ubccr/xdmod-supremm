@@ -52,6 +52,8 @@ shift $((OPTIND-1))
     
     php ${XDMOD_LIB_PATH}/supremm_sharedjobs.php $FLAGS
     
+    php ${XDMOD_LIB_PATH}/supremm_arrayjobs.php $FLAGS
+
     php ${XDMOD_LIB_PATH}/aggregate_supremm.php $FLAGS $AGG_FLAGS
 
     ${XDMOD_BIN_PATH}/xdmod-build-filter-lists --realm SUPREMM $FLAGS
