@@ -22,7 +22,7 @@ description: >
   memory usage, filesystem usage, interconnect fabric traffic, and CPU
   performance.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://supremm.xdmod.org" # the base hostname & protocol for your site
+url: "https://supremm.xdmod.org" # the base hostname & protocol for your site
 github_username: ubccr
 github_url: https://github.com/ubccr/xdmod-supremm
 xdmod_module_name: Job Performance (SUPReMM)
