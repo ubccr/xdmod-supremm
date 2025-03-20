@@ -25,20 +25,22 @@ An RPM package is [available for download](https://github.com/ubccr/supremm/rele
 
 ## Source Installation
 
-The Job summarization software is written in Python and uses [Python setuptools](https://setuptools.readthedocs.io/en/latest/)
-for package creation. The 2.0 release uses Python 3.6. Source code installs are
-tested in a [conda
-environment](https://conda.io/docs/user-guide/install/download.html)
+The Job summarization software is written in python and uses [python setuptools](https://setuptools.readthedocs.io/en/latest/)
+for package creation. The 1.4 release depends on python 2.7 and the 2.0 release
+uses python 3.6. Source code installs are tested in a [conda environment](https://conda.io/docs/user-guide/install/download.html)
 and setup as follows.
 
-    $ conda create -n supremm python=3.6 cython numpy scipy
+    $ conda create -n supremm python=[PYTHON VERSION] cython numpy scipy
     $ source activate supremm
+
+where `[PYTHON VERSION]` should be set to 2.7 if using the 1.4 release or 3.6 if using the 2.0 release.
 
 The software is installed as follows:
 
     $ tar xf supremm-{{ page.summ_sw_version }}.tar.gz
     $ cd supremm-{{ page.summ_sw_version }}
     $ python setup.py install
+
 
 # Configure Job summarization software
 
