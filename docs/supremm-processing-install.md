@@ -13,14 +13,13 @@ A MongoDB database instance must be installed and running. See the [MongoDB inst
 
 ## RPM Installation
 
-The RPM package has dependencies that are available in the [EPEL](http://fedoraproject.org/wiki/EPEL)
-repository. This repository can be added with this command:
+The RPM package has dependencies that are available in the [EPEL](http://fedoraproject.org/wiki/EPEL) and
+PowerTools repositories. These can be added with the following commands:
 
     # dnf install epel-release
+    # dnf config-manager --set-enabled powertools
 
-It also requires the PCP python libraries, which are included in Rocky 8.
-
-An RPM package for Rocky 8 is [available for download](https://github.com/ubccr/supremm/releases/latest).
+An RPM package is [available for download](https://github.com/ubccr/supremm/releases/tag/{{ page.summ_sw_version }}).
 
     # dnf install supremm-{{ page.summ_sw_version }}-1.el8.x86_64.rpm
 
