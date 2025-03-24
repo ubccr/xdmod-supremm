@@ -29,7 +29,7 @@ Open XDMoD in `/opt/xdmod-{{ page.sw_version }}`.
 
     # tar zxvf xdmod-supremm-{{ page.sw_version }}.tar.gz
     # cd xdmod-supremm-{{ page.sw_version }}
-    # ./install -prefix=/opt/xdmod-{{ page.sw_version }}
+    # ./install --prefix=/opt/xdmod-{{ page.sw_version }}
 
 Additional Notes
 ----------------
