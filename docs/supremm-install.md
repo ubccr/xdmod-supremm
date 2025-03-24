@@ -18,12 +18,6 @@ The RPM package can be downloaded from [GitHub](https://github.com/ubccr/xdmod-s
 Source Installation
 -------------------
 
-The Job Performance (SUPReMM) XDMoD module requires all of the software for XDMoD and
-the following additional packages:
-
-- [PHP MongoClient](http://php.net/manual/en/class.mongoclient.php)
-- [nodejs](https://nodejs.org) 16.13.2
-
 The source package can be downloaded from
 [GitHub](https://github.com/ubccr/xdmod-supremm/releases/tag/v{{ page.rpm_version }}).
 Make sure to download `xdmod-supremm-{{ page.sw_version }}.tar.gz`, not the
