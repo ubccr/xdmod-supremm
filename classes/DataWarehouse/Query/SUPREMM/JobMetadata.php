@@ -60,6 +60,10 @@ class JobMetadata implements \DataWarehouse\Query\iJobMetadata
             $available_data[\DataWarehouse\Query\RawQueryTypes::PEERS] = true;
         }
 
+        if ($job['local_job_array_index'] != -1) {
+            $available_data[\DataWarehouse\Query\RawQueryTypes::ARRAY_PEERS] = true;
+        }
+
         // Always report that analytics are present; the data endpoint will
         // report the error reason for any that are missing.
         $available_data[\DataWarehouse\Query\RawQueryTypes::ANALYTICS] = true;
