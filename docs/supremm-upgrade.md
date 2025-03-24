@@ -9,7 +9,7 @@ The Job Performance (SUPReMM) XDMoD module should be upgraded at the same time a
 software. The upgrade procedure is documented on the [Open XDMoD upgrade
 page](https://open.xdmod.org/upgrade.html). Downloads of RPMs and source
 packages for the Job Performance (SUPReMM) XDMoD module are available from
-[GitHub][github-latest-release]. The ingestion and aggregation
+[GitHub][github-release]. The ingestion and aggregation
 script `aggregate_supremm.sh` **must** be run after the Open XDMoD software has
 been upgraded.
 
@@ -33,4 +33,4 @@ The upgrade script will update the following configuration files:
 The upgrade script will add rows to the `modw_supremm.application` table for
 the MOM6, ROMS, NEXMD, Libra, DFTB+, and CDO applications.
 
-[github-latest-release]: https://github.com/ubccr/xdmod-supremm/releases/tag/v{{ page.rpm_version }}
+[github-release]: https://github.com/ubccr/xdmod-supremm/releases/tag/v{{ page.rpm_version }}
