@@ -11,7 +11,14 @@ follow the instructions in the [Upgrade Guide](supremm-upgrade.html).
 RPM Installation
 ----------------
 
-The RPM package can be downloaded from [GitHub](https://github.com/ubccr/xdmod-supremm/releases/tag/v{{ page.rpm_version }}).
+If your web server can reach GitHub via HTTPS, you can install the RPM package
+directly:
+
+    # dnf install https://github.com/ubccr/xdmod-supremm/releases/download/v{{ page.rpm_version }}/xdmod-supremm-{{ page.rpm_version }}.el8.noarch.rpm
+
+Otherwise, you can download the RPM file from the [GitHub page for the
+release](https://github.com/ubccr/xdmod-supremm/releases/tag/v{{
+page.rpm_version }}) and install it:
 
     # dnf install xdmod-supremm-{{ page.rpm_version }}.el8.noarch.rpm
 
