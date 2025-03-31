@@ -82,7 +82,7 @@ by the community software application that was run by each job. In the default
 configuration, the software application is inferred at job ingest time by
 comparing the paths to the executables with a list of known community applications.
 
-This list of applications is maintained in the `share` directory (whose location depends on how you installed XDMoD, e.g., `/usr/share/xdmod`, `/opt/xdmod/share`) under `etl/js/config/supremm/application.json`.
+This list of applications is maintained in the `share` directory (whose location depends on how you installed XDMoD, e.g., `/usr/share/xdmod`, `/opt/xdmod-{{ page.sw_version }}/share`) under `etl/js/config/supremm/application.json`.
 The `application.json` file contains an ordered list of community applications and
 a corresponding set of regular expressions that are tested against the
 executable (i.e., the executable path with the leading directory components removed). If an executable matches, then the job is assigned the corresponding
@@ -137,7 +137,7 @@ not change the data for jobs that are already loaded into XDMoD.
 
 New application definitions should be added at the end of the file. Once
 the new definition has been added, then the database dimension tables
-must be updated as follows (Note: depending on how you installed XDMoD, `/usr/share/xdmod` should be replaced with `/opt/xdmod/share` or the correct path to the `share` directory, and `/etc/xdmod` should be replaced with `/opt/xdmod/etc` or the correct path to the `etc` directory).
+must be updated as follows (Note: depending on how you installed XDMoD, `/usr/share/xdmod` should be replaced with `/opt/xdmod-{{ page.sw_version }}/share` or the correct path to the `share` directory, and `/etc/xdmod` should be replaced with `/opt/xdmod-{{ page.sw_version }}/etc` or the correct path to the `etc` directory).
 
 First update the SQL definition file for the application tables:
 ```

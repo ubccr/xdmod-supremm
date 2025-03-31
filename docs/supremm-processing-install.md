@@ -21,7 +21,7 @@ PowerTools repositories. These can be added with the following commands:
 
 An RPM package is [available for download](https://github.com/ubccr/supremm/releases/tag/{{ page.summ_sw_version }}).
 
-    # dnf install supremm-{{ page.summ_sw_version }}-1.el8.x86_64.rpm
+    # dnf install supremm-{{ page.summ_rpm_version }}.el8.x86_64.rpm
 
 ## Source Installation
 
