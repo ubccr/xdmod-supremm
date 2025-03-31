@@ -15,7 +15,7 @@ The upgrade procedure involves installing the new software package. An RPM is
 provided for Rocky 8 and is compiled against the version of PCP that ships with
 the distribution (PCP version 5.3.7).
 
-    # dnf install supremm-{{ page.summ_sw_version }}-1.el8.x86_64.rpm
+    # dnf install supremm-{{ page.summ_rpm_version }}.el8.x86_64.rpm
 
 ### Source code upgrade
 

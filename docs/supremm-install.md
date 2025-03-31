@@ -11,29 +11,32 @@ follow the instructions in the [Upgrade Guide](supremm-upgrade.html).
 RPM Installation
 ----------------
 
-An RPM package for Rocky 8 is [available for download](https://github.com/ubccr/xdmod-supremm/releases/tag/{{ page.sw_version }}-1).
+If your web server can reach GitHub via HTTPS, you can install the RPM package
+directly:
 
-    # dnf install xdmod-supremm-{{ page.sw_version }}-1.el8.noarch.rpm
+    # dnf install https://github.com/ubccr/xdmod-supremm/releases/download/v{{ page.rpm_version }}/xdmod-supremm-{{ page.rpm_version }}.el8.noarch.rpm
+
+Otherwise, you can download the RPM file from the [GitHub page for the
+release](https://github.com/ubccr/xdmod-supremm/releases/tag/v{{
+page.rpm_version }}) and install it:
+
+    # dnf install xdmod-supremm-{{ page.rpm_version }}.el8.noarch.rpm
 
 Source Installation
 -------------------
 
-The Job Performance (SUPReMM) XDMoD module requires all of the software for XDMoD and
-the following additional packages:
-
-- [PHP MongoClient][]
-- [nodejs][] 16.13.2
-
-[nodejs]:          https://nodejs.org
-[PHP MongoClient]:     http://php.net/manual/en/class.mongoclient.php
-
-    $ tar zxvf xdmod-supremm-{{ page.sw_version }}.tar.gz
-    $ cd xdmod-supremm-{{ page.sw_version }}
-    # ./install -prefix=/opt/xdmod
+The source package can be downloaded from
+[GitHub](https://github.com/ubccr/xdmod-supremm/releases/tag/v{{ page.rpm_version }}).
+Make sure to download `xdmod-supremm-{{ page.sw_version }}.tar.gz`, not the
+GitHub-generated "Source code" files.
 
 **NOTE**: The installation prefix must be the same as your existing Open
 XDMoD installation. These instructions assume you have already installed
-Open XDMoD in `/opt/xdmod`.
+Open XDMoD in `/opt/xdmod-{{ page.sw_version }}`.
+
+    # tar zxvf xdmod-supremm-{{ page.sw_version }}.tar.gz
+    # cd xdmod-supremm-{{ page.sw_version }}
+    # ./install --prefix=/opt/xdmod-{{ page.sw_version }}
 
 Additional Notes
 ----------------
