@@ -14,34 +14,13 @@ subsequent processing by the job summarization software.
 Install the PCP data collector on the compute nodes
 -------------------------------------------
 
-The PCP software has been included in the official CentOS packages since CentOS 7.6. Builds
-for other distributions (and earlier versions) are available from the
-[official PCP dowload page](https://pcp.io/download.html),
+The PCP software is included in the official Rocky 8 packages. Builds for other
+distributions (and earlier versions) are available from the [official PCP
+download page](https://pcp.io/download.html),
 
-The CentOS RPM packages of the summarization software (versions <= 1.4.1) are tested against the version of PCP
-that is provided with CentOS 7 (This is PCP version 4.3.2 as of CentOS 7.8). The Rocky RPM packages
-of the summarization software (versions >= 2.0.0) are tested against the version of PCP that is provided with
-Rocky 8 (PCP version 5.3.7).
-
-For an RPM based install on CentOS 7, the following command will install PCP with
-all of the associated PMDAS (monitoring plugins) that have been tested with the
-summarization software:
-
-    # yum install pcp \
-                  pcp-manager \
-                  pcp-conf \
-                  pcp-libs \
-                  python-pcp \
-                  perl-PCP-PMDA \
-                  pcp-system-tools \
-                  pcp-pmda-gpfs \
-                  pcp-pmda-lustre \
-                  pcp-pmda-infiniband \
-                  pcp-pmda-mic \
-                  pcp-pmda-nvidia-gpu \
-                  pcp-pmda-nfsclient \
-                  pcp-pmda-perfevent \
-                  pcp-pmda-json
+The Rocky RPM packages of the summarization software (versions >= 2.0.0) are
+tested against the version of PCP that is provided with Rocky 8 (PCP version
+5.3.7).
 
 For an RPM based install on Rocky 8, the following command will install PCP with
 all of the associated PMDAs that have been tested with the summarization software:
@@ -69,7 +48,7 @@ PCP data collection components installed. It only requires the python pcp librar
 Compatibility notes
 -------------------
 
-The summarization software is tested on CentOS 7 and Rocky 8 with the package versions of
-PCP that are supplied with CentOS 7 and Rocky 8 (PCP versions 4.3.2 and 5.3.7 respectively).
+The summarization software is tested on Rocky 8 with the package version of
+PCP that is supplied with Rocky 8 (PCP version 5.3.7).
 In general any version of PCP will work as long as the summarization software is built against
 the same or newer version of PCP as the version installed on the compute nodes.
