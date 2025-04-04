@@ -8,7 +8,7 @@ use RegressionTests\TestHarness\RegressionTestHelper;
 /**
  * Test the usage explorer for jobs realm regressions.
  */
-class UsageExplorerJobsTest extends TestCase
+class UsageExplorerSupremmTest extends TestCase
 {
     /**
      * @var RegressionTestHelper

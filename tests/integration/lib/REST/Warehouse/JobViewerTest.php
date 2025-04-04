@@ -404,18 +404,18 @@ class JobViewerTest extends TestCase
 
         $ret = array();
         $ret[] = array($xdmodhelper, $searchparams, 'application/json', null);
+
         $searchparams['format'] = 'pdf';
         $ret[] = array($xdmodhelper, $searchparams, 'application/pdf', 'application/pdf; charset=binary');
-        $searchparams['format'] = 'csv';
 
-        $ret[] = array($xdmodhelper, $searchparams, 'text/csv;charset=UTF-8', 'application/csv; charset=us-ascii');
+        $searchparams['format'] = 'csv';
+        $ret[] = array($xdmodhelper, $searchparams, 'text/csv;charset=UTF-8', 'text/plain; charset=us-ascii');
 
         $searchparams['format'] = 'png';
         $ret[] = array($xdmodhelper, $searchparams, 'image/png', 'image/png; charset=binary');
 
         $searchparams['format'] = 'svg';
-        $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'image/svg+xml; charset=us-ascii');
-
+        $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'image/svg; charset=us-ascii');
 
         return $ret;
     }
