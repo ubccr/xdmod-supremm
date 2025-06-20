@@ -21,7 +21,7 @@ jobs in this tab allowing them to troubleshoot their jobs.
 </figure>
 
 <figure>
-<img src="{{ site.baseurl }}/assets/images/job_viewer_timeseries.png" width="800" height="500" alt="Screeshot of the XDMoD portal's Job Viewer tab showing a timeseries line chart of percentage CPU usage over the life of the job."/>
+<img src="{{ site.baseurl }}/assets/images/job_viewer_timeseries.png" width="800" height="500" alt="Screenshot of the XDMoD portal's Job Viewer tab showing a timeseries line chart of percentage CPU usage over the life of the job."/>
 <figcaption>Figure 2. Screenshot of a single job showing CPU usage over the life of the job.</figcaption>
 </figure>
 
