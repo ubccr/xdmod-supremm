@@ -17,7 +17,7 @@ jobs in this tab allowing them to troubleshoot their jobs.
 
 <figure>
 <img src="{{ site.baseurl }}/assets/images/cpu_hours_cpu_user.png" width="800" height="500" alt="Screenshot of the XDMoD portal's Metric Explorer tab showing a histogram that bins jobs by CPU usage in ten percent intervals and counts the total CPU hours of the jobs in each bin."/>
-<figcaption>Figure 1. Example screenshot of CPU Hours statistic for a cluster.</figcaption>
+<figcaption>Figure 1. Example screenshot of the CPU Hours statistic for a cluster.</figcaption>
 </figure>
 
 <figure>
