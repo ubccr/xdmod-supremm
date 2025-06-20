@@ -16,13 +16,13 @@ usage through the Job Viewer tab, as shown in Figure 2. Users can see informatio
 jobs in this tab allowing them to troubleshoot their jobs.
 
 <figure>
-<img src="{{ site.baseurl }}/assets/images/cpu_hours_cpu_user.png" width="800" height="500" alt="Screenshot of the XDMoD portal's Metric Explorer tab showing a histogram that bins jobs by CPU usage in ten percent intervals and counts the total CPU Hours of the jobs in each bin."/>
+<img src="{{ site.baseurl }}/assets/images/cpu_hours_cpu_user.png" width="800" height="500" alt="Screenshot of the XDMoD portal's Metric Explorer tab showing a histogram that bins jobs by CPU usage in ten percent intervals and counts the total CPU hours of the jobs in each bin."/>
 <figcaption>Figure 1. Example screenshot of CPU Hours statistic for a cluster.</figcaption>
 </figure>
 
 <figure>
 <img src="{{ site.baseurl }}/assets/images/job_viewer_timeseries.png" width="800" height="500" alt="Screeshot of the XDMoD portal's Job Viewer tab showing a timeseries line chart of percentage CPU usage over the life of the job."/>
-<figcaption>Figure 2. Screenshot of a single job showing CPU Usage over the life of the job.</figcaption>
+<figcaption>Figure 2. Screenshot of a single job showing CPU usage over the life of the job.</figcaption>
 </figure>
 
 The Job Performance module also provides job efficiency information on the Efficiency tab which
