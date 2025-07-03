@@ -409,7 +409,7 @@ class JobViewerTest extends TestCase
         $ret[] = array($xdmodhelper, $searchparams, 'application/pdf', 'application/pdf; charset=binary');
 
         $searchparams['format'] = 'csv';
-        $ret[] = array($xdmodhelper, $searchparams, 'text/csv;charset=UTF-8', 'text/plain; charset=us-ascii');
+        $ret[] = array($xdmodhelper, $searchparams, 'text/csv; charset=UTF-8', 'text/plain; charset=us-ascii');
 
         $searchparams['format'] = 'png';
         $ret[] = array($xdmodhelper, $searchparams, 'image/png', 'image/png; charset=binary');
