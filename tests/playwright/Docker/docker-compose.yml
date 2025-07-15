@@ -17,11 +17,14 @@ services:
             XDMOD_ETC_DIR: '/etc/xdmod'
         command: sleep infinity
     playwright:
-        image:  mcr.microsoft.com/playwright:v1.54.0-jammy
+        image:  mcr.microsoft.com/playwright:v1.51.1-jammy
         hostname: playwright
         container_name: playwright
         networks:
             - testing
+        stdin_open: true
+        tty: true
+        ipc: host
         links:
             - xdmod
         depends_on:
