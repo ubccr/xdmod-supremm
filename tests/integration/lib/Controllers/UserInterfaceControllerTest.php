@@ -39,7 +39,7 @@ class UserInterfaceControllerTest extends TestCase
                 }
                 $realms[$menuitem['realm']] += 1;
                 if ($menuitem['realm'] == 'SUPREMM'){
-                    $groupByName = 'group_by_' . $menuitem['realm']  . '_' . $menuitem['group_by'];
+                    $groupByName = 'node=group_by&realm=' . $menuitem['realm']  . '&group_by=' . $menuitem['group_by'];
                     $gbParams = array(
                         'operation' => 'get_menus',
                         'node' => $groupByName,
@@ -53,14 +53,19 @@ class UserInterfaceControllerTest extends TestCase
                 }
             }
         }
+        file_put_contents('/tmp/actual_get_menus.json', json_encode($realmGroupBys));
         $expected = self::generateRealmGroupBys();
-        $this->assertEquals($expected, $realmGroupBys);
+        file_put_contents('/tmp/expected_get_menus.json', json_encode($expected));
+        #$this->assertEquals($expected, $realmGroupBys, sprintf("\nExpected: %s\n\nActual: %s\n\n", json_encode($expected), json_encode($realmGroupBys)));
+
 
         $this->assertArrayHasKey('SUPREMM', $realms);
         $this->assertArrayNotHasKey('JobEfficiency', $realms);
 
         // The count represents the number of group bys in the realm
         $this->assertTrue($realms['SUPREMM'] > 29);
+
+        $this->assertEquals($expected, $realmGroupBys);
     }
 
     public function generateRealmGroupBys()
@@ -299,11 +304,11 @@ class UserInterfaceControllerTest extends TestCase
         );
         $realmGroupBys = array();
         foreach($groupbys as $name => $settings){
-            $realmGroupBys['group_by_SUPREMM_'. $name] = array();
+            $realmGroupBys['node=group_by&realm=SUPREMM&group_by='. $name] = array();
             foreach($statistics as $stat => $text){
-                $realmGroupBys['group_by_SUPREMM_'. $name][] = array(
+                $realmGroupBys['node=group_by&realm=SUPREMM&group_by='. $name][] = array(
                     "text" => $text,
-                    "id" => "statistic_SUPREMM_" . $name ."_" . $stat,
+                    "id" => "node=statistic&realm=SUPREMM&group_by=" . $name ."&statistic=" . $stat,
                     "statistic" => $stat,
                     "group_by" => $name,
                     "group_by_label" => $settings['label'],

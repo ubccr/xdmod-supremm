@@ -7,8 +7,9 @@ use PHPUnit\Framework\TestCase;
 
 class DashboardSupremmTest extends TestCase
 {
-    public function __construct($name, $data, $dataName)
+    public function __construct($name = null, array $data = array(), $dataName = '')
     {
+        parent::__construct($name, $data, $dataName);
         $xdmodConfig = array( "decodetextasjson" => true );
         $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
 
@@ -16,7 +17,7 @@ class DashboardSupremmTest extends TestCase
 
         // validate as manager, for dashboard access
         $this->validateAsUser = 'mgr';
-        parent::__construct($name, $data, $dataName);
+
     }
 
     private function invalidSupremmResourceEntries($params)
@@ -111,7 +112,7 @@ class DashboardSupremmTest extends TestCase
         $result = $this->xdmodhelper->get($this->endpoint . 'dbstats', $params);
 
         // Message will contain "no result found"
-        $this->assertContains("no result found for the given database", $result[0]['message']);
+        $this->assertNotFalse(strpos($result[0]['message'], "no result found for the given database"), "Message does not contain 'no result found for the given database'");
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
@@ -134,7 +135,7 @@ class DashboardSupremmTest extends TestCase
         $result = $this->xdmodhelper->get($this->endpoint . 'dbstats', $params);
 
         // Message will contain "no result found"
-        $this->assertContains("no result found for the given database", $result[0]['message']);
+        $this->assertNotFalse(strpos($result[0]['message'], "no result found for the given database"), "Message does not contain 'no result found for the given database'");
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
