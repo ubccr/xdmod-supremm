@@ -28,16 +28,21 @@ jobs:
           name: Start up the Docker Containers
           command: >
             docker compose -f tests/playwright/Docker/docker-compose.yml up -d
-      - run:
-          name: 'Grab latest release version of XDMoD (!! NOTE: Update branch / user before merging !!!)'
-          command: git clone --branch=playwright_poc https://github.com/bluebrey/xdmod.git ~/xdmod
+#      - run:
+#          name: 'Grab latest release version of XDMoD (!! NOTE: Update branch / user before merging !!!)'
+#          command: docker exec xdmod git clone --branch=main https://github.com/ubccr/xdmod.git /root/xdmod
       - run:
           name: Copy Files into Docker Containers
           command: |
             docker cp ~/xdmod xdmod:/xdmod
-            docker cp ~/xdmod playwright:/xdmod
             docker cp ~/project xdmod:/xdmod-supremm
+            docker cp ~/xdmod playwright:/xdmod
             docker cp ~/project playwright:/xdmod-supremm
+      - run:
+          name: Mark the XDMoD directories as safe for git
+          command: |
+            docker exec -w /xdmod xdmod git config --global --add safe.directory /xdmod
+            docker exec -w /xdmod-supremm xdmod git config --global --add safe.directory /xdmod-supremm
       - run:
           name: Install Dependencies for xdmod and xdmod-supremm
           command: |
@@ -66,7 +71,7 @@ jobs:
       - run:
           name: Install / Upgrade XDMoD from RPM
           command: |
-              docker exec -e XDMOD_TEST_MODE=<< parameters.install-type >> -w /xdmod/open_xdmod/modules/supremm xdmod ./tests/integration_tests/scripts/bootstrap.sh
+              docker exec -e XDMOD_TEST_MODE=<< parameters.install-type >> xdmod /xdmod/open_xdmod/modules/supremm/tests/integration/scripts/bootstrap.sh
       - run:
           name: Validate the newly installed / Upgraded XDMoD
           command: docker exec -w /xdmod-supremm xdmod ./tests/integration_tests/scripts/validate.sh
@@ -76,11 +81,11 @@ jobs:
       - run:
           name: Run Post Install Tests
           command: docker exec -w /xdmod-supremm xdmod ./tests/ci/scripts/post-install-test.sh
-      - run: 
+      - run:
           name: Install composer dev deps
           command: |
             docker exec -w /xdmod xdmod composer install
-            docker exec -w /xdmod-supremm xdmod composer install 
+            docker exec -w /xdmod-supremm xdmod composer install
       - run:
           name: Run Component Tests
           command: docker exec -w /xdmod-supremm xdmod ./tests/component_tests/runtests.sh --log-junit ~/phpunit
@@ -101,8 +106,8 @@ jobs:
           name: Restart XDMoD's services
           command: docker exec xdmod /root/bin/services restart
       - run:
-          name: Run Playwright Tests
-          command: docker exec -w /xdmod/tests/playwright playwright /xdmod/tests/playwright/runtests.sh -j << parameters.os >>
+          name: Run Job Performance Playwright Tests
+          command: docker exec -w /xdmod/tests/playwright playwright /xdmod/open_xdmod/modules/supremm/tests/playwright/runtests.sh -j << parameters.os >>
       - run:
           name: Run Regression Tests
           command: docker exec -w /xdmod xdmod ./tests/regression_tests/runtests.sh --log-junit ~/phpunit
