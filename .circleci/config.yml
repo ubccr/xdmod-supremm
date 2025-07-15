@@ -30,7 +30,7 @@ jobs:
             docker compose -f tests/playwright/Docker/docker-compose.yml up -d
       - run:
           name: 'Grab latest release version of XDMoD (!! NOTE: Update branch / user before merging !!!)'
-          command: git clone --branch=main https://github.com/ubccr/xdmod.git /root/xdmod
+          command: git clone --branch=main https://github.com/ubccr/xdmod.git ~/xdmod
       - run:
           name: Copy Files into Docker Containers
           command: |
