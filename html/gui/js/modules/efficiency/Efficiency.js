@@ -337,7 +337,6 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     const end = params.get('end_time');
                     const duration = params.get('duration');
                     const analytic = params.get('analytic');
-                    
                     const startDate = Date.parseDate(start, 'Y-m-d');
                     const endDate = Date.parseDate(end, 'Y-m-d');
                     const startValid = startDate instanceof Date;
@@ -350,14 +349,13 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     }
                     
                     self.getAnalyticCardDisplay(analytics);
-
+                    
                     if(analytic != null)
                     {
-                        analyticID = 'analytic_card_' + analytic;
+                        const analyticID = 'analytic_card_' + analytic;
                         const analyticCardComponent = Ext.getCmp(analyticID);
-                        console.log(analyticCardComponent);
-
-                        if (analyticCardComponent != null){ 
+                        
+                        if (analyticCardComponent != null) {
                             self.showAnalyticPanel(analyticCardComponent.initialConfig.data);
                         }
                     }
