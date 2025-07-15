@@ -346,9 +346,9 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                         self.getDurationSelector().setValues(start, end);
                     } else if (duration != null) {
                         self.getDurationSelector().selectCustomDateRange(duration);
-                    } 
+                    }
                     self.getAnalyticCardDisplay(analytics);
-                    if(analytic != null) {
+                    if (analytic != null) {
                         const analyticID = 'analytic_card_' + analytic;
                         const analyticCardComponent = Ext.getCmp(analyticID);
                         if (analyticCardComponent != null) {
