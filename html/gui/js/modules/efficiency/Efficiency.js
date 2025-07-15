@@ -331,7 +331,36 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                 if (success) {
                     var analytics = JSON.parse(response.responseText);
                     self.analytics = analytics;
+                    const parts = CCR.tokenize(document.location.hash);
+                    const params = new URLSearchParams(parts.params);
+                    const start = params.get('start_time');
+                    const end = params.get('end_time');
+                    const duration = params.get('duration');
+                    const analytic = params.get('analytic');
+                    
+                    const startDate = Date.parseDate(start, 'Y-m-d');
+                    const endDate = Date.parseDate(end, 'Y-m-d');
+                    const startValid = startDate instanceof Date;
+                    const endValid = endDate instanceof Date;
+
+                    if ((startValid && endValid) && (startDate <= endDate)) {
+                        self.getDurationSelector().setValues(start, end);
+                    } else if (duration != null) {
+                        self.getDurationSelector().selectCustomDateRange(duration);
+                    }
+                    
                     self.getAnalyticCardDisplay(analytics);
+
+                    if(analytic != null)
+                    {
+                        analyticID = 'analytic_card_' + analytic;
+                        const analyticCardComponent = Ext.getCmp(analyticID);
+                        console.log(analyticCardComponent);
+
+                        if (analyticCardComponent != null){ 
+                            self.showAnalyticPanel(analyticCardComponent.initialConfig.data);
+                        }
+                    }
                 }
             },
             failure: function (response) {
