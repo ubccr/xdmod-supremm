@@ -13,7 +13,7 @@ set -o pipefail
 if [ "$XDMOD_TEST_MODE" = "fresh_install" ];
 then
     rm -rf /var/lib/mongo/*
-    mongod -f /etc/mongod.conf --fork
+    mongod -f /etc/mongod.conf &
     ~/bin/importmongo.sh
     mongo $BASEDIR/mongo_auth.mongojs
     mongod -f /etc/mongod.conf --shutdown
