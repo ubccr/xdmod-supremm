@@ -32,6 +32,9 @@ jobs:
 #          name: 'Grab latest release version of XDMoD (!! NOTE: Update branch / user before merging !!!)'
 #          command: docker exec xdmod git clone --branch=main https://github.com/ubccr/xdmod.git /root/xdmod
       - run:
+          name: Snag xdmod
+          command: git clone --branch main --depth 1 https://github.com/ubccr/xdmod.git ~/xdmod
+      - run:
           name: Copy Files into Docker Containers
           command: |
             docker cp ~/xdmod xdmod:/xdmod
