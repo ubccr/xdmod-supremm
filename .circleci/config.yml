@@ -74,7 +74,7 @@ jobs:
               docker exec -e XDMOD_TEST_MODE=<< parameters.install-type >> xdmod /xdmod/open_xdmod/modules/supremm/tests/integration/scripts/bootstrap.sh
       - run:
           name: Validate the newly installed / Upgraded XDMoD
-          command: docker exec -w /xdmod-supremm xdmod ./tests/integration_tests/scripts/validate.sh
+          command: docker exec -w /xdmod-supremm xdmod ./tests/integration/scripts/validate.sh
       - run:
           name: Setup & Run QA Tests
           command: docker exec -w /xdmod-supremm xdmod ./tests/ci/scripts/qa-test-setup.sh
@@ -88,7 +88,7 @@ jobs:
             docker exec -w /xdmod-supremm xdmod composer install
       - run:
           name: Run Component Tests
-          command: docker exec -w /xdmod-supremm xdmod ./tests/component_tests/runtests.sh --log-junit ~/phpunit
+          command: docker exec -w /xdmod-supremm xdmod ./tests/component/runtests.sh --log-junit ~/phpunit
       - run:
           name: Setup Configuration Files for Integration Tests
           command: |
@@ -98,7 +98,7 @@ jobs:
             docker exec xdmod cp /etc/xdmod/organization.json /xdmod/configuration/organization.json
       - run:
           name: Run Integration Tests
-          command: docker exec -w /xdmod-supremm xdmod ./tests/integration_tests/runtests.sh --log-junit ~/phpunit
+          command: docker exec -w /xdmod-supremm xdmod ./tests/integration/runtests.sh --log-junit ~/phpunit
       - run:
           name: Update the HTTPD config file
           command: docker exec xdmod sed -i 's/ServerName localhost/ServerName xdmod/g' /etc/httpd/conf.d/xdmod.conf
