@@ -349,7 +349,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
                     }
                     self.getAnalyticCardDisplay(analytics);
                     if (analytic != null) {
-                        const analyticID = 'analytic_card_' + analytic;
+                        const analyticID = `analytic_card_${analytic}`;
                         const analyticCardComponent = Ext.getCmp(analyticID);
                         if (analyticCardComponent != null) {
                             self.showAnalyticPanel(analyticCardComponent.initialConfig.data);
