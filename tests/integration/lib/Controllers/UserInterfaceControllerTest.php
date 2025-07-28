@@ -53,11 +53,7 @@ class UserInterfaceControllerTest extends TestCase
                 }
             }
         }
-        file_put_contents('/tmp/actual_get_menus.json', json_encode($realmGroupBys));
         $expected = self::generateRealmGroupBys();
-        file_put_contents('/tmp/expected_get_menus.json', json_encode($expected));
-        #$this->assertEquals($expected, $realmGroupBys, sprintf("\nExpected: %s\n\nActual: %s\n\n", json_encode($expected), json_encode($realmGroupBys)));
-
 
         $this->assertArrayHasKey('SUPREMM', $realms);
         $this->assertArrayNotHasKey('JobEfficiency', $realms);

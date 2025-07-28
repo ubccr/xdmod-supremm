@@ -374,9 +374,6 @@ class JobViewerTest extends TestCase
         if ($expectedFinfo !== null) {
             // Check the mime type of the file is correct.
             $finfo = finfo_open(FILEINFO_MIME);
-            if ($expectedFinfo !== finfo_buffer($finfo, $response[0])) {
-                echo var_export($response, true);
-            }
             $this->assertEquals($expectedFinfo, finfo_buffer($finfo, $response[0]));
         }
     }
