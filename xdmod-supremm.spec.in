@@ -11,7 +11,7 @@ Source:        %{name}-%{version}__PRERELEASE__.tar.gz
 BuildRoot:     %(mktemp -ud %{_tmppath}/%{name}-%{version}__PRERELEASE__-%{release}-XXXXXX)
 BuildArch:     noarch
 BuildRequires: php-cli
-Requires:      xdmod >= 11.0.0, xdmod < 11.1.0
+Requires:      xdmod >= 11.5.0, xdmod < 11.6.0
 Requires:      nodejs >= 16.13.2
 BuildRequires: npm >= 8.1.2
 
@@ -59,6 +59,11 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/xdmod/efficiency_analytics.json
 
 %changelog
+* Mon Mar 17 2025 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 11.0.1-1
+- Release 11.0.1
+* Mon Sep 16 2024 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 11.0.0-1.0
+- Release 11.0.0
+- Remove `php-pecl-mongo` from required dependencies
 * Mon Sep 11 2023 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 10.5.0-1.0
 - Release 10.5.0
 * Thu May 11 2023 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 10.0.1-1.0
@@ -84,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 * Thu May 11 2017 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 6.6.0-1.0
 - Release 6.6.0.
 * Tue Jan 10 2017 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 6.5.0-1.0
-- Release 8.5.0.
+- Release 6.5.0.
 * Wed Sep 21 2016 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 6.0.0-1.0
 - Release 6.0.0.
 * Tue May 24 2016 XDMoD <ccr-xdmod-list@listserv.buffalo.edu> 5.6.0-1.0

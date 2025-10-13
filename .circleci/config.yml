@@ -3,7 +3,7 @@ version: 2.1
 executors:
   rocky8: &rocky8-executor
     docker:
-      - image: tools-ext-01.ccr.xdmod.org/xdmod-job_performance-10.5.0:rockylinux8-0.1
+      - image: tools-ext-01.ccr.xdmod.org/xdmod-job-performance:x86_64-rockylinux8.9.20231119-v11.0.0-1.0-04
 jobs:
   build:
     parameters:
@@ -14,7 +14,7 @@ jobs:
     executor: << parameters.os >>
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
-      XDMOD_REALMS: 'jobs,storage,cloud,supremm,jobefficiency'
+      XDMOD_REALMS: 'jobs,storage,cloud,resourcespecifications,supremm,jobefficiency'
       XDMOD_IS_CORE: 'yes'
       XDMOD_INSTALL_DIR: /xdmod
       XDMOD_TEST_MODE: << parameters.install-type >>
@@ -29,25 +29,11 @@ jobs:
       - run:
           name: Checkout XDMoD
           command: |
-            git clone --depth=1 --branch=xdmod11.0 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
+            git clone --depth=1 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
       - run:
           name: Link the SUPREMM module into the XDMoD Source Directory
           command: |
               ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
-      - run:
-          name: Update php module to 7.4
-          command: dnf module -y reset php && dnf module -y enable php:7.4
-      - run:
-          name: Install PHP 7.4 && Pear pre-reqs
-          command: dnf install -y php libzip-devel php-pear
-      - run:
-          name: Install MongoDB Pear module
-          command: yes '' | pecl install mongodb || true
-      - run:
-          name: Add mongodb
-          command: |
-              ./tests/ci/scripts/install_mongo.sh
-
       # We need to update our acct before we can enable docker layer caching.
       # - setup_remote_docker:
       #    docker_layer_caching: true
@@ -108,7 +94,15 @@ jobs:
       - run:
           name: Run Integration Tests
           command: ./tests/integration/runtests.sh --log-junit ~/phpunit/integration.xml
-      - run: pushd $HOME && rm -f chromedriver_linux64.zip && wget https://chromedriver.storage.googleapis.com/98.0.4758.80/chromedriver_linux64.zip && popd
+      - run:
+          name: 'Install Chromium 99'
+          command: |
+            pushd $HOME && \
+            rm -rf chrome-linux && \
+            wget -O chrome-linux.zip "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F961656%2Fchrome-linux.zip?generation=1642723767466615&alt=media" && \
+            unzip chrome-linux.zip && \
+            ln -s /root/chrome-linux/chrome /usr/local/bin/google-chrome && \
+            popd
       - run:
           name: 'Bodge the nodejs version to run an older one for the webdriver tests'
           command: |
