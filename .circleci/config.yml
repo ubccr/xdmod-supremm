@@ -19,7 +19,7 @@ jobs:
       XDMOD_INSTALL_DIR: /xdmod
       XDMOD_TEST_MODE: << parameters.install-type >>
       TRAVIS_COMMIT_RANGE: << pipeline.git.base_revision >>..<<pipeline.git.revision>>
-      XDMOD_SRC_DIR: $HOME/xdmod
+      XDMOD_SRC_DIR: /root/xdmod
       REG_TEST_BASE: /../../../../../project/tests/artifacts/regression/current
     steps:
       - checkout
