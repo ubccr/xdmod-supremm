@@ -36,7 +36,9 @@ defaults:
       layout: "page"
       version: "11.5"
       sw_version: "11.5.0"
+      rpm_version: "11.5.0-1"
       summ_sw_version: "2.0.0"
+      summ_rpm_version: "2.0.0-1"
       style: "effervescence"
       tocversion: "v11_5toc"
 
