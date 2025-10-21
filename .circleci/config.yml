@@ -123,12 +123,13 @@ jobs:
       - run:
           name: Temp Hack until XDMoD Playwright PR is up / merged
           command: |
-            docker exec playwright cp /xdmod/tests/playwright/lib/metricExplorer.page.ts /xdmod/tests/playwright/lib/metricExplorer.page.ts.orig
-            docker exec playwright cp /xdmod/tests/playwright/lib/xdmod.page.ts /xdmod/tests/playwright/lib/xdmod.page.ts.orig
-            docker exec playwright sed -i '109d' /xdmod/tests/playwright/lib/metricExplorer.page.ts
             docker exec playwright sed -i '83d'  /xdmod/tests/playwright/lib/metricExplorer.page.ts
-            docker exec playwright sed -i '15d'  /xdmod/tests/playwright/lib/xdmod.page.ts
-            docker exec playwright cp /xdmod-supremm/tests/playwright/index.ts /xdmod/tests/playwright/index.ts
+            docker exec playwright sed -i '14d'  /xdmod/tests/playwright/lib/xdmod.page.ts
+            docker exec playwright sed -i '108d' /xdmod/tests/playwright/lib/metricExplorer.page.ts
+#            docker exec playwright cp /xdmod/tests/playwright/lib/metricExplorer.page.ts /xdmod/tests/playwright/lib/metricExplorer.page.ts.orig
+#            docker exec playwright cp /xdmod/tests/playwright/lib/xdmod.page.ts /xdmod/tests/playwright/lib/xdmod.page.ts.orig
+
+#            docker exec playwright cp /xdmod-supremm/tests/playwright/index.ts /xdmod/tests/playwright/index.ts
       - run:
           name: Install XDMoD's Playwright tests as a dep of xdmod-supremm's Playwright tests
           command: docker exec -w /xdmod-supremm/tests/playwright playwright npm install /xdmod/tests/playwright
