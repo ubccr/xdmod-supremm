@@ -75,13 +75,13 @@ jobs:
               docker exec -e XDMOD_TEST_MODE=<< parameters.install-type >> xdmod /xdmod/open_xdmod/modules/supremm/tests/integration/scripts/bootstrap.sh
       - run:
           name: Validate the newly installed / Upgraded XDMoD
-          command: docker exec -w /xdmod-supremm xdmod ./tests/integration_tests/scripts/validate.sh
+          command: docker exec -w /xdmod-supremm xdmod /xdmod-supremm/tests/integration_tests/scripts/validate.sh
       - run:
           name: Setup & Run QA Tests
-          command: docker exec -w /xdmod-supremm xdmod ./tests/ci/scripts/qa-test-setup.sh
+          command: docker exec -w /xdmod-supremm xdmod /xdmod-supremm/tests/ci/scripts/qa-test-setup.sh
       - run:
           name: Run Post Install Tests
-          command: docker exec -w /xdmod-supremm xdmod ./tests/ci/scripts/post-install-test.sh
+          command: docker exec -w /xdmod-supremm xdmod /xdmod-supremm/tests/ci/scripts/post-install-test.sh
       - run:
           name: Install composer dev deps
           command: |
@@ -89,7 +89,7 @@ jobs:
             docker exec -w /xdmod-supremm xdmod composer install
       - run:
           name: Run Component Tests
-          command: docker exec -w /xdmod-supremm xdmod ./tests/component_tests/runtests.sh --log-junit ~/phpunit
+          command: docker exec -w /xdmod-supremm xdmod /xdmod-supremm/tests/component_tests/runtests.sh --log-junit /tmp/phpunit
       - run:
           name: Setup Configuration Files for Integration Tests
           command: |
@@ -99,7 +99,7 @@ jobs:
             docker exec xdmod cp /etc/xdmod/organization.json /xdmod/configuration/organization.json
       - run:
           name: Run Integration Tests
-          command: docker exec -w /xdmod-supremm xdmod ./tests/integration_tests/runtests.sh --log-junit ~/phpunit
+          command: docker exec -w /xdmod-supremm xdmod /xdmod-supremm/tests/integration_tests/runtests.sh --log-junit ~/phpunit
       - run:
           name: Update the HTTPD config file
           command: docker exec xdmod sed -i 's/ServerName localhost/ServerName xdmod/g' /etc/httpd/conf.d/xdmod.conf
@@ -111,7 +111,7 @@ jobs:
           command: docker exec -w /xdmod/tests/playwright playwright /xdmod/open_xdmod/modules/supremm/tests/playwright/runtests.sh -j << parameters.os >>
       - run:
           name: Run Regression Tests
-          command: docker exec -w /xdmod xdmod ./tests/regression_tests/runtests.sh --log-junit ~/phpunit
+          command: docker exec -w /xdmod xdmod /xdmod-supremm/tests/regression_tests/runtests.sh --log-junit ~/phpunit
       - run:
           name: Ensure that no unexpected Apache errors were generated
           command: docker exec xdmod test `fgrep -v ' [ssl:warn] ' /var/log/xdmod/apache-error.log | wc -l` = 0
@@ -126,16 +126,12 @@ jobs:
             mkdir ~/project/log
             docker cp xdmod:/var/log/xdmod ~/project/log
             docker cp xdmod:/var/log/php-fpm/ ~/project/log
-            docker cp playwright:/xdmod/tests/playwright/test_results-<< parameters.os >>.xml ~/phpunit
+            docker cp playwright:/xdmod/tests/playwright/test_results-<< parameters.os >>.xml /tmp/phpunit
             docker cp playwright:/xdmod/tests/playwright/test-results /tmp/screenshots
       - store_artifacts:
           path: /tmp/screenshots
       - store_artifacts:
-          path: /var/log/xdmod
-      - store_artifacts:
-          path: /var/log/php-fpm
-      - store_artifacts:
-          path: /var/log/php_errors.log
+          path: ~/project/log
       - store_test_results:
           path: /tmp/phpunit
 
