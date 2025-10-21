@@ -2,7 +2,7 @@
     "table_definition": {
         "name": "jobefficiency_by_day",
         "table_prefix": "jobefficiency_by_",
-        "engine": "MyISAM",
+        "engine": "InnoDB",
         "comment": "jobefficiency aggregated by ${AGGREGATION_UNIT}.",
         "columns": [
             {
