@@ -49,6 +49,9 @@ test.describe('Job Viewer', async ()  => {
                     await jobViewer.performSearch(123, '', 'robertson', false);
                 });
                 await test.step('Have no results', async () => {
+                    const searchResultMask = page.locator('//div[@id="search_results"]//div[contains(@class, "x-mask")]');
+                    await expect(searchResultMask).toBeVisible({timeout: 10000});
+                    await expect(searchResultMask).toHaveText('Lookup returned zero jobs.');
                     await expect(page.locator('#job-viewer-search-save-results .x-item-disabled')).toHaveCount(0);
                 });
                 await test.step('Cancel search', async () => {

@@ -2,11 +2,24 @@
 
 namespace IntegrationTests\REST\internal_dashboard;
 
+use Models\Services\Realms;
+
 use IntegrationTests\TestHarness\XdmodTestHelper;
 use PHPUnit\Framework\TestCase;
 
 class DashboardSupremmTest extends TestCase
 {
+    protected static $XDMOD_REALMS = [];
+
+    public static function setUpBeforeClass(): void
+    {
+        $xdmodRealms = [];
+        foreach(Realms::getRealms() as $realm) {
+            $xdmodRealms[]= strtolower($realm->name);
+        }
+        self::$XDMOD_REALMS = $xdmodRealms;
+    }
+
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
@@ -259,7 +272,9 @@ class DashboardSupremmTest extends TestCase
     // fetch accountdb stats
     public function testFetchDbstatsAccount($db = 'accountdb') {
 
-        $this->markTestIncomplete('This enpoint only works on the XSEDE version of XDMoD.');
+        if (!in_array('xsede', self::$XDMOD_REALMS)) {
+            $this->markTestSkipped('This endpoint test only works on the XSEDE version of XDMoD.');
+        }
 
         $item = $this->validateSupremmDbstatsEntries($db);
 
