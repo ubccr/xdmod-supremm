@@ -25,7 +25,7 @@ jobs:
       - checkout
       - run:
           name: Update nodejs
-          command: dnf module -y reset nodejs && dnf module -y install nodejs:16
+          command: dnf module -y reset nodejs && dnf module -y install nodejs:22
       - run:
           name: Checkout XDMoD
           command: |
