@@ -147,9 +147,9 @@ jobs:
           command: docker exec -w /xdmod-supremm xdmod ./tests/regression/runtests.sh --log-junit /tmp/phpunit
       - run:
           name: Ensure that no unexpected Apache errors were generated
-          command: docker exec xdmod test `fgrep -v ' [ssl:warn] ' /var/log/xdmod/apache-error.log | wc -l` = 0
+          command: docker exec xdmod test '`grep -v " \[ssl\:warn\] " /var/log/xdmod/apache-error.log | wc -l` = 0'
       - run:
-          name: Ensure that no unexpected Apache errors were generated
+          name: Ensure that no unexpected php-fpm errors were generated
           command: docker exec xdmod test ! -e /var/log/php-fpm/www-error.log
       - run:
           name: Ensure that no PHP command-line errors were generated
@@ -174,6 +174,8 @@ jobs:
           path: ~/project/log
       - store_test_results:
           path: ~/phpunit
+      - store_test_results:
+          path: /var/log/php-fpm/www-error.log
 
 workflows:
   full-build:
