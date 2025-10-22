@@ -16,8 +16,7 @@ try {
 } catch (Exception $e) {
     global $logger;
     do {
-        $logger->crit(array(
-            'message'    => $e->getMessage(),
+        $logger->critical($e->getMessage(), array(
             'stacktrace' => $e->getTraceAsString(),
         ));
     } while ($e = $e->getPrevious());
@@ -128,7 +127,7 @@ function main()
             truncateAction($config, false);
             break;
         default:
-            $logger->crit('No action specified');
+            $logger->critical('No action specified');
             displayHelpText();
             exit(1);
     }
@@ -146,7 +145,7 @@ function truncateAction($config, $deleteSqlData)
     global $logger;
 
     if ($config['resource'] === null) {
-        $logger->crit('No resource specified');
+        $logger->critical('No resource specified');
         exit(1);
     }
 
@@ -165,9 +164,9 @@ function truncateAction($config, $deleteSqlData)
     $resourceQuery = $db->prepare('SELECT id FROM `modw`.`resourcefact` WHERE ' . $searchColumn . ' = :resource');
     $resourceQuery->execute(array('resource' => $config['resource']));
     $result = $resourceQuery->fetchAll(PDO::FETCH_COLUMN, 0);
-    
+
     if (count($result) !== 1) {
-        $logger->crit('Unable to find resource ' . $config['resource'] . ' in the database');
+        $logger->critical('Unable to find resource ' . $config['resource'] . ' in the database');
         return;
     }
 
@@ -181,8 +180,8 @@ function truncateAction($config, $deleteSqlData)
     if ($docs_updated === null) {
         $logger->warning('No mongo data found for resource. No action taken');
     } else {
-        if ($docs_updated['ok']) {
-            $logger->notice('Job summary documents status reset for ' . $docs_updated['nModified'] . ' jobs');
+        if ($docs_updated->isAcknowledged()) {
+            $logger->notice('Job summary documents status reset for ' . $docs_updated->getModifiedCount() . ' jobs');
         } else {
             $logger->warning('Job summary document update failed ' . json_encode($docs_updated));
         }
@@ -208,7 +207,7 @@ function truncateAction($config, $deleteSqlData)
 DELETE FROM `modw_supremm` . `job_name` , `modw_supremm` . `job_peers`
 USING `modw_supremm`.`job`
         LEFT JOIN `modw_supremm`.`job_name` ON `modw_supremm`.`job`.jobname_id = `modw_supremm`.`job_name`.id
-        LEFT JOIN `modw_supremm`.`job_peers` ON `modw_supremm`.`job`._id = `modw_supremm`.`job_peers`.job_id 
+        LEFT JOIN `modw_supremm`.`job_peers` ON `modw_supremm`.`job`._id = `modw_supremm`.`job_peers`.job_id
 WHERE
     `modw_supremm`.`job`.resource_id = :resource_id
 EOF;
