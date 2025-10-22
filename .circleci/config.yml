@@ -104,27 +104,51 @@ jobs:
           name: Run Regression Tests
           command: docker exec -w /xdmod xdmod ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
       - run:
-          name: Ensure that no unexpected Apache errors were generated
-          command: docker exec xdmod test `fgrep -v ' [ssl:warn] ' /var/log/xdmod/apache-error.log | wc -l` = 0
-      - run:
-          name: Ensure that no unexpected Apache errors were generated
-          command: docker exec xdmod test ! -e /var/log/php-fpm/www-error.log
-      - run:
           name: Copy Test Results into Unit
           command: |
             docker cp xdmod:/root/phpunit ~/phpunit
             docker cp xdmod:/tmp/screenshots /tmp/screenshots
-            mkdir ~/project/log
-            docker cp xdmod:/var/log/xdmod ~/project/log
-            docker cp xdmod:/var/log/php-fpm/ ~/project/log
-            docker cp playwright:/xdmod/tests/playwright/test_results-<< parameters.os >>.xml /tmp/phpunit
-            docker cp playwright:/xdmod/tests/playwright/test-results /tmp/screenshots
+            mkdir ~/project/log ~/project/log/xdmod ~/project/log/php-fpm
+            docker cp xdmod:/var/log/xdmod/. ~/project/log/xdmod
+            docker cp xdmod:/var/log/php-fpm/. ~/project/log/php-fpm
+            docker cp playwright:/root/xdmod/tests/playwright/test-results /tmp/screenshots
+      - run:
+          name: Copy Test results for Operating System
+          command: |
+            docker cp "playwright:/root/xdmod/tests/playwright/test_results-<< parameters.string_os >>.xml" ~/phpunit
+      - run:
+          name: Check for webserver errors
+          command: |
+            if [ -e ~/project/log/xdmod/apache-error.log ]; then
+                test "$(fgrep -v ' [ssl:warn] ' ~/project/log/apache-error.log | wc -l)" = 0
+            fi
+      - run:
+          name: Check for php-fpm errors
+          command: |
+            if [ -s ~/project/log/php-fpm/www-error.log ]; then
+                echo "Errors seen in php fpm log";
+                false;
+            else
+                echo "PHP fpm error log file is empty"
+            fi
+      - run:
+          name: Check for etl_overseer errors
+          command: |
+            if grep -q error ~/project/log/xdmod/etl_overseer.log
+            then
+                echo "Errors seen in etl_overseer.log"
+                false;
+            fi
+      - run:
+          name: Ensure that no PHP command-line errors were generated
+          command: |
+            docker exec xdmod /bin/bash -c "if [ -s /var/log/php_errors.log ]; then cat /var/log/php_errors.log; false; fi"
       - store_artifacts:
           path: /tmp/screenshots
       - store_artifacts:
           path: ~/project/log
       - store_test_results:
-          path: /tmp/phpunit
+          path: ~/phpunit
 
 workflows:
   full-build:
