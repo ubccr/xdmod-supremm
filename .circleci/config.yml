@@ -113,6 +113,9 @@ jobs:
           name: Run Regression Tests
           command: docker exec -w $XDMOD_INSTALL_DIR xdmod ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
       - run:
+          name: Run Destructive Tests
+          command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/integration/final_tests.sh
+      - run:
           name: Copy Test Results into Unit
           command: |
             docker cp xdmod:/root/phpunit ~/phpunit

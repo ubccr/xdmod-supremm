@@ -180,8 +180,8 @@ function truncateAction($config, $deleteSqlData)
     if ($docs_updated === null) {
         $logger->warning('No mongo data found for resource. No action taken');
     } else {
-        if ($docs_updated['ok']) {
-            $logger->notice('Job summary documents status reset for ' . $docs_updated['nModified'] . ' jobs');
+        if ($docs_updated->isAcknowledged()) {
+            $logger->notice('Job summary documents status reset for ' . $docs_updated->getModifiedCount() . ' jobs');
         } else {
             $logger->warning('Job summary document update failed ' . json_encode($docs_updated));
         }
