@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Year,"[screw - Screwdriver] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
-2016,1.493755886819776
-2017,1.635195597085841
+Year,"[screw - Screwdriver] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)","[wrench - Wrench] Avg: block sda write ops rate: Per Node weighted by node-hour (ops/s)"
+2016,1.557146760752665,1.4743134005490266
+2017,1.635195597085841,0
 ---------

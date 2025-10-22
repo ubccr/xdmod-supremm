@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Quarter,"[screw - Screwdriver] Avg: ib0 receive rate: Per Node weighted by node-hour (bytes/s)"
-"2016 Q4",0.0028914243532313726
-"2017 Q1",0
+Quarter,"[wrench - Wrench] Avg: ib0 receive rate: Per Node weighted by node-hour (bytes/s)","[screw - Screwdriver] Avg: ib0 receive rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",0.003778247247487845,0
+"2017 Q1",0,0
 ---------

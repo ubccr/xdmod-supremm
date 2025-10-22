@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Quarter,"[screw - Screwdriver] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
-"2016 Q4",19.798204961164636
-"2017 Q1",19.252573645866327
+Quarter,"[screw - Screwdriver] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)","[wrench - Wrench] Avg: block sda write rate: Per Node weighted by node-hour (bytes/s)"
+"2016 Q4",20.831308571025932,19.48134385001708
+"2017 Q1",19.252573645866327,0
 ---------

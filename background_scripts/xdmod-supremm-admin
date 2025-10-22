@@ -180,8 +180,28 @@ function truncateAction($config, $deleteSqlData)
     if ($docs_updated === null) {
         $logger->warning('No mongo data found for resource. No action taken');
     } else {
-        if ($docs_updated['ok']) {
-            $logger->notice('Job summary documents status reset for ' . $docs_updated['nModified'] . ' jobs');
+        $updateSuccessful = null;
+        $docsModified = null;
+        if ($docs_updated instanceof \MongoDB\UpdateResult) {
+            $updateSuccessful = $docs_updated->isAcknowledged();
+            $docsModified = $docs_updated->getModifiedCount();
+        } elseif (is_array($docs_updated)) {
+            $updateSuccessful = $docs_updated['ok'];
+            $docsModified = $docs_updated['nModified'];
+        }
+
+        // If this is still null, then `$docs_updated` is not an expected type.
+        if (is_null($updateSuccessful)) {
+            $logger->error(
+                sprintf(
+                    'Unable to determine if update was successful. Expected MongoDB result type, array | \MongoDB\UpdateResult, received: %s',
+                    gettype($docs_updated)
+                )
+            );
+        }
+
+        if ($updateSuccessful) {
+            $logger->notice('Job summary documents status reset for ' . $docsModified . ' jobs');
         } else {
             $logger->warning('Job summary document update failed ' . json_encode($docs_updated));
         }

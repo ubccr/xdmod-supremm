@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Month,"[screw - Screwdriver] Avg: CPU User Imbalance: weighted by core-hour (%)"
-2016-12,26.11122003342567
-2017-01,66.92072234074402
+Month,"[screw - Screwdriver] Avg: CPU User Imbalance: weighted by core-hour (%)","[wrench - Wrench] Avg: CPU User Imbalance: weighted by core-hour (%)"
+2016-12,89.71650571780634,0.9502148181129071
+2017-01,66.92072234074402,0
 ---------

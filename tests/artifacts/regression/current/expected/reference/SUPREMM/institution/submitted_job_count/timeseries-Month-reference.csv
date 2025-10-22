@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Month,"[screw - Screwdriver] Number of Jobs Submitted"
-2016-12,3
-2017-01,3
+Month,"[screw - Screwdriver] Number of Jobs Submitted","[wrench - Wrench] Number of Jobs Submitted"
+2016-12,2,1
+2017-01,3,0
 ---------

@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Year,"[screw - Screwdriver] Wait Hours: Per Job"
-2016,37.57472222222222
-2017,7.007222222222222
+Year,"[wrench - Wrench] Wait Hours: Per Job","[screw - Screwdriver] Wait Hours: Per Job"
+2016,110.12305555555555,1.3005555555555557
+2017,0,7.007222222222222
 ---------

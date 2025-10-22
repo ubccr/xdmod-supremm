@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Year,"[screw - Screwdriver] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
-2016,61880682.262526646
-2017,399276.1550522648
+Year,"[wrench - Wrench] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)","[screw - Screwdriver] Avg: InfiniBand rate: Per Node weighted by node-hour (bytes/s)"
+2016,80859953.01695362,90.29615435511506
+2017,0,399276.1550522648
 ---------

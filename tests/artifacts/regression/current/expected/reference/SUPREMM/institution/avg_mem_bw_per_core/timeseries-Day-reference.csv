@@ -5,10 +5,10 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Day,"[screw - Screwdriver] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
-2016-12-28,95081629.37335773
-2016-12-29,95081629.37335773
-2016-12-30,95081629.37335773
-2016-12-31,74277159.1492415
-2017-01-01,24849273.848053884
+Day,"[wrench - Wrench] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)","[screw - Screwdriver] Avg: Memory Bandwidth: Per Core weighted by core-hour (bytes/s)"
+2016-12-28,95081629.37335773,0
+2016-12-29,95081629.37335773,0
+2016-12-30,95081629.37335773,0
+2016-12-31,95081629.37335773,34129588.90402918
+2017-01-01,0,24849273.848053884
 ---------

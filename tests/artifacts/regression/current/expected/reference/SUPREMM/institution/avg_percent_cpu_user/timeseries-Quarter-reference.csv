@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Quarter,"[screw - Screwdriver] Avg CPU %: User: weighted by core-hour"
-"2016 Q4",74.16738988661236
-"2017 Q1",25.799529770185917
+Quarter,"[wrench - Wrench] Avg CPU %: User: weighted by core-hour","[screw - Screwdriver] Avg CPU %: User: weighted by core-hour"
+"2016 Q4",99.03583376711232,11.301679076992524
+"2017 Q1",0,25.799529770185917
 ---------

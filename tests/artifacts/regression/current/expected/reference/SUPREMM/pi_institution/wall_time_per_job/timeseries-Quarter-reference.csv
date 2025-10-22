@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Quarter,"[screw - Screwdriver] Wall Hours: Per Job"
-"2016 Q4",30.996296296296297
-"2017 Q1",1.5211805555555553
+Quarter,"[wrench - Wrench] Wall Hours: Per Job","[screw - Screwdriver] Wall Hours: Per Job"
+"2016 Q4",65.87416666666667,13.557361111111112
+"2017 Q1",0,1.5211805555555555
 ---------

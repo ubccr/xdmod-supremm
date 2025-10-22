@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Year,"[screw - Screwdriver] Avg: CPI: Per Core weighted by core-hour"
-2016,0.7333711683783726
-2017,1.0705283142764654
+Year,"[screw - Screwdriver] Avg: CPI: Per Core weighted by core-hour","[wrench - Wrench] Avg: CPI: Per Core weighted by core-hour"
+2016,0.6794453050304665,0.735533090751615
+2017,1.0705283142764654,0
 ---------

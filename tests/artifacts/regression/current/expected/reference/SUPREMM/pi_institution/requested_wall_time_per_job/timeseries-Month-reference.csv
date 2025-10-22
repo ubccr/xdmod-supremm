@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Month,"[screw - Screwdriver] Wall Hours: Requested: Per Job"
-2016-12,50.444444444444436
-2017-01,2.470833333333333
+Month,"[wrench - Wrench] Wall Hours: Requested: Per Job","[screw - Screwdriver] Wall Hours: Requested: Per Job"
+2016-12,72,39.666666666666664
+2017-01,0,2.470833333333333
 ---------

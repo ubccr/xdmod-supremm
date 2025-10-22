@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Year,"[screw - Screwdriver] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
-2016,3322.413728217876
-2017,10441861.782546721
+Year,"[screw - Screwdriver] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)","[wrench - Wrench] Avg: eth0 transmit rate: Per Node weighted by node-hour (bytes/s)"
+2016,3980.3105878331294,3296.038222073229
+2017,10441861.782546721,0
 ---------

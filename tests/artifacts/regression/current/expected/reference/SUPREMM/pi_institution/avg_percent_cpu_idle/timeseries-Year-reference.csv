@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Year,"[screw - Screwdriver] Avg CPU %: Idle: weighted by core-hour"
-2016,25.073469481215415
-2017,60.16864723986941
+Year,"[screw - Screwdriver] Avg CPU %: Idle: weighted by core-hour","[wrench - Wrench] Avg CPU %: Idle: weighted by core-hour"
+2016,88.39865870854226,0.02326493821929595
+2017,60.16864723986941,0
 ---------

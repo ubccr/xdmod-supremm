@@ -5,10 +5,10 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Day,"[screw - Screwdriver] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
-2016-12-28,4498.715323196161
-2016-12-29,8014.645183357499
-2016-12-30,16191.204468713406
-2016-12-31,4224.293770870986
-2017-01-01,2742.4583069369655
+Day,"[screw - Screwdriver] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)","[wrench - Wrench] Avg: /projects write rate: Per Node weighted by node-hour (bytes/s)"
+2016-12-28,0,4498.715323196161
+2016-12-29,35546.46916689731,4498.715323196161
+2016-12-30,35546.46916689731,4498.715323196161
+2016-12-31,3694.7268830776106,4498.715323196161
+2017-01-01,2742.4583069369655,0
 ---------

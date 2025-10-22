@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Month,"[screw - Screwdriver] CPU Hours: Total"
-2016-12,8825.538888888888
-2017-01,162.66000000000003
+Month,"[wrench - Wrench] CPU Hours: Total","[screw - Screwdriver] CPU Hours: Total"
+2016-12,6323.92,2501.618888888889
+2017-01,0,162.66000000000003
 ---------

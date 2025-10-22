@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Year,"[screw - Screwdriver] CPU Hours: Idle: Total"
-2016,2212.8687998583537
-2017,97.87032160037158
+Year,"[screw - Screwdriver] CPU Hours: Idle: Total","[wrench - Wrench] CPU Hours: Idle: Total"
+2016,2211.397543777316,1.4712560810377002
+2017,97.87032160037158,0
 ---------

@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Month,"[screw - Screwdriver] Avg CPU %: System: weighted by core-hour"
-2016-12,0.7492125990070948
-2017-01,13.66903932956048
+Month,"[screw - Screwdriver] Avg CPU %: System: weighted by core-hour","[wrench - Wrench] Avg CPU %: System: weighted by core-hour"
+2016-12,0.27184500844475196,0.9380498678995118
+2017-01,13.66903932956048,0
 ---------

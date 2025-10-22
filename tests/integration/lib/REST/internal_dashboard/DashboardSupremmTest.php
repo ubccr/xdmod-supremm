@@ -2,13 +2,27 @@
 
 namespace IntegrationTests\REST\internal_dashboard;
 
+use Models\Services\Realms;
+
 use IntegrationTests\TestHarness\XdmodTestHelper;
 use PHPUnit\Framework\TestCase;
 
 class DashboardSupremmTest extends TestCase
 {
-    public function __construct($name, $data, $dataName)
+    protected static $XDMOD_REALMS = [];
+
+    public static function setUpBeforeClass(): void
     {
+        $xdmodRealms = [];
+        foreach(Realms::getRealms() as $realm) {
+            $xdmodRealms[]= strtolower($realm->name);
+        }
+        self::$XDMOD_REALMS = $xdmodRealms;
+    }
+
+    public function __construct($name = null, array $data = array(), $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
         $xdmodConfig = array( "decodetextasjson" => true );
         $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
 
@@ -16,7 +30,7 @@ class DashboardSupremmTest extends TestCase
 
         // validate as manager, for dashboard access
         $this->validateAsUser = 'mgr';
-        parent::__construct($name, $data, $dataName);
+
     }
 
     private function invalidSupremmResourceEntries($params)
@@ -111,7 +125,7 @@ class DashboardSupremmTest extends TestCase
         $result = $this->xdmodhelper->get($this->endpoint . 'dbstats', $params);
 
         // Message will contain "no result found"
-        $this->assertContains("no result found for the given database", $result[0]['message']);
+        $this->assertNotFalse(strpos($result[0]['message'], "no result found for the given database"), "Message does not contain 'no result found for the given database'");
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
@@ -134,7 +148,7 @@ class DashboardSupremmTest extends TestCase
         $result = $this->xdmodhelper->get($this->endpoint . 'dbstats', $params);
 
         // Message will contain "no result found"
-        $this->assertContains("no result found for the given database", $result[0]['message']);
+        $this->assertNotFalse(strpos($result[0]['message'], "no result found for the given database"), "Message does not contain 'no result found for the given database'");
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
@@ -258,7 +272,9 @@ class DashboardSupremmTest extends TestCase
     // fetch accountdb stats
     public function testFetchDbstatsAccount($db = 'accountdb') {
 
-        $this->markTestIncomplete('This enpoint only works on the XSEDE version of XDMoD.');
+        if (!in_array('xsede', self::$XDMOD_REALMS)) {
+            $this->markTestSkipped('This endpoint test only works on the XSEDE version of XDMoD.');
+        }
 
         $item = $this->validateSupremmDbstatsEntries($db);
 

@@ -5,7 +5,7 @@ parameters
 start,end
 2016-12-22,2017-01-01
 ---------
-Year,"[screw - Screwdriver] Avg: CPLD: Per Core weighted by core-hour"
-2016,2.9487925654353253
-2017,3.780889715758247
+Year,"[wrench - Wrench] Avg: CPLD: Per Core weighted by core-hour","[screw - Screwdriver] Avg: CPLD: Per Core weighted by core-hour"
+2016,2.9824313601295205,2.109724027027582
+2017,0,3.780889715758247
 ---------
