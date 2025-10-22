@@ -32,7 +32,7 @@ jobs:
           command: docker compose -f ~/project/tests/playwright/Docker/docker-compose.yml up -d
       - run:
           name: Update xdmod nodejs version
-          command: docker exec xdmod dnf module reset nodejs && dnf module enable nodejs:20 && dnf install -y nodejs
+          command: docker exec xdmod dnf module -y reset nodejs && dnf module -y enable nodejs:20 && dnf install -y nodejs
       - run:
           name: Generate Key for XDMoD
           command: docker exec xdmod openssl genrsa -out /etc/pki/tls/private/localhost.key -rand /proc/cpuinfo:/proc/filesystems:/proc/interrupts:/proc/ioports:/proc/uptime 2048
