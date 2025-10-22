@@ -79,11 +79,6 @@ jobs:
       - run:
           name: Validate that the install / upgrade went as expected
           command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/integration/scripts/validate.sh
-      - run:
-          name: Make sure that the test dependencies are installed
-          command: |
-            docker exec -w $XDMOD_INSTALL_DIR xdmod composer install
-            docker exec -w $MODULE_INSTALL_DIR xdmod composer install
       - when:
           condition:
             equal: [ << parameters.install-type >>, 'upgrade' ]
@@ -91,6 +86,11 @@ jobs:
             - run:
                 name: Setup & Run QA Tests
                 command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/ci/scripts/qa-test-setup.sh
+      - run:
+          name: Make sure that the test dependencies are installed
+          command: |
+            docker exec -w $XDMOD_INSTALL_DIR xdmod composer install
+            docker exec -w $MODULE_INSTALL_DIR xdmod composer install
       - run:
           name: Run Post Install Tests
           command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/ci/scripts/post-install-test.sh
