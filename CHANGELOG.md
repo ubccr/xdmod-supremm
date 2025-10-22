@@ -7,6 +7,10 @@ Open XDMoD SUPReMM Change Log
     - Add support for PHP 8.2
       ([\#438](https://github.com/ubccr/xdmod-supremm/pull/438)).
 
+- Bug Fixes
+    - Fix bug in `xdmod-supremm-admin`
+      ([\#416](https://github.com/ubccr/xdmod-supremm/pull/416)).
+
 ## 2025-03-17 v11.0.1
 
 - Miscellaneous
