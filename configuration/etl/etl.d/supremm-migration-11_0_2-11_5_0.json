@@ -56,25 +56,6 @@
                 }
             }
         },
-        {
-            "name": "convert-supremm-aggregate-tables-to-innodb",
-            "description": "Convert supremm aggregate tables to InnoDB",
-            "class": "ExecuteSql",
-            "sql_file_list": [
-                {
-                    "delimiter": ";",
-                    "sql_file": "migrations/11.0.2-11.5.0/modw_aggregates/convert_to_innodb.sql"
-                }
-            ],
-            "endpoints": {
-                "destination": {
-                    "type": "mysql",
-                    "name": "XDMoD Data Warehouse",
-                    "config": "datawarehouse",
-                    "schema": "modw_aggregates"
-                }
-            }
-        },
 	{
 	    "name": "update-jobefficiency-aggregate-tables",
 	    "description": "Update modw_aggregates jobefficiency tables to use InnoDB table engine",
