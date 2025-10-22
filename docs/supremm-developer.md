@@ -9,7 +9,7 @@ The SUPReMM architecture comprises three major components.
 * An Open XDMoD module that enables the job-level information to be viewed and analysed.
 
 The Open XDMoD module is designed to support the ingestion and display of job-level performance data
-from a variety of sources including [PCP](http://pcp.io), [Prometheus](https://prometheus.io/), Cray RUR, and [tacc_stats](https://github.com/TACC/tacc_stats).
+from a variety of sources including [PCP](http://pcp.io), [Prometheus](https://prometheus.io/), and [HPCPerfStats](https://github.com/TACC/HPCPerfStats).
 The recommended data collection software is either PCP or Prometheus. The supported job summarization software is listed below.
 
 ### Open XDMoD 
