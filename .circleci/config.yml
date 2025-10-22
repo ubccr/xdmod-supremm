@@ -14,8 +14,6 @@ jobs:
         type: string
       string_os:
         type: string
-      schedule-name:
-        type: string
     executor: << parameters.os >>
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
@@ -169,3 +167,4 @@ workflows:
             parameters:
               os: [rocky8]
               install-type: ["fresh_install", "upgrade"]
+              string_os: [rocky8]
