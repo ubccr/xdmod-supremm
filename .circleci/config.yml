@@ -64,7 +64,7 @@ jobs:
       - run:
           name: Create Test Artifact Directories in the XDMoD Container
           command: |
-            docker exec xdmod mkdir -p /tmp/phpunit
+            docker exec xdmod mkdir -p ~/phpunit
             docker exec xdmod mkdir -p /tmp/screenshots
       - run:
           name: Build RPMs on XDMoD
@@ -89,7 +89,7 @@ jobs:
             docker exec -w /xdmod-supremm xdmod composer install
       - run:
           name: Run Component Tests
-          command: docker exec -w /xdmod-supremm xdmod /xdmod-supremm/tests/component_tests/runtests.sh --log-junit /tmp/phpunit
+          command: docker exec -w /xdmod-supremm xdmod ./tests/component/runtests.sh --log-junit ~/phpunit/component.xml
       - run:
           name: Setup Configuration Files for Integration Tests
           command: |
@@ -99,7 +99,7 @@ jobs:
             docker exec xdmod cp /etc/xdmod/organization.json /xdmod/configuration/organization.json
       - run:
           name: Run Integration Tests
-          command: docker exec -w /xdmod-supremm xdmod /xdmod-supremm/tests/integration_tests/runtests.sh --log-junit ~/phpunit
+          command: docker exec -w /xdmod-supremm xdmod ./tests/integration/runtests.sh --log-junit ~/phpunit/integration.xml
       - run:
           name: Update the HTTPD config file
           command: docker exec xdmod sed -i 's/ServerName localhost/ServerName xdmod/g' /etc/httpd/conf.d/xdmod.conf
@@ -111,7 +111,7 @@ jobs:
           command: docker exec -w /xdmod/tests/playwright playwright /xdmod/open_xdmod/modules/supremm/tests/playwright/runtests.sh -j << parameters.os >>
       - run:
           name: Run Regression Tests
-          command: docker exec -w /xdmod xdmod /xdmod-supremm/tests/regression_tests/runtests.sh --log-junit ~/phpunit
+          command: docker exec -w /xdmod xdmod ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
       - run:
           name: Ensure that no unexpected Apache errors were generated
           command: docker exec xdmod test `fgrep -v ' [ssl:warn] ' /var/log/xdmod/apache-error.log | wc -l` = 0
