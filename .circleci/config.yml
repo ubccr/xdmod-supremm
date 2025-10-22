@@ -75,13 +75,13 @@ jobs:
               docker exec -e XDMOD_TEST_MODE=<< parameters.install-type >> xdmod /xdmod/open_xdmod/modules/supremm/tests/integration/scripts/bootstrap.sh
       - run:
           name: Validate the newly installed / Upgraded XDMoD
-          command: docker exec -w /xdmod-supremm xdmod /xdmod-supremm/tests/integration_tests/scripts/validate.sh
+          command: docker exec -w /xdmod-supremm xdmod ./tests/integration/scripts/validate.sh
       - run:
           name: Setup & Run QA Tests
-          command: docker exec -w /xdmod-supremm xdmod /xdmod-supremm/tests/ci/scripts/qa-test-setup.sh
+          command: docker exec -w /xdmod-supremm xdmod ./tests/ci/scripts/qa-test-setup.sh
       - run:
           name: Run Post Install Tests
-          command: docker exec -w /xdmod-supremm xdmod /xdmod-supremm/tests/ci/scripts/post-install-test.sh
+          command: docker exec -w /xdmod-supremm xdmod ./tests/ci/scripts/post-install-test.sh
       - run:
           name: Install composer dev deps
           command: |
