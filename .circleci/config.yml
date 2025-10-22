@@ -2,7 +2,7 @@
 version: 2.1
 
 executors:
-  rocky8: &rocky8-executor
+  rocky8:
     docker:
       - image: cimg/base:current
 jobs:
@@ -41,10 +41,10 @@ jobs:
       - run:
           name: Copy Files for Playwright and XDMoD containers
           command: |
-            docker cp ~/project/../xdmod xdmod:$XDMOD_INSTALL_DIR
+            docker cp ~/xdmod xdmod:$XDMOD_INSTALL_DIR
             docker cp ~/project xdmod:$MODULE_INSTALL_DIR
             docker exec xdmod chown -R root:root $XDMOD_INSTALL_DIR $MODULE_INSTALL_DIR
-            docker cp ~/project/../xdmod playwright:$XDMOD_INSTALL_DIR
+            docker cp ~/xdmod playwright:$XDMOD_INSTALL_DIR
             docker cp ~/project playwright:$MODULE_INSTALL_DIR
       - run:
           name: Link the Supremm Module into XDMoD's directory structure
@@ -98,6 +98,9 @@ jobs:
           name: Run Post Install Tests
           command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/ci/scripts/post-install-test.sh
       - run:
+          name: Setup the SimpleSAML server etc. so we can test SSO
+          command: docker exec xdmod $XDMOD_INSTALL_DIR/tests/ci/samlSetup.sh
+      - run:
           name: Run Component Tests
           command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/component/runtests.sh --log-junit ~/phpunit/component.xml
       - run:
@@ -107,13 +110,33 @@ jobs:
             docker exec xdmod mv $XDMOD_INSTALL_DIR/configuration/portal_settings.ini $XDMOD_INSTALL_DIR/configuration/portal_settings.ini.old
             docker exec xdmod cp /etc/xdmod/portal_settings.ini $XDMOD_INSTALL_DIR/configuration/portal_settings.ini
             docker exec xdmod cp /etc/xdmod/organization.json $XDMOD_INSTALL_DIR/configuration/organization.json
-
       - run:
           name: Running Integration Tests
           command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/integration/runtests.sh --log-junit ~/phpunit/integration.xml
       - run:
           name: Run Regression Tests
           command: docker exec -w $XDMOD_INSTALL_DIR xdmod ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
+      - run:
+          name: Update the HTTPD config file
+          command: docker exec xdmod sed -i 's/ServerName localhost/ServerName xdmod/g' /etc/httpd/conf.d/xdmod.conf
+      - run:
+          name: Restart XDMoD's services
+          command: docker exec xdmod /root/bin/services restart
+      - run:
+          name: Testing alternate xdmod.page.ts
+          command: docker exec playwright \cp /root/xdmod-supremm/tests/playwright/lib/xdmod.page.ts /root/xdmod/tests/playwright/lib/xdmod.page.ts
+      - run:
+          name: Testing alternate metricExplorer.page.ts
+          command: docker exec playwright \cp /root/xdmod-supremm/tests/playwright/lib/metricExplorer.page.ts /root/xdmod/tests/playwright/lib/metricExplorer.page.ts
+      - run:
+          name: Run XDMoD Playwright Tests
+          command: docker exec -w $XDMOD_INSTALL_DIR/tests/playwright playwright $XDMOD_INSTALL_DIR/tests/playwright/runtests.sh -j << parameters.string_os >>
+      - run:
+          name: Install XDMoD's Playwright tests as a dep of xdmod-supremm's Playwright tests
+          command: docker exec -w $MODULE_INSTALL_DIR/tests/playwright playwright npm install $XDMOD_INSTALL_DIR/tests/playwright
+      - run:
+          name: Run Job Performance Playwright Tests
+          command: docker exec -w $MODULE_INSTALL_DIR/tests/playwright playwright $MODULE_INSTALL_DIR/tests/playwright/runtests.sh -j << parameters.string_os >>
       - run:
           name: Run Destructive Tests
           command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/integration/final_tests.sh
@@ -125,6 +148,7 @@ jobs:
             mkdir ~/project/log ~/project/log/xdmod ~/project/log/php-fpm
             docker cp xdmod:/var/log/xdmod/. ~/project/log/xdmod
             docker cp xdmod:/var/log/php-fpm/. ~/project/log/php-fpm
+            docker cp playwright:/root/xdmod-supremm/tests/playwright/test-results/. ~/project/log/
           when: always
       - run:
           name: Check for webserver errors
@@ -168,4 +192,4 @@ workflows:
             parameters:
               os: [rocky8]
               install-type: ["fresh_install", "upgrade"]
-              string_os: [rocky8]
+              string_os: ['rocky8']
