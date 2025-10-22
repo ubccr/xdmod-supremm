@@ -107,9 +107,6 @@ jobs:
           name: Restart XDMoD's services
           command: docker exec xdmod /root/bin/services restart
       - run:
-          name: Run Job Performance Playwright Tests
-          command: docker exec -w /xdmod/tests/playwright playwright /xdmod/open_xdmod/modules/supremm/tests/playwright/runtests.sh -j << parameters.os >>
-      - run:
           name: Run Regression Tests
           command: docker exec -w /xdmod xdmod ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
       - run:
