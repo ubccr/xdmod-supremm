@@ -120,11 +120,6 @@ jobs:
             mkdir ~/project/log ~/project/log/xdmod ~/project/log/php-fpm
             docker cp xdmod:/var/log/xdmod/. ~/project/log/xdmod
             docker cp xdmod:/var/log/php-fpm/. ~/project/log/php-fpm
-            docker cp playwright:/root/xdmod/tests/playwright/test-results /tmp/screenshots
-      - run:
-          name: Copy Test results for Operating System
-          command: |
-            docker cp "playwright:/root/xdmod/tests/playwright/test_results-<< parameters.string_os >>.xml" ~/phpunit
       - run:
           name: Check for webserver errors
           command: |
