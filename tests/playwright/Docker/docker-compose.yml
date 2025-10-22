@@ -1,0 +1,34 @@
+services:
+    xdmod:
+        image: tools-ext-01.ccr.xdmod.org/xdmod-job-performance:x86_64-rockylinux8.9.20231119-v11.0.0-1.0-04
+        container_name: xdmod
+        init: true
+        hostname: xdmod
+        networks:
+            - testing
+        shm_size: 2g
+        ports:
+            - 8080:443
+            - 7000:7000
+        environment:
+            XDMOD_REALMS: 'jobs,storage,cloud,resourcespecifications,supremm'
+            XDMOD_IS_CORE: true
+            XDMOD_INSTALL_DIR: '/usr/share/xdmod'
+            XDMOD_ETC_DIR: '/etc/xdmod'
+        command: sleep infinity
+    playwright:
+        image:  mcr.microsoft.com/playwright:v1.54.0-jammy
+        hostname: playwright
+        container_name: playwright
+        networks:
+            - testing
+        links:
+            - xdmod
+        depends_on:
+            - xdmod
+        environment:
+            BASE_URL: https://xdmod
+            XDMOD_REALMS: 'jobs,storage,cloud,resourcespecifications,supremm'
+        command: sleep infinity
+networks:
+    testing:

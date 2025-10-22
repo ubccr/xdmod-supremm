@@ -8,8 +8,6 @@ class SupremmDbInterface {
     private $etl_version = null;
     private $resource_rmap = null;
 
-    private $mongoDriver;
-
     public function __construct() {
         $sconf = XdmodConfiguration::assocArrayFactory('supremmconfig.json', CONFIG_DIR);
         $this->etl_version = $sconf['etlversion'];
@@ -40,12 +38,6 @@ class SupremmDbInterface {
 
             $this->resource_rmap[$sresource['resource_id']] = $sresource;
         }
-
-        if (class_exists('\MongoClient')) {
-            $this->mongoDriver = 'mongo';
-        } elseif (class_exists('\MongoDB\Client')) {
-            $this->mongoDriver = 'mongodb';
-        }
     }
 
     /**
@@ -61,11 +53,10 @@ class SupremmDbInterface {
 
         $collection = $this->getCollection($resconf['handle'], $resconf['collection']);
 
-        $result = $this->update(
-            $collection,
+        $result = $collection->updateMany(
             array('processed.' . $this->getEtlUid() . '.version' => $this->etl_version),
             array('$set' => array('processed.' . $this->getEtlUid() . '.version' => $new_etl_version)),
-            array('multiple' => true, 'socketTimeoutMS' => -1, 'wTimeoutMS' => -1)
+            array('socketTimeoutMS' => -1, 'wTimeoutMS' => -1)
         );
 
         return $result;
@@ -168,7 +159,7 @@ class SupremmDbInterface {
         switch ($docType) {
             case 'timeseries':
                 $collectionName = 'timeseries-'.$resconf['collection'];
-                $query = array('_id' => $this->getRegex($queryStr));
+                $query = array('_id' => new \MongoDB\BSON\Regex($queryStr));
                 break;
             case 'schema':
                 $collectionName = 'schema';
@@ -176,20 +167,12 @@ class SupremmDbInterface {
                 break;
             default:
                 $collectionName = $resconf['collection'];
-                $query = array('_id' => $this->getRegex($queryStr));
+                $query = array('_id' => new \MongoDB\BSON\Regex($queryStr));
         }
 
         $collection = $this->getCollection($resconf['handle'], $collectionName);
 
-        switch ($this->mongoDriver) {
-            case 'mongo':
-                $doc = $collection->findOne($query, $filter);
-                break;
-            case 'mongodb':
-            default:
-                $doc = $collection->findOne($query, array('projection' => $filter));
-                break;
-        }
+        $doc = $collection->findOne($query, array('projection' => $filter));
 
         return $doc;
     }
@@ -201,76 +184,27 @@ class SupremmDbInterface {
         return $res[0]['uuid'];
     }
 
-    private function getRegex($regex)
-    {
-        switch ($this->mongoDriver) {
-            case 'mongo':
-                return new \MongoRegex("/$regex/");
-            case 'mongodb':
-            default:
-                return new \MongoDB\BSON\Regex($regex);
-        }
-    }
-
     /**
      * @param $handle
      * @param $collectionName
      * @return mixed
      */
     private function getCollection($handle, $collectionName) {
-        switch ($this->mongoDriver) {
-            case 'mongo':
-                return $handle->selectCollection($collectionName);
-            case 'mongodb':
-            default:
-                $options = array('typeMap' => array('root' => 'array', 'document' => 'array'));
-                return $handle->selectCollection($collectionName, $options);
-        }
-    }
-
-    public function update($collection, $filter, $data, $options)
-    {
-        switch ($this->mongoDriver) {
-            case 'mongo':
-                return $collection->update(
-                    $filter,
-                    $data,
-                    $options
-                );
-            case 'mongodb':
-            default:
-                return $collection->updateOne(
-                    $filter,
-                    $data,
-                    $options
-                );
-        }
+        $options = array('typeMap' => array('root' => 'array', 'document' => 'array'));
+        return $handle->selectCollection($collectionName, $options);
     }
 
     private function getDB($uri, $dbName)
     {
-        switch ($this->mongoDriver) {
-            case 'mongo':
-                $client = new \MongoClient($uri);
-                return $client->selectDB($dbName);
-            case 'mongodb':
-            default:
-                $client = new \MongoDB\Client($uri);
-                return $client->$dbName;
-        }
+        $client = new \MongoDB\Client($uri);
+        return $client->$dbName;
     }
 
     private function getColumnStats($db, $collectionName)
     {
         $command = array('collStats' => $collectionName);
 
-        switch ($this->mongoDriver) {
-            case 'mongo':
-                return $db->command($command);
-            case 'mongodb':
-            default:
-                $results = $db->command($command);
-                return $results->toArray()[0];
-        }
+        $results = $db->command($command);
+        return $results->toArray()[0];
     }
 }
