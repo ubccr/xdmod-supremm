@@ -159,6 +159,7 @@ jobs:
             fi
       - run:
           name: Copy Test Results into Unit
+          when: on_fail
           command: |
             docker cp xdmod:/tmp/phpunit ~/phpunit
             docker cp xdmod:/tmp/screenshots /tmp/screenshots
