@@ -114,7 +114,7 @@ function shared_jobs($resource_id, $start, $end)
 
     $logger->debug('Checking for shared jobs on resource_id=' . $resource_id . ' between ' . $start . ' and ' . $end);
 
-    $hostquery = "SELECT 
+    $hostquery = "SELECT
                 h.id,
                 h.name
             FROM
@@ -126,7 +126,7 @@ function shared_jobs($resource_id, $start, $end)
     $createtmp = $db->handle()->prepare('CREATE TABLE `modw_supremm`.`job_tmp` (KEY (resource_id, local_job_id, end_time_ts)) SELECT _id, resource_id, local_job_id, start_time_ts, end_time_ts FROM `modw_supremm`.`job` WHERE end_time_ts BETWEEN :start AND :end AND resource_id = :resource_id');
     $createtmp->execute(array('start' => $start, 'end' => $end, 'resource_id' => $resource_id));
 
-    $jobsforhost = "SELECT 
+    $jobsforhost = "SELECT
                 j._id as jobid, 'e' as jobstate, j.end_time_ts as state_transition_timestamp
             FROM
                 modw_supremm.job_tmp j,
@@ -136,7 +136,7 @@ function shared_jobs($resource_id, $start, $end)
                 AND jh.resource_id = j.resource_id
                 AND jh.end_time_ts = j.end_time_ts
                 AND jh.host_id = :hostid
-            UNION SELECT 
+            UNION SELECT
                 j._id as jobid, 's' as jobstate, j.start_time_ts as state_transition_timestamp
             FROM
                 modw_supremm.job_tmp j,
@@ -197,7 +197,7 @@ function shared_jobs($resource_id, $start, $end)
                 unset($activejobs[ "{$row['jobid']}" ]);
             }
         }
-        
+
         foreach($sharedjobs as $key => $ignore) {
             $jbu->execute(array($key));
         }
@@ -269,8 +269,7 @@ $logger = CCR\Log::factory('SUPREMM', $conf);
 $cmd = implode(' ', array_map('escapeshellarg', $argv));
 $logger->info("Command: $cmd");
 
-$logger->notice(array(
-    'message'            => 'process shared jobs start',
+$logger->notice('process shared jobs start', array(
     'process_start_time' => date('Y-m-d H:i:s'),
 ));
 
@@ -285,13 +284,11 @@ try
 catch (\Exception $e) {
 
     $msg = 'Caught exception while executing: ' . $e->getMessage();
-    $logger->err(array(
-        'message'    => $msg,
+    $logger->error($msg, array(
         'stacktrace' => $e->getTraceAsString()
     ));
 }
 
-$logger->notice(array(
-    'message'          => 'process shared jobs end',
+$logger->notice('process shared jobs end', array(
     'process_end_time' => date('Y-m-d H:i:s'),
 ));
