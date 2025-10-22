@@ -1,60 +1,37 @@
 ---
 version: 2.1
+
 executors:
-  default:
+  rocky8: &rocky8-executor
     docker:
       - image: cimg/base:current
 jobs:
   build:
     parameters:
       os:
-        type: string
+        type: executor
       install-type:
         type: string
-    executor: default
+      string_os:
+        type: string
+      schedule-name:
+        type: string
+    executor: << parameters.os >>
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
       XDMOD_REALMS: 'jobs,storage,cloud,resourcespecifications,supremm,jobefficiency'
-      XDMOD_IS_CORE: 'yes'
-      XDMOD_INSTALL_DIR: /xdmod
-      XDMOD_TEST_MODE: << parameters.install-type >>
+      QA_BRANCH: 'v2'
       TRAVIS_COMMIT_RANGE: << pipeline.git.base_revision >>..<<pipeline.git.revision>>
-      XDMOD_SRC_DIR: ./../xdmod
-      REG_TEST_BASE: /../../../../../project/tests/artifacts/regression/current
+      XDMOD_IS_CORE: yes
+      XDMOD_INSTALL_DIR: /root/xdmod
+      MODULE_INSTALL_DIR: /root/xdmod-supremm
+      XDMOD_TEST_MODE: << parameters.install-type >>
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: Start up the Docker Containers
-          command: >
-            docker compose -f tests/playwright/Docker/docker-compose.yml up -d
-      - run:
-          name: Checkout XDMoD
-          command: |
-            git clone --depth=1 https://github.com/ubccr/xdmod.git $XDMOD_SRC_DIR
-      - run:
-          name: Copy Files into Docker Containers
-          command: |
-            docker cp ~/xdmod xdmod:/xdmod
-            docker cp ~/project xdmod:/xdmod-supremm
-            docker cp ~/xdmod playwright:/xdmod
-            docker cp ~/project playwright:/xdmod-supremm
-      - run:
-          name: Mark the XDMoD directories as safe for git
-          command: |
-            docker exec -w /xdmod xdmod git config --global --add safe.directory /xdmod
-            docker exec -w /xdmod-supremm xdmod git config --global --add safe.directory /xdmod-supremm
-      - run:
-          name: Install Dependencies for xdmod and xdmod-supremm
-          command: |
-            docker exec -w /xdmod xdmod composer config -g cache-files-ttl 315360000
-            docker exec -w /xdmod xdmod composer install
-            docker exec -w /xdmod-supremm xdmod composer install
-      - run:
-          name: Link the Supremm Module into XDMoD's directory structure
-          command: |
-            docker exec -w /xdmod-supremm xdmod ln -s /xdmod-supremm /xdmod/open_xdmod/modules/supremm
-            docker exec -w /xdmod-supremm playwright ln -s /xdmod-supremm /xdmod/open_xdmod/modules/supremm
+          name: Docker Compose corresponding OS file
+          command: docker compose -f ~/project/tests/playwright/Docker/docker-compose.yml up -d
       - run:
           name: Generate Key for XDMoD
           command: docker exec xdmod openssl genrsa -out /etc/pki/tls/private/localhost.key -rand /proc/cpuinfo:/proc/filesystems:/proc/interrupts:/proc/ioports:/proc/uptime 2048
@@ -62,47 +39,81 @@ jobs:
           name: Generate Cert for XDMoD
           command: docker exec xdmod /usr/bin/openssl req -new -key /etc/pki/tls/private/localhost.key -x509 -sha256 -days 365 -set_serial $RANDOM -extensions v3_req -out /etc/pki/tls/certs/localhost.crt -subj "/C=XX/L=Default City/O=Default Company Ltd"
       - run:
-          name: Create Test Artifact Directories in the XDMoD Container
+          name: Checkout XDMoD
           command: |
-            docker exec xdmod mkdir -p ~/phpunit
-            docker exec xdmod mkdir -p /tmp/screenshots
+            git clone --depth=1 https://github.com/ubccr/xdmod.git $XDMOD_INSTALL_DIR
       - run:
-          name: Build RPMs on XDMoD
-          command: docker exec -w /xdmod xdmod /root/bin/buildrpm xdmod supremm
-      - run:
-          name: Install / Upgrade XDMoD from RPM
+          name: Copy Files for Playwright and XDMoD containers
           command: |
-              docker exec -e XDMOD_TEST_MODE=<< parameters.install-type >> xdmod /xdmod/open_xdmod/modules/supremm/tests/integration/scripts/bootstrap.sh
+            docker cp ~/xdmod xdmod:$XDMOD_INSTALL_DIR
+            docker cp ~/project xdmod:$MODULE_INSTALL_DIR
+            docker cp ~/xdmod playwright:$XDMOD_INSTALL_DIR
+            docker cp ~/project playwright:$MODULE_INSTALL_DIR
       - run:
-          name: Validate the newly installed / Upgraded XDMoD
-          command: docker exec -w /xdmod-supremm xdmod ./tests/integration/scripts/validate.sh
+          name: Link the Supremm Module into XDMoD's directory structure
+          command: |
+            docker exec -w $MODULE_INSTALL_DIR xdmod ln -s $MODULE_INSTALL_DIR $XDMOD_INSTALL_DIR/open_xdmod/modules/supremm
+            docker exec -w $MODULE_INSTALL_DIR playwright ln -s $MODULE_INSTALL_DIR $XDMOD_INSTALL_DIR/open_xdmod/modules/supremm
       - run:
-          name: Setup & Run QA Tests
-          command: docker exec -w /xdmod-supremm xdmod ./tests/ci/scripts/qa-test-setup.sh
+          name: Create test result directories
+          command: |
+            rm -rf ~/phpunit
+            mkdir ~/phpunit
+            rm -rf /tmp/screenshots
+            mkdir /tmp/screenshots
+      - run:
+          name: Create Test Artifact Directories in XDMoD
+          command: |
+            docker exec xdmod mkdir /root/phpunit
+            docker exec xdmod mkdir /tmp/screenshots
+            docker exec xdmod mkdir /root/code_coverage_raw
+            docker exec xdmod mkdir /root/code_coverage
+      - run:
+          name: Install XDMoD Composer Dependencies
+          command: |
+            docker exec -w $XDMOD_INSTALL_DIR xdmod composer install
+            docker exec -w $MODULE_INSTALL_DIR xdmod composer install
+      - run:
+          name: Build XDMoD RPM
+          command: docker exec -w $XDMOD_INSTALL_DIR xdmod /root/bin/buildrpm xdmod supremm
+      - run:
+          name: Install / Upgrade XDMoD from the newly created RPM
+          command: docker exec -e XDMOD_TEST_MODE=<< parameters.install-type >> xdmod $XDMOD_INSTALL_DIR/open_xdmod/modules/supremm/tests/integration/scripts/bootstrap.sh
+      - run:
+          name: Validate that the install / upgrade went as expected
+          command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/integration/scripts/validate.sh
+      - run:
+          name: Make sure that the test dependencies are installed
+          command: |
+            docker exec -w $XDMOD_INSTALL_DIR xdmod composer install
+            docker exec -w $MODULE_INSTALL_DIR xdmod composer install
+      - when:
+          condition:
+            equal: [ << parameters.install-type >>, 'upgrade' ]
+          steps:
+            - run:
+                name: Setup & Run QA Tests
+                command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/ci/scripts/qa-test-setup.sh
       - run:
           name: Run Post Install Tests
-          command: docker exec -w /xdmod-supremm xdmod ./tests/ci/scripts/post-install-test.sh
-      - run:
-          name: Install composer dev deps
-          command: |
-            docker exec -w /xdmod xdmod composer install
-            docker exec -w /xdmod-supremm xdmod composer install
+          command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/ci/scripts/post-install-test.sh
       - run:
           name: Run Component Tests
-          command: docker exec -w /xdmod-supremm xdmod ./tests/component/runtests.sh --log-junit ~/phpunit/component.xml
+          command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/component/runtests.sh --log-junit ~/phpunit/component.xml
       - run:
           name: Setup Configuration Files for Integration Tests
           command: |
-            docker exec xdmod mv /xdmod/configuration/organization.json /xdmod/configuration/organization.json.old
-            docker exec xdmod mv /xdmod/configuration/portal_settings.ini /xdmod/configuration/portal_settings.ini.old
-            docker exec xdmod cp /etc/xdmod/portal_settings.ini /xdmod/configuration/portal_settings.ini
-            docker exec xdmod cp /etc/xdmod/organization.json /xdmod/configuration/organization.json
+            docker exec xdmod mv $XDMOD_INSTALL_DIR/configuration/organization.json $XDMOD_INSTALL_DIR/configuration/organization.json.old
+            docker exec xdmod mv $XDMOD_INSTALL_DIR/configuration/portal_settings.ini $XDMOD_INSTALL_DIR/configuration/portal_settings.ini.old
+            docker exec xdmod cp /etc/xdmod/portal_settings.ini $XDMOD_INSTALL_DIR/configuration/portal_settings.ini
+            docker exec xdmod cp /etc/xdmod/organization.json $XDMOD_INSTALL_DIR/configuration/organization.json
+
       - run:
-          name: Run Integration Tests
-          command: docker exec -w /xdmod-supremm xdmod ./tests/integration/runtests.sh --log-junit ~/phpunit/integration.xml
+          name: Running Integration Tests
+          command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/integration/runtests.sh --log-junit ~/phpunit/integration.xml
       - run:
           name: Run Regression Tests
-          command: docker exec -w /xdmod xdmod ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
+          command: docker exec -w $XDMOD_INSTALL_DIR xdmod ./tests/regression/runtests.sh --junit-output-dir ~/phpunit
       - run:
           name: Copy Test Results into Unit
           command: |
@@ -156,5 +167,5 @@ workflows:
       - build:
           matrix:
             parameters:
-              os: ['rocky8']
-              install-type: ['fresh_install', 'upgrade']
+              os: [rocky8]
+              install-type: ["fresh_install", "upgrade"]
