@@ -6,9 +6,9 @@ use PHPUnit\Framework\TestCase;
 use RegressionTests\TestHarness\RegressionTestHelper;
 
 /**
- * Test the usage explorer for jobs realm regressions.
+ * Test the usage explorer for SUPREMM realm regressions.
  */
-class UsageExplorerJobsTest extends TestCase
+class UsageExplorerSupremmTest extends TestCase
 {
     /**
      * @var RegressionTestHelper
