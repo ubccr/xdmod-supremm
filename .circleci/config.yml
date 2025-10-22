@@ -39,13 +39,13 @@ jobs:
       - run:
           name: Checkout XDMoD
           command: |
-            git clone --depth=1 https://github.com/ubccr/xdmod.git $XDMOD_INSTALL_DIR
+            git clone --depth=1 https://github.com/ubccr/xdmod.git ../xdmod
       - run:
           name: Copy Files for Playwright and XDMoD containers
           command: |
-            docker cp ~/xdmod xdmod:$XDMOD_INSTALL_DIR
+            docker cp ~/project/../xdmod xdmod:$XDMOD_INSTALL_DIR
             docker cp ~/project xdmod:$MODULE_INSTALL_DIR
-            docker cp ~/xdmod playwright:$XDMOD_INSTALL_DIR
+            docker cp ~/project/../xdmod playwright:$XDMOD_INSTALL_DIR
             docker cp ~/project playwright:$MODULE_INSTALL_DIR
       - run:
           name: Link the Supremm Module into XDMoD's directory structure
