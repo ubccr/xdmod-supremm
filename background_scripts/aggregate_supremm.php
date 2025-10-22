@@ -89,8 +89,7 @@ $logger = CCR\Log::factory('SUPREMM', $conf);
 $logger->info('Command: ' . implode(' ', array_map('escapeshellarg', $argv)));
 
 $process_start_time = date('Y-m-d H:i:s');
-$logger->notice(array(
-    'message'            => 'aggregate_supremm start',
+$logger->notice('aggregate_supremm start', array(
     'process_start_time' => $process_start_time
 ));
 
@@ -148,14 +147,12 @@ try {
     run_aggregation(array('modw_aggregates', 'supremmfact_by_day'), array('supremm.supremm-realm-joblist'));
     run_aggregation(array('modw_aggregates', 'jobefficiency_by_day'), array('jobefficiency.joblist'));
 
-    $logger->notice(array(
-        'message'          => 'aggregate_supremm end',
+    $logger->notice('aggregate_supremm end', array(
         'process_end_time' => date('Y-m-d H:i:s')
     ));
 } catch (\Exception $e) {
     $msg = 'Caught exception while executing: ' . $e->getMessage();
-    $logger->err(array(
-        'message'    => $msg,
+    $logger->error($msg, array(
         'stacktrace' => $e->getTraceAsString()
     ));
 }

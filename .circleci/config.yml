@@ -19,7 +19,7 @@ jobs:
       XDMOD_INSTALL_DIR: /xdmod
       XDMOD_TEST_MODE: << parameters.install-type >>
       TRAVIS_COMMIT_RANGE: << pipeline.git.base_revision >>..<<pipeline.git.revision>>
-      XDMOD_SRC_DIR: ./../xdmod
+      XDMOD_SRC_DIR: /root/xdmod
       REG_TEST_BASE: /../../../../../project/tests/artifacts/regression/current
     steps:
       - checkout
@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Link the SUPREMM module into the XDMoD Source Directory
           command: |
-              ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
+            ln -s `pwd` $XDMOD_SRC_DIR/open_xdmod/modules/supremm
       # We need to update our acct before we can enable docker layer caching.
       # - setup_remote_docker:
       #    docker_layer_caching: true
@@ -66,15 +66,15 @@ jobs:
       - run:
           name: Install / Upgrade XDMoD from RPM
           command: |
-              ./tests/integration/scripts/bootstrap.sh
+            ./tests/integration/scripts/bootstrap.sh
       - run:
           name: Validate the newly installed / Upgraded XDMoD
           command: ./tests/integration/scripts/validate.sh
       - run:
           name: Make sure that the Composer Test Dependencies are installed
           command: |
-              composer install -d $XDMOD_SRC_DIR --no-progress
-              composer install --no-progress
+            composer install -d $XDMOD_SRC_DIR --no-progress
+            composer install --no-progress
       - run:
           name: Setup & Run QA Tests
           command: ./tests/ci/scripts/qa-test-setup.sh
@@ -124,9 +124,9 @@ jobs:
       - run:
           name: Ensure that no PHP command-line errors were generated
           command: >
-              if [ -e /var/log/php_errors.log ]; then
-                  test `egrep -v 'vendor/phpunit/phpunit/src|PHP Notice:  fread()' /var/log/php_errors.log | wc -l` = 0;
-              fi
+            if [ -e /var/log/php_errors.log ]; then
+                test `egrep -v 'vendor/phpunit/phpunit/src|PHP Notice:  fread()' /var/log/php_errors.log | wc -l` = 0;
+            fi
       - store_artifacts:
           path: /tmp/screenshots
       - store_artifacts:
