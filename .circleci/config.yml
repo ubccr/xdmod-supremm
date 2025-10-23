@@ -123,12 +123,6 @@ jobs:
           name: Restart XDMoD's services
           command: docker exec xdmod /root/bin/services restart
       - run:
-          name: Testing alternate xdmod.page.ts
-          command: docker exec playwright \cp /root/xdmod-supremm/tests/playwright/lib/xdmod.page.ts /root/xdmod/tests/playwright/lib/xdmod.page.ts
-      - run:
-          name: Testing alternate metricExplorer.page.ts
-          command: docker exec playwright \cp /root/xdmod-supremm/tests/playwright/lib/metricExplorer.page.ts /root/xdmod/tests/playwright/lib/metricExplorer.page.ts
-      - run:
           name: Run XDMoD Playwright Tests
           command: docker exec -w $XDMOD_INSTALL_DIR/tests/playwright playwright $XDMOD_INSTALL_DIR/tests/playwright/runtests.sh -j << parameters.string_os >>
       - run:
