@@ -84,6 +84,9 @@ jobs:
             equal: [ << parameters.install-type >>, 'upgrade' ]
           steps:
             - run:
+                name: Run Unit Tests
+                command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/unit/runtests.sh --log-junit ~/phpunit/unit.xml
+            - run:
                 name: Setup & Run QA Tests
                 command: docker exec -w $MODULE_INSTALL_DIR xdmod ./tests/ci/scripts/qa-test-setup.sh
       - run:
