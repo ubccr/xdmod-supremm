@@ -11,10 +11,13 @@ services:
             - 8080:443
             - 7000:7000
         environment:
-            XDMOD_REALMS: 'jobs,storage,cloud,resourcespecifications,supremm'
-            XDMOD_IS_CORE: true
+            XDMOD_REALMS: "${XDMOD_REALMS}"
+            XDMOD_MODULE_NAME: "${XDMOD_MODULE_NAME}"
+            XDMOD_MODULE_DIR: "${MODULE_INSTALL_DIR}"
+            XDMOD_TEST_MODE: "${XDMOD_TEST_MODE}"
             XDMOD_INSTALL_DIR: '/usr/share/xdmod'
             XDMOD_ETC_DIR: '/etc/xdmod'
+            TRAVIS_COMMIT_RANGE: "${TRAVIS_COMMIT_RANGE}"
         command: sleep infinity
     playwright:
         image:  mcr.microsoft.com/playwright:v1.54.0-jammy
