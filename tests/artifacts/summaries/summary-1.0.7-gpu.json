@@ -1,0 +1,30 @@
+{
+    "summary_version": "summary-1.0.7", 
+    "_id": "summary-1.0.7",
+    "definitions": {
+        "gpu": {
+            "*": {
+                "gpuactive": {
+                    "documentation": "The average GPU usage.", 
+                    "type": "instant", 
+                    "unit": "%"
+                },
+                "gpuactivemax": {
+                    "documentation": "The peak GPU usage.", 
+                    "type": "instant", 
+                    "unit": "%"
+                },
+                "memused": {
+                    "documentation": "The average memory usage per GPU.", 
+                    "type": "instant", 
+                    "unit": "byte"
+                },
+                "memusedmax": {
+                    "documentation": "The peak memory usage for each GPU.", 
+                    "type": "instant", 
+                    "unit": "byte"
+                }
+            }
+        } 
+    } 
+}
