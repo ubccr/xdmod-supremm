@@ -5,5 +5,8 @@
   "description": "Playwright tests for the xdmod-supremm module of Open XDMoD",
   "author": "Lorraine A. Gao",
   "license": "GPL-3.0",
-  "repository": "https://github.com/ubccr/xdmod-supremm"
+  "repository": "https://github.com/ubccr/xdmod-supremm",
+  "dependencies": {
+    "@playwright/test": "^1.56.1"
+  }
 }
