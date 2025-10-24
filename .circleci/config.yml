@@ -139,10 +139,17 @@ jobs:
           command: |
             docker cp xdmod:/root/phpunit ~/phpunit
             docker cp xdmod:/tmp/screenshots /tmp/screenshots
-            mkdir ~/project/log ~/project/log/xdmod ~/project/log/php-fpm
+            mkdir ~/project/log ~/project/log/xdmod ~/project/log/php-fpm ~/project/log/playwright ~/project/log/playwright/xdmod ~/project/log/playwright/supremm
             docker cp xdmod:/var/log/xdmod/. ~/project/log/xdmod
             docker cp xdmod:/var/log/php-fpm/. ~/project/log/php-fpm
-            docker cp playwright:/root/xdmod-supremm/tests/playwright/test-results/. ~/project/log/
+          when: always
+      - run:
+          name: Copy XDMoD Playwright test results to host system
+          command: docker cp xdmod:/root/xdmod/tests/playwright/test-results/. ~/project/log/playwright/xdmod
+          when: always
+      - run:
+          name: Copy SUPREMM Playwright test results to host system
+          command: docker cp playwright:/root/xdmod-supremm/tests/playwright/test-results/. ~/project/log/playwright/supremm
           when: always
       - run:
           name: Check for webserver errors
