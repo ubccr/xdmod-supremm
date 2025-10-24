@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Checkout XDMoD
           command: |
-            git clone --depth=1 https://github.com/ubccr/xdmod.git ../xdmod
+            git clone --depth=1 --branch=main https://github.com/ubccr/xdmod.git ../xdmod
       - run:
           name: Copy Files for Playwright and XDMoD containers
           command: |
