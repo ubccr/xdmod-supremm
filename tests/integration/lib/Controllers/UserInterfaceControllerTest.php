@@ -39,7 +39,7 @@ class UserInterfaceControllerTest extends TestCase
                 }
                 $realms[$menuitem['realm']] += 1;
                 if ($menuitem['realm'] == 'SUPREMM'){
-                    $groupByName = 'group_by_' . $menuitem['realm']  . '_' . $menuitem['group_by'];
+                    $groupByName = 'node=group_by&realm=' . $menuitem['realm']  . '&group_by=' . $menuitem['group_by'];
                     $gbParams = array(
                         'operation' => 'get_menus',
                         'node' => $groupByName,
@@ -54,13 +54,14 @@ class UserInterfaceControllerTest extends TestCase
             }
         }
         $expected = self::generateRealmGroupBys();
-        $this->assertEquals($expected, $realmGroupBys);
 
         $this->assertArrayHasKey('SUPREMM', $realms);
         $this->assertArrayNotHasKey('JobEfficiency', $realms);
 
         // The count represents the number of group bys in the realm
         $this->assertTrue($realms['SUPREMM'] > 29);
+
+        $this->assertEquals($expected, $realmGroupBys);
     }
 
     public function generateRealmGroupBys()
@@ -74,174 +75,174 @@ class UserInterfaceControllerTest extends TestCase
         );
         $groupbys = array(
             'none' => array(
-            'defaultChartSettings' => '4',
-            'label' => 'SUPREMM'
-        ),
+                'defaultChartSettings' => '4',
+                'label' => 'SUPREMM'
+            ),
 
-        'application' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'Application'
-        ),
+            'application' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'Application'
+            ),
 
-        'cpi' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'CPI Value'
-        ),
+            'cpi' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'CPI Value'
+            ),
 
-        'cpucv' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'CPU User CV'
-        ),
+            'cpucv' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'CPU User CV'
+            ),
 
-        'cpuuser' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'CPU User Value'
-        ),
+            'cpuuser' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'CPU User Value'
+            ),
 
-        'catastrophe_bucket_id' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'Catastrophe Rank'
-        ),
+            'catastrophe_bucket_id' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'Catastrophe Rank'
+            ),
 
-        'datasource' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'Datasource'
-        ),
+            'datasource' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'Datasource'
+            ),
 
-        'nsfdirectorate' => array(
-            'defaultChartSettings' => '3',
-            'label' => 'Decanal Unit'
-        ),
+            'nsfdirectorate' => array(
+                'defaultChartSettings' => '3',
+                'label' => 'Decanal Unit'
+            ),
 
-        'parentscience' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'Department'
-        ),
+            'parentscience' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'Department'
+            ),
 
-        'exit_status' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'Exit Status'
-        ),
+            'exit_status' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'Exit Status'
+            ),
 
-        'gpu0_nv_utilization_bucketid' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'GPU0 Usage Value'
-        ),
+            'gpu0_nv_utilization_bucketid' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'GPU0 Usage Value'
+            ),
 
-        'gpu_usage_bucketid' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'GPU Active Value'
-        ),
+            'gpu_usage_bucketid' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'GPU Active Value'
+            ),
 
-        'gpucount' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'GPU Count'
-        ),
+            'gpucount' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'GPU Count'
+            ),
 
-        'granted_pe' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'Granted Processing Element'
-        ),
+            'granted_pe' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'Granted Processing Element'
+            ),
 
-        'homogeneity_bucket_id' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'Homogeneity Rank'
-        ),
+            'homogeneity_bucket_id' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'Homogeneity Rank'
+            ),
 
-        'ibrxbyterate_bucket_id' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'InfiniBand Receive rate'
-        ),
+            'ibrxbyterate_bucket_id' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'InfiniBand Receive rate'
+            ),
 
-        'jobsize' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'Job Size'
-        ),
+            'jobsize' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'Job Size'
+            ),
 
-        'jobwalltime' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'Job Wall Time'
-        ),
+            'jobwalltime' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'Job Wall Time'
+            ),
 
-        'nodecount' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'Node Count'
-        ),
+            'nodecount' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'Node Count'
+            ),
 
-        'pi' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'PI'
-        ),
+            'pi' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'PI'
+            ),
 
-        'fieldofscience' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'PI Group'
-        ),
+            'fieldofscience' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'PI Group'
+            ),
 
-        'pi_institution' => array(
-            'defaultChartSettings' => '1',
-            'label' => 'PI Institution'
-        ),
+            'pi_institution' => array(
+                'defaultChartSettings' => '1',
+                'label' => 'PI Institution'
+            ),
 
-        'max_mem' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'Peak Memory Usage (%)'
-        ),
+            'max_mem' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'Peak Memory Usage (%)'
+            ),
 
-        'queue' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'Queue'
-        ),
+            'queue' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'Queue'
+            ),
 
-        'resource' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'Resource'
-        ),
+            'resource' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'Resource'
+            ),
 
-        'provider' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'Service Provider'
-        ),
+            'provider' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'Service Provider'
+            ),
 
-        'shared' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'Share Mode'
-        ),
+            'shared' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'Share Mode'
+            ),
 
-        'username' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'System Username'
-        ),
+            'username' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'System Username'
+            ),
 
-        'person' => array(
-            'defaultChartSettings' => '2',
-            'label' => 'User'
-        ),
+            'person' => array(
+                'defaultChartSettings' => '2',
+                'label' => 'User'
+            ),
 
-        'institution' => array(
-            'defaultChartSettings' => '1',
-            'label' => 'User Institution'
-        ),
+            'institution' => array(
+                'defaultChartSettings' => '1',
+                'label' => 'User Institution'
+            ),
 
-        'netdrv_gpfs_rx_bucket_id' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'gpfs bytes received'
-        ),
+            'netdrv_gpfs_rx_bucket_id' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'gpfs bytes received'
+            ),
 
-        'netdrv_isilon_rx_bucket_id' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'isilon bytes received'
-        ),
+            'netdrv_isilon_rx_bucket_id' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'isilon bytes received'
+            ),
 
-        'netdrv_panasas_rx_bucket_id' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'panasas bytes received'
-        ),
+            'netdrv_panasas_rx_bucket_id' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'panasas bytes received'
+            ),
 
-        'wall_time_accuracy_bucketid' => array(
-            'defaultChartSettings' => '0',
-            'label' => 'Wall Time Accuracy Value'
-        )
+            'wall_time_accuracy_bucketid' => array(
+                'defaultChartSettings' => '0',
+                'label' => 'Wall Time Accuracy Value'
+            )
 
         );
         $statistics = array(
@@ -299,11 +300,11 @@ class UserInterfaceControllerTest extends TestCase
         );
         $realmGroupBys = array();
         foreach($groupbys as $name => $settings){
-            $realmGroupBys['group_by_SUPREMM_'. $name] = array();
+            $realmGroupBys['node=group_by&realm=SUPREMM&group_by='. $name] = array();
             foreach($statistics as $stat => $text){
-                $realmGroupBys['group_by_SUPREMM_'. $name][] = array(
+                $realmGroupBys['node=group_by&realm=SUPREMM&group_by='. $name][] = array(
                     "text" => $text,
-                    "id" => "statistic_SUPREMM_" . $name ."_" . $stat,
+                    "id" => "node=statistic&realm=SUPREMM&group_by=" . $name ."&statistic=" . $stat,
                     "statistic" => $stat,
                     "group_by" => $name,
                     "group_by_label" => $settings['label'],
