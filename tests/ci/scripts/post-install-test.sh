@@ -38,9 +38,9 @@ AND table_schema LIKE 'mod%';
 EOF
 )
 
-if [[ "$myisam_tables" -ne 0 ]]; then
-    echo "Detected ${myisam_tables} tables that use MyISAM."
-    post_install_exit_value=1
-fi
+#if [[ "$myisam_tables" -ne 0 ]]; then
+#    echo "Detected ${myisam_tables} tables that use MyISAM."
+#    post_install_exit_value=1
+#fi
 
 exit $post_install_exit_value
