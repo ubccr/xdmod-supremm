@@ -1,8 +1,22 @@
 services:
+    mongodb:
+        build:
+          context: ./mongodb
+        hostname: mongodb
+        restart: always
+        networks:
+          - testing
+        ports:
+            - 27017:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: xdmod
     xdmod:
         image: tools-ext-01.ccr.xdmod.org/xdmod-job-performance:x86_64-rockylinux8.9.20231119-v11.0.0-1.0-04
         container_name: xdmod
         init: true
+        depends_on:
+          - mongodb
         hostname: xdmod
         networks:
             - testing
@@ -17,7 +31,6 @@ services:
             XDMOD_TEST_MODE: "${XDMOD_TEST_MODE}"
             XDMOD_INSTALL_DIR: '/usr/share/xdmod'
             XDMOD_ETC_DIR: '/etc/xdmod'
-            TRAVIS_COMMIT_RANGE: "${TRAVIS_COMMIT_RANGE}"
         command: sleep infinity
     playwright:
         image:  mcr.microsoft.com/playwright:v1.54.0-jammy
