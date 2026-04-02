@@ -32,8 +32,8 @@ class SupremmDbSetup extends DatabaseSetupItem
 
         $this->console->displayMessage(<<<"EOT"
 SUPReMM integration with Open XDMoD requires an additional database
-named modw_supremm.  It reuses the existing database
-credentials from your Open XDMoD instance.
+named modw_supremm.  This uses the existing database
+access credentials from your Open XDMoD instance.
 EOT
         );
         $this->console->displayBlankLine();
@@ -56,6 +56,11 @@ EOT
 
         try {
 
+<<<<<<< HEAD
+=======
+            // The SUPReMM databases reuse configuration sections from
+            // the primary portal_settings.ini file.
+>>>>>>> main
             $sectionForDatabase = array(
                 'modw_supremm' => 'datawarehouse',
             );
