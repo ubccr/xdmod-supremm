@@ -408,13 +408,14 @@ class JobViewerTest extends TestCase
         $ret[] = array($xdmodhelper, $searchparams, 'application/pdf', 'application/pdf; charset=binary');
         $searchparams['format'] = 'csv';
 
-        $ret[] = array($xdmodhelper, $searchparams, 'text/csv;charset=UTF-8', 'application/csv; charset=us-ascii');
+        // NOTE: Rocky 8 returns "text/plain; charset=us-ascii" in both php and via `file -i` but Rocky 9 returns "text/csv;charset=UTF-8"
+        $ret[] = array($xdmodhelper, $searchparams, 'text/csv; charset=UTF-8', 'text/plain; charset=us-ascii');
 
         $searchparams['format'] = 'png';
         $ret[] = array($xdmodhelper, $searchparams, 'image/png', 'image/png; charset=binary');
 
         $searchparams['format'] = 'svg';
-        $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'image/svg+xml; charset=us-ascii');
+        $ret[] = array($xdmodhelper, $searchparams, 'image/svg+xml', 'image/svg; charset=us-ascii');
 
 
         return $ret;

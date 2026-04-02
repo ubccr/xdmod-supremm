@@ -8,7 +8,7 @@ use UnitTests\TestHelpers\TestHelper;
 
 class JobMetadataTest extends TestCase
 {
-    const TEST_ARTIFACT_PATH = "../artifacts/xdmod-test-artifacts/xdmod-supremm/summaries/";
+    const TEST_ARTIFACT_PATH = "../artifacts/summaries/";
 
     /**
      * @dataProvider arrayMergeTestdata

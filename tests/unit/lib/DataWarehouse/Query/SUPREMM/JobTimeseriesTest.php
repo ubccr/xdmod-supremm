@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class JobTimeseriesTest extends TestCase
 {
-    const TEST_ARTIFACT_PATH = "../artifacts/xdmod-test-artifacts/xdmod-supremm/summaries/";
+    const TEST_ARTIFACT_PATH = "../artifacts/summaries/";
 
     /**
      * @dataProvider validDataProvider
