@@ -7,7 +7,7 @@
 # Helper functions
 
 proc selectMenuOption { option } {
-	
+
 	expect {
 		-re "\nSelect an option .*: "
 	}
@@ -53,9 +53,8 @@ proc confirmFileWrite { response } {
 }
 
 #-------------------------------------------------------------------------------
-# main body - note there are some hardcoded addresses, usernames and passwords here
-# they should typically not be changed as they need to match up with the
-# settings in the docker container
+# main body
+#-------------------------------------------------------------------------------
 
 set timeout 10
 spawn "xdmod-setup"
@@ -65,7 +64,7 @@ selectMenuOption 9
 selectMenuOption d
 answerQuestion {DB Admin Username:} root
 providePassword {DB Admin Password:} {}
-provideInput {MongoDB uri*} {mongodb://xdmod:uvVA6bIC9DMts30ZiLRaH@localhost:27017/supremm?authSource=auth}
+provideInput {MongoDB uri*} {mongodb://xdmod:uvVA6bIC9DMts30ZiLRaH@mongodb/supremm?authSource=admin}
 provideInput {database name*} {supremm}
 confirmFileWrite yes
 enterToContinue
