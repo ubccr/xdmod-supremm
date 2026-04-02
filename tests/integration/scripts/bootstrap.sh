@@ -17,6 +17,8 @@ fi
 
 if [ "$XDMOD_TEST_MODE" = "upgrade" ];
 then
+    # Copy in updated upgrade tcl needed for the 11.0 to 11.5 upgrade.
+    cp $BASEDIR/xdmod-upgrade.tcl $BASEDIR/../../../../xdmod/tests/ci/scripts
     $XDMOD_BOOTSTRAP
     aggregate_supremm.sh
 fi

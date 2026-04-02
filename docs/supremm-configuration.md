@@ -38,8 +38,8 @@ module configuration menu. The options in the menu are listed below:
 This option creates the necessary SUPReMM-module specific database schemas
 and tables in the XDMoD datawarehouse. You will
 need to provide the credentials for your MySQL root user, or another
-user that has privileges to create databases.  Two database schemas will be
-created, `modw_etl` and `modw_supremm`.  The database user that is
+user that has privileges to create databases.  A new database schema will be
+created: `modw_supremm`.  The database user that is
 specified in your `portal_settings.ini` will be granted access to these
 databases.
 
