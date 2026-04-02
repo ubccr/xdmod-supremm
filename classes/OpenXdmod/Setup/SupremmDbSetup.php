@@ -56,11 +56,8 @@ EOT
 
         try {
 
-<<<<<<< HEAD
-=======
             // The SUPReMM databases reuse configuration sections from
             // the primary portal_settings.ini file.
->>>>>>> main
             $sectionForDatabase = array(
                 'modw_supremm' => 'datawarehouse',
             );
