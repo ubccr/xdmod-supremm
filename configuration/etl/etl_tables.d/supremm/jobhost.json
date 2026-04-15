@@ -1,7 +1,7 @@
 {
     "table_definition": {
         "name": "jobhost",
-        "engine": "MyISAM",
+        "engine": "InnoDB",
         "charset": "utf8",
         "collation": "utf8_unicode_ci",
         "columns": [

@@ -29,4 +29,18 @@ do
 done
 popd >/dev/null || exit 2
 
+printf "\nTesting for tables managed by MyISAM\n"
+myisam_tables=$(mysql -s << EOF
+SELECT COUNT(*)
+FROM information_schema.tables
+WHERE ENGINE = 'MyISAM'
+AND table_schema LIKE 'mod%';
+EOF
+)
+
+if [[ "$myisam_tables" -ne 0 ]]; then
+    echo "Detected ${myisam_tables} tables that use MyISAM."
+    post_install_exit_value=1
+fi
+
 exit $post_install_exit_value
