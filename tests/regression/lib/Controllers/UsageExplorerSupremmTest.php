@@ -89,6 +89,8 @@ class UsageExplorerJobsTest extends TestCase
             'submitted_job_count',
             'wait_time_per_job',
             'wait_time',
+            'eligible_wait_time_per_job',
+            'eligible_wait_time',
             'wall_time_per_job',
             'requested_wall_time_per_job',
             'requested_wall_time'

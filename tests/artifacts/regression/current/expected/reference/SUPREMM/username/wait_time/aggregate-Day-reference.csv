@@ -1,11 +1,11 @@
 title
-"Wait Hours: Total: by System Username"
+"Wait Hours by Submit Time: Total: by System Username"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-"System Username","Wait Hours: Total"
+"System Username","Wait Hours by Submit Time: Total"
 meapi,110.12305555555555
 dunli,28.028888888888886
 whimb,2.6

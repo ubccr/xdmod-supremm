@@ -1,10 +1,10 @@
 title
-"Wait Hours: Total: by isilon bytes received"
+"Wait Hours by Submit Time: Total: by isilon bytes received"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-"isilon bytes received","Wait Hours: Total"
+"isilon bytes received","Wait Hours by Submit Time: Total"
 NA,140.75305555555553
 ---------

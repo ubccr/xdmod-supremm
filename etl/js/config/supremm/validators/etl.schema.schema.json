@@ -34,6 +34,7 @@
 				"wall_time",
 				"requested_wall_time",
 				"wait_time",
+				"eligible_wait_time",
 				"cpu_time",
 				"cpu_idle",
 				"cpu_system",

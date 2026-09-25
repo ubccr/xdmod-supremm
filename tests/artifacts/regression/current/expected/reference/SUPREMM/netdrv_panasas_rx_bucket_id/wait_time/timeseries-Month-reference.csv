@@ -1,11 +1,11 @@
 title
-"Wait Hours: Total: by panasas bytes received"
+"Wait Hours by Submit Time: Total: by panasas bytes received"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-Month,"[NA] Wait Hours: Total"
+Month,"[NA] Wait Hours by Submit Time: Total"
 2016-12,112.72416666666666
 2017-01,28.028888888888886
 ---------

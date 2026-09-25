@@ -1,10 +1,10 @@
 title
-"Wait Hours: Total: by Datasource"
+"Wait Hours by Submit Time: Total: by Datasource"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-Datasource,"Wait Hours: Total"
+Datasource,"Wait Hours by Submit Time: Total"
 pcp,140.75305555555553
 ---------

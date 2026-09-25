@@ -1,11 +1,11 @@
 title
-"Wait Hours: Per Job: by Queue"
+"Wait Hours by Submit Time: Per Job: by Queue"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-Queue,"Wait Hours: Per Job"
+Queue,"Wait Hours by Submit Time: Per Job"
 chapti,23.458657407407404
 crumpet,0.0011111111111111111
 ---------

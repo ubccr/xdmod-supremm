@@ -26,4 +26,19 @@ now been changed to be managed in the main Open XDMoD software. On upgrade
 the `xdmod-upgrade` script will detect the database and prompt to recreate.
 You should select the default `[no]` option to skip reinitializing the database.
 
+### Wait Hours by Eligible Time
+
+New "Wait Hours by Eligible Time: Total" and "Wait Hours by Eligible Time: Per Job"
+statistics have been added to the Job Performance (SUPReMM) realm. These measure the time
+a job waited from when it became eligible to run until it started. Jobs for which the
+resource manager does not report an eligible time are excluded from these statistics. The
+existing wait statistics have been renamed to "Wait Hours by Submit Time: Total" and
+"Wait Hours by Submit Time: Per Job"; their identifiers are unchanged, so saved charts and
+API queries continue to work.
+
+The `xdmod-upgrade` script adds the new `eligible_wait_time` column to the
+`modw_supremm.job` table and calculates it for existing jobs. The next run of
+`aggregate_supremm.sh` then re-aggregates the affected time periods, so it may take
+longer than usual.
+
 [github-release]: https://github.com/ubccr/xdmod-supremm/releases/tag/v{{ page.rpm_version }}

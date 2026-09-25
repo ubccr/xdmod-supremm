@@ -1,11 +1,11 @@
 title
-"Wait Hours: Total: by Exit Status"
+"Wait Hours by Submit Time: Total: by Exit Status"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-Day,"[CANCELLED] Wait Hours: Total","[COMPLETED] Wait Hours: Total","[TIMEOUT] Wait Hours: Total"
+Day,"[CANCELLED] Wait Hours by Submit Time: Total","[COMPLETED] Wait Hours by Submit Time: Total","[TIMEOUT] Wait Hours by Submit Time: Total"
 2016-12-28,110.12305555555555,0,0
 2016-12-29,0.0011111111111111111,0,0
 2016-12-30,0,0,0

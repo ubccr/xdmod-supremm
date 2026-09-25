@@ -1,11 +1,11 @@
 title
-"Wait Hours: Total: by Datasource"
+"Wait Hours by Submit Time: Total: by Datasource"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-Quarter,"[pcp] Wait Hours: Total"
+Quarter,"[pcp] Wait Hours by Submit Time: Total"
 "2016 Q4",112.72416666666666
 "2017 Q1",28.028888888888886
 ---------

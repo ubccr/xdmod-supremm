@@ -1,11 +1,11 @@
 title
-"Wait Hours: Total: by CPU User CV"
+"Wait Hours by Submit Time: Total: by CPU User CV"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-"CPU User CV","Wait Hours: Total"
+"CPU User CV","Wait Hours by Submit Time: Total"
 "&lt; 0.1",118.6886111111111
 "0.1 - 0.2",2.9883333333333333
 "0.4 - 0.8",19.075

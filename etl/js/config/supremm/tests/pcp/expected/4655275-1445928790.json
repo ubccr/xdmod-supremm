@@ -116,6 +116,10 @@
         "value": 34,
         "error": 0
     },
+    "eligible_wait_time": {
+        "value": 34,
+        "error": 0
+    },
     "cpu_time": {
         "value": 5824,
         "error": 0

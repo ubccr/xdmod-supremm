@@ -1,11 +1,11 @@
 title
-"Wait Hours: Per Job: by Department"
+"Wait Hours by Submit Time: Per Job: by Department"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-Day,"[Electrical and Communication Systems] Wait Hours: Per Job","[Environmental Biology] Wait Hours: Per Job","[Astronomical Sciences] Wait Hours: Per Job","[Mechanical and Structural Systems] Wait Hours: Per Job"
+Day,"[Electrical and Communication Systems] Wait Hours by Submit Time: Per Job","[Environmental Biology] Wait Hours by Submit Time: Per Job","[Astronomical Sciences] Wait Hours by Submit Time: Per Job","[Mechanical and Structural Systems] Wait Hours by Submit Time: Per Job"
 2016-12-28,110.12305555555555,0,0,0
 2016-12-29,0,0,0,0.0011111111111111111
 2016-12-30,0,0,0,0

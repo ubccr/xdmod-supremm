@@ -1,11 +1,11 @@
 title
-"Wait Hours: Total: by PI Group"
+"Wait Hours by Submit Time: Total: by PI Group"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-Day,"[Quantum Electronics, Waves, and Beams] Wait Hours: Total","[Systematic and Population Biology] Wait Hours: Total","[Stellar Astronomy and Astrophysics] Wait Hours: Total","[Structures and Building Systems] Wait Hours: Total"
+Day,"[Quantum Electronics, Waves, and Beams] Wait Hours by Submit Time: Total","[Systematic and Population Biology] Wait Hours by Submit Time: Total","[Stellar Astronomy and Astrophysics] Wait Hours by Submit Time: Total","[Structures and Building Systems] Wait Hours by Submit Time: Total"
 2016-12-28,110.12305555555555,0,0,0
 2016-12-29,0,0,0,0.0011111111111111111
 2016-12-30,0,0,0,0

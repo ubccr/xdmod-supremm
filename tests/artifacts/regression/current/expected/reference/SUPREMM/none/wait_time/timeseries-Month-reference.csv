@@ -1,11 +1,11 @@
 title
-"Wait Hours: Total"
+"Wait Hours by Submit Time: Total"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-Month,"[SUPREMM] Wait Hours: Total"
+Month,"[SUPREMM] Wait Hours by Submit Time: Total"
 2016-12,112.72416666666666
 2017-01,28.028888888888886
 ---------

@@ -358,6 +358,28 @@ module.exports = function(config) {
                 },
                 required: true
             },
+            eligible_wait_time: {
+                formula(job) {
+                    const start_time = this.ref(job, this.attributes.start_time_ts.ref);
+                    const eligible_time = this.ref(job, this.attributes.eligible_time_ts.ref);
+
+                    // Jobs with an unknown or invalid eligible time are excluded (NULL),
+                    // matching the eligible_waitduration calculation in the Jobs realm.
+                    if (start_time.value === undefined || start_time.value === null
+                        || eligible_time.value === undefined || eligible_time.value === null
+                        || eligible_time.value <= 0 || eligible_time.value > start_time.value) {
+                        return {
+                            value: null,
+                            error: 0
+                        };
+                    }
+
+                    return {
+                        value: start_time.value - eligible_time.value,
+                        error: start_time.error | eligible_time.error
+                    };
+                }
+            },
             "cpu_time": {
                 formula: function(job) {
                     var wall_time = this.attributes.wall_time.formula.call(this, job);

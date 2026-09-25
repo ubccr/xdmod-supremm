@@ -1,11 +1,11 @@
 title
-"Wait Hours: Per Job: by CPI Value"
+"Wait Hours by Submit Time: Per Job: by CPI Value"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-"CPI Value","Wait Hours: Per Job"
+"CPI Value","Wait Hours by Submit Time: Per Job"
 NA,0.0011111111111111111
 "0.6 - 0.7",2.6
 "0.7 - 0.8",38.74962962962963

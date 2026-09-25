@@ -1,0 +1,11 @@
+title
+"Wait Hours by Eligible Time: Per Job: by Department"
+parameters
+
+start,end
+2016-12-22,2017-01-01
+---------
+Year,"[Electrical and Communication Systems] Wait Hours by Eligible Time: Per Job","[Environmental Biology] Wait Hours by Eligible Time: Per Job","[Astronomical Sciences] Wait Hours by Eligible Time: Per Job","[Mechanical and Structural Systems] Wait Hours by Eligible Time: Per Job"
+2016,110.12305555555555,0,2.6,0.0011111111111111111
+2017,0,7.007222222222222,0,0
+---------

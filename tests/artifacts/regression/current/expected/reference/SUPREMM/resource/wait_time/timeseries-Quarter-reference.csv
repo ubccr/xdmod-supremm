@@ -1,11 +1,11 @@
 title
-"Wait Hours: Total: by Resource"
+"Wait Hours by Submit Time: Total: by Resource"
 parameters
 
 start,end
 2016-12-22,2017-01-01
 ---------
-Quarter,"[robertson] Wait Hours: Total","[frearson] Wait Hours: Total"
+Quarter,"[robertson] Wait Hours by Submit Time: Total","[frearson] Wait Hours by Submit Time: Total"
 "2016 Q4",112.72305555555555,0.0011111111111111111
 "2017 Q1",28.028888888888886,0
 ---------

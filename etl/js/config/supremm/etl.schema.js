@@ -754,14 +754,14 @@ module.exports = {
                 stats: [{
                     sql: 'coalesce(sum(jf.wait_time/3600.0),0)',
                     weightStat: 'started_job_count',
-                    label: 'Wait Hours: Total',
+                    label: 'Wait Hours by Submit Time: Total',
                     unit: 'Hour',
                     description: 'The total time, in hours, jobs waited before execution on their designated resource.<br/>'
                                 + '<i>Wait Time: </i>Wait time is defined as the linear time between submission of a job by a user until it begins to execute.'
                 }, {
                     name: 'wait_time_per_job',
                     sql: 'coalesce(sum(jf.wait_time/3600.0)/sum(jf.started_job_count),0)',
-                    label: 'Wait Hours: Per Job',
+                    label: 'Wait Hours by Submit Time: Per Job',
                     unit: 'Hour',
                     description: 'The average time, in hours, a job waits before execution on the designated resource.<br/>'
                                 + '<i>Wait Time: </i>Wait time is defined as the linear time between submission of a job by a user until it begins to execute.',
@@ -769,6 +769,50 @@ module.exports = {
                 }]
             }
             ]
+        },
+        eligible_wait_time: {
+            name: 'Eligible Wait Time',
+            unit: 'seconds',
+            type: 'int32',
+            dtype: 'accounting',
+            group: 'Timing',
+            nullable: true,
+            def: null,
+            batchExport: true,
+            comments: "The amount of time between the job becoming eligible to run and job start. NULL if the job's eligible time is not known.",
+            per: 'job',
+            table: 'job',
+            agg: [{
+                name: 'eligible_wait_time',
+                table: 'supremmfact',
+                type: 'double',
+                dimension: false,
+                sql: `coalesce(sum(${getIf('start_time_ts between :period_start_ts and :period_end_ts', 'eligible_wait_time', 0)}),0)`,
+                comments: 'The amount of time jobs waited to execute during this period, measured from the time each job became eligible to run. Excludes jobs with no known eligible time.',
+                stats: [{
+                    sql: 'coalesce(sum(jf.eligible_wait_time/3600.0),0)',
+                    weightStat: 'eligible_started_job_count',
+                    label: 'Wait Hours by Eligible Time: Total',
+                    unit: 'Hour',
+                    description: 'The total time, in hours, jobs waited, from the time they became eligible to run, before execution on their designated resource. Jobs for which an eligible time is not reported are excluded.<br/>'
+                                + '<i>Wait Time by Eligible Time: </i>The linear time between a job becoming eligible to run and when it begins to execute.'
+                }, {
+                    name: 'eligible_wait_time_per_job',
+                    sql: 'coalesce(sum(jf.eligible_wait_time/3600.0)/nullif(sum(jf.eligible_started_job_count),0),0)',
+                    label: 'Wait Hours by Eligible Time: Per Job',
+                    unit: 'Hour',
+                    description: 'The average time, in hours, a job waits, from the time it became eligible to run, before execution on the designated resource. Jobs for which an eligible time is not reported are excluded.<br/>'
+                                + '<i>Wait Time by Eligible Time: </i>The linear time between a job becoming eligible to run and when it begins to execute.',
+                    decimals: 2
+                }]
+            }, {
+                name: 'eligible_started_job_count',
+                table: 'supremmfact',
+                type: 'int32',
+                dimension: false,
+                sql: `sum(${getIf('start_time_ts between :period_start_ts and :period_end_ts and eligible_wait_time is not null', 1, 0)})`,
+                comments: 'The number of jobs that started during this period and had a known eligible time.'
+            }]
         },
         cpu_time: {
             unit: "seconds",
