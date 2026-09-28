@@ -5,18 +5,11 @@
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 XDMOD_BOOTSTRAP=$BASEDIR/../../../../xdmod/tests/ci/bootstrap.sh
-REF_DIR=/root/assets/referencedata
 
-set -e
-set -o pipefail
+set -eo pipefail
 
 if [ "$XDMOD_TEST_MODE" = "fresh_install" ];
 then
-    rm -rf /var/lib/mongo/*
-    mongod -f /etc/mongod.conf --fork
-    ~/bin/importmongo.sh
-    mongo $BASEDIR/mongo_auth.mongojs
-    mongod -f /etc/mongod.conf --shutdown
     $XDMOD_BOOTSTRAP
     expect $BASEDIR/xdmod-setup.tcl | col -b
     aggregate_supremm.sh
