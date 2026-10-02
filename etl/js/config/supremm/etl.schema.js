@@ -129,7 +129,7 @@ module.exports = {
                 sum_weighted_expansion_factor: {
                     type: 'double',
                     dimension: false,
-                    sql: 'sum( ((wall_time + wait_time) / wall_time) * nodecount_id * ' + wallduration_case_statement + ')',
+                    sql: 'sum( ((wall_time + wait_time) / NULLIF(wall_time, 0)) * nodecount_id * ' + wallduration_case_statement + ')',
                     comments: 'The sum of expansion factor per job multiplied by nodecount and the [adjusted] duration of jobs that ran in this period.'
                 }
             }
@@ -194,6 +194,7 @@ module.exports = {
             type: "string",
             dtype: "accounting",
             group: "Executable",
+            length: 256,
             nullable: false,
             def: "NA",
             comments: "The name of the job as reported by the job scheduler.",
@@ -668,15 +669,15 @@ module.exports = {
                     decimals: 0
                 }, {
                     name: 'wall_time_accuracy',
-                    sql: 'COALESCE(LEAST((SUM(jf.wall_time)/SUM(jf.requested_wall_time)), 1) *100, 0)',
+                    sql: 'COALESCE(LEAST((SUM(jf.wall_time)/NULLIF(SUM(jf.requested_wall_time), 0)), 1) *100, 0)',
                     label: 'Wall Time Accuracy',
                     unit: '%',
                     description: 'The ratio of total job wall time to total requested wall time during the time period. The wall time and requested wall time contribution outside of the time period are not included in the calculation. The requested wall time is defined as the user requested linear time between start and end time for execution of a particular job.',
                     decimals: 0
                 }, {
                     name: 'wall_time_per_job',
-                    aggregate_sql: 'COALESCE(SUM(jf.wall_time)/SUM(CASE ${DATE_TABLE_ID_FIELD} WHEN ${MIN_DATE_ID} THEN jf.running_job_count ELSE jf.started_job_count END),0)/3600.0',
-                    timeseries_sql: 'COALESCE(SUM(jf.wall_time)/SUM(jf.running_job_count),0)/3600.0',
+                    aggregate_sql: 'COALESCE(SUM(jf.wall_time)/NULLIF(SUM(CASE ${DATE_TABLE_ID_FIELD} WHEN ${MIN_DATE_ID} THEN jf.running_job_count ELSE jf.started_job_count END), 0),0)/3600.0',
+                    timeseries_sql: 'COALESCE(SUM(jf.wall_time)/NULLIF(SUM(jf.running_job_count), 0),0)/3600.0',
                     label: 'Wall Hours: Per Job',
                     unit: 'Hour',
                     description: 'The average time, in hours, a job takes to execute.<br/>'
@@ -690,7 +691,7 @@ module.exports = {
                 dimension: true,
                 category: 'Metrics',
                 table: 'supremmfact',
-                sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(jf.wall_time/jf.requested_wall_time * 100, -1.0) > cb.min AND coalesce(jf.wall_time/jf.requested_wall_time * 100, -1.0) <= cb.max)',
+                sql: '(SELECT id FROM modw_supremm.percentages_buckets cb WHERE coalesce(jf.wall_time/NULLIF(jf.requested_wall_time, 0) * 100, -1.0) > cb.min AND coalesce(jf.wall_time/NULLIF(jf.requested_wall_time, 0) * 100, -1.0) <= cb.max)',
                 label: 'Wall Time Accuracy Value',
                 dimension_table: 'percentages_buckets',
                 show_all_dimension_values: true
@@ -723,8 +724,8 @@ module.exports = {
                     decimals: 0
                 }, {
                     name: 'requested_wall_time_per_job',
-                    aggregate_sql: 'COALESCE(SUM(jf.requested_wall_time)/SUM(CASE ${DATE_TABLE_ID_FIELD} WHEN ${MIN_DATE_ID} THEN jf.running_job_count ELSE jf.started_job_count END),0)/3600.0',
-                    timeseries_sql: 'COALESCE(SUM(jf.requested_wall_time)/SUM(jf.running_job_count),0)/3600.0',
+                    aggregate_sql: 'COALESCE(SUM(jf.requested_wall_time)/NULLIF(SUM(CASE ${DATE_TABLE_ID_FIELD} WHEN ${MIN_DATE_ID} THEN jf.running_job_count ELSE jf.started_job_count END), 0),0)/3600.0',
+                    timeseries_sql: 'COALESCE(SUM(jf.requested_wall_time)/NULLIF(SUM(jf.running_job_count), 0),0)/3600.0',
                     label: 'Wall Hours: Requested: Per Job',
                     unit: 'Hour',
                     description: 'The average time, in hours, a job requested for execution.<br/>'
@@ -760,7 +761,7 @@ module.exports = {
                                 + '<i>Wait Time: </i>Wait time is defined as the linear time between submission of a job by a user until it begins to execute.'
                 }, {
                     name: 'wait_time_per_job',
-                    sql: 'coalesce(sum(jf.wait_time/3600.0)/sum(jf.started_job_count),0)',
+                    sql: 'coalesce(sum(jf.wait_time/3600.0)/NULLIF(sum(jf.started_job_count), 0),0)',
                     label: 'Wait Hours: Per Job',
                     unit: 'Hour',
                     description: 'The average time, in hours, a job waits before execution on the designated resource.<br/>'
@@ -844,7 +845,7 @@ module.exports = {
                     description: 'The idle CPU hours for all jobs that were executing during the time period.'
                 }, {
                     name: 'avg_percent_cpu_idle',
-                    sql: 'sum(100.0 * jf.cpu_time_idle / jf.cpu_time * jf.cpu_usage_weight)/sum(jf.cpu_usage_weight)',
+                    sql: 'sum(100.0 * jf.cpu_time_idle / jf.cpu_time * jf.cpu_usage_weight)/NULLIF(sum(jf.cpu_usage_weight), 0)',
                     label: 'Avg CPU %: Idle: weighted by core-hour',
                     requirenotnull: 'jf.cpu_time_idle',
                     unit: 'CPU %',
@@ -884,7 +885,7 @@ module.exports = {
                     description: 'The system CPU hours for all jobs that were executing during the time period.'
                 }, {
                     name: 'avg_percent_cpu_system',
-                    sql: 'sum(100.0 * jf.cpu_time_system / jf.cpu_time * jf.cpu_usage_weight)/sum(jf.cpu_usage_weight)',
+                    sql: 'sum(100.0 * jf.cpu_time_system / jf.cpu_time * jf.cpu_usage_weight)/NULLIF(sum(jf.cpu_usage_weight), 0)',
                     label: 'Avg CPU %: System: weighted by core-hour',
                     requirenotnull: 'jf.cpu_time_system',
                     unit: 'CPU %',
@@ -924,7 +925,7 @@ module.exports = {
                     description: 'The user CPU hours for all jobs that were executing during the time period.'
                 }, {
                     name: 'avg_percent_cpu_user',
-                    sql: 'sum(100.0 * jf.cpu_time_user / jf.cpu_time * jf.cpu_usage_weight)/sum(jf.cpu_usage_weight)',
+                    sql: 'sum(100.0 * jf.cpu_time_user / jf.cpu_time * jf.cpu_usage_weight)/NULLIF(sum(jf.cpu_usage_weight), 0)',
                     label: 'Avg CPU %: User: weighted by core-hour',
                     requirenotnull: 'jf.cpu_time_user',
                     unit: 'CPU %',
@@ -986,7 +987,7 @@ module.exports = {
                 comments: 'The total floating point operations per core in this period.',
                 stats: [ {
                     name: "avg_flops_per_core",
-                    sql: 'sum(jf.flop / jf.wall_time * jf.flop_weight)/sum(jf.flop_weight)',
+                    sql: 'sum(jf.flop / jf.wall_time * jf.flop_weight)/NULLIF(sum(jf.flop_weight), 0)',
                     requirenotnull: 'jf.flop',
                     label: 'Avg: FLOPS: Per Core weighted by core-hour',
                     unit: 'ops/s',
@@ -1040,7 +1041,7 @@ module.exports = {
                     comments: 'Total cpiref core seconds.',
                     stats: [{
                         name: "avg_cpiref_per_core",
-                        sql: 'sum(jf.cpiref_weighted_by_coreseconds / jf.wall_time / jf.cores * jf.cpiref_weight)/sum(jf.cpiref_weight)',
+                        sql: 'sum(jf.cpiref_weighted_by_coreseconds / jf.wall_time / jf.cores * jf.cpiref_weight)/NULLIF(sum(jf.cpiref_weight), 0)',
                         requirenotnull: 'jf.cpiref_weighted_by_coreseconds',
                         decimals: 2,
                         label: 'Avg: CPI: Per Core weighted by core-hour',
@@ -1104,7 +1105,7 @@ module.exports = {
                 comments: 'Total max memory core seconds.',
                 stats: [{
                     name: 'avg_homogeneity',
-                    sql: 'sum(jf.homogeneity_weighted_by_node_hour / jf.wall_time / jf.nodecount_id * jf.homogeneity_weight)/sum(jf.homogeneity_weight)',
+                    sql: 'sum(jf.homogeneity_weighted_by_node_hour / jf.wall_time / jf.nodecount_id * jf.homogeneity_weight)/NULLIF(sum(jf.homogeneity_weight), 0)',
                     requirenotnull: 'jf.homogeneity_weighted_by_node_hour',
                     label: 'Avg: Homogeneity: weighted by node-hour',
                     unit: '%',
@@ -1156,7 +1157,7 @@ module.exports = {
                     comments: 'Total cpldref core seconds.',
                     stats: [{
                         name: "avg_cpldref_per_core",
-                        sql: 'sum(jf.cpldref_weighted_by_coreseconds / jf.wall_time / jf.cores * jf.cpldref_weight)/sum(jf.cpldref_weight)',
+                        sql: 'sum(jf.cpldref_weighted_by_coreseconds / jf.wall_time / jf.cores * jf.cpldref_weight)/NULLIF(sum(jf.cpldref_weight), 0)',
                         requirenotnull: 'jf.cpldref_weighted_by_coreseconds',
                         decimals: 4,
                         label: 'Avg: CPLD: Per Core weighted by core-hour',
@@ -1250,7 +1251,7 @@ module.exports = {
                     comments: 'Total memory transferred.',
                     stats: [{
                         name: "avg_mem_bw_per_core",
-                        sql: 'sum(jf.mem_transferred / jf.wall_time / jf.cores * jf.mem_transferred_weight)/sum(jf.mem_transferred_weight)',
+                        sql: 'sum(jf.mem_transferred / jf.wall_time / jf.cores * jf.mem_transferred_weight)/NULLIF(sum(jf.mem_transferred_weight), 0)',
                         requirenotnull: 'jf.mem_transferred',
                         label: 'Avg: Memory Bandwidth: Per Core weighted by core-hour',
                         unit: 'bytes/s',
@@ -1305,7 +1306,7 @@ module.exports = {
                     comments: 'cpu user CV * core seconds.',
                     stats: [{
                         name: "avg_cpuusercv_per_core",
-                        sql: 'sum(jf.cpu_user_cv_weighted_core_seconds / jf.wall_time / jf.cores * jf.cpu_usage_weight)/sum(jf.cpu_usage_weight)',
+                        sql: 'sum(jf.cpu_user_cv_weighted_core_seconds / jf.wall_time / jf.cores * jf.cpu_usage_weight)/NULLIF(sum(jf.cpu_usage_weight), 0)',
                         requirenotnull: 'jf.cpu_user_cv_weighted_core_seconds',
                         label: 'Avg: CPU User CV: weighted by core-hour',
                         unit: 'CV',
@@ -1351,7 +1352,7 @@ module.exports = {
                     comments: 'Total cpu user imbalance core seconds.',
                     stats: [{
                         name: "avg_cpuuserimb_per_core",
-                        sql: 'sum(jf.cpu_user_imbalance_weighted_core_seconds / jf.wall_time / jf.cores * jf.cpu_usage_weight)/sum(jf.cpu_usage_weight)',
+                        sql: 'sum(jf.cpu_user_imbalance_weighted_core_seconds / jf.wall_time / jf.cores * jf.cpu_usage_weight)/NULLIF(sum(jf.cpu_usage_weight), 0)',
                         requirenotnull: 'jf.cpu_user_imbalance_weighted_core_seconds',
                         label: 'Avg: CPU User Imbalance: weighted by core-hour',
                         unit: '%',
@@ -1385,7 +1386,7 @@ module.exports = {
                 comments: 'The total memory seconds used in byte seconds in this period. This value indicates the memory used by all processes including system services. It does not include the memory used by the OS page or buffer cache.',
                 stats: [{
                     name: "avg_memory_per_core",
-                    sql: 'sum(jf.mem_used_weighted_by_duration / jf.wall_time / jf.cores * jf.mem_usage_weight)/sum(jf.mem_usage_weight)',
+                    sql: 'sum(jf.mem_used_weighted_by_duration / jf.wall_time / jf.cores * jf.mem_usage_weight)/NULLIF(sum(jf.mem_usage_weight), 0)',
                     requirenotnull: 'jf.mem_used_weighted_by_duration',
                     label: 'Avg: Memory: Per Core weighted by core-hour',
                     unit: 'bytes',
@@ -1435,7 +1436,7 @@ module.exports = {
                 comments: 'Total max memory core seconds.',
                 stats: [{
                     name: 'avg_max_memory_per_core',
-                    sql: '100.0 * sum(jf.max_mem_weighted_by_core_seconds / jf.wall_time / jf.cores * jf.max_memory_weight)/sum(jf.max_memory_weight)',
+                    sql: '100.0 * sum(jf.max_mem_weighted_by_core_seconds / jf.wall_time / jf.cores * jf.max_memory_weight)/NULLIF(sum(jf.max_memory_weight), 0)',
                     requirenotnull: 'jf.max_mem_weighted_by_core_seconds',
                     label: 'Avg: Max Memory: weighted by core-hour',
                     unit: '%',
@@ -1490,7 +1491,7 @@ module.exports = {
                 comments: 'The total memory seconds used in byte seconds by the OS including the page and buffer caches in this period.',
                 stats: [{
                     name: "avg_total_memory_per_core",
-                    sql: 'sum(jf.mem_used_including_os_caches_weighted_by_duration / jf.wall_time / jf.cores * jf.mem_usage_weight)/sum(jf.mem_usage_weight)',
+                    sql: 'sum(jf.mem_used_including_os_caches_weighted_by_duration / jf.wall_time / jf.cores * jf.mem_usage_weight)/NULLIF(sum(jf.mem_usage_weight), 0)',
                     requirenotnull: 'jf.mem_used_including_os_caches_weighted_by_duration',
                     label: 'Avg: Total Memory: Per Core weighted by core-hour',
                     unit: 'bytes',
@@ -1535,7 +1536,7 @@ module.exports = {
                 comments: 'The total bytes per second written by block devices in this period.',
                 stats: [{
                     name: "avg_ib_rx_bytes",
-                    sql: 'sum(ib_rx_bytes / jf.wall_time / jf.nodecount_id * jf.ib_rx_bytes_weight)/sum(jf.ib_rx_bytes_weight)',
+                    sql: 'sum(ib_rx_bytes / jf.wall_time / jf.nodecount_id * jf.ib_rx_bytes_weight)/NULLIF(sum(jf.ib_rx_bytes_weight), 0)',
                     requirenotnull: 'jf.ib_rx_bytes',
                     label: 'Avg: InfiniBand rate: Per Node weighted by node-hour',
                     unit: 'bytes/s',
@@ -1554,7 +1555,7 @@ module.exports = {
                     roles: { disable: [ "pub" ] },
                     dimension: true,
                     table: 'supremmfact',
-                    sql: '(SELECT id FROM modw_supremm.logscalebytes_buckets cb WHERE coalesce(ib_rx_bytes/wall_time, -1.0) > cb.min AND coalesce(ib_rx_bytes/wall_time, -1.0) <= cb.max)',
+                    sql: '(SELECT id FROM modw_supremm.logscalebytes_buckets cb WHERE coalesce(ib_rx_bytes/NULLIF(wall_time, 0), -1.0) > cb.min AND coalesce(ib_rx_bytes/NULLIF(wall_time, 0), -1.0) <= cb.max)',
                     label: "InfiniBand Receive rate",
                     category: "Metrics",
                     dimension_table: "logscalebytes_buckets"
@@ -1585,7 +1586,7 @@ module.exports = {
                 comments: 'The total number of write io operations by block devices in this period.',
                 stats: [{
                     name: "avg_:field_name",
-                    sql: 'sum(:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    sql: 'sum(:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/NULLIF(sum(jf.:field_name_weight), 0)',
                     requirenotnull: 'jf.:field_name',
                     label: 'Avg: block :label_1 write ops rate: Per Node weighted by node-hour',
                     unit: 'ops/s',
@@ -1624,7 +1625,7 @@ module.exports = {
                 comments: 'The total bytes per second written by block devices in this period.',
                 stats: [{
                     name: "avg_:field_name",
-                    sql: 'sum(:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    sql: 'sum(:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/NULLIF(sum(jf.:field_name_weight), 0)',
                     requirenotnull: 'jf.:field_name',
                     label: 'Avg: block :label_1 write rate: Per Node weighted by node-hour',
                     unit: 'bytes/s',
@@ -1677,7 +1678,7 @@ module.exports = {
                 comments: 'The total number of read io operations per second by block devices in this period.',
                 stats: [{
                     name: "avg_:field_name",
-                    sql: 'sum(:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    sql: 'sum(:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/NULLIF(sum(jf.:field_name_weight), 0)',
                     requirenotnull: 'jf.:field_name',
                     label: 'Avg: block :label_1 read ops rate: Per Node weighted by node-hour',
                     unit: 'ops/s',
@@ -1716,7 +1717,7 @@ module.exports = {
                 comments: 'The total bytes per second read by block devices in this period.',
                 stats: [{
                     name: "avg_:field_name",
-                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/NULLIF(sum(jf.:field_name_weight), 0)',
                     requirenotnull: 'jf.:field_name',
                     label: 'Avg: block :label_1 read rate: Per Node weighted by node-hour',
                     unit: 'bytes/s',
@@ -1786,7 +1787,7 @@ module.exports = {
                 comments: 'The total bytes rwritten to network dir i in this period.',
                 stats: [{
                     name: "avg_:field_name",
-                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/NULLIF(sum(jf.:field_name_weight), 0)',
                     requirenotnull: 'jf.:field_name',
                     label: 'Avg: /:label_1 write rate: Per Node weighted by node-hour',
                     unit: 'bytes/s',
@@ -1839,7 +1840,7 @@ module.exports = {
                 comments: 'The total bytes received by network drive i in this period.',
                 stats: [{
                     name: "avg_:field_name",
-                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/NULLIF(sum(jf.:field_name_weight), 0)',
                     requirenotnull: 'jf.:field_name',
                     label: 'Avg: :label_1 receive rate: Per Node weighted by node-hour',
                     unit: 'bytes/s',
@@ -1919,7 +1920,7 @@ module.exports = {
                 comments: 'The total number of bytes transmitted by network drive i in this period.',
                 stats: [{
                     name: "avg_:field_name",
-                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/NULLIF(sum(jf.:field_name_weight), 0)',
                     requirenotnull: 'jf.:field_name',
                     label: 'Avg: :label_1 transmit rate: Per Node weighted by node-hour',
                     unit: 'bytes/s',
@@ -1987,7 +1988,7 @@ module.exports = {
                 comments: 'The total number of bytes received by network via network interface i in this period.',
                 stats: [{
                     name: "avg_:field_name",
-                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/NULLIF(sum(jf.:field_name_weight), 0)',
                     requirenotnull: 'jf.:field_name',
                     label: 'Avg: :label_1 receive rate: Per Node weighted by node-hour',
                     unit: 'bytes/s',
@@ -2051,7 +2052,7 @@ module.exports = {
                 comments: 'The total number of bytes transmitted by by network via network interface i in this period.',
                 stats: [{
                     name: "avg_:field_name",
-                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    sql: 'sum(jf.:field_name / jf.wall_time / jf.nodecount_id * jf.:field_name_weight)/NULLIF(sum(jf.:field_name_weight), 0)',
                     requirenotnull: 'jf.:field_name',
                     label: 'Avg: :label_1 transmit rate: Per Node weighted by node-hour',
                     unit: 'bytes/s',
@@ -2182,7 +2183,7 @@ module.exports = {
                     description: 'The total GPU time in hours for all jobs that were executing during the time period. The GPU time is calculated as the number of allocated GPU devices multiplied by the wall time of the job.'
                 }, {
                     name: 'avg_percent_gpu_active',
-                    sql: 'sum(100.0 * jf.gpu_time_active / jf.gpu_time * jf.gpu_usage_weight)/sum(jf.gpu_usage_weight)',
+                    sql: 'sum(100.0 * jf.gpu_time_active / jf.gpu_time * jf.gpu_usage_weight)/NULLIF(sum(jf.gpu_usage_weight), 0)',
                     label: 'Avg GPU active: weighted by gpu-hour',
                     requirenotnull: 'jf.gpu_time_active',
                     unit: 'GPU %',
@@ -2281,7 +2282,7 @@ module.exports = {
                     description: 'The total GPU hours for all jobs that were executing during the time period.'
                 }, {
                     name: 'avg_percent_:field_name',
-                    sql: 'sum(100.0 * jf.:field_name / jf.node_time * jf.:field_name_weight)/sum(jf.:field_name_weight)',
+                    sql: 'sum(100.0 * jf.:field_name / jf.node_time * jf.:field_name_weight)/NULLIF(sum(jf.:field_name_weight), 0)',
                     label: 'Avg GPU:label_1 usage: weighted by node-hour',
                     requirenotnull: 'jf.:field_name',
                     unit: 'GPU %',

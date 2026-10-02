@@ -273,31 +273,15 @@ class JobDataset extends \DataWarehouse\Query\RawQuery
             throw new \Exception(sprintf('Unrecognized table alias "%s"', $errorTableAlias));
         }
 
-        static $errorTableIdx = 0;
-
-        $errordesc = new Table(
-            new Schema('modw'),
-            'error_descriptions',
-            'ed'.$errorTableIdx
-        );
-
-        $errorTableIdx += 1;
-
-        $this->addLeftJoin($errordesc,
-            new WhereCondition(
-                new Field( '((' .$errorTable->getAlias() . '.' . $fieldName . ' >> ' . $errordesc->getAlias() . '.id - 1) & 1)'),
-                '>',
-                '0'
-            )
-        );
-
         if ($errorName === null) {
             $errorName = $fieldName.'_error';
         }
 
         $this->addField(
             new Field(
-                'GROUP_CONCAT( DISTINCT '. $errordesc->getAlias() . ".description SEPARATOR '<br />' )",
+                "(SELECT GROUP_CONCAT( DISTINCT ed.description SEPARATOR '<br />' )"
+                . ' FROM modw.error_descriptions ed'
+                . ' WHERE ((' . $errorTable->getAlias() . '.' . $fieldName . ' >> ed.id - 1) & 1) > 0)',
                 $errorName
             )
         );

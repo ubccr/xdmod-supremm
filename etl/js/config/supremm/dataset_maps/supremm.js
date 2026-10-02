@@ -59,6 +59,15 @@ module.exports = function(config) {
         // for a metric are ommitted if they have default values. The avg
         // metric is always provided so that is is possible to determine
         // whether the statistic is mssing due to it being a default value.
+        // The summarization software reports some missing metrics with a text
+        // error such as "no data". The error columns are integer bit fields,
+        // so map anything that is not an integer to a generic error code.
+        numericError(error) {
+            if (Number.isInteger(error)) {
+                return error;
+            }
+            return this.metricErrors.codes.metricMissingUnknownReason.value;
+        },
         "getcov": function(job, metricname) {
             if (Array.isArray(metricname)) {
                 for (var i = 0; i < metricname.length; i++) {
@@ -805,7 +814,16 @@ module.exports = function(config) {
                 }
             },
             "gpu0_nv_mem_used": {
-                ref: "gpu.gpu0.memused.avg"
+                formula(job) {
+                    const mem = this.ref(job, 'gpu.gpu0.memused.avg');
+                    if (mem.error === 0) {
+                        return mem;
+                    }
+                    return {
+                        value: null,
+                        error: this.numericError(mem.error)
+                    };
+                }
             },
             "gpu0_nv_utilization": {
                 formula: function(job) {
@@ -818,7 +836,7 @@ module.exports = function(config) {
                     } else {
                         return {
                             value: null,
-                            error: gpu.error
+                            error: this.numericError(gpu.error)
                         };
                     }
                 }

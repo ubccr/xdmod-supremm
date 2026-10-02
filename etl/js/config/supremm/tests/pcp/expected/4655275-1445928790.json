@@ -402,10 +402,10 @@
     },
     "gpu0_nv_mem_used": {
         "value": null,
-        "error": "no data"
+        "error": 8
     },
     "gpu0_nv_utilization": {
         "value": null,
-        "error": "no data"
+        "error": 8
     }
 }

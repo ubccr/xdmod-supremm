@@ -1,6 +1,6 @@
 {
     "table_definition": {
-        "$ref": "${table_definition_dir}/jobefficiency/jobefficiency_by_day.json#/table_definition"
+        "$ref": "${table_definition_dir}/jobefficiency/jobefficiency_by.json#/table_definition"
     },
     "aggregation_period_query": {
         "overseer_restrictions": {
