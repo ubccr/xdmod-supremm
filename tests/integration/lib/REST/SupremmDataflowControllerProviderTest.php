@@ -31,7 +31,7 @@ class SupremmDataflowControllerProviderTest extends BaseTest
     public function provideGetDbstats()
     {
         $validInput = [
-            'path' => 'rest/supremm_dataflow/dbstats',
+            'path' => 'supremm_dataflow/dbstats',
             'method' => 'get',
             'params' => [],
             'data' => null
@@ -64,7 +64,7 @@ class SupremmDataflowControllerProviderTest extends BaseTest
     public function provideGetQuality()
     {
         $validInput = [
-            'path' => 'rest/supremm_dataflow/quality',
+            'path' => 'supremm_dataflow/quality',
             'method' => 'get',
             'params' => [],
             'data' => null

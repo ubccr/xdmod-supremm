@@ -12,7 +12,7 @@ class DashboardSupremmTest extends BaseTest
         $xdmodConfig = array( "decodetextasjson" => true );
         $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
 
-        $this->endpoint = 'rest/v0.1/supremm_dataflow/';
+        $this->endpoint = 'supremm_dataflow/';
 
         // validate as manager, for dashboard access
         $this->validateAsUser = 'mgr';

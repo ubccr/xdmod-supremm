@@ -7,7 +7,7 @@ use IntegrationTests\TestHarness\XdmodTestHelper;
 
 class EfficiencyControllerProviderTest extends BaseTest
 {
-    const ENDPOINT = 'rest/v1/efficiency/';
+    const ENDPOINT = 'efficiency/';
 
     protected static $helpers = array();
 
