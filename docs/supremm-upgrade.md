@@ -19,4 +19,11 @@ these edits every time you upgrade as noted on [this page](customization.md).
 11.5.0 Upgrade Notes
 --------------------
 
+### Database Changes
+
+The `modw_etl` database schema that used to be managed by this module has
+now been changed to be managed in the main Open XDMoD software. On upgrade
+the `xdmod-upgrade` script will detect the database and prompt to recreate.
+You should select the default `[no]` option to skip reinitializing the database.
+
 [github-release]: https://github.com/ubccr/xdmod-supremm/releases/tag/v{{ page.rpm_version }}
