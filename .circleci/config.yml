@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Checkout XDMoD
           command: |
-            git clone --depth=1 --branch=symfony_migration https://github.com/ubccr/xdmod.git ../xdmod
+            git clone --depth=1 --branch=symfony_migration-Tokens https://github.com/connersaeli/xdmod.git ../xdmod
       - run:
           name: Update PHP to PHP8.2
           command: |
