@@ -39,6 +39,18 @@ jobs:
           command: |
             git clone --depth=1 https://github.com/ubccr/xdmod.git ../xdmod
       - run:
+          name: Update PHP to PHP8.2
+          command: |
+            docker exec xdmod dnf module reset -y php
+            docker exec xdmod dnf module enable -y php:8.2
+            docker exec xdmod dnf install -y php-devel openssl-devel
+            docker exec xdmod dnf update -y php php-common php-opcache php-cli php-gd php-curl php-pear php-zip php-gmp php-pdo php-xml php-mbstring php-mysqlnd php-pecl-apcu php-pecl-json php-pear
+            docker exec xdmod pecl uninstall mongodb-1.18.1
+            docker exec xdmod pecl install mongodb-1.18.1
+            docker exec xdmod pecl install zip
+            docker exec xdmod dnf remove -y php-devel openssl-devel
+            docker exec xdmod bash -c ">/var/log/php_errors.log"
+      - run:
           name: Copy Files for Playwright and XDMoD containers
           command: |
             docker cp ~/project/../xdmod xdmod:$XDMOD_INSTALL_DIR
