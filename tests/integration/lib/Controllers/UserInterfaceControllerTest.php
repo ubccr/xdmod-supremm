@@ -39,7 +39,7 @@ class UserInterfaceControllerTest extends TestCase
                 }
                 $realms[$menuitem['realm']] += 1;
                 if ($menuitem['realm'] == 'SUPREMM'){
-                    $groupByName = 'group_by_' . $menuitem['realm']  . '_' . $menuitem['group_by'];
+                    $groupByName = 'node=group_by&realm=' . $menuitem['realm'] . '&group_by=' . $menuitem['group_by'];
                     $gbParams = array(
                         'operation' => 'get_menus',
                         'node' => $groupByName,
@@ -299,11 +299,11 @@ class UserInterfaceControllerTest extends TestCase
         );
         $realmGroupBys = array();
         foreach($groupbys as $name => $settings){
-            $realmGroupBys['group_by_SUPREMM_'. $name] = array();
+            $realmGroupBys['node=group_by&realm=SUPREMM&group_by='. $name] = array();
             foreach($statistics as $stat => $text){
-                $realmGroupBys['group_by_SUPREMM_'. $name][] = array(
+                $realmGroupBys['node=group_by&realm=SUPREMM&group_by='. $name][] = array(
                     "text" => $text,
-                    "id" => "statistic_SUPREMM_" . $name ."_" . $stat,
+                    "id" => "node=statistic&realm=SUPREMM&group_by=" . $name ."&statistic=" . $stat,
                     "statistic" => $stat,
                     "group_by" => $name,
                     "group_by_label" => $settings['label'],
