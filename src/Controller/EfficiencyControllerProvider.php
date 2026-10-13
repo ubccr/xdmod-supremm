@@ -2,7 +2,7 @@
 
 namespace CCR\Controller;
 
-use CCR\Security\Attributes\MgrRequired;
+use CCR\Security\Attributes\MustBeLoggedIn;
 use DataWarehouse\Access\MetricExplorer;
 use DataWarehouse\Query\Exceptions\AccessDeniedException;
 use Exception;
@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[MustBeLoggedIn]
 #[Route('/efficiency')]
 class EfficiencyControllerProvider extends BaseController
 {
@@ -87,7 +88,6 @@ class EfficiencyControllerProvider extends BaseController
      * @param $dimension
      * @return Response
      */
-    #[MustBeLoggedIn]
     #[Route('/histogram/{dimension}', methods: ['GET'])]
     public function getHistogramData(Request $request, $dimension)
     {
@@ -253,7 +253,6 @@ class EfficiencyControllerProvider extends BaseController
      * @param Request $request
      * @return Response
      */
-    #[MustBeLoggedIn]
     #[Route('/groupedData', methods: ['GET'])]
     public function getMultiStatisticData(Request $request): Response
     {
