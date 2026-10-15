@@ -252,6 +252,7 @@ class EfficiencyControllerProvider extends BaseController
      * @param Request $request
      * @return Response
      */
+    #[MustBeLoggedIn]
     #[Route('/groupedData', methods: ['GET'])]
     public function getMultiStatisticData(Request $request): Response
     {
