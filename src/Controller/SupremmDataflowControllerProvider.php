@@ -82,7 +82,7 @@ class SupremmDataflowControllerProvider extends BaseController
      * @return Response
      */
     #[Route('/quality', methods: ['GET'])]
-    public function getQuality(Request $request, Application $app)
+    public function getQuality(Request $request)
     {
         $this->authorize($request, array('mgr'));
 
