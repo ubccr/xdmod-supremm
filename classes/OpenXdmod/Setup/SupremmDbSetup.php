@@ -31,10 +31,9 @@ class SupremmDbSetup extends DatabaseSetupItem
         $this->console->displaySectionHeader('SUPReMM Setup');
 
         $this->console->displayMessage(<<<"EOT"
-SUPReMM integration with Open XDMoD requires two additional databases
-that are separate from the SUPReMM packages.  The databases must be
-named modw_etl and modw_supremm.  They reuse the existing database
-credentials from your Open XDMoD instance.
+SUPReMM integration with Open XDMoD requires an additional database
+named modw_supremm.  This uses the existing database
+access credentials from your Open XDMoD instance.
 EOT
         );
         $this->console->displayBlankLine();
@@ -58,12 +57,8 @@ EOT
         try {
 
             // The SUPReMM databases reuse configuration sections from
-            // the primary portal_settings.ini file.  Currently, the
-            // modw_etl database uses the credentials from the "logger"
-            // section.  Likewise, modw_supremm use the credentials from
-            // the "datawarehouse" section.
+            // the primary portal_settings.ini file.
             $sectionForDatabase = array(
-                'modw_etl'     => 'logger',
                 'modw_supremm' => 'datawarehouse',
             );
 

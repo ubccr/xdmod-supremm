@@ -22,6 +22,7 @@
             "rsync -a open_xdmod/modules/supremm/etl/js/config etl/js",
             "XDMOD_BUILD_ROOT=open_xdmod/modules/supremm node etl/js/etl.cli.js -i",
             "XDMOD_BUILD_ROOT=open_xdmod/modules/supremm node etl/js/etl.cli.js -a",
+            "mkdir -p open_xdmod/modules/supremm/db/schema",
             "mv etl/js/config/supremm/output_db/modw_supremm.sql open_xdmod/modules/supremm/db/schema/modw_supremm.sql",
             "node etl/js/etl.cli.js -o >>open_xdmod/modules/supremm/db/schema/modw_supremm.sql",
             "node etl/js/etl.cli.js -o > open_xdmod/modules/supremm/configuration/etl/etl_sql.d/supremm/applications.sql",
