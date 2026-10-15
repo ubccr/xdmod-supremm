@@ -415,7 +415,7 @@ class JobViewerTest extends TestCase
         $ret[] = array($xdmodhelper, $searchparams, 'image/png', 'image/png; charset=binary');
 
         $searchparams['format'] = 'svg';
-        $ret[] = array($xdmodhelper, $searchparams, 'image/svg', 'image/svg; charset=us-ascii');
+        $ret[] = array($xdmodhelper, $searchparams, 'image/svg', 'image/svg+xml; charset=us-ascii');
 
 
         return $ret;
