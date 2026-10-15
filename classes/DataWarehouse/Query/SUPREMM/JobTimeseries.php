@@ -11,7 +11,7 @@ class JobTimeseries
 {
     private $_doc;
 
-    public function __construct( $doc ) {
+    public function __construct($doc) {
         $this->_doc = $doc;
     }
 

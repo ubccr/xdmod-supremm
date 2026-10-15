@@ -7,13 +7,14 @@ use IntegrationTests\BaseTest;
 
 class DashboardSupremmTest extends BaseTest
 {
-
-    private const $endpoint = 'supremm_dataflow/';
-    private const $validateAsUser = 'mgr';
+    private const $endpoint;
+    private const $validateAsUser;
     protected static $xdmodhelper;
 
     public function __construct()
     {
+        $this->endpoint = 'supremm_dataflow/';
+        $this->validateAsUser = 'mgr';
         $xdmodConfig = array( "decodetextasjson" => true );
         $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
         parent::__construct();
