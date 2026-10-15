@@ -54,8 +54,7 @@ class EfficiencyControllerProviderTest extends BaseTest
         foreach (array('pub', 'cd', 'usr') as $role) {
             $response = self::$helpers[$role]->get(self::ENDPOINT . 'analytics');
 
-            $statusCode = ('pub' == $role) ? Response::HTTP_UNAUTHORIZED : Response::HTTP_OK;
-            $this->assertEquals($statusCode, $response[1]['http_code']);
+            $this->assertEquals(Response::HTTP_OK, $response[1]['http_code']);
 
             $this->assertArrayHasKey('success', $response[0]);
             $this->assertTrue($response[0]['success']);

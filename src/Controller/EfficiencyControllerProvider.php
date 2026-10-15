@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[MustBeLoggedIn]
 #[Route('/efficiency')]
 class EfficiencyControllerProvider extends BaseController
 {
@@ -357,7 +356,6 @@ class EfficiencyControllerProvider extends BaseController
             $output['count'] += 1;
         }
 
-        sleep(0.5);
         return $this->json(
             array(
                 'results' => [$output],
