@@ -4,6 +4,7 @@ namespace IntegrationTests\REST;
 
 use IntegrationTests\BaseTest;
 use IntegrationTests\TestHarness\XdmodTestHelper;
+use Symfony\Component\HttpFoundation\Response;
 
 class EfficiencyControllerProviderTest extends BaseTest
 {
