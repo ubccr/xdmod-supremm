@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class StatsController extends BaseController
 {
 
-    #[Route('/internal_dashboard/stats.php', methods: ['GET'])]
+    #[Route('{prefix}internal_dashboard/stats.php', requirements: ['prefix' => '.*'], methods: ['GET'])]
     public function getStats(Request $request): Response
     {
         $user = $this->authorize($request);

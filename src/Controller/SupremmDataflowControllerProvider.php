@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use XDUser;
 use \CCR\DB;
 
-#[Route('/supremm_dataflow')]
+#[Route('{prefix}supremm_dataflow', requirements: ['prefix' => '.*'])]
 class SupremmDataflowControllerProvider extends BaseController
 {
     /**
