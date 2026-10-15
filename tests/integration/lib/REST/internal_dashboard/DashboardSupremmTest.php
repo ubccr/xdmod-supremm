@@ -9,7 +9,7 @@ class DashboardSupremmTest extends BaseTest
 {
     private $endpoint;
     private $validateAsUser;
-    protected static $xdmodhelper;
+    protected $xdmodhelper;
 
     public function __construct()
     {
