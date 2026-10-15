@@ -7,8 +7,8 @@ use IntegrationTests\BaseTest;
 
 class DashboardSupremmTest extends BaseTest
 {
-    private const $endpoint;
-    private const $validateAsUser;
+    private $endpoint;
+    private $validateAsUser;
     protected static $xdmodhelper;
 
     public function __construct()
