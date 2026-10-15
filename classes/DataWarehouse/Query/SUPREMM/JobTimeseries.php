@@ -9,6 +9,8 @@ namespace DataWarehouse\Query\SUPREMM;
 
 class JobTimeseries
 {
+    private $_doc;
+
     public function __construct( $doc ) {
         $this->_doc = $doc;
     }
@@ -90,7 +92,7 @@ class JobTimeseries
         return $outdata;
     }
 
-    private function getdata($metric, $nodeidx, $devid) 
+    private function getdata($metric, $nodeidx, $devid)
     {
         if( !isset( $this->_doc[$metric] ) ) {
             return null;
@@ -118,12 +120,12 @@ class JobTimeseries
             }
             else
             {
-                foreach( $this->_doc[$metric]['hosts'] as $hostidx => $hostdata ) 
+                foreach( $this->_doc[$metric]['hosts'] as $hostidx => $hostdata )
                 {
-                    $ret['series'][] = array( 
-                        "name" => $this->_doc['hosts']["$hostidx"] , 
-                        "dtype" => "nodeid", 
-                        "nodeid" => $hostidx, 
+                    $ret['series'][] = array(
+                        "name" => $this->_doc['hosts']["$hostidx"] ,
+                        "dtype" => "nodeid",
+                        "nodeid" => $hostidx,
                         "data" => $this->ziptimes( $this->_doc[$metric]['times'], $this->_doc[$metric]['hosts'][$hostidx]['all'] )
                     );
                 }
@@ -140,22 +142,22 @@ class JobTimeseries
                 // Show all the devices or the overview (depending on whether the device data is available
 
                 if(isset($this->_doc[$metric]['hosts'][$nodeidx]['dev']) ) {
-                    foreach($this->_doc[$metric]['hosts'][$nodeidx]['dev'] as $devidx => $devdata) 
+                    foreach($this->_doc[$metric]['hosts'][$nodeidx]['dev'] as $devidx => $devdata)
                     {
-                        $ret['series'][] = array( 
+                        $ret['series'][] = array(
                             "name" => $this->_doc[$metric]['hosts'][$nodeidx]['names'][$devidx],
-                            "dtype" => "cpuid", 
-                            "cpuid" => $devidx, 
+                            "dtype" => "cpuid",
+                            "cpuid" => $devidx,
                             "data" => $this->ziptimes( $this->_doc[$metric]['times'], $devdata )
                         );
                     }
                 }
                 else {
-                    $ret['series'][] = array( 
-                        "name" => $this->_doc['hosts'][$nodeidx] , 
-                        "dtype" => "nodeid", 
-                        "nodeid" => $nodeidx, 
-                        "data" => $this->ziptimes( $this->_doc[$metric]['times'], $this->_doc[$metric]['hosts'][$nodeidx]['all'] ) 
+                    $ret['series'][] = array(
+                        "name" => $this->_doc['hosts'][$nodeidx] ,
+                        "dtype" => "nodeid",
+                        "nodeid" => $nodeidx,
+                        "data" => $this->ziptimes( $this->_doc[$metric]['times'], $this->_doc[$metric]['hosts'][$nodeidx]['all'] )
                     );
                 }
             }
@@ -177,7 +179,7 @@ class JobTimeseries
         return $ret;
     }
 
-    private function getdata_v3($metric, $nodeidx, $cpuidx) 
+    private function getdata_v3($metric, $nodeidx, $cpuidx)
     {
         if( !isset( $this->_doc['nodebased'][$metric] ) ) {
             return null;
