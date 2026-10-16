@@ -94,7 +94,7 @@ class EfficiencyControllerProvider extends BaseController
     #[Route('/histogram/{dimension}', methods: ['GET'])]
     public function getHistogramData(Request $request, $dimension)
     {
-        $user = $this->getUserFromRequest($request) ?? XDUser::getPublicUser();
+        $user = $this->getXDUser($request->getSession());
 
         $params = $request->query->all();
 
