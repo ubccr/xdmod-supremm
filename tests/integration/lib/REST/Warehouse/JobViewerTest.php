@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 class JobViewerTest extends TestCase
 {
     const ENDPOINT = 'rest/v0.1/warehouse/';
+    private $xdmodhelper;
 
     public function setUp(): void
     {
