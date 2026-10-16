@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use DataWarehouse\Access\MetricExplorer;
 
 use Exception;
+use XDUser;
 
 #[Route('{prefix}efficiency', requirements: ['prefix' => '.*'])]
 class EfficiencyControllerProvider extends BaseController
@@ -93,7 +94,7 @@ class EfficiencyControllerProvider extends BaseController
     #[Route('/histogram/{dimension}', methods: ['GET'])]
     public function getHistogramData(Request $request, $dimension)
     {
-        $user = $this->getUserFromRequest($request);
+        $user = $this->getUserFromRequest($request) ?? XDUser::getPublicUser();
 
         $params = $request->query->all();
 
