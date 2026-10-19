@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use DataWarehouse\Access\MetricExplorer;
 
 use Exception;
-use XDUser;
 
 #[Route('{prefix}efficiency', requirements: ['prefix' => '.*'])]
 class EfficiencyControllerProvider extends BaseController
