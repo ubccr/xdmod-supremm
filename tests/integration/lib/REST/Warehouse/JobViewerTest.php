@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 class JobViewerTest extends TestCase
 {
     const ENDPOINT = 'rest/v0.1/warehouse/';
+    private $xdmodhelper;
 
     public function setUp(): void
     {
@@ -408,7 +409,7 @@ class JobViewerTest extends TestCase
         $ret[] = array($xdmodhelper, $searchparams, 'application/pdf', 'application/pdf; charset=binary');
         $searchparams['format'] = 'csv';
 
-        $ret[] = array($xdmodhelper, $searchparams, 'text/csv;charset=UTF-8', 'application/csv; charset=us-ascii');
+        $ret[] = array($xdmodhelper, $searchparams, 'text/csv; charset=UTF-8', 'text/csv; charset=us-ascii');
 
         $searchparams['format'] = 'png';
         $ret[] = array($xdmodhelper, $searchparams, 'image/png', 'image/png; charset=binary');

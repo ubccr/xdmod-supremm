@@ -15,7 +15,7 @@ use DataWarehouse\Access\MetricExplorer;
 
 use Exception;
 
-#[Route('/efficiency')]
+#[Route('{prefix}efficiency', requirements: ['prefix' => '.*'])]
 class EfficiencyControllerProvider extends BaseController
 {
     /**
@@ -93,7 +93,7 @@ class EfficiencyControllerProvider extends BaseController
     #[Route('/histogram/{dimension}', methods: ['GET'])]
     public function getHistogramData(Request $request, $dimension)
     {
-        $user = $this->getUserFromRequest($request);
+        $user = $this->getXDUser($request->getSession());
 
         $params = $request->query->all();
 

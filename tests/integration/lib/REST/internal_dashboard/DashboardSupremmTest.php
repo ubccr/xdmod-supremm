@@ -3,20 +3,21 @@
 namespace IntegrationTests\REST\internal_dashboard;
 
 use IntegrationTests\TestHarness\XdmodTestHelper;
-use PHPUnit\Framework\TestCase;
+use IntegrationTests\BaseTest;
 
-class DashboardSupremmTest extends TestCase
+class DashboardSupremmTest extends BaseTest
 {
-    public function __construct($name, $data, $dataName)
+    private $endpoint;
+    private $validateAsUser;
+    private $xdmodhelper;
+
+    public function __construct()
     {
         $xdmodConfig = array( "decodetextasjson" => true );
         $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
-
         $this->endpoint = 'rest/v0.1/supremm_dataflow/';
-
-        // validate as manager, for dashboard access
         $this->validateAsUser = 'mgr';
-        parent::__construct($name, $data, $dataName);
+        parent::__construct();
     }
 
     private function invalidSupremmResourceEntries($params)
@@ -111,7 +112,7 @@ class DashboardSupremmTest extends TestCase
         $result = $this->xdmodhelper->get($this->endpoint . 'dbstats', $params);
 
         // Message will contain "no result found"
-        $this->assertContains("no result found for the given database", $result[0]['message']);
+        $this->assertStringContainsString("no result found for the given database", $result[0]['message']);
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
@@ -134,7 +135,7 @@ class DashboardSupremmTest extends TestCase
         $result = $this->xdmodhelper->get($this->endpoint . 'dbstats', $params);
 
         // Message will contain "no result found"
-        $this->assertContains("no result found for the given database", $result[0]['message']);
+        $this->assertStringContainsString("no result found for the given database", $result[0]['message']);
 
         // result has success='false'
         $this->assertArrayHasKey('success', $result[0]);
