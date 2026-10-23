@@ -322,11 +322,8 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
 
         // Get the analytics that will be displayed
         Ext.Ajax.request({
-            url: XDMoD.REST.url + '/efficiency/analytics',
+            url: '/efficiency/analytics',
             method: 'GET',
-            params: {
-                token: XDMoD.REST.token
-            },
             callback: function (o, success, response) {
                 if (success) {
                     var analytics = JSON.parse(response.responseText);
@@ -575,7 +572,7 @@ XDMoD.Module.Efficiency = Ext.extend(XDMoD.PortalModule, {
         var analyticStore = new Ext.data.JsonStore({
             storeId: 'analytic_store_' + config.analytic,
             restful: true,
-            url: XDMoD.REST.url + '/efficiency/groupedData',
+            url: '/efficiency/groupedData',
             root: 'results',
             autoLoad: true,
             baseParams: {

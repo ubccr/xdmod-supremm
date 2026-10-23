@@ -400,7 +400,7 @@ XDMoD.Module.Efficiency.FilterPanel = Ext.extend(Ext.Panel, {
             hideTrigger: true,
             store: new Ext.data.JsonStore({
                 proxy: new Ext.data.HttpProxy({
-                    url: XDMoD.REST.url + '/warehouse/dimensions/' + dimension.toLowerCase(),
+                    url: '/warehouse/dimensions/' + dimension.toLowerCase(),
                     method: 'GET'
                 }),
                 baseParams: {

@@ -4,10 +4,11 @@ namespace IntegrationTests\REST;
 
 use IntegrationTests\BaseTest;
 use IntegrationTests\TestHarness\XdmodTestHelper;
+use Symfony\Component\HttpFoundation\Response;
 
 class EfficiencyControllerProviderTest extends BaseTest
 {
-    const ENDPOINT = 'rest/v1/efficiency/';
+    const ENDPOINT = 'efficiency/';
 
     protected static $helpers = array();
 
@@ -53,7 +54,7 @@ class EfficiencyControllerProviderTest extends BaseTest
         foreach (array('pub', 'cd', 'usr') as $role) {
             $response = self::$helpers[$role]->get(self::ENDPOINT . 'analytics');
 
-            $this->assertEquals(200, $response[1]['http_code']);
+            $this->assertEquals(Response::HTTP_OK, $response[1]['http_code']);
 
             $this->assertArrayHasKey('success', $response[0]);
             $this->assertTrue($response[0]['success']);

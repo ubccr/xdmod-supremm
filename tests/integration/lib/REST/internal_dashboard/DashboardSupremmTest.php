@@ -20,7 +20,7 @@ class DashboardSupremmTest extends BaseTest
         parent::__construct();
     }
 
-    private function invalidSupremmResourceEntries($params)
+    private function invalidSupremmResourceEntries($params = null)
     {
         // without performing validation: expect to receive a 401;
         // if wrong user authenticated: expect to receive a 403
@@ -196,14 +196,14 @@ class DashboardSupremmTest extends BaseTest
         $user = 'cd';
         $this->xdmodhelper->authenticate($user);
 
-        $result = $this->invalidSupremmResourceEntries(null);
+        $result = $this->invalidSupremmResourceEntries();
         $this->assertEquals(403, $result[1]['http_code']);
     }
 
     public function testInvalidUserSupremmResourceEntries()
     {
         // with no user authenticated: expect to receive a 401
-        $result = $this->invalidSupremmResourceEntries(null);
+        $result = $this->invalidSupremmResourceEntries();
         $this->assertEquals(401, $result[1]['http_code']);
     }
 

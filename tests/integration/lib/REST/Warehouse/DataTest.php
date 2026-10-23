@@ -9,7 +9,7 @@ class DataTest extends TestCase
 {
     protected static $xdmodhelper;
 
-    const ENDPOINT = 'rest/v0.1/warehouse/';
+    const ENDPOINT = 'warehouse/';
 
     public static function setUpBeforeClass(): void
     {

@@ -67,7 +67,7 @@ XDMoD.Module.Dashboard.JobEfficiencyComponent = Ext.extend(CCR.xdmod.ui.Portlet,
 
         var jobStore = new Ext.data.JsonStore({
             restful: true,
-            url: XDMoD.REST.url + '/warehouse/aggregatedata',
+            url: '/warehouse/aggregatedata',
             root: 'results',
             autoLoad: true,
             baseParams: {

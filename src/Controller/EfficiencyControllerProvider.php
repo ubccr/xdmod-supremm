@@ -2,12 +2,13 @@
 
 namespace CCR\Controller;
 
+use CCR\Security\Attributes\MustBeLoggedIn;
+use DataWarehouse\Access\MetricExplorer;
 use DataWarehouse\Query\Exceptions\AccessDeniedException;
-
+use Exception;
 use Models\Services\Acls;
-
-use \Symfony\Component\HttpFoundation\Request;
-use \Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -93,7 +94,7 @@ class EfficiencyControllerProvider extends BaseController
     #[Route('/histogram/{dimension}', methods: ['GET'])]
     public function getHistogramData(Request $request, $dimension)
     {
-        $user = $this->getXDUser($request->getSession());
+        $user = $this->getXDUser();
 
         $params = $request->query->all();
 
@@ -255,10 +256,11 @@ class EfficiencyControllerProvider extends BaseController
      * @param Request $request
      * @return Response
      */
+    #[MustBeLoggedIn]
     #[Route('/groupedData', methods: ['GET'])]
     public function getMultiStatisticData(Request $request): Response
     {
-        $user = $this->authorize($request);
+        $user = $this->getXDUser();
 
         $json_config = $this->getStringParam($request, 'config', true);
 
@@ -359,7 +361,6 @@ class EfficiencyControllerProvider extends BaseController
             $output['count'] += 1;
         }
 
-        sleep(0.5);
         return $this->json(
             array(
                 'results' => [$output],
@@ -378,7 +379,7 @@ class EfficiencyControllerProvider extends BaseController
      */
     private function getDimensionValues(Request $request, $dimension)
     {
-        $user = $this->authorize($request);
+        $user = $this->getXDUser();
 
         //Get parameters from the request.
         $offset = $this->getIntParam($request, 'offset', false, 0);

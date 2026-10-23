@@ -368,7 +368,7 @@ XDMoD.Module.Efficiency.ScatterPlotPanel = Ext.extend(Ext.Panel, {
             baseParams: baseParams,
             proxy: new Ext.data.HttpProxy({
                 method: 'GET',
-                url: XDMoD.REST.url + '/efficiency/histogram/' + self.config.histogram.group_by,
+                url: '/efficiency/histogram/' + self.config.histogram.group_by,
                 listeners: {
                     exception: function (proxy, type, action, options, response) {
                         self.el.unmask();

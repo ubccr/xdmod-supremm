@@ -2,10 +2,13 @@
 
 namespace CCR\Controller;
 
+use \CCR\DB;
+use CCR\Security\Attributes\MgrRequired;
+use DataWarehouse\Query\SUPREMM\SupremmDbInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
-use \Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 use XDUser;
@@ -21,6 +24,7 @@ class SupremmDataflowControllerProvider extends BaseController
      * @param Request $request
      * @return Respnse
      */
+    #[MgrRequired]
     #[Route('/resources', methods: ['GET'])]
     public function getResources(Request $request): Response
     {
@@ -30,9 +34,9 @@ class SupremmDataflowControllerProvider extends BaseController
             'action' => $action,
         );
 
-        $user = $this->authorize($request, array(ROLE_ID_MANAGER));
+        $user = $this->getXDUser();
 
-        $s = new \DataWarehouse\Query\SUPREMM\SupremmDbInterface();
+        $s = new SupremmDbInterface();
         $resources = $s->getResources();
 
         $pdo = DB::factory('database');
@@ -51,6 +55,7 @@ class SupremmDataflowControllerProvider extends BaseController
      * @param Request $request
      * @return Response
      */
+    #[MgrRequired]
     #[Route('/dbstats', methods: ['GET'])]
     public function getDbstats(Request $request)
     {
@@ -64,7 +69,7 @@ class SupremmDataflowControllerProvider extends BaseController
             'message' => 'success'
         );
 
-        $user = $this->authorize($request, array(ROLE_ID_MANAGER));
+        $user = $this->getXDUser();
         $data = $this->queryDbstats($dbid, $resourceid);
 
         if (isset($data)) {
@@ -81,11 +86,10 @@ class SupremmDataflowControllerProvider extends BaseController
      * @param Request $request
      * @return Response
      */
+    #[MgrRequired]
     #[Route('/quality', methods: ['GET'])]
     public function getQuality(Request $request)
     {
-        $this->authorize($request, array('mgr'));
-
         $start = $this->getStringParam($request, 'start');
         $end = $this->getStringParam($request, 'end');
         $type = $this->getStringParam($request, 'type');
@@ -175,7 +179,7 @@ class SupremmDataflowControllerProvider extends BaseController
         switch ($dbid) {
 
             case "summarydb":
-                $s = new \DataWarehouse\Query\SUPREMM\SupremmDbInterface();
+                $s = new SupremmDbInterface();
                 return $s->getdbstats($resourceid);
                 break;
 
@@ -608,5 +612,5 @@ class SupremmDataflowControllerProvider extends BaseController
         $resources = $stmt->fetchAll(\PDO::FETCH_COLUMN, 0);
 
         return join(",", $resources);
-    } // function getreslist
-} // class SupremmDataflowControllerProvider
+    }
+}

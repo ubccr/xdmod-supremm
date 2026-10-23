@@ -7,7 +7,7 @@ XDMoD.SupremmDataFlow = {
         const el = document.querySelector(selector);
         el.innerHTML = '<img src="/gui/images/loading.gif"></img>Loading';
 
-        fetch(`${XDMoD.REST.url}/supremm_dataflow/dbstats?token=${XDMoD.REST.token}&resource_id=${resourceId}&db_id=${endPoint}`)
+        fetch(`/supremm_dataflow/dbstats?resource_id=${resourceId}&db_id=${endPoint}`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(`[<b>Error<b> ${response.status}]: ${response.statusText}`);
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         XDMoD.SupremmDataFlow.loadAllStats(document.querySelector('#resourceselect').value);
     });
 
-    fetch(`${XDMoD.REST.url}/supremm_dataflow/resources?token=${XDMoD.REST.token}`)
+    fetch(`/supremm_dataflow/resources`)
     .then((response) => {
         if (!response.ok) {
             throw new Error(`[<b>Error<b> ${response.status}]: ${response.statusText}`);
