@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class StatsController extends BaseController
 {
     #[MgrRequired]
-    #[Route('/internal_dashboard/supremm/stats.php', methods: ['GET'])]
+    #[Route('{prefix}internal_dashboard/stats.php', requirements: ['prefix' => '.*'], methods: ['GET'])]
     public function getStats(Request $request): Response
     {
         $params = [

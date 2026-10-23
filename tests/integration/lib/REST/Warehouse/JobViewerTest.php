@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class JobViewerTest extends TestCase
 {
     const ENDPOINT = 'rest/v0.1/warehouse/';
-    protected $xdmodhelper;
+    private $xdmodhelper;
 
     public function setUp(): void
     {
@@ -409,7 +409,6 @@ class JobViewerTest extends TestCase
         $ret[] = array($xdmodhelper, $searchparams, 'application/pdf', 'application/pdf; charset=binary');
         $searchparams['format'] = 'csv';
 
-        // NOTE: Rocky 8 returns "text/plain; charset=us-ascii" in both php and via `file -i` but Rocky 9 returns "text/csv;charset=UTF-8"
         $ret[] = array($xdmodhelper, $searchparams, 'text/csv; charset=UTF-8', 'text/csv; charset=us-ascii');
 
         $searchparams['format'] = 'png';

@@ -9,14 +9,14 @@ class DashboardSupremmTest extends BaseTest
 {
     private $endpoint;
     private $validateAsUser;
-    protected $xdmodhelper;
+    private $xdmodhelper;
 
     public function __construct()
     {
-        $this->endpoint = 'supremm_dataflow/';
-        $this->validateAsUser = 'mgr';
         $xdmodConfig = array( "decodetextasjson" => true );
         $this->xdmodhelper = new XdmodTestHelper($xdmodConfig);
+        $this->endpoint = 'rest/v0.1/supremm_dataflow/';
+        $this->validateAsUser = 'mgr';
         parent::__construct();
     }
 

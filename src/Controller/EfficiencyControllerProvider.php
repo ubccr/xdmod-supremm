@@ -12,7 +12,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/efficiency')]
+use DataWarehouse\Access\MetricExplorer;
+
+use Exception;
+
+#[Route('{prefix}efficiency', requirements: ['prefix' => '.*'])]
 class EfficiencyControllerProvider extends BaseController
 {
     /**

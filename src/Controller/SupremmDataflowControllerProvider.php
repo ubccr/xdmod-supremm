@@ -11,7 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/supremm_dataflow')]
+use XDUser;
+use \CCR\DB;
+
+#[Route('{prefix}supremm_dataflow', requirements: ['prefix' => '.*'])]
 class SupremmDataflowControllerProvider extends BaseController
 {
     /**
